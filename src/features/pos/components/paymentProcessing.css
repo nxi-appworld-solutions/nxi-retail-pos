@@ -1,0 +1,179 @@
+/* Fullscreen background */
+/* .processing-overlay-pro {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #10131a 0%, #05060a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 9999;
+  padding: 20px;
+} */
+
+/* .processing-overlay-pro {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35); 
+  background: radial-gradient(circle at top, #10131a 0%, #05060a 100%);
+  backdrop-filter: blur(4px);  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 10000;
+  padding: 20px;
+} */
+
+.processing-overlay-pro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);     /* semi dark dim */
+  backdrop-filter: blur(6px);          /* smooth background blur */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* Glassmorphism card */
+.processing-card {
+  width: 370px;
+  padding: 42px 38px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(22px);
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.55);
+  text-align: center;
+  animation: popIn 0.6s ease forwards;
+}
+
+/* Ring Loader */
+.ring-loader {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #00ff92;
+  animation: spin 1.2s linear infinite;
+  position: relative;
+}
+
+.inner-ring {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: rgba(0, 255, 150, 0.15);
+  animation: softPulse 2s ease-in-out infinite;
+}
+
+/* Text */
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #d9d9d9;
+  margin-bottom: 26px;
+}
+
+/* Animated Bar */
+.progress-bar {
+  width: 100%;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #00ff92, #00e676);
+  animation: fill 2.2s infinite ease-in-out;
+}
+
+/* Floating particles */
+.particles-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(0, 255, 150, 0.5);
+  border-radius: 50%;
+  top: 100%;
+  left: calc(100% * var(--x));
+  animation: floatUp 6s linear infinite;
+}
+.particle:nth-child(n) {
+  --x: calc(var(--n) + 0.03);
+}
+
+/* ---------------- Animations ---------------- */
+@keyframes popIn {
+  0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes softPulse {
+  0%, 100% { transform: scale(1); opacity: 0.25; }
+  50% { transform: scale(1.14); opacity: 0.45; }
+}
+
+@keyframes fill {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { transform: translateY(-120vh) scale(0.4); opacity: 0; }
+}
+
+/* Fade effects */
+.fade-up {
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 0.25s;
+}
+
+.fade-up-delayed {
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards 0.55s;
+}
+
+@keyframes fadeUp {
+  0% { transform: translateY(14px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.scale-in {
+  animation: scaleIn 0.5s ease forwards;
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0.88); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}

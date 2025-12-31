@@ -1,0 +1,261 @@
+// _signin.scss
+
+// $primary: #4a90e2;
+// $bg: linear-gradient(to right, #e0ecff, #f0f4ff);
+$text-dark: #1f1f1f;
+$text-muted: #7a7a7a;
+$radius: 14px;
+$shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+$transition: 0.3s ease;
+$font: 'Inter', 'Segoe UI', sans-serif;
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  font-family: $font;
+  // background: $bg;
+  // color: $text-dark;
+  margin: 0;
+  padding: 0;
+}
+// Delay Animations
+.fade-in {
+  opacity: 0;
+  animation: fadeUp 0.6s forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1s; }
+.delay-6 { animation-delay: 1.2s; }
+
+// Wrapper
+.signin-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 1rem;
+  background: linear-gradient(to right, #e0ecff, #f0f4ff);
+}
+
+.signin-box {
+  width: 100%;
+  max-width: 420px;
+  // background: #fff;
+  padding: 2.5rem;
+  // border-radius: $radius;
+  box-shadow: $shadow;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: box-shadow 0.3s;
+  &:hover {
+    box-shadow: 0 12px 40px 0 rgba(31,38,135,0.22);
+  }
+}
+
+.animate-entry {
+  animation-delay: 0.1s;
+}
+
+// Header
+.signin-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .signin-logo {
+    height: 48px;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: $text-dark;
+  }
+
+  p {
+    font-size: 14px;
+    color: $text-muted;
+  }
+}
+
+
+// Floating Labels
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+
+  .form-control {
+    width: 100%;
+    padding: 12px 12px 12px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: $transition;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+    }
+
+    &:focus + label,
+    &:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 10px;
+      font-size: 12px;
+      // background: #fff;
+      background: transparent;
+      padding: 0 4px;
+      color: $primary;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    background: transparent;
+  }
+}
+
+// Password
+.password-wrapper {
+  position: relative;
+
+  .toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    // text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #999;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+// Options
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: $text-muted;
+  margin-bottom: 1.5rem;
+
+  .forgot-link {
+    color: $primary;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .checkbox input {
+    margin-right: 5px;
+  }
+}
+
+// Button
+.signin-button {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  background-color: $primary;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s, transform 0.1s;
+  // transition: background 0.25s ease;
+  &:hover {
+    background-color: darken($primary, 7%);
+    // background: linear-gradient(90deg, #4a90e2 60%, #6dd5ed 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 16px rgba(74,144,226,0.15);
+  }
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+// Focus ring for inputs
+.form-control:focus {
+  box-shadow: 0 0 0 2px #4a90e233;
+  border-color: #4a90e2;
+}
+
+// Password toggle animation
+// .toggle-password {
+//   transition: color 0.2s, transform 0.2s;
+//   &:hover {
+//     color: #4a90e2;
+//     transform: scale(1.2) rotate(-10deg);
+//   }
+// }
+
+// Floating label animation (already present, just polish)
+.form-group label {
+  transition: 0.2s cubic-bezier(.4,0,.2,1) all;
+}
+
+// Optional: Animated gradient background
+@keyframes gradientBG {
+  0% { background-position: 0% 50%;}
+  50% { background-position: 100% 50%;}
+  100% { background-position: 0% 50%;}
+}
+
+// Footer
+.signin-footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 13px;
+  color: #aaa;
+}
+
+// Responsive
+@media (max-width: 480px) {
+  .signin-box {
+    padding: 2rem;
+  }
+
+  .signin-header h2 {
+    font-size: 20px;
+  }
+
+  .signin-button {
+    font-size: 14px;
+  }
+}
