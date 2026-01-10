@@ -150,11 +150,9 @@
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../../../core/redux/modalSlice";
+import { closeModal } from "../../../../core/redux/store/modalSlice";
 import { addAuditEntry } from "../../../../core/redux/auditLogSlice";
 import { pushAlert } from "../../../../core/redux/alertsSlice";
-// optional action to update order status in your orders store
-// import { markOrderCancelled, voidOrderItems } from '../../../../core/redux/ordersSlice';
 
 const CancelOrderModal = ({ order = {}, user = { id: 'staff-1', name: 'Staff' }, onClose }) => {
   const dispatch = useDispatch();

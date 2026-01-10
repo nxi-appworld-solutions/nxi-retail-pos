@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const CommonDeleteModal = ({ onShow, onClose, onConfirm, title, message }) => {
+const CommonDeleteModal = ({ onShow, onClose, onConfirm, title, message, isDeleting }) => {
   return (
     <Modal centered show={onShow} onHide={onClose}>
       <Modal.Body className="text-center p-4">

@@ -1,8 +1,8 @@
 // src/components/modals/pos/ResetModal.jsx
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../../../core/redux/modalSlice";
 import { toast } from "react-toastify";
+import { closeModal } from "../../../../core/redux/store/modalSlice";
 import { clearCart } from "../../../../core/redux/cartSlice";
 import { resetPosOrderState } from "../../../../core/redux/posOrderSlice";
 

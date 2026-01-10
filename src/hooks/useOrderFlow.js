@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "../core/redux/modalSlice";
 import { resetPosOrderState } from "../core/redux/posOrderSlice";
 import usePos from "./usePos";
 
@@ -8,6 +7,7 @@ import useOrderValidation from "./useOrderFlow/useOrderValidation";
 import usePaymentFlow from "./useOrderFlow/usePaymentFlow";
 import useReceipt from "./useOrderFlow/useReceipt";
 import { buildOrderPayload } from "../utils/buildOrderPayload";
+import { openModal } from "../core/redux/store/modalSlice";
 
 export default function useOrderFlow(cart) {
   const dispatch = useDispatch();

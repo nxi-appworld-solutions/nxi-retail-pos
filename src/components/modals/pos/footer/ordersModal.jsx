@@ -785,7 +785,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../../../core/redux/modalSlice";
+import { closeModal } from "../../../../core/redux/store/modalSlice";
 import usePos from "../../../../hooks/usePos";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";

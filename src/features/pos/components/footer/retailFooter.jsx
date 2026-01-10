@@ -1,7 +1,7 @@
 // components/pos/footers/RetailFooter.jsx
 import React from "react";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../../../core/redux/modalSlice";
+import { openModal } from "../../../../core/redux/store/modalSlice";
 
 const RetailFooter = () => {
   const dispatch = useDispatch();

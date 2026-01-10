@@ -1,8 +1,8 @@
 import React from "react";
 import Loader from "../../../components/loader/loader";
 import { toast } from "react-toastify";
-import TableHeader from "../../../components/table/DataTableHeader";
-import DataTable from "../../../components/common/DataTable";
+import TableHeader from "../../../components/data-table/PageHeader";
+import DataTable from "../../../components/data-table/DataTable";
 import { handleExportToExcel } from "../../../utils/exportToExcel";
 import useCustomers from "../../../hooks/useCustomers";
 import { useNavigate } from "react-router-dom";

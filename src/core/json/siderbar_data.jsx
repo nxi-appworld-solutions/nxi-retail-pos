@@ -102,10 +102,10 @@ export const SidebarData = [
     ],
   },
   {
-    label: "Inventory",
+    label: "Products / Services",
     submenuOpen: true,
     showSubRoute: false,
-    submenuHdr: "Inventory",
+    submenuHdr: "Products",
     submenuItems: [
       {
         label: "Products",
@@ -136,7 +136,7 @@ export const SidebarData = [
       //   submenu: false,
       // },
       {
-        label: "Category",
+        label: "Categories",
         link: "/category-list",
         icon: "list-details",
         showSubRoute: false,
@@ -152,7 +152,14 @@ export const SidebarData = [
       {
         label: "Brands",
         link: "/brand-list",
-        icon: 'triangles',
+        icon: "triangles",
+        showSubRoute: false,
+        submenu: false,
+      },
+      {
+        label: "Variant Attributes",
+        link: "/variant-attributes",
+        icon: "checklist",
         showSubRoute: false,
         submenu: false,
       },
@@ -164,26 +171,19 @@ export const SidebarData = [
         submenu: false,
       },
       // {
-      //   label: "Variant Attributes",
-      //   link: "/variant-attributes",
-      //   icon: 'checklist',
-      //   showSubRoute: false,
-      //   submenu: false,
-      // },
-      // {
       //   label: "Warranties",
       //   link: "/warranty",
       //   icon: 'certificate',
       //   showSubRoute: false,
       //   submenu: false,
       // },
-      // {
-      //   label: "Print Barcode",
-      //   link: "/barcode",
-      //   icon: 'barcode',
-      //   showSubRoute: false,
-      //   submenu: false,
-      // },
+      {
+        label: "Barcode Management",
+        link: "/barcode",
+        icon: "barcode",
+        showSubRoute: false,
+        submenu: false,
+      },
       // {
       //   label: "Print QR Code",
       //   link: "/qrcode",
@@ -191,6 +191,34 @@ export const SidebarData = [
       //   showSubRoute: false,
       //   submenu: false,
       // },
+      {
+        label: "GST Related",
+        icon: "layout-sidebar-right-collapse",
+        submenu: true,
+        showSubRoute: false,
+        submenuItems: [
+          {
+            label: "HSN / SAC Code",
+            link: route.units,
+            showSubRoute: false,
+          },
+          {
+            label: "GST Slab Mapping",
+            link: route.deleteaccount,
+            showSubRoute: false,
+          },
+          {
+            label: "Tax Type (Inclusive / Exclusive)",
+            link: route.departmentlist,
+            showSubRoute: false,
+          },
+          {
+            label: "Zero Rated / Exempt Product Flag",
+            link: route.deleteaccount,
+            showSubRoute: false,
+          },
+        ],
+      },
     ],
   },
   // {
@@ -490,28 +518,28 @@ export const SidebarData = [
       {
         label: "Billers",
         link: "/billers",
-        icon: 'user-up',
+        icon: "user-up",
         showSubRoute: false,
         submenu: false,
       },
       {
         label: "Suppliers",
         link: "/suppliers",
-        icon: 'user-dollar',
+        icon: "user-dollar",
         showSubRoute: false,
         submenu: false,
       },
       {
         label: "Stores",
         link: "/store-list",
-        icon: 'home-bolt',
+        icon: "home-bolt",
         showSubRoute: false,
         submenu: false,
       },
       {
         label: "Warehouses",
         link: "/warehouse",
-        icon: 'archive',
+        icon: "archive",
         showSubRoute: false,
         submenu: false,
       },

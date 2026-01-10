@@ -17,8 +17,8 @@ import PaymentMethods from "../components/PaymentMethods";
 import EmptyCart from "../components/emptyCart";
 import useOrderFlow from "../../../hooks/useOrderFlow";
 import HoldOrderModal from "../../../components/modals/pos/HoldOrderModal";
-import { closeModal } from "../../../core/redux/modalSlice";
 import PosActionButtons from "../components/posActionButtons";
+import { closeModal } from "../../../core/redux/store/modalSlice";
 
 const PosOrder = ({
   onLoadingChange,

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import ThemeSettings from "../InitialPage/themeSettings";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Outlet, useLocation } from "react-router-dom";
+import ThemeSettings from "../InitialPage/themeSettings";
 import Header from "../InitialPage/Sidebar/Header";
 import Sidebar from "../InitialPage/Sidebar/Sidebar";
 import TwoColumnSidebar from "../InitialPage/Sidebar/two-column";
 import HorizontalSidebar from "../InitialPage/Sidebar/horizontalSidebar";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import GlobalModalRenderer from "../components/modals/GlobalModalRenderer";
+import GlobalModalRenderer from "../core/modals/GlobalModalRenderer";
 
 const HeaderLayouts = () => {
   const [showLoader, setShowLoader] = useState(true);

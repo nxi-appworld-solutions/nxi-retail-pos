@@ -4,12 +4,14 @@ import themeSettingSlice from "./themeSettingSlice";
 import transactionReducer from "./transactionSlice";
 import cartReducer from "./cartSlice";
 import orderReducer from "./orderSlice";
-import modalReducer from "./modalSlice";
 import posOrderSlice from "./posOrderSlice";
 import storeTypeReducer from "./storeTypeSlice";
-import uiModalReducer from "./uiModalSlice";
+import modalReducer from "./store/modalSlice";
 
-import { registerCrossTabListener, storeTypeMiddleware } from "./middleware/storeTypeMiddleware";
+import {
+  registerCrossTabListener,
+  storeTypeMiddleware,
+} from "./middleware/storeTypeMiddleware";
 import { fraudDetectionMiddleware } from "./middleware/fraudDetectionMiddleware";
 
 const store = configureStore({
@@ -21,10 +23,10 @@ const store = configureStore({
     cart: cartReducer,
     posOrder: posOrderSlice,
     order: orderReducer,
-    modals: modalReducer,
-    uiModal: uiModalReducer,
+    modal: modalReducer,
   },
-  middleware: (getDefault) => getDefault().concat(storeTypeMiddleware, fraudDetectionMiddleware),
+  middleware: (getDefault) =>
+    getDefault().concat(storeTypeMiddleware, fraudDetectionMiddleware),
 });
 
 // Enable cross-tab syncing

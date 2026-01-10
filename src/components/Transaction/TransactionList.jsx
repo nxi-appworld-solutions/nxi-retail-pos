@@ -1,7 +1,7 @@
 // Now in your TransactionList.jsx
 import React from "react";
-import TransactionTable from "../common/DataTable";
-import TransactionTableHeader from "../table/DataTableHeader";
+import TransactionTable from "../data-table/DataTable";
+import TransactionTableHeader from "../data-table/PageHeader";
 import { toast } from "react-toastify";
 import { handleExportToExcel } from "../../utils/exportToExcel";
 import Loader from "../loader/loader";

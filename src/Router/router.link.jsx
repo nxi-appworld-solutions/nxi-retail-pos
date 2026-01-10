@@ -1,7 +1,5 @@
 import React from "react";
 import { Route, Navigate } from "react-router-dom";
-import Products from "../features/products/product/pages/Products";
-import AddProduct from "../features/products/product/pages/AddProduct";
 
 // import ProductList from "../feature-module/inventory/productlist";
 import Dashboard from "../feature-module/dashboard/Dashboard";
@@ -22,7 +20,6 @@ import UserList from "../pages/partials/userlist";
 import CustomerList from "../pages/partials/customerlist";
 
 import SalesList from "../pages/transactions/sales/saleslist";
-import PurchasesList from "../pages/transactions/purchases/purchaselist";
 // import PurchasesList from "../pages/purchases/purchaseslist-1111";
 
 // import SalesDashbaord from "../feature-module/dashboard/salesdashbaord";
@@ -306,8 +303,11 @@ import Pos from "../features/pos/pages/pos";
 import KDSSystem from "../pages/KDS/kds";
 import Customers from "../features/customers/pages/CustomerList";
 import AddCustomer from "../features/customers/pages/AddCustomer";
-import Categories from "../features/products/category/CategoryList";
-import Brands from "../features/products/brand/brands";
+import Brands from "../feature-module/products/brands";
+import Categories from "../feature-module/products/categories";
+import Products from "../feature-module/products/products";
+import AddProduct from "../feature-module/products/addProduct";
+import PurchasesList from "../pages/transactions/sales/saleslist";
 
 export const publicRoutes = [
   {
@@ -357,6 +357,13 @@ export const publicRoutes = [
     path: routes.brands,
     name: "brands",
     element: <Brands />,
+    route: Route,
+  },
+  {
+    id: 60,
+    path: routes.categorylist,
+    name: "categorylist",
+    element: <Categories />,
     route: Route,
   },
   {
@@ -987,13 +994,6 @@ export const publicRoutes = [
     path: routes.lowstock,
     name: "lowstock",
     element: <LowStock />,
-    route: Route,
-  },
-  {
-    id: 60,
-    path: routes.categorylist,
-    name: "categorylist",
-    element: <Categories />,
     route: Route,
   },
   {

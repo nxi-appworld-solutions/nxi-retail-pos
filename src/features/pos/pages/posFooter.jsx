@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { closeModal } from "../../../core/redux/modalSlice";
 
 // Import all your modals
 import HoldOrderListModal from "../../../components/modals/pos/footer/holdOrderListModal";
@@ -12,6 +11,7 @@ import RecentTransactionsModal from "../../../components/modals/pos/footer/recen
 import ResetModal from "../../../components/modals/pos/footer/resetModal";
 import DiscountModal from "../../../components/modals/pos/footer/discountModal";
 import UniversalPosFooter from "../components/universalPosFooter";
+import { closeModal } from "../../../core/redux/store/modalSlice";
 
 const PosFooter = () => {
   const modal = useSelector((state) => state.modals);

@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { closeModal } from "../../../../core/redux/modalSlice";
+import { closeModal } from "../../../../core/redux/store/modalSlice";
 
 const DiscountModal = ({ isOpen = true, cart = {}, onApply }) => {
   const dispatch = useDispatch();

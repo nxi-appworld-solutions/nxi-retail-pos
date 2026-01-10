@@ -1,7 +1,7 @@
 // src/components/modals/pos/SplitPaymentModal.jsx
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../../../core/redux/modalSlice";
+import { closeModal } from "../../../../core/redux/store/modalSlice";
 import { toast } from "react-toastify";
 
 const paymentMethods = ["cash", "card", "upi", "wallet", "online"];

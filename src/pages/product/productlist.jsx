@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import ImageTextCell from "../../components/table/ImageTextCell"
+import ImageTextCell from "../../components/data-table/AvatarTextCell";
 import Loader from "../../components/loader/loader";
 
 import { all_routes } from "../../Router/all_routes";
@@ -12,9 +12,9 @@ import ImportProduct from "../../components/modals/importproduct";
 import { IMPORT_OPT } from "../../constants";
 import { handleExportToExcel } from "../../utils/exportToExcel";
 import { API_URL } from "../../environment";
-import DataTableHeader from "../../components/table/DataTableHeader";
-import DataTable from "../../components/common/DataTable";
-import RowActionButtons from "../../components/table/RowActionButtons";
+import DataTableHeader from "../../components/data-table/PageHeader";
+import DataTable from "../../components/data-table/DataTable";
+import RowActionButtons from "../../components/data-table/TableRowActions";
 
 const ProductList = () => {
   const route = all_routes;

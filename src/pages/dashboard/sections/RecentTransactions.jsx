@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ImageWithBasePath from "../../../core/img/imagewithbasebath";
 import { all_routes } from "../../../Router/all_routes";
 import { Clock } from "react-feather";
-import DataTable from "../../../components/common/DataTable";
+import DataTable from "../../../components/data-table/DataTable";
 import { Table } from "antd";
 
 const RecentTransactions = ({ columns, dataSource }) => {

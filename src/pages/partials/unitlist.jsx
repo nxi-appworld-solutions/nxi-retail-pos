@@ -8,9 +8,9 @@ import { setToogleHeader } from "../../core/redux/action";
 import CommonFooter from "../../core/common/footer/commonFooter";
 import { exportToExcel } from "../../utils/exportToExcel";
 import { API_URL } from "../../environment";
-import DataTableHeader from "../../components/table/DataTableHeader";
-import DataTable from "../../components/common/DataTable";
-import RowActionButtons from "../../components/table/RowActionButtons";
+import DataTableHeader from "../../components/data-table/PageHeader";
+import DataTable from "../../components/data-table/DataTable";
+import RowActionButtons from "../../components/data-table/TableRowActions";
 import { handleCollapseToggle } from "../../utils/common";
 
 const UnitList = () => {

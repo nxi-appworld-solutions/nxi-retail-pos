@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../../../core/redux/modalSlice";
+import { closeModal } from "../../../../core/redux/store/modalSlice";
 
 const HoldOrderListModal = ({ orders = [], onRestore, onDelete, onPrint }) => {
   const dispatch = useDispatch();

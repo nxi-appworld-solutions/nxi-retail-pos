@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { invoiceReport } from "../../services/service";
-import Loader from "../../components/loader/loader";
 import ReportSummaryCards from "../../components/Summary/ReportSummary";
 import InvoiceReportFilters from "../../components/InvoiceReportFilters";
 import InvoiceReportTable from "../../components/InvoiceReportTable";
 import CommonFooter from "../../core/common/footer/commonFooter";
-import DataTableHeader from "../../components/table/DataTableHeader";
-import { exportToExcel, handleExportToExcel } from "../../utils/exportToExcel";
-import TableActionBar from "../../components/table/DataTableActionBar";
+import { exportToExcel } from "../../utils/exportToExcel";
+import TableHeaderActions from "../../components/data-table/TableHeaderActions";
+import Loader from "../../components/loader/loader";
 
 const InvoiceReport = () => {
   const [filters, setFilters] = useState({
@@ -16,12 +15,14 @@ const InvoiceReport = () => {
     customer: null,
     status: null,
   });
+
   const [data, setData] = useState([]);
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleGenerateReport = async (e) => {
-    if (e) e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
+
     const startDate = filters?.date?.start;
     const endDate = filters?.date?.end;
     const customer = filters.customer?.value || null;
@@ -30,7 +31,7 @@ const InvoiceReport = () => {
     setLoading(true);
     try {
       const resp = await invoiceReport(9, startDate, endDate, customer, status);
-      // console.log("invoice report response", resp);
+
       const rows = resp?.data?.transactions || [];
 
       const formattedData = rows.map((item) => ({
@@ -43,12 +44,11 @@ const InvoiceReport = () => {
         amountDue: item.paymentStatus === "PAID" ? "0.00" : item.amount,
         status: item.paymentStatus,
       }));
-      setData(formattedData);
 
-      // const summaryResp = await invoiceReportSummary(9, startDate, endDate, customer, status);
+      setData(formattedData);
       setSummary(resp?.data?.summary || null);
     } catch (err) {
-      toast.error(`API error: ${err?.message}`);
+      toast.error(`API error: ${err?.message || "Something went wrong"}`);
     } finally {
       setLoading(false);
     }
@@ -56,12 +56,12 @@ const InvoiceReport = () => {
 
   useEffect(() => {
     handleGenerateReport();
-    // eslint-disable-next-line
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      {loading && <Loader />}
+      {loading && <Loader loading={loading} />}
       <div className="page-wrapper">
         <div className="content">
           <div className="page-header">
@@ -70,26 +70,25 @@ const InvoiceReport = () => {
               <h6>Manage Your Invoice Report</h6>
             </div>
 
-            <TableActionBar
-              onExportPdf={() => {
-                toast.info("Export to PDF is not implemented yet");
-              }}
+            <TableHeaderActions
+              onExportPdf={() =>
+                toast.info("Export to PDF is not implemented yet")
+              }
               onExportExcel={() =>
                 exportToExcel(
                   data,
                   `Invoice_Report_${new Date().toISOString().slice(0, 10)}`,
                   [],
                   "Invoice Report",
-                  () => toast.success("Excel downloaded 🙂")
+                  () => toast.success("Excel downloaded")
                 )
               }
-              onRefresh={handleGenerateReport}
+              onRefresh={() => handleGenerateReport()}
             />
           </div>
-          {/* Summary Cards */}
+
           <ReportSummaryCards summary={summary} />
 
-          {/* Filters */}
           <InvoiceReportFilters
             filters={filters}
             setFilters={setFilters}
@@ -97,12 +96,11 @@ const InvoiceReport = () => {
             loading={loading}
           />
 
-          {/* Table */}
           <InvoiceReportTable data={data} />
         </div>
+
         <CommonFooter />
       </div>
-      <ToastContainer />
     </div>
   );
 };

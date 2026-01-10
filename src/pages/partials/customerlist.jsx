@@ -2,16 +2,16 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { handleExportToExcel } from "../../utils/exportToExcel";
-import DataTable from "../../components/common/DataTable";
+import DataTable from "../../components/data-table/DataTable";
 import { API_URL } from "../../environment";
 
 import CommonFooter from "../../core/common/footer/commonFooter";
 import EntityFormModal from "../../components/modals/addCustomer";
-import DataTableHeader from "../../components/table/DataTableHeader";
+import DataTableHeader from "../../components/data-table/PageHeader";
 
-import ImageTextCell from "../../components/table/ImageTextCell";
+import ImageTextCell from "../../components/data-table/AvatarTextCell";
 import CommonDeleteModal from "../../components/modals/deleteRecord";
-import RowActionButtons from "../../components/table/RowActionButtons";
+import RowActionButtons from "../../components/data-table/TableRowActions";
 
 const initialfield = {
   code: 0,
