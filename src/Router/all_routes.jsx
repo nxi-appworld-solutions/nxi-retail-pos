@@ -1,3 +1,5 @@
+import { GState } from "jspdf";
+
 export const all_routes = {
   // dashboard: "/index",
   kds: "kds",
@@ -12,14 +14,19 @@ export const all_routes = {
   addproduct: "/add-product",
   salesdashboard: "/sales-dashboard",
   brands: "/brand-list",
+  variantyattributes: "/variant-attributes",
   units: "/units",
-  
+  gstmaster: "/gst-master",
+  hsnmaster: "/hsn-master",
+  taxgroup: "/tax-group",
+  gstsetting: "/gst-setting",
+  gstreport: "/gst-reports",
   customers: "/customers-list",
   addcustomers: "/add-customers",
 
   maintenance: "/under-maintenance",
   invoicereport: "/invoice-report",
-  variantyattributes: "/variant-attributes",
+  // variantyattributes: "/variant-attributes",
   warranty: "/warranty",
   barcode: "/barcode",
   alerts: "/ui-alerts",

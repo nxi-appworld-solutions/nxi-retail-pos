@@ -34,14 +34,9 @@ const sections = [
   { key: "tax", label: "Tax & GST", icon: <Percent />, color: "#f6c23e" },
   { key: "variants", label: "Variants", icon: <Layers />, color: "#e74a3b" },
   { key: "supplier", label: "Suppliers", icon: <Truck />, color: "#6610f2" },
-  {
-    key: "analytics",
-    label: "Analytics",
-    icon: <BarChart2 />,
-    color: "#fd7e14",
-  },
+  // { key: "analytics", label: "Analytics", icon: <BarChart2 />,  color: "#fd7e14" },
   { key: "pos", label: "POS Rules", icon: <Settings />, color: "#858796" },
-  { key: "system", label: "System", icon: <Settings />, color: "#5a5c69" },
+  // { key: "system", label: "System", icon: <Settings />, color: "#5a5c69" },
 ];
 
 const ProductERPLayout = ({ formData, handleChange }) => {
@@ -138,8 +133,15 @@ const ProductERPLayout = ({ formData, handleChange }) => {
       </div>
 
       {/* DYNAMIC CONTENT AREA */}
-      <div className="col-lg-9 mb-5 pb-5">
-        <div className="card border-0 shadow-sm rounded-4 h-100 min-vh-75">
+      <div
+        className="col-lg-9"
+        style={{
+          maxHeight: "calc(100vh - 140px)",
+          overflowY: "auto",
+          paddingBottom: "120px",
+        }}
+      >
+        <div className="card border-0 shadow-sm rounded-4">
           {/* <div className="card-header bg-white border-bottom-0 py-4 px-4">
             <div className="d-flex justify-content-between align-items-center">
               <div>
@@ -169,7 +171,9 @@ const ProductERPLayout = ({ formData, handleChange }) => {
               </span>
             </div>
           </div>
-          <div className="card-body p-4">  {/* mt-0 mb-4 opacity-50 */}
+          <div className="card-body p-4">
+            {" "}
+            {/* mt-0 mb-4 opacity-50 */}
             {/* <hr className="mt-0 mb-4 opacity-50" /> */}
             {/* We wrap renderSection in a div with key to trigger animation on switch */}
             <div

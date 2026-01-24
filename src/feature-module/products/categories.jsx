@@ -6,6 +6,7 @@ import DataTableCard from "../../components/data-table/DataTable";
 
 import { handleExportToExcel } from "../../utils/exportToExcel";
 import { openModal } from "../../core/redux/store/modalSlice";
+import { MODAL_TYPES } from "../../core/modals/modalTypes";
 
 const Categories = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const Categories = () => {
             ...child,
             type: "CHILD",
             parentName: parent.name,
-          })
+          }),
         );
     });
 
@@ -62,14 +63,12 @@ const Categories = () => {
       dataIndex: "name",
       render: (text, row) => (
         <div>
-          <div className="fw-bold d-flex align-items-center gap-2">
-            {row.type === "CHILD" && <span className="text-muted">↳</span>}
+          <div className="fw-bold d-flex align-items-center">
+            {row.type === "CHILD" && <span className="text-muted me-1">↳</span>}
             {text}
           </div>
           {row.type === "CHILD" && (
-            <small className="text-muted">
-              Parent: {row.parentName}
-            </small>
+            <small className="text-muted">Parent: {row.parentName}</small>
           )}
         </div>
       ),
@@ -77,25 +76,19 @@ const Categories = () => {
     {
       title: "Code",
       dataIndex: "code",
-      render: (v) => (
-        <span className="fw-bold font-monospace">{v || "—"}</span>
-      ),
-    },
-    {
-      title: "GST",
-      dataIndex: "gstRate",
-      render: (v) => (
-        <span className="badge bg-soft-primary">{v}%</span>
-      ),
+      render: (v) => <span className="fw-bold font-monospace">{v || "—"}</span>,
     },
     {
       title: "POS",
       dataIndex: "visibleInPOS",
-      render: (v) => (
-        <span className={`badge ${v ? "bg-success" : "bg-secondary"}`}>
-          {v ? "Yes" : "No"}
-        </span>
-      ),
+      render: (v, row) =>
+        row.type === "PARENT" ? (
+          <span className="badge bg-light text-muted">Auto</span>
+        ) : (
+          <span className={`badge ${v ? "bg-success" : "bg-secondary"}`}>
+            {v ? "Yes" : "No"}
+          </span>
+        ),
     },
     {
       title: "Status",
@@ -103,11 +96,7 @@ const Categories = () => {
       render: (v) => (
         <span
           className={`badge ${
-            v === "Active"
-              ? "bg-success"
-              : v === "Inactive"
-              ? "bg-warning text-dark"
-              : "bg-danger"
+            v === "Active" ? "bg-success" : "bg-warning text-dark"
           }`}
         >
           {v}
@@ -124,12 +113,13 @@ const Categories = () => {
           onClick={() =>
             dispatch(
               openModal({
-                modalName: "CATEGORY",
-                modalProps: {
+                name: MODAL_TYPES.CATEGORY,
+                payload: {
                   mode: "EDIT",
                   record: row,
                 },
-              })
+                options: { size: "xl" },
+              }),
             )
           }
         />
@@ -142,7 +132,7 @@ const Categories = () => {
       <div className="content">
         <PageHeader
           title="Categories"
-          subtitle="Manage your product categories"
+          subtitle="Organize products using category hierarchy"
           actions={[
             {
               label: "Add Category",
@@ -150,9 +140,10 @@ const Categories = () => {
               onClick: () =>
                 dispatch(
                   openModal({
-                    modalName: "CATEGORY",
-                    modalProps: { mode: "ADD", record: null, },
-                  })
+                    name: MODAL_TYPES.CATEGORY,
+                    modalProps: { mode: "ADD", record: null },
+                    options: { size: "xl" },
+                  }),
                 ),
             },
           ]}
@@ -163,11 +154,7 @@ const Categories = () => {
           }}
         />
 
-        <DataTableCard
-          columns={columns}
-          dataSource={dataSource}
-          rowKey="id" // ✅ FIX 2
-        />
+        <DataTableCard columns={columns} dataSource={dataSource} rowKey="id" />
       </div>
     </div>
   );

@@ -1,156 +1,261 @@
-import { ShieldCheck } from "lucide-react";
 import React from "react";
 import {
-  DollarSign,
   TrendingUp,
   AlertTriangle,
-  Percent,
-  Truck,
   Globe,
+  Truck,
   Settings,
   Gift,
-  Lock
 } from "react-feather";
+import { ShieldCheck } from "lucide-react";
 
-const PricingInfo = ({ formData, handleChange }) => {
-  // Logic: Margin calculation based on Sale Price and Purchase Price
-  const margin =
-    formData.salePrice && formData.purchasePrice
-      ? (((formData.salePrice - formData.purchasePrice) / formData.salePrice) * 100).toFixed(2)
-      : 0;
+const num = (v) => (isNaN(Number(v)) ? 0 : Number(v));
 
-  const loss = Number(formData.salePrice) < Number(formData.purchasePrice);
+const PricingInfo = ({ formData, handleChange, taxControlled = true }) => {
+  const sale = num(formData.salePrice);
+  const cost = num(formData.purchasePrice);
+
+  const profit = sale - cost;
+  const margin = cost > 0 ? ((profit / cost) * 100).toFixed(2) : 0;
+  const isLoss = sale > 0 && sale < cost;
 
   return (
     <div className="row g-4 animate__animated animate__fadeIn">
-      {/* --- PROFITABILITY INDICATOR --- */}
+      {/* ================= PROFIT SUMMARY ================= */}
       <div className="col-12">
-        <div className={`p-4 rounded-4 border-start border-4 shadow-sm d-flex align-items-center justify-content-between ${loss ? 'bg-soft-danger border-danger' : 'bg-soft-success border-success'}`}>
+        <div
+          className={`p-4 rounded-4 border-start border-4 shadow-sm d-flex justify-content-between align-items-center ${
+            isLoss
+              ? "bg-soft-danger border-danger"
+              : "bg-soft-success border-success"
+          }`}
+        >
           <div className="d-flex align-items-center">
-            <div className={`p-3 rounded-circle me-3 ${loss ? 'bg-danger text-white' : 'bg-success text-white'}`}>
-              {loss ? <AlertTriangle size={24} /> : <TrendingUp size={24} />}
+            <div
+              className={`p-3 rounded-circle me-3 ${
+                isLoss ? "bg-danger text-white" : "bg-success text-white"
+              }`}
+            >
+              {isLoss ? <AlertTriangle size={22} /> : <TrendingUp size={22} />}
             </div>
             <div>
               <h5 className="fw-bold mb-0">
-                Gross Margin Analysis: <span className={loss ? 'text-danger' : 'text-success'}>{margin}%</span>
+                Profit Margin:{" "}
+                <span className={isLoss ? "text-danger" : "text-success"}>
+                  {margin}%
+                </span>
               </h5>
               <small className="text-muted">
-                {loss ? "CRITICAL: Selling price is below cost!" : "Healthy margin for this product category."}
+                {isLoss
+                  ? "Warning: Selling price is lower than buying price"
+                  : "Good profit on each sale"}
               </small>
             </div>
           </div>
+
           <div className="text-end d-none d-md-block">
-             <h6 className="mb-0 fw-bold">₹ {(formData.salePrice - formData.purchasePrice || 0).toFixed(2)}</h6>
-             <small className="text-muted">Profit Per Unit</small>
+            <h6 className="mb-0 fw-bold">₹ {profit.toFixed(2)}</h6>
+            <small className="text-muted">Profit per item</small>
           </div>
         </div>
       </div>
 
-      {/* --- MAIN PRICING FIELDS --- */}
+      {/* ================= BASIC PRICES ================= */}
       <div className="col-md-4">
-        <label className="form-label fw-bold small">MRP (Maximum Retail Price)</label>
-        <div className="input-group shadow-sm">
-          <span className="input-group-text bg-light fw-bold small">MRP</span>
-          <input type="number" name="mrp" className="form-control fw-bold" value={formData.mrp} onChange={handleChange} />
-        </div>
+        <label className="form-label fw-bold small">MRP (Printed Price)</label>
+        <input
+          type="number"
+          min="0"
+          name="mrp"
+          className="form-control shadow-sm"
+          placeholder="Price printed on product (optional)"
+          value={formData.mrp}
+          onChange={handleChange}
+        />
+        <small className="text-muted">Customer may see this price on box</small>
       </div>
 
       <div className="col-md-4">
-        <label className="form-label fw-bold small">Standard Sale Price *</label>
-        <div className="input-group shadow-sm border border-primary border-opacity-25 rounded-3">
-          <span className="input-group-text text-muted border-0">₹</span>
-          <input type="number" name="salePrice" className="form-control fw-bold" value={formData.salePrice} onChange={handleChange} placeholder="0.00" required />
-        </div>
+        <label className="form-label fw-bold small">
+          Sale Price <span className="text-danger">*</span>
+        </label>
+        <input
+          type="number"
+          min="0"
+          name="salePrice"
+          className="form-control shadow-sm fw-bold"
+          placeholder="Final billing price at counter"
+          value={formData.salePrice}
+          onChange={handleChange}
+        />
+        <small className="text-muted">
+          This price will be used during billing
+        </small>
       </div>
 
       <div className="col-md-4">
-        <label className="form-label fw-bold small">Purchase Price (Cost)</label>
-        <div className="input-group shadow-sm">
-          <span className="input-group-text">₹</span>
-          <input type="number" name="purchasePrice" className="form-control text-danger fw-bold" value={formData.purchasePrice} placeholder="0.00" onChange={handleChange} />
-        </div>
+        <label className="form-label fw-bold small">Buying Price (Cost)</label>
+        <input
+          type="number"
+          min="0"
+          name="purchasePrice"
+          className="form-control shadow-sm fw-bold text-danger"
+          placeholder="How much you pay to supplier"
+          value={formData.purchasePrice}
+          onChange={handleChange}
+        />
+        <small className="text-muted">
+          Used to calculate profit automatically
+        </small>
       </div>
 
-      {/* --- DISCOUNT CONTROL SECTION (NEW) --- */}
-      <div className="col-12 mt-4">
-        <h6 className="fw-bold text-uppercase small text-warning border-bottom pb-2 d-flex align-items-center">
-          <Gift size={16} className="me-2"/> Discount & Promotion Rules
+      {/* ================= DISCOUNTS ================= */}
+      <div className="col-12 mt-3">
+        <h6 className="fw-bold small text-warning border-bottom pb-2 d-flex align-items-center">
+          <Gift size={14} className="me-2" />
+          Discount Rules
         </h6>
       </div>
 
       <div className="col-md-6">
-        <label className="form-label fw-bold small">Default Auto-Discount (%)</label>
-        <div className="input-group shadow-sm">
-          <span className="input-group-text bg-success-light text-success"><Percent size={14}/></span>
-          <input type="number" name="defaultDiscount" className="form-control fw-bold text-success" 
-                 placeholder="Applied automatically at POS" value={formData.defaultDiscount} onChange={handleChange} />
-        </div>
-        <small className="text-muted mt-1 d-block">This % will be deducted automatically from Sale Price.</small>
+        <label className="form-label fw-bold small">Default Discount (%)</label>
+        <input
+          type="number"
+          min="0"
+          max="100"
+          name="defaultDiscount"
+          className="form-control shadow-sm text-success fw-bold"
+          placeholder="Discount auto-applied at billing"
+          value={formData.defaultDiscount}
+          onChange={handleChange}
+        />
+        <small className="text-muted">Automatically applied during sale</small>
       </div>
 
       <div className="col-md-6">
-        <label className="form-label fw-bold small">Maximum Allowed Discount (%)</label>
-        <div className="input-group shadow-sm">
-          <span className="input-group-text bg-danger-light text-danger"><Lock size={14}/></span>
-          <input type="number" name="maxDiscount" className="form-control fw-bold text-danger" 
-                 placeholder="Cashier limit" value={formData.maxDiscount} onChange={handleChange} />
-        </div>
-        <small className="text-muted mt-1 d-block">Prevents cashier from giving excess discount.</small>
+        <label className="form-label fw-bold small">
+          Maximum Discount Allowed (%)
+        </label>
+        <input
+          type="number"
+          min="0"
+          max="100"
+          name="maxDiscount"
+          className="form-control shadow-sm text-danger fw-bold"
+          placeholder="Cashier cannot exceed this"
+          value={formData.maxDiscount}
+          onChange={handleChange}
+        />
+        <small className="text-muted">
+          Protects against heavy discount misuse
+        </small>
       </div>
 
-      {/* --- TIERED & ONLINE PRICING --- */}
-      <div className="col-12 mt-4">
-        <h6 className="fw-bold text-uppercase small text-muted border-bottom pb-2">Multi-Channel & Tier Pricing</h6>
+      {/* ================= CHANNEL PRICING ================= */}
+      <div className="col-12 mt-3">
+        <h6 className="fw-bold small text-muted border-bottom pb-2">
+          Different Prices for Different Customers
+        </h6>
       </div>
 
       <div className="col-md-3">
         <label className="form-label fw-bold small">Wholesale Price</label>
-        <input type="number" name="wholesalePrice" className="form-control shadow-sm" value={formData.wholesalePrice} onChange={handleChange} />
+        <input
+          type="number"
+          min="0"
+          name="wholesalePrice"
+          className="form-control shadow-sm"
+          placeholder="For bulk buyers"
+          value={formData.wholesalePrice}
+          onChange={handleChange}
+        />
       </div>
 
       <div className="col-md-3">
-        <label className="form-label fw-bold small">VIP Price</label>
-        <input type="number" name="vipPrice" className="form-control shadow-sm border-warning border-opacity-25" value={formData.vipPrice} onChange={handleChange} />
+        <label className="form-label fw-bold small">
+          VIP / Special Customer Price
+        </label>
+        <input
+          type="number"
+          min="0"
+          name="vipPrice"
+          className="form-control shadow-sm border-warning"
+          placeholder="Special trusted customers"
+          value={formData.vipPrice}
+          onChange={handleChange}
+        />
       </div>
 
       <div className="col-md-3">
-        <label className="form-label fw-bold small"><Globe size={14} className="me-1"/> Online Price</label>
-        <input type="number" name="onlinePrice" className="form-control shadow-sm border-info border-opacity-25" value={formData.onlinePrice} onChange={handleChange} />
+        <label className="form-label fw-bold small">
+          <Globe size={13} className="me-1" />
+          Online Selling Price
+        </label>
+        <input
+          type="number"
+          min="0"
+          name="onlinePrice"
+          className="form-control shadow-sm border-info"
+          placeholder="Website / app price"
+          value={formData.onlinePrice}
+          onChange={handleChange}
+        />
       </div>
 
       <div className="col-md-3">
-        <label className="form-label fw-bold small"><Truck size={14} className="me-1"/> Landing Cost</label>
-        <input type="number" name="landingCost" className="form-control shadow-sm" placeholder="Incl. Freight" value={formData.landingCost} onChange={handleChange} />
+        <label className="form-label fw-bold small">
+          <Truck size={13} className="me-1" />
+          Extra Cost (Transport etc.)
+        </label>
+        <input
+          type="number"
+          min="0"
+          name="landingCost"
+          className="form-control shadow-sm"
+          placeholder="Loading, transport, packing"
+          value={formData.landingCost}
+          onChange={handleChange}
+        />
       </div>
 
-      {/* --- SETTINGS & RULES --- */}
+      {/* ================= SAFETY CONTROLS ================= */}
       <div className="col-md-6">
-        <div className="p-3 bg-light border rounded-4 d-flex justify-content-between align-items-center shadow-sm h-100">
+        <div className="p-3 bg-light rounded-4 border d-flex justify-content-between align-items-center h-100">
           <div className="d-flex align-items-center">
-            <ShieldCheck size={20} className="text-primary me-2" />
+            <ShieldCheck size={18} className="text-primary me-2" />
             <div>
-              <h6 className="mb-0 fw-bold small">MSP Protection</h6>
-              <small className="text-muted">Restrict sale below Min. Price</small>
+              <h6 className="mb-0 fw-bold small">Prevent Loss Selling</h6>
+              <small className="text-muted">
+                Block billing below buying price
+              </small>
             </div>
           </div>
-          <div className="form-check form-switch m-0">
-            <input type="checkbox" name="protectMinPrice" className="form-check-input p-2" checked={formData.protectMinPrice} onChange={handleChange} />
-          </div>
+          <input
+            type="checkbox"
+            name="protectMinPrice"
+            className="form-check-input"
+            checked={formData.protectMinPrice}
+            onChange={handleChange}
+          />
         </div>
       </div>
 
       <div className="col-md-6">
-        <div className="p-3 bg-light border rounded-4 d-flex justify-content-between align-items-center shadow-sm h-100">
+        <div className="p-3 bg-light rounded-4 border d-flex justify-content-between align-items-center h-100">
           <div className="d-flex align-items-center">
-            <Settings size={20} className="text-secondary me-2" />
+            <Settings size={18} className="text-secondary me-2" />
             <div>
-              <h6 className="mb-0 fw-bold small">Tax Inclusive Price</h6>
-              <small className="text-muted">Sale price includes GST</small>
+              <h6 className="mb-0 fw-bold small">Price Includes GST</h6>
+              <small className="text-muted">Controlled from GST settings</small>
             </div>
           </div>
-          <div className="form-check form-switch m-0">
-            <input type="checkbox" name="isTaxInclusive" className="form-check-input p-2" checked={formData.isTaxInclusive} onChange={handleChange} />
-          </div>
+          <input
+            type="checkbox"
+            disabled={taxControlled}
+            checked={formData.isTaxInclusive}
+            className="form-check-input"
+            readOnly
+          />
         </div>
       </div>
     </div>

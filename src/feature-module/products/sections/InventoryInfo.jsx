@@ -1,9 +1,9 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import {
   Database,
   AlertTriangle,
   Package,
-  Repeat,
   ShieldOff,
   MapPin,
   Truck,
@@ -11,180 +11,341 @@ import {
   Layers,
   Cpu,
   Slash,
-  TrendingUp
+  TrendingUp,
 } from "react-feather";
 
-const InventoryInfo = ({ formData, handleChange }) => {
-  const handleCheckbox = (e) => {
-    const { name, checked } = e.target;
-    handleChange({ target: { name, value: checked } });
+const InventoryInfo = ({
+  formData,
+  handleChange,
+  warehouses = [],
+}) => {
+  /* ================= DERIVED MODES ================= */
+  const isSimple = formData.stockTracking === "None";
+  const isBatch = formData.stockTracking === "Batch";
+  const isSerial = formData.stockTracking === "Serial";
+
+  /* ================= HELPERS ================= */
+  const onBoolChange = (e) => {
+    handleChange({
+      target: { name: e.target.name, value: e.target.checked },
+    });
   };
 
-  const handleModeChange = (mode) => {
-    handleChange({ target: { name: "stockTracking", value: mode } });
+  const setTracking = (mode) => {
+    handleChange({
+      target: { name: "stockTracking", value: mode },
+    });
   };
+
+  /* ================= AUTO CORRECTIONS ================= */
+  useEffect(() => {
+    if (isBatch) {
+      handleChange({
+        target: { name: "expiryTracking", value: true },
+      });
+    }
+
+    if (isSerial) {
+      handleChange({
+        target: { name: "expiryTracking", value: false },
+      });
+    }
+  }, [formData.stockTracking]);
 
   return (
     <div className="row g-4 animate__animated animate__fadeIn">
-      {/* --- INVENTORY COMMAND CENTER --- */}
+
+      {/* ================================================= */}
+      {/* INVENTORY HEADER                                 */}
+      {/* ================================================= */}
       <div className="col-12">
-        <div className="p-4 bg-white rounded-4 shadow-sm d-flex align-items-center justify-content-between border-start border-4 border-info">
+        <div className="p-4 bg-white rounded-4 shadow-sm border-start border-4 border-info">
           <div className="d-flex align-items-center">
-            <div className="p-3 bg-info bg-opacity-10 rounded-3 me-3 text-info">
-              <Database size={28} />
+            <div className="p-3 bg-info bg-opacity-10 rounded-3 me-3">
+              <Database size={26} className="text-info" />
             </div>
             <div>
-              <h6 className="fw-bold mb-1">Advanced Stock Intelligence</h6>
-              <small className="text-muted">Manage tracking modes, storage bins, and replenishment rules</small>
+              <h6 className="fw-bold mb-1">Inventory Management</h6>
+              <small className="text-muted">
+                Configure how stock is tracked, stored and controlled
+              </small>
             </div>
-          </div>
-          <div className="text-end d-none d-md-block">
-             <span className="badge bg-soft-info text-info px-3 py-2 rounded-pill fw-bold">Method: FIFO</span>
           </div>
         </div>
       </div>
 
-      {/* --- MISSING FIELD 1: STOCK TRACKING MODE (VISUAL SELECTION) --- */}
+      {/* ================================================= */}
+      {/* STOCK TRACKING MODE                               */}
+      {/* ================================================= */}
       <div className="col-12">
-        <label className="form-label fw-bold small text-muted mb-3 text-uppercase ls-1">Tracking Intelligence *</label>
+        <label className="form-label fw-bold small text-uppercase text-muted mb-2">
+          Stock Tracking Method <span className="text-danger">*</span>
+        </label>
+
         <div className="row g-3">
           {[
-            { id: 'None', label: 'Simple Stock', icon: <Slash />, desc: 'Count only' },
-            { id: 'Batch', label: 'Batch/Lot', icon: <Layers />, desc: 'Expiry & Manufacturing' },
-            { id: 'Serial', label: 'Unique Serial', icon: <Cpu />, desc: 'IMEI & Electronics' }
-          ].map((mode) => (
-            <div className="col-md-4" key={mode.id}>
-              <div 
-                onClick={() => handleModeChange(mode.id)}
-                className={`p-3 rounded-4 border-2 cursor-pointer transition-all h-100 ${
-                  formData.stockTracking === mode.id 
-                  ? "border-primary bg-primary bg-opacity-10 shadow-sm" 
-                  : "border-light bg-light bg-opacity-50"
+            {
+              id: "None",
+              icon: <Slash />,
+              title: "Simple Quantity",
+              desc: "Only total quantity (garments, grocery)",
+            },
+            {
+              id: "Batch",
+              icon: <Layers />,
+              title: "Batch / Lot",
+              desc: "Expiry & manufacturing date (FMCG, medicine)",
+            },
+            {
+              id: "Serial",
+              icon: <Cpu />,
+              title: "Serial Number",
+              desc: "Unique items (IMEI, electronics)",
+            },
+          ].map((m) => (
+            <div className="col-md-4" key={m.id}>
+              <div
+                onClick={() => setTracking(m.id)}
+                className={`p-3 rounded-4 h-100 cursor-pointer border transition-all ${
+                  formData.stockTracking === m.id
+                    ? "border-primary bg-primary bg-opacity-10"
+                    : "bg-light border-light"
                 }`}
               >
-                <div className={`mb-2 ${formData.stockTracking === mode.id ? 'text-primary' : 'text-muted'}`}>
-                  {React.cloneElement(mode.icon, { size: 22 })}
+                <div
+                  className={`mb-2 ${
+                    formData.stockTracking === m.id
+                      ? "text-primary"
+                      : "text-muted"
+                  }`}
+                >
+                  {React.cloneElement(m.icon, { size: 22 })}
                 </div>
-                <h6 className="fw-bold mb-1 small">{mode.label}</h6>
-                <p className="mb-0 text-muted" style={{ fontSize: '11px' }}>{mode.desc}</p>
+                <h6 className="fw-bold small mb-1">{m.title}</h6>
+                <small className="text-muted">{m.desc}</small>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* --- STOCK QUANTITIES --- */}
-      <div className="col-md-4">
-        <label className="form-label fw-bold small">Opening Quantity</label>
-        <div className="input-group shadow-sm border rounded-3 overflow-hidden">
-          <span className="input-group-text bg-white border-0"><Package size={16} className="text-muted"/></span>
-          <input type="number" name="openingStock" className="form-control border-0 fw-bold" 
-                 value={formData.openingStock} onChange={handleChange} />
+      {/* ================= CONTEXTUAL INFO ================= */}
+      {isBatch && (
+        <div className="col-12">
+          <div className="p-3 bg-soft-warning rounded-4 border border-warning border-opacity-25">
+            <strong>Batch Tracking Enabled</strong>
+            <p className="mb-0 small text-muted">
+              Each purchase batch will be tracked separately with expiry dates.
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="col-md-4">
-        <label className="form-label fw-bold small">Current On-Hand</label>
-        <div className="input-group shadow-sm border rounded-3 overflow-hidden">
-          <span className="input-group-text bg-light border-0"><Archive size={16} className="text-info"/></span>
-          <input type="number" className="form-control border-0 bg-light fw-bold text-info shadow-none" 
-                 value={formData.currentStock || formData.openingStock || 0} disabled />
+      {isSerial && (
+        <div className="col-12">
+          <div className="p-3 bg-soft-info rounded-4 border border-info border-opacity-25">
+            <strong>Serial Tracking Enabled</strong>
+            <p className="mb-0 small text-muted">
+              Stock quantity is derived from individual serial numbers.
+            </p>
+          </div>
         </div>
+      )}
+
+      {/* ================================================= */}
+      {/* STOCK QUANTITY                                    */}
+      {/* ================================================= */}
+      <div className="col-md-4">
+        <label className="form-label fw-bold small">
+          Opening Stock
+        </label>
+        <input
+          type="number"
+          name="openingStock"
+          className="form-control shadow-sm fw-bold"
+          placeholder={
+            isSerial ? "Auto from serials" : "e.g. 100"
+          }
+          value={formData.openingStock}
+          onChange={handleChange}
+          disabled={isSerial}
+        />
+        <small className="text-muted">
+          {isSerial
+            ? "Calculated automatically"
+            : "Initial stock at setup"}
+        </small>
       </div>
 
       <div className="col-md-4">
-        <label className="form-label fw-bold small text-danger">Reorder Threshold (Safety)</label>
-        <div className="input-group shadow-sm border border-danger border-opacity-25 rounded-3 overflow-hidden">
-          <span className="input-group-text bg-danger text-white border-0"><AlertTriangle size={16} /></span>
-          <input type="number" name="reorderLevel" className="form-control border-0 fw-bold text-danger shadow-none" 
-                 value={formData.reorderLevel} onChange={handleChange} />
-        </div>
-      </div>
-
-      {/* --- MISSING FIELD 2: STORAGE DEPTH (WAREHOUSING) --- */}
-      <div className="col-12 mt-4">
-        <h6 className="fw-bold text-uppercase small text-muted border-bottom pb-2">Warehousing & Storage Location</h6>
+        <label className="form-label fw-bold small">
+          Current Stock
+        </label>
+        <input
+          type="number"
+          disabled
+          className="form-control bg-light fw-bold text-info"
+          value={
+            formData.currentStock ??
+            formData.openingStock ??
+            0
+          }
+        />
+        <small className="text-muted">
+          Updated automatically
+        </small>
       </div>
 
       <div className="col-md-4">
-        <label className="form-label fw-bold small">Primary Store/Warehouse</label>
-        <select name="warehouse" className="form-select shadow-sm border-0 bg-light" value={formData.warehouse} onChange={handleChange}>
-          <option value="Main">Main Showroom</option>
-          <option value="Warehouse-A">Central Godown (Zone A)</option>
-          <option value="Cold-Storage">Cold Storage Unit</option>
+        <label className="form-label fw-bold small text-danger">
+          Reorder Level
+        </label>
+        <input
+          type="number"
+          name="reorderLevel"
+          className="form-control shadow-sm fw-bold text-danger"
+          placeholder={
+            isSerial
+              ? "Optional for serial items"
+              : "e.g. 10"
+          }
+          value={formData.reorderLevel}
+          onChange={handleChange}
+        />
+        <small className="text-muted">
+          Stock alert threshold
+        </small>
+      </div>
+
+      {/* ================================================= */}
+      {/* WAREHOUSE                                        */}
+      {/* ================================================= */}
+      <div className="col-12 mt-3">
+        <h6 className="fw-bold small text-muted border-bottom pb-2">
+          Storage & Location
+        </h6>
+      </div>
+
+      <div className="col-md-4">
+        <label className="form-label fw-bold small">
+          Warehouse
+        </label>
+        <select
+          name="warehouse"
+          className="form-select shadow-sm"
+          value={formData.warehouse}
+          onChange={handleChange}
+        >
+          <option value="">Select warehouse</option>
+          {warehouses.map((w) => (
+            <option key={w.id} value={w.id}>
+              {w.name}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="col-md-4">
-        <label className="form-label fw-bold small"><MapPin size={14} className="me-1"/> Rack / Bin Number</label>
-        <input type="text" name="rackLocation" className="form-control shadow-sm" 
-               placeholder="e.g. Rack-05 / Shelf-B" value={formData.rackLocation} onChange={handleChange} />
+        <label className="form-label fw-bold small">
+          <MapPin size={14} className="me-1" />
+          Rack / Bin
+        </label>
+        <input
+          type="text"
+          name="rackLocation"
+          className="form-control shadow-sm"
+          placeholder="e.g. Rack-A / Shelf-3"
+          value={formData.rackLocation}
+          onChange={handleChange}
+        />
       </div>
 
       <div className="col-md-4">
-        <label className="form-label fw-bold small">Inventory Valuation</label>
-        <select name="valuationMethod" className="form-select shadow-sm bg-light border-0" value={formData.valuationMethod} onChange={handleChange}>
-          <option value="FIFO">First In, First Out (FIFO)</option>
+        <label className="form-label fw-bold small">
+          Valuation Method
+        </label>
+        <select
+          name="valuationMethod"
+          className="form-select shadow-sm"
+          value={formData.valuationMethod}
+          onChange={handleChange}
+        >
+          <option value="FIFO">FIFO (Recommended)</option>
           <option value="Average">Weighted Average</option>
-          <option value="LIFO">Last In, First Out (LIFO)</option>
+          <option value="LIFO">LIFO</option>
         </select>
       </div>
 
-      {/* --- MISSING FIELD 3: EXPIRY & AUTOMATION --- */}
-      <div className="col-md-6 mt-4">
-        <div className="p-3 bg-light border border-dashed rounded-4 d-flex align-items-center justify-content-between shadow-sm h-100">
+      {/* ================================================= */}
+      {/* AUTOMATION & CONTROL                              */}
+      {/* ================================================= */}
+      <div className="col-md-6 mt-3">
+        <div className="p-3 bg-light rounded-4 border d-flex justify-content-between align-items-center h-100">
           <div className="d-flex align-items-center">
-            <div className="p-2 bg-white rounded-3 shadow-sm me-3">
-              <TrendingUp size={18} className="text-warning" />
-            </div>
+            <TrendingUp size={18} className="text-warning me-2" />
             <div>
-              <h6 className="mb-0 fw-bold small text-dark">Expiry Tracking</h6>
-              <small className="text-muted">Required for FMCG/Medicine</small>
+              <h6 className="fw-bold small mb-0">
+                Expiry Tracking
+              </h6>
+              <small className="text-muted">
+                Mandatory for batch items
+              </small>
             </div>
           </div>
-          <div className="form-check form-switch m-0">
-            <input className="form-check-input p-2 cursor-pointer" type="checkbox" name="expiryTracking" 
-                   checked={formData.expiryTracking === "Yes"} 
-                   onChange={(e) => handleChange({ target: { name: 'expiryTracking', value: e.target.checked ? "Yes" : "No" } })} />
-          </div>
+          <input
+            type="checkbox"
+            name="expiryTracking"
+            className="form-check-input"
+            checked={isBatch ? true : formData.expiryTracking}
+            disabled={isBatch}
+            onChange={onBoolChange}
+          />
         </div>
       </div>
 
-      {/* REORDER AUTOMATION */}
-      <div className="col-md-6 mt-4">
-        <div className="p-3 bg-soft-primary border border-primary border-opacity-10 rounded-4 d-flex align-items-center justify-content-between shadow-sm h-100">
+      <div className="col-md-6 mt-3">
+        <div className="p-3 bg-soft-primary rounded-4 border d-flex justify-content-between align-items-center h-100">
           <div className="d-flex align-items-center">
-            <div className="p-2 bg-white rounded-3 shadow-sm me-3">
-               <Truck size={18} className="text-primary" />
-            </div>
+            <Truck size={18} className="text-primary me-2" />
             <div>
-              <h6 className="mb-0 fw-bold small text-dark">Auto-PO Suggestion</h6>
-              <small className="text-muted">Generate PO at reorder level</small>
+              <h6 className="fw-bold small mb-0">
+                Auto Purchase Suggestion
+              </h6>
+              <small className="text-muted">
+                Suggest PO on low stock
+              </small>
             </div>
           </div>
-          <div className="form-check form-switch m-0">
-            <input className="form-check-input p-2 cursor-pointer" type="checkbox" name="autoReorder" 
-                   checked={formData.autoReorder} onChange={handleCheckbox} />
-          </div>
+          <input
+            type="checkbox"
+            name="autoReorder"
+            className="form-check-input"
+            checked={formData.autoReorder}
+            onChange={onBoolChange}
+          />
         </div>
       </div>
 
-      {/* NEGATIVE STOCK PROTECTION */}
       <div className="col-12">
-        <div className="p-3 bg-soft-danger border border-danger border-opacity-10 rounded-4 d-flex align-items-center justify-content-between shadow-sm">
+        <div className="p-3 bg-soft-danger rounded-4 border d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
-            <div className="p-2 bg-white rounded-3 shadow-sm me-3">
-               <ShieldOff size={18} className="text-danger" />
-            </div>
+            <ShieldOff size={18} className="text-danger me-2" />
             <div>
-              <h6 className="mb-0 fw-bold small text-dark">Negative Stock Control</h6>
-              <small className="text-muted">Restrict billing if item is out of stock</small>
+              <h6 className="fw-bold small mb-0">
+                Allow Negative Stock
+              </h6>
+              <small className="text-muted">
+                Allow billing even if stock is zero
+              </small>
             </div>
           </div>
-          <div className="form-check form-switch m-0">
-            <input className="form-check-input p-2 cursor-pointer" type="checkbox" name="allowNegativeStock" 
-                   checked={formData.allowNegativeStock} onChange={handleCheckbox} />
-          </div>
+          <input
+            type="checkbox"
+            name="allowNegativeStock"
+            className="form-check-input"
+            checked={formData.allowNegativeStock}
+            onChange={onBoolChange}
+          />
         </div>
       </div>
     </div>

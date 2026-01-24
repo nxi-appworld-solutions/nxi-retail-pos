@@ -9,6 +9,7 @@ import Sidebar from "../InitialPage/Sidebar/Sidebar";
 import TwoColumnSidebar from "../InitialPage/Sidebar/two-column";
 import HorizontalSidebar from "../InitialPage/Sidebar/horizontalSidebar";
 import GlobalModalRenderer from "../core/modals/GlobalModalRenderer";
+import ModalRoot from "../core/modals/ModalRoot";
 
 const HeaderLayouts = () => {
   const [showLoader, setShowLoader] = useState(true);
@@ -93,7 +94,8 @@ const HeaderLayouts = () => {
             <TwoColumnSidebar />
             <HorizontalSidebar />
             <Outlet />
-            <GlobalModalRenderer />
+            {/* <GlobalModalRenderer /> */}
+            <ModalRoot />
             <ToastContainer />
             {/* {location.pathname.includes("layout") ? <></> : <ThemeSettings />} */}
           </div>

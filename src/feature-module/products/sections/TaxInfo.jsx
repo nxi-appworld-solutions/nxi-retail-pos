@@ -3,174 +3,259 @@ import {
   Percent,
   FileText,
   Shield,
-  AlertCircle,
   CheckCircle,
-  Briefcase,
   Layers,
-  HelpCircle
+  HelpCircle,
 } from "react-feather";
 
-const TaxInfo = ({ formData, handleChange }) => {
-  const handleCheckbox = (e) => {
-    const { name, checked } = e.target;
-    handleChange({ target: { name, value: checked } });
+const TaxInfo = ({
+  formData,
+  handleChange,
+  gstList = [],     // from GST Master
+  taxControlled = true, // pricing section controls inclusive/exclusive
+}) => {
+  const isTaxable = formData.taxCategory === "Taxable";
+
+  const handleBool = (e) => {
+    handleChange({
+      target: { name: e.target.name, value: e.target.checked },
+    });
   };
 
   return (
     <div className="row g-4 animate__animated animate__fadeIn">
-      {/* --- TAX COMPLIANCE HEADER --- */}
+
+      {/* ================================================= */}
+      {/* TAX HEADER                                       */}
+      {/* ================================================= */}
       <div className="col-12">
-        <div className="p-4 bg-white rounded-4 shadow-sm d-flex align-items-center justify-content-between border-start border-4 border-warning">
+        <div className="p-4 bg-white rounded-4 shadow-sm border-start border-4 border-warning">
           <div className="d-flex align-items-center">
-            <div className="p-3 bg-warning bg-opacity-10 rounded-3 me-3 text-warning">
-              <Shield size={28} />
+            <div className="p-3 bg-warning bg-opacity-10 rounded-3 me-3">
+              <Shield size={26} className="text-warning" />
             </div>
             <div>
-              <h6 className="fw-bold mb-1">Taxation & Compliance</h6>
-              <small className="text-muted">GST slabs, HSN codes, and calculation rules</small>
+              <h6 className="fw-bold mb-1">Tax & Compliance</h6>
+              <small className="text-muted">
+                GST, HSN/SAC and tax calculation rules
+              </small>
             </div>
           </div>
         </div>
       </div>
 
-      {/* --- CORE TAX SETTINGS --- */}
+      {/* ================================================= */}
+      {/* TAX CLASSIFICATION                               */}
+      {/* ================================================= */}
       <div className="col-md-6">
-        <label className="form-label fw-bold small">Tax Category</label>
-        <div className="input-group shadow-sm">
-          <span className="input-group-text bg-white border-end-0"><Layers size={16} className="text-muted"/></span>
-          <select
-            name="taxCategory"
-            className="form-select border-start-0"
-            value={formData.taxCategory || "Taxable"}
-            onChange={handleChange}
-          >
-            <option value="Taxable">Standard Taxable</option>
-            <option value="Exempt">Exempted Goods</option>
-            <option value="Zero">Zero Rated (Export)</option>
-            <option value="Nil">Nil Rated</option>
-          </select>
-        </div>
+        <label className="form-label fw-bold small">
+          Tax Category
+        </label>
+        <select
+          name="taxCategory"
+          className="form-select shadow-sm"
+          value={formData.taxCategory}
+          onChange={handleChange}
+        >
+          <option value="Taxable">Taxable (GST Applicable)</option>
+          <option value="Exempt">Exempted</option>
+          <option value="Nil">Nil Rated</option>
+          <option value="Zero">Zero Rated (Export)</option>
+        </select>
+        <small className="text-muted">
+          Determines whether GST will be applied
+        </small>
       </div>
 
       <div className="col-md-6">
-        <label className="form-label fw-bold small">GST Rate (%)</label>
-        <div className="input-group shadow-sm">
-          <span className="input-group-text bg-white border-end-0 text-success"><Percent size={16} /></span>
-          <select
-            name="gstRate"
-            className="form-select border-start-0 fw-bold"
-            value={formData.gstRate}
-            onChange={handleChange}
-          >
-            <option value="0">GST @ 0%</option>
-            <option value="5">GST @ 5%</option>
-            <option value="12">GST @ 12%</option>
-            <option value="18">GST @ 18%</option>
-            <option value="28">GST @ 28%</option>
-          </select>
-        </div>
+        <label className="form-label fw-bold small">
+          GST Slab
+        </label>
+        <select
+          name="gstId"
+          className="form-select shadow-sm fw-bold"
+          value={formData.gstId || ""}
+          onChange={handleChange}
+          disabled={!isTaxable}
+        >
+          <option value="">Select GST slab</option>
+          {gstList.map((g) => (
+            <option key={g.id} value={g.id}>
+              {g.gstName} ({g.gstPercent}%)
+            </option>
+          ))}
+        </select>
+        <small className="text-muted">
+          {isTaxable
+            ? "GST applied during billing"
+            : "GST not applicable for this category"}
+        </small>
       </div>
 
-      {/* --- MISSING FIELD 1: HSN/SAC & CESS --- */}
+      {/* ================================================= */}
+      {/* HSN / SAC & SUPPLY                               */}
+      {/* ================================================= */}
       <div className="col-md-4">
-        <label className="form-label fw-bold small">HSN / SAC Code</label>
-        <div className="input-group shadow-sm">
-          <span className="input-group-text bg-light border-end-0"><FileText size={16} /></span>
-          <input
-            type="text"
-            name="hsn"
-            className="form-control border-start-0 font-monospace"
-            placeholder="e.g. 8471"
-            value={formData.hsn}
-            onChange={handleChange}
-          />
-        </div>
+        <label className="form-label fw-bold small">
+          HSN / SAC Code
+        </label>
+        <input
+          type="text"
+          name="hsn"
+          className="form-control shadow-sm font-monospace"
+          placeholder="e.g. 8471 / 9983"
+          value={formData.hsn}
+          onChange={handleChange}
+          disabled={!isTaxable}
+        />
+        <small className="text-muted">
+          Mandatory for taxable items
+        </small>
       </div>
 
       <div className="col-md-4">
-        <label className="form-label fw-bold small">Additional CESS (%)</label>
+        <label className="form-label fw-bold small">
+          Additional CESS (%)
+        </label>
         <input
           type="number"
+          min="0"
           name="cess"
           className="form-control shadow-sm"
           placeholder="e.g. 1.5"
           value={formData.cess}
           onChange={handleChange}
+          disabled={!isTaxable}
         />
+        <small className="text-muted">
+          Applicable only for specific goods
+        </small>
       </div>
 
       <div className="col-md-4">
-        <label className="form-label fw-bold small">Supply Type</label>
+        <label className="form-label fw-bold small">
+          Supply Type
+        </label>
         <select
           name="supplyType"
           className="form-select shadow-sm"
-          value={formData.supplyType || "Goods"}
+          value={formData.supplyType}
           onChange={handleChange}
         >
-          <option value="Goods">Goods (Inventory)</option>
-          <option value="Services">Services (Labor/AMC)</option>
+          <option value="Goods">Goods</option>
+          <option value="Services">Services</option>
         </select>
       </div>
 
-      {/* --- MISSING FIELD 2: TAX CALCULATION RULES --- */}
-      <div className="col-12 mt-4">
-        <h6 className="fw-bold text-uppercase small text-muted border-bottom pb-2">Calculation Logic</h6>
-      </div>
-
-      <div className="col-md-6">
-        <div className="p-3 bg-light border rounded-4 d-flex align-items-center justify-content-between shadow-sm">
+      {/* ================================================= */}
+      {/* TAX MODE                                         */}
+      {/* ================================================= */}
+      <div className="col-md-6 mt-3">
+        <div className="p-3 bg-light border rounded-4 d-flex justify-content-between align-items-center shadow-sm">
           <div>
-            <h6 className="mb-0 fw-bold small">Tax Mode</h6>
-            <small className="text-muted">Is tax included in Price?</small>
+            <h6 className="fw-bold small mb-0">
+              Tax Mode
+            </h6>
+            <small className="text-muted">
+              Inclusive or Exclusive pricing
+            </small>
           </div>
-          <div className="btn-group shadow-sm">
-            <button 
-              type="button" 
-              className={`btn btn-sm ${formData.taxMode === 'Inclusive' ? 'btn-primary' : 'btn-outline-primary'}`}
-              onClick={() => handleChange({ target: { name: 'taxMode', value: 'Inclusive' } })}
-            >Inclusive</button>
-            <button 
-              type="button" 
-              className={`btn btn-sm ${formData.taxMode !== 'Inclusive' ? 'btn-primary' : 'btn-outline-primary'}`}
-              onClick={() => handleChange({ target: { name: 'taxMode', value: 'Exclusive' } })}
-            >Exclusive</button>
+          <div className="btn-group">
+            <button
+              type="button"
+              className={`btn btn-sm ${
+                formData.taxMode === "Inclusive"
+                  ? "btn-primary"
+                  : "btn-outline-primary"
+              }`}
+              disabled={taxControlled}
+              onClick={() =>
+                handleChange({
+                  target: {
+                    name: "taxMode",
+                    value: "Inclusive",
+                  },
+                })
+              }
+            >
+              Inclusive
+            </button>
+            <button
+              type="button"
+              className={`btn btn-sm ${
+                formData.taxMode === "Exclusive"
+                  ? "btn-primary"
+                  : "btn-outline-primary"
+              }`}
+              disabled={taxControlled}
+              onClick={() =>
+                handleChange({
+                  target: {
+                    name: "taxMode",
+                    value: "Exclusive",
+                  },
+                })
+              }
+            >
+              Exclusive
+            </button>
           </div>
         </div>
+        {taxControlled && (
+          <small className="text-muted d-block mt-1">
+            Controlled from Pricing section
+          </small>
+        )}
       </div>
 
-      {/* --- ADVANCED COMPLIANCE TOGGLES --- */}
-      <div className="col-md-6">
-        <div className="p-3 bg-light border rounded-4 d-flex align-items-center justify-content-between shadow-sm">
+      {/* ================================================= */}
+      {/* ADVANCED CONTROL                                 */}
+      {/* ================================================= */}
+      <div className="col-md-6 mt-3">
+        <div className="p-3 bg-light border rounded-4 d-flex justify-content-between align-items-center shadow-sm">
           <div className="d-flex align-items-center">
-            <Shield size={20} className="text-warning me-3" />
+            <Shield size={18} className="text-warning me-2" />
             <div>
-              <h6 className="mb-0 fw-bold small">POS Override</h6>
-              <small className="text-muted">Cashier can edit tax rate</small>
+              <h6 className="fw-bold small mb-0">
+                Allow POS Tax Override
+              </h6>
+              <small className="text-muted">
+                Restrict for compliance safety
+              </small>
             </div>
           </div>
-          <div className="form-check form-switch m-0">
-            <input
-              type="checkbox"
-              name="allowTaxOverride"
-              className="form-check-input p-2"
-              checked={formData.allowTaxOverride}
-              onChange={handleCheckbox}
-            />
-          </div>
+          <input
+            type="checkbox"
+            name="allowTaxOverride"
+            className="form-check-input"
+            checked={formData.allowTaxOverride}
+            onChange={handleBool}
+          />
         </div>
       </div>
 
-      <div className="col-12 mt-3">
-        <div className={`p-3 rounded-4 border-dashed d-flex align-items-center shadow-sm ${formData.taxCategory === 'Taxable' ? 'bg-soft-success border-success' : 'bg-light'}`}>
-          <CheckCircle size={20} className="text-success me-3" />
-          <div className="small text-muted">
-            {formData.taxCategory === 'Taxable' 
-              ? `Note: System will apply ${formData.gstRate}% GST. Intra-state (CGST+SGST) or Inter-state (IGST) will be determined by Warehouse and Customer location.`
-              : "Tax configuration is disabled for non-taxable categories."}
-          </div>
+      {/* ================================================= */}
+      {/* SYSTEM NOTE                                      */}
+      {/* ================================================= */}
+      <div className="col-12 mt-2">
+        <div
+          className={`p-3 rounded-4 border ${
+            isTaxable
+              ? "bg-soft-success border-success"
+              : "bg-light"
+          }`}
+        >
+          <CheckCircle
+            size={18}
+            className="text-success me-2"
+          />
+          <span className="small text-muted">
+            {isTaxable
+              ? "GST will be calculated automatically based on customer & warehouse location (CGST/SGST or IGST)."
+              : "Tax calculation is disabled for this product."}
+          </span>
         </div>
       </div>
-
     </div>
   );
 };

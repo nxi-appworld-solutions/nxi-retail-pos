@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Plus, Edit2 } from "react-feather";
+import { Edit2 } from "react-feather";
 
 import PageHeader from "../../components/data-table/PageHeader";
 import DataTableCard from "../../components/data-table/DataTable";
@@ -8,57 +8,63 @@ import { handleExportToExcel } from "../../utils/exportToExcel";
 import { openModal } from "../../core/redux/store/modalSlice";
 import { MODAL_TYPES } from "../../core/modals/modalTypes";
 
-const Brands = () => {
+const GSTMaster = () => {
   const dispatch = useDispatch();
 
-  const brands = [
+  // TEMP DATA (API se aayega)
+  const gstList = [
     {
-      id: "1",
-      name: "Samsung",
-      code: "SAM",
-      brandTier: "Premium",
-      countryOfOrigin: "South Korea",
-      visibleInPOS: true,
+      id: 1,
+      gstName: "GST 0%",
+      gstCode: "GST0",
+      gstPercent: 0,
+      isInclusive: false,
       status: "Active",
     },
     {
-      id: "2",
-      name: "Nike",
-      code: "NIK",
-      brandTier: "Premium",
-      countryOfOrigin: "USA",
-      visibleInPOS: false,
-      status: "Inactive",
+      id: 2,
+      gstName: "Sales GST 5%",
+      gstCode: "GST5",
+      gstPercent: 5,
+      isInclusive: false,
+      status: "Active",
+    },
+    {
+      id: 3,
+      gstName: "Sales GST 18%",
+      gstCode: "GST18",
+      gstPercent: 18,
+      isInclusive: true,
+      status: "Active",
     },
   ];
 
   const columns = [
     {
-      title: "Brand",
-      dataIndex: "name",
+      title: "GST Name",
+      dataIndex: "gstName",
       render: (v) => <span className="fw-bold">{v}</span>,
     },
     {
       title: "Code",
-      dataIndex: "code",
-      render: (v) => <span className="fw-bold font-monospace">{v || "—"}</span>,
-    },
-    {
-      title: "Tier",
-      dataIndex: "brandTier",
-      render: (v) => <span className="badge bg-soft-info text-dark">{v}</span>,
-    },
-    {
-      title: "Country",
-      dataIndex: "countryOfOrigin",
-      render: (v) => v || "—",
-    },
-    {
-      title: "POS",
-      dataIndex: "visibleInPOS",
+      dataIndex: "gstCode",
       render: (v) => (
-        <span className={`badge ${v ? "bg-success" : "bg-secondary"}`}>
-          {v ? "Yes" : "No"}
+        <span className="fw-bold font-monospace">{v}</span>
+      ),
+    },
+    {
+      title: "GST %",
+      dataIndex: "gstPercent",
+      render: (v) => (
+        <span className="fw-bold text-success">{v}%</span>
+      ),
+    },
+    {
+      title: "Price Type",
+      dataIndex: "isInclusive",
+      render: (v) => (
+        <span className={`badge ${v ? "bg-info" : "bg-secondary"}`}>
+          {v ? "Inclusive" : "Exclusive"}
         </span>
       ),
     },
@@ -70,9 +76,7 @@ const Brands = () => {
           className={`badge ${
             v === "Active"
               ? "bg-success"
-              : v === "Inactive"
-                ? "bg-warning text-dark"
-                : "bg-danger"
+              : "bg-warning text-dark"
           }`}
         >
           {v}
@@ -89,12 +93,13 @@ const Brands = () => {
           onClick={() =>
             dispatch(
               openModal({
-                modalName: "BRAND",
-                modalProps: {
+                name: MODAL_TYPES.GST,
+                payload: {
                   mode: "EDIT",
                   record: row,
                 },
-              }),
+                options: { size: "lg" },
+              })
             )
           }
         />
@@ -106,33 +111,37 @@ const Brands = () => {
     <div className="page-wrapper">
       <div className="content">
         <PageHeader
-          title="Brand"
-          subtitle="Manage your product brands"
+          title="GST Master"
+          subtitle="Manage GST slabs and tax behavior"
           actions={[
             {
-              label: "Add Brand",
+              label: "Add GST",
               icon: <i className="ti ti-circle-plus" />,
               onClick: () =>
                 dispatch(
                   openModal({
-                    name: MODAL_TYPES.BRAND,
-                    payload: { mode: "EDIT", record: null },
-                    options: { size: "xl" },
-                  }),
+                    name: MODAL_TYPES.GST,
+                    payload: { mode: "ADD", record: null },
+                    options: { size: "lg" },
+                  })
                 ),
             },
           ]}
           tableActions={{
             onExportPdf: () => console.log("PDF"),
-            onExportExcel: () => handleExportToExcel(brands),
+            onExportExcel: () => handleExportToExcel(gstList),
             onRefresh: () => window.location.reload(),
           }}
         />
 
-        <DataTableCard columns={columns} dataSource={brands} rowKey="id" />
+        <DataTableCard
+          columns={columns}
+          dataSource={gstList}
+          rowKey="id"
+        />
       </div>
     </div>
   );
 };
 
-export default Brands;
+export default GSTMaster;

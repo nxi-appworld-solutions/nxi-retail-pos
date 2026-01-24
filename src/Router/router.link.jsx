@@ -24,7 +24,7 @@ import SalesList from "../pages/transactions/sales/saleslist";
 
 // import SalesDashbaord from "../feature-module/dashboard/salesdashbaord";
 import BrandList from "../feature-module/inventory/brandlist";
-import VariantAttributes from "../feature-module/inventory/variantattributes";
+// import VariantAttributes from "../feature-module/inventory/variantattributes";
 import Warranty from "../feature-module/inventory/warranty";
 import PrintBarcode from "../feature-module/inventory/printbarcode";
 import Grid from "../feature-module/uiinterface/grid";
@@ -303,11 +303,18 @@ import Pos from "../features/pos/pages/pos";
 import KDSSystem from "../pages/KDS/kds";
 import Customers from "../features/customers/pages/CustomerList";
 import AddCustomer from "../features/customers/pages/AddCustomer";
-import Brands from "../feature-module/products/brands";
-import Categories from "../feature-module/products/categories";
+import Brands from "../feature-module/products/Brands";
+import GSTMaster from "../feature-module/taxmanagement/GSTMaster";
+import Categories from "../feature-module/products/Categories";
 import Products from "../feature-module/products/products";
 import AddProduct from "../feature-module/products/addProduct";
 import PurchasesList from "../pages/transactions/sales/saleslist";
+import HSNMaster from "../feature-module/taxmanagement/HSNMaster";
+import TaxGroupList from "../feature-module/taxmanagement/TaxGroupList";
+import GSTSettings from "../feature-module/taxmanagement/GSTSettings";
+import GSTReports from "../feature-module/taxmanagement/GSTReports";
+import VariantAttributes from "../feature-module/products/VariantAttributes";
+import UnitMaster from "../feature-module/products/UnitMaster";
 
 export const publicRoutes = [
   {
@@ -360,6 +367,41 @@ export const publicRoutes = [
     route: Route,
   },
   {
+    id: 5,
+    path: routes.gstmaster,
+    name: "gstmaster",
+    element: <GSTMaster />,
+    route: Route,
+  },
+  {
+    id: 5,
+    path: routes.hsnmaster,
+    name: "hsnmaster",
+    element: <HSNMaster />,
+    route: Route,
+  },
+  {
+    id: 5,
+    path: routes.taxgroup,
+    name: "taxgroup",
+    element: <TaxGroupList />,
+    route: Route,
+  },
+  {
+    id: 5,
+    path: routes.gstsetting,
+    name: "gstsetting",
+    element: <GSTSettings />,
+    route: Route,
+  },
+  {
+    id: 5,
+    path: routes.gstreport,
+    name: "gstreport",
+    element: <GSTReports />,
+    route: Route,
+  },
+  {
     id: 60,
     path: routes.categorylist,
     name: "categorylist",
@@ -369,8 +411,8 @@ export const publicRoutes = [
   {
     id: 6,
     path: routes.units,
-    name: "unit",
-    element: <UnitList />,
+    name: "units",
+    element: <UnitMaster />,
     route: Route,
   },
   {

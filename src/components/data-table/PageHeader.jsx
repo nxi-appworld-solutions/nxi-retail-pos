@@ -30,18 +30,40 @@ const DataTableHeader = ({
 
       {/* PRIMARY ACTIONS */}
       <div className="d-flex gap-2 page-btn">
-        {actions
-          .filter((action) => action.show !== false)
-          .map((action, index) => (
+        {actions.map((action, index) => {
+          if (action.children) {
+            return (
+              <div key={index} className="dropdown">
+                <button
+                  className="btn btn-primary dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                >
+                  {action.icon} {action.label}
+                </button>
+
+                <ul className="dropdown-menu">
+                  {action.children.map((child, i) => (
+                    <li key={i}>
+                      <button className="dropdown-item" onClick={child.onClick}>
+                        {child.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          }
+
+          return (
             <button
               key={index}
-              className={`btn btn-${action.variant === "secondary" ? "secondary" : "primary"}`}
+              className="btn btn-primary"
               onClick={action.onClick}
             >
-              {action.icon && <span className="me-1">{action.icon}</span>}
-              {action.label}
+              {action.icon} {action.label}
             </button>
-          ))}
+          );
+        })}
       </div>
     </div>
   );
