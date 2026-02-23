@@ -200,6 +200,7 @@ export const SidebarData = [
         showSubRoute: false,
         submenu: false,
       },
+<<<<<<< HEAD
       {
         label: "Tax Group",
         link: route.taxgroup,
@@ -207,6 +208,15 @@ export const SidebarData = [
         showSubRoute: false,
         submenu: false,
       },
+=======
+      // {
+      //   label: "Tax Group",
+      //   link: route.taxgroup,
+      //   icon: "file-percent",
+      //   showSubRoute: false,
+      //   submenu: false,
+      // },
+>>>>>>> 1c9ca8c (again post)
       {
         label: "GST Settings",
         link: route.gstsetting,
@@ -325,6 +335,7 @@ export const SidebarData = [
         showSubRoute: false,
         submenu: false,
       },
+<<<<<<< HEAD
       {
         label: "GST",
         link: route.invoicereport,
@@ -332,6 +343,8 @@ export const SidebarData = [
         showSubRoute: false,
         submenu: false,
       },
+=======
+>>>>>>> 1c9ca8c (again post)
     ],
   },
   // {
@@ -537,7 +550,10 @@ export const SidebarData = [
     submenuOpen: true,
     showSubRoute: false,
     submenuHdr: "People",
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1c9ca8c (again post)
     submenuItems: [
       {
         label: "Customers",
@@ -546,6 +562,7 @@ export const SidebarData = [
         showSubRoute: false,
         submenu: false,
       },
+<<<<<<< HEAD
       {
         label: "Billers",
         link: "/billers",
@@ -574,6 +591,36 @@ export const SidebarData = [
         showSubRoute: false,
         submenu: false,
       },
+=======
+      // {
+      //   label: "Billers",
+      //   link: "/billers",
+      //   icon: "user-up",
+      //   showSubRoute: false,
+      //   submenu: false,
+      // },
+      // {
+      //   label: "Suppliers",
+      //   link: "/suppliers",
+      //   icon: "user-dollar",
+      //   showSubRoute: false,
+      //   submenu: false,
+      // },
+      // {
+      //   label: "Stores",
+      //   link: "/store-list",
+      //   icon: "home-bolt",
+      //   showSubRoute: false,
+      //   submenu: false,
+      // },
+      // {
+      //   label: "Warehouses",
+      //   link: "/warehouse",
+      //   icon: "archive",
+      //   showSubRoute: false,
+      //   submenu: false,
+      // },
+>>>>>>> 1c9ca8c (again post)
     ],
   },
 
@@ -812,7 +859,11 @@ export const SidebarData = [
   //   ],
   // },
   {
+<<<<<<< HEAD
     label: "User Management",
+=======
+    label: "System Administration",
+>>>>>>> 1c9ca8c (again post)
     submenuOpen: true,
     showSubRoute: false,
     submenuHdr: "User Management",
@@ -823,12 +874,27 @@ export const SidebarData = [
         icon: "shield-up",
         showSubRoute: false,
       },
+<<<<<<< HEAD
       // {
       //   label: "Roles & Permissions",
       //   link: "/roles-permissions",
       //   icon: "jump-rope",
       //   showSubRoute: false,
       // },
+=======
+      {
+        label: "Roles & Permissions",
+        link: "/roles-permissions",
+        icon: "jump-rope",
+        showSubRoute: false,
+      },
+      {
+        label: "Security",
+        link: "/security",
+        icon: "shield-check",
+        showSubRoute: false,
+      },
+>>>>>>> 1c9ca8c (again post)
       // {
       //   label: "Delete Account Request",
       //   link: "/delete-account",

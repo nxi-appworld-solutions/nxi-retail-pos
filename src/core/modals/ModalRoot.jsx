@@ -78,6 +78,7 @@ const ModalRoot = () => {
     };
   }, []);
 
+<<<<<<< HEAD
   /* -----------------------------
      BODY SCROLL LOCK
   ----------------------------- */
@@ -87,6 +88,17 @@ const ModalRoot = () => {
       document.body.style.overflow = "";
     };
   }, []);
+=======
+  // /* -----------------------------
+  //    BODY SCROLL LOCK
+  // ----------------------------- */
+  // useEffect(() => {
+  //   document.body.style.overflow = "hidden";
+  //   return () => {
+  //     document.body.style.overflow = "";
+  //   };
+  // }, []);
+>>>>>>> 1c9ca8c (again post)
 
   if (!name) return null;
 

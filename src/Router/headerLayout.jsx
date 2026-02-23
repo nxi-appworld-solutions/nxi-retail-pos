@@ -18,6 +18,7 @@ const HeaderLayouts = () => {
   const dataWidth = useSelector((state) => state.themeSetting.dataWidth);
   const dataLayout = useSelector((state) => state.themeSetting.dataLayout);
   const dataSidebarAll = useSelector(
+<<<<<<< HEAD
     (state) => state.themeSetting.dataSidebarAll
   );
   const dataColorAll = useSelector((state) => state.themeSetting.dataColorAll);
@@ -26,6 +27,16 @@ const HeaderLayouts = () => {
   );
   const dataTopbarAll = useSelector(
     (state) => state.themeSetting.dataTopbarAll
+=======
+    (state) => state.themeSetting.dataSidebarAll,
+  );
+  const dataColorAll = useSelector((state) => state.themeSetting.dataColorAll);
+  const dataTopBarColorAll = useSelector(
+    (state) => state.themeSetting.dataTopBarColorAll,
+  );
+  const dataTopbarAll = useSelector(
+    (state) => state.themeSetting.dataTopbarAll,
+>>>>>>> 1c9ca8c (again post)
   );
 
   useEffect(() => {

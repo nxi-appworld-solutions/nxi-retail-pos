@@ -8,12 +8,21 @@ const AddProduct = () => {
   const { formData, onChange, onSubmit } = useProducts();
   return (
     <form onSubmit={onSubmit}>
+<<<<<<< HEAD
       <div className="page-wrapper">
         <div className="content container-fluid">
           <div className="d-flex justify-content-between align-items-center mb-4">
             <div>
               <nav>
                 <ol className="breadcrumb">
+=======
+      <div className="page-wrapper px-0">
+        <div className="content container-fluid">
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <nav aria-label="breadcrumb">
+                <ol className="breadcrumb mb-1">
+>>>>>>> 1c9ca8c (again post)
                   <li className="breadcrumb-item">
                     <Link to="/products">Products</Link>
                   </li>

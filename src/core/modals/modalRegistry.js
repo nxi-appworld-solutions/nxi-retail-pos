@@ -3,6 +3,7 @@ import BrandModal from "./products/BrandModal";
 import QuickAddProductModal from "./products/QuickAddProductModal";
 import CategoryModal from "./products/CategoryModal";
 import VariantAttributeModal from "./products/VariantAttributeModal";
+<<<<<<< HEAD
 import UserModal from "./usermanagement/addusers";
 import GSTMasterModal from "./taxmanagement/GSTMasterModal";
 import HSNMasterModal from "./taxmanagement/HSNMasterModal";
@@ -10,6 +11,15 @@ import TaxGroupModal from "./taxmanagement/TaxGroupModal";
 
 import { MODAL_TYPES } from "./modalTypes";
 import UnitMasterModal from "./products/UnitMasterModal";
+=======
+import UnitMasterModal from "./products/UnitMasterModal";
+import GSTMasterModal from "./taxmanagement/GSTMasterModal";
+import HSNMasterModal from "./taxmanagement/HSNMasterModal";
+import TaxGroupModal from "./taxmanagement/TaxGroupModal";
+import UserModal from "./system/UserModal";
+
+import { MODAL_TYPES } from "./modalTypes";
+>>>>>>> 1c9ca8c (again post)
 
 export const MODAL_REGISTRY = {
   [MODAL_TYPES.BRAND]: BrandModal,

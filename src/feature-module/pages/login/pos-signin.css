@@ -1,0 +1,256 @@
+.pos-login-page {
+  display: flex;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+  background: #f4f6f9;
+}
+
+.pos-left {
+  flex: 1;
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(59, 130, 246, 0.15),
+      transparent 40%
+    ),
+    linear-gradient(160deg, #020617, #020617);
+  color: #ffffff;
+  padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pos-left::after {
+  content: "";
+  position: absolute;
+  right: -120px;
+  bottom: -80px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.25),
+    transparent 60%
+  );
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.pos-left-top {
+  max-width: 420px;
+  margin-top: -20px;
+  z-index: 2;
+}
+
+.pos-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.pos-brand-logo {
+  width: 86px;        
+  opacity: 1;
+}
+
+.pos-brand-text {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.pos-divider {
+  width: 64px;
+  height: 4px;
+  background: #3b82f6;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+.pos-brand-sub {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #c7d2fe;
+}
+
+.pos-points {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.pos-points li {
+  list-style: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  color: #e5e7eb;
+  backdrop-filter: blur(6px);
+}
+
+/* RIGHT LOGIN PANEL */
+.pos-right {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* LOGIN CARD */
+.pos-login-card {
+  width: 380px;
+  padding: 34px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
+}
+
+.pos-login-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.pos-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+/* INPUT */
+.pos-input {
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  margin-bottom: 16px;
+  /* margin-bottom: 8px; */
+
+}
+
+.pos-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* PIN DOTS */
+.pos-pin-dots {
+  text-align: center;
+  font-size: 26px;
+  letter-spacing: 10px;
+  margin: 12px 0 18px;
+  user-select: none;
+}
+
+/* KEYPAD */
+.pos-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.pos-keypad button {
+  height: 52px;
+  border-radius: 10px;
+  border: none;
+  background: #f1f5f9;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.pos-keypad button:hover {
+  background: #e2e8f0;
+}
+
+/* CLEAR */
+.key-clear {
+  background: #fee2e2 !important;
+  color: #991b1b;
+}
+
+/* ENTER */
+.key-enter {
+  background: #2563eb !important;
+  color: #ffffff;
+}
+
+/* PRIMARY BUTTON */
+.pos-primary-btn {
+  width: 100%;
+  height: 46px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pos-primary-btn:disabled {
+  background: #94a3b8;
+}
+
+/* MODE SWITCH */
+.pos-switch {
+  margin-top: 18px;
+}
+
+.pos-ghost-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pos-ghost-btn:hover {
+  border-color: #2563eb;
+  background: #f8fafc;
+}
+
+/* FOOTER */
+.pos-footer {
+  margin-top: 24px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .pos-login-page {
+    flex-direction: column;
+  }
+
+  .pos-left {
+    text-align: center;
+    align-items: center;
+    padding: 40px;
+  }
+
+  .pos-right {
+    padding: 30px 0;
+  }
+}
+
+.pos-helper-text {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: -14px;
+  margin-bottom: 14px;
+}
