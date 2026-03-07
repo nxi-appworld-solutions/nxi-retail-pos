@@ -3,27 +3,6 @@ import { toast } from "react-toastify";
 import { API_URL } from "../environment";
 import useForm from "./useForm";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import dayjs from "dayjs";
-import { initialCustomer } from "../constants/people/initialCustomer";
-
-// ---------------- VALIDATION ---------------- //
-const validateCustomer = (data) => {
-  const errors = {};
-
-  if (!data.name?.trim()) errors.name = "Name is required";
-  if (!data.mobile || data.mobile.length < 10)
-    errors.mobile = "Valid mobile number required";
-
-  if (data.taxType === "Regular" && !data.gstin)
-    errors.gstin = "GSTIN required for Regular GST";
-
-  if (Number(data.creditLimit) < 0)
-    errors.creditLimit = "Credit limit cannot be negative";
-
-  if (data.status === "Blacklisted")
-    errors.status = "Blacklisted customer cannot be billed";
-=======
 import { initialCustomerV2 } from "../constants/people/initialCustomer";
 
 /* =====================================================
@@ -58,45 +37,10 @@ const validateCustomer = (data) => {
   if (data.config?.isBlocked) {
     errors.status = "Blocked customer cannot be billed";
   }
->>>>>>> 1c9ca8c (again post)
 
   return errors;
 };
 
-<<<<<<< HEAD
-export default function useCustomers() {
-  /* ---------- FORM MODE ---------- */
-  const navigate = useNavigate();
-  const { formData, setFormData, handleChange, resetForm } =
-    useForm(initialCustomer);
-
-  const [errors, setErrors] = useState({});
-  const [isSaved, setIsSaved] = useState(false);
-
-  /* ---------- LIST MODE ---------- */
-  const [customers, setCustomers] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(dayjs());
-
-  /* ---------- FETCH LIST ---------- */
-  const fetchCustomers = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`${API_URL}/GetCustomerMasterDet/customers`);
-      const json = await res.json();
-      setCustomers(json?.data || []);
-    } catch {
-      toast.error("Failed to fetch customers");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  /* ---------- SAVE CUSTOMER ---------- */
-  const saveCustomer = async (callback) => {
-    const validationErrors = validateCustomer(formData);
-    if (Object.keys(validationErrors).length) {
-=======
 /* =====================================================
    NORMALIZER (UI → BACKEND)
 ===================================================== */
@@ -196,7 +140,6 @@ export default function useCustomers() {
     const validationErrors = validateCustomer(payload);
 
     if (Object.keys(validationErrors).length > 0) {
->>>>>>> 1c9ca8c (again post)
       setErrors(validationErrors);
       toast.error("Please fix validation errors");
       return;
@@ -204,23 +147,6 @@ export default function useCustomers() {
 
     setLoading(true);
     try {
-<<<<<<< HEAD
-      const res = await fetch(`${API_URL}/SaveOrUpdateCustomerDet/customers`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-
-      if (data.status === 1) {
-        toast.success(data.msg || "Customer saved");
-        setIsSaved(true);
-        fetchCustomers();
-        callback?.(data);
-      } else {
-        toast.error(data.msg || "Save failed");
-      }
-=======
       const res = await fetch(`${API_URL}/customers/save`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -249,26 +175,11 @@ export default function useCustomers() {
       }
     } catch {
       toast.error("Server error while saving customer");
->>>>>>> 1c9ca8c (again post)
     } finally {
       setLoading(false);
     }
   };
 
-<<<<<<< HEAD
-  /* ---------- DELETE ---------- */
-  const deleteCustomer = async (id, callback) => {
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `${API_URL}/DeleteMasterByTypeAndCode?tranType=1&masterType=2&code=${id}`,
-        { method: "POST" }
-      );
-      const data = await res.json();
-      toast[data.status === 1 ? "success" : "error"](data.msg);
-      fetchCustomers();
-      callback?.();
-=======
   /* =====================================================
      🔥 FINAL onSubmit (ADD + EDIT)
   ===================================================== */
@@ -300,34 +211,11 @@ export default function useCustomers() {
       fetchCustomers();
     } catch {
       toast.error("Failed to delete customer");
->>>>>>> 1c9ca8c (again post)
     } finally {
       setLoading(false);
     }
   };
 
-<<<<<<< HEAD
-  /* ---------- POS BILLING GATE ---------- */
-  const startBilling = () => {
-    if (!isSaved) {
-      toast.error("Please save customer before billing");
-      return;
-    }
-    navigate(`/pos/billing/${formData.code}`);
-  };
-
-  /* ---------- TABLE COLUMNS ---------- */
-  const columns = [
-    { title: "Name", dataIndex: "name" },
-    { title: "Type", dataIndex: "type" },
-    { title: "Mobile", dataIndex: "mobile" },
-    { title: "Email", dataIndex: "email" },
-    { title: "City", dataIndex: "city" },
-    { title: "Status", dataIndex: "status" },
-    { title: "Created On", dataIndex: "createdOn" },
-  ];
-
-=======
   /* =====================================================
      POS BILLING GATE
   ===================================================== */
@@ -369,32 +257,21 @@ export default function useCustomers() {
   /* =====================================================
      INIT
   ===================================================== */
->>>>>>> 1c9ca8c (again post)
   useEffect(() => {
     fetchCustomers();
   }, []);
 
-<<<<<<< HEAD
-  /* ---------- RETURN (DUAL MODE) ---------- */
-  return {
-    /* FORM (Add / Edit) */
-=======
   /* =====================================================
      EXPORT
   ===================================================== */
   return {
     /* FORM */
->>>>>>> 1c9ca8c (again post)
     formData,
     setFormData,
     handleChange,
     resetForm,
-<<<<<<< HEAD
-    saveCustomer,
-=======
     onSubmit,
     loadCustomer,      // 🔥 EDIT ENTRY POINT
->>>>>>> 1c9ca8c (again post)
     errors,
     isSaved,
     startBilling,
@@ -407,10 +284,5 @@ export default function useCustomers() {
 
     /* COMMON */
     loading,
-<<<<<<< HEAD
-    selectedDate,
-    setSelectedDate,
-=======
->>>>>>> 1c9ca8c (again post)
   };
 }

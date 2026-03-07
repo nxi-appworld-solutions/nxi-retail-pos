@@ -218,21 +218,12 @@ import BootstrapIcons from "../feature-module/uiinterface/icons/bootstrapicons";
 import RemixIcons from "../feature-module/uiinterface/icons/remixIcons";
 import TablerIcon from "../feature-module/uiinterface/icons/tablericon";
 import NewDashboard from "../feature-module/dashboard/newDashboard";
-<<<<<<< HEAD
-import Pos2 from "../feature-module/pos/pos2";
-// import Pos from "../feature-module/pos/pos";
-import Pos3 from "../feature-module/pos/pos3";
-import OnlineOrder from "../feature-module/sales/online-order/onlineOrder";
-import Pos4 from "../feature-module/pos/pos4";
-import Pos5 from "../feature-module/pos/pos5";
-=======
 import Pos2 from "../feature-module/pos-old/pos2";
 // import Pos from "../feature-module/pos/pos";
 import Pos3 from "../feature-module/pos-old/pos3";
 import OnlineOrder from "../feature-module/sales/online-order/onlineOrder";
 import Pos4 from "../feature-module/pos-old/pos4";
 import Pos5 from "../feature-module/pos-old/pos5";
->>>>>>> 1c9ca8c (again post)
 import PosOrder from "../feature-module/sales/pos-order/posOrder";
 // import Invoice from "../feature-module/sales/invoicereport";
 import Invoicedetails from "../feature-module/sales/invoicedetails";
@@ -308,16 +299,9 @@ import TaxCategoryForm from "../components/Busy/Tax/TaxCategoryForm";
 import InvoiceReport from "../pages/reports/InvoiceReport";
 import SalesDashboard from "../pages/dashboard/SalesDashboard";
 
-<<<<<<< HEAD
-import Pos from "../features/pos/pages/pos";
-import KDSSystem from "../pages/KDS/kds";
-import Customers from "../features/customers/pages/CustomerList";
-import AddCustomer from "../features/customers/pages/AddCustomer";
-=======
 import Pos from "../feature-module/pos/pages/pos";
 import KDSSystem from "../pages/KDS/kds";
 
->>>>>>> 1c9ca8c (again post)
 import Brands from "../feature-module/products/Brands";
 import GSTMaster from "../feature-module/taxmanagement/GSTMaster";
 import Categories from "../feature-module/products/Categories";
@@ -330,14 +314,11 @@ import GSTSettings from "../feature-module/taxmanagement/GSTSettings";
 import GSTReports from "../feature-module/taxmanagement/GSTReports";
 import VariantAttributes from "../feature-module/products/VariantAttributes";
 import UnitMaster from "../feature-module/products/UnitMaster";
-<<<<<<< HEAD
-=======
 import Users from "../feature-module/system/Users";
 import FirstTimePasswordSetup from "../feature-module/pages/password/FirstTimeCredentialSetup";
 import Customers from "../feature-module/people/customers/CustomerList";
 import AddCustomer from "../feature-module/people/customers/AddCustomer";
 import CustomerForm from "../feature-module/people/customers/CustomerForm";
->>>>>>> 1c9ca8c (again post)
 
 export const publicRoutes = [
   {
@@ -1542,11 +1523,7 @@ export const publicRoutes = [
     id: 104,
     path: routes.users,
     name: "users",
-<<<<<<< HEAD
-    element: <UserList />,
-=======
     element: <Users />,
->>>>>>> 1c9ca8c (again post)
     route: Route,
   },
   {
@@ -1648,8 +1625,6 @@ export const publicRoutes = [
     route: Route,
   },
   {
-<<<<<<< HEAD
-=======
     id: 117,
     path: "/passwordsetup",
     name: "passwordsetup",
@@ -1657,7 +1632,6 @@ export const publicRoutes = [
     route: Route,
   },
   {
->>>>>>> 1c9ca8c (again post)
     id: 118,
     path: routes.banksettingsgrid,
     name: "banksettingsgrid",
@@ -2201,17 +2175,11 @@ export const publicRoutes = [
     id: 177,
     path: routes.addcustomers,
     name: "add-customer",
-<<<<<<< HEAD
-    element: <AddCustomer />,
-=======
     element: <CustomerForm />,
->>>>>>> 1c9ca8c (again post)
     route: Route,
   },
   {
     id: 178,
-<<<<<<< HEAD
-=======
     path: routes.editcustomers,
     name: "edit-customer",
     element: <CustomerForm />,
@@ -2220,7 +2188,6 @@ export const publicRoutes = [
 
   {
     id: 178,
->>>>>>> 1c9ca8c (again post)
     path: routes.invoicereport,
     name: "invoice-report",
     element: <InvoiceReport />,

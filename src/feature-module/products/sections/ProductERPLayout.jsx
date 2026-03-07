@@ -71,17 +71,10 @@ const ProductERPLayout = ({ formData, handleChange }) => {
   return (
     <div className="row gx-4 animate__animated animate__fadeIn">
       {/* SIDEBAR NAVIGATION */}
-<<<<<<< HEAD
-      <div className="col-lg-3">
-        <div className="sticky-top" style={{ top: "100px", zIndex: 10 }}>
-          <div className="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
-            <div className="card-header bg-white border-0 py-3">
-=======
       <div className="col-lg-3 mb-4">
         <div className="sticky-top" style={{ top: "100px", zIndex: 10 }}>
           <div className="card border-0 shadow-sm rounded-3">
             <div className="card-header bg-white py-3 border-0">
->>>>>>> 1c9ca8c (again post)
               <h6 className="fw-bold mb-0 text-muted small text-uppercase">
                 Navigation
               </h6>
@@ -121,21 +114,13 @@ const ProductERPLayout = ({ formData, handleChange }) => {
           </div>
 
           {/* QUICK PREVIEW MINI-CARD (PRO UX) */}
-<<<<<<< HEAD
-          <div className="card border-0 bg-primary bg-opacity-10 rounded-4 p-3 d-none d-lg-block">
-=======
           <div className="card border-0 bg-primary bg-opacity-10 rounded-3 p-3 mt-3 d-none d-lg-block">
->>>>>>> 1c9ca8c (again post)
             <div className="d-flex align-items-center">
               <div className="p-2 bg-primary rounded-3 text-white me-2">
                 <Box size={16} />
               </div>
               <div className="overflow-hidden">
-<<<<<<< HEAD
-                <h6 className="small fw-bold mb-0 text-truncate text-primary">
-=======
                 <h6 className="small fw-bold mb-0 text-truncate text-truncate">
->>>>>>> 1c9ca8c (again post)
                   {formData.name || "Draft Product"}
                 </h6>
                 <p className="text-xs text-muted mb-0">
@@ -147,44 +132,16 @@ const ProductERPLayout = ({ formData, handleChange }) => {
         </div>
       </div>
 
-<<<<<<< HEAD
-      {/* DYNAMIC CONTENT AREA */}
-      <div
-        className="col-lg-9"
-=======
       {/* -------- RIGHT CONTENT -------- */}
       <div
         className="col-lg-9 mb-5 pb-5"
->>>>>>> 1c9ca8c (again post)
         style={{
           maxHeight: "calc(100vh - 140px)",
           overflowY: "auto",
           paddingBottom: "120px",
         }}
       >
-<<<<<<< HEAD
-        <div className="card border-0 shadow-sm rounded-4">
-          {/* <div className="card-header bg-white border-bottom-0 py-4 px-4">
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <h4 className="fw-bold text-dark mb-1">
-                  {sections.find((s) => s.key === active)?.label} Details
-                </h4>
-                <p className="text-muted small mb-0">
-                  Configure your product {active} settings here.
-                </p>
-              </div>
-              <div className="text-end">
-                <span className="badge bg-soft-primary text-primary px-3 py-2 rounded-pill fw-bold">
-                  STEP {sections.findIndex((s) => s.key === active) + 1} OF{" "}
-                  {sections.length}
-                </span>
-              </div>
-            </div>
-          </div> */}
-=======
         <div className="card border-0 shadow-sm rounded-4 min-vh-50">
->>>>>>> 1c9ca8c (again post)
           <div className="card-header bg-white border-bottom py-3 px-4 d-flex justify-content-between align-items-center">
             <h5 className="mb-0 fw-bold text-primary">
               {sections.find((s) => s.key === active)?.label} Details
@@ -197,28 +154,16 @@ const ProductERPLayout = ({ formData, handleChange }) => {
             </div>
           </div>
           <div className="card-body p-4">
-<<<<<<< HEAD
-            {" "}
-=======
             {/* {renderSection()} */}
->>>>>>> 1c9ca8c (again post)
             {/* mt-0 mb-4 opacity-50 */}
             {/* <hr className="mt-0 mb-4 opacity-50" /> */}
             {/* We wrap renderSection in a div with key to trigger animation on switch */}
             <div
-<<<<<<< HEAD
-              key={active}
-              className="animate__animated animate__fadeInRight animate__faster"
-            >
-              {renderSection()}
-            </div>
-=======
                 key={active}
                 className="animate__animated animate__fadeInRight animate__faster"
               >
                 {renderSection()}
               </div>
->>>>>>> 1c9ca8c (again post)
           </div>
         </div>
       </div>

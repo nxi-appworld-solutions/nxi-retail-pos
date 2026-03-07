@@ -5,18 +5,6 @@ import { handleEnterKey } from "../utils/form";
 export default function useForm(initialState) {
   const [formData, setFormData] = useState(initialState);
 
-<<<<<<< HEAD
-  const handleChange = (key, value) => {
-    // console.log("value", value);
-    setFormData((prev) => ({ ...prev, [key]: value }));
-  };
-
-  // console.log("formData", formData);
-
-  const resetForm = () => setFormData(initialState);
-
-  return { formData, setFormData, handleChange, handleEnterKey, resetForm };
-=======
   /**
    * handleChange supports:
    * 1. onChange(e)
@@ -52,5 +40,4 @@ export default function useForm(initialState) {
     handleEnterKey,
     resetForm,
   };
->>>>>>> 1c9ca8c (again post)
 }

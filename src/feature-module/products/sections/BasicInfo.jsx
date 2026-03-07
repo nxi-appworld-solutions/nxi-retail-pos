@@ -23,11 +23,7 @@ const BasicInfo = ({
     const previews = files.map((f) => URL.createObjectURL(f));
     const updated = [...(formData.images || []), ...previews].slice(
       0,
-<<<<<<< HEAD
-      MAX_IMAGES
-=======
       MAX_IMAGES,
->>>>>>> 1c9ca8c (again post)
     );
 
     handleChange({ target: { name: "images", value: updated } });
@@ -43,18 +39,6 @@ const BasicInfo = ({
 
   return (
     <div className="row g-4 animate__animated animate__fadeIn">
-<<<<<<< HEAD
-
-      {/* ================================================= */}
-      {/* 📦 PRODUCT IDENTITY                               */}
-      {/* ================================================= */}
-      <div className="col-12">
-        <div className="p-4 bg-white rounded-4 shadow-sm border">
-          <div className="d-flex align-items-center mb-3">
-            <Box size={18} className="text-primary me-2" />
-            <h6 className="fw-bold mb-0">Product Identity</h6>
-          </div>
-=======
       <div className="col-12">
         {/* <div className="p-4 bg-white rounded-4 shadow-sm border"> */}
         <div
@@ -68,7 +52,6 @@ const BasicInfo = ({
             <Box size={18} className="text-primary me-2" />
             <h6 className="fw-bold mb-0">Product Identity</h6>
           </div> */}
->>>>>>> 1c9ca8c (again post)
 
           <div className="d-flex flex-wrap gap-3">
             {/* Upload */}
@@ -77,20 +60,12 @@ const BasicInfo = ({
               style={{ width: 110, height: 110 }}
               onClick={() => fileInputRef.current?.click()}
             >
-<<<<<<< HEAD
-              <div className="w-100 h-100 bg-light rounded-4 border-2 border-dashed d-flex flex-column align-items-center justify-content-center text-center">
-                <Plus size={20} className="text-primary mb-1" />
-                <small className="fw-semibold text-muted">
-                  Add Images
-                </small>
-=======
               <div
                 className="w-100 h-100 bg-white rounded-4 border-2 border-[rgba(78,115,223,0.3)] d-flex flex-column align-items-center justify-content-center text-center"
                 style={{ border: "2px dashed rgba(78,115,223,0.3)"}}
               >
                 <Plus size={20} className="text-primary mb-1" />
                 <small className="fw-semibold text-muted">Add Images</small>
->>>>>>> 1c9ca8c (again post)
                 <small className="text-muted" style={{ fontSize: 10 }}>
                   Max {MAX_IMAGES}
                 </small>
@@ -136,13 +111,7 @@ const BasicInfo = ({
 
             {/* Title Preview */}
             <div className="flex-grow-1 ps-md-3">
-<<<<<<< HEAD
-              <h5 className="fw-bold mb-1">
-                {formData.name || "New Product"}
-              </h5>
-=======
               <h5 className="fw-bold mb-1">{formData.name || "New Product"}</h5>
->>>>>>> 1c9ca8c (again post)
               <span
                 className={`badge ${
                   formData.sku
@@ -191,13 +160,7 @@ const BasicInfo = ({
       </div>
 
       <div className="col-md-4">
-<<<<<<< HEAD
-        <label className="form-label fw-bold small">
-          SKU / Item Code
-        </label>
-=======
         <label className="form-label fw-bold small">SKU / Item Code</label>
->>>>>>> 1c9ca8c (again post)
         <input
           type="text"
           name="sku"
@@ -206,13 +169,7 @@ const BasicInfo = ({
           value={formData.sku}
           onChange={handleChange}
         />
-<<<<<<< HEAD
-        <small className="text-muted">
-          Leave blank to auto-generate
-        </small>
-=======
         {/* <small className="text-muted">Leave blank to auto-generate</small> */}
->>>>>>> 1c9ca8c (again post)
       </div>
 
       {/* ================================================= */}
@@ -288,13 +245,7 @@ const BasicInfo = ({
       </div>
 
       <div className="col-md-6">
-<<<<<<< HEAD
-        <label className="form-label fw-bold small">
-          Search / SEO Tags
-        </label>
-=======
         <label className="form-label fw-bold small">Search / SEO Tags</label>
->>>>>>> 1c9ca8c (again post)
         <input
           type="text"
           name="tags"

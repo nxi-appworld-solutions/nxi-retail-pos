@@ -9,10 +9,6 @@ import ImageWithBasePath from "../../core/img/imagewithbasebath";
 import { ChevronsLeft } from "feather-icons-react/build/IconComponents";
 import { useSelector } from "react-redux";
 const Sidebar = () => {
-<<<<<<< HEAD
-
-=======
->>>>>>> 1c9ca8c (again post)
   const route = all_routes;
 
   const Location = useLocation();
@@ -37,22 +33,14 @@ const Sidebar = () => {
     }
   };
 
-<<<<<<< HEAD
-    const [toggle, SetToggle] = useState(false);
-=======
   const [toggle, SetToggle] = useState(false);
->>>>>>> 1c9ca8c (again post)
   const handlesidebar = () => {
     document.body.classList.toggle("mini-sidebar");
     SetToggle((current) => !current);
   };
 
   const { expandMenus } = useSelector(
-<<<<<<< HEAD
-    (state) => state.themeSetting.expandMenus
-=======
     (state) => state.themeSetting.expandMenus,
->>>>>>> 1c9ca8c (again post)
   );
   const dataLayout = useSelector((state) => state.themeSetting.dataLayout);
 
@@ -65,17 +53,12 @@ const Sidebar = () => {
 
   return (
     <div>
-<<<<<<< HEAD
-      <div className={`sidebar ${toggle ? "" : "active"} ${expandMenus || dataLayout === 'layout-hovered' ? "expand-menu" : ""}`} id="sidebar"  onMouseLeave={expandMenu}
-          onMouseOver={expandMenuOpen}>
-=======
       <div
         className={`sidebar ${toggle ? "" : "active"} ${expandMenus || dataLayout === "layout-hovered" ? "expand-menu" : ""}`}
         id="sidebar"
         onMouseLeave={expandMenu}
         onMouseOver={expandMenuOpen}
       >
->>>>>>> 1c9ca8c (again post)
         <>
           {/* Logo */}
           <div className="sidebar-logo">
@@ -145,14 +128,10 @@ const Sidebar = () => {
             </div>
             <div className="d-flex align-items-center justify-content-between menu-item mb-3">
               <div>
-<<<<<<< HEAD
-                <Link to={route.newdashboard} className="btn btn-sm btn-icon bg-light">
-=======
                 <Link
                   to={route.newdashboard}
                   className="btn btn-sm btn-icon bg-light"
                 >
->>>>>>> 1c9ca8c (again post)
                   <i className="ti ti-layout-grid-remove" />
                 </Link>
               </div>
@@ -189,14 +168,8 @@ const Sidebar = () => {
             </div>
           </div>
         </>
-<<<<<<< HEAD
-        <Scrollbars>
-
-          <div className="sidebar-inner slimscroll">
-=======
         <Scrollbars autoHide style={{ height: "calc(100vh - 50px)" }}>
           <div className="sidebar-inner">
->>>>>>> 1c9ca8c (again post)
             <div id="sidebar-menu" className="sidebar-menu">
               <ul>
                 {SidebarData?.map((mainLabel, index) => (
@@ -219,31 +192,16 @@ const Sidebar = () => {
                           <React.Fragment key={i}>
                             {" "}
                             <li
-<<<<<<< HEAD
-                              className={`submenu ${!title?.submenu &&
-                                Location.pathname === title?.link
-                                ? "custom-active-hassubroute-false"
-                                : ""
-                                }`}
-=======
                               className={`submenu ${
                                 !title?.submenu &&
                                 Location.pathname === title?.link
                                   ? "custom-active-hassubroute-false"
                                   : ""
                               }`}
->>>>>>> 1c9ca8c (again post)
                             >
                               <Link
                                 to={title?.link}
                                 onClick={() => toggleSidebar(title?.label)}
-<<<<<<< HEAD
-                                className={`${subOpen === title?.label ? "subdrop" : ""
-                                  } ${title?.links?.includes(Location.pathname)
-                                    ? "active"
-                                    : ""
-                                  }`}
-=======
                                 className={`${
                                   subOpen === title?.label ? "subdrop" : ""
                                 } ${
@@ -251,7 +209,6 @@ const Sidebar = () => {
                                     ? "active"
                                     : ""
                                 }`}
->>>>>>> 1c9ca8c (again post)
                               >
                                 <i className={`ti ti-${title.icon} me-2`}></i>
                                 <span className="custom-active-span">
@@ -275,18 +232,6 @@ const Sidebar = () => {
                                     >
                                       <Link
                                         to={item?.link}
-<<<<<<< HEAD
-                                        className={`${item?.submenuItems
-                                          ?.map((link) => link.link)
-                                          .includes(Location.pathname) ||
-                                          item?.link === Location.pathname
-                                          ? "active"
-                                          : ""
-                                          } ${subsidebar === item?.label
-                                            ? "subdrop"
-                                            : ""
-                                          }`}
-=======
                                         className={`${
                                           item?.submenuItems
                                             ?.map((link) => link.link)
@@ -299,7 +244,6 @@ const Sidebar = () => {
                                             ? "subdrop"
                                             : ""
                                         }`}
->>>>>>> 1c9ca8c (again post)
                                         onClick={() =>
                                           toggleSubsidebar(item?.label)
                                         }
@@ -322,21 +266,6 @@ const Sidebar = () => {
                                             <li key={subIndex}>
                                               <Link
                                                 to={items?.link}
-<<<<<<< HEAD
-                                                className={`${subsidebar === items?.label
-                                                  ? "submenu-two subdrop"
-                                                  : "submenu-two"
-                                                  } ${items?.submenuItems
-                                                    ?.map((link) => link.link)
-                                                    .includes(
-                                                      Location.pathname
-                                                    ) ||
-                                                    items?.link ===
-                                                    Location.pathname
-                                                    ? "active"
-                                                    : ""
-                                                  }`}
-=======
                                                 className={`${
                                                   subsidebar === items?.label
                                                     ? "submenu-two subdrop"
@@ -352,24 +281,15 @@ const Sidebar = () => {
                                                     ? "active"
                                                     : ""
                                                 }`}
->>>>>>> 1c9ca8c (again post)
                                               >
                                                 {items?.label}
                                               </Link>
                                             </li>
-<<<<<<< HEAD
-                                          )
-                                        )}
-                                      </ul>
-                                    </li>
-                                  )
-=======
                                           ),
                                         )}
                                       </ul>
                                     </li>
                                   ),
->>>>>>> 1c9ca8c (again post)
                                 )}
                               </ul>
                             </li>

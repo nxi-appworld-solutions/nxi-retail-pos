@@ -21,10 +21,6 @@ export const all_routes = {
   taxgroup: "/tax-group",
   gstsetting: "/gst-setting",
   gstreport: "/gst-reports",
-<<<<<<< HEAD
-  customers: "/customers-list",
-  addcustomers: "/add-customers",
-=======
   customers: "/customers/customers-list",
   addcustomers: "/customers/add-customer",
   editcustomers: "/customers/edit-customer/:code",
@@ -32,7 +28,6 @@ export const all_routes = {
   users: "/users",
   rolespermission: "/roles-permissions",
   permissions: "/permissions",
->>>>>>> 1c9ca8c (again post)
 
   maintenance: "/under-maintenance",
   invoicereport: "/invoice-report",
@@ -199,10 +194,7 @@ export const all_routes = {
   notes: "/notes",
   filemanager: "/file-manager",
   profile: "/profile",
-<<<<<<< HEAD
-=======
   passwordsetup: "/password-setup",
->>>>>>> 1c9ca8c (again post)
   signin: "/signin",
   signintwo: "/signin-2",
   signinthree: "/signin-3",
@@ -227,13 +219,7 @@ export const all_routes = {
   blankpage: "/blank-page",
   comingsoon: "/coming-soon",
   undermaintenance: "/under-maintenance",
-<<<<<<< HEAD
-  users: "/users",
-  rolespermission: "/roles-permissions",
-  permissions: "/permissions",
-=======
 
->>>>>>> 1c9ca8c (again post)
   deleteaccount: "/delete-account",
   employeegrid: "/employees-grid",
   addemployee: "/add-employee",
