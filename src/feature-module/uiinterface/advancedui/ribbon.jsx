@@ -1,5 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom/dist";
+import { Link } from "react-router";
+
+
 
 const Ribbon = () => {
   return (
@@ -455,8 +456,8 @@ const Ribbon = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Ribbon;

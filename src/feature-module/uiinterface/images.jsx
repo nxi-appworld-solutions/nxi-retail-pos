@@ -1,5 +1,6 @@
-import React from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { avatar_02, avatar_03, img1, img4 } from "../../utils/imagepath";
+
+
 
 const Images = () => {
   return (
@@ -26,45 +27,45 @@ const Images = () => {
                     </p>
                     <div className="row">
                       <div className="col-sm-3">
-                        <ImageWithBasePath
-                          src="assets/img/img-4.jpg"
+                        <img
+                          src={img4}
                           alt="image"
                           className="img-fluid rounded"
-                          width={200}
-                        />
+                          width={200} />
+                        
                         <p className="mb-0">
                           <code>.rounded</code>
                         </p>
                       </div>
                       <div className="col-sm-3">
-                        <ImageWithBasePath
-                          src="assets/img/profiles/avatar-03.jpg"
+                        <img
+                          src={avatar_03}
                           alt="image"
                           className="img-fluid rounded-circle"
-                          width={133}
-                        />
+                          width={133} />
+                        
                         <p className="mb-0">
                           <code>.rounded-circle</code>
                         </p>
                       </div>
                       <div className="col-sm-3">
-                        <ImageWithBasePath
-                          src="assets/img/img-1.jpg"
+                        <img
+                          src={img1}
                           alt="image"
                           className="img-fluid img-thumbnail"
-                          width={200}
-                        />
+                          width={200} />
+                        
                         <p className="mb-0">
                           <code>.img-thumbnail</code>
                         </p>
                       </div>
                       <div className="col-sm-3">
-                        <ImageWithBasePath
-                          src="assets/img/profiles/avatar-02.jpg"
+                        <img
+                          src={avatar_02}
                           alt="image"
                           className="img-thumbnail rounded-pill"
-                          width={133}
-                        />
+                          width={133} />
+                        
                         <p className="mb-0">
                           <code>.rounded-pill</code>
                         </p>
@@ -85,12 +86,12 @@ const Images = () => {
                 <div className="card-title">Image Left Align</div>
               </div>
               <div className="card-body">
-                <ImageWithBasePath
+                <img
                   className="rounded float-start"
-                  src="assets/img/img-1.jpg"
+                  src={img1}
                   alt="..."
-                  width={200}
-                />
+                  width={200} />
+                
               </div>
             </div>
           </div>
@@ -102,12 +103,12 @@ const Images = () => {
                 <div className="card-title">Image Center Align</div>
               </div>
               <div className="card-body">
-                <ImageWithBasePath
+                <img
                   className="rounded mx-auto d-block"
-                  src="assets/img/img-1.jpg"
+                  src={img1}
                   alt="..."
-                  width={200}
-                />
+                  width={200} />
+                
               </div>
             </div>
           </div>
@@ -119,12 +120,12 @@ const Images = () => {
                 <div className="card-title">Image Right Align</div>
               </div>
               <div className="card-body">
-                <ImageWithBasePath
+                <img
                   className="rounded float-end"
-                  src="assets/img/img-1.jpg"
+                  src={img1}
                   alt="..."
-                  width={200}
-                />
+                  width={200} />
+                
               </div>
             </div>
           </div>
@@ -137,21 +138,21 @@ const Images = () => {
               </div>
               <div className="card-body d-flex justify-content-between gap-2">
                 <figure className="figure">
-                  <ImageWithBasePath
+                  <img
                     className="bd-placeholder-img figure-img img-fluid rounded card-img"
-                    src="assets/img/img-1.jpg"
-                    alt="..."
-                  />
+                    src={img1}
+                    alt="..." />
+                  
                   <figcaption className="figure-caption">
                     A caption for the above image.
                   </figcaption>
                 </figure>
                 <figure className="figure float-end">
-                  <ImageWithBasePath
+                  <img
                     className="bd-placeholder-img figure-img img-fluid rounded card-img"
-                    src="assets/img/img-1.jpg"
-                    alt="..."
-                  />
+                    src={img1}
+                    alt="..." />
+                  
                   <figcaption className="figure-caption text-end">
                     A caption for the above image.
                   </figcaption>
@@ -162,8 +163,8 @@ const Images = () => {
           {/* /Figures */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Images;

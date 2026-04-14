@@ -1,38 +1,42 @@
+import CommonSelect from "../../components/select/common-select";
 import React from "react";
-import { Filter } from "react-feather";
 import { Link } from "react-router-dom";
-import Select from "react-select";
 const Content = () => {
   const optionsBulk = [
-    { value: "bulkActions", label: "Bulk Actions" },
-    { value: "deleteMarked", label: "Delete Marked" },
-    { value: "unmarkAll", label: "Unmark All" },
-    { value: "markAll", label: "Mark All" },
-  ];
+  { value: "bulkActions", label: "Bulk Actions" },
+  { value: "deleteMarked", label: "Delete Marked" },
+  { value: "unmarkAll", label: "Unmark All" },
+  { value: "markAll", label: "Mark All" }];
+
 
   const optionsRecent = [
-    { value: "recent", label: "Recent" },
-    { value: "lastModified", label: "Last Modified" },
-    { value: "lastModifiedByMe", label: "Last Modified by me" },
-  ];
+  { value: "recent", label: "Recent" },
+  { value: "lastModified", label: "Last Modified" },
+  { value: "lastModifiedByMe", label: "Last Modified by me" }];
+
+  const [selectedBulk, setSelectedBulk] = React.useState(optionsBulk[0]);
+  const [selectedRecent, setSelectedRecent] = React.useState(optionsRecent[0]);
   return (
     <>
       <div className="section-bulk-wrap">
         <div className="bulk-action-type">
           <div className="form-sort select-bluk">
-            <Select
-              classNamePrefix="react-select"
+            <CommonSelect
+              className="w-100"
               options={optionsBulk}
+              value={selectedBulk}
+              onChange={(e) => setSelectedBulk(e.value)}
               placeholder="Choose"
-            />
+              filter={false} />
+            
           </div>
-          <Link to className="btn btn-added ">
+          <Link to="#" className="btn btn-added ">
             Apply
           </Link>
           <div className="search-set">
             <div className="search-input">
-              <Link to className="btn btn-searchset">
-                <i data-feather="search" className="feather-search" />
+              <Link to="#" className="btn btn-searchset">
+                <i className="feather icon-search feather-search" />
               </Link>
               <div id="DataTables_Table_0_filter" className="dataTables_filter">
                 <label>
@@ -40,20 +44,23 @@ const Content = () => {
                   <input
                     type="search"
                     className="form-control form-control-sm"
-                    placeholder="Search"
-                  />
+                    placeholder="Search" />
+                  
                 </label>
               </div>
             </div>
           </div>
         </div>
         <div className="form-sort">
-          <Filter className="feather-filter" />
-          <Select className="img-select recent-select-notes"
-            classNamePrefix="react-select"
+          <i className="feather icon-filter feather-filter" />
+          <CommonSelect
+            className="img-select recent-select-notes"
             options={optionsRecent}
-            defaultValue={optionsRecent[0]}
-          />
+            value={selectedRecent}
+            onChange={(e) => setSelectedRecent(e.value)}
+            placeholder="Choose"
+            filter={false} />
+          
         </div>
       </div>
       <div className="tab-content" id="v-pills-tabContent">
@@ -61,30 +68,27 @@ const Content = () => {
           className="tab-pane fade active show"
           id="v-pills-profile"
           role="tabpanel"
-          aria-labelledby="v-pills-profile-tab"
-        >
+          aria-labelledby="v-pills-profile-tab">
+          
           <div className="sections-notes-slider">
             <div className="row">
               <div className="col-lg-12">
                 <div
                   className="accordion-card-one accordion todo-accordion"
-                  id="accordionExample"
-                >
+                  id="accordionExample">
+                  
                   <div className="accordion-item">
                     <div className="accordion-header" id="headingOne">
                       <div
                         className="accordion-button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseOne"
-                        aria-controls="collapseOne"
-                      >
+                        aria-controls="collapseOne">
+                        
                         <div className="notes-content todo-today-content">
                           <div className="notes-header todo-today-header">
                             <span>
-                              <i
-                                data-feather="calendar"
-                                className="feather-calendar"
-                              />
+                              <i className="feather icon-plus-calendar feather-calendar" />
                             </span>
                             <h3>Today</h3>
                             <h6>1</h6>
@@ -103,8 +107,8 @@ const Content = () => {
                       id="collapseOne"
                       className="accordion-collapse collapse show"
                       aria-labelledby="headingOne"
-                      data-bs-parent="#accordionExample"
-                    >
+                      data-bs-parent="#accordionExample">
+                      
                       <div className="accordion-body">
                         <div className="todo-widget">
                           <div className="todo-wrapper-list">
@@ -131,13 +135,13 @@ const Content = () => {
                               <img
                                 src="./assets/img/users/user-24.jpg"
                                 alt="Img"
-                                className="img-fluid"
-                              />
+                                className="img-fluid" />
+                              
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -145,10 +149,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
-                                    <i data-feather="edit" />
+                                    <i className="feather icon-edit" />
                                   </span>
                                   Edit
                                 </Link>
@@ -156,16 +160,16 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#delete-note-units"
-                                >
+                                  data-bs-target="#delete-note-units">
+                                  
                                   <span>
-                                    <i data-feather="trash-2" />
+                                    <i className="feather icon-trash-2" />
                                   </span>
                                   Delete
                                 </Link>
                                 <Link to="#" className="dropdown-item">
                                   <span>
-                                    <i data-feather="star" />
+                                    <i className="feather icon-star" />
                                   </span>
                                   Not Important
                                 </Link>
@@ -173,10 +177,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
-                                    <i data-feather="eye" />
+                                    <i className="feather icon-plus-eye" />
                                   </span>
                                   View
                                 </Link>
@@ -190,23 +194,20 @@ const Content = () => {
                 </div>
                 <div
                   className="accordion-card-one accordion todo-accordion"
-                  id="accordionExample2"
-                >
+                  id="accordionExample2">
+                  
                   <div className="accordion-item">
                     <div className="accordion-header" id="headingTwo">
                       <div
                         className="accordion-button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseTwo"
-                        aria-controls="collapseTwo"
-                      >
+                        aria-controls="collapseTwo">
+                        
                         <div className="notes-content todo-today-content">
                           <div className="notes-header todo-today-header">
                             <span>
-                              <i
-                                data-feather="calendar"
-                                className="feather-calendar"
-                              />
+                              <i className="feather icon-plus-calendar feather-calendar" />
                             </span>
                             <h3>Yesterday</h3>
                           </div>
@@ -224,8 +225,8 @@ const Content = () => {
                       id="collapseTwo"
                       className="accordion-collapse collapse show"
                       aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample2"
-                    >
+                      data-bs-parent="#accordionExample2">
+                      
                       <div className="accordion-body">
                         <div className="todo-widget">
                           <div className="todo-wrapper-list">
@@ -251,25 +252,22 @@ const Content = () => {
                             <div className=" todo-profile d-flex align-items-center">
                               <Link
                                 to="#"
-                                className="todo-star star-todo-inbox"
-                              >
+                                className="todo-star star-todo-inbox">
+                                
                                 <span>
-                                  <i
-                                    data-feather="star"
-                                    className="feather-star me-3"
-                                  />
+                                  <i className="feather icon-star feather-star me-3" />
                                 </span>
                               </Link>
                               <img
                                 src="./assets/img/avatar/avatar-2.jpg"
                                 alt="Img"
-                                className="img-fluid"
-                              />
+                                className="img-fluid" />
+                              
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -277,10 +275,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
-                                    <i data-feather="edit" />
+                                    <i className="feather icon-edit" />
                                   </span>
                                   Edit
                                 </Link>
@@ -288,16 +286,16 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#delete-note-units"
-                                >
+                                  data-bs-target="#delete-note-units">
+                                  
                                   <span>
-                                    <i data-feather="trash-2" />
+                                    <i className="feather icon-trash-2" />
                                   </span>
                                   Delete
                                 </Link>
                                 <Link to="#" className="dropdown-item">
                                   <span>
-                                    <i data-feather="star" />
+                                    <i className="feather icon-star" />
                                   </span>
                                   Not Important
                                 </Link>
@@ -305,10 +303,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
-                                    <i data-feather="eye" />
+                                    <i className="feather icon-plus-eye" />
                                   </span>
                                   View
                                 </Link>
@@ -339,13 +337,13 @@ const Content = () => {
                               <img
                                 src="./assets/img/users/user-11.jpg"
                                 alt="Img"
-                                className="img-fluid"
-                              />
+                                className="img-fluid" />
+                              
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -353,10 +351,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
-                                    <i data-feather="edit" />
+                                    <i className="feather icon-edit" />
                                   </span>
                                   Edit
                                 </Link>
@@ -364,16 +362,16 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#delete-note-units"
-                                >
+                                  data-bs-target="#delete-note-units">
+                                  
                                   <span>
-                                    <i data-feather="trash-2" />
+                                    <i className="feather icon-trash-2" />
                                   </span>
                                   Delete
                                 </Link>
                                 <Link to="#" className="dropdown-item">
                                   <span>
-                                    <i data-feather="star" />
+                                    <i className="feather icon-star" />
                                   </span>
                                   Not Important
                                 </Link>
@@ -381,10 +379,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
-                                    <i data-feather="eye" />
+                                    <i className="feather icon-plus-eye" />
                                   </span>
                                   View
                                 </Link>
@@ -418,13 +416,13 @@ const Content = () => {
                               <img
                                 src="./assets/img/users/user-02.jpg"
                                 alt="Img"
-                                className="img-fluid"
-                              />
+                                className="img-fluid" />
+                              
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -432,10 +430,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
-                                    <i data-feather="edit" />
+                                    <i className="feather icon-edit" />
                                   </span>
                                   Edit
                                 </Link>
@@ -443,16 +441,16 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#delete-note-units"
-                                >
+                                  data-bs-target="#delete-note-units">
+                                  
                                   <span>
-                                    <i data-feather="trash-2" />
+                                    <i className="feather icon-trash-2" />
                                   </span>
                                   Delete
                                 </Link>
                                 <Link to="#" className="dropdown-item">
                                   <span>
-                                    <i data-feather="star" />
+                                    <i className="feather icon-star" />
                                   </span>
                                   Not Important
                                 </Link>
@@ -460,10 +458,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
-                                    <i data-feather="eye" />
+                                    <i className="feather icon-plus-eye" />
                                   </span>
                                   View
                                 </Link>
@@ -477,23 +475,20 @@ const Content = () => {
                 </div>
                 <div
                   className="accordion-card-one accordion todo-accordion"
-                  id="accordionExample4"
-                >
+                  id="accordionExample4">
+                  
                   <div className="accordion-item">
                     <div className="accordion-header" id="headingFour">
                       <div
                         className="accordion-button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseFour"
-                        aria-controls="collapseFour"
-                      >
+                        aria-controls="collapseFour">
+                        
                         <div className="notes-content todo-today-content">
                           <div className="notes-header todo-today-header">
                             <span>
-                              <i
-                                data-feather="calendar"
-                                className="feather-calendar"
-                              />
+                              <i className="feather icon-plus-calendar feather-calendar" />
                             </span>
                             <h3>25/07/2023</h3>
                           </div>
@@ -511,8 +506,8 @@ const Content = () => {
                       id="collapseFour"
                       className="accordion-collapse collapse show"
                       aria-labelledby="headingFour"
-                      data-bs-parent="#accordionExample4"
-                    >
+                      data-bs-parent="#accordionExample4">
+                      
                       <div className="accordion-body">
                         <div className="todo-widget">
                           <div className="todo-wrapper-list">
@@ -539,13 +534,13 @@ const Content = () => {
                               <img
                                 src="./assets/img/users/user-25.jpg"
                                 alt="Img"
-                                className="img-fluid"
-                              />
+                                className="img-fluid" />
+                              
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -553,10 +548,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
-                                    <i data-feather="edit" />
+                                    <i className="feather icon-edit" />
                                   </span>
                                   Edit
                                 </Link>
@@ -564,16 +559,16 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#delete-note-units"
-                                >
+                                  data-bs-target="#delete-note-units">
+                                  
                                   <span>
-                                    <i data-feather="trash-2" />
+                                    <i className="feather icon-trash-2" />
                                   </span>
                                   Delete
                                 </Link>
                                 <Link to="#" className="dropdown-item">
                                   <span>
-                                    <i data-feather="star" />
+                                    <i className="feather icon-star" />
                                   </span>
                                   Not Important
                                 </Link>
@@ -581,10 +576,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
-                                    <i data-feather="eye" />
+                                    <i className="feather icon-plus-eye" />
                                   </span>
                                   View
                                 </Link>
@@ -615,13 +610,13 @@ const Content = () => {
                               <img
                                 src="./assets/img/users/user-04.jpg"
                                 alt="Img"
-                                className="img-fluid"
-                              />
+                                className="img-fluid" />
+                              
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -629,10 +624,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
-                                    <i data-feather="edit" />
+                                    <i className="feather icon-edit" />
                                   </span>
                                   Edit
                                 </Link>
@@ -640,16 +635,16 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#delete-note-units"
-                                >
+                                  data-bs-target="#delete-note-units">
+                                  
                                   <span>
-                                    <i data-feather="trash-2" />
+                                    <i className="feather icon-trash-2" />
                                   </span>
                                   Delete
                                 </Link>
                                 <Link to="#" className="dropdown-item">
                                   <span>
-                                    <i data-feather="star" />
+                                    <i className="feather icon-star" />
                                   </span>
                                   Not Important
                                 </Link>
@@ -657,10 +652,10 @@ const Content = () => {
                                   to="#"
                                   className="dropdown-item"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
-                                    <i data-feather="eye" />
+                                    <i className="feather icon-plus-eye" />
                                   </span>
                                   View
                                 </Link>
@@ -680,8 +675,8 @@ const Content = () => {
           className="tab-pane fade "
           id="v-pills-home"
           role="tabpanel"
-          aria-labelledby="v-pills-home-tab"
-        >
+          aria-labelledby="v-pills-home-tab">
+          
           <div className="sections-notes-slider">
             <div className="row">
               <div className="todo-widget">
@@ -709,13 +704,13 @@ const Content = () => {
                     <img
                       src="./assets/img/users/user-03.jpg"
                       alt="Img"
-                      className="img-fluid"
-                    />
+                      className="img-fluid" />
+                    
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -723,10 +718,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -734,16 +729,16 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -751,10 +746,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -785,13 +780,13 @@ const Content = () => {
                     <img
                       src="./assets/img/users/user-04.jpg"
                       alt="Img"
-                      className="img-fluid"
-                    />
+                      className="img-fluid" />
+                    
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -799,10 +794,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -810,16 +805,16 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -827,10 +822,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -861,16 +856,16 @@ const Content = () => {
                     <img
                       src="./assets/img/users/user-05.jpg"
                       alt="Img"
-                      className="img-fluid me-0"
-                    />
+                      className="img-fluid me-0" />
+                    
                     <Link to="#" className="inbox-call-profile">
                       Calls
                     </Link>
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -878,10 +873,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -889,16 +884,16 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -906,10 +901,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -924,8 +919,8 @@ const Content = () => {
           className="tab-pane fade"
           id="v-pills-messages"
           role="tabpanel"
-          aria-labelledby="v-pills-messages-tab"
-        >
+          aria-labelledby="v-pills-messages-tab">
+          
           <div className="sections-notes-slider">
             <div className="row">
               <div className="todo-widget">
@@ -958,13 +953,13 @@ const Content = () => {
                     <img
                       src="./assets/img/users/user-05.jpg"
                       alt="Img"
-                      className="img-fluid"
-                    />
+                      className="img-fluid" />
+                    
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -972,10 +967,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -983,16 +978,16 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1000,10 +995,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1034,13 +1029,13 @@ const Content = () => {
                     <img
                       src="./assets/img/users/user-06.jpg"
                       alt="Img"
-                      className="img-fluid"
-                    />
+                      className="img-fluid" />
+                    
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1048,10 +1043,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -1059,16 +1054,16 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1076,10 +1071,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1110,13 +1105,13 @@ const Content = () => {
                     <img
                       src="./assets/img/users/user-07.jpg"
                       alt="Img"
-                      className="img-fluid"
-                    />
+                      className="img-fluid" />
+                    
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1124,10 +1119,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -1135,16 +1130,16 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1152,10 +1147,10 @@ const Content = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1170,8 +1165,8 @@ const Content = () => {
           className="tab-pane fade"
           id="v-pills-settings"
           role="tabpanel"
-          aria-labelledby="v-pills-settings-tab"
-        >
+          aria-labelledby="v-pills-settings-tab">
+          
           <div className="sections-notes-slider">
             <div className="row">
               <div className="todo-widget">
@@ -1199,25 +1194,25 @@ const Content = () => {
                     <img
                       src="./assets/img/users/user-08.jpg"
                       alt="Img"
-                      className="img-fluid"
-                    />
+                      className="img-fluid" />
+                    
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Permanent Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Restore Task
                       </Link>
@@ -1248,25 +1243,25 @@ const Content = () => {
                     <img
                       src="./assets/img/users/user-09.jpg"
                       alt="Img"
-                      className="img-fluid"
-                    />
+                      className="img-fluid" />
+                    
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Permanent Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Restore Task
                       </Link>
@@ -1306,8 +1301,8 @@ const Content = () => {
           </div>
         </div>
       </div>
-    </>
-  );
+    </>);
+
 };
 
 export default Content;

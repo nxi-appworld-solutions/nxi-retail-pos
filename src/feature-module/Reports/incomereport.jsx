@@ -1,73 +1,81 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
+import CommonFooter from "../../components/footer/commonFooter";
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
+import PrimeDataTable from "../../components/data-table";
+import CommonSelect from "../../components/select/common-select";
 import { incomedata } from "../../core/json/incomedata";
-import Table from "../../core/pagination/datatable";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import { DatePicker } from "antd";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
 
 const IncomeReport = () => {
   const data = incomedata;
+  const [listData, _setListData] = useState(data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [selectedStore, setSelectedStore] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
   const columns = [
-    {
-      title: "Reference",
-      dataIndex: "Reference",
-      render:(text) => (
-        <Link className="text-orange">
-          {text}
-        </Link>
-      ),
-      sorter: (a, b) => a.Reference.length - b.Reference.length,
-    },
-    {
-      title: "Date",
-      dataIndex: "Date",
-      sorter: (a, b) => a.Date.length - b.Date.length,
-    },
+  {
+    header: "Reference",
+    field: "Reference",
+    body: (text) =>
+    <Link className="text-orange" to="#">
+          {text.Reference}
+        </Link>,
 
-    {
-      title: "Store",
-      dataIndex: "Store",
-      sorter: (a, b) => a.Store.length - b.Store.length,
-    },
+    sorter: (a, b) => a.Reference.length - b.Reference.length
+  },
+  {
+    header: "Date",
+    field: "Date",
+    sorter: (a, b) => a.Date.length - b.Date.length
+  },
 
-    {
-      title: "Category",
-      dataIndex: "Category",
-      sorter: (a, b) => a.Category.length - b.Category.length,
-    },
-    {
-      title: "Notes",
-      dataIndex: "Notes",
-      sorter: (a, b) => a.Notes.length - b.Notes.length,
-    },
-    {
-      title: "Amount",
-      dataIndex: "Amount",
-      sorter: (a, b) => a.Amount.length - b.Amount.length,
-    },
-    {
-      title: "Payment Method",
-      dataIndex: "Payment_Method",
-      sorter: (a, b) => a.Payment_Method.length - b.Payment_Method.length,
-    },
-  ];
+  {
+    header: "Store",
+    field: "Store",
+    sorter: (a, b) => a.Store.length - b.Store.length
+  },
+
+  {
+    header: "Category",
+    field: "Category",
+    sorter: (a, b) => a.Category.length - b.Category.length
+  },
+  {
+    header: "Notes",
+    field: "Notes",
+    sorter: (a, b) => a.Notes.length - b.Notes.length
+  },
+  {
+    header: "Amount",
+    field: "Amount",
+    sorter: (a, b) => a.Amount.length - b.Amount.length
+  },
+  {
+    header: "Payment Method",
+    field: "Payment_Method",
+    sorter: (a, b) =>
+    a.Payment_Method.length - b.Payment_Method.length
+  }];
 
 
   const Store = [
-    { value: "All", label: "All" },
-    { value: "Electro Mart", label: "Electro Mart" },
-    { value: "Quantum Gadgets", label: "Quantum Gadgets" },
-    { value: "Prime Bazaar", label: "Prime Bazaar" },
-  ]
+  { value: "All", label: "All" },
+  { value: "Electro Mart", label: "Electro Mart" },
+  { value: "Quantum Gadgets", label: "Quantum Gadgets" },
+  { value: "Prime Bazaar", label: "Prime Bazaar" }];
+
   const Payment_Method = [
-    { value: "All", label: "All" },
-    { value: "Paypal", label: "Paypal" },
-    { value: "Cash", label: "Cash" },
-    { value: "Credit Card", label: "Credit Card" },
-  ]
+  { value: "All", label: "All" },
+  { value: "Paypal", label: "Paypal" },
+  { value: "Cash", label: "Cash" },
+  { value: "Credit Card", label: "Credit Card" }];
+
 
   return (
     <div className="page-wrapper">
@@ -79,27 +87,14 @@ const IncomeReport = () => {
               <h6>View Reports of Purchases</h6>
             </div>
           </div>
-          <ul className="table-top-head">
-            <li className="me-2">
-              <a data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh">
-                <i data-feather="rotate-ccw" className="feather-rotate-ccw" />
-              </a>
-            </li>
-            <li>
-              <a
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Collapse"
-                id="collapse-header"
-              >
-                <i data-feather="chevron-up" className="feather-chevron-up" />
-              </a>
-            </li>
+         <ul className="table-top-head">
+            <RefreshIcon />
+            <CollapesIcon />
           </ul>
         </div>
         <div className="card border-0">
           <div className="card-body pb-1">
-            <form action="income-report.html">
+            <form>
               <div className="row align-items-end">
                 <div className="col-lg-10">
                   <div className="row">
@@ -107,10 +102,7 @@ const IncomeReport = () => {
                       <div className="mb-3">
                         <label className="form-label">Choose Date</label>
                         <div className="input-icon-start position-relative">
-                          <DatePicker
-                            className="form-control datetimepicker"
-                            placeholder="dd/mm/yyyy"
-                          />
+                          <CommonDateRangePicker />
                           <span className="input-icon-left">
                             <i className="ti ti-calendar" />
                           </span>
@@ -120,21 +112,27 @@ const IncomeReport = () => {
                     <div className="col-md-4">
                       <div className="mb-3">
                         <label className="form-label">Store</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={Store}
+                          value={selectedStore}
+                          onChange={(e) => setSelectedStore(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-md-4">
                       <div className="mb-3">
                         <label className="form-label">Payment Method</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={Payment_Method}
+                          value={selectedPaymentMethod}
+                          onChange={(e) => setSelectedPaymentMethod(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                   </div>
@@ -159,7 +157,12 @@ const IncomeReport = () => {
             <ul className="table-top-head">
               <TooltipIcons />
               <li>
-                <Link to="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Print">
+                <Link
+                  to="#"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Print">
+                  
                   <i className="ti ti-printer" />
                 </Link>
               </li>
@@ -167,16 +170,23 @@ const IncomeReport = () => {
           </div>
           <div className="card-body">
             <div className="table-responsive">
-              <Table columns={columns} dataSource={data} />
+              <PrimeDataTable
+                column={columns}
+                data={listData}
+                rows={rows}
+                setRows={setRows}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalRecords={totalRecords} />
+              
             </div>
           </div>
         </div>
         {/* /product list */}
       </div>
       <CommonFooter />
-    </div>
+    </div>);
 
-  );
 };
 
 export default IncomeReport;

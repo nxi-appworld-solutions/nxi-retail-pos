@@ -1,8 +1,10 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+
+import React from "react";
+
 
 const Lightboxes = () => {
   const [open1, setOpen1] = React.useState(false);
@@ -29,34 +31,34 @@ const Lightboxes = () => {
                     open={open1}
                     close={() => setOpen1(false)}
                     slides={[
-                      { src: "assets/img/img-01.jpg" },
-                      { src: "assets/img/img-02.jpg" },
-                    ]}
-                  />
+                    { src: "src/assets/img/img-01.jpg" },
+                    { src: "src/assets/img/img-02.jpg" }]
+                    } />
+                  
                   <div className="col-md-4 mb-2 mb-md-0">
                     <Link
                       onClick={() => setOpen1(true)}
-                      href="assets/img/img-01.jpg"
-                      className="image-popup"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/img-01.jpg"
+                      to="src/assets/img/img-01.jpg"
+                      className="image-popup">
+                      
+                     <img
+                        src="src/assets/img/img-01.jpg"
                         className="img-fluid"
-                        alt="image"
-                      />
+                        alt="image" />
+                      
                     </Link>
                   </div>
                   <div className="col-md-4 mb-2 mb-md-0">
                     <Link
-                      href="assets/img/img-02.jpg"
+                      to="src/assets/img/img-02.jpg"
                       className="image-popup"
-                      onClick={() => setOpen1(true)}
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/img-02.jpg"
+                      onClick={() => setOpen1(true)}>
+                      
+                     <img
+                        src="src/assets/img/img-02.jpg"
                         className="img-fluid"
-                        alt="image"
-                      />
+                        alt="image" />
+                      
                     </Link>
                   </div>
                 </div>
@@ -73,54 +75,54 @@ const Lightboxes = () => {
                 <div className="card-body">
                   <div className="row">
                   <Lightbox
-                    open={open2}
-                    close={() => setOpen2(false)}
-                    slides={[
-                      { src: "assets/img/img-03.jpg" },
-                      { src: "assets/img/img-04.jpg" },
-                      { src: "assets/img/img-05.jpg" },
-                    ]}
-                  />
+                      open={open2}
+                      close={() => setOpen2(false)}
+                      slides={[
+                      { src: "src/assets/img/img-03.jpg" },
+                      { src: "src/assets/img/img-04.jpg" },
+                      { src: "src/assets/img/img-05.jpg" }]
+                      } />
+                    
                     <div className="col-md-4 mb-2 mb-md-0">
-                      <Link  onClick={() => setOpen2(true)}
-                        href="assets/img/img-03.jpg"
-                        className="image-popup-desc"
-                        data-title="Title 01"
-                        data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/img-03.jpg"
+                      <Link onClick={() => setOpen2(true)}
+                      to="src/assets/img/img-03.jpg"
+                      className="image-popup-desc"
+                      data-title="Title 01"
+                      data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit">
+                        
+                       <img
+                          src="src/assets/img/img-03.jpg"
                           className="img-fluid"
-                          alt="work-thumbnail"
-                        />
+                          alt="work-thumbnail" />
+                        
                      </Link>
                     </div>
                     <div className="col-md-4 mb-2 mb-md-0">
-                      <Link  onClick={() => setOpen2(true)}
-                        href="assets/img/img-04.jpg"
-                        className="image-popup-desc"
-                        data-title="Title 02"
-                        data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/img-04.jpg"
+                      <Link onClick={() => setOpen2(true)}
+                      to="src/assets/img/img-04.jpg"
+                      className="image-popup-desc"
+                      data-title="Title 02"
+                      data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit">
+                        
+                       <img
+                          src="src/assets/img/img-04.jpg"
                           className="img-fluid"
-                          alt="work-thumbnail"
-                        />
+                          alt="work-thumbnail" />
+                        
                      </Link>
                     </div>
                     <div className="col-md-4 mb-2 mb-md-0">
-                      <Link  onClick={() => setOpen2(true)}
-                        href="assets/img/img-05.jpg"
-                        className="image-popup-desc"
-                        data-title="Title 03"
-                        data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/img-05.jpg"
+                      <Link onClick={() => setOpen2(true)}
+                      to="src/assets/img/img-05.jpg"
+                      className="image-popup-desc"
+                      data-title="Title 03"
+                      data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit">
+                        
+                       <img
+                          src="src/assets/img/img-05.jpg"
                           className="img-fluid"
-                          alt="work-thumbnail"
-                        />
+                          alt="work-thumbnail" />
+                        
                      </Link>
                     </div>
                   </div>
@@ -131,8 +133,8 @@ const Lightboxes = () => {
           </>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Lightboxes;

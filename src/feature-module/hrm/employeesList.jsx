@@ -1,112 +1,123 @@
-import React from "react";
-import {
-  PlusCircle
-} from "feather-icons-react/build/IconComponents";
-import { all_routes } from "../../Router/all_routes";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { useState } from "react";
+import { PlusCircle } from "react-feather";
 import { Link } from "react-router-dom";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { employeeListData } from "../../core/json/employeeListData";
-import Table from "../../core/pagination/datatable.jsx";
-
+import { employeeListData } from "../../core/json/employeeListData.js";
+import PrimeDataTable from "../../components/data-table";
+import { all_routes } from "../../routes/all_routes.jsx";
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons.jsx";
+import CollapesIcon from "../../components/tooltip-content/collapes.jsx";
+import RefreshIcon from "../../components/tooltip-content/refresh.jsx";
+import ImageWithBasePath from "../../components/image-with-base-path/index.jsx";
 
 const EmployeesList = () => {
-    const dataSource = employeeListData;
+  const dataSource = employeeListData;
+  const [rows, setRows] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords] = useState(dataSource.length);
+  const [selectedEmployees, setSelectedEmployees] = useState([]);
 
-    const columns = [
-      {
-        title: "ID",
-        dataIndex: "ID",
-        render: (text) => (
-            <Link to={all_routes.employeedetails}>{text}</Link>
-          ),
-        sorter: (a, b) => a.ID.length - b.ID.length,
-      },
-  
-      {
-        title: "Employee",
-        dataIndex: "Employee",
-        render: (text,data) => (
-            <div className="d-flex align-items-center">
-            <Link to={all_routes.employeedetails} className="avatar avatar-md">
-              <ImageWithBasePath src={`assets/img/users/${data.img}`} className="img-fluid" alt="img" />
-            </Link>
-            <div className="ms-2">
-              <p className="text-dark mb-0">
-                <Link to={all_routes.employeedetails}>{text}</Link>
-              </p>
-            </div>
+  const columns = [
+    {
+      header: "ID",
+      field: "ID",
+      body: (rowData) => (
+        <Link to={all_routes.employeedetails}>{rowData.ID}</Link>
+      ),
+
+      sortable: true,
+    },
+
+    {
+      header: "Employee",
+      field: "Employee",
+      body: (rowData) => (
+        <div className="d-flex align-items-center">
+          <Link to={all_routes.employeedetails} className="avatar avatar-md">
+            <ImageWithBasePath
+              src={`assets/img/users/${rowData.img}`}
+              className="img-fluid"
+              alt="img"
+            />
+          </Link>
+          <div className="ms-2">
+            <p className="text-dark mb-0">
+              <Link to={all_routes.employeedetails}>{rowData.Employee}</Link>
+            </p>
           </div>
-          
-          ),
-        sorter: (a, b) => a.Employee.length - b.Employee.length,
-      },
-      {
-        title: "Designation",
-        dataIndex: "Designation",
-        sorter: (a, b) => a.Designation.length - b.Designation.length,
-      },
-      {
-        title: "Email",
-        dataIndex: "Email",
-        sorter: (a, b) => a.Email.length - b.Email.length,
-      },
-      {
-        title: "Phone",
-        dataIndex: "Phone",
-        sorter: (a, b) => a.Phone.length - b.Phone.length,
-      },
-      {
-        title: "Shift",
-        dataIndex: "Shift",
-        sorter: (a, b) => a.Shift.length - b.Shift.length,
-      },
-      {
-        title: "Status",
-        dataIndex: "Status",
-        render: (text) => (
-            <span className={`badge  ${text==='Active' ? 'badge-success':'badge-danger' } d-inline-flex align-items-center badge-xs`}>
-            <i className="ti ti-point-filled me-1" />
-            {text}
-          </span>
-          
-        ),
-        sorter: (a, b) => a.Status.length - b.Status.length,
-      },
-  
-      {
-        title: "",
-        dataIndex: "actions",
-        key: "actions",
-        render: () => (
-            <div className="edit-delete-action d-flex align-items-center">
-            <Link
-              className="me-2 d-flex align-items-center border rounded p-2"
-              to={all_routes.employeedetails}
-            >
-              <i data-feather="eye" className="feather-eye" />
-            </Link>
-            <Link
-              className="me-2 p-2 d-flex align-items-center border rounded"
-              to={all_routes.editemployee}
-            >
-              <i data-feather="edit" className="feather-edit" />
-            </Link>
-            <Link
-              data-bs-toggle="modal"
-              data-bs-target="#delete-modal"
-              className="p-2 d-flex align-items-center border rounded"
-              to="#"
-            >
-              <i data-feather="trash-2" className="feather-trash-2" />
-            </Link>
-          </div>
-          
-        ),
-      },
-    ];
+        </div>
+      ),
+
+      sortable: true,
+    },
+    {
+      header: "Designation",
+      field: "Designation",
+      sortable: true,
+    },
+    {
+      header: "Email",
+      field: "Email",
+      sortable: true,
+    },
+    {
+      header: "Phone",
+      field: "Phone",
+      sortable: true,
+    },
+    {
+      header: "Shift",
+      field: "Shift",
+      sortable: true,
+    },
+    {
+      header: "Status",
+      field: "Status",
+      body: (rowData) => (
+        <span
+          className={`badge  ${
+            rowData.Status === "Active" ? "badge-success" : "badge-danger"
+          } d-inline-flex align-items-center badge-xs`}
+        >
+          <i className="ti ti-point-filled me-1" />
+          {rowData.Status}
+        </span>
+      ),
+
+      sortable: true,
+    },
+
+    {
+      header: "",
+      field: "actions",
+      body: () => (
+        <div className="edit-delete-action d-flex align-items-center">
+          <Link
+            className="me-2 d-flex align-items-center border rounded p-2"
+            to={all_routes.employeedetails}
+          >
+            <i data-feather="eye" className="feather-eye" />
+          </Link>
+          <Link
+            className="me-2 p-2 d-flex align-items-center border rounded"
+            to={all_routes.editemployee}
+          >
+            <i data-feather="edit" className="feather-edit" />
+          </Link>
+          <Link
+            data-bs-toggle="modal"
+            data-bs-target="#delete-modal"
+            className="p-2 d-flex align-items-center border rounded"
+            to="#"
+          >
+            <i data-feather="trash-2" className="feather-trash-2" />
+          </Link>
+        </div>
+      ),
+
+      sortable: false,
+    },
+  ];
+
   return (
     <div className="page-wrapper">
       <div className="content">
@@ -120,20 +131,20 @@ const EmployeesList = () => {
           <ul className="table-top-head">
             <li>
               <div className="d-flex me-2 pe-2 border-end">
-                <Link to={all_routes.employeelist} className="btn-list active  bg-primary me-2">
+                <Link
+                  to={all_routes.employeelist}
+                  className="btn-list active  bg-primary me-2"
+                >
                   <i data-feather="list" className="feather-list text-white" />
                 </Link>
-                <Link
-                  to={all_routes.employeegrid}
-                  className="btn-grid me-2"
-                >
+                <Link to={all_routes.employeegrid} className="btn-grid me-2">
                   <i data-feather="grid" className="feather-grid " />
                 </Link>
               </div>
             </li>
-           <TooltipIcons/>
-            <RefreshIcon/>
-            <CollapesIcon/>
+            <TooltipIcons />
+            <RefreshIcon />
+            <CollapesIcon />
           </ul>
           <div className="page-btn">
             <Link to={all_routes.addemployee} className="btn btn-primary">
@@ -205,150 +216,159 @@ const EmployeesList = () => {
           </div>
         </div>
         {/* /product list */}
-        <div className="card table-list-card">
-  <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-    <div className="search-set">
-      
-    </div>
-    <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
-      <div className="dropdown me-2">
-        <Link
-          to="#"
-          className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-          data-bs-toggle="dropdown"
-        >
-          Select Employees
-        </Link>
-        <ul className="dropdown-menu  dropdown-menu-end p-3">
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Anthony Lewis
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Brian Villalobos
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Harvey Smith
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Stephan Peralt
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div className="dropdown me-2">
-        <Link
-          to="#"
-          className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-          data-bs-toggle="dropdown"
-        >
-          Designation
-        </Link>
-        <ul className="dropdown-menu  dropdown-menu-end p-3">
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              System Admin
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Designer
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Tech Lead
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Database administrator
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div className="dropdown me-2">
-        <Link
-          to="#"
-          className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-          data-bs-toggle="dropdown"
-        >
-          Select Status
-        </Link>
-        <ul className="dropdown-menu  dropdown-menu-end p-3">
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Active
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Inactive
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              New Joiners
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div className="dropdown">
-        <Link
-          to="#"
-          className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-          data-bs-toggle="dropdown"
-        >
-          Sort By : Last 7 Days
-        </Link>
-        <ul className="dropdown-menu  dropdown-menu-end p-3">
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Recently Added
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Ascending
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Desending
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Last Month
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item rounded-1">
-              Last 7 Days
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div className="card-body pb-0">
-    <div className="custom-datatable-filter table-responsive">
-    <Table columns={columns} dataSource={dataSource} />
-    </div>
-  </div>
-</div>
+        <div className="card table-list-card employee-table">
+          <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3 ">
+            <div className="search-set"></div>
+            <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+              <div className="dropdown me-2">
+                <Link
+                  to="#"
+                  className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
+                  data-bs-toggle="dropdown"
+                >
+                  Select Employees
+                </Link>
+                <ul className="dropdown-menu  dropdown-menu-end p-3">
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Anthony Lewis
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Brian Villalobos
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Harvey Smith
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Stephan Peralt
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="dropdown me-2">
+                <Link
+                  to="#"
+                  className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
+                  data-bs-toggle="dropdown"
+                >
+                  Designation
+                </Link>
+                <ul className="dropdown-menu  dropdown-menu-end p-3">
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      System Admin
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Designer
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Tech Lead
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Database administrator
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="dropdown me-2">
+                <Link
+                  to="#"
+                  className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
+                  data-bs-toggle="dropdown"
+                >
+                  Select Status
+                </Link>
+                <ul className="dropdown-menu  dropdown-menu-end p-3">
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Active
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Inactive
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      New Joiners
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="dropdown">
+                <Link
+                  to="#"
+                  className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
+                  data-bs-toggle="dropdown"
+                >
+                  Sort By : Last 7 Days
+                </Link>
+                <ul className="dropdown-menu  dropdown-menu-end p-3">
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Recently Added
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Ascending
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Desending
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Last Month
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="dropdown-item rounded-1">
+                      Last 7 Days
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="card-body pb-0">
+            <div className="custom-datatable-filter table-responsive">
+              <PrimeDataTable
+                column={columns}
+                data={dataSource}
+                rows={rows}
+                setRows={setRows}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalRecords={totalRecords}
+                selectionMode="checkbox"
+                selection={selectedEmployees}
+                onSelectionChange={(e) => setSelectedEmployees(e.value)}
+                dataKey="ID"
+              />
+            </div>
+          </div>
+        </div>
 
         {/* /product list */}
-        
       </div>
       <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-        <p className="mb-0">2014-2025 © DreamsPOS. All Right Reserved</p>
+        <p className="mb-0">2014-2026 © DreamsPOS. All Right Reserved</p>
         <p>
           Designed &amp; Developed By{" "}
           <Link to="#" className="text-primary">
@@ -357,41 +377,40 @@ const EmployeesList = () => {
         </p>
       </div>
       <div className="modal fade" id="delete-modal">
-  <div className="modal-dialog modal-dialog-centered">
-    <div className="modal-content">
-      <div className="page-wrapper-new p-0">
-        <div className="content p-5 px-3 text-center">
-          <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-            <i className="ti ti-trash fs-24 text-danger" />
-          </span>
-          <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
-            Delete Employee
-          </h4>
-          <p className="text-gray-6 mb-0 fs-16">
-            Are you sure you want to delete employee?
-          </p>
-          <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-            <button
-              type="button"
-              className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-              data-bs-dismiss="modal"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-               data-bs-dismiss="modal"
-              className="btn btn-submit fs-13 fw-medium p-2 px-3"
-            >
-              Yes Delete
-            </button>
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="page-wrapper-new p-0">
+              <div className="content p-5 px-3 text-center">
+                <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
+                  <i className="ti ti-trash fs-24 text-danger" />
+                </span>
+                <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
+                  Delete Employee
+                </h4>
+                <p className="text-gray-6 mb-0 fs-16">
+                  Are you sure you want to delete employee?
+                </p>
+                <div className="modal-footer-btn mt-3 d-flex justify-content-center">
+                  <button
+                    type="button"
+                    className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    data-bs-dismiss="modal"
+                    className="btn btn-submit fs-13 fw-medium p-2 px-3"
+                  >
+                    Yes Delete
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
     </div>
   );
 };

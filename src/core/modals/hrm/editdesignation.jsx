@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+
+import { Link } from 'react-router-dom';
 
 const EditDesignation = () => {
-    return (
-        <div>
+  return (
+    <div>
             {/* Edit Department */}
             <div className="modal fade" id="edit-department">
                 <div className="modal-dialog modal-dialog-centered custom-modal-two">
@@ -15,11 +15,11 @@ const EditDesignation = () => {
                                         <h4>Edit Designation </h4>
                                     </div>
                                     <button
-                                        type="button"
-                                        className="close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    >
+                    type="button"
+                    className="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+                    
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
@@ -30,21 +30,21 @@ const EditDesignation = () => {
                                                 <div className="mb-3">
                                                     <label className="form-label">Designation Name</label>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        defaultValue="Designer"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            defaultValue="Designer" />
+                          
                                                 </div>
                                             </div>
                                             <div className="input-blocks m-0">
                                                 <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
                                                     <span className="status-label">Status</span>
                                                     <input
-                                                        type="checkbox"
-                                                        id="user3"
-                                                        className="check"
-                                                        defaultChecked="true"
-                                                    />
+                            type="checkbox"
+                            id="user3"
+                            className="check"
+                            defaultChecked />
+                          
                                                     <label htmlFor="user3" className="checktoggle">
                                                         {" "}
                                                     </label>
@@ -53,10 +53,10 @@ const EditDesignation = () => {
                                         </div>
                                         <div className="modal-footer-btn">
                                             <button
-                                                type="button"
-                                                className="btn btn-cancel me-2"
-                                                data-bs-dismiss="modal"
-                                            >
+                        type="button"
+                        className="btn btn-cancel me-2"
+                        data-bs-dismiss="modal">
+                        
                                                 Cancel
                                             </button>
                                             <Link to="#" className="btn btn-submit">
@@ -71,8 +71,8 @@ const EditDesignation = () => {
                 </div>
             </div>
             {/* /Edit Department */}
-        </div>
-    )
-}
+        </div>);
 
-export default EditDesignation
+};
+
+export default EditDesignation;

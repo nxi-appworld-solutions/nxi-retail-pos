@@ -1,5 +1,5 @@
-import React from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+
+
 
 const Media = () => {
   return (
@@ -24,11 +24,11 @@ const Media = () => {
                 </p>
                 <div className="d-flex align-items-start text-muted mb-4">
                   <div className="flex-shrink-0 me-3">
-                    <ImageWithBasePath
-                      src="assets/img/users/user-5.jpg"
+                    <img
+                      src="src/assets/img/users/user-5.jpg"
                       className="avatar avatar-xl rounded"
-                      alt="..."
-                    />
+                      alt="..." />
+                    
                   </div>
                   <div className="flex-grow-1">
                     <h5 className="fs-14">Media Heading</h5>
@@ -43,20 +43,20 @@ const Media = () => {
                     this with any content and adjust it as needed.
                   </div>
                   <div className="flex-shrink-0 ms-3">
-                    <ImageWithBasePath
-                      src="assets/img/users/user-6.jpg"
+                    <img
+                      src="src/assets/img/users/user-6.jpg"
                       className="avatar avatar-xl rounded"
-                      alt="..."
-                    />
+                      alt="..." />
+                    
                   </div>
                 </div>
                 <div className="d-flex align-items-start text-muted">
                   <div className="flex-shrink-0 me-3">
-                    <ImageWithBasePath
-                      src="assets/img/users/user-7.jpg"
+                    <img
+                      src="src/assets/img/users/user-7.jpg"
                       className="avatar avatar-xl rounded"
-                      alt="..."
-                    />
+                      alt="..." />
+                    
                   </div>
                   <div className="flex-grow-1">
                     <h5 className="fs-14">Media Heading</h5>
@@ -83,11 +83,11 @@ const Media = () => {
                 </p>
                 <div className="d-flex align-items-start text-muted mb-4">
                   <div className="flex-shrink-0 me-3">
-                    <ImageWithBasePath
-                      src="assets/img/users/user-5.jpg"
+                    <img
+                      src="src/assets/img/users/user-5.jpg"
                       className="avatar avatar-xl rounded"
-                      alt="..."
-                    />
+                      alt="..." />
+                    
                   </div>
                   <div className="flex-grow-1">
                     <h5 className="fs-14">Media Heading</h5>
@@ -95,11 +95,11 @@ const Media = () => {
                     this with any content and adjust it as needed.
                     <div className="d-flex align-items-start text-muted mt-3">
                       <div className="flex-shrink-0 me-3">
-                        <ImageWithBasePath
-                          src="assets/img/users/user-6.jpg"
+                        <img
+                          src="src/assets/img/users/user-6.jpg"
                           className="avatar avatar-xl rounded"
-                          alt="..."
-                        />
+                          alt="..." />
+                        
                       </div>
                       <div className="flex-grow-1">
                         <h5 className="fs-14">Media Heading</h5>
@@ -111,11 +111,11 @@ const Media = () => {
                 </div>
                 <div className="d-flex align-items-start text-muted">
                   <div className="flex-shrink-0 me-3">
-                    <ImageWithBasePath
-                      src="assets/img/users/user-7.jpg"
+                    <img
+                      src="src/assets/img/users/user-7.jpg"
                       className="avatar avatar-xl rounded"
-                      alt="..."
-                    />
+                      alt="..." />
+                    
                   </div>
                   <div className="flex-grow-1">
                     <h5 className="fs-14">Media Heading</h5>
@@ -142,11 +142,11 @@ const Media = () => {
                 </p>
                 <div className="d-flex align-items-start text-muted mb-4">
                   <div className="flex-shrink-0 me-3">
-                    <ImageWithBasePath
-                      src="assets/img/users/user-5.jpg"
+                    <img
+                      src="src/assets/img/users/user-5.jpg"
                       className="avatar avatar-xxxl rounded"
-                      alt="..."
-                    />
+                      alt="..." />
+                    
                   </div>
                   <div className="flex-grow-1">
                     <h5 className="fs-14">Top Aligned media</h5>
@@ -166,11 +166,11 @@ const Media = () => {
                 </div>
                 <div className="d-flex align-items-center text-muted mb-4">
                   <div className="flex-shrink-0 me-3">
-                    <ImageWithBasePath
-                      src="assets/img/users/user-6.jpg"
+                    <img
+                      src="src/assets/img/users/user-6.jpg"
                       className="avatar avatar-xxxl rounded"
-                      alt="..."
-                    />
+                      alt="..." />
+                    
                   </div>
                   <div className="flex-grow-1">
                     <h5 className="fs-14">Center Aligned media</h5>
@@ -190,11 +190,11 @@ const Media = () => {
                 </div>
                 <div className="d-flex align-items-end text-muted">
                   <div className="flex-shrink-0 me-3">
-                    <ImageWithBasePath
-                      src="assets/img/users/user-7.jpg"
+                    <img
+                      src="src/assets/img/users/user-7.jpg"
                       className="avatar avatar-xxxl rounded"
-                      alt="..."
-                    />
+                      alt="..." />
+                    
                   </div>
                   <div className="flex-grow-1">
                     <h5 className="fs-14">Bottom Aligned media</h5>
@@ -218,8 +218,8 @@ const Media = () => {
           {/* /Media Alignment */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Media;

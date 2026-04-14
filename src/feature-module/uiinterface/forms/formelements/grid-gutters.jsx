@@ -1,6 +1,6 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
-import { all_routes } from "../../../../Router/all_routes";
+import { all_routes } from "../../../../routes/all_routes";
 
 const GridGutters = () => {
   const route = all_routes;
@@ -36,16 +36,16 @@ const GridGutters = () => {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="First Name"
-                      />
+                        placeholder="First Name" />
+                      
                     </div>
                     <div className="col-md-6 mb-3">
                       <label className="form-label">Last Name</label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Last Name"
-                      />
+                        placeholder="Last Name" />
+                      
                     </div>
                     <div className="col-md-6 mb-3">
                       <label className="form-label">Address</label>
@@ -54,22 +54,22 @@ const GridGutters = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Street"
-                          />
+                            placeholder="Street" />
+                          
                         </div>
                         <div className="col-xl-12 mb-3">
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Landmark"
-                          />
+                            placeholder="Landmark" />
+                          
                         </div>
                         <div className="col-xxl-6 col-xl-12 mb-3">
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="City"
-                          />
+                            placeholder="City" />
+                          
                         </div>
                         <div className="col-xxl-6 col-xl-12 mb-3">
                           <select id="inputState1" className="form-select">
@@ -81,8 +81,8 @@ const GridGutters = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Postal/Zip code"
-                          />
+                            placeholder="Postal/Zip code" />
+                          
                         </div>
                         <div className="col-xxl-6 col-xl-12 mb-3">
                           <select id="inputCountry" className="form-select">
@@ -99,8 +99,8 @@ const GridGutters = () => {
                           <input
                             type="email"
                             className="form-control"
-                            placeholder="Email"
-                          />
+                            placeholder="Email" />
+                          
                         </div>
                         <div className="col-xl-12 mb-3">
                           <label className="form-label">DOB</label>
@@ -118,12 +118,12 @@ const GridGutters = () => {
                                   type="checkbox"
                                   defaultValue=""
                                   id="status-married"
-                                  required=""
-                                />
+                                  required />
+                                
                                 <label
                                   className="form-check-label"
-                                  htmlFor="status-married"
-                                >
+                                  htmlFor="status-married">
+                                  
                                   Married
                                 </label>
                               </div>
@@ -135,12 +135,12 @@ const GridGutters = () => {
                                   type="checkbox"
                                   defaultValue=""
                                   id="status-unmarried"
-                                  required=""
-                                />
+                                  required />
+                                
                                 <label
                                   className="form-check-label"
-                                  htmlFor="status-unmarried"
-                                >
+                                  htmlFor="status-unmarried">
+                                  
                                   Single
                                 </label>
                               </div>
@@ -155,24 +155,24 @@ const GridGutters = () => {
                       <input
                         type="number"
                         className="form-control"
-                        placeholder="Phone Number"
-                      />
+                        placeholder="Phone Number" />
+                      
                     </div>
                     <div className="col-md-6 mb-3">
                       <label className="form-label">Alternative Contact</label>
                       <input
                         type="number"
                         className="form-control"
-                        placeholder="Phone Number"
-                      />
+                        placeholder="Phone Number" />
+                      
                     </div>
                     <div className="col-md-12">
                       <div className="form-check mb-3">
                         <input
                           className="form-check-input"
                           type="checkbox"
-                          id="gridCheck"
-                        />
+                          id="gridCheck" />
+                        
                         <label className="form-check-label" htmlFor="gridCheck">
                           Check me out
                         </label>
@@ -199,16 +199,16 @@ const GridGutters = () => {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="First Name"
-                      />
+                        placeholder="First Name" />
+                      
                     </div>
                     <div className="col-md-6">
                       <label className="form-label">Last Name</label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Last Name"
-                      />
+                        placeholder="Last Name" />
+                      
                     </div>
                     <div className="col-md-6">
                       <label htmlFor="inputEmail4" className="form-label">
@@ -217,8 +217,8 @@ const GridGutters = () => {
                       <input
                         type="email"
                         className="form-control"
-                        id="inputEmail4"
-                      />
+                        id="inputEmail4" />
+                      
                     </div>
                     <div className="col-md-6">
                       <label htmlFor="inputPassword4" className="form-label">
@@ -227,8 +227,8 @@ const GridGutters = () => {
                       <input
                         type="password"
                         className="form-control"
-                        id="inputPassword4"
-                      />
+                        id="inputPassword4" />
+                      
                     </div>
                     <div className="col-12">
                       <label htmlFor="inputAddress" className="form-label">
@@ -237,8 +237,8 @@ const GridGutters = () => {
                       <input
                         type="text"
                         className="form-control"
-                        id="inputAddress"
-                      />
+                        id="inputAddress" />
+                      
                     </div>
                     <div className="col-12">
                       <label htmlFor="inputAddress2" className="form-label">
@@ -247,8 +247,8 @@ const GridGutters = () => {
                       <input
                         type="text"
                         className="form-control"
-                        id="inputAddress2"
-                      />
+                        id="inputAddress2" />
+                      
                     </div>
                     <div className="col-md-6">
                       <label htmlFor="inputCity" className="form-label">
@@ -257,8 +257,8 @@ const GridGutters = () => {
                       <input
                         type="text"
                         className="form-control"
-                        id="inputCity"
-                      />
+                        id="inputCity" />
+                      
                     </div>
                     <div className="col-md-4">
                       <label htmlFor="inputState" className="form-label">
@@ -276,20 +276,20 @@ const GridGutters = () => {
                       <input
                         type="text"
                         className="form-control"
-                        id="inputZip"
-                      />
+                        id="inputZip" />
+                      
                     </div>
                     <div className="col-12">
                       <div className="form-check">
                         <input
                           className="form-check-input"
                           type="checkbox"
-                          id="gridCheck3"
-                        />
+                          id="gridCheck3" />
+                        
                         <label
                           className="form-check-label"
-                          htmlFor="gridCheck3"
-                        >
+                          htmlFor="gridCheck3">
+                          
                           Check me out
                         </label>
                       </div>
@@ -306,8 +306,8 @@ const GridGutters = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default GridGutters;

@@ -1,11 +1,10 @@
-import React from 'react'
-import RefreshIcon from '../../core/common/tooltip-content/refresh'
-import CollapesIcon from '../../core/common/tooltip-content/collapes'
-import { Link } from 'react-router-dom'
+import RefreshIcon from '../../components/tooltip-content/refresh';
+import CollapesIcon from '../../components/tooltip-content/collapes';
+import { Link } from 'react-router-dom';
 
 const Pricing = () => {
-    return (
-        <div>
+  return (
+    <div>
             <div className="page-wrapper">
                 <div className="content">
                     <div className="page-header">
@@ -27,10 +26,10 @@ const Pricing = () => {
                                 <p className="mb-0 me-2">Monthly</p>
                                 <div className="form-check form-switch">
                                     <input
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        id="flexSwitchCheckDefault"
-                                    />
+                    className="form-check-input"
+                    type="checkbox"
+                    id="flexSwitchCheckDefault" />
+                  
                                 </div>
                                 <p>Yearly</p>
                             </div>
@@ -262,7 +261,7 @@ const Pricing = () => {
                     {/* /Pricing */}
                 </div>
                 <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-                    <p className="mb-0">2014-2025 © DreamsPOS. All Right Reserved</p>
+                    <p className="mb-0">2014-2026 © DreamsPOS. All Right Reserved</p>
                     <p>
                         Designed &amp; Developed By{" "}
                         <Link to="#" className="text-primary">
@@ -272,8 +271,8 @@ const Pricing = () => {
                 </div>
             </div>
 
-        </div>
-    )
-}
+        </div>);
 
-export default Pricing
+};
+
+export default Pricing;

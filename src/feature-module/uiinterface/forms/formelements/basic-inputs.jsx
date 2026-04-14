@@ -1,6 +1,7 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
-import { all_routes } from "../../../../Router/all_routes";
+import { all_routes } from "../../../../routes/all_routes";
+
 
 const FormBasicInputs = () => {
   const route = all_routes;
@@ -54,9 +55,9 @@ const FormBasicInputs = () => {
                       <div className="col-md-10">
                         <input
                           type="text"
-                          className="form-control"
-                          disabled="disabled"
-                        />
+                          className="form-control" />
+
+                        
                       </div>
                     </div>
                     <div className="mb-3 row">
@@ -67,9 +68,9 @@ const FormBasicInputs = () => {
                         <input
                           type="text"
                           className="form-control"
-                          defaultValue="readonly"
-                          readOnly="readonly"
-                        />
+                          defaultValue="readonly" />
+
+                        
                       </div>
                     </div>
                     <div className="mb-3 row">
@@ -80,8 +81,8 @@ const FormBasicInputs = () => {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Placeholder"
-                        />
+                          placeholder="Placeholder" />
+                        
                       </div>
                     </div>
                     <div className="mb-3 row">
@@ -159,8 +160,8 @@ const FormBasicInputs = () => {
                           cols={5}
                           className="form-control"
                           placeholder="Enter text here"
-                          defaultValue={""}
-                        />
+                          defaultValue={""} />
+                        
                       </div>
                     </div>
                     <div className="mb-3 mb-0 row">
@@ -177,8 +178,8 @@ const FormBasicInputs = () => {
                             className="form-control"
                             placeholder="Username"
                             aria-label="Username"
-                            aria-describedby="basic-addon1"
-                          />
+                            aria-describedby="basic-addon1" />
+                          
                           <button className="btn btn-primary" type="button">
                             Button
                           </button>
@@ -202,8 +203,8 @@ const FormBasicInputs = () => {
                         <input
                           type="text"
                           className="form-control form-control-lg"
-                          placeholder=".form-control-lg"
-                        />
+                          placeholder=".form-control-lg" />
+                        
                       </div>
                     </div>
                     <div className="mb-3 row">
@@ -214,8 +215,8 @@ const FormBasicInputs = () => {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder=".form-control"
-                        />
+                          placeholder=".form-control" />
+                        
                       </div>
                     </div>
                     <div className="mb-3 mb-0 row">
@@ -226,8 +227,8 @@ const FormBasicInputs = () => {
                         <input
                           type="text"
                           className="form-control form-control-sm"
-                          placeholder=".form-control-sm"
-                        />
+                          placeholder=".form-control-sm" />
+                        
                       </div>
                     </div>
                   </form>
@@ -237,8 +238,8 @@ const FormBasicInputs = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default FormBasicInputs;

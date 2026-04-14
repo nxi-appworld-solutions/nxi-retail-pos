@@ -1,62 +1,68 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { all_routes } from "../../../Router/all_routes";
-import Table from "../../../core/pagination/datatable";
+import { all_routes } from "../../../routes/all_routes";
 import { pageDataTablesData } from "../../../core/json/pageDataTables";
+import PrimeDataTable from "../../../components/data-table";
+
 
 const DataTables = () => {
   const data = pageDataTablesData;
   const route = all_routes;
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      sorter: (a, b) => a.name.length - b.name.length,
-    },
-    {
-      title: "Position",
-      dataIndex: "position",
-      key: "position",
-      sorter: (a, b) => a.position.length - b.position.length,
-    },
-    {
-      title: "Office",
-      dataIndex: "office",
-      key: "office",
-      sorter: (a, b) => a.office.length - b.office.length,
-    },
-    {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
-      sorter: (a, b) => a.age.length - b.age.length,
-    },
-    {
-      title: "Start Date",
-      dataIndex: "startDate",
-      key: "startDate",
-      sorter: (a, b) => a.startDate.length - b.startDate.length,
-    },
-    {
-      title: "Salary",
-      dataIndex: "salary",
-      key: "salary",
-      sorter: (a, b) => a.salary.length - b.salary.length,
-    },
-  ];
+  const [rows, setRows] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(data.length);
   const [searchText, setSearchText] = useState("");
+  const [selectedRows, setSelectedRows] = useState([]);
+  
   const handleSearch = (e) => {
     setSearchText(e.target.value);
   };
 
   const filteredData = data.filter((entry) => {
     return Object.keys(entry).some((key) => {
-      return String(entry[key])
-        .toLowerCase()
-        .includes(searchText.toLowerCase());
+      return String(entry[key]).
+      toLowerCase().
+      includes(searchText.toLowerCase());
     });
   });
+
+  const columns = [
+  {
+    header: "Name",
+    field: "name",
+    key: "name",
+    sortable: true
+  },
+  {
+    header: "Position",
+    field: "position",
+    key: "position",
+    sortable: true
+  },
+  {
+    header: "Office",
+    field: "office",
+    key: "office",
+    sortable: true
+  },
+  {
+    header: "Age",
+    field: "age",
+    key: "age",
+    sortable: true
+  },
+  {
+    header: "Start Date",
+    field: "startDate",
+    key: "startDate",
+    sortable: true
+  },
+  {
+    header: "Salary",
+    field: "salary",
+    key: "salary",
+    sortable: true
+  }];
   return (
     <div>
       <div className="page-wrapper">
@@ -91,8 +97,8 @@ const DataTables = () => {
                   <div className="table-responsive">
                     <div
                       id="DataTables_Table_0_filter"
-                      className="dataTables_filter custom-data-table-react"
-                    >
+                      className="dataTables_filter custom-data-table-react">
+                      
                       <label>
                         {" "}
                         <input
@@ -101,11 +107,23 @@ const DataTables = () => {
                           placeholder="Search"
                           aria-controls="DataTables_Table_0"
                           value={searchText}
-                          onChange={handleSearch}
-                        />
+                          onChange={handleSearch} />
+                        
                       </label>
                     </div>
-                    <Table columns={columns} dataSource={filteredData} rowKey="key" />
+                    <PrimeDataTable
+                      column={columns}
+                      data={filteredData}
+                      totalRecords={totalRecords}
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      rows={rows}
+                      setRows={setRows}
+                      selectionMode="checkbox"
+                      selection={selectedRows}
+                      onSelectionChange={(e) => setSelectedRows(e.value)}
+                      dataKey="id"
+                    />
                   </div>
                 </div>
               </div>
@@ -113,8 +131,8 @@ const DataTables = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default DataTables;

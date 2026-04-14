@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../img/imagewithbasebath";
-import Select from "react-select";
-import { Status } from "../../common/selectOption/selectOption";
-import DefaultEditor from "react-simple-wysiwyg";
-import { DatePicker } from "antd";
-import { Calendar } from "feather-icons-react/build/IconComponents";
+import { Editor } from "primereact/editor";
+import { plus1, qrCodeImage } from "../../../utils/imagepath";
+import CommonSelect from "../../../components/select/common-select";
+import CommonDatePicker from "../../../components/date-picker/common-date-picker";
 
 const AddQuotation = () => {
+  const [date, setDate] = useState(new Date());
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
+  const [text, setText] = useState("");
+
   const customer = [
-    { value: "Choose", label: "Choose" },
-    { value: "Benjamin", label: "Benjamin" },
-    { value: "Nydia Fitzgerald", label: "Nydia Fitzgerald" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "Benjamin", label: "Benjamin" },
+  { value: "Nydia Fitzgerald", label: "Nydia Fitzgerald" }];
 
 
-  const [values, setValue] = useState();
-  function onChange(e) {
-    setValue(e.target.value);
-  }
+  const Status = [
+  { label: 'Sent', value: '1' },
+  { label: 'Pending', value: '2' }];
+
 
   return (
     <div>
@@ -35,8 +37,8 @@ const AddQuotation = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -46,25 +48,32 @@ const AddQuotation = () => {
                     <div className="col-lg-4 col-md-6 col-sm-12">
                       <div className="mb-3 add-product">
                         <label className="form-label">
-                          Customer Name<span className="text-danger ms-1">*</span>
+                          Customer Name
+                          <span className="text-danger ms-1">*</span>
                         </label>
                         <div className="row">
                           <div className="col-lg-10 col-sm-10 col-10">
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={customer}
+                              value={selectedCustomer}
+                              onChange={(e) => setSelectedCustomer(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                           <div className="col-lg-2 col-sm-2 col-2 p-0">
                             <div className="add-icon tab">
-                              <a
-                                className="bg-dark text-white p-2 rounded"
-                                data-bs-toggle="modal"
-                                data-bs-target="#add-units"
-                              >
-                                <ImageWithBasePath src="assets/img/icons/plus1.svg" alt="img" />
-                              </a>
+                              <Link to="#"
+                              className="bg-dark text-white p-2 rounded"
+                              data-bs-toggle="modal"
+                              data-bs-target="#add-units">
+                                
+                                <img
+                                  src={plus1}
+                                  alt="img" />
+                                
+                              </Link>
                             </div>
                           </div>
                         </div>
@@ -76,11 +85,12 @@ const AddQuotation = () => {
                           Date<span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-groupicon calender-input">
-                          <DatePicker
-                            className="form-control datetimepicker"
-                            placeholder="dd/mm/yyyy"
-                          />
-                          <Calendar className="info-img" />
+                          <CommonDatePicker
+                            value={date}
+                            onChange={setDate}
+                            className="w-100" />
+                          
+                          <i className="feather icon-calendar info-img" />
                         </div>
                       </div>
                     </div>
@@ -103,10 +113,13 @@ const AddQuotation = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Please type product code and select"
-                          />
+                            placeholder="Please type product code and select" />
+                          
                           <div className="addonset">
-                            <ImageWithBasePath src="assets/img/icons/qrcode-scan.svg" alt="img" />
+                            <img
+                              src={qrCodeImage}
+                              alt="img" />
+                            
                           </div>
                         </div>
                       </div>
@@ -152,8 +165,8 @@ const AddQuotation = () => {
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue={0}
-                          />
+                            defaultValue={0} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-3 col-md-6 col-sm-12">
@@ -164,8 +177,8 @@ const AddQuotation = () => {
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue={0}
-                          />
+                            defaultValue={0} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-3 col-md-6 col-sm-12">
@@ -176,8 +189,8 @@ const AddQuotation = () => {
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue={0}
-                          />
+                            defaultValue={0} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-3 col-md-6 col-sm-12">
@@ -185,11 +198,14 @@ const AddQuotation = () => {
                           <label className="form-label">
                             Status<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={Status}
+                            value={selectedStatus}
+                            onChange={(e) => setSelectedStatus(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                     </div>
@@ -197,7 +213,11 @@ const AddQuotation = () => {
                   <div className="col-lg-12">
                     <div className="mb-3 summer-description-box">
                       <label className="form-label">Description</label>
-                      <DefaultEditor value={values} onChange={onChange} />
+                      <Editor
+                        value={text}
+                        onTextChange={(e) => setText(e.htmlValue)}
+                        style={{ height: "200px" }} />
+                      
                     </div>
                   </div>
                 </div>
@@ -205,11 +225,15 @@ const AddQuotation = () => {
                   <button
                     type="button"
                     className="btn btn-secondary me-2"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
-                  <Link to="#" className="btn btn-primary" data-bs-dismiss="modal">
+                  <Link
+                    to="#"
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal">
+                    
                     Submit
                   </Link>
                 </div>
@@ -219,9 +243,8 @@ const AddQuotation = () => {
         </div>
         {/* /Add Quotation */}
       </>
+    </div>);
 
-    </div>
-  );
 };
 
 export default AddQuotation;

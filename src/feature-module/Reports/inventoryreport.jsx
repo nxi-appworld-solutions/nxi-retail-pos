@@ -1,80 +1,84 @@
-import React, { useState } from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
 import { inventoryreportdata } from "../../core/json/inventoryreportdata";
-import Table from "../../core/pagination/datatable";
-import { all_routes } from "../../Router/all_routes";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { DatePicker } from "antd";
-import { Category, ProductName } from "../../core/common/selectOption/selectOption";
-import CommonFooter from "../../core/common/footer/commonFooter";
+import { all_routes } from "../../routes/all_routes";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+
+import CommonFooter from "../../components/footer/commonFooter";
+import PrimeDataTable from "../../components/data-table";
+import CommonSelect from "../../components/select/common-select";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
 
 const InventoryReport = () => {
-
   const route = all_routes;
-
   const data = inventoryreportdata;
-  const [searchText] = useState("");
+  const [listData, _setListData] = useState(data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedUnit, setSelectedUnit] = useState(null);
 
-  const filteredData = data.filter((entry) => {
-    return Object.keys(entry).some((key) => {
-      return String(entry[key])
-        .toLowerCase()
-        .includes(searchText.toLowerCase());
-    });
-  });
+  const Category = [
+  { value: "electronics", label: "Electronics" },
+  { value: "fashion", label: "Fashion" },
+  { value: "grocery", label: "Grocery" }];
+
+  const ProductName = [
+  { value: "product1", label: "Product 1" },
+  { value: "product2", label: "Product 2" },
+  { value: "product3", label: "Product 3" }];
 
 
   const units = [
-    { value: "PC", label: "PC" },
-    { value: "BX", label: "BX" },
-  ];
+  { value: "PC", label: "PC" },
+  { value: "BX", label: "BX" }];
+
   const columns = [
-    {
-      title: "Product Name",
-      dataIndex: "productName",
-      render: (text, record) => (
-        <span className="productimgname">
+  {
+    header: "Product Name",
+    field: "productName",
+    body: (text) =>
+    <span className="productimgname">
           <Link to="#" className="product-img stock-img">
-            <ImageWithBasePath alt="img" src={record.img} />
+            <img alt="img" src={text.img} />
           </Link>
-          <Link to="#">{text}</Link>
-        </span>
-      ),
-      sorter: (a, b) => a.productName.length - b.productName.length,
-    },
-    {
-      title: "SKU",
-      dataIndex: "sku",
-      sorter: (a, b) => a.sku.length - b.sku.length,
-    },
+          <Link to="#">{text.productName}</Link>
+        </span>,
 
-    {
-      title: "Category",
-      dataIndex: "category",
-      sorter: (a, b) => a.category.length - b.category.length,
-    },
+    sorter: (a, b) => a.productName.length - b.productName.length
+  },
+  {
+    header: "SKU",
+    field: "sku",
+    sorter: (a, b) => a.sku.length - b.sku.length
+  },
 
-    {
-      title: "Brand",
-      dataIndex: "brand",
-      sorter: (a, b) => a.brand.length - b.brand.length,
-    },
-    {
-      title: "Unit",
-      dataIndex: "unit",
-      sorter: (a, b) => a.unit.length - b.unit.length,
-    },
+  {
+    header: "Category",
+    field: "category",
+    sorter: (a, b) => a.category.length - b.category.length
+  },
 
-    {
-      title: "Instock Qty",
-      dataIndex: "instockQty",
-      sorter: (a, b) => a.instockQty.length - b.instockQty.length,
-    },
+  {
+    header: "Brand",
+    field: "brand",
+    sorter: (a, b) => a.brand.length - b.brand.length
+  },
+  {
+    header: "Unit",
+    field: "unit",
+    sorter: (a, b) => a.unit.length - b.unit.length
+  },
 
-  ];
+  {
+    header: "Instock Qty",
+    field: "instockQty",
+    sorter: (a, b) => a.instockQty.length - b.instockQty.length
+  }];
+
   return (
     <>
       <div className="page-wrapper">
@@ -121,10 +125,7 @@ const InventoryReport = () => {
                         <div className="mb-3">
                           <label className="form-label">Choose Date</label>
                           <div className="input-icon-start position-relative">
-                            <DatePicker
-                              className="form-control datetimepicker"
-                              placeholder="dd/mm/yyyy"
-                            />
+                            <CommonDateRangePicker />
                             <span className="input-icon-left">
                               <i className="ti ti-calendar" />
                             </span>
@@ -134,31 +135,40 @@ const InventoryReport = () => {
                       <div className="col-md-3">
                         <div className="mb-3">
                           <label className="form-label">Category</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={Category}
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-md-3">
                         <div className="mb-3">
                           <label className="form-label">Products</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={ProductName}
+                            value={selectedProduct}
+                            onChange={(e) => setSelectedProduct(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-md-3">
                         <div className="mb-3">
                           <label className="form-label">Units</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={units}
+                            value={selectedUnit}
+                            onChange={(e) => setSelectedUnit(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                     </div>
@@ -179,7 +189,15 @@ const InventoryReport = () => {
           <div className="card table-list-card">
             <div className="card-body">
               <div className="table-responsive">
-                <Table columns={columns} dataSource={filteredData} />
+                <PrimeDataTable
+                  column={columns}
+                  data={listData}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords} />
+                
               </div>
             </div>
           </div>
@@ -187,9 +205,8 @@ const InventoryReport = () => {
         </div>
       </div>
       <CommonFooter />
-    </>
+    </>);
 
-  );
 };
 
 export default InventoryReport;

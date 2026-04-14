@@ -1,25 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import NotesModal from "../../core/modals/applications/notesModal";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import CommonFooter from "../../core/common/footer/commonFooter";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
 import Select from "react-select";
 import { DatePicker } from "antd";
-import { Edit, Eye, PlusCircle, Star, Trash2 } from "feather-icons-react/build/IconComponents";
+import { Edit, Eye, Star, Trash2 } from "react-feather";
+import CommonFooter from "../../components/footer/commonFooter";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
 
 const Notes = () => {
   const [isOpen] = useState(false);
 
   const recentChoose = [
-    { value: "Recent", label: "Recent" },
-    { value: "Last Modified", label: "Last Modified" },
-    { value: "Last Modified by me", label: "Last Modified by me" }
-  ];
+  { value: "Recent", label: "Recent" },
+  { value: "Last Modified", label: "Last Modified" },
+  { value: "Last Modified by me", label: "Last Modified by me" }];
+
 
   const settings = {
     dots: false,
@@ -28,39 +27,40 @@ const Notes = () => {
     margin: 24,
     speed: 500,
     responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 776,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 567,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-    ],
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 2
+      }
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 2
+      }
+    },
+    {
+      breakpoint: 776,
+      settings: {
+        slidesToShow: 2
+      }
+    },
+    {
+      breakpoint: 567,
+      settings: {
+        slidesToShow: 2
+      }
+    }]
+
   };
 
   return (
     <>
       <div
-        className={`page-wrapper notes-page-wrapper ${isOpen && "notes-tag-left"
-          }`}
-      >
+        className={`page-wrapper notes-page-wrapper ${
+        isOpen && "notes-tag-left"}`
+        }>
+        
         <div className="content">
           <div className="page-header page-add-notes border-0 flex-sm-row flex-column">
             <div className="add-item d-flex">
@@ -76,7 +76,7 @@ const Notes = () => {
               </ul>
               <div className="search-set">
                 <div className="search-input">
-                  <Link href="#" className="btn btn-searchset">
+                  <Link to="#" className="btn btn-searchset">
                     <i data-feather="search" className="feather-search" />
                   </Link>
                   <div className="dataTables_filter">
@@ -85,20 +85,20 @@ const Notes = () => {
                       <input
                         type="search"
                         className="form-control form-control-sm py-0"
-                        placeholder="Search"
-                      />
+                        placeholder="Search" />
+                      
                     </label>
                   </div>
                 </div>
               </div>
               <div className="page-btn">
                 <Link
-                  href="#"
+                  to="#"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#note-units"
-                >
-                <i className='ti ti-circle-plus me-1'></i> Add Note
+                  data-bs-target="#note-units">
+                  
+                  <i className="ti ti-circle-plus me-1"></i> Add Note
                 </Link>
               </div>
             </div>
@@ -118,8 +118,8 @@ const Notes = () => {
                     className="nav flex-column nav-pills"
                     id="v-pills-tab"
                     role="tablist"
-                    aria-orientation="vertical"
-                  >
+                    aria-orientation="vertical">
+                    
                     <button
                       className="d-flex text-start align-items-center fw-medium fs-15 nav-link active mb-1"
                       id="v-pills-profile-tab"
@@ -128,8 +128,8 @@ const Notes = () => {
                       type="button"
                       role="tab"
                       aria-controls="v-pills-profile"
-                      aria-selected="true"
-                    >
+                      aria-selected="true">
+                      
                       <i className="ti ti-inbox me-2" />
                       All Notes<span className="ms-2">1</span>
                     </button>
@@ -141,8 +141,8 @@ const Notes = () => {
                       type="button"
                       role="tab"
                       aria-controls="v-pills-messages"
-                      aria-selected="false"
-                    >
+                      aria-selected="false">
+                      
                       <i className="ti ti-star me-2" />
                       Important
                     </button>
@@ -154,8 +154,8 @@ const Notes = () => {
                       type="button"
                       role="tab"
                       aria-controls="v-pills-settings"
-                      aria-selected="false"
-                    >
+                      aria-selected="false">
+                      
                       <i className="ti ti-trash me-2" />
                       Trash
                     </button>
@@ -224,8 +224,8 @@ const Notes = () => {
                   <Select
                     classNamePrefix="react-select"
                     options={recentChoose}
-                    placeholder="Choose"
-                  />
+                    placeholder="Choose" />
+                  
                 </div>
                 <div className="d-flex align-items-center mb-3">
                   <div className="input-icon-start me-2 position-relative">
@@ -235,11 +235,12 @@ const Notes = () => {
                     <DatePicker
                       className="form-control datetimepicker"
                       placeholder="dd/mm/yyyy"
-                    />
+                      suffixIcon={null} />
+                    
                   </div>
                   <div className="search-set">
                     <div className="search-input">
-                      <Link href="#" className="btn btn-searchset">
+                      <Link to="#" className="btn btn-searchset">
                         <i data-feather="search" className="feather-search" />
                       </Link>
                       <div className="dataTables_filter">
@@ -248,8 +249,8 @@ const Notes = () => {
                           <input
                             type="search"
                             className="form-control form-control-sm"
-                            placeholder="Search"
-                          />
+                            placeholder="Search" />
+                          
                         </label>
                       </div>
                     </div>
@@ -262,8 +263,8 @@ const Notes = () => {
                   className="tab-pane fade active show"
                   id="v-pills-profile"
                   role="tabpanel"
-                  aria-labelledby="v-pills-profile-tab"
-                >
+                  aria-labelledby="v-pills-profile-tab">
+                  
                   <div className="border-bottom mb-4 pb-4">
                     <div className="row">
                       <div className="col-md-12">
@@ -273,18 +274,17 @@ const Notes = () => {
                             <div className="owl-nav slide-nav5 text-end nav-control ms-3" />
                           </div>
                           <div className="notes-close mb-3">
-                            <Link
-                              to="#"
-                              className="text-danger fs-15"
-                            >
+                            <Link to="#" className="text-danger fs-15">
                               <i className="fas fa-times me-1" /> Close{" "}
                             </Link>
                           </div>
                         </div>
                       </div>
                       <div className="col-md-12">
-
-                        <Slider {...settings} className="notes-slider owl-carousel">
+                        <Slider
+                          {...settings}
+                          className="notes-slider owl-carousel">
+                          
                           <div className="card rounded-3 mb-0">
                             <div className="card-body p-4">
                               <div className="d-flex align-items-center justify-content-between">
@@ -296,17 +296,18 @@ const Notes = () => {
                                   <Link
                                     to="#"
                                     data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                  >
+                                    aria-expanded="false">
+                                    
                                     <i className="fas fa-ellipsis-v" />
                                   </Link>
                                   <div className="dropdown-menu notes-menu dropdown-menu-end">
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#edit-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#edit-note-units">
+                                      
                                       <span>
                                         <Edit />
                                       </span>
@@ -315,18 +316,16 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#delete_modal"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#delete_modal">
+                                      
                                       <span>
                                         <Trash2 />
                                       </span>
                                       Delete
                                     </Link>
-                                    <Link
-                                      to="#"
-                                      className="dropdown-item"
-                                    >
+                                    <Link to="#" className="dropdown-item">
                                       <span>
                                         <Star />
                                       </span>
@@ -335,9 +334,10 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#view-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#view-note-units">
+                                      
                                       <span>
                                         <Eye />
                                       </span>
@@ -357,21 +357,21 @@ const Notes = () => {
                                   20 Jan 2024
                                 </p>
                                 <p className="text-truncate line-clamb-2 text-wrap">
-                                  Space, the final frontier. These are the voyages
-                                  of the Starship Enterprise.
+                                  Space, the final frontier. These are the
+                                  voyages of the Starship Enterprise.
                                 </p>
                               </div>
                               <div className="d-flex align-items-center justify-content-between border-top pt-3">
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="avatar avatar-md me-2"
-                                  >
-                                    <ImageWithBasePath
-                                      src="./assets/img/profiles/avatar-01.jpg"
+                                    className="avatar avatar-md me-2">
+                                    
+                                    <img
+                                      src="src/assets/img/profiles/avatar-01.jpg"
                                       alt="Profile"
-                                      className="img-fluid rounded-circle"
-                                    />
+                                      className="img-fluid rounded-circle" />
+                                    
                                   </Link>
                                   <span className="text-info d-flex align-items-center">
                                     <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -404,17 +404,18 @@ const Notes = () => {
                                   <Link
                                     to="#"
                                     data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                  >
+                                    aria-expanded="false">
+                                    
                                     <i className="fas fa-ellipsis-v" />
                                   </Link>
                                   <div className="dropdown-menu notes-menu dropdown-menu-end">
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#edit-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#edit-note-units">
+                                      
                                       <span>
                                         <Edit />
                                       </span>
@@ -423,18 +424,16 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#delete_modal"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#delete_modal">
+                                      
                                       <span>
                                         <Trash2 />
                                       </span>
                                       Delete
                                     </Link>
-                                    <Link
-                                      to="#"
-                                      className="dropdown-item"
-                                    >
+                                    <Link to="#" className="dropdown-item">
                                       <span>
                                         <Star />
                                       </span>
@@ -443,9 +442,10 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#view-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#view-note-units">
+                                      
                                       <span>
                                         <Eye />
                                       </span>
@@ -456,30 +456,28 @@ const Notes = () => {
                               </div>
                               <div className="my-3">
                                 <h5 className="text-truncate mb-1">
-                                  <Link to="#">
-                                    Improve touch typing
-                                  </Link>
+                                  <Link to="#">Improve touch typing</Link>
                                 </h5>
                                 <p className="mb-3 d-flex align-items-center text-dark">
                                   <i className="ti ti-calendar me-1" />
                                   22 Jan 2024
                                 </p>
                                 <p className="text-truncate line-clamb-2 text-wrap">
-                                  Well, the way they make shows is, they make one
-                                  show.
+                                  Well, the way they make shows is, they make
+                                  one show.
                                 </p>
                               </div>
                               <div className="d-flex align-items-center justify-content-between border-top pt-3">
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="avatar avatar-md me-2"
-                                  >
-                                    <ImageWithBasePath
-                                      src="./assets/img/profiles/avatar-02.jpg"
+                                    className="avatar avatar-md me-2">
+                                    
+                                   <img
+                                      src="src/assets/img/profiles/avatar-02.jpg"
                                       alt="Profile"
-                                      className="img-fluid rounded-circle"
-                                    />
+                                      className="img-fluid rounded-circle" />
+                                    
                                   </Link>
                                   <span className="text-success d-flex align-items-center">
                                     <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -512,17 +510,18 @@ const Notes = () => {
                                   <Link
                                     to="#"
                                     data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                  >
+                                    aria-expanded="false">
+                                    
                                     <i className="fas fa-ellipsis-v" />
                                   </Link>
                                   <div className="dropdown-menu notes-menu dropdown-menu-end">
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#edit-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#edit-note-units">
+                                      
                                       <span>
                                         <Edit />
                                       </span>
@@ -531,18 +530,16 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#delete_modal"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#delete_modal">
+                                      
                                       <span>
                                         <Trash2 />
                                       </span>
                                       Delete
                                     </Link>
-                                    <Link
-                                      to="#"
-                                      className="dropdown-item"
-                                    >
+                                    <Link to="#" className="dropdown-item">
                                       <span>
                                         <Star />
                                       </span>
@@ -551,9 +548,10 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#view-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#view-note-units">
+                                      
                                       <span>
                                         <Eye />
                                       </span>
@@ -564,30 +562,28 @@ const Notes = () => {
                               </div>
                               <div className="my-3">
                                 <h5 className="text-truncate mb-1">
-                                  <Link to="#">
-                                    Learn calligraphy
-                                  </Link>
+                                  <Link to="#">Learn calligraphy</Link>
                                 </h5>
                                 <p className="mb-3 d-flex align-items-center text-dark">
                                   <i className="ti ti-calendar me-1" />
                                   24 Jan 2024
                                 </p>
                                 <p className="text-truncate line-clamb-2 text-wrap">
-                                  Calligraphy, the art of beautiful handwriting. The
-                                  term may derive from the Greek words.{" "}
+                                  Calligraphy, the art of beautiful handwriting.
+                                  The term may derive from the Greek words.{" "}
                                 </p>
                               </div>
                               <div className="d-flex align-items-center justify-content-between border-top pt-3">
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="avatar avatar-md me-2"
-                                  >
-                                    <ImageWithBasePath
-                                      src="./assets/img/profiles/avatar-03.jpg"
+                                    className="avatar avatar-md me-2">
+                                    
+                                   <img
+                                      src="src/assets/img/profiles/avatar-03.jpg"
                                       alt="Profile"
-                                      className="img-fluid rounded-circle"
-                                    />
+                                      className="img-fluid rounded-circle" />
+                                    
                                   </Link>
                                   <span className="text-info d-flex align-items-center">
                                     <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -620,17 +616,18 @@ const Notes = () => {
                                   <Link
                                     to="#"
                                     data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                  >
+                                    aria-expanded="false">
+                                    
                                     <i className="fas fa-ellipsis-v" />
                                   </Link>
                                   <div className="dropdown-menu notes-menu dropdown-menu-end">
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#edit-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#edit-note-units">
+                                      
                                       <span>
                                         <Edit />
                                       </span>
@@ -639,18 +636,16 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#delete_modal"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#delete_modal">
+                                      
                                       <span>
                                         <Trash2 />
                                       </span>
                                       Delete
                                     </Link>
-                                    <Link
-                                      to="#"
-                                      className="dropdown-item"
-                                    >
+                                    <Link to="#" className="dropdown-item">
                                       <span>
                                         <Star />
                                       </span>
@@ -659,9 +654,10 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#view-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#view-note-units">
+                                      
                                       <span>
                                         <Eye />
                                       </span>
@@ -681,21 +677,21 @@ const Notes = () => {
                                   25 Jan 2024
                                 </p>
                                 <p className="text-truncate line-clamb-2 text-wrap">
-                                  Space, the final frontier. These are the voyages
-                                  of the Starship Enterprise.
+                                  Space, the final frontier. These are the
+                                  voyages of the Starship Enterprise.
                                 </p>
                               </div>
                               <div className="d-flex align-items-center justify-content-between border-top pt-3">
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="avatar avatar-md me-2"
-                                  >
-                                    <ImageWithBasePath
-                                      src="./assets/img/profiles/avatar-01.jpg"
+                                    className="avatar avatar-md me-2">
+                                    
+                                   <img
+                                      src="src/assets/img/profiles/avatar-01.jpg"
                                       alt="Profile"
-                                      className="img-fluid rounded-circle"
-                                    />
+                                      className="img-fluid rounded-circle" />
+                                    
                                   </Link>
                                   <span className="text-info d-flex align-items-center">
                                     <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -728,17 +724,18 @@ const Notes = () => {
                                   <Link
                                     to="#"
                                     data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                  >
+                                    aria-expanded="false">
+                                    
                                     <i className="fas fa-ellipsis-v" />
                                   </Link>
                                   <div className="dropdown-menu notes-menu dropdown-menu-end">
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#edit-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#edit-note-units">
+                                      
                                       <span>
                                         <Edit />
                                       </span>
@@ -747,18 +744,16 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#delete_modal"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#delete_modal">
+                                      
                                       <span>
                                         <Trash2 />
                                       </span>
                                       Delete
                                     </Link>
-                                    <Link
-                                      to="#"
-                                      className="dropdown-item"
-                                    >
+                                    <Link to="#" className="dropdown-item">
                                       <span>
                                         <Star />
                                       </span>
@@ -767,9 +762,10 @@ const Notes = () => {
                                     <Link
                                       to="#"
                                       className="dropdown-item"
-                                      data-bs-toggle="modal" data-inert={true}
-                                      data-bs-target="#view-note-units"
-                                    >
+                                      data-bs-toggle="modal"
+                                      data-inert={true}
+                                      data-bs-target="#view-note-units">
+                                      
                                       <span>
                                         <Eye />
                                       </span>
@@ -780,30 +776,28 @@ const Notes = () => {
                               </div>
                               <div className="my-3">
                                 <h5 className="text-truncate mb-1">
-                                  <Link to="#">
-                                    Improve touch typing
-                                  </Link>
+                                  <Link to="#">Improve touch typing</Link>
                                 </h5>
                                 <p className="mb-3 d-flex align-items-center text-dark">
                                   <i className="ti ti-calendar me-1" />
                                   26 Jan 2024
                                 </p>
                                 <p className="text-truncate line-clamb-2 text-wrap">
-                                  Well, the way they make shows is, they make one
-                                  show.
+                                  Well, the way they make shows is, they make
+                                  one show.
                                 </p>
                               </div>
                               <div className="d-flex align-items-center justify-content-between border-top pt-3">
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="avatar avatar-md me-2"
-                                  >
-                                    <ImageWithBasePath
-                                      src="./assets/img/profiles/avatar-02.jpg"
+                                    className="avatar avatar-md me-2">
+                                    
+                                   <img
+                                      src="src/assets/img/profiles/avatar-02.jpg"
                                       alt="Profile"
-                                      className="img-fluid rounded-circle"
-                                    />
+                                      className="img-fluid rounded-circle" />
+                                    
                                   </Link>
                                   <span className="text-success d-flex align-items-center">
                                     <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -842,17 +836,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -861,18 +856,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -881,9 +874,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -901,21 +895,18 @@ const Notes = () => {
                               20 Jan 2024
                             </p>
                             <p className="text-truncate line-clamb-2 text-wrap">
-                              Project files should be took backup before end of the
-                              day.
+                              Project files should be took backup before end of
+                              the day.
                             </p>
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-05.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-05.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-info d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -950,17 +941,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -969,18 +961,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -989,9 +979,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1009,21 +1000,18 @@ const Notes = () => {
                               25 Jan 2024
                             </p>
                             <p className="text-truncate line-clamb-2 text-wrap">
-                              Server log is a text document that contains a record
-                              of all activity.
+                              Server log is a text document that contains a
+                              record of all activity.
                             </p>
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-06.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-06.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-success d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -1058,17 +1046,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -1077,18 +1066,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -1097,9 +1084,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1110,30 +1098,25 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Team meet at Starbucks
-                              </Link>
+                              <Link to="#">Team meet at Starbucks</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
                               26 Jan 2024
                             </p>
                             <p className="text-truncate line-clamb-2 text-wrap">
-                              Meeting all teamets at Starbucks for identifying them
-                              all.
+                              Meeting all teamets at Starbucks for identifying
+                              them all.
                             </p>
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-07.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-07.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-warning d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -1168,17 +1151,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -1187,18 +1171,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -1207,9 +1189,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1220,9 +1203,7 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Create a compost pile
-                              </Link>
+                              <Link to="#">Create a compost pile</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
@@ -1235,15 +1216,12 @@ const Notes = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-08.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-08.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-warning d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -1278,17 +1256,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -1297,18 +1276,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -1317,9 +1294,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1330,9 +1308,7 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Take a hike at a local park
-                              </Link>
+                              <Link to="#">Take a hike at a local park</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
@@ -1345,15 +1321,12 @@ const Notes = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-09.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-09.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-info d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -1388,17 +1361,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -1407,18 +1381,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -1427,9 +1399,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1440,9 +1413,7 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Research a topic interested
-                              </Link>
+                              <Link to="#">Research a topic interested</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
@@ -1455,15 +1426,12 @@ const Notes = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-10.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-10.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-success d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -1492,8 +1460,8 @@ const Notes = () => {
                   className="tab-pane fade"
                   id="v-pills-messages"
                   role="tabpanel"
-                  aria-labelledby="v-pills-messages-tab"
-                >
+                  aria-labelledby="v-pills-messages-tab">
+                  
                   <div className="row">
                     <div className="col-md-4 d-flex">
                       <div className="card rounded-3 mb-4 flex-fill">
@@ -1507,17 +1475,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -1526,18 +1495,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -1546,9 +1513,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1566,21 +1534,18 @@ const Notes = () => {
                               20 Jan 2024
                             </p>
                             <p className="text-truncate line-clamb-2 text-wrap">
-                              Project files should be took backup before end of the
-                              day.
+                              Project files should be took backup before end of
+                              the day.
                             </p>
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-05.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-05.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-info d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -1615,17 +1580,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -1634,18 +1600,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -1654,9 +1618,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1674,21 +1639,18 @@ const Notes = () => {
                               25 Jan 2024
                             </p>
                             <p className="text-truncate line-clamb-2 text-wrap">
-                              Server log is a text document that contains a record
-                              of all activity.
+                              Server log is a text document that contains a
+                              record of all activity.
                             </p>
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-06.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-06.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-success d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -1723,17 +1685,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -1742,18 +1705,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -1762,9 +1723,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1775,30 +1737,25 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Team meet at Starbucks
-                              </Link>
+                              <Link to="#">Team meet at Starbucks</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
                               26 Jan 2024
                             </p>
                             <p className="text-truncate line-clamb-2 text-wrap">
-                              Meeting all teamets at Starbucks for identifying them
-                              all.
+                              Meeting all teamets at Starbucks for identifying
+                              them all.
                             </p>
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-07.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-07.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-warning d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -1833,17 +1790,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -1852,18 +1810,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -1872,9 +1828,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1885,9 +1842,7 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Create a compost pile
-                              </Link>
+                              <Link to="#">Create a compost pile</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
@@ -1900,15 +1855,12 @@ const Notes = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-08.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-08.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-warning d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -1943,17 +1895,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -1962,18 +1915,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -1982,9 +1933,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -1995,9 +1947,7 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Take a hike at a local park
-                              </Link>
+                              <Link to="#">Take a hike at a local park</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
@@ -2010,15 +1960,12 @@ const Notes = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-09.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                               <img
+                                  src="src/assets/img/profiles/avatar-09.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-info d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -2053,17 +2000,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -2072,18 +2020,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -2092,9 +2038,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -2105,9 +2052,7 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Research a topic interested
-                              </Link>
+                              <Link to="#">Research a topic interested</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
@@ -2120,15 +2065,12 @@ const Notes = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-10.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                                <img
+                                  src="src/assets/img/profiles/avatar-10.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-success d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -2157,8 +2099,8 @@ const Notes = () => {
                   className="tab-pane fade"
                   id="v-pills-settings"
                   role="tabpanel"
-                  aria-labelledby="v-pills-settings-tab"
-                >
+                  aria-labelledby="v-pills-settings-tab">
+                  
                   <div className="row">
                     <div className="col-12 d-flex align-items-center justify-content-end">
                       <Link to="#" className="btn btn-danger mb-4">
@@ -2183,17 +2125,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -2202,18 +2145,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -2222,9 +2163,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -2235,9 +2177,7 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Create a compost pile
-                              </Link>
+                              <Link to="#">Create a compost pile</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
@@ -2250,15 +2190,12 @@ const Notes = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-08.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                                <img
+                                  src="src/assets/img/profiles/avatar-08.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-warning d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -2293,17 +2230,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -2312,18 +2250,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -2332,9 +2268,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -2345,9 +2282,7 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Take a hike at a local park
-                              </Link>
+                              <Link to="#">Take a hike at a local park</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
@@ -2360,15 +2295,12 @@ const Notes = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-09.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                                <img
+                                  src="src/assets/img/profiles/avatar-09.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-info d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -2403,17 +2335,18 @@ const Notes = () => {
                               <Link
                                 to="#"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                              >
+                                aria-expanded="false">
+                                
                                 <i className="fas fa-ellipsis-v" />
                               </Link>
                               <div className="dropdown-menu notes-menu dropdown-menu-end">
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#edit-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#edit-note-units">
+                                  
                                   <span>
                                     <Edit />
                                   </span>
@@ -2422,18 +2355,16 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <span>
                                     <Trash2 />
                                   </span>
                                   Delete
                                 </Link>
-                                <Link
-                                  to="#"
-                                  className="dropdown-item"
-                                >
+                                <Link to="#" className="dropdown-item">
                                   <span>
                                     <Star />
                                   </span>
@@ -2442,9 +2373,10 @@ const Notes = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#view-note-units"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#view-note-units">
+                                  
                                   <span>
                                     <Eye />
                                   </span>
@@ -2455,9 +2387,7 @@ const Notes = () => {
                           </div>
                           <div className="my-3">
                             <h5 className="text-truncate mb-1">
-                              <Link to="#">
-                                Research a topic interested
-                              </Link>
+                              <Link to="#">Research a topic interested</Link>
                             </h5>
                             <p className="mb-3 d-flex align-items-center text-dark">
                               <i className="ti ti-calendar me-1" />
@@ -2470,15 +2400,12 @@ const Notes = () => {
                           </div>
                           <div className="d-flex align-items-center justify-content-between border-top pt-3">
                             <div className="d-flex align-items-center">
-                              <Link
-                                to="#"
-                                className="avatar avatar-md me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="./assets/img/profiles/avatar-10.jpg"
+                              <Link to="#" className="avatar avatar-md me-2">
+                                <img
+                                  src="src/assets/img/profiles/avatar-10.jpg"
                                   alt="Profile"
-                                  className="img-fluid rounded-circle"
-                                />
+                                  className="img-fluid rounded-circle" />
+                                
                               </Link>
                               <span className="text-success d-flex align-items-center">
                                 <i className="fas fa-square square-rotate fs-10 me-1" />
@@ -2538,9 +2465,8 @@ const Notes = () => {
         <CommonFooter />
       </div>
       <NotesModal />
-    </>
+    </>);
 
-  );
 };
 
 export default Notes;

@@ -1,28 +1,36 @@
-
-import React, { useState } from "react";
-import Select from "react-select";
+import { useState } from "react";
 import SettingsSideBar from "../settingssidebar";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
-import RefreshIcon from "../../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../../core/common/tooltip-content/collapes";
-import CommonFooter from '../../../core/common/footer/commonFooter'
+import RefreshIcon from "../../../components/tooltip-content/refresh";
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+import CommonFooter from "../../../components/footer/commonFooter";
+import { themeImage08, themeImage09, themeImage10 } from "../../../utils/imagepath";
+import CommonSelect from "../../../components/select/common-select";
 
 const Appearance = () => {
-  const [isActive, setIsActive] = useState(null);
 
+
+
+
+
+
+
+
+
+
+  const [isActive, setIsActive] = useState(null);
+  const [selectedSidebarSize, setSelectedSidebarSize] = useState(null);
+  const [selectedFont, setSelectedFont] = useState(null);
   const setActive = (theme) => {
     setIsActive(theme);
   };
 
-
   const sizeOptions = [
-    { value: "small", label: "Small - 85px" },
-    { value: "large", label: "Large - 250px" },
-  ];
+  { value: "small", label: "Small - 85px" },
+  { value: "large", label: "Large - 250px" }];
+
   const fonts = [
-    { value: "Nunito", label: "Nunito" },
-    { value: "Poppins", label: "Poppins" },
-  ];
+  { value: "Nunito", label: "Nunito" },
+  { value: "Poppins", label: "Poppins" }];
 
 
   return (
@@ -50,7 +58,7 @@ const Appearance = () => {
                     <h4 className="fs-18 fw-bold">Appearance</h4>
                   </div>
                   <div className="card-body">
-                    <form >
+                    <form>
                       <div className="appearance-settings">
                         <div className="row">
                           <div className="col-xl-4 col-lg-12 col-md-4">
@@ -62,35 +70,35 @@ const Appearance = () => {
                           <div className="col-xl-8 col-lg-12 col-md-8">
                             <div className="theme-type-images d-flex align-items-center mb-4">
                               <div
-                                className={`theme-image border ${isActive === "Light" ? "active" : ""
-                                  }`}
-                                onClick={() => setActive("Light")}
-                              >
-
+                                className={`theme-image border ${
+                                isActive === "Light" ? "active" : ""}`
+                                }
+                                onClick={() => setActive("Light")}>
+                                
                                 <div className="theme-image-set">
-                                  <ImageWithBasePath src="assets/img/theme/theme-img-08.jpg" alt="Img" />
+                                  <img src={themeImage08} alt="Img" />
                                 </div>
                                 <h6>Light</h6>
                               </div>
                               <div
-                                className={`theme-image border ${isActive === "Dark" ? "active" : ""
-                                  }`}
-                                onClick={() => setActive("Dark")}
-                              >
-
+                                className={`theme-image border ${
+                                isActive === "Dark" ? "active" : ""}`
+                                }
+                                onClick={() => setActive("Dark")}>
+                                
                                 <div className="theme-image-set">
-                                  <ImageWithBasePath src="assets/img/theme/theme-img-09.jpg" alt="Img" />
+                                  <img src={themeImage09} alt="Img" />
                                 </div>
                                 <h6>Dark</h6>
                               </div>
                               <div
-                                className={`theme-image border ${isActive === "Automatic" ? "active" : ""
-                                  }`}
-                                onClick={() => setActive("Automatic")}
-                              >
-
+                                className={`theme-image border ${
+                                isActive === "Automatic" ? "active" : ""}`
+                                }
+                                onClick={() => setActive("Automatic")}>
+                                
                                 <div className="theme-image-set">
-                                  <ImageWithBasePath src="assets/img/theme/theme-img-10.jpg" alt="Img" />
+                                  <img src={themeImage10} alt="Img" />
                                 </div>
                                 <h6>Automatic</h6>
                               </div>
@@ -109,35 +117,39 @@ const Appearance = () => {
                               <ul>
                                 <li>
                                   <span
-                                    className={`themecolorset defaultcolor ${isActive === "defaultcolor" ? "active" : ""
-                                      }`}
-                                    onClick={() => setActive("defaultcolor")}
-                                  ></span>
-
+                                    className={`themecolorset defaultcolor ${
+                                    isActive === "defaultcolor" ?
+                                    "active" :
+                                    ""}`
+                                    }
+                                    onClick={() => setActive("defaultcolor")}>
+                                  </span>
                                 </li>
                                 <li>
                                   <span
-                                    className={`themecolorset theme-violet ${isActive === "theme-violet" ? "active" : ""
-                                      }`}
-                                    onClick={() => setActive("theme-violet")}
-                                  ></span>
-
+                                    className={`themecolorset theme-violet ${
+                                    isActive === "theme-violet" ?
+                                    "active" :
+                                    ""}`
+                                    }
+                                    onClick={() => setActive("theme-violet")}>
+                                  </span>
                                 </li>
                                 <li>
                                   <span
-                                    className={`themecolorset theme-blue ${isActive === "theme-blue" ? "active" : ""
-                                      }`}
-                                    onClick={() => setActive("theme-blue")}
-                                  ></span>
-
+                                    className={`themecolorset theme-blue ${
+                                    isActive === "theme-blue" ? "active" : ""}`
+                                    }
+                                    onClick={() => setActive("theme-blue")}>
+                                  </span>
                                 </li>
                                 <li>
                                   <span
-                                    className={`themecolorset theme-brown ${isActive === "theme-brown" ? "active" : ""
-                                      }`}
-                                    onClick={() => setActive("theme-brown")}
-                                  ></span>
-
+                                    className={`themecolorset theme-brown ${
+                                    isActive === "theme-brown" ? "active" : ""}`
+                                    }
+                                    onClick={() => setActive("theme-brown")}>
+                                  </span>
                                 </li>
                               </ul>
                             </div>
@@ -156,8 +168,8 @@ const Appearance = () => {
                                 type="checkbox"
                                 id="user1"
                                 className="check"
-                                defaultChecked
-                              />
+                                defaultChecked />
+                              
                               <label htmlFor="user1" className="checktoggle">
                                 {" "}
                               </label>
@@ -173,11 +185,15 @@ const Appearance = () => {
                           </div>
                           <div className="col-xl-4 col-lg-12 col-md-4">
                             <div className="localization-select">
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
+                                filter={false}
                                 options={sizeOptions}
-                                placeholder="Choose"
-                              />
+                                value={selectedSidebarSize}
+                                onChange={(e) =>
+                                setSelectedSidebarSize(e.value)
+                                }
+                                placeholder="Choose" />
+                              
                             </div>
                           </div>
                         </div>
@@ -190,17 +206,22 @@ const Appearance = () => {
                           </div>
                           <div className="col-xl-4 col-lg-12 col-md-4">
                             <div className="localization-select">
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
+                                filter={false}
                                 options={fonts}
-                                placeholder="Choose"
-                              />
+                                value={selectedFont}
+                                onChange={(e) => setSelectedFont(e.value)}
+                                placeholder="Choose" />
+                              
                             </div>
                           </div>
                         </div>
                       </div>
                       <div className="text-end settings-bottom-btn mt-0">
-                        <button type="button" className="btn btn-secondary me-2">
+                        <button
+                          type="button"
+                          className="btn btn-secondary me-2">
+                          
                           Cancel
                         </button>
                         <button type="submit" className="btn btn-primary">
@@ -210,15 +231,14 @@ const Appearance = () => {
                     </form>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
         <CommonFooter />
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Appearance;

@@ -1,28 +1,32 @@
-import { DatePicker } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
-import TextEditor from "../../../feature-module/inventory/texteditor";
+import CommonDatePicker from "../../../components/date-picker/common-date-picker";
+import CommonSelect from "../../../components/select/common-select";
+import { Editor } from "primereact/editor";
+
+
+
+
+
 
 const EditCoupons = () => {
+  const [date1, setDate1] = useState(new Date());
+  const [date2, setDate2] = useState(new Date());
+  const [selectedType, setSelectedType] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(
+    null
+  );
+  const [text, setText] = useState("");
   const price = [
-    { value: "choose", label: "Choose Type" },
-    { value: "fixed", label: "Fixed" },
-    { value: "percentage", label: "Percentage" },
-  ];
-  const options = [
-    { value: "nike-jordan", label: "Nike Jordan" },
-    { value: "amazon-echo-dot", label: "Amazon Echo Dot" },
-  ];
+  { value: "choose", label: "Choose Type" },
+  { value: "fixed", label: "Fixed" },
+  { value: "percentage", label: "Percentage" }];
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-  const [selectedDate1, setSelectedDate1] = useState(new Date());
-  const handleDateChange1 = (date) => {
-    setSelectedDate1(date);
-  };
+  const options = [
+  { value: "nike-jordan", label: "Nike Jordan" },
+  { value: "amazon-echo-dot", label: "Amazon Echo Dot" }];
+
+
   return (
     <div>
       {/* Edit coupons */}
@@ -39,8 +43,8 @@ const EditCoupons = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -49,35 +53,50 @@ const EditCoupons = () => {
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="input-blocks">
-                          <label>Coupon Name<span className="text-danger ms-1">*</span></label>
+                          <label>
+                            Coupon Name
+                            <span className="text-danger ms-1">*</span>
+                          </label>
                           <input type="text" defaultValue="Coupons 21" />
                         </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="input-blocks">
-                          <label>Coupon Code<span className="text-danger ms-1">*</span></label>
+                          <label>
+                            Coupon Code
+                            <span className="text-danger ms-1">*</span>
+                          </label>
                           <input type="text" defaultValue="Christmas" />
                         </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="input-blocks">
-                          <label>Type<span className="text-danger ms-1">*</span></label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <label>
+                            Type<span className="text-danger ms-1">*</span>
+                          </label>
+                          <CommonSelect
+                            className="w-100"
                             options={price}
+                            value={selectedType}
+                            onChange={(e) => setSelectedType(e.value)}
                             placeholder="Choose Type"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="input-blocks">
-                          <label>Discount<span className="text-danger ms-1">*</span></label>
+                          <label>
+                            Discount<span className="text-danger ms-1">*</span>
+                          </label>
                           <input type="text" defaultValue="$20" />
                         </div>
                       </div>
                       <div className="col-lg-12">
                         <div className="input-blocks">
-                          <label>Limit<span className="text-danger ms-1">*</span></label>
+                          <label>
+                            Limit<span className="text-danger ms-1">*</span>
+                          </label>
                           <input type="text" defaultValue="04" />
                           <span className="unlimited-text">
                             0 for Unlimited
@@ -86,31 +105,30 @@ const EditCoupons = () => {
                       </div>
                       <div className="col-lg-6">
                         <div className="input-blocks">
-                          <label>Start Date<span className="text-danger ms-1">*</span></label>
+                          <label>
+                            Start Date
+                            <span className="text-danger ms-1">*</span>
+                          </label>
                           <div className="input-groupicon calender-input">
-                            <DatePicker
-                              selected={selectedDate}
-                              onChange={handleDateChange}
-                              type="date"
-                              className="filterdatepicker"
-                              dateFormat="dd-MM-yyyy"
-                              placeholder="20-2-2024"
-                            />
+                            <CommonDatePicker
+                              value={date1}
+                              onChange={setDate1}
+                              className="w-100" />
+                            
                           </div>
                         </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="input-blocks">
-                          <label>End Date<span className="text-danger ms-1">*</span></label>
+                          <label>
+                            End Date<span className="text-danger ms-1">*</span>
+                          </label>
                           <div className="input-groupicon calender-input">
-                            <DatePicker
-                              selected={selectedDate1}
-                              onChange={handleDateChange1}
-                              type="date"
-                              className="filterdatepicker"
-                              dateFormat="dd-MM-yyyy"
-                              placeholder="20-2-2024"
-                            />
+                            <CommonDatePicker
+                              value={date2}
+                              onChange={setDate2}
+                              className="w-100" />
+                            
                           </div>
                         </div>
                       </div>
@@ -121,28 +139,34 @@ const EditCoupons = () => {
                             <input
                               type="checkbox"
                               id="user5"
-                              className="check"
-                            />
+                              className="check" />
+                            
                             <label
                               htmlFor="user5"
-                              className="checktoggle mb-0 me-1"
-                            />
+                              className="checktoggle mb-0 me-1" />
+                            
                             <span className="customer-toggle">
                               Once Per Customer
                             </span>
                           </div>
                         </div>
 
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={options}
+                          value={selectedProduct}
+                          onChange={(e) => setSelectedProduct(e.value)}
                           placeholder="Select an option"
-                          isSearchable={true} // Set to false if you don't want a search input
-                        />
+                          filter={false} />
+                        
                       </div>
                       <div className="mb-3 summer-description-box">
                         <label className="form-label">Description</label>
-                        <TextEditor />
+                        <Editor
+                          value={text}
+                          onTextChange={(e) => setText(e.htmlValue)}
+                          style={{ height: "200px" }} />
+                        
                         <p>Maximum 60 Words</p>
                       </div>
 
@@ -153,8 +177,8 @@ const EditCoupons = () => {
                             type="checkbox"
                             id="user6"
                             className="check"
-                            defaultChecked="true"
-                          />
+                            defaultChecked={true} />
+                          
                           <label htmlFor="user6" className="checktoggle">
                             {" "}
                           </label>
@@ -165,11 +189,15 @@ const EditCoupons = () => {
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
-                      <Link to="#" data-bs-dismiss="modal" className="btn btn-submit">
+                      <Link
+                        to="#"
+                        data-bs-dismiss="modal"
+                        className="btn btn-submit">
+                        
                         Save Changes
                       </Link>
                     </div>
@@ -181,8 +209,8 @@ const EditCoupons = () => {
         </div>
       </div>
       {/* /Edit Coupons */}
-    </div>
-  );
+    </div>);
+
 };
 
 export default EditCoupons;

@@ -1,32 +1,57 @@
 import React, { useState } from "react";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import {
-  Calendar,
-  ChevronUp,
-  FileText,
-  PlusCircle,
-  RotateCcw,
-  Sliders,
-  StopCircle,
-  User,
-} from "feather-icons-react/build/IconComponents";
-import { setToogleHeader } from "../../core/redux/action";
-import { useDispatch, useSelector } from "react-redux";
-import { Filter, MinusCircle } from "react-feather";
-import Select from "react-select";
-import { DatePicker } from "antd";
 import { saleslist } from "../../core/json/saleslistdata";
-import Table from "../../core/pagination/datatable";
-import withReactContent from "sweetalert2-react-content";
-import Swal from "sweetalert2";
+import PrimeDataTable from "../../components/data-table";
+import {
+  closeIcon,
+  excel,
+  pdf,
+  qrCodeImage,
+  scanners,
+  stockImg02,
+  stockImg03,
+  stockImg05 } from
+"../../utils/imagepath";
+import CommonDatePicker from "../../components/date-picker/common-date-picker";
+import TableTopHead from "../../components/table-top-head";
+import CommonSelect from "../../components/select/common-select";
 
 const SalesList = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+
   const saleslistdata = saleslist;
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.rootReducer.toggle_header);
+  const [selectedSales, setSelectedSales] = useState([]);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [date1, setDate1] = useState(new Date());
+  const [date2, setDate2] = useState(new Date());
+  const [date3, setDate3] = useState(new Date());
+  const [selectedSortDate, setSelectedSortDate] = useState(null);
+  const [selectedCustomerName, setSelectedCustomerName] = useState(
+
+    null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
+  const [selectedPaymentStatus, setSelectedPaymentStatus] = useState(
+
+    null);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [selectedSupplier, setSelectedSupplier] = useState(null);
+  const [selectedStatusUpdate, setSelectedStatusUpdate] = useState(
+
+    null);
+  const [selectedPaymentType, setSelectedPaymentType] = useState(
+    null
+  );
 
   const toggleFilterVisibility = () => {
     setIsFilterVisible((prevVisibility) => !prevVisibility);
@@ -37,205 +62,192 @@ const SalesList = () => {
   const [searchText, setSearchText] = useState("");
   const filteredData = saleslistdata.filter((entry) => {
     return Object.keys(entry).some((key) => {
-      return String(entry[key])
-        .toLowerCase()
-        .includes(searchText.toLowerCase());
+      return String(entry[key]).
+      toLowerCase().
+      includes(searchText.toLowerCase());
     });
   });
   const oldandlatestvalue = [
-    { value: "Sort by Date", label: "Sort by Date" },
-    { value: "07 09 23", label: "07 09 23" },
-    { value: "21 09 23", label: "21 09 23" },
-  ];
+  { value: "Sort by Date", label: "Sort by Date" },
+  { value: "07 09 23", label: "07 09 23" },
+  { value: "21 09 23", label: "21 09 23" }];
+
   const customername = [
-    { value: "Choose Customer Name", label: "Choose Customer Name" },
-    { value: "Macbook pro", label: "Macbook pro" },
-    { value: "Orange", label: "Orange" },
-  ];
+  { value: "Choose Customer Name", label: "Choose Customer Name" },
+  { value: "Macbook pro", label: "Macbook pro" },
+  { value: "Orange", label: "Orange" }];
+
   const status = [
-    { value: "Choose Status", label: "Choose Status" },
-    { value: "Computers", label: "Computers" },
-    { value: "Fruits", label: "Fruits" },
-  ];
+  { value: "Choose Status", label: "Choose Status" },
+  { value: "Computers", label: "Computers" },
+  { value: "Fruits", label: "Fruits" }];
+
   const paymentstatus = [
-    { value: "Choose Payment Status", label: "Choose Payment Status" },
-    { value: "Computers", label: "Computers" },
-    { value: "Fruits", label: "Fruits" },
-  ];
+  { value: "Choose Payment Status", label: "Choose Payment Status" },
+  { value: "Computers", label: "Computers" },
+  { value: "Fruits", label: "Fruits" }];
+
   const customer = [
-    { value: "Choose Customer", label: "Choose Customer" },
-    { value: "Customer Name", label: "Customer Name" },
-  ];
+  { value: "Choose Customer", label: "Choose Customer" },
+  { value: "Customer Name", label: "Customer Name" }];
+
   const suppliername = [
-    { value: "Supplier", label: "Supplier" },
-    { value: "Supplier Name", label: "Supplier Name" },
-  ];
+  { value: "Supplier", label: "Supplier" },
+  { value: "Supplier Name", label: "Supplier Name" }];
+
   const statusupdate = [
-    { value: "Supplier", label: "Choose" },
-    { value: "Completed", label: "Completed" },
-    { value: "InProgress", label: "InProgress" },
-  ];
+  { value: "Supplier", label: "Choose" },
+  { value: "Completed", label: "Completed" },
+  { value: "InProgress", label: "InProgress" }];
+
   const paymenttype = [
-    { value: "Choose", label: "Choose" },
-    { value: "Cash", label: "Cash" },
-    { value: "Online", label: "Online" },
-  ];
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+  { value: "Choose", label: "Choose" },
+  { value: "Cash", label: "Cash" },
+  { value: "Online", label: "Online" }];
 
-  const renderTooltip = (props) => (
-    <Tooltip id="pdf-tooltip" {...props}>
-      Pdf
-    </Tooltip>
-  );
-  const renderExcelTooltip = (props) => (
-    <Tooltip id="excel-tooltip" {...props}>
-      Excel
-    </Tooltip>
-  );
-  const renderPrinterTooltip = (props) => (
-    <Tooltip id="printer-tooltip" {...props}>
-      Printer
-    </Tooltip>
-  );
-  const renderRefreshTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Refresh
-    </Tooltip>
-  );
-  const renderCollapseTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Collapse
-    </Tooltip>
-  );
-  const MySwal = withReactContent(Swal);
 
-  const showConfirmationAlert = () => {
-    MySwal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      showCancelButton: true,
-      confirmButtonColor: "#00ff00",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonColor: "#ff0000",
-      cancelButtonText: "Cancel",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        MySwal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          className: "btn btn-success",
-          confirmButtonText: "OK",
-          customClass: {
-            confirmButton: "btn btn-success",
-          },
-        });
-      } else {
-        MySwal.close();
-      }
-    });
-  };
+
   const columns = [
-    {
-      title: "CustomerName",
-      dataIndex: "customerName",
-      sorter: (a, b) => a.customerName.length - b.customerName.length,
-    },
-    {
-      title: "Reference",
-      dataIndex: "reference",
-      sorter: (a, b) => a.reference.length - b.reference.length,
-    },
+  {
+    header: "CustomerName",
+    field: "customerName"
+  },
+  {
+    header: "Reference",
+    field: "reference"
+  },
 
-    {
-      title: "Date",
-      dataIndex: "date",
-      sorter: (a, b) => a.date.length - b.date.length,
-    },
+  {
+    header: "Date",
+    field: "date"
+  },
 
-    {
-      title: "Status",
-      dataIndex: "status",
-      render: (text) => (
+  {
+    header: "Status",
+    field: "status",
+    body: (text) =>
+    <span
+      className={`badge ${
+      text?.Status === "Completed" ? "badge-bgsuccess" : "badge-bgdanger"}`
+      }>
+      
+          {text?.Status}
+        </span>
+
+  },
+  {
+    header: "GrandTotal",
+    field: "grandTotal"
+  },
+  {
+    header: "Paid",
+    field: "paid"
+  },
+  {
+    header: "Due",
+    field: "due"
+  },
+  {
+    header: "PaymentStatus",
+    field: "paymentStatus",
+    body: (text) => {
+      return (
         <span
           className={`badge ${
-            text === "Completed" ? "badge-bgsuccess" : "badge-bgdanger"
-          }`}
-        >
-          {text}
-        </span>
-      ),
-      sorter: (a, b) => a.status.length - b.status.length,
-    },
-    {
-      title: "GrandTotal",
-      dataIndex: "grandTotal",
-      sorter: (a, b) => a.grandTotal.length - b.grandTotal.length,
-    },
-    {
-      title: "Paid",
-      dataIndex: "paid",
-      sorter: (a, b) => a.paid.length - b.paid.length,
-    },
-    {
-      title: "Due",
-      dataIndex: "due",
-      sorter: (a, b) => a.due.length - b.due.length,
-    },
-    {
-      title: "PaymentStatus",
-      dataIndex: "paymentStatus",
-      render: (text) => (
-        <span
-          className={`badge ${
-            text === "Paid" ? "badge-linesuccess" : "badge-linedanger"
-          }`}
-        >
-          {text}
-        </span>
-      ),
-      sorter: (a, b) => a.paymentStatus.length - b.paymentStatus.length,
-    },
-    {
-      title: "Biller",
-      dataIndex: "biller",
-      sorter: (a, b) => a.biller.length - b.biller.length,
-    },
-    {
-      title: "Actions",
-      dataIndex: "actions",
-      key: "actions",
-      render: () => (
-        <div className="text-center">
-        <Link className="action-set" to="#" data-bs-toggle="dropdown" aria-expanded="true">
-          <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
-       </Link>
-        <ul className="dropdown-menu">
-          <li>
-            <Link to="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#sales-details-new"><i data-feather="eye" className="feather-eye me-2"></i>Sale Detail</Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit-sales-new"><i data-feather="edit" className="feather-edit me-2"></i>Edit Sale</Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#showpayment"><i data-feather="dollar-sign" className="feather-dollar-sign"></i>Show Payments</Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item" data-bs-toggle="modal" data-bs-target="#createpayment"><i data-feather="plus-circle" className="feather-plus-circle me-2"></i>Create Payment</Link>
-          </li>
-          <li>
-            <Link to="#" className="dropdown-item"><i data-feather="download" className="feather-edit me-2"></i>Download pdf</Link>
-          </li>	
-          <li>
-            <Link to="#" className="dropdown-item confirm-text mb-0" onClick={showConfirmationAlert}><i data-feather="trash-2" className="feather-trash me-2"  ></i>Delete Sale</Link>
-          </li>								
-        </ul>
-      </div>
-      ),
-    },
-  ];
+          text?.paymentStatus === "Paid" ?
+          "badge-linesuccess" :
+          "badge-linedanger"}`
+          }>
+          
+            {text?.paymentStatus}
+          </span>);
+
+    }
+  },
+  {
+    header: "Biller",
+    field: "biller"
+  },
+  {
+    header: "Actions",
+    field: "actions",
+    key: "actions",
+    body: () =>
+    <div className="text-center">
+          <Link
+        className="action-set"
+        to="#"
+        data-bs-toggle="dropdown"
+        aria-expanded="true">
+        
+            <i className="ti ti-dots-vertical" />
+          </Link>
+          <ul className="dropdown-menu">
+            <li>
+              <Link
+            to="#"
+            className="dropdown-item"
+            data-bs-toggle="modal"
+            data-bs-target="#sales-details-new">
+            
+                <i className="ti ti-eye" />
+                Sale Detail
+              </Link>
+            </li>
+            <li>
+              <Link
+            to="#"
+            className="dropdown-item"
+            data-bs-toggle="modal"
+            data-bs-target="#edit-sales-new">
+            
+                <i className="ti ti-edit" />
+                Edit Sale
+              </Link>
+            </li>
+            <li>
+              <Link
+            to="#"
+            className="dropdown-item"
+            data-bs-toggle="modal"
+            data-bs-target="#showpayment">
+            
+                <i className="ti ti-currency-dollar" />
+                Show Payments
+              </Link>
+            </li>
+            <li>
+              <Link
+            to="#"
+            className="dropdown-item"
+            data-bs-toggle="modal"
+            data-bs-target="#createpayment">
+            
+                <i className="ti ti-circle-plus me-2" />
+                Create Payment
+              </Link>
+            </li>
+            <li>
+              <Link to="#" className="dropdown-item">
+                <i className="ti ti-download me-2" />
+                Download pdf
+              </Link>
+            </li>
+            <li>
+              <Link
+            to="#"
+            className="dropdown-item confirm-text mb-0"
+            // onClick={showConfirmationAlert}
+          >
+                <i className="ti ti-trash" />
+                Delete Sale
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+  }];
+
   return (
     <div>
       <div className="page-wrapper">
@@ -247,65 +259,15 @@ const SalesList = () => {
                 <h6>Manage Your Sales</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <li>
-                <OverlayTrigger placement="top" overlay={renderTooltip}>
-                  <Link>
-                    <ImageWithBasePath
-                      src="assets/img/icons/pdf.svg"
-                      alt="img"
-                    />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderExcelTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <ImageWithBasePath
-                      src="assets/img/icons/excel.svg"
-                      alt="img"
-                    />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderPrinterTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <i data-feather="printer" className="feather-printer" />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderRefreshTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <RotateCcw />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderCollapseTooltip}>
-                  <Link
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    id="collapse-header"
-                    className={data ? "active" : ""}
-                    onClick={() => {
-                      dispatch(setToogleHeader(!data));
-                    }}
-                  >
-                    <ChevronUp />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-added"
                 data-bs-toggle="modal"
-                data-bs-target="#add-sales-new"
-              >
-              <i className='ti ti-circle-plus me-1'></i>
+                data-bs-target="#add-sales-new">
+                
+                <i className="ti ti-circle-plus me-1"></i>
                 Add New Sales
               </Link>
             </div>
@@ -322,10 +284,10 @@ const SalesList = () => {
                       className="form-control form-control-sm formsearch"
                       aria-controls="DataTables_Table_0"
                       value={searchText}
-                      onChange={handleSearch}
-                    />
-                    <Link to className="btn btn-searchset">
-                      <i data-feather="search" className="feather-search" />
+                      onChange={handleSearch} />
+                    
+                    <Link to="#" className="btn btn-searchset">
+                      <i className="ti ti-search" />
                     </Link>
                   </div>
                 </div>
@@ -333,96 +295,98 @@ const SalesList = () => {
                   <div className="d-flex align-items-center">
                     <div className="search-path">
                       <Link
+                        to="#"
                         className={`btn btn-filter ${
-                          isFilterVisible ? "setclose" : ""
-                        }`}
-                        id="filter_search"
-                      >
-                        <Filter
-                          className="filter-icon"
-                          onClick={toggleFilterVisibility}
-                        />
+                        isFilterVisible ? "setclose" : ""}`
+                        }
+                        id="filter_search">
+                        
+                        <i
+                          className="feather icon-filter filter-icon"
+                          onClick={toggleFilterVisibility} />
+                        
                         <span onClick={toggleFilterVisibility}>
-                          <ImageWithBasePath
-                            src="assets/img/icons/closes.svg"
-                            alt="img"
-                          />
+                          <img src={closeIcon} alt="img" />
                         </span>
                       </Link>
                     </div>
                   </div>
                 </div>
                 <div className="form-sort">
-                  <Sliders className="info-img" />
-                  <Select
+                  <i className="info-img feather icon-sliders" />
+                  <CommonSelect
                     className="img-select"
-                    classNamePrefix="react-select"
                     options={oldandlatestvalue}
+                    value={selectedSortDate}
+                    onChange={(e) => setSelectedSortDate(e.value)}
                     placeholder="Newest"
-                  />
+                    filter={false} />
+                  
                 </div>
               </div>
               {/* /Filter */}
               <div
                 className={`card${isFilterVisible ? " visible" : ""}`}
                 id="filter_inputs"
-                style={{ display: isFilterVisible ? "block" : "none" }}
-              >
+                style={{ display: isFilterVisible ? "block" : "none" }}>
+                
                 <div className="card-body pb-0">
                   <div className="row">
                     <div className="col-lg-3 col-sm-6 col-12">
                       <div className="input-blocks">
-                        <i data-feather="user" className="info-img" />
-                        <User className="info-img" />
-                        <Select
+                        <i className="feather icon-user info-img" />
+                        <i className="feather icon-user info-img"></i>
+                        <CommonSelect
                           className="img-select"
-                          classNamePrefix="react-select"
                           options={customername}
+                          value={selectedCustomerName}
+                          onChange={(e) => setSelectedCustomerName(e.value)}
                           placeholder="Newest"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-lg-2 col-sm-6 col-12">
                       <div className="input-blocks">
-                        <StopCircle className="info-img" />
-                        <Select
+                        <i className="info-img feather icon-stop-circle" />
+                        <CommonSelect
                           className="img-select"
-                          classNamePrefix="react-select"
                           options={status}
+                          value={selectedStatus}
+                          onChange={(e) => setSelectedStatus(e.value)}
                           placeholder="Newest"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-lg-2 col-sm-6 col-12">
                       <div className="input-blocks">
-                        <FileText className="info-img" />
+                        <i className="info-img feather icon-file-text" />
                         <input
                           type="text"
                           placeholder="Enter Reference"
-                          className="form-control"
-                        />
+                          className="form-control" />
+                        
                       </div>
                     </div>
                     <div className="col-lg-3 col-sm-6 col-12">
                       <div className="input-blocks">
-                        <StopCircle className="info-img" />
-                        <Select
+                        <i className="info-img feather icon-stop-circle" />
+                        <CommonSelect
                           className="img-select"
-                          classNamePrefix="react-select"
                           options={paymentstatus}
+                          value={selectedPaymentStatus}
+                          onChange={(e) => setSelectedPaymentStatus(e.value)}
                           placeholder="Choose Payment Status"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-lg-2 col-sm-6 col-12">
                       <div className="input-blocks">
-                        <Link className="btn btn-filters ms-auto">
+                        <Link to="#" className="btn btn-filters ms-auto">
                           {" "}
-                          <i
-                            data-feather="search"
-                            className="feather-search"
-                          />{" "}
-                          Search{" "}
+                          <i className="ti ti-search" /> Search{" "}
                         </Link>
                       </div>
                     </div>
@@ -431,7 +395,19 @@ const SalesList = () => {
               </div>
               {/* /Filter */}
               <div className="table-responsive">
-                <Table columns={columns} dataSource={filteredData} />
+                <PrimeDataTable
+                  column={columns}
+                  data={filteredData}
+                  totalRecords={10}
+                  rows={10}
+                  setRows={() => {}}
+                  currentPage={1}
+                  setCurrentPage={() => {}}
+                  selectionMode="checkbox"
+                  selection={selectedSales}
+                  onSelectionChange={(e) => setSelectedSales(e.value)}
+                  dataKey="id" />
+                
               </div>
             </div>
           </div>
@@ -453,8 +429,8 @@ const SalesList = () => {
                       type="button"
                       className="close"
                       data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <span aria-hidden="true">×</span>
                     </button>
                   </div>
@@ -467,16 +443,20 @@ const SalesList = () => {
                               <label>Customer Name</label>
                               <div className="row">
                                 <div className="col-lg-10 col-sm-10 col-10">
-                                  <Select
-                                    classNamePrefix="react-select"
+                                  <CommonSelect
                                     options={customer}
+                                    value={selectedCustomer}
+                                    onChange={(e) =>
+                                    setSelectedCustomer(e.value)
+                                    }
                                     placeholder="Newest"
-                                  />
+                                    filter={false} />
+                                  
                                 </div>
                                 <div className="col-lg-2 col-sm-2 col-2 ps-0">
                                   <div className="add-icon">
                                     <Link to="#" className="choose-add">
-                                      <PlusCircle className="plus" />
+                                      <i className="feather icon-plus-circle plus" />
                                     </Link>
                                   </div>
                                 </div>
@@ -487,26 +467,25 @@ const SalesList = () => {
                             <div className="input-blocks">
                               <label>Date</label>
                               <div className="input-groupicon calender-input">
-                              <Calendar className="info-img" />
-                                <DatePicker
-                                  selected={selectedDate}
-                                  onChange={handleDateChange}
-                                  type="date"
-                                  className="filterdatepicker"
-                                  dateFormat="dd-MM-yyyy"
-                                  placeholder="Choose Date"
-                                />
+                                <i className="feather icon-calendar info-img" />
+                                <CommonDatePicker
+                                  value={date1}
+                                  onChange={setDate1}
+                                  className="w-100" />
+                                
                               </div>
                             </div>
                           </div>
                           <div className="col-lg-4 col-sm-6 col-12">
                             <div className="input-blocks">
                               <label>Supplier</label>
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
                                 options={suppliername}
+                                value={selectedSupplier}
+                                onChange={(e) => setSelectedSupplier(e.value)}
                                 placeholder="Newest"
-                              />
+                                filter={false} />
+                              
                             </div>
                           </div>
                           <div className="col-lg-12 col-sm-6 col-12">
@@ -515,13 +494,10 @@ const SalesList = () => {
                               <div className="input-groupicon select-code">
                                 <input
                                   type="text"
-                                  placeholder="Please type product code and select"
-                                />
+                                  placeholder="Please type product code and select" />
+                                
                                 <div className="addonset">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/qrcode-scan.svg"
-                                    alt="img"
-                                  />
+                                  <img src={qrCodeImage} alt="img" />
                                 </div>
                               </div>
                             </div>
@@ -533,11 +509,11 @@ const SalesList = () => {
                               <tr>
                                 <th>Product</th>
                                 <th>Qty</th>
-                                <th>Purchase Price(₹)</th>
-                                <th>Discount(₹)</th>
+                                <th>Purchase Price($)</th>
+                                <th>Discount($)</th>
                                 <th>Tax(%)</th>
-                                <th>Tax Amount(₹)</th>
-                                <th>Unit Cost(₹)</th>
+                                <th>Tax Amount($)</th>
+                                <th>Unit Cost($)</th>
                                 <th>Total Cost(%)</th>
                               </tr>
                             </thead>
@@ -561,19 +537,19 @@ const SalesList = () => {
                               <ul>
                                 <li>
                                   <h4>Order Tax</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                                 <li>
                                   <h4>Discount</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                                 <li>
                                   <h4>Shipping</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                                 <li>
                                   <h4>Grand Total</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                               </ul>
                             </div>
@@ -587,8 +563,8 @@ const SalesList = () => {
                                 <input
                                   type="text"
                                   defaultValue={0}
-                                  className="p-2"
-                                />
+                                  className="p-2" />
+                                
                               </div>
                             </div>
                           </div>
@@ -599,8 +575,8 @@ const SalesList = () => {
                                 <input
                                   type="text"
                                   defaultValue={0}
-                                  className="p-2"
-                                />
+                                  className="p-2" />
+                                
                               </div>
                             </div>
                           </div>
@@ -611,27 +587,31 @@ const SalesList = () => {
                                 <input
                                   type="text"
                                   defaultValue={0}
-                                  className="p-2"
-                                />
+                                  className="p-2" />
+                                
                               </div>
                             </div>
                           </div>
                           <div className="col-lg-3 col-sm-6 col-12">
                             <div className="input-blocks mb-5">
                               <label>Status</label>
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
                                 options={statusupdate}
-                                placeholder="status"
-                              />
+                                value={selectedStatusUpdate}
+                                onChange={(e) =>
+                                setSelectedStatusUpdate(e.value)
+                                }
+                                placeholder="Status"
+                                filter={false} />
+                              
                             </div>
                           </div>
                           <div className="col-lg-12 text-end">
                             <button
                               type="button"
                               className="btn btn-cancel add-cancel me-3"
-                              data-bs-dismiss="modal"
-                            >
+                              data-bs-dismiss="modal">
+                              
                               Cancel
                             </button>
                             <Link to="#" className="btn btn-submit add-sale">
@@ -663,9 +643,9 @@ const SalesList = () => {
                         <Link
                           to="#"
                           className="btn btn-added"
-                          data-bs-dismiss="modal"
-                        >
-                        <i className='ti ti-circle-plus me-1'></i>
+                          data-bs-dismiss="modal">
+                          
+                          <i className="ti ti-circle-plus me-1"></i>
                           Add New Sales
                         </Link>
                       </div>
@@ -673,50 +653,42 @@ const SalesList = () => {
                     <ul className="table-top-head">
                       <li>
                         <Link
+                          to="#"
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
-                          title="Pdf"
-                        >
-                          <i
-                            data-feather="edit"
-                            className="feather-edit sales-action"
-                          />
+                          title="Pdf">
+                          
+                          <i className="ti ti-edit sales-action" />
                         </Link>
                       </li>
                       <li>
                         <Link
+                          to="#"
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
-                          title="Pdf"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/icons/pdf.svg"
-                            alt="img"
-                          />
+                          title="Pdf">
+                          
+                          <img src={pdf} alt="img" />
                         </Link>
                       </li>
                       <li>
                         <Link
+                          to="#"
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
-                          title="Excel"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/icons/excel.svg"
-                            alt="img"
-                          />
+                          title="Excel">
+                          
+                          <img src={excel} alt="img" />
                         </Link>
                       </li>
                       <li>
                         <Link
+                          to="#"
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
-                          title="Print"
-                        >
-                          <i
-                            data-feather="printer"
-                            className="feather-rotate-ccw"
-                          />
+                          title="Print">
+                          
+                          <i className="ti ti-printer" />
                         </Link>
                       </li>
                     </ul>
@@ -724,10 +696,7 @@ const SalesList = () => {
                   <div className="card">
                     <div className="card-body">
                       <form>
-                        <div
-                          className="invoice-box table-height"
-                         
-                        >
+                        <div className="invoice-box table-height">
                           <div className="sales-details-items d-flex">
                             <div className="details-item">
                               <h6>Customer Info</h6>
@@ -777,11 +746,11 @@ const SalesList = () => {
                                 <tr>
                                   <th>Product</th>
                                   <th>Qty</th>
-                                  <th>Purchase Price(₹)</th>
-                                  <th>Discount(₹)</th>
+                                  <th>Purchase Price($)</th>
+                                  <th>Discount($)</th>
                                   <th>Tax(%)</th>
-                                  <th>Tax Amount(₹)</th>
-                                  <th>Unit Cost(₹)</th>
+                                  <th>Tax Amount($)</th>
+                                  <th>Unit Cost($)</th>
                                   <th>Total Cost(%)</th>
                                 </tr>
                               </thead>
@@ -791,12 +760,9 @@ const SalesList = () => {
                                     <div className="productimgname">
                                       <Link
                                         to="#"
-                                        className="product-img stock-img"
-                                      >
-                                        <ImageWithBasePath
-                                          src="assets/img/products/stock-img-02.png"
-                                          alt="product"
-                                        />
+                                        className="product-img stock-img">
+                                        
+                                        <img src={stockImg02} alt="product" />
                                       </Link>
                                       <Link to="#">Nike Jordan</Link>
                                     </div>
@@ -805,19 +771,15 @@ const SalesList = () => {
                                     <div className="product-quantity">
                                       <span className="quantity-btn">
                                         +
-                                        <PlusCircle/>
+                                        <i className="feather icon-plus-circle" />
                                       </span>
                                       <input
                                         type="text"
                                         className="quntity-input"
-                                        defaultValue={2}
-                                      />
+                                        defaultValue={2} />
+                                      
                                       <span className="quantity-btn">
-                                        {/* <i
-                                          data-feather="minus-circle"
-                                          className="feather-minus-circle"
-                                        /> */}
-                                        <MinusCircle/>
+                                        <i className="feather icon-minus-circle" />
                                       </span>
                                     </div>
                                   </td>
@@ -833,12 +795,9 @@ const SalesList = () => {
                                     <div className="productimgname">
                                       <Link
                                         to="#"
-                                        className="product-img stock-img"
-                                      >
-                                        <ImageWithBasePath
-                                          src="assets/img/products/stock-img-03.png"
-                                          alt="product"
-                                        />
+                                        className="product-img stock-img">
+                                        
+                                        <img src={stockImg03} alt="product" />
                                       </Link>
                                       <Link to="#">Apple Series 5 Watch</Link>
                                     </div>
@@ -847,15 +806,15 @@ const SalesList = () => {
                                     <div className="product-quantity">
                                       <span className="quantity-btn">
                                         +
-                                        <PlusCircle/>
+                                        <i className="feather icon-plus-circle" />
                                       </span>
                                       <input
                                         type="text"
                                         className="quntity-input"
-                                        defaultValue={2}
-                                      />
+                                        defaultValue={2} />
+                                      
                                       <span className="quantity-btn">
-                                      <MinusCircle/>
+                                        <i className="feather icon-minus-circle" />
                                       </span>
                                     </div>
                                   </td>
@@ -871,12 +830,9 @@ const SalesList = () => {
                                     <div className="productimgname">
                                       <Link
                                         to="#"
-                                        className="product-img stock-img"
-                                      >
-                                        <ImageWithBasePath
-                                          src="assets/img/products/stock-img-05.png"
-                                          alt="product"
-                                        />
+                                        className="product-img stock-img">
+                                        
+                                        <img src={stockImg05} alt="product" />
                                       </Link>
                                       <Link to="#">Lobar Handy</Link>
                                     </div>
@@ -885,15 +841,15 @@ const SalesList = () => {
                                     <div className="product-quantity">
                                       <span className="quantity-btn">
                                         +
-                                        <PlusCircle/>
+                                        <i className="feather icon-plus-circle" />
                                       </span>
                                       <input
                                         type="text"
                                         className="quntity-input"
-                                        defaultValue={2}
-                                      />
+                                        defaultValue={2} />
+                                      
                                       <span className="quantity-btn">
-                                      <MinusCircle/>
+                                        <i className="feather icon-minus-circle" />
                                       </span>
                                     </div>
                                   </td>
@@ -915,23 +871,23 @@ const SalesList = () => {
                                 <ul>
                                   <li>
                                     <h4>Order Tax</h4>
-                                    <h5>₹ 0.00</h5>
+                                    <h5>$ 0.00</h5>
                                   </li>
                                   <li>
                                     <h4>Discount</h4>
-                                    <h5>₹ 0.00</h5>
+                                    <h5>$ 0.00</h5>
                                   </li>
                                   <li>
                                     <h4>Grand Total</h4>
-                                    <h5>₹ 5200.00</h5>
+                                    <h5>$ 5200.00</h5>
                                   </li>
                                   <li>
                                     <h4>Paid</h4>
-                                    <h5>₹ 5200.00</h5>
+                                    <h5>$ 5200.00</h5>
                                   </li>
                                   <li>
                                     <h4>Due</h4>
-                                    <h5>₹ 0.00</h5>
+                                    <h5>$ 0.00</h5>
                                   </li>
                                 </ul>
                               </div>
@@ -962,8 +918,8 @@ const SalesList = () => {
                         type="button"
                         className="close"
                         data-bs-dismiss="modal"
-                        aria-label="Close"
-                      >
+                        aria-label="Close">
+                        
                         <span aria-hidden="true">×</span>
                       </button>
                     </div>
@@ -977,16 +933,20 @@ const SalesList = () => {
                               <label>Customer</label>
                               <div className="row">
                                 <div className="col-lg-10 col-sm-10 col-10">
-                                  <Select
-                                    classNamePrefix="react-select"
+                                  <CommonSelect
                                     options={customer}
+                                    value={selectedCustomer}
+                                    onChange={(e) =>
+                                    setSelectedCustomer(e.value)
+                                    }
                                     placeholder="Newest"
-                                  />
+                                    filter={false} />
+                                  
                                 </div>
                                 <div className="col-lg-2 col-sm-2 col-2 ps-0">
                                   <div className="add-icon">
                                     <Link to="#" className="choose-add">
-                                      <PlusCircle className="plus" />
+                                      <i className="feather icon-plus-circle plus" />
                                     </Link>
                                   </div>
                                 </div>
@@ -997,26 +957,25 @@ const SalesList = () => {
                             <div className="input-blocks">
                               <label>Purchase Date</label>
                               <div className="input-groupicon calender-input">
-                              <Calendar className="info-img" />
-                                <DatePicker
-                                  selected={selectedDate}
-                                  onChange={handleDateChange}
-                                  type="date"
-                                  className="filterdatepicker"
-                                  dateFormat="dd-MM-yyyy"
-                                  placeholder="Choose Date"
-                                />
+                                <i className="feather icon-calendar info-img" />
+                                <CommonDatePicker
+                                  value={date2}
+                                  onChange={setDate2}
+                                  className="w-100" />
+                                
                               </div>
                             </div>
                           </div>
                           <div className="col-lg-4 col-sm-6 col-12">
                             <div className="input-blocks">
                               <label>Supplier</label>
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
                                 options={suppliername}
+                                value={selectedSupplier}
+                                onChange={(e) => setSelectedSupplier(e.value)}
                                 placeholder="Newest"
-                              />
+                                filter={false} />
+                              
                             </div>
                           </div>
                           <div className="col-lg-12 col-sm-6 col-12">
@@ -1025,13 +984,10 @@ const SalesList = () => {
                               <div className="input-groupicon select-code">
                                 <input
                                   type="text"
-                                  placeholder="Please type product code and select"
-                                />
+                                  placeholder="Please type product code and select" />
+                                
                                 <div className="addonset">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/scanners.svg"
-                                    alt="img"
-                                  />
+                                  <img src={scanners} alt="img" />
                                 </div>
                               </div>
                             </div>
@@ -1043,11 +999,11 @@ const SalesList = () => {
                               <tr>
                                 <th>Product</th>
                                 <th>Qty</th>
-                                <th>Purchase Price(₹)</th>
-                                <th>Discount(₹)</th>
+                                <th>Purchase Price($)</th>
+                                <th>Discount($)</th>
                                 <th>Tax(%)</th>
-                                <th>Tax Amount(₹)</th>
-                                <th>Unit Cost(₹)</th>
+                                <th>Tax Amount($)</th>
+                                <th>Unit Cost($)</th>
                                 <th>Total Cost(%)</th>
                               </tr>
                             </thead>
@@ -1057,12 +1013,9 @@ const SalesList = () => {
                                   <div className="productimgname">
                                     <Link
                                       to="#"
-                                      className="product-img stock-img"
-                                    >
-                                      <ImageWithBasePath
-                                        src="assets/img/products/stock-img-02.png"
-                                        alt="product"
-                                      />
+                                      className="product-img stock-img">
+                                      
+                                      <img src={stockImg02} alt="product" />
                                     </Link>
                                     <Link to="#">Nike Jordan</Link>
                                   </div>
@@ -1071,15 +1024,15 @@ const SalesList = () => {
                                   <div className="product-quantity">
                                     <span className="quantity-btn">
                                       +
-                                      <PlusCircle/>
+                                      <i className="feather icon-plus-circle" />
                                     </span>
                                     <input
                                       type="text"
                                       className="quntity-input"
-                                      defaultValue={2}
-                                    />
+                                      defaultValue={2} />
+                                    
                                     <span className="quantity-btn">
-                                    <MinusCircle/>
+                                      <i className="feather icon-minus-circle" />
                                     </span>
                                   </div>
                                 </td>
@@ -1095,12 +1048,9 @@ const SalesList = () => {
                                   <div className="productimgname">
                                     <Link
                                       to="#"
-                                      className="product-img stock-img"
-                                    >
-                                      <ImageWithBasePath
-                                        src="assets/img/products/stock-img-03.png"
-                                        alt="product"
-                                      />
+                                      className="product-img stock-img">
+                                      
+                                      <img src={stockImg03} alt="product" />
                                     </Link>
                                     <Link to="#">Apple Series 5 Watch</Link>
                                   </div>
@@ -1109,15 +1059,15 @@ const SalesList = () => {
                                   <div className="product-quantity">
                                     <span className="quantity-btn">
                                       +
-                                      <PlusCircle/>
+                                      <i className="feather icon-plus-circle" />
                                     </span>
                                     <input
                                       type="text"
                                       className="quntity-input"
-                                      defaultValue={2}
-                                    />
+                                      defaultValue={2} />
+                                    
                                     <span className="quantity-btn">
-                                    <MinusCircle/>
+                                      <i className="feather icon-minus-circle" />
                                     </span>
                                   </div>
                                 </td>
@@ -1133,12 +1083,9 @@ const SalesList = () => {
                                   <div className="productimgname">
                                     <Link
                                       to="#"
-                                      className="product-img stock-img"
-                                    >
-                                      <ImageWithBasePath
-                                        src="assets/img/products/stock-img-05.png"
-                                        alt="product"
-                                      />
+                                      className="product-img stock-img">
+                                      
+                                      <img src={stockImg05} alt="product" />
                                     </Link>
                                     <Link to="#">Lobar Handy</Link>
                                   </div>
@@ -1147,15 +1094,15 @@ const SalesList = () => {
                                   <div className="product-quantity">
                                     <span className="quantity-btn">
                                       +
-                                      <PlusCircle/>
+                                      <i className="feather icon-plus-circle" />
                                     </span>
                                     <input
                                       type="text"
                                       className="quntity-input"
-                                      defaultValue={2}
-                                    />
+                                      defaultValue={2} />
+                                    
                                     <span className="quantity-btn">
-                                    <MinusCircle/>
+                                      <i className="feather icon-minus-circle" />
                                     </span>
                                   </div>
                                 </td>
@@ -1175,19 +1122,19 @@ const SalesList = () => {
                               <ul>
                                 <li>
                                   <h4>Order Tax</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                                 <li>
                                   <h4>Discount</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                                 <li>
                                   <h4>Shipping</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                                 <li>
                                   <h4>Grand Total</h4>
-                                  <h5>₹5200.00</h5>
+                                  <h5>$5200.00</h5>
                                 </li>
                               </ul>
                             </div>
@@ -1198,7 +1145,7 @@ const SalesList = () => {
                             <div className="input-blocks">
                               <label>Order Tax</label>
                               <div className="input-groupicon select-code">
-                                <input type="text" placeholder={0} />
+                                <input type="text" placeholder={"0"} />
                               </div>
                             </div>
                           </div>
@@ -1206,7 +1153,7 @@ const SalesList = () => {
                             <div className="input-blocks">
                               <label>Discount</label>
                               <div className="input-groupicon select-code">
-                                <input type="text" placeholder={0} />
+                                <input type="text" placeholder={"0"} />
                               </div>
                             </div>
                           </div>
@@ -1214,18 +1161,22 @@ const SalesList = () => {
                             <div className="input-blocks">
                               <label>Shipping</label>
                               <div className="input-groupicon select-code">
-                                <input type="text" placeholder={0} />
+                                <input type="text" placeholder={"0"} />
                               </div>
                             </div>
                           </div>
                           <div className="col-lg-3 col-sm-6 col-12">
                             <div className="input-blocks mb-5">
                               <label>Status</label>
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
                                 options={statusupdate}
-                                placeholder="Newest"
-                              />
+                                value={selectedStatusUpdate}
+                                onChange={(e) =>
+                                setSelectedStatusUpdate(e.value)
+                                }
+                                placeholder="Status"
+                                filter={false} />
+                              
                             </div>
                           </div>
                           <div className="col-lg-12">
@@ -1233,16 +1184,16 @@ const SalesList = () => {
                               <label>Notes</label>
                               <textarea
                                 className="form-control"
-                                defaultValue={""}
-                              />
+                                defaultValue={""} />
+                              
                             </div>
                           </div>
                           <div className="col-lg-12 text-end">
                             <button
                               type="button"
                               className="btn btn-cancel add-cancel me-3"
-                              data-bs-dismiss="modal"
-                            >
+                              data-bs-dismiss="modal">
+                              
                               Cancel
                             </button>
                             <Link to="#" className="btn btn-submit add-sale">
@@ -1265,8 +1216,8 @@ const SalesList = () => {
           id="showpayment"
           tabIndex={-1}
           aria-labelledby="showpayment"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
+          
           <div className="modal-dialog modal-dialog-centered stock-adjust-modal">
             <div className="modal-content">
               <div className="page-wrapper-new p-0">
@@ -1279,8 +1230,8 @@ const SalesList = () => {
                       type="button"
                       className="close"
                       data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <span aria-hidden="true">×</span>
                     </button>
                   </div>
@@ -1303,32 +1254,23 @@ const SalesList = () => {
                                 <tr>
                                   <td>19 Jan 2023</td>
                                   <td>INV/SL0101</td>
-                                  <td>₹1500</td>
+                                  <td>$1500</td>
                                   <td>Cash</td>
                                   <td className="action-table-data">
                                     <div className="edit-delete-action">
                                       <Link className="me-3 p-2" to="#">
-                                        <i
-                                          data-feather="printer"
-                                          className="feather-rotate-ccw"
-                                        />
+                                        <i className="ti ti-printer" />
                                       </Link>
                                       <Link
                                         className="me-3 p-2"
                                         to="#"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#editpayment"
-                                      >
-                                        <i
-                                          data-feather="edit"
-                                          className="feather-edit"
-                                        />
+                                        data-bs-target="#editpayment">
+                                        
+                                        <i className="ti ti-edit" />
                                       </Link>
                                       <Link className="confirm-text p-2" to="#">
-                                        <i
-                                          data-feather="trash-2"
-                                          className="feather-trash-2"
-                                        />
+                                        <i className="ti ti-trash" />
                                       </Link>
                                     </div>
                                   </td>
@@ -1352,8 +1294,8 @@ const SalesList = () => {
           id="createpayment"
           tabIndex={-1}
           aria-labelledby="createpayment"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
+          
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header border-0 custom-modal-header">
@@ -1364,8 +1306,8 @@ const SalesList = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -1376,15 +1318,13 @@ const SalesList = () => {
                       <div className="input-blocks">
                         <label> Date</label>
                         <div className="input-groupicon calender-input ">
-                        <Calendar className="info-img" />
-                          <DatePicker
-                            selected={selectedDate}
-                            onChange={handleDateChange}
-                            type="date"
-                            className="filterdatepicker"
-                            dateFormat="dd-MM-yyyy"
-                            placeholder="Choose Date"
-                          />
+                          <i className="feather icon-calendar info-img" />
+
+                          <CommonDatePicker
+                            value={date3}
+                            onChange={setDate3}
+                            className="w-100" />
+                          
                         </div>
                       </div>
                     </div>
@@ -1400,7 +1340,7 @@ const SalesList = () => {
                       <div className="input-blocks">
                         <label>Received Amount</label>
                         <div className="input-groupicon calender-input">
-                          <i data-feather="dollar-sign" className="info-img" />
+                          <i className="feather icon-dollar-sign info-img" />
                           <input type="text" />
                         </div>
                       </div>
@@ -1409,7 +1349,7 @@ const SalesList = () => {
                       <div className="input-blocks">
                         <label>Paying Amount</label>
                         <div className="input-groupicon calender-input">
-                          <i data-feather="dollar-sign" className="info-img" />
+                          <i className="feather icon-dollar-sign info-img" />
                           <input type="text" />
                         </div>
                       </div>
@@ -1417,11 +1357,13 @@ const SalesList = () => {
                     <div className="col-lg-4 col-sm-12 col-12">
                       <div className="input-blocks">
                         <label>Payment type</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
                           options={paymenttype}
+                          value={selectedPaymentType}
+                          onChange={(e) => setSelectedPaymentType(e.value)}
                           placeholder="Newest"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-lg-12">
@@ -1437,8 +1379,8 @@ const SalesList = () => {
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <Link to="#" className="btn btn-submit">
@@ -1458,8 +1400,8 @@ const SalesList = () => {
           id="editpayment"
           tabIndex={-1}
           aria-labelledby="editpayment"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
+          
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header border-0 custom-modal-header">
@@ -1470,8 +1412,8 @@ const SalesList = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -1482,12 +1424,12 @@ const SalesList = () => {
                       <div className="input-blocks">
                         <label>19 Jan 2023</label>
                         <div className="input-groupicon calender-input">
-                          <Calendar className="info-img" />
+                          <i className="feather icon-calendar info-img" />
                           <input
                             type="text"
                             className="datetimepicker form-control"
-                            placeholder="Select Date"
-                          />
+                            placeholder="Select Date" />
+                          
                         </div>
                       </div>
                     </div>
@@ -1503,7 +1445,7 @@ const SalesList = () => {
                       <div className="input-blocks">
                         <label>Received Amount</label>
                         <div className="input-groupicon calender-input">
-                          <i data-feather="dollar-sign" className="info-img" />
+                          <i className="feather icon-dollar-sign info-img" />
                           <input type="text" defaultValue={1500} />
                         </div>
                       </div>
@@ -1512,7 +1454,7 @@ const SalesList = () => {
                       <div className="input-blocks">
                         <label>Paying Amount</label>
                         <div className="input-groupicon calender-input">
-                          <i data-feather="dollar-sign" className="info-img" />
+                          <i className="feather icon-dollar-sign info-img" />
                           <input type="text" defaultValue={1500} />
                         </div>
                       </div>
@@ -1520,7 +1462,7 @@ const SalesList = () => {
                     <div className="col-lg-4 col-sm-12 col-12">
                       <div className="input-blocks">
                         <label>Payment type</label>
-                        <select className="react-select">
+                        <select>
                           <option>Cash</option>
                           <option>Online</option>
                           <option>Inprogress</option>
@@ -1540,8 +1482,8 @@ const SalesList = () => {
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <button type="submit" className="btn btn-submit">
@@ -1563,16 +1505,16 @@ const SalesList = () => {
                 className="navigation-add"
                 data-bs-toggle="tooltip"
                 data-bs-placement="left"
-                data-bs-original-title="Theme"
-              >
-                <i data-feather="settings" className="feather-five" />
+                data-bs-original-title="Theme">
+                
+                <i className="ti ti-settings" />
               </Link>
             </li>
           </ul>
         </div>
       </>
-    </div>
-  );
+    </div>);
+
 };
 
 export default SalesList;

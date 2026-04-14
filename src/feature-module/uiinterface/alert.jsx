@@ -1,7 +1,6 @@
-import { X } from "feather-icons-react/build/IconComponents";
-import React from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { X } from "react-feather";
 import { Link } from "react-router-dom";
+import { avatar01, avatar_02, avatar_03, avatar_04, avatar_05, avatar_06, avatar_07 } from "../../utils/imagepath";
 
 const Alert = () => {
   return (
@@ -123,8 +122,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <X className="fas fa-xmark" />
                   </button>
                 </div>
@@ -134,8 +133,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -145,8 +144,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -156,8 +155,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -167,8 +166,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -178,8 +177,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -189,8 +188,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close text-default"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -200,8 +199,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close text-white"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -220,8 +219,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -231,8 +230,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -242,8 +241,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -253,8 +252,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -264,8 +263,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -275,8 +274,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -286,8 +285,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close text-default"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -297,8 +296,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -317,8 +316,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -328,8 +327,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -339,8 +338,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -350,8 +349,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -370,8 +369,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -381,8 +380,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -392,8 +391,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -403,8 +402,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -423,8 +422,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -434,8 +433,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -445,8 +444,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -456,8 +455,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -478,8 +477,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close custom-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -489,8 +488,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close custom-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -500,8 +499,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close custom-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -511,8 +510,8 @@ const Alert = () => {
                     type="button"
                     className="btn-close custom-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -527,29 +526,29 @@ const Alert = () => {
               <div className="card-body">
                 <div
                   className="alert alert-primary d-flex align-items-center"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <i className="feather-info flex-shrink-0 me-2" />
                   <div>An example alert with an icon</div>
                 </div>
                 <div
                   className="alert alert-success d-flex align-items-center"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <i className="feather-check-circle flex-shrink-0 me-2" />
                   <div>An example success alert with an icon</div>
                 </div>
                 <div
                   className="alert alert-warning d-flex align-items-center"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <i className="feather-alert-triangle flex-shrink-0 me-2" />
                   <div>An example warning alert with an icon</div>
                 </div>
                 <div
                   className="alert alert-danger d-flex align-items-center"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <i className="feather-alert-octagon flex-shrink-0 me-2" />
                   <div>An example danger alert with an icon</div>
                 </div>
@@ -564,61 +563,61 @@ const Alert = () => {
               <div className="card-body">
                 <div
                   className="alert alert-primary alert-dismissible fade show custom-alert-icon shadow-sm d-flex align-items-center"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <i className="feather-info flex-shrink-0 me-2" />A customized
                   primary alert with an icon
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-secondary alert-dismissible fade show custom-alert-icon shadow-sm d-flex align-items-center"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <i className="feather-check-circle flex-shrink-0 me-2" />A
                   customized secondary alert with an icon
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-warning alert-dismissible fade show custom-alert-icon shadow-sm d-flex align-items-center"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <i className="feather-alert-triangle flex-shrink-0 me-2" />A
                   customized warning alert with an icon
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-danger alert-dismissible fade show custom-alert-icon shadow-sm d-flex align-items-centers"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <i className="feather-alert-octagon flex-shrink-0 me-2" />A
                   customized danger alert with an icon
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
@@ -643,8 +642,8 @@ const Alert = () => {
                                 type="button"
                                 className="btn-close p-0"
                                 data-bs-dismiss="alert"
-                                aria-label="Close"
-                              >
+                                aria-label="Close">
+                                
                                 <i className="fas fa-xmark" />
                               </button>
                             </div>
@@ -654,8 +653,8 @@ const Alert = () => {
                             <div className="fs-12">
                               <Link
                                 to="#"
-                                className="text-secondary fw-semibold me-2 d-inline-block"
-                              >
+                                className="text-secondary fw-semibold me-2 d-inline-block">
+                                
                                 cancel
                               </Link>
                               <Link to="#" className="text-primary fw-semibold">
@@ -681,8 +680,8 @@ const Alert = () => {
                                 type="button"
                                 className="btn-close p-0"
                                 data-bs-dismiss="alert"
-                                aria-label="Close"
-                              >
+                                aria-label="Close">
+                                
                                 <i className="fas fa-xmark" />
                               </button>
                             </div>
@@ -692,14 +691,14 @@ const Alert = () => {
                             <div className="fs-12">
                               <Link
                                 to="#"
-                                className="text-danger fw-semibold me-2 d-inline-block"
-                              >
+                                className="text-danger fw-semibold me-2 d-inline-block">
+                                
                                 cancel
                               </Link>
                               <Link
                                 to="#"
-                                className="text-secondary fw-semibold"
-                              >
+                                className="text-secondary fw-semibold">
+                                
                                 open
                               </Link>
                             </div>
@@ -722,8 +721,8 @@ const Alert = () => {
                                 type="button"
                                 className="btn-close p-0"
                                 data-bs-dismiss="alert"
-                                aria-label="Close"
-                              >
+                                aria-label="Close">
+                                
                                 <i className="fas fa-xmark" />
                               </button>
                             </div>
@@ -733,8 +732,8 @@ const Alert = () => {
                             <div className="fs-12">
                               <Link
                                 to="#"
-                                className="text-dark fw-semibold me-2 d-inline-block"
-                              >
+                                className="text-dark fw-semibold me-2 d-inline-block">
+                                
                                 cancel
                               </Link>
                               <Link to="#" className="text-warning fw-semibold">
@@ -760,8 +759,8 @@ const Alert = () => {
                                 type="button"
                                 className="btn-close p-0"
                                 data-bs-dismiss="alert"
-                                aria-label="Close"
-                              >
+                                aria-label="Close">
+                                
                                 <i className="fas fa-xmark" />
                               </button>
                             </div>
@@ -771,8 +770,8 @@ const Alert = () => {
                             <div className="fs-12">
                               <Link
                                 to="#"
-                                className="text-info fw-semibold me-2 d-inline-block"
-                              >
+                                className="text-info fw-semibold me-2 d-inline-block">
+                                
                                 cancel
                               </Link>
                               <Link to="#" className="text-danger fw-semibold">
@@ -800,8 +799,8 @@ const Alert = () => {
                                 type="button"
                                 className="btn-close p-0"
                                 data-bs-dismiss="alert"
-                                aria-label="Close"
-                              >
+                                aria-label="Close">
+                                
                                 <i className="fas fa-xmark" />
                               </button>
                             </div>
@@ -811,14 +810,14 @@ const Alert = () => {
                             <div className="fs-12">
                               <Link
                                 to="#"
-                                className="text-fixed-white fw-semibold me-2 op-7"
-                              >
+                                className="text-fixed-white fw-semibold me-2 op-7">
+                                
                                 cancel
                               </Link>
                               <Link
                                 to="#"
-                                className="text-fixed-white fw-semibold"
-                              >
+                                className="text-fixed-white fw-semibold">
+                                
                                 open
                               </Link>
                             </div>
@@ -841,8 +840,8 @@ const Alert = () => {
                                 type="button"
                                 className="btn-close p-0"
                                 data-bs-dismiss="alert"
-                                aria-label="Close"
-                              >
+                                aria-label="Close">
+                                
                                 <i className="fas fa-xmark" />
                               </button>
                             </div>
@@ -852,8 +851,8 @@ const Alert = () => {
                             <div className="fs-12">
                               <Link
                                 to="#"
-                                className="text-fixed-white fw-semibold me-2"
-                              >
+                                className="text-fixed-white fw-semibold me-2">
+                                
                                 close
                               </Link>
                             </div>
@@ -876,8 +875,8 @@ const Alert = () => {
                                 type="button"
                                 className="btn-close p-0"
                                 data-bs-dismiss="alert"
-                                aria-label="Close"
-                              >
+                                aria-label="Close">
+                                
                                 <i className="fas fa-xmark" />
                               </button>
                             </div>
@@ -887,14 +886,14 @@ const Alert = () => {
                             <div className="fs-12">
                               <Link
                                 to="#"
-                                className="text-fixed-white fw-semibold me-2 op-7"
-                              >
+                                className="text-fixed-white fw-semibold me-2 op-7">
+                                
                                 skip
                               </Link>
                               <Link
                                 to="#"
-                                className="text-fixed-white fw-semibold"
-                              >
+                                className="text-fixed-white fw-semibold">
+                                
                                 open
                               </Link>
                             </div>
@@ -917,8 +916,8 @@ const Alert = () => {
                                 type="button"
                                 className="btn-close p-0"
                                 data-bs-dismiss="alert"
-                                aria-label="Close"
-                              >
+                                aria-label="Close">
+                                
                                 <i className="fas fa-xmark" />
                               </button>
                             </div>
@@ -928,14 +927,14 @@ const Alert = () => {
                             <div className="fs-12">
                               <Link
                                 to="#"
-                                className="text-fixed-white fw-semibold me-2 op-7"
-                              >
+                                className="text-fixed-white fw-semibold me-2 op-7">
+                                
                                 close
                               </Link>
                               <Link
                                 to="#"
-                                className="text-fixed-white fw-semibold"
-                              >
+                                className="text-fixed-white fw-semibold">
+                                
                                 continue
                               </Link>
                             </div>
@@ -956,141 +955,141 @@ const Alert = () => {
               <div className="card-body">
                 <div
                   className="alert alert-img alert-primary alert-dismissible fase show rounded-pill flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-sm me-3 avatar-rounded">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-01.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar01}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple primary alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-secondary alert-dismissible fase show rounded-pill flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-sm me-3 avatar-rounded">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-02.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_02}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple secondary alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-warning alert-dismissible fase show rounded-pill flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-sm me-3 avatar-rounded">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-03.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_03}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple warning alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-danger alert-dismissible fase show rounded-pill flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-sm me-3 avatar-rounded">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-04.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_04}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple danger alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-info alert-dismissible fase show rounded-pill flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-sm me-3 avatar-rounded">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-05.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_05}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple info alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-light alert-dismissible fase show rounded-pill flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-sm me-3 avatar-rounded">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-06.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_06}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple light alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-dark alert-dismissible fase show rounded-pill flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-sm me-3 avatar-rounded">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-07.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_07}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple dark alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark text-muted" />
                   </button>
                 </div>
@@ -1107,121 +1106,121 @@ const Alert = () => {
               <div className="card-body">
                 <div
                   className="alert alert-img alert-primary alert-dismissible fase show flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-xs me-3">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-02.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_02}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple primary alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-secondary alert-dismissible fase show flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-sm me-3">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-02.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_02}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple secondary alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-warning alert-dismissible fase show flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar me-3">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-02.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_02}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple warning alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-danger alert-dismissible fase show flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-md me-3">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-02.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_02}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple danger alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-info alert-dismissible fase show flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-lg me-3">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-02.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_02}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple info alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark" />
                   </button>
                 </div>
                 <div
                   className="alert alert-img alert-dark alert-dismissible fase show flex-wrap"
-                  role="alert"
-                >
+                  role="alert">
+                  
                   <div className="avatar avatar-xl me-3">
-                    <ImageWithBasePath
-                      src="assets/img/profiles/avatar-02.jpg"
-                      alt="img"
-                    />
+                    <img
+                      src={avatar_02}
+                      alt="img" />
+                    
                   </div>
                   <div>A simple info alert with image—check it out!</div>
                   <button
                     type="button"
                     className="btn-close"
                     data-bs-dismiss="alert"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="fas fa-xmark text-muted" />
                   </button>
                 </div>
@@ -1237,8 +1236,8 @@ const Alert = () => {
                       type="button"
                       className="btn-close ms-auto"
                       data-bs-dismiss="alert"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <i className="fas fa-xmark" />
                     </button>
                     <div className="text-center  px-5 pb-0">
@@ -1269,8 +1268,8 @@ const Alert = () => {
                       type="button"
                       className="btn-close ms-auto"
                       data-bs-dismiss="alert"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <i className="fas fa-xmark" />
                     </button>
                     <div className="text-center px-5 pb-0">
@@ -1298,8 +1297,8 @@ const Alert = () => {
                       type="button"
                       className="btn-close ms-auto"
                       data-bs-dismiss="alert"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <i className="fas fa-xmark" />
                     </button>
                     <div className="text-center px-5 pb-0">
@@ -1329,8 +1328,8 @@ const Alert = () => {
                       type="button"
                       className="btn-close ms-auto"
                       data-bs-dismiss="alert"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <i className="fas fa-xmark" />
                     </button>
                     <div className="text-center px-5 pb-0">
@@ -1362,8 +1361,8 @@ const Alert = () => {
                   <div className="col-xl-6">
                     <div
                       className="alert alert-primary overflow-hidden p-0"
-                      role="alert"
-                    >
+                      role="alert">
+                      
                       <div className="p-3 bg-primary text-fixed-white d-flex justify-content-between">
                         <h6 className="aletr-heading mb-0 text-fixed-white">
                           Thank you for reporting this.
@@ -1372,8 +1371,8 @@ const Alert = () => {
                           type="button"
                           className="btn-close p-0 text-fixed-white"
                           data-bs-dismiss="alert"
-                          aria-label="Close"
-                        >
+                          aria-label="Close">
+                          
                           <i className="fas fa-xmark" />
                         </button>
                       </div>
@@ -1384,8 +1383,8 @@ const Alert = () => {
                           template and for warning us about future consequences{" "}
                           <Link
                             to="#"
-                            className="fw-semibold text-decoration-underline text-primary"
-                          >
+                            className="fw-semibold text-decoration-underline text-primary">
+                            
                             Visit for support for queries ?
                           </Link>
                         </p>
@@ -1395,8 +1394,8 @@ const Alert = () => {
                   <div className="col-xl-6">
                     <div
                       className="alert alert-secondary overflow-hidden p-0"
-                      role="alert"
-                    >
+                      role="alert">
+                      
                       <div className="p-3 bg-secondary text-fixed-white d-flex justify-content-between">
                         <h6 className="aletr-heading mb-0 text-fixed-white">
                           Thank you for reporting this.
@@ -1405,8 +1404,8 @@ const Alert = () => {
                           type="button"
                           className="btn-close p-0 text-fixed-white"
                           data-bs-dismiss="alert"
-                          aria-label="Close"
-                        >
+                          aria-label="Close">
+                          
                           <i className="fas fa-xmark" />
                         </button>
                       </div>
@@ -1417,8 +1416,8 @@ const Alert = () => {
                           template and for warning us about future consequences{" "}
                           <Link
                             to="#"
-                            className="fw-semibold text-decoration-underline text-secondary"
-                          >
+                            className="fw-semibold text-decoration-underline text-secondary">
+                            
                             Visit for support for queries ?
                           </Link>
                         </p>
@@ -1428,8 +1427,8 @@ const Alert = () => {
                   <div className="col-xl-6">
                     <div
                       className="alert alert-success overflow-hidden p-0"
-                      role="alert"
-                    >
+                      role="alert">
+                      
                       <div className="p-3 bg-success text-fixed-white d-flex justify-content-between">
                         <h6 className="aletr-heading mb-0 text-fixed-white">
                           Thank you for reporting this.
@@ -1438,8 +1437,8 @@ const Alert = () => {
                           type="button"
                           className="btn-close p-0 text-fixed-white"
                           data-bs-dismiss="alert"
-                          aria-label="Close"
-                        >
+                          aria-label="Close">
+                          
                           <i className="fas fa-xmark" />
                         </button>
                       </div>
@@ -1450,8 +1449,8 @@ const Alert = () => {
                           template and for warning us about future consequences{" "}
                           <Link
                             to="#"
-                            className="fw-semibold text-decoration-underline text-success"
-                          >
+                            className="fw-semibold text-decoration-underline text-success">
+                            
                             Visit for support for queries ?
                           </Link>
                         </p>
@@ -1461,8 +1460,8 @@ const Alert = () => {
                   <div className="col-xl-6">
                     <div
                       className="alert alert-warning overflow-hidden p-0"
-                      role="alert"
-                    >
+                      role="alert">
+                      
                       <div className="p-3 bg-warning text-fixed-white d-flex justify-content-between">
                         <h6 className="aletr-heading mb-0 text-fixed-white">
                           Thank you for reporting this.
@@ -1471,8 +1470,8 @@ const Alert = () => {
                           type="button"
                           className="btn-close p-0 text-fixed-white"
                           data-bs-dismiss="alert"
-                          aria-label="Close"
-                        >
+                          aria-label="Close">
+                          
                           <i className="fas fa-xmark" />
                         </button>
                       </div>
@@ -1483,8 +1482,8 @@ const Alert = () => {
                           template and for warning us about future consequences{" "}
                           <Link
                             to="#"
-                            className="fw-semibold text-decoration-underline text-warning"
-                          >
+                            className="fw-semibold text-decoration-underline text-warning">
+                            
                             Visit for support for queries ?
                           </Link>
                         </p>
@@ -1497,8 +1496,8 @@ const Alert = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Alert;

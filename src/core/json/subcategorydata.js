@@ -1,172 +1,174 @@
+import {
+  product1,
+  product2,
+  product3,
+  product4,
+  product5,
+  product6,
+  product7,
+  product8,
+  product9,
+  product10,
+  product11,
+  product12,
+  product13,
+  product14,
+  product15,
+  product16,
+  product17 } from
+"../../utils/imagepath";
+
 export const subcateorydata = [
-	{
-		"id":1,
-		"img": "assets/img/products/product1.jpg",
-		"category": "Computers",
-		"parentcategory": "Computers",
-		"categorycode": "CT001",
-		"description": "Computers description",
-		"status": "Active",
-		
-	},
-	{
-		"id":2,
-		"img": "assets/img/products/product2.jpg",
-		"category": "Fruits",
-		"parentcategory": "Fruits",
-		"categorycode": "CT002",
-		"description": "Fruits description",
-		"status": "Active",
-		
-	},
-	{
-		"id":3,
-		"img": "assets/img/products/product3.jpg",
-		"category": "Fruits",
-		"parentcategory": "Fruits",
-		"categorycode": "CT003",
-		"description": "Fruits description",
-		"status": "Active",
-		
-	},
-	{
-		"id":4,
-		"img": "assets/img/products/product4.jpg",
-		"category": "Fruits",
-		"parentcategory": "Fruits",
-		"categorycode": "CT004",
-		"description": "Fruits description",
-		"status": "Active",
-		
-	},
-	{
-		"id":5,
-		"img": "assets/img/products/product5.jpg",
-		"category": "Accessories",
-		"parentcategory": "Accessories",
-		"categorycode": "CT005",
-		"description": "Accessories description",
-		"status": "Active",
-		
-	},
-	{
-		"id":6,
-		"img": "assets/img/products/product6.jpg",
-		"category": "Shoes",
-		"parentcategory": "Shoes",
-		"categorycode": "CT006",
-		"description": "Shoes description",
-		"status": "Active",
-		
-	},
-	{
-		"id":7,
-		"img": "assets/img/products/product7.jpg",
-		"category": "Fruits",
-		"parentcategory": "Fruits",
-		"categorycode": "CT007",
-		"description": "Fruits description",
-		"status": "Active",
-		
-	},
-	{
-		"id":8,
-		"img": "assets/img/products/product8.jpg",
-		"category": "Fruits",
-		"parentcategory": "Fruits",
-		"categorycode": "CT008",
-		"description": "Fruits description",
-		"status": "Active",
-		
-	},
-	{
-		"id":9,
-		"img": "assets/img/products/product9.jpg",
-		"category": "Computers",
-		"parentcategory": "Computers",
-		"categorycode": "CT009",
-		"description": "Computers description",
-		"status": "Active",
-		
-	},
-	{
-		"id":10,
-		"img": "assets/img/products/product10.jpg",
-		"category": "Health Care",
-		"parentcategory": "Health Care",
-		"categorycode": "CT0010",
-		"description": "Health Care description",
-		"status": "Active",
-		
-	},
-	{
-		"id":11,
-		"img": "assets/img/products/product11.jpg",
-		"category": "Fruits",
-		"parentcategory": "Fruits",
-		"categorycode": "CT004",
-		"description": "Fruits description",
-		"status": "Active",
-		
-	},
-	{
-		"id":12,
-		"img": "assets/img/products/product12.jpg",
-		"category": "Accessories",
-		"parentcategory": "Accessories",
-		"categorycode": "CT005",
-		"description": "Accessories description",
-		"status": "Active",
-		
-	},
-	{
-		"id":13,
-		"img": "assets/img/products/product13.jpg",
-		"category": "Shoes",
-		"parentcategory": "Shoes",
-		"categorycode": "CT006",
-		"description": "Shoes description",
-		"status": "Active",
-		
-	},
-	{
-		"id":14,
-		"img": "assets/img/products/product14.jpg",
-		"category": "Fruits",
-		"parentcategory": "Fruits",
-		"categorycode": "CT007",
-		"description": "Fruits description",
-		"status": "Active",
-		
-	},
-	{
-		"id":15,
-		"img": "assets/img/products/product15.jpg",
-		"category": "Fruits",
-		"parentcategory": "Fruits",
-		"categorycode": "CT008",
-		"description": "Fruits description",
-		"status": "Active",
-		
-	},
-	{
-		"id":16,
-		"img": "assets/img/products/product16.jpg",
-		"category": "Computers",
-		"parentcategory": "Computers",
-		"categorycode": "CT009",
-		"description": "Computers description",
-		"status": "Active",
-		
-	},
-	{
-		"id":17,
-		"img": "assets/img/products/product17.jpg",
-		"category": "Health Care",
-		"parentcategory": "Health Care",
-		"categorycode": "CT0010",
-		"description": "Health Care description",
-		"status": "Active",
-		
-	}
-]
+{
+  id: 1,
+  img: { product1 },
+  category: "Computers",
+  parentcategory: "Computers",
+  categorycode: "CT001",
+  description: "Computers description",
+  status: "Active"
+},
+{
+  id: 2,
+  img: { product2 },
+  category: "Fruits",
+  parentcategory: "Fruits",
+  categorycode: "CT002",
+  description: "Fruits description",
+  status: "Active"
+},
+{
+  id: 3,
+  img: { product3 },
+  category: "Fruits",
+  parentcategory: "Fruits",
+  categorycode: "CT003",
+  description: "Fruits description",
+  status: "Active"
+},
+{
+  id: 4,
+  img: { product4 },
+  category: "Fruits",
+  parentcategory: "Fruits",
+  categorycode: "CT004",
+  description: "Fruits description",
+  status: "Active"
+},
+{
+  id: 5,
+  img: { product5 },
+  category: "Accessories",
+  parentcategory: "Accessories",
+  categorycode: "CT005",
+  description: "Accessories description",
+  status: "Active"
+},
+{
+  id: 6,
+  img: { product6 },
+  category: "Shoes",
+  parentcategory: "Shoes",
+  categorycode: "CT006",
+  description: "Shoes description",
+  status: "Active"
+},
+{
+  id: 7,
+  img: { product7 },
+  category: "Fruits",
+  parentcategory: "Fruits",
+  categorycode: "CT007",
+  description: "Fruits description",
+  status: "Active"
+},
+{
+  id: 8,
+  img: { product8 },
+  category: "Fruits",
+  parentcategory: "Fruits",
+  categorycode: "CT008",
+  description: "Fruits description",
+  status: "Active"
+},
+{
+  id: 9,
+  img: { product9 },
+  category: "Computers",
+  parentcategory: "Computers",
+  categorycode: "CT009",
+  description: "Computers description",
+  status: "Active"
+},
+{
+  id: 10,
+  img: { product10 },
+  category: "Health Care",
+  parentcategory: "Health Care",
+  categorycode: "CT0010",
+  description: "Health Care description",
+  status: "Active"
+},
+{
+  id: 11,
+  img: { product11 },
+  category: "Fruits",
+  parentcategory: "Fruits",
+  categorycode: "CT004",
+  description: "Fruits description",
+  status: "Active"
+},
+{
+  id: 12,
+  img: { product12 },
+  category: "Accessories",
+  parentcategory: "Accessories",
+  categorycode: "CT005",
+  description: "Accessories description",
+  status: "Active"
+},
+{
+  id: 13,
+  img: { product13 },
+  category: "Shoes",
+  parentcategory: "Shoes",
+  categorycode: "CT006",
+  description: "Shoes description",
+  status: "Active"
+},
+{
+  id: 14,
+  img: { product14 },
+  category: "Fruits",
+  parentcategory: "Fruits",
+  categorycode: "CT007",
+  description: "Fruits description",
+  status: "Active"
+},
+{
+  id: 15,
+  img: { product15 },
+  category: "Fruits",
+  parentcategory: "Fruits",
+  categorycode: "CT008",
+  description: "Fruits description",
+  status: "Active"
+},
+{
+  id: 16,
+  img: { product16 },
+  category: "Computers",
+  parentcategory: "Computers",
+  categorycode: "CT009",
+  description: "Computers description",
+  status: "Active"
+},
+{
+  id: 17,
+  img: { product17 },
+  category: "Health Care",
+  parentcategory: "Health Care",
+  categorycode: "CT0010",
+  description: "Health Care description",
+  status: "Active"
+}];

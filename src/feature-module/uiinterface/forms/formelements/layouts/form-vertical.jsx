@@ -1,30 +1,31 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import Select from "react-select";
-import { all_routes } from "../../../../../Router/all_routes";
+import { all_routes } from "../../../../../routes/all_routes";
+
 
 const FormVertical = () => {
   const route = all_routes;
   const bloodgroup = [
-    { value: "Select", label: "Select" },
-    { value: "A+", label: "A+" },
-    { value: "O+", label: "O+" },
-    { value: "B+", label: "B+" },
-    { value: "AB+", label: "AB+" },
-  ];
+  { value: "Select", label: "Select" },
+  { value: "A+", label: "A+" },
+  { value: "O+", label: "O+" },
+  { value: "B+", label: "B+" },
+  { value: "AB+", label: "AB+" }];
+
   const statelist = [
-    { value: "Select State", label: "Select State" },
-    { value: "California", label: "California" },
-    { value: "Texas", label: "Texas" },
-    { value: "Florida", label: "Florida" },
-  ];
+  { value: "Select State", label: "Select State" },
+  { value: "California", label: "California" },
+  { value: "Texas", label: "Texas" },
+  { value: "Florida", label: "Florida" }];
+
   const countrylist = [
-    { value: "Select Country", label: "Select Country" },
-    { value: "USA", label: "USA" },
-    { value: "France", label: "France" },
-    { value: "India", label: "India" },
-    { value: "Spain", label: "Spain" },
-  ];
+  { value: "Select Country", label: "Select Country" },
+  { value: "USA", label: "USA" },
+  { value: "France", label: "France" },
+  { value: "India", label: "India" },
+  { value: "Spain", label: "Spain" }];
+
   return (
     <div>
       <div className="page-wrapper cardhead">
@@ -150,8 +151,8 @@ const FormVertical = () => {
                           <Select
                             classNamePrefix="react-select"
                             options={bloodgroup}
-                            placeholder="Select"
-                          />
+                            placeholder="Select" />
+                          
                         </div>
                         <div className="mb-3">
                           <label className="d-block">Gender:</label>
@@ -161,12 +162,12 @@ const FormVertical = () => {
                               type="radio"
                               name="gender"
                               id="gender_male"
-                              defaultValue="option1"
-                            />
+                              defaultValue="option1" />
+                            
                             <label
                               className="form-check-label"
-                              htmlFor="gender_male"
-                            >
+                              htmlFor="gender_male">
+                              
                               Male
                             </label>
                           </div>
@@ -176,12 +177,12 @@ const FormVertical = () => {
                               type="radio"
                               name="gender"
                               id="gender_female"
-                              defaultValue="option2"
-                            />
+                              defaultValue="option2" />
+                            
                             <label
                               className="form-check-label"
-                              htmlFor="gender_female"
-                            >
+                              htmlFor="gender_female">
+                              
                               Female
                             </label>
                           </div>
@@ -271,8 +272,8 @@ const FormVertical = () => {
                           <Select
                             classNamePrefix="react-select"
                             options={statelist}
-                            placeholder="Select"
-                          />
+                            placeholder="Select" />
+                          
                         </div>
                         <div className="mb-3">
                           <label className="form-label">Your Message:</label>
@@ -281,8 +282,8 @@ const FormVertical = () => {
                             cols={5}
                             className="form-control"
                             placeholder="Enter message"
-                            defaultValue={""}
-                          />
+                            defaultValue={""} />
+                          
                         </div>
                       </div>
                       <div className="col-md-6">
@@ -332,8 +333,8 @@ const FormVertical = () => {
                               <Select
                                 classNamePrefix="react-select"
                                 options={countrylist}
-                                placeholder="Select"
-                              />
+                                placeholder="Select" />
+                              
                             </div>
                           </div>
                           <div className="col-md-6">
@@ -388,15 +389,15 @@ const FormVertical = () => {
                         type="text"
                         className="form-control"
                         id="form-text1"
-                        placeholder=""
-                      />
+                        placeholder="" />
+                      
                     </div>
                   </div>
                   <div className="mb-3">
                     <label
                       htmlFor="form-password1"
-                      className="form-label fs-14"
-                    >
+                      className="form-label fs-14">
+                      
                       Enter Password
                     </label>
                     <div className="input-group">
@@ -407,15 +408,15 @@ const FormVertical = () => {
                         type="password"
                         className="form-control"
                         id="form-password1"
-                        placeholder=""
-                      />
+                        placeholder="" />
+                      
                     </div>
                   </div>
                   <div className="mb-3">
                     <label
                       htmlFor="form-password1"
-                      className="form-label fs-14"
-                    >
+                      className="form-label fs-14">
+                      
                       Enter Repeat Password
                     </label>
                     <div className="input-group">
@@ -426,8 +427,8 @@ const FormVertical = () => {
                         type="password"
                         className="form-control"
                         id="form-password1"
-                        placeholder=""
-                      />
+                        placeholder="" />
+                      
                     </div>
                   </div>
                   <Link className="btn btn-primary" to="#">
@@ -445,16 +446,16 @@ const FormVertical = () => {
                   <div className="mb-3">
                     <label
                       htmlFor="colFormLabelSm"
-                      className="col-form-label col-form-label-sm"
-                    >
+                      className="col-form-label col-form-label-sm">
+                      
                       Email
                     </label>
                     <input
                       type="email"
                       className="form-control form-control-sm"
                       id="colFormLabelSm"
-                      placeholder="col-form-label-sm"
-                    />
+                      placeholder="col-form-label-sm" />
+                    
                   </div>
                   <div className="mb-3">
                     <label htmlFor="colFormLabel" className="col-form-label">
@@ -464,22 +465,22 @@ const FormVertical = () => {
                       type="email"
                       className="form-control"
                       id="colFormLabel"
-                      placeholder="col-form-label"
-                    />
+                      placeholder="col-form-label" />
+                    
                   </div>
                   <div>
                     <label
                       htmlFor="colFormLabelLg"
-                      className="col-form-label col-form-label-lg"
-                    >
+                      className="col-form-label col-form-label-lg">
+                      
                       Email
                     </label>
                     <input
                       type="email"
                       className="form-control form-control-lg"
                       id="colFormLabelLg"
-                      placeholder="col-form-label-lg"
-                    />
+                      placeholder="col-form-label-lg" />
+                    
                   </div>
                 </div>
               </div>
@@ -487,8 +488,8 @@ const FormVertical = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default FormVertical;

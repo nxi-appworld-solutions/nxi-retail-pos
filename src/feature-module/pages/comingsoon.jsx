@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { logoSmall } from "../../utils/imagepath";
+import { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
 
 const Comingsoon = () => {
@@ -25,15 +26,15 @@ const Comingsoon = () => {
         <div className="comming-soon-pg w-100">
           <div className="coming-soon-box">
             <div className="pos-logo">
-              <ImageWithBasePath src="assets/img/logo-small.png" alt="Img" />
+              <img src={logoSmall} alt="Img" />
             </div>
             <span>Our Website is</span>
             <h1>
               <span> COMING </span> SOON{" "}
             </h1>
             <p>
-              Please check back later, We are working hard to get everything just
-              right.
+              Please check back later, We are working hard to get everything
+              just right.
             </p>
             <ul className="coming-soon-timer">
               <li>
@@ -58,8 +59,8 @@ const Comingsoon = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder="Enter Your Email"
-                />
+                  placeholder="Enter Your Email" />
+                
                 <Link to="#" className="btn btn-primary subscribe-btn">
                   Subscribe
                 </Link>
@@ -96,9 +97,8 @@ const Comingsoon = () => {
         </div>
       </div>
       {/* /Main Wrapper */}
-    </>
+    </>);
 
-  );
 };
 
 export default Comingsoon;

@@ -1,176 +1,184 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { DatePicker } from 'antd'
-import ReactApexChart from 'react-apexcharts'
-import ImageWithBasePath from '../../../core/img/imagewithbasebath'
-import Select from 'react-select';
-import TooltipIcons from '../../../core/common/tooltip-content/tooltipIcons'
-import RefreshIcon from '../../../core/common/tooltip-content/refresh'
-import CollapesIcon from '../../../core/common/tooltip-content/collapes'
-import CommonFooter from '../../../core/common/footer/commonFooter';
-import PredefinedDateRanges from '../../../core/common/range-picker/datePicker';
-import { companies_details } from '../../../core/json/companiesdetails';
-import Table from "../../../core/pagination/datatable";
-// type PasswordField = "password" | "confirmPassword";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { DatePicker } from "antd";
+import ReactApexChart from "react-apexcharts";
+import Select from "react-select";
+import { companies_details } from "../../../core/json/companiesdetails";
+import PrimeDataTable from "../../../components/data-table";
+
+import TooltipIcons from "../../../components/tooltip-content/tooltipIcons";
+import RefreshIcon from "../../../components/tooltip-content/refresh";
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+import CommonFooter from "../../../components/footer/commonFooter";
+import CommonDateRangePicker from "../../../components/date-range-picker/common-date-range-picker";
+
 
 const Companies = () => {
   const data = companies_details;
+  const [rows, setRows] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(data.length);
+  const [selectedCompanies, setSelectedCompanies] = useState([]);
+  
   const columns = [
-    {
-      title: "Company Name",
-      dataIndex: "CompanyName",
-      render: (text, record) => (
-        <div className="d-flex align-items-center file-name-icon">
+  {
+    header: "Company Name",
+    field: "CompanyName",
+    body: (rowData) =>
+    <div className="d-flex align-items-center file-name-icon">
           <Link to="#" className="avatar avatar-md border rounded-circle">
-            <ImageWithBasePath
-              src={`assets/img/company/${record.Image}`}
-              className="img-fluid"
-              alt="img"
-            />
+            <img
+          src={`src/assets/img/company/${rowData.Image}`}
+          className="img-fluid"
+          alt="img" />
+        
           </Link>
           <div className="ms-2">
             <h6 className="fw-medium">
-              <Link to="#">{text}</Link>
+              <Link to="#">{rowData.CompanyName}</Link>
             </h6>
           </div>
-        </div>
+        </div>,
 
-      ),
-      sorter: (a, b) => a.CompanyName.length - b.CompanyName.length,
-    },
-    {
-      title: "Email",
-      dataIndex: "Email",
-      sorter: (a, b) => a.Email.length - b.Email.length,
-    },
-    {
-      title: "Account URL",
-      dataIndex: "AccountURL",
-      sorter: (a, b) => a.AccountURL.length - b.AccountURL.length,
-    },
-    {
-      title: "Plan",
-      dataIndex: "Plan",
-      render: (text) => (
-        <div className="d-flex align-items-center justify-content-between">
-          <p className="mb-0 me-2">{text}</p>
+    sortable: true
+  },
+  {
+    header: "Email",
+    field: "Email",
+    sortable: true
+  },
+  {
+    header: "Account URL",
+    field: "AccountURL",
+    sortable: true
+  },
+  {
+    header: "Plan",
+    field: "Plan",
+    body: (rowData) =>
+    <div className="d-flex align-items-center justify-content-between">
+          <p className="mb-0 me-2">{rowData.Plan}</p>
           <Link
-            to="#"
-            data-bs-toggle="modal"
-            className="badge badge-purple badge-xs"
-            data-bs-target="#upgrade_info"
-          >
+        to="#"
+        data-bs-toggle="modal"
+        className="badge badge-purple badge-xs"
+        data-bs-target="#upgrade_info">
+        
             Upgrade
           </Link>
-        </div>
+        </div>,
 
-      ),
-      sorter: (a, b) => a.Plan.length - b.Plan.length,
-    },
-    {
-      title: "Created Date",
-      dataIndex: "CreatedDate",
-      sorter: (a, b) => a.CreatedDate.length - b.CreatedDate.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      render: (text) => (
-        <span className={`badge ${text === 'Active' ? 'badge-success' : 'badge-danger'} d-inline-flex align-items-center badge-xs`}>
+    sortable: true
+  },
+  {
+    header: "Created Date",
+    field: "CreatedDate",
+    sortable: true
+  },
+  {
+    header: "Status",
+    field: "Status",
+    body: (rowData) =>
+    <span
+      className={`badge ${
+      rowData.Status === "Active" ? "badge-success" : "badge-danger"} d-inline-flex align-items-center badge-xs`
+      }>
+      
           <i className="ti ti-point-filled me-1" />
-          {text}
-        </span>
+          {rowData.Status}
+        </span>,
 
-      ),
-      sorter: (a, b) => a.Status.length - b.Status.length,
-    },
-    {
-      title: "",
-      dataIndex: "actions",
-      render: () => (
-        <div className="action-icon d-inline-flex align-items-center">
+    sortable: true
+  },
+  {
+    header: "",
+    field: "actions",
+    body: () =>
+    <div className="action-icon d-inline-flex align-items-center">
           <Link
-            to="#"
-            className="p-2 d-flex align-items-center border rounded me-2"
-            data-bs-toggle="modal"
-            data-bs-target="#company_detail"
-          >
+        to="#"
+        className="p-2 d-flex align-items-center border rounded me-2"
+        data-bs-toggle="modal"
+        data-bs-target="#company_detail">
+        
             <i className="ti ti-eye" />
           </Link>
           <Link
-            to="#"
-            className="p-2 d-flex align-items-center border rounded me-2"
-            data-bs-toggle="modal"
-            data-bs-target="#edit_company"
-          >
+        to="#"
+        className="p-2 d-flex align-items-center border rounded me-2"
+        data-bs-toggle="modal"
+        data-bs-target="#edit_company">
+        
             <i className="ti ti-edit" />
           </Link>
           <Link
-            to="#"
-            className="p-2 d-flex align-items-center border rounded"
-            data-bs-toggle="modal"
-            data-bs-target="#delete_modal"
-          >
+        to="#"
+        className="p-2 d-flex align-items-center border rounded"
+        data-bs-toggle="modal"
+        data-bs-target="#delete_modal">
+        
             <i className="ti ti-trash" />
           </Link>
-        </div>
+        </div>,
 
-      ),
-    },
-  ]
+    sortable: false
+  }];
+
   const [passwordVisibility, setPasswordVisibility] = useState({
     password: false,
-    confirmPassword: false,
+    confirmPassword: false
   });
 
   const togglePasswordVisibility = (field) => {
     setPasswordVisibility((prevState) => ({
       ...prevState,
-      [field]: !prevState[field],
+      [field]: !prevState[field]
     }));
   };
 
   const planName = [
-    { value: "Advanced", label: "Advanced" },
-    { value: "Basic", label: "Basic" },
-    { value: "Enterprise", label: "Enterprise" },
-  ];
+  { value: "Advanced", label: "Advanced" },
+  { value: "Basic", label: "Basic" },
+  { value: "Enterprise", label: "Enterprise" }];
+
   const planType = [
-    { value: "Monthly", label: "Monthly" },
-    { value: "Yearly", label: "Yearly" },
-  ];
+  { value: "Monthly", label: "Monthly" },
+  { value: "Yearly", label: "Yearly" }];
+
   const currency = [
-    { value: "USD", label: "USD" },
-    { value: "Euro", label: "Euro" },
-  ];
+  { value: "USD", label: "USD" },
+  { value: "Euro", label: "Euro" }];
+
   const language = [
-    { value: "English", label: "English" },
-    { value: "Arabic", label: "Arabic" },
-  ];
+  { value: "English", label: "English" },
+  { value: "Arabic", label: "Arabic" }];
+
   const statusChoose = [
-    { value: "Active", label: "Active" },
-    { value: "Inactive", label: "Inactive" },
-  ];
+  { value: "Active", label: "Active" },
+  { value: "Inactive", label: "Inactive" }];
+
 
   const getModalContainer = () => {
-    const modalElement = document.getElementById('modal-datepicker');
+    const modalElement = document.getElementById("modal-datepicker");
     return modalElement ? modalElement : document.body; // Fallback to document.body if modalElement is null
   };
 
-  const [totalChart] = React.useState({
-    series: [{
+  const [totalChart] = useState({
+    series: [
+    {
       name: "Messages",
       data: [25, 66, 41, 12, 36, 9, 21]
     }],
+
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         opacityFrom: 0, // Start with 0 opacity (transparent)
-        opacityTo: 0    // End with 0 opacity (transparent)
+        opacityTo: 0 // End with 0 opacity (transparent)
       }
     },
     chart: {
-      foreColor: '#fff',
+      foreColor: "#fff",
       type: "area",
       width: 50,
       toolbar: {
@@ -180,11 +188,10 @@ const Companies = () => {
         enabled: !1
       },
       dropShadow: {
-        enabled: 0,
         top: 3,
         left: 14,
         blur: 4,
-        opacity: .12,
+        opacity: 0.12,
         color: "#fff"
       },
       sparkline: {
@@ -204,7 +211,7 @@ const Companies = () => {
       bar: {
         horizontal: !1,
         columnWidth: "35%",
-        endingShape: "rounded"
+        borderRadius: 4
       }
     },
     dataLabels: {
@@ -217,7 +224,17 @@ const Companies = () => {
     },
     colors: ["#F26522"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+      categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep"]
+
     },
     tooltip: {
       theme: "dark",
@@ -230,7 +247,7 @@ const Companies = () => {
       y: {
         title: {
           formatter: function () {
-            return ""
+            return "";
           }
         }
       },
@@ -238,21 +255,23 @@ const Companies = () => {
         show: !1
       }
     }
-  })
-  const [activeChart] = React.useState({
-    series: [{
+  });
+  const [activeChart] = useState({
+    series: [
+    {
       name: "Active Company",
       data: [25, 40, 35, 20, 36, 9, 21]
     }],
+
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         opacityFrom: 0, // Start with 0 opacity (transparent)
-        opacityTo: 0    // End with 0 opacity (transparent)
+        opacityTo: 0 // End with 0 opacity (transparent)
       }
     },
     chart: {
-      foreColor: '#fff',
+      foreColor: "#fff",
       type: "area",
       width: 50,
       toolbar: {
@@ -262,11 +281,10 @@ const Companies = () => {
         enabled: !1
       },
       dropShadow: {
-        enabled: 0,
         top: 3,
         left: 14,
         blur: 4,
-        opacity: .12,
+        opacity: 0.12,
         color: "#fff"
       },
       sparkline: {
@@ -286,7 +304,7 @@ const Companies = () => {
       bar: {
         horizontal: !1,
         columnWidth: "35%",
-        endingShape: "rounded"
+        borderRadius: 4
       }
     },
     dataLabels: {
@@ -299,7 +317,17 @@ const Companies = () => {
     },
     colors: ["#F26522"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+      categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep"]
+
     },
     tooltip: {
       theme: "dark",
@@ -312,7 +340,7 @@ const Companies = () => {
       y: {
         title: {
           formatter: function () {
-            return ""
+            return "";
           }
         }
       },
@@ -320,21 +348,23 @@ const Companies = () => {
         show: !1
       }
     }
-  })
-  const [inactiveChart] = React.useState({
-    series: [{
+  });
+  const [inactiveChart] = useState({
+    series: [
+    {
       name: "Inactive Company",
       data: [25, 10, 35, 5, 25, 28, 21]
     }],
+
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         opacityFrom: 0, // Start with 0 opacity (transparent)
-        opacityTo: 0    // End with 0 opacity (transparent)
+        opacityTo: 0 // End with 0 opacity (transparent)
       }
     },
     chart: {
-      foreColor: '#fff',
+      foreColor: "#fff",
       type: "area",
       width: 50,
       toolbar: {
@@ -344,11 +374,10 @@ const Companies = () => {
         enabled: !1
       },
       dropShadow: {
-        enabled: 0,
         top: 3,
         left: 14,
         blur: 4,
-        opacity: .12,
+        opacity: 0.12,
         color: "#fff"
       },
       sparkline: {
@@ -368,7 +397,7 @@ const Companies = () => {
       bar: {
         horizontal: !1,
         columnWidth: "35%",
-        endingShape: "rounded"
+        borderRadius: 4
       }
     },
     dataLabels: {
@@ -381,7 +410,17 @@ const Companies = () => {
     },
     colors: ["#F26522"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+      categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep"]
+
     },
     tooltip: {
       theme: "dark",
@@ -394,7 +433,7 @@ const Companies = () => {
       y: {
         title: {
           formatter: function () {
-            return ""
+            return "";
           }
         }
       },
@@ -402,21 +441,23 @@ const Companies = () => {
         show: !1
       }
     }
-  })
-  const [locationChart] = React.useState({
-    series: [{
+  });
+  const [locationChart] = useState({
+    series: [
+    {
       name: "Inactive Company",
       data: [30, 40, 15, 23, 20, 23, 25]
     }],
+
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         opacityFrom: 0, // Start with 0 opacity (transparent)
-        opacityTo: 0    // End with 0 opacity (transparent)
+        opacityTo: 0 // End with 0 opacity (transparent)
       }
     },
     chart: {
-      foreColor: '#fff',
+      foreColor: "#fff",
       type: "area",
       width: 50,
       toolbar: {
@@ -426,11 +467,10 @@ const Companies = () => {
         enabled: !1
       },
       dropShadow: {
-        enabled: 0,
         top: 3,
         left: 14,
         blur: 4,
-        opacity: .12,
+        opacity: 0.12,
         color: "#fff"
       },
       sparkline: {
@@ -450,7 +490,7 @@ const Companies = () => {
       bar: {
         horizontal: !1,
         columnWidth: "35%",
-        endingShape: "rounded"
+        borderRadius: 4
       }
     },
     dataLabels: {
@@ -463,7 +503,17 @@ const Companies = () => {
     },
     colors: ["#F26522"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+      categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep"]
+
     },
     tooltip: {
       theme: "dark",
@@ -476,7 +526,7 @@ const Companies = () => {
       y: {
         title: {
           formatter: function () {
-            return ""
+            return "";
           }
         }
       },
@@ -484,7 +534,7 @@ const Companies = () => {
         show: !1
       }
     }
-  })
+  });
 
   return (
     <>
@@ -508,9 +558,9 @@ const Companies = () => {
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add_company"
-              >
-                <i className='ti ti-circle-plus me-1'></i> Add Company
+                data-bs-target="#add_company">
+                
+                <i className="ti ti-circle-plus me-1"></i> Add Company
               </Link>
             </div>
           </div>
@@ -535,8 +585,8 @@ const Companies = () => {
                     options={totalChart}
                     series={totalChart.series}
                     type="area"
-                    width={50}
-                  />
+                    width={50} />
+                  
                 </div>
               </div>
             </div>
@@ -560,8 +610,8 @@ const Companies = () => {
                     options={activeChart}
                     series={activeChart.series}
                     type="area"
-                    width={50}
-                  />
+                    width={50} />
+                  
                 </div>
               </div>
             </div>
@@ -585,8 +635,8 @@ const Companies = () => {
                     options={inactiveChart}
                     series={inactiveChart.series}
                     type="area"
-                    width={50}
-                  />
+                    width={50} />
+                  
                 </div>
               </div>
             </div>
@@ -610,8 +660,8 @@ const Companies = () => {
                     options={locationChart}
                     series={locationChart.series}
                     type="area"
-                    width={50}
-                  />
+                    width={50} />
+                  
                 </div>
               </div>
             </div>
@@ -623,7 +673,7 @@ const Companies = () => {
               <div className="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="me-3">
                   <div className="input-icon-end position-relative">
-                    <PredefinedDateRanges />
+                    <CommonDateRangePicker />
                     <span className="input-icon-addon">
                       <i className="ti ti-chevron-down" />
                     </span>
@@ -633,32 +683,23 @@ const Companies = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Select Plan
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Advanced
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Basic
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Enterprise
                       </Link>
                     </li>
@@ -668,24 +709,18 @@ const Companies = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Select Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Active
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Inactive
                       </Link>
                     </li>
@@ -695,48 +730,33 @@ const Companies = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Sort By : Last 7 Days
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Recently Added
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Ascending
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Desending
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Last Month
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Last 7 Days
                       </Link>
                     </li>
@@ -746,9 +766,20 @@ const Companies = () => {
             </div>
             <div className="card-body p-0">
               <div className="table-responsive">
-                <Table columns={columns} dataSource={data} />
+                <PrimeDataTable
+                  column={columns}
+                  data={data}
+                  totalRecords={totalRecords}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  rows={rows}
+                  setRows={setRows}
+                  selectionMode="checkbox"
+                  selection={selectedCompanies}
+                  onSelectionChange={(e) => setSelectedCompanies(e.value)}
+                  dataKey="id"
+                />
               </div>
-
             </div>
           </div>
         </div>
@@ -765,8 +796,8 @@ const Companies = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
@@ -786,7 +817,11 @@ const Companies = () => {
                         <div className="profile-uploader d-flex align-items-center">
                           <div className="drag-upload-btn btn btn-sm btn-primary me-2">
                             Upload
-                            <input type="file" className="form-control image-sign" multiple="" />
+                            <input
+                              type="file"
+                              className="form-control image-sign"
+                              multiple />
+                            
                           </div>
                           <Link to="#" className="btn btn-secondary btn-sm">
                             Cancel
@@ -838,21 +873,18 @@ const Companies = () => {
                       <div className="pass-group">
                         <input
                           type={
-                            passwordVisibility.password
-                              ? "text"
-                              : "password"
+                          passwordVisibility.password ? "text" : "password"
                           }
-                          className="pass-input form-control"
-                        />
+                          className="pass-input form-control" />
+                        
                         <span
-                          className={`ti toggle-passwords ${passwordVisibility.password
-                            ? "ti-eye"
-                            : "ti-eye-off"
-                            }`}
-                          onClick={() =>
-                            togglePasswordVisibility("password")
+                          className={`ti toggle-passwords ${
+                          passwordVisibility.password ?
+                          "ti-eye" :
+                          "ti-eye-off"}`
                           }
-                        ></span>
+                          onClick={() => togglePasswordVisibility("password")}>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -864,21 +896,22 @@ const Companies = () => {
                       <div className="pass-group">
                         <input
                           type={
-                            passwordVisibility.confirmPassword
-                              ? "text"
-                              : "password"
+                          passwordVisibility.confirmPassword ?
+                          "text" :
+                          "password"
                           }
-                          className="pass-input form-control"
-                        />
+                          className="pass-input form-control" />
+                        
                         <span
-                          className={`ti toggle-passwords ${passwordVisibility.confirmPassword
-                            ? "ti-eye"
-                            : "ti-eye-off"
-                            }`}
-                          onClick={() =>
-                            togglePasswordVisibility("confirmPassword")
+                          className={`ti toggle-passwords ${
+                          passwordVisibility.confirmPassword ?
+                          "ti-eye" :
+                          "ti-eye-off"}`
                           }
-                        ></span>
+                          onClick={() =>
+                          togglePasswordVisibility("confirmPassword")
+                          }>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -896,8 +929,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planName}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -908,8 +941,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planType}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -920,8 +953,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={currency}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -932,8 +965,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={language}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -942,8 +975,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={statusChoose}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                 </div>
@@ -952,11 +985,15 @@ const Companies = () => {
                 <button
                   type="button"
                   className="btn btn-light me-2"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Cancel
                 </button>
-                <button type="button" data-bs-dismiss="modal" className="btn btn-primary">
+                <button
+                  type="button"
+                  data-bs-dismiss="modal"
+                  className="btn btn-primary">
+                  
                   Add Company
                 </button>
               </div>
@@ -975,8 +1012,8 @@ const Companies = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
@@ -996,7 +1033,11 @@ const Companies = () => {
                         <div className="profile-uploader d-flex align-items-center">
                           <div className="drag-upload-btn btn btn-sm btn-primary me-2">
                             Upload
-                            <input type="file" className="form-control image-sign" multiple="" />
+                            <input
+                              type="file"
+                              className="form-control image-sign"
+                              multiple />
+                            
                           </div>
                           <Link to="#" className="btn btn-secondary btn-sm">
                             Cancel
@@ -1013,8 +1054,8 @@ const Companies = () => {
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue="Stellar Dynamics"
-                      />
+                        defaultValue="Stellar Dynamics" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -1023,8 +1064,8 @@ const Companies = () => {
                       <input
                         type="email"
                         className="form-control"
-                        defaultValue="sophie@example.com"
-                      />
+                        defaultValue="sophie@example.com" />
+                      
                     </div>
                   </div>
                   <div className="col-md-12">
@@ -1033,8 +1074,8 @@ const Companies = () => {
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue="sd.example.com"
-                      />
+                        defaultValue="sd.example.com" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -1045,8 +1086,8 @@ const Companies = () => {
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue="+1 895455450"
-                      />
+                        defaultValue="+1 895455450" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -1055,8 +1096,8 @@ const Companies = () => {
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue="Admin Website"
-                      />
+                        defaultValue="Admin Website" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -1067,21 +1108,18 @@ const Companies = () => {
                       <div className="pass-group">
                         <input
                           type={
-                            passwordVisibility.password
-                              ? "text"
-                              : "password"
+                          passwordVisibility.password ? "text" : "password"
                           }
-                          className="pass-input form-control"
-                        />
+                          className="pass-input form-control" />
+                        
                         <span
-                          className={`ti toggle-passwords ${passwordVisibility.password
-                            ? "ti-eye"
-                            : "ti-eye-off"
-                            }`}
-                          onClick={() =>
-                            togglePasswordVisibility("password")
+                          className={`ti toggle-passwords ${
+                          passwordVisibility.password ?
+                          "ti-eye" :
+                          "ti-eye-off"}`
                           }
-                        ></span>
+                          onClick={() => togglePasswordVisibility("password")}>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -1093,21 +1131,22 @@ const Companies = () => {
                       <div className="pass-group">
                         <input
                           type={
-                            passwordVisibility.confirmPassword
-                              ? "text"
-                              : "password"
+                          passwordVisibility.confirmPassword ?
+                          "text" :
+                          "password"
                           }
-                          className="pass-input form-control"
-                        />
+                          className="pass-input form-control" />
+                        
                         <span
-                          className={`ti toggle-passwords ${passwordVisibility.confirmPassword
-                            ? "ti-eye"
-                            : "ti-eye-off"
-                            }`}
-                          onClick={() =>
-                            togglePasswordVisibility("confirmPassword")
+                          className={`ti toggle-passwords ${
+                          passwordVisibility.confirmPassword ?
+                          "ti-eye" :
+                          "ti-eye-off"}`
                           }
-                        ></span>
+                          onClick={() =>
+                          togglePasswordVisibility("confirmPassword")
+                          }>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -1125,8 +1164,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planName}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -1137,8 +1176,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planType}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -1149,8 +1188,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={currency}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -1161,8 +1200,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={language}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -1171,8 +1210,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={statusChoose}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                 </div>
@@ -1181,11 +1220,15 @@ const Companies = () => {
                 <button
                   type="button"
                   className="btn btn-light me-2"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Cancel
                 </button>
-                <button type="button" data-bs-dismiss="modal" className="btn btn-primary">
+                <button
+                  type="button"
+                  data-bs-dismiss="modal"
+                  className="btn btn-primary">
+                  
                   Save Changes
                 </button>
               </div>
@@ -1204,8 +1247,8 @@ const Companies = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
@@ -1266,8 +1309,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planName}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -1278,8 +1321,8 @@ const Companies = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planType}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -1300,11 +1343,11 @@ const Companies = () => {
                           className="form-control datetimepicker"
                           format={{
                             format: "DD-MM-YYYY",
-                            type: "mask",
+                            type: "mask"
                           }}
                           getPopupContainer={getModalContainer}
-                          placeholder="DD-MM-YYYY"
-                        />
+                          placeholder="DD-MM-YYYY" />
+                        
                         <span className="input-icon-addon">
                           <i className="ti ti-calendar text-gray-7" />
                         </span>
@@ -1321,11 +1364,11 @@ const Companies = () => {
                           className="form-control datetimepicker"
                           format={{
                             format: "DD-MM-YYYY",
-                            type: "mask",
+                            type: "mask"
                           }}
                           getPopupContainer={getModalContainer}
-                          placeholder="DD-MM-YYYY"
-                        />
+                          placeholder="DD-MM-YYYY" />
+                        
                         <span className="input-icon-addon">
                           <i className="ti ti-calendar text-gray-7" />
                         </span>
@@ -1342,11 +1385,11 @@ const Companies = () => {
                           className="form-control datetimepicker"
                           format={{
                             format: "DD-MM-YYYY",
-                            type: "mask",
+                            type: "mask"
                           }}
                           getPopupContainer={getModalContainer}
-                          placeholder="DD-MM-YYYY"
-                        />
+                          placeholder="DD-MM-YYYY" />
+                        
                         <span className="input-icon-addon">
                           <i className="ti ti-calendar text-gray-7" />
                         </span>
@@ -1359,11 +1402,15 @@ const Companies = () => {
                 <button
                   type="button"
                   className="btn btn-light me-2"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Cancel
                 </button>
-                <button type="button" data-bs-dismiss="modal" className="btn btn-primary">
+                <button
+                  type="button"
+                  data-bs-dismiss="modal"
+                  className="btn btn-primary">
+                  
                   Save Changes
                 </button>
               </div>
@@ -1382,8 +1429,8 @@ const Companies = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
@@ -1393,13 +1440,13 @@ const Companies = () => {
                   <div className="file-name-icon d-flex align-items-center">
                     <Link
                       to="#"
-                      className="avatar avatar-md border rounded-circle flex-shrink-0 me-2"
-                    >
-                      <ImageWithBasePath
+                      className="avatar avatar-md border rounded-circle flex-shrink-0 me-2">
+                      
+                      <img
                         src="assets/img/company/company-01.svg"
                         className="img-fluid"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <p className="text-gray-9 fw-medium mb-0">
@@ -1441,7 +1488,9 @@ const Companies = () => {
                     <div className="col-md-4">
                       <div className="mb-3">
                         <p className="fs-12 mb-0">Currency</p>
-                        <p className="text-gray-9">United Stated Dollar (USD)</p>
+                        <p className="text-gray-9">
+                          United Stated Dollar (USD)
+                        </p>
                       </div>
                     </div>
                     <div className="col-md-4">
@@ -1514,18 +1563,22 @@ const Companies = () => {
                 </span>
                 <h4 className="mb-1">Confirm Delete</h4>
                 <p className="mb-3">
-                  You want to delete all the marked items, this cant be undone once
-                  you delete.
+                  You want to delete all the marked items, this cant be undone
+                  once you delete.
                 </p>
                 <div className="d-flex justify-content-center">
                   <Link
                     to="#"
                     className="btn btn-secondary me-3"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </Link>
-                  <Link to="#" className="btn btn-primary" data-bs-dismiss="modal">
+                  <Link
+                    to="#"
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal">
+                    
                     Yes, Delete
                   </Link>
                 </div>
@@ -1535,11 +1588,8 @@ const Companies = () => {
         </div>
         {/* /Delete Modal */}
       </>
+    </>);
 
-    </>
+};
 
-
-  )
-}
-
-export default Companies
+export default Companies;

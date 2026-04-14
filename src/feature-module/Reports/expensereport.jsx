@@ -1,77 +1,86 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
+import CommonFooter from "../../components/footer/commonFooter";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
+import PrimeDataTable from "../../components/data-table";
+import CommonSelect from "../../components/select/common-select";
 import { expensereportdata } from "../../core/json/expensereportdata";
-import Table from "../../core/pagination/datatable";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { DatePicker } from "antd";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
 
 const ExpenseReport = () => {
   const data = expensereportdata;
+  const [listData, _setListData] = useState(data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, _setSearchQuery] = useState(undefined);
+  const [selectedExpenseCategory, setSelectedExpenseCategory] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
 
   const ExpenseCategory = [
-    { value: "All", label: "All" },
-    { value: "Electricity Payment", label: "Electricity Payment" },
-    { value: "Stationery Purchase", label: "Stationery Purchase" },
-    { value: "AC Repair Service", label: "AC Repair Service" },
-  ]
+  { value: "All", label: "All" },
+  { value: "Electricity Payment", label: "Electricity Payment" },
+  { value: "Stationery Purchase", label: "Stationery Purchase" },
+  { value: "AC Repair Service", label: "AC Repair Service" }];
+
   const PaymentMethode = [
-    { value: "All", label: "All" },
-    { value: "Paypal", label: "Paypal" },
-    { value: "Cash", label: "Cash" },
-    { value: "Credit Card", label: "Credit Card" },
-  ]
+  { value: "All", label: "All" },
+  { value: "Paypal", label: "Paypal" },
+  { value: "Cash", label: "Cash" },
+  { value: "Credit Card", label: "Credit Card" }];
+
   const Status = [
-    { value: "All", label: "All" },
-    { value: "Approved", label: "Approved" },
-    { value: "Pending", label: "Pending" },
-  ]
+  { value: "All", label: "All" },
+  { value: "Approved", label: "Approved" },
+  { value: "Pending", label: "Pending" }];
+
 
   const columns = [
-    {
-      title: "Expense Name",
-      dataIndex: "Expense_Name",
-      sorter: (a, b) => a.Expense_Name.length - b.Expense_Name.length,
-    },
-    {
-      title: "Category",
-      dataIndex: "Category",
+  {
+    header: "Expense Name",
+    field: "Expense_Name",
+    sorter: (a, b) => a.Expense_Name.length - b.Expense_Name.length
+  },
+  {
+    header: "Category",
+    field: "Category",
 
-      sorter: (a, b) => a.Category.length - b.Category.length,
-    },
+    sorter: (a, b) => a.Category.length - b.Category.length
+  },
 
-    {
-      title: "Description",
-      dataIndex: "Description",
-      sorter: (a, b) => a.Description.length - b.Description.length,
-    },
+  {
+    header: "Description",
+    field: "Description",
+    sorter: (a, b) => a.Description.length - b.Description.length
+  },
 
-    {
-      title: "Date",
-      dataIndex: "Date",
-      sorter: (a, b) => a.Date.length - b.Date.length,
-    },
-    {
-      title: "Amount",
-      dataIndex: "Amount",
-      sorter: (a, b) => a.Amount.length - b.Amount.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      render: (text) => (
-        <>
-          <span className={`badge ${text === 'Approved' ? 'badge-success' : 'badge-cyan'} d-inline-flex align-items-center badge-xs`}>
-            {text}
+  {
+    header: "Date",
+    field: "Date",
+    sorter: (a, b) => a.Date.length - b.Date.length
+  },
+  {
+    header: "Amount",
+    field: "Amount",
+    sorter: (a, b) => a.Amount.length - b.Amount.length
+  },
+  {
+    header: "Status",
+    field: "Status",
+    body: (text) =>
+    <>
+          <span
+        className={`badge ${text === "Approved" ? "badge-success" : "badge-cyan"} d-inline-flex align-items-center badge-xs`}>
+        
+            {text.Status}
           </span>
-        </>
-      ),
-      sorter: (a, b) => a.Status.length - b.Status.length,
-    },
-  ];
+        </>,
+
+    sorter: (a, b) => a.Status.length - b.Status.length
+  }];
 
 
   return (
@@ -99,10 +108,7 @@ const ExpenseReport = () => {
                       <div className="mb-3">
                         <label className="form-label">Choose Date</label>
                         <div className="input-icon-start position-relative">
-                          <DatePicker
-                            className="form-control datetimepicker"
-                            placeholder="dd/mm/yyyy"
-                          />
+                          <CommonDateRangePicker />
                           <span className="input-icon-left">
                             <i className="ti ti-calendar" />
                           </span>
@@ -112,31 +118,40 @@ const ExpenseReport = () => {
                     <div className="col-md-3">
                       <div className="mb-3">
                         <label className="form-label">Expense Category</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={ExpenseCategory}
+                          value={selectedExpenseCategory}
+                          onChange={(e) => setSelectedExpenseCategory(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-md-3">
                       <div className="mb-3">
                         <label className="form-label">Payment Method</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={PaymentMethode}
+                          value={selectedPaymentMethod}
+                          onChange={(e) => setSelectedPaymentMethod(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-md-3">
                       <div className="mb-3">
                         <label className="form-label">Status</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={Status}
+                          value={selectedStatus}
+                          onChange={(e) => setSelectedStatus(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                   </div>
@@ -161,7 +176,12 @@ const ExpenseReport = () => {
             <ul className="table-top-head">
               <TooltipIcons />
               <li>
-                <Link to="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Print">
+                <Link
+                  to="#"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Print">
+                  
                   <i className="ti ti-printer" />
                 </Link>
               </li>
@@ -169,16 +189,23 @@ const ExpenseReport = () => {
           </div>
           <div className="card-body">
             <div className="table-responsive custome-search">
-              <Table columns={columns} dataSource={data} />
+              <PrimeDataTable
+                column={columns}
+                data={listData}
+                rows={rows}
+                setRows={setRows}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalRecords={totalRecords} />
+              
             </div>
           </div>
         </div>
         {/* /product list */}
       </div>
       <CommonFooter />
-    </div>
+    </div>);
 
-  );
 };
 
 export default ExpenseReport;

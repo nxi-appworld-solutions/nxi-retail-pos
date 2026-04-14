@@ -1,14 +1,12 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
 import AwsSettings from "../../../core/modals/settings/awssettings";
 import SettingsSideBar from "../settingssidebar";
-import RefreshIcon from "../../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../../core/common/tooltip-content/collapes";
-import { Settings } from "feather-icons-react/build/IconComponents";
+import RefreshIcon from "../../../components/tooltip-content/refresh";
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+
+import { storageIcon01, storageIcon02 } from "../../../utils/imagepath";
 
 const StorageSettings = () => {
-
   return (
     <div>
       <div className="page-wrapper">
@@ -41,22 +39,25 @@ const StorageSettings = () => {
                             <div className="d-flex align-items-center justify-content-between">
                               <div className="d-flex align-items-center">
                                 <span className="system-app-icon">
-                                  <ImageWithBasePath src="assets/img/icons/storage-icon-01.svg" alt="Img" />
+                                  <img src={storageIcon01} alt="Img" />
                                 </span>
                                 <h6>Local Storage</h6>
                               </div>
                               <div className="d-flex align-items-center">
                                 <Link to="#">
-                                  <Settings className="me-2"/>
+                                  <i className="feather icon-settings me-2" />
                                 </Link>
                                 <div className="status-toggle modal-status d-flex justify-content-between align-items-center ms-2">
                                   <input
                                     type="checkbox"
                                     id="user1"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user1" className="checktoggle">
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user1"
+                                    className="checktoggle">
+                                    
                                     {" "}
                                   </label>
                                 </div>
@@ -71,7 +72,7 @@ const StorageSettings = () => {
                             <div className="d-flex align-items-center justify-content-between">
                               <div className="d-flex align-items-center">
                                 <span className="system-app-icon">
-                                  <ImageWithBasePath src="assets/img/icons/storage-icon-02.svg" alt="Img" />
+                                  <img src={storageIcon02} alt="Img" />
                                 </span>
                                 <h6>AWS</h6>
                               </div>
@@ -79,18 +80,21 @@ const StorageSettings = () => {
                                 <Link
                                   to="#"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#aws-config"
-                                >
-                                  <Settings  className="me-2"/>
+                                  data-bs-target="#aws-config">
+                                  
+                                   <i className="feather icon-settings me-2" />
                                 </Link>
                                 <div className="status-toggle modal-status d-flex justify-content-between align-items-center ms-2">
                                   <input
                                     type="checkbox"
                                     id="user2"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user2" className="checktoggle">
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user2"
+                                    className="checktoggle">
+                                    
                                     {" "}
                                   </label>
                                 </div>
@@ -102,13 +106,12 @@ const StorageSettings = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
         <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-          <p className="mb-0">2014-2025 © DreamsPOS. All Right Reserved</p>
+          <p className="mb-0">2014-2026 © DreamsPOS. All Right Reserved</p>
           <p>
             Designed &amp; Developed By{" "}
             <Link to="#" className="text-primary">
@@ -119,8 +122,8 @@ const StorageSettings = () => {
       </div>
 
       <AwsSettings />
-    </div>
-  );
+    </div>);
+
 };
 
 export default StorageSettings;

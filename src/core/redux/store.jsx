@@ -1,35 +1,37 @@
-import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "./reducer";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { getPreloadedState, saveToLocalStorage } from "./localStorage";
+import sidebarSlice from "./sidebarSlice";
+import commonSlice from "./commonSlice";
+import MainReducer from "./reducer";
 import themeSettingSlice from "./themeSettingSlice";
-import transactionReducer from "./transactionSlice";
-import cartReducer from "./cartSlice";
-import orderReducer from "./orderSlice";
-import posOrderSlice from "./posOrderSlice";
-import storeTypeReducer from "./storeTypeSlice";
 import modalReducer from "./store/modalSlice";
 
-import {
-  registerCrossTabListener,
-  storeTypeMiddleware,
-} from "./middleware/storeTypeMiddleware";
-import { fraudDetectionMiddleware } from "./middleware/fraudDetectionMiddleware";
-
-const store = configureStore({
-  reducer: {
-    rootReducer: rootReducer,
-    themeSetting: themeSettingSlice,
-    transaction: transactionReducer,
-    storeType: storeTypeReducer,
-    cart: cartReducer,
-    posOrder: posOrderSlice,
-    order: orderReducer,
-    modal: modalReducer,
-  },
-  middleware: (getDefault) =>
-    getDefault().concat(storeTypeMiddleware, fraudDetectionMiddleware),
+const combinedReducer = combineReducers({
+  sidebar: sidebarSlice,
+  common: commonSlice,
+  rootReducer: MainReducer,
+  themeSetting: themeSettingSlice,
+  modal: modalReducer,
 });
 
-// Enable cross-tab syncing
-registerCrossTabListener(store);
+const rootReducer = (state, action) => {
+  if (action.type === "login/logout") {
+    state = undefined;
+  }
+
+  return combinedReducer(state, action);
+};
+
+const store = configureStore({
+  reducer: rootReducer,
+  preloadedState: getPreloadedState(),
+  modal: modalReducer,
+});
+
+function onStateChange() {
+  saveToLocalStorage(store.getState());
+}
+
+store.subscribe(onStateChange);
 
 export default store;

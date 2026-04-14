@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+
+import { Link } from 'react-router-dom';
 
 const EditLeaveType = () => {
-    return (
-        <div>
+  return (
+    <div>
             {/* Edit Warehouse */}
             <div className="modal fade" id="edit-units">
                 <div className="modal-dialog modal-dialog-centered custom-modal-two">
@@ -15,11 +15,11 @@ const EditLeaveType = () => {
                                         <h4>Edit Leave Type</h4>
                                     </div>
                                     <button
-                                        type="button"
-                                        className="close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    >
+                    type="button"
+                    className="close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+                    
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
@@ -42,11 +42,10 @@ const EditLeaveType = () => {
                                                 <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
                                                     <span className="status-label">Status</span>
                                                     <input
-                                                        type="checkbox"
-                                                        id="user4"
-                                                        className="check"
-                                                        defaultChecked="true"
-                                                    />
+                            type="checkbox"
+                            id="user4"
+                            className="check" />
+                          
                                                     <label htmlFor="user4" className="checktoggle">
                                                         {" "}
                                                     </label>
@@ -55,10 +54,10 @@ const EditLeaveType = () => {
                                         </div>
                                         <div className="modal-footer-btn">
                                             <button
-                                                type="button"
-                                                className="btn btn-cancel me-2"
-                                                data-bs-dismiss="modal"
-                                            >
+                        type="button"
+                        className="btn btn-cancel me-2"
+                        data-bs-dismiss="modal">
+                        
                                                 Cancel
                                             </button>
                                             <Link to="#" className="btn btn-submit">
@@ -73,8 +72,8 @@ const EditLeaveType = () => {
                 </div>
             </div>
             {/* /Edit Warehouse */}
-        </div>
-    )
-}
+        </div>);
 
-export default EditLeaveType
+};
+
+export default EditLeaveType;

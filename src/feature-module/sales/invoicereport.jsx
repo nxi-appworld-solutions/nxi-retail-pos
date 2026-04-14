@@ -1,109 +1,116 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Table from "../../core/pagination/datatable";
 import { invoicereportdata } from "../../core/json/invoicereportdata";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { Eye, Trash2 } from "feather-icons-react/build/IconComponents";
-import { all_routes } from "../../Router/all_routes";
-import CommonDeleteModal from "../../core/common/modal/commonDeleteModal";
+import CommonFooter from "../../components/footer/commonFooter";
+import { all_routes } from "../../routes/all_routes";
+import PrimeDataTable from "../../components/data-table";
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
 
 const Invoice = () => {
   const data = invoicereportdata;
   const route = all_routes;
+  const [selectedInvoices, setSelectedInvoices] = useState([]);
   const columns = [
-    {
-      title: "Invoice No",
-      dataIndex: "invoiceno",
-      render:(text) =>(
-        <>
-        <Link>{text}</Link>
+  {
+    header: "Invoice No",
+    field: "invoiceno",
+    body: (text) =>
+    <>
+          <Link to="#">{text?.invoiceno}</Link>
         </>
-      ),
-      sorter: (a, b) => a.invoiceno.length - b.invoiceno.length,
-    },
 
-    {
-      title: "Customer",
-      dataIndex: "customer",
-      render: (text, render) => (
-        <div className="d-flex align-items-center">
+  },
+
+  {
+    header: "Customer",
+    field: "customer",
+    body: (text) =>
+    <div className="d-flex align-items-center">
           <Link to="#" className="avatar avatar-md">
-            <ImageWithBasePath src={`assets/img/users/${render.image}`} alt="product" />
+            <img src={text.image} alt="product" />
           </Link>
-          <Link to="#" className="ms-2">{text}</Link>
+          <Link to="#" className="ms-2">
+            {text?.customer}
+          </Link>
         </div>
 
-      ),
-      sorter: (a, b) => a.customer.length - b.customer.length,
-    },
-    {
-      title: "Due Date",
-      dataIndex: "duedate",
-      sorter: (a, b) => a.duedate.length - b.duedate.length,
-    },
-    {
-      title: "Amount",
-      dataIndex: "amount",
-      sorter: (a, b) => a.amount.length - b.amount.length,
-    },
-    {
-      title: "Paid",
-      dataIndex: "paid",
-      sorter: (a, b) => a.paid.length - b.paid.length,
-    },
-    {
-      title: "Amount Due",
-      dataIndex: "amountdue",
-      sorter: (a, b) => a.amountdue.length - b.amountdue.length,
-    },
+  },
+  {
+    header: "Due Date",
+    field: "duedate"
+  },
+  {
+    header: "Amount",
+    field: "amount"
+  },
+  {
+    header: "Paid",
+    field: "paid"
+  },
+  {
+    header: "Amount Due",
+    field: "amountdue"
+  },
 
-    {
-      title: "Status",
-      dataIndex: "status",
-      render: (text) => (
-        <div>
-          {text === "Paid" && (
-            <span className="badge badge-soft-success badge-xs shadow-none"><i className="ti ti-point-filled me-1"></i>{text}</span>
-          )}
-          {text === "Unpaid" && (
-            <span className="badge badge-soft-danger badge-xs shadow-none"><i className="ti ti-point-filled me-1"></i>{text}</span>
-          )}
-          {text === "Overdue" && (
-            <span className="badge badge-soft-warning badge-xs shadow-none"><i className="ti ti-point-filled me-1"></i>{text}</span>
-          )}
+  {
+    header: "Status",
+    field: "status",
+    body: (text) =>
+    <div>
+          {text?.status === "Paid" &&
+      <span className="badge badge-soft-success badge-xs shadow-none">
+              <i className="ti ti-point-filled me-1"></i>
+              {text?.status}
+            </span>
+      }
+          {text?.status === "Unpaid" &&
+      <span className="badge badge-soft-danger badge-xs shadow-none">
+              <i className="ti ti-point-filled me-1"></i>
+              {text?.status}
+            </span>
+      }
+          {text?.status === "Overdue" &&
+      <span className="badge badge-soft-warning badge-xs shadow-none">
+              <i className="ti ti-point-filled me-1"></i>
+              {text?.status}
+            </span>
+      }
         </div>
-      ),
-      sorter: (a, b) => a.status.length - b.status.length,
-    },
-    {
-      title: "",
-      dataIndex: "action",
-      render: () => (
-        <div className="edit-delete-action d-flex align-items-center justify-content-center">
+
+  },
+  {
+    header: "",
+    field: "action",
+    body: () =>
+    <div className="edit-delete-action d-flex align-items-center justify-content-center">
           <Link
-            className="me-2 p-2 d-flex align-items-center justify-content-between border rounded"
-            to={route.invoicedetails}
-          >
-            <Eye className="feather-eye" />
+        className="me-2 p-2 d-flex align-items-center justify-content-between border rounded"
+        to={route.invoicedetails}>
+        
+            <i className="feather icon-eye feather-eye" />
           </Link>
           <Link
-            className="p-2 d-flex align-items-center justify-content-between border rounded"
-            to="#"
-            data-bs-toggle="modal"
-            data-bs-target="#delete-modal"
-          >
-            <Trash2 className="feather-trash-2" />
+        className="p-2 d-flex align-items-center justify-content-between border rounded"
+        to="#"
+        data-bs-toggle="modal"
+        data-bs-target="#delete-modal">
+        
+            <i className="feather icon-trash-2"></i>
           </Link>
         </div>
 
-      ),
-      sorter: (a, b) => a.status.length - b.status.length,
-    },
-  ];
+  }];
+
+
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(
+    undefined
+  );
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
 
   // const Customer = [
   //   { label: 'Carl Evans', value: '1' },
@@ -128,26 +135,24 @@ const Invoice = () => {
                 <h6>Manage your stock invoices</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
           </div>
 
           {/* /product list */}
-          <div className="card table-list-card no-search">
+          <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Customer
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -177,8 +182,8 @@ const Invoice = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -203,8 +208,8 @@ const Invoice = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Sort By : Last 7 Days
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -240,7 +245,19 @@ const Invoice = () => {
 
             <div className="card-body">
               <div className=" table-responsive">
-                <Table columns={columns} dataSource={data} />
+                <PrimeDataTable
+                  column={columns}
+                  data={data}
+                  rows={10}
+                  setRows={() => {}}
+                  currentPage={1}
+                  setCurrentPage={() => {}}
+                  totalRecords={10}
+                  selectionMode="checkbox"
+                  selection={selectedInvoices}
+                  onSelectionChange={(e) => setSelectedInvoices(e.value)}
+                  dataKey="id" />
+                
               </div>
             </div>
           </div>
@@ -249,9 +266,9 @@ const Invoice = () => {
         <CommonFooter />
       </div>
 
-      <CommonDeleteModal />
-    </div>
-  );
+      <DeleteModal />
+    </div>);
+
 };
 
 export default Invoice;

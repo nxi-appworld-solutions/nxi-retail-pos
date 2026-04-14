@@ -1,102 +1,71 @@
-import React from "react";
-import Table from "../../core/pagination/datatable";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { ProductsData } from "../../core/json/productsdata";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import { Download, Eye } from "feather-icons-react/build/IconComponents";
-import { all_routes } from "../../Router/all_routes";
+import CommonFooter from "../../components/footer/commonFooter";
+import { all_routes } from "../../routes/all_routes";
+import TableTopHead from "../../components/table-top-head";
+import CommonSelect from "../../components/select/common-select";
+import { Editor } from "primereact/editor";
+import SearchFromApi from "../../components/data-table/search";
+import { downloadImg } from "../../utils/imagepath";
 
 const Products = () => {
+  const [text, setText] = useState("");
   const route = all_routes;
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  // const [Category, setCategory] = useState([]);
+  // const [SubCategory, setSubCategory] = useState([]);
 
-  const data = ProductsData;
+  useEffect(() => {
+    fetchProducts();
+    // fetchCategories();
+    // fetchSubCategories();
+  }, []);
 
-  const columns = [
-    {
-      title: "SKU",
-      dataIndex: "SKU",
-      sorter: (a, b) => a.SKU.length - b.SKU.length,
-    },
-    {
-      title: "Product Name",
-      dataIndex: "Product_Name",
-      render: (text, render) => (
-        <div className="d-flex align-items-center">
-          <Link to="#" className="avatar avatar-md">
-            <ImageWithBasePath src={render.image} alt="product" />
-          </Link>
-          <Link to="#">{text}</Link>
-        </div>
-      ),
-      sorter: (a, b) => a.Product_Name.length - b.Product_Name.length,
-    },
+  const fetchProducts = async () => {
+    setLoading(true);
+    
+    try {
+      const res = await fetch(`${api_url}/GetMaster?masterType=6`);
+      const json = await res.json();
+      console.log("Products data:", json);
+      const formattedData = json?.data?.map((row) => ({
+        code: row.code,
+        name: row.name,
+        category: row.category,
+        subCategory: row.subCategory,
+        createdBy: row.createdBy,
+        createdAt: row.createdAt,
+      }));
+      setProducts(formattedData);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    {
-      title: "Category",
-      dataIndex: "Category",
-      sorter: (a, b) => a.Category.length - b.Category.length,
-    },
+  // const products = [
+  //   { value: "Bold V3.2", label: "Bold V3.2" },
+  //   { value: "Nike Jordan", label: "Nike Jordan" },
+  //   { value: "Iphone 14 Pro", label: "Iphone 14 Pro" },
+  // ];
 
-    {
-      title: "Brand",
-      dataIndex: "Brand",
-      sorter: (a, b) => a.Email.length - b.Email.length,
-    },
+  const Category = [
+    { value: "Laptop", label: "Laptop" },
+    { value: "Electronics", label: "Electronics" },
+    { value: "Shoe", label: "Shoe" },
+  ];
 
-    {
-      title: "Price",
-      dataIndex: "Price",
-      sorter: (a, b) => a.Price.length - b.Price.length,
-    },
-    {
-      title: "Unit",
-      dataIndex: "Unit",
-      sorter: (a, b) => a.Unit.length - b.Unit.length,
-    },
-    {
-      title: "Qty",
-      dataIndex: "Qty",
-      sorter: (a, b) => a.Qty.length - b.Qty.length,
-    },
-
-    {
-      title: "Created By",
-      dataIndex: "Created_By",
-      render: (text, render) => (
-        <div className="d-flex align-items-center">
-          <span>
-            <Link to="#" className="avatar avatar-md me-2">
-              <ImageWithBasePath src={render.profile_image} alt="product" />
-            </Link>
-          </span>
-          <Link to="#">{text}</Link>
-        </div>
-      ),
-      sorter: (a, b) => a.Created_By.length - b.Created_By.length,
-    },
-
-    {
-      title: "",
-      dataIndex: "action",
-      render: () => (
-        <div className="edit-delete-action">
-          <Link className="me-2 edit-icon p-2" to={route.productdetails}>
-            <Eye className="action-eye" />
-          </Link>
-          <Link className="me-2 p-2" to={route.editproduct}>
-            <i data-feather="edit" className="feather-edit" />
-          </Link>
-          <Link className="p-2" to="#">
-            <i data-feather="trash-2" className="feather-trash-2" />
-          </Link>
-        </div>
-      ),
-      sorter: (a, b) => a.action.length - b.action.length,
-    },
+  const SubCategory = [
+    { value: "Lenovo", label: "Lenovo" },
+    { value: "Bolt", label: "Bolt" },
+    { value: "Nike", label: "Nike" },
   ];
 
   return (
@@ -106,15 +75,11 @@ const Products = () => {
           <div className="page-header">
             <div className="add-item d-flex">
               <div className="page-title">
-                <h4 className="fw-bold">Product List</h4>
+                <h4 className="fw-bold">Product List333</h4>
                 <h6>Manage your products</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link to={route.addproduct} className="btn btn-primary">
                 <i className="ti ti-circle-plus me-1"></i>
@@ -128,7 +93,7 @@ const Products = () => {
                 data-bs-toggle="modal"
                 data-bs-target="#view-notes"
               >
-                <Download className="me-2" />
+                <i className="feather icon-download me-2"></i>
                 Import Product
               </Link>
             </div>
@@ -136,8 +101,13 @@ const Products = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set"></div>
-              {/* <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+              <SearchFromApi
+                callback={(e) => setSearchQuery(e)}
+                rows={rows}
+                setRows={setRows}
+              />
+
+              <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
@@ -298,11 +268,11 @@ const Products = () => {
                     </li>
                   </ul>
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="card-body">
               <div className=" table-responsive">
-                <Table columns={columns} dataSource={data} />
+                {/* <Table columns={columns} dataSource={data} /> */}
               </div>
             </div>
           </div>
@@ -310,6 +280,162 @@ const Products = () => {
         </div>
         <CommonFooter />
       </div>
+      <>
+        {/* Import Product */}
+        <div className="modal fade" id="view-notes">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="page-wrapper-new p-0">
+                <div className="content">
+                  <div className="modal-header">
+                    <div className="page-title">
+                      <h4>Import Product</h4>
+                    </div>
+                    <button
+                      type="button"
+                      className="close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <form>
+                      <div className="modal-top">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="input-blocks">
+                              <label>
+                                Product
+                                <span className="ms-1 text-danger">*</span>
+                              </label>
+                              <CommonSelect
+                                className="w-100"
+                                options={products}
+                                value={selectedProduct}
+                                onChange={(e) => setSelectedProduct(e.value)}
+                                placeholder="Choose"
+                                filter={false}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-sm-6 col-12">
+                            <div className="input-blocks">
+                              <label>
+                                Category
+                                <span className="ms-1 text-danger">*</span>
+                              </label>
+                              <CommonSelect
+                                className="w-100"
+                                options={Category}
+                                value={selectedCategory}
+                                onChange={(e) => setSelectedCategory(e.value)}
+                                placeholder="Choose"
+                                filter={false}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-sm-6 col-12">
+                            <div className="input-blocks">
+                              <label>
+                                Sub Category
+                                <span className="ms-1 text-danger">*</span>
+                              </label>
+                              <CommonSelect
+                                className="w-100"
+                                options={SubCategory}
+                                value={selectedSubCategory}
+                                onChange={(e) =>
+                                  setSelectedSubCategory(e.value)
+                                }
+                                placeholder="Choose"
+                                filter={false}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-lg-12 col-sm-6 col-12">
+                            <div className="row">
+                              <div>
+                                <div className="modal-footer-btn download-file">
+                                  <Link to="#" className="btn btn-submit">
+                                    Download Sample File
+                                  </Link>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-lg-12">
+                            <div className="input-blocks image-upload-down">
+                              <label> Upload CSV File</label>
+                              <div className="image-upload download">
+                                <input type="file" />
+                                <div className="image-uploads">
+                                  <img src={downloadImg} alt="img" />
+
+                                  <h4>
+                                    Drag and drop a <span>file to upload</span>
+                                  </h4>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-lg-12 col-sm-6 col-12">
+                            <div className="mb-3">
+                              <label className="form-label">
+                                Created by
+                                <span className="ms-1 text-danger">*</span>
+                              </label>
+                              <input type="text" className="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-lg-12">
+                            <div className="mb-3 input-blocks">
+                              <label className="form-label">Description</label>
+                              <Editor
+                                value={text}
+                                onTextChange={(e) => setText(e.htmlValue)}
+                                style={{ height: "200px" }}
+                              />
+
+                              <p className="mt-1">Maximum 60 Characters</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="modal-btns">
+                        <div className="row">
+                          <div className="col-lg-12">
+                            <div className="modal-footer-btn">
+                              <button
+                                type="button"
+                                className="btn btn-cancel me-2 p-2 px-3"
+                                data-bs-dismiss="modal"
+                              >
+                                Cancel
+                              </button>
+                              <Link
+                                to="#"
+                                className="btn btn-submit p-2 px-3"
+                                data-bs-dismiss="modal"
+                              >
+                                Submit
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* /Import Product */}
+      </>
     </div>
   );
 };

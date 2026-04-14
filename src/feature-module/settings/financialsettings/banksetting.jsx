@@ -1,91 +1,42 @@
-import {
-  ChevronUp,
-  Edit2,
-  Filter,
-  Grid,
-  List,
-  RotateCcw,
-  Sliders,
-  User,
-} from "feather-icons-react/build/IconComponents";
-import React, { useState } from "react";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { setToogleHeader } from "../../../core/redux/action";
-import { useDispatch, useSelector } from "react-redux";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
-import Select from "react-select";
 import BankSettingList from "../../../core/modals/settings/banksettinglist";
 import EditBankSettingList from "../../../core/modals/settings/editbanksettinglist";
-import withReactContent from "sweetalert2-react-content";
-import Swal from "sweetalert2";
 import SettingsSideBar from "../settingssidebar";
-import { all_routes } from "../../../Router/all_routes";
+import { all_routes } from "../../../routes/all_routes";
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+import RefreshIcon from "../../../components/tooltip-content/refresh";
+import CommonSelect from "../../../components/select/common-select";
+import { closes } from "../../../utils/imagepath";
 
 const BankSetting = () => {
   const route = all_routes;
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.rootReducer.toggle_header);
-
-  const renderRefreshTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Refresh
-    </Tooltip>
-  );
-  const renderCollapseTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Collapse
-    </Tooltip>
-  );
-
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [selectedSort, setSelectedSort] = useState(null);
+  const [selectedName, setSelectedName] = useState(null);
+  const [selectedBank, setSelectedBank] = useState(null);
+
   const toggleFilterVisibility = () => {
     setIsFilterVisible((prevVisibility) => !prevVisibility);
   };
   const oldandlatestvalue = [
-    { value: "date", label: "Sort by Date" },
-    { value: "newest", label: "Newest" },
-    { value: "oldest", label: "Oldest" },
-  ];
-  const options = [
-    { value: "chooseName", label: "Choose Name" },
-    { value: "mathew", label: "Mathew" },
-    { value: "johnSmith", label: "John Smith" },
-    { value: "andrew", label: "Andrew" },
-  ];
-  const banklist = [
-    { value: "chooseBank", label: "Choose Bank" },
-    { value: "hdfc", label: "HDFC" },
-    { value: "swissBank", label: "Swiss Bank" },
-    { value: "canaraBank", label: "Canara Bank" },
-  ];
-  const MySwal = withReactContent(Swal);
+  { value: "date", label: "Sort by Date" },
+  { value: "newest", label: "Newest" },
+  { value: "oldest", label: "Oldest" }];
 
-  const showConfirmationAlert = () => {
-    MySwal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      showCancelButton: true,
-      confirmButtonColor: "#00ff00",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonColor: "#ff0000",
-      cancelButtonText: "Cancel",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        MySwal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          className: "btn btn-success",
-          confirmButtonText: "OK",
-          customClass: {
-            confirmButton: "btn btn-success",
-          },
-        });
-      } else {
-        MySwal.close();
-      }
-    });
-  };
+  const options = [
+  { value: "chooseName", label: "Choose Name" },
+  { value: "mathew", label: "Mathew" },
+  { value: "johnSmith", label: "John Smith" },
+  { value: "andrew", label: "Andrew" }];
+
+  const banklist = [
+  { value: "chooseBank", label: "Choose Bank" },
+  { value: "hdfc", label: "HDFC" },
+  { value: "swissBank", label: "Swiss Bank" },
+  { value: "canaraBank", label: "Canara Bank" }];
+
+
 
   return (
     <div>
@@ -99,28 +50,8 @@ const BankSetting = () => {
               </div>
             </div>
             <ul className="table-top-head">
-              <li>
-                <OverlayTrigger placement="top" overlay={renderRefreshTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <RotateCcw />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderCollapseTooltip}>
-                  <Link
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    id="collapse-header"
-                    className={data ? "active" : ""}
-                    onClick={() => {
-                      dispatch(setToogleHeader(!data));
-                    }}
-                  >
-                    <ChevronUp />
-                  </Link>
-                </OverlayTrigger>
-              </li>
+              <RefreshIcon />
+              <CollapesIcon />
             </ul>
           </div>
           <div className="row">
@@ -134,21 +65,21 @@ const BankSetting = () => {
                   <div className="page-header bank-settings justify-content-end">
                     <Link
                       to={route.banksettingslist}
-                      className="btn-list me-2 active"
-                    >
-                      <List className="feather-user" />
+                      className="btn-list me-2 active">
+                      
+                      <i className="feather icon-list feather-user" />
                     </Link>
                     <Link to={route.banksettingsgrid} className="btn-grid">
-                      <Grid className="feather-user" />
+                      <i className="feather icon-grid feather-user" />
                     </Link>
                     <div className="page-btn">
                       <Link
                         to="#"
                         className="btn btn-added"
                         data-bs-toggle="modal"
-                        data-bs-target="#add-account"
-                      >
-                      <i className='ti ti-circle-plus me-1'></i>
+                        data-bs-target="#add-account">
+                        
+                        <i className="ti ti-circle-plus me-1"></i>
                         Add New Account
                       </Link>
                     </div>
@@ -165,13 +96,10 @@ const BankSetting = () => {
                                     <input
                                       type="text"
                                       placeholder="Search"
-                                      className="form-control form-control-sm formsearch"
-                                    />
-                                    <Link to className="btn btn-searchset">
-                                      <i
-                                        data-feather="search"
-                                        className="feather-search"
-                                      />
+                                      className="form-control form-control-sm formsearch" />
+                                    
+                                    <Link to="#" className="btn btn-searchset">
+                                      <i className="feather icon-search feather-search" />
                                     </Link>
                                   </div>
                                 </div>
@@ -180,73 +108,81 @@ const BankSetting = () => {
                             <div className="search-path">
                               <div className="d-flex align-items-center">
                                 <Link
+                                  to="#"
                                   className={`btn btn-filter ${
-                                    isFilterVisible ? "setclose" : ""
-                                  }`}
-                                  id="filter_search"
-                                >
-                                  <Filter
-                                    className="filter-icon"
-                                    onClick={toggleFilterVisibility}
-                                  />
+                                  isFilterVisible ? "setclose" : ""}`
+                                  }
+                                  id="filter_search">
+                                  
+                                  <i
+                                    className="feather icon-filter filter-icon"
+                                    onClick={toggleFilterVisibility} />
+                                  
                                   <span onClick={toggleFilterVisibility}>
-                                    <ImageWithBasePath
-                                      src="assets/img/icons/closes.svg"
-                                      alt="img"
-                                    />
+                                    <img
+                                      src={closes}
+                                      alt="img" />
+                                    
                                   </span>
                                 </Link>
                               </div>
                             </div>
                             <div className="form-sort">
-                              <Sliders className="info-img" />
-                              <Select className="img-select"
-                                classNamePrefix="react-select"
+                              <i className="feather icon-sliders info-img" />
+                              <CommonSelect
+                                className="img-select"
                                 options={oldandlatestvalue}
+                                value={selectedSort}
+                                onChange={(e) => setSelectedSort(e.value)}
                                 placeholder="Newest"
-                              />
+                                filter={false} />
+                              
                             </div>
                           </div>
                           {/* /Filter */}
                           <div
                             className={`card${
-                              isFilterVisible ? " visible" : ""
-                            }`}
+                            isFilterVisible ? " visible" : ""}`
+                            }
                             id="filter_inputs"
                             style={{
-                              display: isFilterVisible ? "block" : "none",
-                            }}
-                          >
+                              display: isFilterVisible ? "block" : "none"
+                            }}>
+                            
                             <div className="card-body pb-0">
                               <div className="row">
                                 <div className="col-lg-4 col-sm-6 col-12">
                                   <div className="input-blocks">
-                                    <User className="info-img" />
-                                    <Select
+                                    <i className="feather icon-user info-img"></i>
+                                    <CommonSelect
                                       options={options}
-                                      classNamePrefix="react-select"
+                                      value={selectedName}
+                                      onChange={(e) => setSelectedName(e.value)}
                                       placeholder="Choose a Name"
-                                    />
+                                      filter={false} />
+                                    
                                   </div>
                                 </div>
                                 <div className="col-lg-4 col-sm-6 col-12">
                                   <div className="input-blocks">
-                                    <Edit2 className="info-img" />
-                                    <Select
+                                    <i className="feather icon-edit info-img" />
+                                    <CommonSelect
                                       options={banklist}
-                                      classNamePrefix="react-select"
+                                      value={selectedBank}
+                                      onChange={(e) => setSelectedBank(e.value)}
                                       placeholder="Choose a Bank"
-                                    />
+                                      filter={false} />
+                                    
                                   </div>
                                 </div>
                                 <div className="col-lg-3 col-sm-6 col-12 ms-auto">
                                   <div className="input-blocks">
-                                    <Link className="btn btn-filters ms-auto">
+                                    <Link
+                                      to="#"
+                                      className="btn btn-filters ms-auto">
+                                      
                                       {" "}
-                                      <i
-                                        data-feather="search"
-                                        className="feather-search"
-                                      />{" "}
+                                      <i className="feather icon-search feather-search" />{" "}
                                       Search{" "}
                                     </Link>
                                   </div>
@@ -294,22 +230,15 @@ const BankSetting = () => {
                                         className="me-2 p-2"
                                         to="#"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#edit-account"
-                                      >
-                                        <i
-                                          data-feather="edit"
-                                          className="feather-edit"
-                                        />
+                                        data-bs-target="#edit-account">
+                                        
+                                        <i className="ti ti-edit" />
                                       </Link>
                                       <Link
-                                        onClick={showConfirmationAlert}
                                         className="confirm-text p-2"
-                                        to="#"
-                                      >
-                                        <i
-                                          data-feather="trash-2"
-                                          className="feather-trash-2"
-                                        />
+                                        to="#">
+                                        
+                                        <i className="ti ti-trash" />
                                       </Link>
                                     </div>
                                   </td>
@@ -333,22 +262,15 @@ const BankSetting = () => {
                                         className="me-2 p-2"
                                         to="#"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#edit-account"
-                                      >
-                                        <i
-                                          data-feather="edit"
-                                          className="feather-edit"
-                                        />
+                                        data-bs-target="#edit-account">
+                                        
+                                        <i className="ti ti-edit" />
                                       </Link>
                                       <Link
-                                        onClick={showConfirmationAlert}
                                         className="confirm-text p-2"
-                                        to="#"
-                                      >
-                                        <i
-                                          data-feather="trash-2"
-                                          className="feather-trash-2"
-                                        />
+                                        to="#">
+                                        
+                                        <i className="ti ti-trash" />
                                       </Link>
                                     </div>
                                   </td>
@@ -372,22 +294,15 @@ const BankSetting = () => {
                                         className="me-2 p-2"
                                         to="#"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#edit-account"
-                                      >
-                                        <i
-                                          data-feather="edit"
-                                          className="feather-edit"
-                                        />
+                                        data-bs-target="#edit-account">
+                                        
+                                        <i className="ti ti-edit" />
                                       </Link>
                                       <Link
-                                        onClick={showConfirmationAlert}
                                         className="confirm-text p-2"
-                                        to="#"
-                                      >
-                                        <i
-                                          data-feather="trash-2"
-                                          className="feather-trash-2"
-                                        />
+                                        to="#">
+                                        
+                                        <i className="ti ti-trash" />
                                       </Link>
                                     </div>
                                   </td>
@@ -411,22 +326,15 @@ const BankSetting = () => {
                                         className="me-2 p-2"
                                         to="#"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#edit-account"
-                                      >
-                                        <i
-                                          data-feather="edit"
-                                          className="feather-edit"
-                                        />
+                                        data-bs-target="#edit-account">
+                                        
+                                        <i className="ti ti-edit" />
                                       </Link>
                                       <Link
-                                        onClick={showConfirmationAlert}
                                         className="confirm-text p-2"
-                                        to="#"
-                                      >
-                                        <i
-                                          data-feather="trash-2"
-                                          className="feather-trash-2"
-                                        />
+                                        to="#">
+                                        
+                                        <i className="ti ti-trash" />
                                       </Link>
                                     </div>
                                   </td>
@@ -450,22 +358,15 @@ const BankSetting = () => {
                                         className="me-2 p-2"
                                         to="#"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#edit-account"
-                                      >
-                                        <i
-                                          data-feather="edit"
-                                          className="feather-edit"
-                                        />
+                                        data-bs-target="#edit-account">
+                                        
+                                        <i className="ti ti-edit" />
                                       </Link>
                                       <Link
-                                        onClick={showConfirmationAlert}
                                         className="confirm-text p-2"
-                                        to="#"
-                                      >
-                                        <i
-                                          data-feather="trash-2"
-                                          className="feather-trash-2"
-                                        />
+                                        to="#">
+                                        
+                                        <i className="ti ti-trash" />
                                       </Link>
                                     </div>
                                   </td>
@@ -485,8 +386,8 @@ const BankSetting = () => {
       </div>
       <BankSettingList />
       <EditBankSettingList />
-    </div>
-  );
+    </div>);
+
 };
 
 export default BankSetting;

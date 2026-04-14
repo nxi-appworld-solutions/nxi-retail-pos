@@ -1,9 +1,9 @@
-import { Smile } from 'feather-icons-react/build/IconComponents'
-import React from 'react'
+import { Smile } from 'react-feather';
+
 
 const Colors = () => {
-    return (
-        <div>
+  return (
+    <div>
             <div className="page-wrapper">
                 <div className="content">
                     <div className="page-header">
@@ -248,7 +248,7 @@ const Colors = () => {
                                         <div className="p-3 col">
                                             <div className="m-2 bg-outline-primary mx-auto color-container">
                                              
-                                                <Smile className="fs-18"/>
+                                                <Smile className="fs-18" />
                                             </div>
                                             <p className="pb-0 mb-0 fw-semibold text-center">
                                                 <code>.bg-outline-primary</code>
@@ -256,7 +256,7 @@ const Colors = () => {
                                         </div>
                                         <div className="p-3 col">
                                             <div className="m-2 bg-outline-secondary mx-auto color-container">
-                                            <Smile className="fs-18"/>
+                                            <Smile className="fs-18" />
                                             </div>
                                             <p className="pb-0 mb-0 fw-semibold text-center">
                                                 <code>.bg-outline-secondary</code>
@@ -264,7 +264,7 @@ const Colors = () => {
                                         </div>
                                         <div className="p-3 col">
                                             <div className="m-2 bg-outline-warning mx-auto color-container">
-                                            <Smile className="fs-18"/>
+                                            <Smile className="fs-18" />
                                             </div>
                                             <p className="pb-0 mb-0 fw-semibold text-center">
                                                 <code>.bg-outline-warning</code>
@@ -272,7 +272,7 @@ const Colors = () => {
                                         </div>
                                         <div className="p-3 col">
                                             <div className="m-2 bg-outline-info mx-auto color-container">
-                                            <Smile className="fs-18"/>
+                                            <Smile className="fs-18" />
                                             </div>
                                             <p className="pb-0 mb-0 fw-semibold text-center">
                                                 <code>.bg-outline-info</code>
@@ -280,7 +280,7 @@ const Colors = () => {
                                         </div>
                                         <div className="p-3 col">
                                             <div className="m-2 bg-outline-success mx-auto color-container">
-                                            <Smile className="fs-18"/>
+                                            <Smile className="fs-18" />
                                             </div>
                                             <p className="pb-0 mb-0 fw-semibold text-center">
                                                 <code>.bg-outline-success</code>
@@ -288,7 +288,7 @@ const Colors = () => {
                                         </div>
                                         <div className="p-3 col">
                                             <div className="m-2 bg-outline-danger mx-auto color-container">
-                                            <Smile className="fs-18"/>
+                                            <Smile className="fs-18" />
                                             </div>
                                             <p className="pb-0 mb-0 fw-semibold text-center">
                                                 <code>.bg-outline-danger</code>
@@ -296,7 +296,7 @@ const Colors = () => {
                                         </div>
                                         <div className="p-3 col">
                                             <div className="m-2 bg-outline-light mx-auto color-container">
-                                            <Smile className="fs-18"/>
+                                            <Smile className="fs-18" />
                                             </div>
                                             <p className="pb-0 mb-0 fw-semibold text-center">
                                                 <code>.bg-outline-light</code>
@@ -304,7 +304,7 @@ const Colors = () => {
                                         </div>
                                         <div className="p-3 col">
                                             <div className="m-2 bg-outline-dark mx-auto color-container">
-                                            <Smile className="fs-18"/>
+                                            <Smile className="fs-18" />
                                             </div>
                                             <p className="pb-0 mb-0 fw-semibold text-center">
                                                 <code>.bg-outline-dark</code>
@@ -609,8 +609,8 @@ const Colors = () => {
                 </div>
             </div>
 
-        </div>
-    )
-}
+        </div>);
 
-export default Colors
+};
+
+export default Colors;

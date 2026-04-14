@@ -1,23 +1,25 @@
-import React, { useState } from "react";
-import Select from "react-select";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, PlusCircle } from "feather-icons-react/build/IconComponents";
-import ImageWithBasePath from "../../img/imagewithbasebath";
-import { Status } from "../../common/selectOption/selectOption";
-import DefaultEditor from "react-simple-wysiwyg";
-import { DatePicker } from "antd";
+import CommonSelect from "../../../components/select/common-select";
+import { Editor } from "primereact/editor";
+import CommonDatePicker from "../../../components/date-picker/common-date-picker";
+import { scanners, stockImg02, stockImg03, stockImg05 } from "../../../utils/imagepath";
 
 const EditQuotation = () => {
-  const customer = [
-    { value: "Choose", label: "Choose" },
-    { value: "Thomas", label: "Thomas" },
-    { value: "Rose", label: "Rose" },
-  ];
-  const [values, setValue] = useState();
-  function onChange(e) {
-    setValue(e.target.value);
-  }
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
+  const [text, setText] = useState("");
 
+  const customer = [
+  { value: "Choose", label: "Choose" },
+  { value: "Thomas", label: "Thomas" },
+  { value: "Rose", label: "Rose" }];
+
+  const Status = [
+  { label: "Sent", value: "1" },
+  { label: "Pending", value: "2" }];
+
+  const [date, setDate] = useState(new Date());
   return (
     <div>
       <>
@@ -34,8 +36,8 @@ const EditQuotation = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -49,16 +51,19 @@ const EditQuotation = () => {
                           <label className="form-label">Customer Name</label>
                           <div className="row">
                             <div className="col-lg-10 col-sm-10 col-10">
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
+                                className="w-100"
                                 options={customer}
+                                value={selectedCustomer}
+                                onChange={(e) => setSelectedCustomer(e.value)}
                                 placeholder="Choose"
-                              />
+                                filter={false} />
+                              
                             </div>
                             <div className="col-lg-2 col-sm-2 col-2 ps-0">
                               <div className="add-icon">
                                 <span className="bg-dark text-white p-2 rounded">
-                                  <PlusCircle />
+                                  <i className="feather icon-plus-circle" />
                                 </span>
                               </div>
                             </div>
@@ -69,11 +74,12 @@ const EditQuotation = () => {
                         <div className="mb-3">
                           <label className="form-label">Date</label>
                           <div className="input-groupicon calender-input">
-                            <DatePicker
-                              className="form-control datetimepicker"
-                              placeholder="dd/mm/yyyy"
-                            />
-                            <Calendar className="info-img" />
+                            <CommonDatePicker
+                              value={date}
+                              onChange={setDate}
+                              className="w-100" />
+                            
+                            <i className="feather icon-calendar info-img" />
                           </div>
                         </div>
                       </div>
@@ -83,8 +89,8 @@ const EditQuotation = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder={"010203"}
-                          />
+                            placeholder={"010203"} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12 col-sm-6 col-12">
@@ -94,10 +100,13 @@ const EditQuotation = () => {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Please type product code and select"
-                            />
+                              placeholder="Please type product code and select" />
+                            
                             <div className="addonset">
-                              <ImageWithBasePath src="assets/img/icons/scanners.svg" alt="img" />
+                              <img
+                                src={scanners}
+                                alt="img" />
+                              
                             </div>
                           </div>
                         </div>
@@ -121,14 +130,8 @@ const EditQuotation = () => {
                           <tr>
                             <td>
                               <div className="d-flex align-items-center">
-                                <Link
-                                  to="#"
-                                  className="avatar avatar-md me-2"
-                                >
-                                  <ImageWithBasePath
-                                    src="assets/img/products/stock-img-02.png"
-                                    alt="product"
-                                  />
+                                <Link to="#" className="avatar avatar-md me-2">
+                                  <img src={stockImg02} alt="product" />
                                 </Link>
                                 <Link to="#">Nike Jordan</Link>
                               </div>
@@ -137,21 +140,15 @@ const EditQuotation = () => {
                               <div className="product-quantity bg-light border-0">
                                 <span className="quantity-btn">
                                   +
-                                  <i
-                                    data-feather="plus-circle"
-                                    className="plus-circle"
-                                  />
+                                  <i className="feather icon-plus-circle plus-circle" />
                                 </span>
                                 <input
                                   type="text"
                                   className="quntity-input bg-transparent"
-                                  defaultValue={2}
-                                />
+                                  defaultValue={2} />
+                                
                                 <span className="quantity-btn">
-                                  <i
-                                    data-feather="minus-circle"
-                                    className="feather-search"
-                                  />
+                                  <i className="feather icon-minus-circle feather-search" />
                                 </span>
                               </div>
                             </td>
@@ -165,14 +162,8 @@ const EditQuotation = () => {
                           <tr>
                             <td>
                               <div className="d-flex align-items-center">
-                                <Link
-                                  to="#"
-                                  className="avatar avatar-md me-2"
-                                >
-                                  <ImageWithBasePath
-                                    src="assets/img/products/stock-img-03.png"
-                                    alt="product"
-                                  />
+                                <Link to="#" className="avatar avatar-md me-2">
+                                  <img src={stockImg03} alt="product" />
                                 </Link>
                                 <Link to="#">Apple Series 5 Watch</Link>
                               </div>
@@ -181,21 +172,15 @@ const EditQuotation = () => {
                               <div className="product-quantity bg-light border-0">
                                 <span className="quantity-btn">
                                   +
-                                  <i
-                                    data-feather="plus-circle"
-                                    className="plus-circle"
-                                  />
+                                  <i className="feather icon-plus-circle plus-circle" />
                                 </span>
                                 <input
                                   type="text"
                                   className="quntity-input bg-transparent"
-                                  defaultValue={2}
-                                />
+                                  defaultValue={2} />
+                                
                                 <span className="quantity-btn">
-                                  <i
-                                    data-feather="minus-circle"
-                                    className="feather-search"
-                                  />
+                                  <i className="feather icon-minus-circle feather-search" />
                                 </span>
                               </div>
                             </td>
@@ -209,14 +194,8 @@ const EditQuotation = () => {
                           <tr>
                             <td>
                               <div className="d-flex align-items-center">
-                                <Link
-                                  to="#"
-                                  className="avatar avatar-md me-2"
-                                >
-                                  <ImageWithBasePath
-                                    src="assets/img/products/stock-img-05.png"
-                                    alt="product"
-                                  />
+                                <Link to="#" className="avatar avatar-md me-2">
+                                  <img src={stockImg05} alt="product" />
                                 </Link>
                                 <Link to="#">Lobar Handy</Link>
                               </div>
@@ -225,21 +204,15 @@ const EditQuotation = () => {
                               <div className="product-quantity bg-light border-0">
                                 <span className="quantity-btn">
                                   +
-                                  <i
-                                    data-feather="plus-circle"
-                                    className="plus-circle"
-                                  />
+                                  <i className="feather icon-plus-circle plus-circle" />
                                 </span>
                                 <input
                                   type="text"
                                   className="quntity-input bg-transparent"
-                                  defaultValue={2}
-                                />
+                                  defaultValue={2} />
+                                
                                 <span className="quantity-btn">
-                                  <i
-                                    data-feather="minus-circle"
-                                    className="feather-search"
-                                  />
+                                  <i className="feather icon-minus-circle feather-search" />
                                 </span>
                               </div>
                             </td>
@@ -285,8 +258,8 @@ const EditQuotation = () => {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder={0}
-                            />
+                              placeholder={"0"} />
+                            
                           </div>
                         </div>
                       </div>
@@ -297,8 +270,8 @@ const EditQuotation = () => {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder={0}
-                            />
+                              placeholder={"0"} />
+                            
                           </div>
                         </div>
                       </div>
@@ -309,25 +282,32 @@ const EditQuotation = () => {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder={0}
-                            />
+                              placeholder={"0"} />
+                            
                           </div>
                         </div>
                       </div>
                       <div className="col-lg-3 col-sm-6 col-12">
                         <div className="mb-3">
                           <label className="form-label">Status</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={Status}
+                            value={selectedStatus}
+                            onChange={(e) => setSelectedStatus(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
                         <div className="mb-3 summer-description-box">
                           <label className="form-label">Description</label>
-                          <DefaultEditor value={values} onChange={onChange} />
+                          <Editor
+                            value={text}
+                            onTextChange={(e) => setText(e.htmlValue)}
+                            style={{ height: "200px" }} />
+                          
                         </div>
                       </div>
                     </div>
@@ -337,11 +317,15 @@ const EditQuotation = () => {
                   <button
                     type="button"
                     className="btn btn-secondary add-cancel me-3"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
-                  <Link to="#" className="btn btn-primary add-sale" data-bs-dismiss="modal">
+                  <Link
+                    to="#"
+                    className="btn btn-primary add-sale"
+                    data-bs-dismiss="modal">
+                    
                     Submit
                   </Link>
                 </div>
@@ -351,9 +335,8 @@ const EditQuotation = () => {
         </div>
         {/* /edit popup */}
       </>
+    </div>);
 
-    </div>
-  );
 };
 
 export default EditQuotation;

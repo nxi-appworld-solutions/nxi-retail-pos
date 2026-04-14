@@ -1,13 +1,23 @@
-import React from "react";
-import {
-  PlusCircle
-} from "feather-icons-react/build/IconComponents";
-import { all_routes } from "../../Router/all_routes";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { all_routes } from "../../routes/all_routes";
+
 import { Link } from "react-router-dom";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import {
+  user02,
+  user03,
+  user04,
+  user06,
+  user08,
+  user11,
+  user17,
+  user19,
+  user26,
+  user28,
+  user30,
+  user32,
+} from "../../utils/imagepath";
 const EmployeesGrid = () => {
   return (
     <>
@@ -24,13 +34,13 @@ const EmployeesGrid = () => {
               <li>
                 <div className="d-flex me-2 pe-2 border-end">
                   <Link to={all_routes.employeelist} className="btn-list me-2">
-                    <i data-feather="list" className="feather-list" />
+                    <i className="feather icon-list" />
                   </Link>
                   <Link
                     to={all_routes.employeegrid}
                     className="btn-grid active bg-primary me-2"
                   >
-                    <i data-feather="grid" className="feather-grid text-white" />
+                    <i className="feather icon-grid text-white" />
                   </Link>
                 </div>
               </li>
@@ -40,7 +50,7 @@ const EmployeesGrid = () => {
             </ul>
             <div className="page-btn">
               <Link to={all_routes.addemployee} className="btn btn-primary">
-                <PlusCircle data-feather="plus-circle" className=" me-2" />
+                <i className="feather icon-plus-circle me-2" />
                 Add Employee
               </Link>
             </div>
@@ -113,15 +123,12 @@ const EmployeesGrid = () => {
               <div className="d-flex align-items-center justify-content-between flex-wrap row-gap-3">
                 <div className="search-set mb-0">
                   <div className="search-input">
-                    <Link to="#" className="btn btn-searchset">
-                      <i data-feather="search" className="feather-search" />
-                    </Link>
-                    <input
-                      type="search"
-                      className="form-control"
-                      placeholder="Search"
-                    />
-                  </div>
+  <span className="btn-searchset">
+    <i className="ti ti-search fs-14 feather-search" />
+  </span>
+  <input type="search" className="form-control" placeholder="Search" />
+</div>
+
                 </div>
                 <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                   <div className="dropdown me-2">
@@ -134,34 +141,22 @@ const EmployeesGrid = () => {
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Anthony Lewis
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Brian Villalobos
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Harvey Smith
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Stephan Peralt
                         </Link>
                       </li>
@@ -177,34 +172,22 @@ const EmployeesGrid = () => {
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           System Admin
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Designer
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Tech Lead
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Database administrator
                         </Link>
                       </li>
@@ -220,26 +203,17 @@ const EmployeesGrid = () => {
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Active
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Inactive
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           New Joiners
                         </Link>
                       </li>
@@ -255,42 +229,27 @@ const EmployeesGrid = () => {
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Recently Added
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Ascending
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Desending
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Last Month
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Last 7 Days
                         </Link>
                       </li>
@@ -315,8 +274,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-32.jpg"
+                          <img
+                            src={user32}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -329,10 +288,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -340,7 +296,7 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
@@ -348,8 +304,9 @@ const EmployeesGrid = () => {
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -361,9 +318,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Anthony Lewis</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Anthony Lewis
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -392,8 +351,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-02.jpg"
+                          <img
+                            src={user02}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -406,10 +365,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -417,16 +373,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -438,9 +395,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Brian Villalobos</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Brian Villalobos
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         Software Developer
                       </span>
                     </div>
@@ -469,8 +428,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-03.jpg"
+                          <img
+                            src={user03}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -483,10 +442,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -494,16 +450,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -515,9 +472,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Harvey Smith</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Harvey Smith
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -546,8 +505,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-06.jpg"
+                          <img
+                            src={user06}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -560,10 +519,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -571,16 +527,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -592,9 +549,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Stephan Peralt</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Stephan Peralt
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -623,8 +582,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-08.jpg"
+                          <img
+                            src={user08}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -637,10 +596,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -648,16 +604,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -669,9 +626,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Doglas Martini</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Doglas Martini
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -700,8 +659,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-19.jpg"
+                          <img
+                            src={user19}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -714,10 +673,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -725,16 +681,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -748,7 +705,7 @@ const EmployeesGrid = () => {
                       <h6 className="mb-1">
                         <Link to={all_routes.employeedetails}>Linda Ray</Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -777,8 +734,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-28.jpg"
+                          <img
+                            src={user28}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -791,10 +748,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -802,16 +756,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -823,9 +778,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Elliot Murray</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Elliot Murray
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -854,8 +811,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-17.jpg"
+                          <img
+                            src={user17}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -868,10 +825,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -879,16 +833,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -900,9 +855,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Rebecca Smtih</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Rebecca Smtih
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -931,8 +888,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-30.jpg"
+                          <img
+                            src={user30}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -945,10 +902,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -956,16 +910,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -977,9 +932,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Connie Waters</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Connie Waters
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -1008,8 +965,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-26.jpg"
+                          <img
+                            src={user26}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -1022,10 +979,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -1033,16 +987,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -1054,9 +1009,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Lori Broaddus</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Lori Broaddus
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -1085,8 +1042,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-11.jpg"
+                          <img
+                            src={user11}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -1099,10 +1056,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -1110,16 +1064,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -1131,9 +1086,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Trent Frazier</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Trent Frazier
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -1162,8 +1119,8 @@ const EmployeesGrid = () => {
                           to={all_routes.employeedetails}
                           className="avatar avatar-xl avatar-rounded border p-1 rounded-circle"
                         >
-                          <ImageWithBasePath
-                            src="assets/img/users/user-04.jpg"
+                          <img
+                            src={user04}
                             className="img-fluid h-auto w-auto"
                             alt="img"
                           />
@@ -1176,10 +1133,7 @@ const EmployeesGrid = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          <i
-                            data-feather="more-vertical"
-                            className="feather-more-vertical"
-                          />
+                          <i className="feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -1187,16 +1141,17 @@ const EmployeesGrid = () => {
                               to={all_routes.editemployee}
                               className="dropdown-item"
                             >
-                              <i data-feather="edit" className="me-2" />
+                              <i className="feather icon-edit me-2" />
                               Edit
                             </Link>
                           </li>
-                          <li>
+                         <li>
                             <Link
                               to="#"
                               className="dropdown-item confirm-text mb-0"
+                              data-bs-toggle="modal" data-bs-target="#delete-modal"
                             >
-                              <i data-feather="trash-2" className="me-2" />
+                              <i className="me-2 feather icon-trash-2" />
                               Delete
                             </Link>
                           </li>
@@ -1208,9 +1163,11 @@ const EmployeesGrid = () => {
                     </div>
                     <div className="text-center mb-3">
                       <h6 className="mb-1">
-                        <Link to={all_routes.employeedetails}>Norene Valle</Link>
+                        <Link to={all_routes.employeedetails}>
+                          Norene Valle
+                        </Link>
                       </h6>
-                      <span className="badge bg-secondary-transparent fs-10 fw-medium">
+                      <span className="badge bg-secondary-transparent text-gray-9 fs-10 fw-medium">
                         System Admin
                       </span>
                     </div>
@@ -1231,7 +1188,7 @@ const EmployeesGrid = () => {
           </div>
         </div>
         <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-          <p className="mb-0">2014-2025 © DreamsPOS. All Right Reserved</p>
+          <p className="mb-0">2014-2026 © DreamsPOS. All Right Reserved</p>
           <p>
             Designed &amp; Developed By{" "}
             <Link to="#" className="text-primary">
@@ -1239,10 +1196,45 @@ const EmployeesGrid = () => {
             </Link>
           </p>
         </div>
-
       </div>
-    </>
 
+      {/* delete modal */}
+      <div className="modal fade" id="delete-modal">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="page-wrapper-new p-0">
+              <div className="content p-5 px-3 text-center">
+                <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
+                  <i className="ti ti-trash fs-24 text-danger" />
+                </span>
+                <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
+                  Delete Employee
+                </h4>
+                <p className="text-gray-6 mb-0 fs-16">
+                  Are you sure you want to delete employee?
+                </p>
+                <div className="modal-footer-btn mt-3 d-flex justify-content-center">
+                  <button
+                    type="button"
+                    className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-submit fs-13 fw-medium p-2 px-3"
+                  >
+                    Yes Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* /delete modal */}
+    </>
   );
 };
 

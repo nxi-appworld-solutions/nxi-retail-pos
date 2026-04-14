@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import TodoModal from "../../../core/modals/todoModal";
-import { Grid, List } from "feather-icons-react/build/IconComponents";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
-import { all_routes } from "../../../Router/all_routes";
-import RefreshIcon from "../../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../../core/common/tooltip-content/collapes";
 
 
+import { all_routes } from "../../../routes/all_routes";
+import RefreshIcon from "../../../components/tooltip-content/refresh";
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+import {
+  avator13,
+  avatar29,
+  avatar28,
+  avatar25,
+  avatar14,
+  avatar24,
+  avatar23,
+  avatar15,
+  avatar22,
+  avatar21,
+  avator06,
+  avatar20,
+  avator09 } from
+"../../../utils/imagepath";
 
 const Todo = () => {
-
   const route = all_routes;
 
-  const [setIsTodo] = useState([false, false, false]);
+  const [_isTodo, setIsTodo] = useState([false, false, false]);
   const toggleTodo = (index) => {
     setIsTodo((prevIsTodo) => {
       const newIsTodo = [...prevIsTodo];
@@ -38,12 +50,12 @@ const Todo = () => {
               <ul className="table-top-head">
                 <li>
                   <Link to={route.todo} className="todo-grid-view active">
-                    <Grid className="feather-rotate-ccw" />
+                    <i className="feather icon-grid feather-rotate-ccw" />
                   </Link>
                 </li>
                 <li>
                   <Link to={route.todolist} className="todo-list-view">
-                    <List className="feather-rotate-ccw" />
+                    <i className="feather icon-list feather-rotate-ccw" />
                   </Link>
                 </li>
                 <RefreshIcon />
@@ -54,9 +66,9 @@ const Todo = () => {
                   to="#"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#note-units"
-                >
-                <i className='ti ti-circle-plus me-1'></i>
+                  data-bs-target="#note-units">
+                  
+                  <i className="ti ti-circle-plus me-1"></i>
                   Create New
                 </Link>
               </div>
@@ -90,9 +102,10 @@ const Todo = () => {
                 <div className="mb-3">
                   <button
                     className="btn bg-primary-transparent border-dashed border-primary w-100 text-start"
-                    data-bs-toggle="modal" data-inert={true}
-                    data-bs-target="#edit-note-units"
-                  >
+                    data-bs-toggle="modal"
+                    data-inert={true}
+                    data-bs-target="#edit-note-units">
+                    
                     <i className="ti ti-plus me-2" />
                     New task
                   </button>
@@ -104,8 +117,8 @@ const Todo = () => {
                       <ul
                         className="nav nav-pills border d-inline-flex p-1 rounded bg-light todo-tabs"
                         id="pills-tab"
-                        role="tablist"
-                      >
+                        role="tablist">
+                        
                         <li className="nav-item" role="presentation">
                           <button
                             className="nav-link btn btn-sm btn-icon py-3 d-flex align-items-center justify-content-center w-auto active"
@@ -113,8 +126,8 @@ const Todo = () => {
                             data-bs-target="#pills-home"
                             type="button"
                             role="tab"
-                            aria-selected="true"
-                          >
+                            aria-selected="true">
+                            
                             All
                           </button>
                         </li>
@@ -125,8 +138,8 @@ const Todo = () => {
                             data-bs-target="#pills-contact"
                             type="button"
                             role="tab"
-                            aria-selected="false"
-                          >
+                            aria-selected="false">
+                            
                             High
                           </button>
                         </li>
@@ -137,8 +150,8 @@ const Todo = () => {
                             data-bs-target="#pills-medium"
                             type="button"
                             role="tab"
-                            aria-selected="false"
-                          >
+                            aria-selected="false">
+                            
                             Medium
                           </button>
                         </li>
@@ -149,8 +162,8 @@ const Todo = () => {
                             data-bs-target="#pills-low"
                             type="button"
                             role="tab"
-                            aria-selected="false"
-                          >
+                            aria-selected="false">
+                            
                             Low
                           </button>
                         </li>
@@ -166,63 +179,45 @@ const Todo = () => {
                         <input
                           type="text"
                           className="form-control datetimepicker"
-                          placeholder="Due Date"
-                        />
+                          placeholder="Due Date" />
+                        
                       </div>
                       <div className="dropdown me-2">
                         <Link
                           to="#"
                           className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                          data-bs-toggle="dropdown"
-                        >
+                          data-bs-toggle="dropdown">
+                          
                           All Tags
                         </Link>
                         <ul className="dropdown-menu  dropdown-menu-end p-3">
                           <li>
-                            <Link
-                              to="#"
-                              className="dropdown-item rounded-1"
-                            >
+                            <Link to="#" className="dropdown-item rounded-1">
                               All Tags
                             </Link>
                           </li>
                           <li>
-                            <Link
-                              to="#"
-                              className="dropdown-item rounded-1"
-                            >
+                            <Link to="#" className="dropdown-item rounded-1">
                               Internal
                             </Link>
                           </li>
                           <li>
-                            <Link
-                              to="#"
-                              className="dropdown-item rounded-1"
-                            >
+                            <Link to="#" className="dropdown-item rounded-1">
                               Projects
                             </Link>
                           </li>
                           <li>
-                            <Link
-                              to="#"
-                              className="dropdown-item rounded-1"
-                            >
+                            <Link to="#" className="dropdown-item rounded-1">
                               Meetings
                             </Link>
                           </li>
                           <li>
-                            <Link
-                              to="#"
-                              className="dropdown-item rounded-1"
-                            >
+                            <Link to="#" className="dropdown-item rounded-1">
                               Reminder
                             </Link>
                           </li>
                           <li>
-                            <Link
-                              to="#"
-                              className="dropdown-item rounded-1"
-                            >
+                            <Link to="#" className="dropdown-item rounded-1">
                               Research
                             </Link>
                           </li>
@@ -234,32 +229,23 @@ const Todo = () => {
                           <Link
                             to="#"
                             className="dropdown-toggle btn btn-white d-inline-flex align-items-center border-0 bg-transparent p-0 text-dark"
-                            data-bs-toggle="dropdown"
-                          >
+                            data-bs-toggle="dropdown">
+                            
                             Created Date
                           </Link>
                           <ul className="dropdown-menu  dropdown-menu-end p-3">
                             <li>
-                              <Link
-                                to="#"
-                                className="dropdown-item rounded-1"
-                              >
+                              <Link to="#" className="dropdown-item rounded-1">
                                 Created Date
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                to="#"
-                                className="dropdown-item rounded-1"
-                              >
+                              <Link to="#" className="dropdown-item rounded-1">
                                 Priority
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                to="#"
-                                className="dropdown-item rounded-1"
-                              >
+                              <Link to="#" className="dropdown-item rounded-1">
                                 Due Date
                               </Link>
                             </li>
@@ -273,9 +259,12 @@ const Todo = () => {
                   <div
                     className="tab-pane fade show active"
                     id="pills-home"
-                    role="tabpanel"
-                  >
-                    <div className="accordion todo-accordion" id="accordionExample">
+                    role="tabpanel">
+                    
+                    <div
+                      className="accordion todo-accordion"
+                      id="accordionExample">
+                      
                       <div className="accordion-item mb-3">
                         <div className="row align-items-center mb-3 row-gap-3">
                           <div className="col-lg-4 col-sm-6">
@@ -284,8 +273,8 @@ const Todo = () => {
                                 className="accordion-button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#collapseTwo"
-                                aria-controls="collapseTwo"
-                              >
+                                aria-controls="collapseTwo">
+                                
                                 <div className="d-flex align-items-center w-100">
                                   <div className="me-2">
                                     <Link to="#">
@@ -312,13 +301,17 @@ const Todo = () => {
                               <Link
                                 to="#"
                                 className="btn btn-light me-2"
-                                data-bs-toggle="modal" data-inert={true}
-                                data-bs-target="#edit-note-units"
-                              >
+                                data-bs-toggle="modal"
+                                data-inert={true}
+                                data-bs-target="#edit-note-units">
+                                
                                 <i className="ti ti-circle-plus me-2" />
                                 Add New
                               </Link>
-                              <Link to="#" className="btn btn-outline-light border">
+                              <Link
+                                to="#"
+                                className="btn btn-outline-light border">
+                                
                                 See All <i className="ti ti-arrow-right ms-2" />
                               </Link>
                             </div>
@@ -328,8 +321,8 @@ const Todo = () => {
                           id="collapseTwo"
                           className="accordion-collapse collapse show"
                           aria-labelledby="headingTwo"
-                          data-bs-parent="#accordionExample"
-                        >
+                          data-bs-parent="#accordionExample">
+                          
                           <div className="accordion-body">
                             <div className="list-group list-group-flush border-bottom pb-2">
                               <div className="list-group-item list-item-hover shadow-sm rounded mb-2 p-3">
@@ -343,8 +336,8 @@ const Todo = () => {
                                         <input
                                           className="form-check-input"
                                           type="checkbox"
-                                          onChange={() => toggleTodo(0)}
-                                        />
+                                          onChange={() => toggleTodo(0)} />
+                                        
                                       </div>
                                       <span className="me-2 d-flex align-items-center rating-select">
                                         <i className="ti ti-star-filled filled" />
@@ -372,33 +365,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-13.jpg"
-                                              alt="img"
-                                            />
+                                              src={avator13}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-14.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar14}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-15.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar15}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -406,9 +399,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -417,9 +411,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -428,9 +423,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -452,8 +448,8 @@ const Todo = () => {
                                       <div className="form-check form-check-md me-2">
                                         <input
                                           className="form-check-input"
-                                          type="checkbox"
-                                        />
+                                          type="checkbox" />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
@@ -481,33 +477,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-20.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar20}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-21.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar21}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-22.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar22}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -515,9 +511,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -526,9 +523,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -537,9 +535,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -562,8 +561,8 @@ const Todo = () => {
                                         <input
                                           className="form-check-input"
                                           type="checkbox"
-                                          defaultChecked
-                                        />
+                                          defaultChecked />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
@@ -591,33 +590,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-23.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar23}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-24.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar24}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-25.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar25}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -625,9 +624,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -636,9 +636,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -647,9 +648,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -673,8 +675,8 @@ const Todo = () => {
                                 className="accordion-button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#collapseThree"
-                                aria-controls="collapseThree"
-                              >
+                                aria-controls="collapseThree">
+                                
                                 <div className="d-flex align-items-center w-100">
                                   <div className="me-2">
                                     <Link to="#">
@@ -701,13 +703,17 @@ const Todo = () => {
                               <Link
                                 to="#"
                                 className="btn btn-light me-2"
-                                data-bs-toggle="modal" data-inert={true}
-                                data-bs-target="#edit-note-units"
-                              >
+                                data-bs-toggle="modal"
+                                data-inert={true}
+                                data-bs-target="#edit-note-units">
+                                
                                 <i className="ti ti-circle-plus me-2" />
                                 Add New
                               </Link>
-                              <Link to="#" className="btn btn-outline-light border">
+                              <Link
+                                to="#"
+                                className="btn btn-outline-light border">
+                                
                                 See All <i className="ti ti-arrow-right ms-2" />
                               </Link>
                             </div>
@@ -717,8 +723,8 @@ const Todo = () => {
                           id="collapseThree"
                           className="accordion-collapse collapse show"
                           aria-labelledby="headingThree"
-                          data-bs-parent="#accordionExample"
-                        >
+                          data-bs-parent="#accordionExample">
+                          
                           <div className="accordion-body">
                             <div className="list-group list-group-flush border-bottom pb-2">
                               <div className="list-group-item list-item-hover shadow-sm rounded mb-2 p-3">
@@ -731,8 +737,8 @@ const Todo = () => {
                                       <div className="form-check form-check-md me-2">
                                         <input
                                           className="form-check-input"
-                                          type="checkbox"
-                                        />
+                                          type="checkbox" />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
@@ -760,33 +766,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-28.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar28}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-29.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar29}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-24.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar24}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -794,9 +800,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -805,9 +812,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -816,9 +824,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -840,15 +849,16 @@ const Todo = () => {
                                       <div className="form-check form-check-md me-2">
                                         <input
                                           className="form-check-input"
-                                          type="checkbox"
-                                        />
+                                          type="checkbox" />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
                                       </span>
                                       <div className="strike-info">
                                         <h4 className="fs-14">
-                                          Coordinate with department head on progress
+                                          Coordinate with department head on
+                                          progress
                                         </h4>
                                       </div>
                                       <span className="badge bg-transparent-dark text-dark rounded-pill ms-2">
@@ -869,33 +879,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-06.jpg"
-                                              alt="img"
-                                            />
+                                              src={avator06}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-09.jpg"
-                                              alt="img"
-                                            />
+                                              src={avator09}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-14.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar14}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -903,9 +913,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -914,9 +925,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -925,9 +937,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -951,8 +964,8 @@ const Todo = () => {
                                 className="accordion-button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#collapseFour"
-                                aria-controls="collapseFour"
-                              >
+                                aria-controls="collapseFour">
+                                
                                 <div className="d-flex align-items-center w-100">
                                   <div className="me-2">
                                     <Link to="#">
@@ -979,13 +992,17 @@ const Todo = () => {
                               <Link
                                 to="#"
                                 className="btn btn-light me-2"
-                                data-bs-toggle="modal" data-inert={true}
-                                data-bs-target="#edit-note-units"
-                              >
+                                data-bs-toggle="modal"
+                                data-inert={true}
+                                data-bs-target="#edit-note-units">
+                                
                                 <i className="ti ti-circle-plus me-2" />
                                 Add New
                               </Link>
-                              <Link to="#" className="btn btn-outline-light border">
+                              <Link
+                                to="#"
+                                className="btn btn-outline-light border">
+                                
                                 See All <i className="ti ti-arrow-right ms-2" />
                               </Link>
                             </div>
@@ -995,8 +1012,8 @@ const Todo = () => {
                           id="collapseFour"
                           className="accordion-collapse collapse show"
                           aria-labelledby="headingFour"
-                          data-bs-parent="#accordionExample"
-                        >
+                          data-bs-parent="#accordionExample">
+                          
                           <div className="accordion-body">
                             <div className="list-group list-group-flush">
                               <div className="list-group-item list-item-hover shadow-sm rounded mb-2 p-3">
@@ -1009,8 +1026,8 @@ const Todo = () => {
                                       <div className="form-check form-check-md me-2">
                                         <input
                                           className="form-check-input"
-                                          type="checkbox"
-                                        />
+                                          type="checkbox" />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
@@ -1038,33 +1055,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-28.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar28}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-29.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar29}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-24.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar24}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -1072,9 +1089,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -1083,9 +1101,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -1094,9 +1113,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -1114,7 +1134,11 @@ const Todo = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="tab-pane fade" id="pills-contact" role="tabpanel">
+                  <div
+                    className="tab-pane fade"
+                    id="pills-contact"
+                    role="tabpanel">
+                    
                     <div className="accordion todo-accordion">
                       <div className="accordion-item mb-3">
                         <div className="row align-items-center mb-3 row-gap-3">
@@ -1124,8 +1148,8 @@ const Todo = () => {
                                 className="accordion-button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#collapseSix"
-                                aria-controls="collapseSix"
-                              >
+                                aria-controls="collapseSix">
+                                
                                 <div className="d-flex align-items-center w-100">
                                   <div className="me-2">
                                     <Link to="#">
@@ -1152,13 +1176,17 @@ const Todo = () => {
                               <Link
                                 to="#"
                                 className="btn btn-light me-2"
-                                data-bs-toggle="modal" data-inert={true}
-                                data-bs-target="#edit-note-units"
-                              >
+                                data-bs-toggle="modal"
+                                data-inert={true}
+                                data-bs-target="#edit-note-units">
+                                
                                 <i className="ti ti-circle-plus me-2" />
                                 Add New
                               </Link>
-                              <Link to="#" className="btn btn-outline-light border">
+                              <Link
+                                to="#"
+                                className="btn btn-outline-light border">
+                                
                                 See All <i className="ti ti-arrow-right ms-2" />
                               </Link>
                             </div>
@@ -1167,8 +1195,8 @@ const Todo = () => {
                         <div
                           id="collapseSix"
                           className="accordion-collapse collapse show"
-                          aria-labelledby="headingSix"
-                        >
+                          aria-labelledby="headingSix">
+                          
                           <div className="accordion-body">
                             <div className="list-group list-group-flush">
                               <div className="list-group-item list-item-hover shadow-sm rounded mb-2 p-3">
@@ -1181,8 +1209,8 @@ const Todo = () => {
                                       <div className="form-check form-check-md me-2">
                                         <input
                                           className="form-check-input"
-                                          type="checkbox"
-                                        />
+                                          type="checkbox" />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star-filled filled" />
@@ -1210,33 +1238,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-13.jpg"
-                                              alt="img"
-                                            />
+                                              src={avator13}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-14.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar14}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-15.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar15}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -1244,9 +1272,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -1255,9 +1284,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -1266,9 +1296,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -1290,8 +1321,8 @@ const Todo = () => {
                                       <div className="form-check form-check-md me-2">
                                         <input
                                           className="form-check-input"
-                                          type="checkbox"
-                                        />
+                                          type="checkbox" />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
@@ -1319,33 +1350,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-20.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar20}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-21.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar21}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-22.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar22}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -1353,9 +1384,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -1364,9 +1396,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -1375,9 +1408,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -1400,8 +1434,8 @@ const Todo = () => {
                                         <input
                                           className="form-check-input"
                                           type="checkbox"
-                                          defaultChecked
-                                        />
+                                          defaultChecked />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
@@ -1429,33 +1463,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-23.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar23}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-24.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar24}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-25.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar25}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -1463,9 +1497,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -1474,9 +1509,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -1485,9 +1521,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -1505,7 +1542,11 @@ const Todo = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="tab-pane fade" id="pills-medium" role="tabpanel">
+                  <div
+                    className="tab-pane fade"
+                    id="pills-medium"
+                    role="tabpanel">
+                    
                     <div className="accordion todo-accordion">
                       <div className="accordion-item mb-3">
                         <div className="row align-items-center mb-3 row-gap-3">
@@ -1515,8 +1556,8 @@ const Todo = () => {
                                 className="accordion-button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#collapseSeven"
-                                aria-controls="collapseSeven"
-                              >
+                                aria-controls="collapseSeven">
+                                
                                 <div className="d-flex align-items-center w-100">
                                   <div className="me-2">
                                     <Link to="#">
@@ -1543,13 +1584,17 @@ const Todo = () => {
                               <Link
                                 to="#"
                                 className="btn btn-light me-2"
-                                data-bs-toggle="modal" data-inert={true}
-                                data-bs-target="#edit-note-units"
-                              >
+                                data-bs-toggle="modal"
+                                data-inert={true}
+                                data-bs-target="#edit-note-units">
+                                
                                 <i className="ti ti-circle-plus me-2" />
                                 Add New
                               </Link>
-                              <Link to="#" className="btn btn-outline-light border">
+                              <Link
+                                to="#"
+                                className="btn btn-outline-light border">
+                                
                                 See All <i className="ti ti-arrow-right ms-2" />
                               </Link>
                             </div>
@@ -1558,8 +1603,8 @@ const Todo = () => {
                         <div
                           id="collapseSeven"
                           className="accordion-collapse collapse show"
-                          aria-labelledby="headingSeven"
-                        >
+                          aria-labelledby="headingSeven">
+                          
                           <div className="accordion-body">
                             <div className="list-group list-group-flush">
                               <div className="list-group-item list-item-hover shadow-sm rounded mb-2 p-3">
@@ -1572,8 +1617,8 @@ const Todo = () => {
                                       <div className="form-check form-check-md me-2">
                                         <input
                                           className="form-check-input"
-                                          type="checkbox"
-                                        />
+                                          type="checkbox" />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
@@ -1601,33 +1646,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-28.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar28}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-29.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar29}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-24.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar24}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -1635,9 +1680,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -1646,9 +1692,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -1657,9 +1704,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -1681,15 +1729,16 @@ const Todo = () => {
                                       <div className="form-check form-check-md me-2">
                                         <input
                                           className="form-check-input"
-                                          type="checkbox"
-                                        />
+                                          type="checkbox" />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
                                       </span>
                                       <div className="strike-info">
                                         <h4 className="fs-14">
-                                          Coordinate with department head on progress
+                                          Coordinate with department head on
+                                          progress
                                         </h4>
                                       </div>
                                       <span className="badge bg-transparent-dark text-dark rounded-pill ms-2">
@@ -1710,33 +1759,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-06.jpg"
-                                              alt="img"
-                                            />
+                                              src={avator06}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-09.jpg"
-                                              alt="img"
-                                            />
+                                              src={avator09}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-14.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar14}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -1744,9 +1793,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -1755,9 +1805,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -1766,9 +1817,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -1796,8 +1848,8 @@ const Todo = () => {
                                 className="accordion-button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#collapseEight"
-                                aria-controls="collapseEight"
-                              >
+                                aria-controls="collapseEight">
+                                
                                 <div className="d-flex align-items-center w-100">
                                   <div className="me-2">
                                     <Link to="#">
@@ -1824,13 +1876,17 @@ const Todo = () => {
                               <Link
                                 to="#"
                                 className="btn btn-light me-2"
-                                data-bs-toggle="modal" data-inert={true}
-                                data-bs-target="#edit-note-units"
-                              >
+                                data-bs-toggle="modal"
+                                data-inert={true}
+                                data-bs-target="#edit-note-units">
+                                
                                 <i className="ti ti-circle-plus me-2" />
                                 Add New
                               </Link>
-                              <Link to="#" className="btn btn-outline-light border">
+                              <Link
+                                to="#"
+                                className="btn btn-outline-light border">
+                                
                                 See All <i className="ti ti-arrow-right ms-2" />
                               </Link>
                             </div>
@@ -1839,8 +1895,8 @@ const Todo = () => {
                         <div
                           id="collapseEight"
                           className="accordion-collapse collapse show"
-                          aria-labelledby="headingEight"
-                        >
+                          aria-labelledby="headingEight">
+                          
                           <div className="accordion-body">
                             <div className="list-group list-group-flush">
                               <div className="list-group-item list-item-hover shadow-sm rounded mb-2 p-3">
@@ -1853,8 +1909,8 @@ const Todo = () => {
                                       <div className="form-check form-check-md me-2">
                                         <input
                                           className="form-check-input"
-                                          type="checkbox"
-                                        />
+                                          type="checkbox" />
+                                        
                                       </div>
                                       <span className="me-2 rating-select d-flex align-items-center">
                                         <i className="ti ti-star" />
@@ -1882,33 +1938,33 @@ const Todo = () => {
                                       <div className="d-flex align-items-center">
                                         <div className="avatar-list-stacked avatar-group-sm">
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-28.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar28}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-29.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar29}
+                                              alt="img" />
+                                            
                                           </span>
                                           <span className="avatar avatar-rounded">
-                                            <ImageWithBasePath
+                                            <img
                                               className="border border-white"
-                                              src="assets/img/profiles/avatar-24.jpg"
-                                              alt="img"
-                                            />
+                                              src={avatar24}
+                                              alt="img" />
+                                            
                                           </span>
                                         </div>
                                         <div className="dropdown ms-2">
                                           <Link
                                             to="#"
                                             className="d-inline-flex align-items-center"
-                                            data-bs-toggle="dropdown"
-                                          >
+                                            data-bs-toggle="dropdown">
+                                            
                                             <i className="ti ti-dots-vertical" />
                                           </Link>
                                           <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -1916,9 +1972,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#edit-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#edit-note-units">
+                                                
                                                 <i className="ti ti-edit me-2" />
                                                 Edit
                                               </Link>
@@ -1927,9 +1984,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#delete-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#delete-note-units">
+                                                
                                                 <i className="ti ti-trash me-2" />
                                                 Delete
                                               </Link>
@@ -1938,9 +1996,10 @@ const Todo = () => {
                                               <Link
                                                 to="#"
                                                 className="dropdown-item rounded-1"
-                                                data-bs-toggle="modal" data-inert={true}
-                                                data-bs-target="#view-note-units"
-                                              >
+                                                data-bs-toggle="modal"
+                                                data-inert={true}
+                                                data-bs-target="#view-note-units">
+                                                
                                                 <i className="ti ti-eye me-2" />
                                                 View
                                               </Link>
@@ -1982,8 +2041,8 @@ const Todo = () => {
       </>
 
       <TodoModal />
-    </>
-  );
+    </>);
+
 };
 
 export default Todo;

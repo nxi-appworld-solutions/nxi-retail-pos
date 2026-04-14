@@ -1,23 +1,24 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
-import ImageWithBasePath from "../../img/imagewithbasebath";
-import { DatePicker } from "antd";
-import { Calendar, PlusCircle } from "feather-icons-react/build/IconComponents";
+import CommonDatePicker from "../../../components/date-picker/common-date-picker";
+import CommonSelect from "../../../components/select/common-select";
+import { qrCodeImage, product6, product7 } from "../../../utils/imagepath";
 
 const EditSalesRetuens = () => {
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
   const customers = [
-    { value: "Choose Customer", label: "Choose Customer" },
-    { value: "Thomas", label: "Thomas" },
-    { value: "Benjamin", label: "Benjamin" },
-    { value: "Bruklin", label: "Bruklin" },
-  ];
-  const status = [
-    { value: "Status", label: "Status" },
-    { value: "Pending", label: "Pending" },
-    { value: "Received", label: "Received" },
-  ];
+  { value: "Choose Customer", label: "Choose Customer" },
+  { value: "Thomas", label: "Thomas" },
+  { value: "Benjamin", label: "Benjamin" },
+  { value: "Bruklin", label: "Bruklin" }];
 
+  const status = [
+  { value: "Status", label: "Status" },
+  { value: "Pending", label: "Pending" },
+  { value: "Received", label: "Received" }];
+
+  const [date, setDate] = useState(new Date());
+  const [selectedStatus, setSelectedStatus] = useState(null);
   return (
     <div>
       <>
@@ -33,8 +34,8 @@ const EditSalesRetuens = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -45,23 +46,27 @@ const EditSalesRetuens = () => {
                       <div className="col-lg-4 col-sm-6 col-12">
                         <div className="mb-3">
                           <label className="form-label">
-                            Customer Name<span className="text-danger ms-1">*</span>
+                            Customer Name
+                            <span className="text-danger ms-1">*</span>
                           </label>
                           <div className="row">
                             <div className="col-lg-10 col-sm-10 col-10">
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
+                                className="w-100"
                                 options={customers}
+                                value={selectedCustomer}
+                                onChange={(e) => setSelectedCustomer(e.value)}
                                 placeholder="Choose"
-                              />
+                                filter={false} />
+                              
                             </div>
                             <div className="col-lg-2 col-sm-2 col-2 ps-0">
                               <div className="add-icon">
                                 <Link
                                   to="#"
-                                  className="bg-dark text-white p-2 rounded"
-                                >
-                                  <PlusCircle className="plus"/>
+                                  className="bg-dark text-white p-2 rounded">
+                                  
+                                  <i className="feather icon-plus-circle plus" />
                                 </Link>
                               </div>
                             </div>
@@ -74,11 +79,12 @@ const EditSalesRetuens = () => {
                             Date<span className="text-danger ms-1">*</span>
                           </label>
                           <div className="input-groupicon calender-input">
-                            <DatePicker
-                              className="form-control datetimepicker"
-                              placeholder="dd/mm/yyyy"
-                            />
-                            <Calendar className="info-img" />
+                            <CommonDatePicker
+                              value={date}
+                              onChange={setDate}
+                              className="w-100" />
+                            
+                            <i className="feather icon-calendar info-img" />
                           </div>
                         </div>
                       </div>
@@ -90,8 +96,8 @@ const EditSalesRetuens = () => {
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue={555444}
-                          />
+                            defaultValue={555444} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12 col-sm-6 col-12">
@@ -103,10 +109,10 @@ const EditSalesRetuens = () => {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Please type product code and select"
-                            />
+                              placeholder="Please type product code and select" />
+                            
                             <div className="addonset">
-                              <ImageWithBasePath src="assets/img/icons/qrcode-scan.svg" alt="img" />
+                              <img src={qrCodeImage} alt="img" />
                             </div>
                           </div>
                         </div>
@@ -129,14 +135,8 @@ const EditSalesRetuens = () => {
                           <tr>
                             <td>
                               <div className="d-flex align-items-center">
-                                <Link
-                                  to="#"
-                                  className="avatar avatar-md"
-                                >
-                                  <ImageWithBasePath
-                                    src="assets/img/products/product6.jpg"
-                                    alt="product"
-                                  />
+                                <Link to="#" className="avatar avatar-md">
+                                  <img src={product6} alt="product" />
                                 </Link>
                                 <Link to="#">Apple Earpods</Link>
                               </div>
@@ -151,14 +151,8 @@ const EditSalesRetuens = () => {
                           <tr>
                             <td>
                               <div className="d-flex align-items-center">
-                                <Link
-                                  to="#"
-                                  className="avatar avatar-md"
-                                >
-                                  <img
-                                    src="assets/img/products/product7.jpg"
-                                    alt="product"
-                                  />
+                                <Link to="#" className="avatar avatar-md">
+                                  <img src={product7} alt="product" />
                                 </Link>
                                 <Link to="#">Apple Earpods</Link>
                               </div>
@@ -207,8 +201,8 @@ const EditSalesRetuens = () => {
                             <input
                               type="text"
                               defaultValue={0}
-                              className="form-control p-2"
-                            />
+                              className="form-control p-2" />
+                            
                           </div>
                         </div>
                       </div>
@@ -221,8 +215,8 @@ const EditSalesRetuens = () => {
                             <input
                               type="text"
                               defaultValue={0}
-                              className="form-control p-2"
-                            />
+                              className="form-control p-2" />
+                            
                           </div>
                         </div>
                       </div>
@@ -235,8 +229,8 @@ const EditSalesRetuens = () => {
                             <input
                               type="text"
                               defaultValue={0}
-                              className="form-control p-2"
-                            />
+                              className="form-control p-2" />
+                            
                           </div>
                         </div>
                       </div>
@@ -245,11 +239,14 @@ const EditSalesRetuens = () => {
                           <label className="form-label">
                             Status<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={status}
+                            value={selectedStatus}
+                            onChange={(e) => setSelectedStatus(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                     </div>
@@ -259,8 +256,8 @@ const EditSalesRetuens = () => {
                   <button
                     type="button"
                     className="btn btn-secondary add-cancel me-3"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
                   <Link to="#" className="btn btn-primary add-sale">
@@ -273,9 +270,8 @@ const EditSalesRetuens = () => {
         </div>
         {/* /Edit popup */}
       </>
+    </div>);
 
-    </div>
-  );
 };
 
 export default EditSalesRetuens;

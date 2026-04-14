@@ -1,91 +1,118 @@
-import React from "react";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  PlusCircle,
-} from "react-feather";
-import Table from "../../core/pagination/datatable.jsx";
-import AddHolidays from "../../core/modals/hrm/addholidays.jsx";
-import EditHolidays from "../../core/modals/hrm/editholidays.jsx";
-import { leavedata } from "../../core/json/leavesdata.js";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons.jsx";
-import RefreshIcon from "../../core/common/tooltip-content/refresh.jsx";
-import CollapesIcon from "../../core/common/tooltip-content/collapes.jsx";
-import CommonFooter from "../../core/common/footer/commonFooter.jsx";
+import { leavedata } from "../../core/json/leavesdata";
+import AddHolidays from "../../core/modals/hrm/addholidays";
+import EditHolidays from "../../core/modals/hrm/editholidays";
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
+import PrimeDataTable from "../../components/data-table";
+import CommonFooter from "../../components/footer/commonFooter";
 
 const Holidays = () => {
   const datas = leavedata;
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
   const [searchText] = useState("");
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [selectedHolidays, setSelectedHolidays] = useState([]);
 
 
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
   const filteredData = datas.filter((entry) => {
     return Object.keys(entry).some((key) => {
-      return String(entry[key])
-        .toLowerCase()
-        .includes(searchText.toLowerCase());
+      return String(entry[key]).
+      toLowerCase().
+      includes(searchText.toLowerCase());
     });
   });
 
   const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      sorter: (a, b) => a.name.length - b.name.length,
-    },
-    {
-      title: "date",
-      dataIndex: "date",
-      sorter: (a, b) => a.date.length - b.date.length,
-    },
-    {
-      title: "duration",
-      dataIndex: "duration",
-      sorter: (a, b) => a.duration.length - b.duration.length,
-    },
-    {
-      title: "createdon",
-      dataIndex: "createdon",
-      sorter: (a, b) => a.createdon.length - b.createdon.length,
-    },
+  {
+    header:
+    <label className="checkboxs">
+          <input type="checkbox" id="select-all" />
+          <span className="checkmarks" />
+        </label>,
 
-    {
-      title: "Status",
-      dataIndex: "status",
-      render: (text) => (
-        <span className="badge badge-success d-inline-flex align-items-center badge-xs">
-          <i className="ti ti-point-filled me-1"></i>{text}
+    body: () =>
+    <label className="checkboxs">
+          <input type="checkbox" />
+          <span className="checkmarks" />
+        </label>,
+
+    sortable: false,
+    key: "checked"
+  },
+
+  {
+    field: "name",
+    header: "Name",
+    sortable: true,
+    sortFunction: (a, b) => a.name.length - b.name.length
+  },
+  {
+    field: "date",
+    header: "Date",
+    sortable: true,
+    sortFunction: (a, b) => a.date.length - b.date.length
+  },
+  {
+    field: "duration",
+    header: "Duration",
+    sortable: true,
+    sortFunction: (a, b) => a.duration.length - b.duration.length
+  },
+  {
+    field: "createdon",
+    header: "Created On",
+    sortable: true,
+    sortFunction: (a, b) => a.createdon.length - b.createdon.length
+  },
+  {
+    field: "status",
+    header: "Status",
+    sortable: true,
+    sortFunction: (a, b) => a.status.length - b.status.length,
+    body: (rowData) =>
+    <span className="badge badge-success d-inline-flex align-items-center badge-xs">
+          <i className="ti ti-point-filled me-1"></i>
+          {rowData.status}
         </span>
-      ),
-      sorter: (a, b) => a.status.length - b.status.length,
-    },
 
-    {
-      title: "",
-      dataIndex: "actions",
-      key: "actions",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
-            <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-department"
-            >
-              <i data-feather="edit" className="feather-edit"></i>
-            </Link>
-            <Link className="confirm-text p-2" to="#" data-bs-target="#delete-modal">
-              <i
-                data-feather="trash-2"
-                className="feather-trash-2"
-              ></i>
-            </Link>
-          </div>
+  },
+
+  {
+    header: "",
+    field: "actions",
+    key: "actions",
+    sortable: false,
+    body: (_row) =>
+    <div className="edit-delete-action d-flex align-items-center">
+          <Link
+        className="me-2 p-2 d-flex align-items-center border rounded"
+        to="#"
+        data-bs-toggle="modal"
+        data-bs-target="#edit-customer">
+        
+            <i className="feather icon-edit"></i>
+          </Link>
+          <Link
+        className="p-2 d-flex align-items-center border rounded"
+        to="#"
+        data-bs-toggle="modal" data-bs-target="#delete-modal">
+        
+            <i className="feather icon-trash-2"></i>
+          </Link>
         </div>
-      ),
-    },
-  ];
+
+  }];
+
+
   return (
     <div>
       <div className="page-wrapper">
@@ -97,19 +124,15 @@ const Holidays = () => {
                 <h6>Manage your holidays</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary custom-btn"
                 data-bs-toggle="modal"
-                data-bs-target="#add-holiday"
-              >
-                <PlusCircle className="me-2 " />
+                data-bs-target="#add-holiday">
+                
+                <i className="feather icon-plus-circle me-2" />
                 Add Holiday
               </Link>
             </div>
@@ -118,16 +141,19 @@ const Holidays = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
-                     Status
+                    data-bs-toggle="dropdown">
+                    
+                    Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
@@ -152,7 +178,19 @@ const Holidays = () => {
             <div className="card-body pb-0">
               {/* product list */}
               <div className="table-responsive">
-                <Table columns={columns} dataSource={filteredData} />
+                <PrimeDataTable
+                  column={columns}
+                  data={filteredData}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedHolidays}
+                  onSelectionChange={(e) => setSelectedHolidays(e.value)}
+                  dataKey="id" />
+                
               </div>
               {/* /product list */}
             </div>
@@ -162,44 +200,9 @@ const Holidays = () => {
       </div>
       <AddHolidays />
       <EditHolidays />
-      <>
-        {/* Delete Modal */}
-        <div className="modal fade" id="delete-modal">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content p-5">
-              <div className="modal-body text-center p-0">
-                <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                  <i className="ti ti-trash fs-24 text-danger" />
-                </span>
-                <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
-                  Delete Holiday
-                </h4>
-                <p className="text-gray-6 mb-0 fs-16">
-                  Are you sure you want to delete holiday?
-                </p>
-                <div className="d-flex justify-content-center mt-3">
-                  <Link to="#"
-                    className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                    data-bs-dismiss="modal"
-                  >
-                    Cancel
-                  </Link>
-                  <Link
-                    to="#"
-                    className="btn btn-primary fs-13 fw-medium p-2 px-3" data-bs-dismiss="modal"
-                  >
-                    Yes Delete
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* /Delete Modal */}
-      </>
+    <DeleteModal />
+    </div>);
 
-    </div>
-  );
 };
 
 export default Holidays;

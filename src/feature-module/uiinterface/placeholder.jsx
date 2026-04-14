@@ -1,6 +1,6 @@
-import React from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+
 import { Link } from "react-router-dom";
+import { img1, img2 } from "../../utils/imagepath";
 
 const Placeholder = () => {
   return (
@@ -25,11 +25,11 @@ const Placeholder = () => {
                 <div className="row">
                   <div className="col-md-6">
                     <div className="card border shadow-none">
-                      <ImageWithBasePath
-                        src="assets/img/img-1.jpg"
+                      <img
+                        src={img1}
                         className="card-img-top"
-                        alt="..."
-                      />
+                        alt="..." />
+                      
                       <div className="card-body">
                         <h5 className="card-title">Card title</h5>
                         <p className="card-text">
@@ -45,13 +45,13 @@ const Placeholder = () => {
                   <div className="col-md-6">
                     <div
                       className="card border shadow-none mb-0"
-                      aria-hidden="true"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/img-2.jpg"
+                      aria-hidden="true">
+                      
+                      <img
+                        src={img2}
                         className="card-img-top"
-                        alt="..."
-                      />
+                        alt="..." />
+                      
                       <div className="card-body">
                         <p className="card-title placeholder-glow">
                           <span className="placeholder col-6" />
@@ -66,8 +66,8 @@ const Placeholder = () => {
                         <Link
                           to="#"
                           tabIndex={-1}
-                          className="btn btn-primary disabled placeholder col-6"
-                        />
+                          className="btn btn-primary disabled placeholder col-6" />
+                        
                       </div>
                     </div>
                   </div>
@@ -142,8 +142,8 @@ const Placeholder = () => {
                 <Link
                   to="#"
                   className="btn btn-primary disabled placeholder col-4"
-                  aria-hidden="true"
-                />
+                  aria-hidden="true" />
+                
               </div>
             </div>
             <div className="card">
@@ -166,8 +166,8 @@ const Placeholder = () => {
           {/* /Color Placeholders */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Placeholder;

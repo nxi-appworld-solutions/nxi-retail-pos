@@ -1,88 +1,86 @@
-import React, { useState } from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
 import { salesreportdata } from "../../core/json/salesreportdata";
-import Table from "../../core/pagination/datatable";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { ProductName, Store } from "../../core/common/selectOption/selectOption";
-import { DatePicker } from "antd";
-import CommonFooter from "../../core/common/footer/commonFooter";
-
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import CommonFooter from "../../components/footer/commonFooter";
+import PrimeDataTable from "../../components/data-table";
+import CommonSelect from "../../components/select/common-select";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
 
 const SalesReport = () => {
-
-
   const data = salesreportdata;
-  const [searchText] = useState("");
+  const [listData, _setListData] = useState(data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [selectedStore, setSelectedStore] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const filteredData = data.filter((entry) => {
-    return Object.keys(entry).some((key) => {
-      return String(entry[key])
-        .toLowerCase()
-        .includes(searchText.toLowerCase());
-    });
-  });
-
+  const ProductName = [{ label: "Lenovo 3rd Generation", value: "1" }];
+  const Store = [
+  { label: "Electro Mart", value: "1" },
+  { label: "Quantum Gadgets", value: "2" },
+  { label: "Prime Bazaar", value: "3" },
+  { label: "Gadget World", value: "4" },
+  { label: "Volt Vault", value: "5" }];
 
 
   const columns = [
-    {
-      title: "Product Name",
-      dataIndex: "productName",
-      render: (text, record) => (
-        <span className="productimgname">
+  {
+    header: "Product Name",
+    field: "productName",
+    body: (text) =>
+    <span className="productimgname">
           <Link to="#" className="product-img stock-img">
-            <ImageWithBasePath alt="" src={record.img} />
+            <img alt="" src={text.img} />
           </Link>
-          <Link to="#">{text}</Link>
-        </span>
-      ),
-      sorter: (a, b) => a.productName.length - b.productName.length,
-    },
-    {
-      title: "SKU",
-      dataIndex: "sku",
-      sorter: (a, b) => a.sku.length - b.sku.length,
-    },
+          <Link to="#">{text.productName}</Link>
+        </span>,
 
-    {
-      title: "Category",
-      dataIndex: "category",
-      sorter: (a, b) => a.category.length - b.category.length,
-    },
+    sorter: (a, b) => a.productName.length - b.productName.length
+  },
+  {
+    header: "SKU",
+    field: "sku",
+    sorter: (a, b) => a.sku.length - b.sku.length
+  },
 
-    {
-      title: "Brand",
-      dataIndex: "brand",
-      sorter: (a, b) => a.brand.length - b.brand.length,
-    },
-    {
-      title: "Sold Qty",
-      dataIndex: "soldQty",
-      sorter: (a, b) => a.soldQty.length - b.soldQty.length,
-    },
-    {
-      title: "Sold Amount",
-      dataIndex: "soldAmount",
-      sorter: (a, b) => a.soldAmount.length - b.soldAmount.length,
-    },
-    {
-      title: "Instock Qty",
-      dataIndex: "instockQty",
-      sorter: (a, b) => a.instockQty.length - b.instockQty.length,
-    },
+  {
+    header: "Category",
+    field: "category",
+    sorter: (a, b) => a.category.length - b.category.length
+  },
 
-  ];
+  {
+    header: "Brand",
+    field: "brand",
+    sorter: (a, b) => a.brand.length - b.brand.length
+  },
+  {
+    header: "Sold Qty",
+    field: "soldQty",
+    sorter: (a, b) => a.soldQty.length - b.soldQty.length
+  },
+  {
+    header: "Sold Amount",
+    field: "soldAmount",
+    sorter: (a, b) => a.soldAmount.length - b.soldAmount.length
+  },
+  {
+    header: "Instock Qty",
+    field: "instockQty",
+    sorter: (a, b) => a.instockQty.length - b.instockQty.length
+  }];
+
+
   return (
     <div className="page-wrapper">
       <div className="content">
-
         <div className="page-header">
           <div className="add-item d-flex">
-            <div className="page-title">
+            <div className="page-header">
               <h4>Sales Report</h4>
               <h6>Manage your Sales report</h6>
             </div>
@@ -156,7 +154,7 @@ const SalesReport = () => {
         </div>
         <div className="card border-0">
           <div className="card-body pb-1">
-            <form >
+            <form>
               <div className="row align-items-end">
                 <div className="col-lg-10">
                   <div className="row">
@@ -164,10 +162,7 @@ const SalesReport = () => {
                       <div className="mb-3">
                         <label className="form-label">Choose Date&nbsp;</label>
                         <div className="input-icon-start position-relative">
-                          <DatePicker
-                            className="form-control datetimepicker"
-                            placeholder="dd/mm/yyyy"
-                          />
+                          <CommonDateRangePicker />
                           <span className="input-icon-left">
                             <i className="ti ti-calendar" />
                           </span>
@@ -177,21 +172,27 @@ const SalesReport = () => {
                     <div className="col-md-4">
                       <div className="mb-3">
                         <label className="form-label">Store</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={Store}
+                          value={selectedStore}
+                          onChange={(e) => setSelectedStore(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-md-4">
                       <div className="mb-3">
                         <label className="form-label">Products</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={ProductName}
+                          value={selectedProduct}
+                          onChange={(e) => setSelectedProduct(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                   </div>
@@ -208,7 +209,6 @@ const SalesReport = () => {
           </div>
         </div>
 
-
         {/* /product list */}
         <div className="card table-list-card hide-search">
           <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
@@ -218,24 +218,32 @@ const SalesReport = () => {
             <ul className="table-top-head">
               <TooltipIcons />
               <li>
-                <Link data-bs-toggle="tooltip" data-bs-placement="top" title="Print">
+                <Link data-bs-toggle="tooltip" data-bs-placement="top" to="#">
                   <i className="ti ti-printer" />
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div className="card-body">
+          <div className="card-body p-0">
             <div className="table-responsive">
-              <Table columns={columns} dataSource={filteredData} />
+              <PrimeDataTable
+                column={columns}
+                data={listData}
+                rows={rows}
+                setRows={setRows}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalRecords={totalRecords} />
+              
             </div>
           </div>
         </div>
         {/* /product list */}
       </div>
       <CommonFooter />
-    </div>
-  );
+    </div>);
+
 };
 
 export default SalesReport;

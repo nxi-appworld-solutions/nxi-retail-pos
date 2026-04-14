@@ -1,6 +1,7 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
-import { all_routes } from "../../../../../Router/all_routes";
+import { all_routes } from "../../../../../routes/all_routes";
+
 
 const FormValidation = () => {
   const route = all_routes;
@@ -37,8 +38,8 @@ const FormValidation = () => {
                     your form. For server side validation{" "}
                     <Link
                       to="https://getbootstrap.com/docs/4.1/components/forms/#server-side"
-                      target="_blank"
-                    >
+                      target="_blank">
+                      
                       read full documentation
                     </Link>
                     .
@@ -50,7 +51,7 @@ const FormValidation = () => {
                       <form className="needs-validation" noValidate>
                         <div className="form-row row">
                           <div className="col-md-4 mb-3">
-                            <label  className="form-label" htmlFor="validationCustom01">
+                            <label className="form-label" htmlFor="validationCustom01">
                               First namesss
                             </label>
                             <input
@@ -59,8 +60,8 @@ const FormValidation = () => {
                               id="validationCustom01"
                               placeholder="First name"
                               defaultValue="Mark"
-                              required
-                            />
+                              required />
+                            
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                           <div className="col-md-4 mb-3">
@@ -73,8 +74,8 @@ const FormValidation = () => {
                               id="validationCustom02"
                               placeholder="Last name"
                               defaultValue="Otto"
-                              required
-                            />
+                              required />
+                            
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                           <div className="col-md-4 mb-3">
@@ -84,8 +85,8 @@ const FormValidation = () => {
                             <div className="input-group">
                               <span
                                 className="input-group-text"
-                                id="inputGroupPrepend"
-                              >
+                                id="inputGroupPrepend">
+                                
                                 {" "}
                                 @{" "}
                               </span>
@@ -95,8 +96,8 @@ const FormValidation = () => {
                                 id="validationCustomUsername"
                                 placeholder="Username"
                                 aria-describedby="inputGroupPrepend"
-                                required
-                              />
+                                required />
+                              
                               <div className="invalid-feedback">
                                 {" "}
                                 Please choose a username.
@@ -112,21 +113,21 @@ const FormValidation = () => {
                               className="form-control"
                               id="validationCustom03"
                               placeholder="City"
-                              required
-                            />
+                              required />
+                            
                             <div className="invalid-feedback">
                               Please provide a valid city.
                             </div>
                           </div>
                           <div className="col-md-3 mb-3">
-                            <label  className="form-label" htmlFor="validationCustom04">State</label>
+                            <label className="form-label" htmlFor="validationCustom04">State</label>
                             <input
                               type="text"
                               className="form-control"
                               id="validationCustom04"
                               placeholder="State"
-                              required
-                            />
+                              required />
+                            
                             <div className="invalid-feedback">
                               Please provide a valid state.
                             </div>
@@ -138,8 +139,8 @@ const FormValidation = () => {
                               className="form-control"
                               id="validationCustom05"
                               placeholder="Zip"
-                              required
-                            />
+                              required />
+                            
                             <div className="invalid-feedback">
                               Please provide a valid zip.
                             </div>
@@ -150,14 +151,14 @@ const FormValidation = () => {
                             <input
                               className="form-check-input"
                               type="checkbox"
-                              defaultValue
+
                               id="invalidCheck"
-                              required
-                            />
+                              required />
+                            
                             <label
                               className="form-check-label"
-                              htmlFor="invalidCheck"
-                            >
+                              htmlFor="invalidCheck">
+                              
                               Agree to terms and conditions
                             </label>
                             <div className="invalid-feedback">
@@ -200,8 +201,8 @@ const FormValidation = () => {
                               id="validationDefault01"
                               placeholder="First name"
                               defaultValue="Mark"
-                              required
-                            />
+                              required />
+                            
                           </div>
                           <div className="col-md-4 mb-3">
                             <label className="form-label" htmlFor="validationDefault02">
@@ -213,8 +214,8 @@ const FormValidation = () => {
                               id="validationDefault02"
                               placeholder="Last name"
                               defaultValue="Otto"
-                              required
-                            />
+                              required />
+                            
                           </div>
                           <div className="col-md-4 mb-3">
                             <label className="form-label" htmlFor="validationDefaultUsername">
@@ -223,8 +224,8 @@ const FormValidation = () => {
                             <div className="input-group">
                               <span
                                 className="input-group-text"
-                                id="inputGroupPrepend2"
-                              >
+                                id="inputGroupPrepend2">
+                                
                                 @
                               </span>
                               <input
@@ -233,8 +234,8 @@ const FormValidation = () => {
                                 id="validationDefaultUsername"
                                 placeholder="Username"
                                 aria-describedby="inputGroupPrepend2"
-                                required
-                              />
+                                required />
+                              
                             </div>
                           </div>
                         </div>
@@ -246,8 +247,8 @@ const FormValidation = () => {
                               className="form-control"
                               id="validationDefault03"
                               placeholder="City"
-                              required
-                            />
+                              required />
+                            
                           </div>
                           <div className="col-md-3 mb-3">
                             <label className="form-label" htmlFor="validationDefault04">State</label>
@@ -256,8 +257,8 @@ const FormValidation = () => {
                               className="form-control"
                               id="validationDefault04"
                               placeholder="State"
-                              required
-                            />
+                              required />
+                            
                           </div>
                           <div className="col-md-3 mb-3">
                             <label className="form-label" htmlFor="validationDefault05">Zip</label>
@@ -266,8 +267,8 @@ const FormValidation = () => {
                               className="form-control"
                               id="validationDefault05"
                               placeholder="Zip"
-                              required
-                            />
+                              required />
+                            
                           </div>
                         </div>
                         <div className="input-block mb-3">
@@ -275,14 +276,14 @@ const FormValidation = () => {
                             <input
                               className="form-check-input"
                               type="checkbox"
-                              defaultValue
+
                               id="invalidCheck2"
-                              required
-                            />
+                              required />
+                            
                             <label
                               className="form-check-label"
-                              htmlFor="invalidCheck2"
-                            >
+                              htmlFor="invalidCheck2">
+                              
                               Agree to terms and conditions
                             </label>
                           </div>
@@ -320,8 +321,8 @@ const FormValidation = () => {
                           id="validationServer01"
                           placeholder="First name"
                           defaultValue="Mark"
-                          required
-                        />
+                          required />
+                        
                         <div className="valid-feedback">Looks good!</div>
                       </div>
                       <div className="col-md-4 mb-3">
@@ -332,8 +333,8 @@ const FormValidation = () => {
                           id="validationServer02"
                           placeholder="Last name"
                           defaultValue="Otto"
-                          required
-                        />
+                          required />
+                        
                         <div className="valid-feedback">Looks good!</div>
                       </div>
                       <div className="col-md-4 mb-3">
@@ -343,8 +344,8 @@ const FormValidation = () => {
                         <div className="input-group">
                           <span
                             className="input-group-text"
-                            id="inputGroupPrepend3"
-                          >
+                            id="inputGroupPrepend3">
+                            
                             @
                           </span>
                           <input
@@ -353,8 +354,8 @@ const FormValidation = () => {
                             id="validationServerUsername"
                             placeholder="Username"
                             aria-describedby="inputGroupPrepend3"
-                            required
-                          />
+                            required />
+                          
                           <div className="invalid-feedback">
                             Please choose a username.
                           </div>
@@ -369,8 +370,8 @@ const FormValidation = () => {
                           className="form-control is-invalid"
                           id="validationServer03"
                           placeholder="City"
-                          required
-                        />
+                          required />
+                        
                         <div className="invalid-feedback">
                           Please provide a valid city.
                         </div>
@@ -382,8 +383,8 @@ const FormValidation = () => {
                           className="form-control is-invalid"
                           id="validationServer04"
                           placeholder="State"
-                          required
-                        />
+                          required />
+                        
                         <div className="invalid-feedback">
                           Please provide a valid state.
                         </div>
@@ -395,8 +396,8 @@ const FormValidation = () => {
                           className="form-control is-invalid"
                           id="validationServer05"
                           placeholder="Zip"
-                          required
-                        />
+                          required />
+                        
                         <div className="invalid-feedback">
                           Please provide a valid zip.
                         </div>
@@ -407,14 +408,14 @@ const FormValidation = () => {
                         <input
                           className="form-check-input is-invalid"
                           type="checkbox"
-                          defaultValue
+
                           id="invalidCheck3"
-                          required
-                        />
+                          required />
+                        
                         <label
                           className="form-check-label"
-                          htmlFor="invalidCheck3"
-                        >
+                          htmlFor="invalidCheck3">
+                          
                           Agree to terms and conditions
                         </label>
                         <div className="invalid-feedback">
@@ -444,10 +445,10 @@ const FormValidation = () => {
                     <div className="col-sm">
                       <form className="was-validated">
                         <div className="mb-3">
-                          <label 
+                          <label
                             htmlFor="validationTextarea"
-                            className="form-label"
-                          >
+                            className="form-label">
+                            
                             Textarea
                           </label>
                           <textarea
@@ -455,8 +456,8 @@ const FormValidation = () => {
                             id="validationTextarea"
                             placeholder="Required example textarea"
                             required
-                            defaultValue={""}
-                          />
+                            defaultValue={""} />
+                          
                           <div className="invalid-feedback">
                             Please enter a message in the textarea.
                           </div>
@@ -466,12 +467,12 @@ const FormValidation = () => {
                             type="checkbox"
                             className="form-check-input"
                             id="validationFormCheck1"
-                            required
-                          />
+                            required />
+                          
                           <label
                             className="form-check-label"
-                            htmlFor="validationFormCheck1"
-                          >
+                            htmlFor="validationFormCheck1">
+                            
                             Check this checkbox{" "}
                           </label>
                           <div className="invalid-feedback">
@@ -484,12 +485,12 @@ const FormValidation = () => {
                             className="form-check-input"
                             id="validationFormCheck2"
                             name="radio-stacked"
-                            required
-                          />
+                            required />
+                          
                           <label
                             className="form-check-label"
-                            htmlFor="validationFormCheck2"
-                          >
+                            htmlFor="validationFormCheck2">
+                            
                             Toggle this radio
                           </label>
                         </div>
@@ -499,12 +500,12 @@ const FormValidation = () => {
                             className="form-check-input"
                             id="validationFormCheck3"
                             name="radio-stacked"
-                            required
-                          />
+                            required />
+                          
                           <label
                             className="form-check-label"
-                            htmlFor="validationFormCheck3"
-                          >
+                            htmlFor="validationFormCheck3">
+                            
                             Or toggle this other radio
                           </label>
                           <div className="invalid-feedback">
@@ -516,9 +517,9 @@ const FormValidation = () => {
                           <select
                             className="form-select"
                             required
-                            aria-label="select example"
-                          >
-                            <option value>Open this select menu</option>
+                            aria-label="select example">
+                            
+                            <option value={0}>Open this select menu</option>
                             <option value={1}>One</option>
                             <option value={2}>Two</option>
                             <option value={3}>Three</option>
@@ -532,8 +533,8 @@ const FormValidation = () => {
                             type="file"
                             className="form-control"
                             aria-label="file example"
-                            required
-                          />
+                            required />
+                          
                           <div className="invalid-feedback">
                             Example invalid form file feedback
                           </div>
@@ -574,8 +575,8 @@ const FormValidation = () => {
                           id="validationTooltip01"
                           placeholder="First name"
                           defaultValue="Mark"
-                          required
-                        />
+                          required />
+                        
                         <div className="valid-tooltip">Looks good!</div>
                       </div>
                       <div className="col-md-4 mb-3">
@@ -586,8 +587,8 @@ const FormValidation = () => {
                           id="validationTooltip02"
                           placeholder="Last name"
                           defaultValue="Otto"
-                          required
-                        />
+                          required />
+                        
                         <div className="valid-tooltip">Looks good!</div>
                       </div>
                       <div className="col-md-4 mb-3">
@@ -599,8 +600,8 @@ const FormValidation = () => {
                           className="form-control"
                           id="validationTooltipUsername"
                           placeholder="Username"
-                          required
-                        />
+                          required />
+                        
                         <div className="invalid-tooltip">
                           Please choose a unique and valid username.
                         </div>
@@ -608,14 +609,14 @@ const FormValidation = () => {
                     </div>
                     <div className="form-row row">
                       <div className="col-md-6 mb-3">
-                        <label className="form-label"  htmlFor="validationTooltip03">City</label>
+                        <label className="form-label" htmlFor="validationTooltip03">City</label>
                         <input
                           type="text"
                           className="form-control"
                           id="validationTooltip03"
                           placeholder="City"
-                          required
-                        />
+                          required />
+                        
                         <div className="invalid-tooltip">
                           Please provide a valid city.
                         </div>
@@ -627,8 +628,8 @@ const FormValidation = () => {
                           className="form-control"
                           id="validationTooltip04"
                           placeholder="State"
-                          required
-                        />
+                          required />
+                        
                         <div className="invalid-tooltip">
                           Please provide a valid state.
                         </div>
@@ -640,8 +641,8 @@ const FormValidation = () => {
                           className="form-control"
                           id="validationTooltip05"
                           placeholder="Zip"
-                          required
-                        />
+                          required />
+                        
                         <div className="invalid-tooltip">
                           Please provide a valid zip.
                         </div>
@@ -659,8 +660,8 @@ const FormValidation = () => {
           {/* /Row */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default FormValidation;

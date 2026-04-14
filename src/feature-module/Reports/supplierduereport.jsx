@@ -1,102 +1,112 @@
-import React from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import Select from "react-select";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import { DatePicker, Table } from "antd";
-import CommonFooter from "../../core/common/footer/commonFooter";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
+import CommonFooter from "../../components/footer/commonFooter";
 import { supplierduereportdata } from "../../core/json/supplierduereportdata";
-import { all_routes } from "../../Router/all_routes";
+import { all_routes } from "../../routes/all_routes";
+import PrimeDataTable from "../../components/data-table";
+import CommonSelect from "../../components/select/common-select";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
 
 const SupplierDueReport = () => {
   const data = supplierduereportdata;
+  const [listData, _setListData] = useState(data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [selectedSupplier, setSelectedSupplier] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
   const statusOptions = [
-    { value: "chooseStatus", label: "Choose Status" },
-    { value: "received", label: "Received" },
-    { value: "Pending", label: "Pending" },
-    { value: "Ordered", label: "Ordered" },
-  ];
+  { value: "chooseStatus", label: "Choose Status" },
+  { value: "received", label: "Received" },
+  { value: "Pending", label: "Pending" },
+  { value: "Ordered", label: "Ordered" }];
+
 
   const supplierNameOptions = [
-    { value: "chooseSupplierName", label: "Choose Supplier Name" },
-    { value: "apexComputers", label: "Apex Computers" },
-    { value: "beatsHeadphones", label: "Beats Headphones" },
-  ];
+  { value: "chooseSupplierName", label: "Choose Supplier Name" },
+  { value: "apexComputers", label: "Apex Computers" },
+  { value: "beatsHeadphones", label: "Beats Headphones" }];
+
 
   const paymentmethode = [
-    { value: "Cash", label: "Cash" },
-    { value: "Paypal", label: "Paypal" },
-    { value: "Credit Card", label: "Credit Card" },
-    { value: "Stripe", label: "Stripe" },
-  ];
+  { value: "Cash", label: "Cash" },
+  { value: "Paypal", label: "Paypal" },
+  { value: "Credit Card", label: "Credit Card" },
+  { value: "Stripe", label: "Stripe" }];
+
 
   const columns = [
-    {
-      title: "Reference",
-      dataIndex: "Reference",
-      render: (text) => (
-        <>
-          <Link to="#" className="text-primary">{text}</Link>
-        </>
-      ),
-      sorter: (a, b) => a.Reference.length - b.Reference.length,
-    },
-    {
-      title: "ID",
-      dataIndex: "ID",
-      sorter: (a, b) => a.ID.length - b.ID.length,
-    },
+  {
+    header: "Reference",
+    field: "Reference",
+    body: (text) =>
+    <>
+          <Link to="#" className="text-primary">
+            {text.Reference}
+          </Link>
+        </>,
 
-    {
-      title: "Supplier",
-      dataIndex: "Supplier",
-      render: (text, record) => (
-        <>
+    sorter: (a, b) => a.Reference.length - b.Reference.length
+  },
+  {
+    header: "ID",
+    field: "ID",
+    sorter: (a, b) => a.ID.length - b.ID.length
+  },
+
+  {
+    header: "Supplier",
+    field: "Supplier",
+    body: (text) =>
+    <>
           <div className="d-flex align-items-center">
             <Link to="#" className="avatar avatar-md me-2">
-              <ImageWithBasePath src={record.image} alt="Img" />
+              <img src={text.image} alt="Img" />
             </Link>
             <h6 className="fw-medium">
-              <Link to="#">{text}</Link>
+              <Link to="#">{text.Supplier}</Link>
             </h6>
           </div>
+        </>,
 
-        </>
-      ),
-      sorter: (a, b) => a.Supplier.length - b.Supplier.length,
-    },
+    sorter: (a, b) => a.Supplier.length - b.Supplier.length
+  },
 
-    {
-      title: "Total Items",
-      dataIndex: "Total_Items",
-      sorter: (a, b) => a.Total_Items.length - b.Total_Items.length,
-    },
-    {
-      title: "Amount",
-      dataIndex: "Amount",
-      sorter: (a, b) => a.Amount.length - b.Amount.length,
-    },
+  {
+    header: "Total Items",
+    field: "Total_Items",
+    sorter: (a, b) => a.Total_Items.length - b.Total_Items.length
+  },
+  {
+    header: "Amount",
+    field: "Amount",
+    sorter: (a, b) => a.Amount.length - b.Amount.length
+  },
 
-    {
-      title: "Payment Method",
-      dataIndex: "Payment_Method",
-      sorter: (a, b) => a.Payment_Method.length - b.Payment_Method.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      render: (text) => (
-        <span className={`badge  ${text === 'Paid' ? 'badge-success' : text === 'Overdue' ? 'badge-purple' : 'badge-danger'} d-inline-flex align-items-center badge-xs`}>
-          {text}
-        </span>
-      ),
-      sorter: (a, b) => a.Status.length - b.Status.length,
-    },
+  {
+    header: "Payment Method",
+    field: "Payment_Method",
+    sorter: (a, b) =>
+    a.Payment_Method.length - b.Payment_Method.length
+  },
+  {
+    header: "Status",
+    field: "Status",
+    body: (text) =>
+    <span
+      className={`badge  ${text === "Paid" ? "badge-success" : text === "Overdue" ? "badge-purple" : "badge-danger"} d-inline-flex align-items-center badge-xs`}>
+      
+          {text.Status}
+        </span>,
 
-  ];
+    sorter: (a, b) => a.Status.length - b.Status.length
+  }];
+
 
   const route = all_routes;
 
@@ -141,10 +151,7 @@ const SupplierDueReport = () => {
                         <div className="mb-3">
                           <label className="form-label">Choose Date</label>
                           <div className="input-icon-start position-relative">
-                            <DatePicker
-                              className="form-control datetimepicker"
-                              placeholder="dd/mm/yyyy"
-                            />
+                            <CommonDateRangePicker />
                             <span className="input-icon-left">
                               <i className="ti ti-calendar" />
                             </span>
@@ -154,31 +161,41 @@ const SupplierDueReport = () => {
                       <div className="col-md-3">
                         <div className="mb-3">
                           <label className="form-label">Supplier</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={supplierNameOptions}
+                            value={selectedSupplier}
+                            onChange={(e) => setSelectedSupplier(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-md-3">
                         <div className="mb-3">
                           <label className="form-label">Status</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <label className="form-label">Status</label>
+                          <CommonSelect
+                            className="w-100"
                             options={statusOptions}
+                            value={selectedStatus}
+                            onChange={(e) => setSelectedStatus(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-md-3">
                         <div className="mb-3">
                           <label className="form-label">Payment Method</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={paymentmethode}
+                            value={selectedPaymentMethod}
+                            onChange={(e) => setSelectedPaymentMethod(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                     </div>
@@ -204,42 +221,35 @@ const SupplierDueReport = () => {
                 <ul className="table-top-head">
                   <TooltipIcons />
                   <li>
-                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="Print">
+                    <Link to="#"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Print">
+                      
                       <i className="ti ti-printer" />
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
               <div className="table-responsive custome-search">
-                <Table
-                  columns={columns}
-                  dataSource={data}
-                  summary={() => {
-                    return (
-                      <>
-                        <Table.Summary.Row>
-                          <Table.Summary.Cell index={3}><h6>Total</h6></Table.Summary.Cell>
-                          <Table.Summary.Cell ></Table.Summary.Cell>
-                          <Table.Summary.Cell ></Table.Summary.Cell>
-                          <Table.Summary.Cell ><h6>33268</h6></Table.Summary.Cell>
-                          <Table.Summary.Cell ><h6>$33268.53</h6></Table.Summary.Cell>
-                          <Table.Summary.Cell ><h6>$0.0</h6></Table.Summary.Cell>
-                          <Table.Summary.Cell ></Table.Summary.Cell>
-                        </Table.Summary.Row>
-                      </>
-                    );
-                  }}
-                />
+                <PrimeDataTable
+                  column={columns}
+                  data={listData}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords} />
+                
               </div>
             </div>
           </div>
           {/* /product list */}
         </div>
-
       </div>
       <CommonFooter />
-    </div>
-  );
+    </div>);
+
 };
 
 export default SupplierDueReport;

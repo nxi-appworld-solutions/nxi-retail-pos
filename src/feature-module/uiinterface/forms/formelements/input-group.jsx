@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+
+import { Link } from 'react-router-dom';
 
 const InputGroup = () => {
-    return (
-        <div>
+  return (
+    <div>
             <div className="page-wrapper cardhead">
                 <div className="content container-fluid">
                     {/* Page Header */}
@@ -37,12 +37,12 @@ const InputGroup = () => {
                                                         @
                                                     </span>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Username"
-                                                        aria-label="Username"
-                                                        aria-describedby="basic-addon1"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            placeholder="Username"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1" />
+                          
                                                 </div>
                                             </div>
                                         </div>
@@ -51,12 +51,12 @@ const InputGroup = () => {
                                             <div className="col-lg-10">
                                                 <div className="input-group">
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Recipient's username"
-                                                        aria-label="Recipient's username"
-                                                        aria-describedby="basic-addon2"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            placeholder="Recipient's username"
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2" />
+                          
                                                     <span className="input-group-text" id="basic-addon2">
                                                         @example.com
                                                     </span>
@@ -71,11 +71,11 @@ const InputGroup = () => {
                                                         https://example.com/users/
                                                     </span>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        id="basic-url"
-                                                        aria-describedby="basic-addon3"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            id="basic-url"
+                            aria-describedby="basic-addon3" />
+                          
                                                 </div>
                                             </div>
                                         </div>
@@ -87,10 +87,10 @@ const InputGroup = () => {
                                                 <div className="input-group">
                                                     <span className="input-group-text">$</span>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Amount (to the nearest dollar)"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Amount (to the nearest dollar)" />
+                          
                                                     <span className="input-group-text">.00</span>
                                                 </div>
                                             </div>
@@ -108,10 +108,10 @@ const InputGroup = () => {
                                                 <div className="input-group">
                                                     <span className="input-group-text">$</span>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Amount (to the nearest dollar)"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Amount (to the nearest dollar)" />
+                          
                                                     <span className="input-group-text">.00</span>
                                                 </div>
                                             </div>
@@ -122,10 +122,10 @@ const InputGroup = () => {
                                                 <div className="input-group">
                                                     <span className="input-group-text">With textarea</span>
                                                     <textarea
-                                                        className="form-control"
-                                                        aria-label="With textarea"
-                                                        defaultValue={""}
-                                                    />
+                            className="form-control"
+                            aria-label="With textarea"
+                            defaultValue={""} />
+                          
                                                 </div>
                                             </div>
                                         </div>
@@ -145,17 +145,17 @@ const InputGroup = () => {
                                             <div className="col-lg-10">
                                                 <div className="input-group input-group-lg">
                                                     <span
-                                                        className="input-group-text"
-                                                        id="inputGroup-sizing-lg"
-                                                    >
+                            className="input-group-text"
+                            id="inputGroup-sizing-lg">
+                            
                                                         Large
                                                     </span>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Sizing example input"
-                                                        aria-describedby="inputGroup-sizing-lg"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" />
+                          
                                                 </div>
                                             </div>
                                         </div>
@@ -166,17 +166,17 @@ const InputGroup = () => {
                                             <div className="col-lg-10">
                                                 <div className="input-group">
                                                     <span
-                                                        className="input-group-text"
-                                                        id="inputGroup-sizing-default"
-                                                    >
+                            className="input-group-text"
+                            id="inputGroup-sizing-default">
+                            
                                                         Default
                                                     </span>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Sizing example input"
-                                                        aria-describedby="inputGroup-sizing-default"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" />
+                          
                                                 </div>
                                             </div>
                                         </div>
@@ -187,17 +187,17 @@ const InputGroup = () => {
                                             <div className="col-lg-10">
                                                 <div className="input-group input-group-sm">
                                                     <span
-                                                        className="input-group-text"
-                                                        id="inputGroup-sizing-sm"
-                                                    >
+                            className="input-group-text"
+                            id="inputGroup-sizing-sm">
+                            
                                                         Small
                                                     </span>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Sizing example input"
-                                                        aria-describedby="inputGroup-sizing-sm"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" />
+                          
                                                 </div>
                                             </div>
                                         </div>
@@ -216,17 +216,17 @@ const InputGroup = () => {
                                                 <div className="input-group">
                                                     <div className="input-group-text">
                                                         <input
-                                                            className="form-check-input"
-                                                            type="checkbox"
-                                                            defaultValue=""
-                                                            aria-label="Checkbox for following text input"
-                                                        />
+                              className="form-check-input"
+                              type="checkbox"
+                              defaultValue=""
+                              aria-label="Checkbox for following text input" />
+                            
                                                     </div>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Text input with checkbox"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Text input with checkbox" />
+                          
                                                 </div>
                                             </div>
                                         </div>
@@ -236,17 +236,17 @@ const InputGroup = () => {
                                                 <div className="input-group">
                                                     <div className="input-group-text">
                                                         <input
-                                                            className="form-check-input"
-                                                            type="radio"
-                                                            defaultValue=""
-                                                            aria-label="Radio button for following text input"
-                                                        />
+                              className="form-check-input"
+                              type="radio"
+                              defaultValue=""
+                              aria-label="Radio button for following text input" />
+                            
                                                     </div>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Text input with radio button"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Text input with radio button" />
+                          
                                                 </div>
                                             </div>
                                         </div>
@@ -299,11 +299,11 @@ const InputGroup = () => {
                                             <div className="col-lg-10">
                                                 <div className="input-group">
                                                     <button
-                                                        className="btn btn-primary dropdown-toggle"
-                                                        type="button"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                    >
+                            className="btn btn-primary dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            
                                                         Dropdown
                                                     </button>
                                                     <ul className="dropdown-menu">
@@ -332,10 +332,10 @@ const InputGroup = () => {
                                                         </li>
                                                     </ul>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Text input with dropdown button"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Text input with dropdown button" />
+                          
                                                 </div>
                                             </div>
                                         </div>
@@ -346,16 +346,16 @@ const InputGroup = () => {
                                             <div className="col-lg-10">
                                                 <div className="input-group">
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Text input with dropdown button"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Text input with dropdown button" />
+                          
                                                     <button
-                                                        className="btn btn-outline-primary dropdown-toggle"
-                                                        type="button"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                    >
+                            className="btn btn-outline-primary dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            
                                                         Dropdown
                                                     </button>
                                                     <ul className="dropdown-menu dropdown-menu-end">
@@ -393,11 +393,11 @@ const InputGroup = () => {
                                             <div className="col-lg-10">
                                                 <div className="input-group">
                                                     <button
-                                                        className="btn btn-soft-primary dropdown-toggle"
-                                                        type="button"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                    >
+                            className="btn btn-soft-primary dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            
                                                         Dropdown
                                                     </button>
                                                     <ul className="dropdown-menu">
@@ -426,16 +426,16 @@ const InputGroup = () => {
                                                         </li>
                                                     </ul>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        aria-label="Text input with 2 dropdown buttons"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            aria-label="Text input with 2 dropdown buttons" />
+                          
                                                     <button
-                                                        className="btn btn-soft-primary dropdown-toggle"
-                                                        type="button"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                    >
+                            className="btn btn-soft-primary dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            
                                                         Dropdown
                                                     </button>
                                                     <ul className="dropdown-menu dropdown-menu-end">
@@ -473,8 +473,8 @@ const InputGroup = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    )
-}
+        </div>);
 
-export default InputGroup
+};
+
+export default InputGroup;

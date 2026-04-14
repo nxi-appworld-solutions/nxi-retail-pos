@@ -1,6 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { all_routes } from "../../../../Router/all_routes";
+import { Link } from "react-router";
+import { all_routes } from "../../../../routes/all_routes";
+
+
 
 const FormSelect = () => {
   const route = all_routes;
@@ -32,8 +33,8 @@ const FormSelect = () => {
                 <div className="card-body">
                   <select
                     className="form-select"
-                    aria-label="Default select example"
-                  >
+                    aria-label="Default select example">
+                    
                     <option value="">Open this select menu</option>
                     <option value={1}>One</option>
                     <option value={2}>Two</option>
@@ -50,8 +51,8 @@ const FormSelect = () => {
                 <div className="card-body">
                   <select
                     className="form-select form-select-lg mb-3"
-                    aria-label=".form-select-lg example"
-                  >
+                    aria-label=".form-select-lg example">
+                    
                     <option value="">Open this select menu</option>
                     <option value={1}>One</option>
                     <option value={2}>Two</option>
@@ -59,8 +60,8 @@ const FormSelect = () => {
                   </select>
                   <select
                     className="form-select form-select-sm"
-                    aria-label=".form-select-sm example"
-                  >
+                    aria-label=".form-select-sm example">
+                    
                     <option value="">Open this select menu</option>
                     <option value={1}>One</option>
                     <option value={2}>Two</option>
@@ -77,9 +78,9 @@ const FormSelect = () => {
                 <div className="card-body">
                   <select
                     className="form-select"
-                    multiple=""
-                    aria-label="multiple select example"
-                  >
+                    multiple
+                    aria-label="multiple select example">
+                    
                     <option value="">Open this select menu</option>
                     <option value={1}>One</option>
                     <option value={2}>Two</option>
@@ -91,8 +92,8 @@ const FormSelect = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default FormSelect;

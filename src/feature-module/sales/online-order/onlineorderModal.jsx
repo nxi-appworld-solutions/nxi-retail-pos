@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import Select from "react-select";
-import {
-  CustomerName,
-  OrderStatus,
-  PaymentType,
-  Supplier,
-} from "../../../core/common/selectOption/selectOption";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ArrowLeft,
-  Calendar,
-  DollarSign,
-  Minus,
-  PlusCircle,
-} from "feather-icons-react/build/IconComponents";
-import { DatePicker } from "antd";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
-import DefaultEditor from "react-simple-wysiwyg";
+import { pdf, printer, qrCodeImage, scanners, stockImg02, stockImg03, stockImg05 } from "../../../utils/imagepath";
+import { Editor } from "primereact/editor";
+import CommonDatePicker from "../../../components/date-picker/common-date-picker";
+import CommonSelect from "../../../components/select/common-select";
 
 const OnlineorderModal = () => {
   const [quantity, setQuantity] = useState(4);
+  const [text, setText] = useState("");
+  const [date1, setDate1] = useState(new Date());
+  const [date2, setDate2] = useState(new Date());
+  const [date3, setDate3] = useState(new Date());
+  const [selectedCustomerName, setSelectedCustomerName] = useState(
 
+    null);
+  const [selectedSupplier, setSelectedSupplier] = useState(null);
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState(
+    null
+  );
+  const [selectedPaymentType, setSelectedPaymentType] = useState(
+    null
+  );
   const handleDecrement = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
@@ -31,10 +31,16 @@ const OnlineorderModal = () => {
     setQuantity(quantity + 1);
   };
 
-  const [values, setValue] = useState();
-  function onChange(e) {
-    setValue(e.target.value);
-  }
+  const CustomerName = [{ label: "Customer Name", value: "1" }];
+  const OrderStatus = [
+  { label: "Completed", value: "1" },
+  { label: "Inprogress", value: "2" }];
+
+  const PaymentType = [
+  { label: "Completed", value: "1" },
+  { label: "Inprogress", value: "2" }];
+
+  const Supplier = [{ label: "Supplier Name", value: "1" }];
 
   return (
     <div>
@@ -51,8 +57,8 @@ const OnlineorderModal = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -65,11 +71,11 @@ const OnlineorderModal = () => {
                           <tr>
                             <th>Product</th>
                             <th>Qty</th>
-                            <th>Purchase Price(₹)</th>
-                            <th>Discount(₹)</th>
+                            <th>Purchase Price($)</th>
+                            <th>Discount($)</th>
                             <th>Tax(%)</th>
-                            <th>Tax Amount(₹)</th>
-                            <th>Unit Cost(₹)</th>
+                            <th>Tax Amount($)</th>
+                            <th>Unit Cost($)</th>
                             <th>Total Cost(%)</th>
                           </tr>
                         </thead>
@@ -96,19 +102,23 @@ const OnlineorderModal = () => {
                           </label>
                           <div className="row">
                             <div className="col-lg-10 col-sm-10 col-10">
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
                                 options={CustomerName}
+                                value={selectedCustomerName}
+                                onChange={(e) =>
+                                setSelectedCustomerName(e.value)
+                                }
                                 placeholder="Choose"
-                              />
+                                filter={false} />
+                              
                             </div>
                             <div className="col-lg-2 col-sm-2 col-2 ps-0">
                               <div className="add-icon">
                                 <Link
                                   to="#"
-                                  className="bg-dark text-white p-2 rounded"
-                                >
-                                  <PlusCircle />
+                                  className="bg-dark text-white p-2 rounded">
+                                  
+                                  <i className="feather icon-plus-circle" />
                                 </Link>
                               </div>
                             </div>
@@ -121,11 +131,12 @@ const OnlineorderModal = () => {
                             Date<span className="text-danger ms-1">*</span>
                           </label>
                           <div className="input-groupicon calender-input">
-                            <DatePicker
-                              className="form-control datetimepicker"
-                              placeholder="dd/mm/yyyy"
-                            />
-                            <Calendar className="info-img" />
+                            <CommonDatePicker
+                              value={date1}
+                              onChange={setDate1}
+                              className="w-100" />
+                            
+                            <i className="feather icon-calendar info-img" />
                           </div>
                         </div>
                       </div>
@@ -134,11 +145,13 @@ const OnlineorderModal = () => {
                           <label className="form-label">
                             Supplier<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
                             options={Supplier}
+                            value={selectedSupplier}
+                            onChange={(e) => setSelectedSupplier(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12 col-sm-6 col-12">
@@ -150,13 +163,10 @@ const OnlineorderModal = () => {
                             <input
                               type="text"
                               className="form-control"
-                              placeholder="Please type product code and select"
-                            />
+                              placeholder="Please type product code and select" />
+                            
                             <div className="addonset">
-                              <ImageWithBasePath
-                                src="assets/img/icons/qrcode-scan.svg"
-                                alt="img"
-                              />
+                              <img src={qrCodeImage} alt="img" />
                             </div>
                           </div>
                         </div>
@@ -168,19 +178,19 @@ const OnlineorderModal = () => {
                           <ul className="border-1 rounded-2">
                             <li className="border-bottom">
                               <h4 className="border-end">Order Tax</h4>
-                              <h5>₹ 0.00</h5>
+                              <h5>$ 0.00</h5>
                             </li>
                             <li className="border-bottom">
                               <h4 className="border-end">Discount</h4>
-                              <h5>₹ 0.00</h5>
+                              <h5>$ 0.00</h5>
                             </li>
                             <li className="border-bottom">
                               <h4 className="border-end">Shipping</h4>
-                              <h5>₹ 0.00</h5>
+                              <h5>$ 0.00</h5>
                             </li>
                             <li className="border-bottom">
                               <h4 className="border-end">Grand Total</h4>
-                              <h5>₹ 0.00</h5>
+                              <h5>$ 0.00</h5>
                             </li>
                           </ul>
                         </div>
@@ -196,8 +206,8 @@ const OnlineorderModal = () => {
                             <input
                               type="text"
                               defaultValue={0}
-                              className="form-control p-2"
-                            />
+                              className="form-control p-2" />
+                            
                           </div>
                         </div>
                       </div>
@@ -210,8 +220,8 @@ const OnlineorderModal = () => {
                             <input
                               type="text"
                               defaultValue={0}
-                              className="form-control p-2"
-                            />
+                              className="form-control p-2" />
+                            
                           </div>
                         </div>
                       </div>
@@ -224,8 +234,8 @@ const OnlineorderModal = () => {
                             <input
                               type="text"
                               defaultValue={0}
-                              className="form-control p-2"
-                            />
+                              className="form-control p-2" />
+                            
                           </div>
                         </div>
                       </div>
@@ -234,11 +244,13 @@ const OnlineorderModal = () => {
                           <label className="form-label">
                             Status<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
                             options={OrderStatus}
+                            value={selectedOrderStatus}
+                            onChange={(e) => setSelectedOrderStatus(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                     </div>
@@ -248,15 +260,15 @@ const OnlineorderModal = () => {
                   <button
                     type="button"
                     className="btn btn-secondary add-cancel me-3"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
                   <Link
                     to="#"
                     className="btn btn-primary add-sale"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Submit
                   </Link>
                 </div>
@@ -278,26 +290,22 @@ const OnlineorderModal = () => {
                 <ul className="table-top-head">
                   <li>
                     <Link
+                      to="#"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="Pdf"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/icons/pdf.svg"
-                        alt="img"
-                      />
+                      title="Pdf">
+                      
+                      <img src={pdf} alt="img" />
                     </Link>
                   </li>
                   <li>
                     <Link
+                      to="#"
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
-                      title="Pdf"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/icons/printer.svg"
-                        alt="img"
-                      />
+                      title="Pdf">
+                      
+                      <img src={printer} alt="img" />
                     </Link>
                   </li>
                 </ul>
@@ -305,9 +313,9 @@ const OnlineorderModal = () => {
                   <Link
                     to="#"
                     className="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    <ArrowLeft className="me-2" /> Back to Sales
+                    data-bs-dismiss="modal">
+                    
+                    <i className="feather icon-arrow-left me-2" /> Back to Sales
                   </Link>
                 </div>
               </div>
@@ -321,9 +329,9 @@ const OnlineorderModal = () => {
                         width: "100%",
                         padding: 0,
                         fontSize: 14,
-                        color: "#555",
-                      }}
-                    >
+                        color: "#555"
+                      }}>
+                      
                       <div className="row sales-details-items d-flex">
                         <div className="col-md-4 details-item">
                           <h6>Customer Info</h6>
@@ -387,11 +395,11 @@ const OnlineorderModal = () => {
                           <thead>
                             <tr>
                               <th>Product</th>
-                              <th>Purchase Price(₹)</th>
-                              <th>Discount(₹)</th>
+                              <th>Purchase Price($)</th>
+                              <th>Discount($)</th>
                               <th>Tax(%)</th>
-                              <th>Tax Amount(₹)</th>
-                              <th>Unit Cost(₹)</th>
+                              <th>Tax Amount($)</th>
+                              <th>Unit Cost($)</th>
                               <th>Total Cost(%)</th>
                             </tr>
                           </thead>
@@ -401,12 +409,12 @@ const OnlineorderModal = () => {
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="avatar avatar-md me-2"
-                                  >
-                                    <ImageWithBasePath
-                                      src="assets/img/products/stock-img-02.png"
-                                      alt="product"
-                                    />
+                                    className="avatar avatar-md me-2">
+                                    
+                                    <img
+                                      src={stockImg02}
+                                      alt="product" />
+                                    
                                   </Link>
                                   <Link to="#">Nike Jordan</Link>
                                 </div>
@@ -423,12 +431,12 @@ const OnlineorderModal = () => {
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="avatar avatar-md me-2"
-                                  >
-                                    <ImageWithBasePath
-                                      src="assets/img/products/stock-img-03.png"
-                                      alt="product"
-                                    />
+                                    className="avatar avatar-md me-2">
+                                    
+                                    <img
+                                      src={stockImg03}
+                                      alt="product" />
+                                    
                                   </Link>
                                   <Link to="#">Apple Series 5 Watch</Link>
                                 </div>
@@ -445,12 +453,12 @@ const OnlineorderModal = () => {
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="avatar avatar-md me-2"
-                                  >
-                                    <ImageWithBasePath
-                                      src="assets/img/products/stock-img-05.png"
-                                      alt="product"
-                                    />
+                                    className="avatar avatar-md me-2">
+                                    
+                                    <img
+                                      src={stockImg05}
+                                      alt="product" />
+                                    
                                   </Link>
                                   <Link to="#">Lobar Handy</Link>
                                 </div>
@@ -473,23 +481,23 @@ const OnlineorderModal = () => {
                             <ul className="border-1 rounded-1">
                               <li className="border-bottom">
                                 <h4 className="border-end">Order Tax</h4>
-                                <h5>₹ 0.00</h5>
+                                <h5>$ 0.00</h5>
                               </li>
                               <li className="border-bottom">
                                 <h4 className="border-end">Discount</h4>
-                                <h5>₹ 0.00</h5>
+                                <h5>$ 0.00</h5>
                               </li>
                               <li className="border-bottom">
                                 <h4 className="border-end">Grand Total</h4>
-                                <h5>₹ 5200.00</h5>
+                                <h5>$ 5200.00</h5>
                               </li>
                               <li className="border-bottom">
                                 <h4 className="border-end">Paid</h4>
-                                <h5>₹ 5200.00</h5>
+                                <h5>$ 5200.00</h5>
                               </li>
                               <li className="border-bottom">
                                 <h4 className="border-end">Due</h4>
-                                <h5>₹ 0.00</h5>
+                                <h5>$ 0.00</h5>
                               </li>
                             </ul>
                           </div>
@@ -502,8 +510,8 @@ const OnlineorderModal = () => {
                   <button
                     type="button"
                     className="btn btn-secondary me-2"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
                   <button type="submit" className="btn btn-primary">
@@ -530,8 +538,8 @@ const OnlineorderModal = () => {
                         type="button"
                         className="close"
                         data-bs-dismiss="modal"
-                        aria-label="Close"
-                      >
+                        aria-label="Close">
+                        
                         <span aria-hidden="true">×</span>
                       </button>
                     </div>
@@ -545,11 +553,11 @@ const OnlineorderModal = () => {
                               <tr>
                                 <th>Product</th>
                                 <th>Qty</th>
-                                <th>Purchase Price(₹)</th>
-                                <th>Discount(₹)</th>
+                                <th>Purchase Price($)</th>
+                                <th>Discount($)</th>
                                 <th>Tax(%)</th>
-                                <th>Tax Amount(₹)</th>
-                                <th>Unit Cost(₹)</th>
+                                <th>Tax Amount($)</th>
+                                <th>Unit Cost($)</th>
                                 <th>Total Cost(%)</th>
                               </tr>
                             </thead>
@@ -559,31 +567,35 @@ const OnlineorderModal = () => {
                                   <div className="d-flex align-items-center">
                                     <Link
                                       to="#"
-                                      className="avatar avatar-md me-2"
-                                    >
-                                      <ImageWithBasePath
-                                        src="assets/img/products/stock-img-02.png"
-                                        alt="product"
-                                      />
+                                      className="avatar avatar-md me-2">
+                                      
+                                      <img
+                                        src={stockImg02}
+                                        alt="product" />
+                                      
                                     </Link>
                                     <Link to="#">Nike Jordan</Link>
                                   </div>
                                 </td>
                                 <td>
                                   <div className="product-quantity bg-gray-transparent border-0">
-                                    <span className="quantity-btn">
+                                    <span
+                                      className="quantity-btn"
+                                      onClick={handleIncrement}>
+                                      
                                       +
-                                      <PlusCircle className="plus-circle" />
-                                      onClick={handleIncrement}
+                                      <i className="feather icon-plus-circle plus-circle" />
                                     </span>
                                     <input
                                       type="text"
                                       className="quntity-input form-control bg-transparent"
-                                      defaultValue={2}
-                                    />
-                                    <span className="quantity-btn">
-                                      <Minus className="feather-search" />
-                                      onClick={handleDecrement}
+                                      defaultValue={2} />
+                                    
+                                    <span
+                                      className="quantity-btn"
+                                      onClick={handleDecrement}>
+                                      
+                                      <i className="feather icon-minus feather-search" />
                                     </span>
                                   </div>
                                 </td>
@@ -599,31 +611,35 @@ const OnlineorderModal = () => {
                                   <div className="d-flex align-items-center">
                                     <Link
                                       to="#"
-                                      className="avatar avatar-md me-2"
-                                    >
-                                      <ImageWithBasePath
-                                        src="assets/img/products/stock-img-03.png"
-                                        alt="product"
-                                      />
+                                      className="avatar avatar-md me-2">
+                                      
+                                      <img
+                                        src={stockImg03}
+                                        alt="product" />
+                                      
                                     </Link>
                                     <Link to="#">Apple Series 5 Watch</Link>
                                   </div>
                                 </td>
                                 <td>
                                   <div className="product-quantity bg-gray-transparent border-0">
-                                    <span className="quantity-btn">
+                                    <span
+                                      className="quantity-btn"
+                                      onClick={handleIncrement}>
+                                      
                                       +
-                                      <PlusCircle className="plus-circle" />
-                                      onClick={handleIncrement}
+                                      <i className="feather icon-plus-circle plus-circle" />
                                     </span>
                                     <input
                                       type="text"
                                       className="quntity-input form-control bg-transparent"
-                                      defaultValue={2}
-                                    />
-                                    <span className="quantity-btn">
-                                      <Minus className="feather-search" />
-                                      onClick={handleDecrement}
+                                      defaultValue={2} />
+                                    
+                                    <span
+                                      className="quantity-btn"
+                                      onClick={handleDecrement}>
+                                      
+                                      <i className="feather icon-minus feather-search" />
                                     </span>
                                   </div>
                                 </td>
@@ -639,31 +655,35 @@ const OnlineorderModal = () => {
                                   <div className="d-flex align-items-center">
                                     <Link
                                       to="#"
-                                      className="avatar avatar-md me-2"
-                                    >
-                                      <ImageWithBasePath
-                                        src="assets/img/products/stock-img-05.png"
-                                        alt="product"
-                                      />
+                                      className="avatar avatar-md me-2">
+                                      
+                                      <img
+                                        src={stockImg05}
+                                        alt="product" />
+                                      
                                     </Link>
                                     <Link to="#">Lobar Handy</Link>
                                   </div>
                                 </td>
                                 <td>
                                   <div className="product-quantity bg-gray-transparent border-0">
-                                    <span className="quantity-btn">
+                                    <span
+                                      className="quantity-btn"
+                                      onClick={handleIncrement}>
+                                      
                                       +
-                                      <PlusCircle className="plus-circle" />
-                                      onClick = {handleIncrement}
+                                      <i className="feather icon-plus-circle plus-circle" />
                                     </span>
                                     <input
                                       type="text"
                                       className="quntity-input form-control bg-transparent"
-                                      defaultValue={2}
-                                    />
-                                    <span className="quantity-btn">
-                                      <Minus className="feather-search" />
-                                      onClick = {handleDecrement}
+                                      defaultValue={2} />
+                                    
+                                    <span
+                                      className="quantity-btn"
+                                      onClick={handleDecrement}>
+                                      
+                                      <i className="feather icon-minus feather-search" />
                                     </span>
                                   </div>
                                 </td>
@@ -686,19 +706,23 @@ const OnlineorderModal = () => {
                               </label>
                               <div className="row">
                                 <div className="col-lg-10 col-sm-10 col-10">
-                                  <Select
-                                    classNamePrefix="react-select"
+                                  <CommonSelect
                                     options={CustomerName}
+                                    value={selectedCustomerName}
+                                    onChange={(e) =>
+                                    setSelectedCustomerName(e.value)
+                                    }
                                     placeholder="Choose"
-                                  />
+                                    filter={false} />
+                                  
                                 </div>
                                 <div className="col-lg-2 col-sm-2 col-2 ps-0">
                                   <div className="add-icon">
                                     <Link
                                       to="#"
-                                      className="bg-dark text-white p-2 rounded"
-                                    >
-                                      <PlusCircle className="plus" />
+                                      className="bg-dark text-white p-2 rounded">
+                                      
+                                      <i className="feather icon-plus-circle plus" />
                                     </Link>
                                   </div>
                                 </div>
@@ -711,11 +735,12 @@ const OnlineorderModal = () => {
                                 Date<span className="text-danger ms-1">*</span>
                               </label>
                               <div className="input-groupicon calender-input">
-                                <DatePicker
-                                  className="form-control datetimepicker"
-                                  placeholder="dd/mm/yyyy"
-                                />
-                                <Calendar className="info-img" />
+                                <CommonDatePicker
+                                  value={date2}
+                                  onChange={setDate2}
+                                  className="w-100" />
+                                
+                                <i className="feather icon-calendar info-img" />
                               </div>
                             </div>
                           </div>
@@ -725,11 +750,13 @@ const OnlineorderModal = () => {
                                 Supplier
                                 <span className="text-danger ms-1">*</span>
                               </label>
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
                                 options={Supplier}
+                                value={selectedSupplier}
+                                onChange={(e) => setSelectedSupplier(e.value)}
                                 placeholder="Choose"
-                              />
+                                filter={false} />
+                              
                             </div>
                           </div>
                           <div className="col-lg-12 col-sm-6 col-12">
@@ -742,13 +769,13 @@ const OnlineorderModal = () => {
                                 <input
                                   type="text"
                                   className="form-control"
-                                  placeholder="Please type product code and select"
-                                />
+                                  placeholder="Please type product code and select" />
+                                
                                 <div className="addonset">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/scanners.svg"
-                                    alt="img"
-                                  />
+                                  <img
+                                    src={scanners}
+                                    alt="img" />
+                                  
                                 </div>
                               </div>
                             </div>
@@ -760,19 +787,19 @@ const OnlineorderModal = () => {
                               <ul className="border-1 rounded-1">
                                 <li className="border-bottom">
                                   <h4 className="border-end">Order Tax</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                                 <li className="border-bottom">
                                   <h4 className="border-end">Discount</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                                 <li className="border-bottom">
                                   <h4 className="border-end">Shipping</h4>
-                                  <h5>₹ 0.00</h5>
+                                  <h5>$ 0.00</h5>
                                 </li>
                                 <li className="border-bottom">
                                   <h4 className="border-end">Grand Total</h4>
-                                  <h5>₹5200.00</h5>
+                                  <h5>$5200.00</h5>
                                 </li>
                               </ul>
                             </div>
@@ -789,8 +816,8 @@ const OnlineorderModal = () => {
                                 <input
                                   type="text"
                                   className="form-control"
-                                  placeholder={0}
-                                />
+                                  placeholder={"0"} />
+                                
                               </div>
                             </div>
                           </div>
@@ -804,8 +831,8 @@ const OnlineorderModal = () => {
                                 <input
                                   type="text"
                                   className="form-control"
-                                  placeholder={0}
-                                />
+                                  placeholder={"0"} />
+                                
                               </div>
                             </div>
                           </div>
@@ -819,8 +846,8 @@ const OnlineorderModal = () => {
                                 <input
                                   type="text"
                                   className="form-control"
-                                  placeholder={0}
-                                />
+                                  placeholder={"0"} />
+                                
                               </div>
                             </div>
                           </div>
@@ -830,11 +857,15 @@ const OnlineorderModal = () => {
                                 Status
                                 <span className="text-danger ms-1">*</span>
                               </label>
-                              <Select
-                                classNamePrefix="react-select"
+                              <CommonSelect
                                 options={OrderStatus}
+                                value={selectedOrderStatus}
+                                onChange={(e) =>
+                                setSelectedOrderStatus(e.value)
+                                }
                                 placeholder="Choose"
-                              />
+                                filter={false} />
+                              
                             </div>
                           </div>
                           <div className="col-lg-12">
@@ -842,10 +873,11 @@ const OnlineorderModal = () => {
                               <label className="form-label">
                                 Notes<span className="text-danger ms-1">*</span>
                               </label>
-                              <DefaultEditor
-                                value={values}
-                                onChange={onChange}
-                              />
+                              <Editor
+                                value={text}
+                                onTextChange={(e) => setText(e.htmlValue)}
+                                style={{ height: "200px" }} />
+                              
                             </div>
                           </div>
                         </div>
@@ -855,15 +887,15 @@ const OnlineorderModal = () => {
                       <button
                         type="button"
                         className="btn btn-secondary add-cancel me-3"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <Link
                         to="#"
                         className="btn btn-primary add-sale"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Save Changes
                       </Link>
                     </div>
@@ -880,8 +912,8 @@ const OnlineorderModal = () => {
           id="showpayment"
           tabIndex={-1}
           aria-labelledby="showpayment"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
+          
           <div className="modal-dialog modal-dialog-centered stock-adjust-modal">
             <div className="modal-content">
               <div className="modal-header">
@@ -892,8 +924,8 @@ const OnlineorderModal = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -916,38 +948,29 @@ const OnlineorderModal = () => {
                             <tr>
                               <td>19 Jan 2023</td>
                               <td>INV/SL0101</td>
-                              <td>₹1500</td>
+                              <td>$1500</td>
                               <td>Cash</td>
                               <td>
                                 <div className="edit-delete-action d-flex align-items-center">
                                   <Link
                                     className="me-3 p-2 border rounded d-flex align-items-center"
-                                    to="#"
-                                  >
-                                    <i
-                                      data-feather="printer"
-                                      className="feather-rotate-ccw"
-                                    />
+                                    to="#">
+                                    
+                                    <i className="feather icon-printer feather-rotate-ccw" />
                                   </Link>
                                   <Link
                                     className="me-3 p-2 border rounded d-flex align-items-center"
                                     to="#"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#editpayment"
-                                  >
-                                    <i
-                                      data-feather="edit"
-                                      className="feather-edit"
-                                    />
+                                    data-bs-target="#editpayment">
+                                    
+                                    <i className="feather icon-edit feather-edit" />
                                   </Link>
                                   <Link
                                     className="p-2 border rounded d-flex align-items-center"
-                                    to="#"
-                                  >
-                                    <i
-                                      data-feather="trash-2"
-                                      className="feather-trash-2"
-                                    />
+                                    to="#">
+                                    
+                                    <i className="feather icon-trash-2" />
                                   </Link>
                                 </div>
                               </td>
@@ -969,8 +992,8 @@ const OnlineorderModal = () => {
           id="createpayment"
           tabIndex={-1}
           aria-labelledby="createpayment"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
+          
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
@@ -981,8 +1004,8 @@ const OnlineorderModal = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -996,11 +1019,12 @@ const OnlineorderModal = () => {
                           Date<span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-groupicon calender-input">
-                          <DatePicker
-                            className="form-control datetimepicker"
-                            placeholder="dd/mm/yyyy"
-                          />
-                          <Calendar className="info-img" />
+                          <CommonDatePicker
+                            value={date3}
+                            onChange={setDate3}
+                            className="w-100" />
+                          
+                          <i className="feather icon-calendar info-img" />
                         </div>
                       </div>
                     </div>
@@ -1021,7 +1045,7 @@ const OnlineorderModal = () => {
                           <span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-groupicon doller-input">
-                          <DollarSign className="info-img" />
+                          <i className="feather icon-dollar-sign info-img" />
                           <input type="text" className="form-control ps-4" />
                         </div>
                       </div>
@@ -1033,7 +1057,7 @@ const OnlineorderModal = () => {
                           <span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-groupicon doller-input">
-                          <DollarSign className="info-img" />
+                          <i className="feather icon-dollar-sign info-img" />
                           <input type="text" className="form-control ps-4" />
                         </div>
                       </div>
@@ -1044,17 +1068,23 @@ const OnlineorderModal = () => {
                           Payment type
                           <span className="text-danger ms-1">*</span>
                         </label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
                           options={PaymentType}
+                          value={selectedPaymentType}
+                          onChange={(e) => setSelectedPaymentType(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-lg-12">
                       <div className="mb-3">
                         <label className="form-label">Description</label>
-                        <DefaultEditor value={values} onChange={onChange} />
+                        <Editor
+                          value={text}
+                          onTextChange={(e) => setText(e.htmlValue)}
+                          style={{ height: "200px" }} />
+                        
                         <p>Maximum 60 Characters</p>
                       </div>
                     </div>
@@ -1064,15 +1094,15 @@ const OnlineorderModal = () => {
                   <button
                     type="button"
                     className="btn btn-secondary me-2"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
                   <Link
                     to="#"
                     className="btn btn-primary"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Submit
                   </Link>
                 </div>
@@ -1087,8 +1117,8 @@ const OnlineorderModal = () => {
           id="editpayment"
           tabIndex={-1}
           aria-labelledby="editpayment"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
+          
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
@@ -1099,8 +1129,8 @@ const OnlineorderModal = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -1113,12 +1143,12 @@ const OnlineorderModal = () => {
                           Date<span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-groupicon calender-input">
-                          <i data-feather="calendar" className="info-img" />
+                          <i className="feather icon-plus-calendar info-img" />
                           <input
                             type="text"
                             className="datetimepicker form-control"
-                            placeholder="Select Date"
-                          />
+                            placeholder="Select Date" />
+                          
                         </div>
                       </div>
                     </div>
@@ -1130,8 +1160,8 @@ const OnlineorderModal = () => {
                         <input
                           type="text"
                           className="form-control"
-                          defaultValue="INV/SL0101"
-                        />
+                          defaultValue="INV/SL0101" />
+                        
                       </div>
                     </div>
                   </div>
@@ -1143,12 +1173,12 @@ const OnlineorderModal = () => {
                           <span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-groupicon calender-input">
-                          <i data-feather="dollar-sign" className="info-img" />
+                          <i className="feather icon-dollar-sign info-img" />
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue={1500}
-                          />
+                            defaultValue={1500} />
+                          
                         </div>
                       </div>
                     </div>
@@ -1159,12 +1189,12 @@ const OnlineorderModal = () => {
                           <span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-groupicon calender-input">
-                          <i data-feather="dollar-sign" className="info-img" />
+                          <i className="feather icon-dollar-sign info-img" />
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue={1500}
-                          />
+                            defaultValue={1500} />
+                          
                         </div>
                       </div>
                     </div>
@@ -1194,8 +1224,8 @@ const OnlineorderModal = () => {
                   <button
                     type="button"
                     className="btn btn-secondary me-2"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
                   <button type="submit" className="btn btn-primary">
@@ -1208,8 +1238,8 @@ const OnlineorderModal = () => {
         </div>
         {/* edit payment Modal */}
       </>
-    </div>
-  );
+    </div>);
+
 };
 
 export default OnlineorderModal;

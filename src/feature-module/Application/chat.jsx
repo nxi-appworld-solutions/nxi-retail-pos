@@ -1,20 +1,36 @@
-import React, { useState, useEffect } from "react";
-import Scrollbars from "react-custom-scrollbars-2";
-import "boxicons/css/boxicons.css";
-import "boxicons/css/boxicons.min.css";
+import { useState, useEffect } from "react";
+import { Scrollbar } from "react-scrollbars-custom";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { all_routes } from "../../Router/all_routes";
-import { Calendar } from "feather-icons-react/build/IconComponents";
+import { all_routes } from "../../routes/all_routes";
 import "yet-another-react-lightbox/styles.css";
-import "react-modal-video/scss/modal-video.scss";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
+import CommonFooter from "../../components/footer/commonFooter";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import {
+  avatar14,
+  avatar19,
+  avatar20,
+  avatar21,
+  avatar22,
+  avatar23,
+  downloadImg,
+  emonji02,
+  emonji03,
+  emonji05,
+  emonji06,
+  emonji07,
+  emonji08,
+  emonji09,
+  emonji10,
+  scanners,
+  stockImg02,
+  deleteImg,
+  user01,
+  user09,
+  user49 } from
+"../../utils/imagepath";
 
 const Chat = () => {
-
-
   useEffect(() => {
     document.body.classList.add("app-chat");
     return () => {
@@ -25,7 +41,12 @@ const Chat = () => {
   const routes = all_routes;
   const [showEmoji, setShowEmoji] = useState(false);
   const [showEmoji2, setShowEmoji2] = useState(false);
+  const [showChatMessages, setShowChatMessages] = useState(false);
 
+  const handleChatUserClick = (e) => {
+    e.preventDefault();
+    setShowChatMessages(true);
+  };
 
   return (
     <>
@@ -47,7 +68,7 @@ const Chat = () => {
             {/* Chats sidebar */}
             <div className="sidebar-group">
               <div id="chats" className="sidebar-content active slimscroll">
-                <Scrollbars>
+                <Scrollbar>
                   <div className="chat-search-header">
                     <div className="header-title d-flex align-items-center justify-content-between">
                       <h4 className="mb-3">Chats</h4>
@@ -59,8 +80,8 @@ const Chat = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Search For Contacts or Messages"
-                          />
+                            placeholder="Search For Contacts or Messages" />
+                          
                           <span className="input-group-text">
                             <i className="ti ti-search" />
                           </span>
@@ -77,13 +98,13 @@ const Chat = () => {
                     {/* /Left Chat Title */}
                     <div className="chat-users-wrap">
                       <div className="chat-list">
-                        <Link to={routes.chat} className="chat-user-list">
+                        <Link to={routes.chat} className="chat-user-list" onClick={handleChatUserClick}>
                           <div className="avatar avatar-lg online me-2">
-                            <ImageWithBasePath
-                              src="assets/img/avatar/avatar-14.jpg"
+                            <img
+                              src={avatar14}
                               className="rounded-circle"
-                              alt="image"
-                            />
+                              alt="image" />
+                            
                           </div>
                           <div className="chat-user-info">
                             <div className="chat-user-msg">
@@ -144,13 +165,13 @@ const Chat = () => {
                         </div>
                       </div>
                       <div className="chat-list">
-                        <Link to={routes.chat} className="chat-user-list">
+                        <Link to={routes.chat} className="chat-user-list" onClick={handleChatUserClick}>
                           <div className="avatar avatar-lg online me-2">
-                            <ImageWithBasePath
-                              src="assets/img/avatar/avatar-19.jpg"
+                            <img
+                              src={avatar19}
                               className="rounded-circle"
-                              alt="image"
-                            />
+                              alt="image" />
+                            
                           </div>
                           <div className="chat-user-info">
                             <div className="chat-user-msg">
@@ -207,13 +228,13 @@ const Chat = () => {
                         </div>
                       </div>
                       <div className="chat-list">
-                        <Link to={routes.chat} className="chat-user-list">
+                        <Link to={routes.chat} className="chat-user-list" onClick={handleChatUserClick}>
                           <div className="avatar avatar-lg online me-2">
-                            <ImageWithBasePath
-                              src="assets/img/avatar/avatar-20.jpg"
+                            <img
+                              src={avatar20}
                               className="rounded-circle"
-                              alt="image"
-                            />
+                              alt="image" />
+                            
                           </div>
                           <div className="chat-user-info">
                             <div className="chat-user-msg">
@@ -270,13 +291,13 @@ const Chat = () => {
                         </div>
                       </div>
                       <div className="chat-list">
-                        <Link to="chat.html" className="chat-user-list">
+                        <Link to="chat.html" className="chat-user-list" onClick={handleChatUserClick}>
                           <div className="avatar avatar-lg online me-2">
-                            <ImageWithBasePath
-                              src="assets/img/users/user-01.jpg"
+                            <img
+                              src={user01}
                               className="rounded-circle"
-                              alt="image"
-                            />
+                              alt="image" />
+                            
                           </div>
                           <div className="chat-user-info">
                             <div className="chat-user-msg">
@@ -332,13 +353,13 @@ const Chat = () => {
                         </div>
                       </div>
                       <div className="chat-list">
-                        <Link to="chat.html" className="chat-user-list">
+                        <Link to="chat.html" className="chat-user-list" onClick={handleChatUserClick}>
                           <div className="avatar avatar-lg online me-2">
-                            <ImageWithBasePath
-                              src="assets/img/users/user-01.jpg"
+                            <img
+                              src={user01}
                               className="rounded-circle"
-                              alt="image"
-                            />
+                              alt="image" />
+                            
                           </div>
                           <div className="chat-user-info">
                             <div className="chat-user-msg">
@@ -395,13 +416,13 @@ const Chat = () => {
                         </div>
                       </div>
                       <div className="chat-list">
-                        <Link to="chat.html" className="chat-user-list">
+                        <Link to="chat.html" className="chat-user-list" onClick={handleChatUserClick}>
                           <div className="avatar avatar-lg online me-2">
-                            <ImageWithBasePath
-                              src="assets/img/avatar/avatar-21.jpg"
+                            <img
+                              src={avatar21}
                               className="rounded-circle"
-                              alt="image"
-                            />
+                              alt="image" />
+                            
                           </div>
                           <div className="chat-user-info">
                             <div className="chat-user-msg">
@@ -455,13 +476,13 @@ const Chat = () => {
                         </div>
                       </div>
                       <div className="chat-list">
-                        <Link to="chat.html" className="chat-user-list">
+                        <Link to="chat.html" className="chat-user-list" onClick={handleChatUserClick}>
                           <div className="avatar avatar-lg online me-2">
-                            <ImageWithBasePath
-                              src="assets/img/users/user-09.jpg"
+                            <img
+                              src={user09}
                               className="rounded-circle"
-                              alt="image"
-                            />
+                              alt="image" />
+                            
                           </div>
                           <div className="chat-user-info">
                             <div className="chat-user-msg">
@@ -516,13 +537,13 @@ const Chat = () => {
                         </div>
                       </div>
                       <div className="chat-list">
-                        <Link to="chat.html" className="chat-user-list">
+                        <Link to="chat.html" className="chat-user-list" onClick={handleChatUserClick}>
                           <div className="avatar avatar-lg online me-2">
-                            <ImageWithBasePath
-                              src="assets/img/avatar/avatar-22.jpg"
+                            <img
+                              src={avatar22}
                               className="rounded-circle"
-                              alt="image"
-                            />
+                              alt="image" />
+                            
                           </div>
                           <div className="chat-user-info">
                             <div className="chat-user-msg">
@@ -581,13 +602,13 @@ const Chat = () => {
                         </div>
                       </div>
                       <div className="chat-list">
-                        <Link to="chat.html" className="chat-user-list">
+                        <Link to="chat.html" className="chat-user-list" onClick={handleChatUserClick}>
                           <div className="avatar avatar-lg online me-2">
-                            <ImageWithBasePath
-                              src="assets/img/avatar/avatar-23.jpg"
+                            <img
+                              src={avatar23}
                               className="rounded-circle"
-                              alt="image"
-                            />
+                              alt="image" />
+                            
                           </div>
                           <div className="chat-user-info">
                             <div className="chat-user-msg">
@@ -645,12 +666,12 @@ const Chat = () => {
                       </div>
                     </div>
                   </div>
-                </Scrollbars>
+                </Scrollbar>
               </div>
             </div>
             {/* / Chats sidebar */}
             {/* Chat */}
-            <div className="chat chat-messages show" id="middle">
+            <div className={`chat chat-messages ${showChatMessages ? "show" : ""}`} id="middle">
               <div>
                 <div className="chat-header">
                   <div className="user-details">
@@ -660,11 +681,11 @@ const Chat = () => {
                       </Link>
                     </div>
                     <div className="avatar avatar-lg online flex-shrink-0">
-                      <ImageWithBasePath
-                        src="assets/img/avatar/avatar-14.jpg"
+                      <img
+                        src={avatar14}
                         className="rounded-circle"
-                        alt="image"
-                      />
+                        alt="image" />
+                      
                     </div>
                     <div className="ms-2 overflow-hidden">
                       <h6>Anthony Lewis</h6>
@@ -679,13 +700,17 @@ const Chat = () => {
                           className="btn chat-search-btn"
                           data-bs-toggle="tooltip"
                           data-bs-placement="bottom"
-                          title="Search"
-                        >
+                          title="Search">
+                          
                           <i className="ti ti-search" />
                         </Link>
                       </li>
                       <li>
-                        <Link className="btn no-bg" to="#" data-bs-toggle="dropdown">
+                        <Link
+                          className="btn no-bg"
+                          to="#"
+                          data-bs-toggle="dropdown">
+                          
                           <i className="ti ti-dots-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end p-3">
@@ -730,8 +755,8 @@ const Chat = () => {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Search Contacts"
-                        />
+                          placeholder="Search Contacts" />
+                        
                         <span className="input-group-text">
                           <i className="ti ti-search" />
                         </span>
@@ -742,14 +767,14 @@ const Chat = () => {
                 </div>
 
                 <div className="chat-body chat-page-group slimscroll">
-                  <Scrollbars>
+                  <Scrollbar>
                     <div className="messages">
                       <div className="chats chats-right">
                         <div className="chat-content">
                           <div className="chat-info">
                             <div className="message-content">
-                              Hi, this is Mark from Freshmart. I’m reaching out to confirm this
-                              week’s delivery schedule.
+                              Hi, this is Mark from Freshmart. I’m reaching out
+                              to confirm this week’s delivery schedule.
                               <div className="emoj-group">
                                 <ul>
                                   <li className="emoj-action">
@@ -760,42 +785,42 @@ const Chat = () => {
                                       <ul>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-02.svg" alt="Icon" />
+                                            <img src={emonji02} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-05.svg" alt="Icon" />
+                                            <img src={emonji05} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-06.svg" alt="Icon" />
+                                            <img src={emonji06} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-07.svg" alt="Icon" />
+                                            <img src={emonji07} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-08.svg" alt="Icon" />
+                                            <img src={emonji08} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-03.svg" alt="Icon" />
+                                            <img src={emonji03} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-10.svg" alt="Icon" />
+                                            <img src={emonji10} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-09.svg" alt="Icon" />
+                                            <img src={emonji09} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li className="add-emoj">
@@ -827,26 +852,27 @@ const Chat = () => {
                           </div>
                         </div>
                         <div className="chat-avatar">
-                          <ImageWithBasePath
-                            src="assets/img/users/user-49.png"
+                          <img
+                            src={user49}
                             className="rounded-circle dreams_chat"
-                            alt="image"
-                          />
+                            alt="image" />
+                          
                         </div>
                       </div>
                       <div className="chats">
                         <div className="chat-avatar">
-                          <ImageWithBasePath
-                            src="assets/img/avatar/avatar-14.jpg"
+                          <img
+                            src={avatar14}
                             className="rounded-circle"
-                            alt="image"
-                          />
+                            alt="image" />
+                          
                         </div>
                         <div className="chat-content">
                           <div className="chat-info">
                             <div className="message-content">
-                              Hi Mark, good to hear from you! Your delivery is scheduled for Friday
-                              at 10:00 AM. Is that time still convenient for you?{" "}
+                              Hi Mark, good to hear from you! Your delivery is
+                              scheduled for Friday at 10:00 AM. Is that time
+                              still convenient for you?{" "}
                               <div className="emoj-group">
                                 <ul>
                                   <li className="emoj-action">
@@ -857,42 +883,42 @@ const Chat = () => {
                                       <ul>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-02.svg" alt="Icon" />
+                                            <img src={emonji02} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-05.svg" alt="Icon" />
+                                            <img src={emonji05} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-06.svg" alt="Icon" />
+                                            <img src={emonji06} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-07.svg" alt="Icon" />
+                                            <img src={emonji07} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-08.svg" alt="Icon" />
+                                            <img src={emonji08} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-03.svg" alt="Icon" />
+                                            <img src={emonji03} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-10.svg" alt="Icon" />
+                                            <img src={emonji10} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-09.svg" alt="Icon" />
+                                            <img src={emonji09} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li className="add-emoj">
@@ -926,8 +952,8 @@ const Chat = () => {
                         <div className="chat-content">
                           <div className="chat-info">
                             <div className="message-content">
-                              Yes, that works. Could you also confirm the items in this week’s
-                              order?
+                              Yes, that works. Could you also confirm the items
+                              in this week’s order?
                               <div className="emoj-group">
                                 <ul>
                                   <li className="emoj-action">
@@ -938,42 +964,42 @@ const Chat = () => {
                                       <ul>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-02.svg" alt="Icon" />
+                                            <img src={emonji02} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-05.svg" alt="Icon" />
+                                            <img src={emonji05} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-06.svg" alt="Icon" />
+                                            <img src={emonji06} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-07.svg" alt="Icon" />
+                                            <img src={emonji07} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-08.svg" alt="Icon" />
+                                            <img src={emonji08} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-03.svg" alt="Icon" />
+                                            <img src={emonji03} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-10.svg" alt="Icon" />
+                                            <img src={emonji10} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-09.svg" alt="Icon" />
+                                            <img src={emonji09} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li className="add-emoj">
@@ -1005,11 +1031,11 @@ const Chat = () => {
                           </div>
                         </div>
                         <div className="chat-avatar">
-                          <ImageWithBasePath
-                            src="assets/img/users/user-49.png"
+                          <img
+                            src={user49}
                             className="rounded-circle dreams_chat"
-                            alt="image"
-                          />
+                            alt="image" />
+                          
                         </div>
                       </div>
                       <div className="chat-line">
@@ -1017,11 +1043,11 @@ const Chat = () => {
                       </div>
                       <div className="chats">
                         <div className="chat-avatar">
-                          <ImageWithBasePath
-                            src="assets/img/avatar/avatar-14.jpg"
+                          <img
+                            src={avatar14}
                             className="rounded-circle"
-                            alt="image"
-                          />
+                            alt="image" />
+                          
                         </div>
                         <div className="chat-content">
                           <div className="chat-info">
@@ -1029,8 +1055,8 @@ const Chat = () => {
                               Of course! Here’s the list:
                               <ul>
                                 <li>
-                                  <i className="ti ti-point-filled" /> 20 cases of bottled water
-                                  (500ml)
+                                  <i className="ti ti-point-filled" /> 20 cases
+                                  of bottled water (500ml)
                                 </li>
                                 <li>
                                   <i className="ti ti-point-filled" />
@@ -1048,42 +1074,42 @@ const Chat = () => {
                                       <ul>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-02.svg" alt="Icon" />
+                                            <img src={emonji02} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-05.svg" alt="Icon" />
+                                            <img src={emonji05} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-06.svg" alt="Icon" />
+                                            <img src={emonji06} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-07.svg" alt="Icon" />
+                                            <img src={emonji07} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-08.svg" alt="Icon" />
+                                            <img src={emonji08} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-03.svg" alt="Icon" />
+                                            <img src={emonji03} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-10.svg" alt="Icon" />
+                                            <img src={emonji10} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-09.svg" alt="Icon" />
+                                            <img src={emonji09} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li className="add-emoj">
@@ -1116,7 +1142,8 @@ const Chat = () => {
                         <div className="chat-content">
                           <div className="chat-info">
                             <div className="message-content">
-                              Almost. Can you increase the bottled water to 30 cases instead of 20?
+                              Almost. Can you increase the bottled water to 30
+                              cases instead of 20?
                               <div className="emoj-group">
                                 <ul>
                                   <li className="emoj-action">
@@ -1127,42 +1154,42 @@ const Chat = () => {
                                       <ul>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-02.svg" alt="Icon" />
+                                            <img src={emonji02} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-05.svg" alt="Icon" />
+                                            <img src={emonji05} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-06.svg" alt="Icon" />
+                                            <img src={emonji06} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-07.svg" alt="Icon" />
+                                            <img src={emonji07} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-08.svg" alt="Icon" />
+                                            <img src={emonji08} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-03.svg" alt="Icon" />
+                                            <img src={emonji03} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-10.svg" alt="Icon" />
+                                            <img src={emonji10} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-09.svg" alt="Icon" />
+                                            <img src={emonji09} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li className="add-emoj">
@@ -1194,26 +1221,27 @@ const Chat = () => {
                           </div>
                         </div>
                         <div className="chat-avatar">
-                          <ImageWithBasePath
-                            src="assets/img/users/user-49.png"
+                          <img
+                            src={user49}
                             className="rounded-circle dreams_chat"
-                            alt="image"
-                          />
+                            alt="image" />
+                          
                         </div>
                       </div>
                       <div className="chats">
                         <div className="chat-avatar">
-                          <ImageWithBasePath
-                            src="assets/img/avatar/avatar-14.jpg"
+                          <img
+                            src={avatar14}
                             className="rounded-circle"
-                            alt="image"
-                          />
+                            alt="image" />
+                          
                         </div>
                         <div className="chat-content">
                           <div className="chat-info">
                             <div className="message-content">
-                              Got it! I’ll update the order to 30 cases of bottled water. Anything
-                              else you’d like to add or adjust?
+                              Got it! I’ll update the order to 30 cases of
+                              bottled water. Anything else you’d like to add or
+                              adjust?
                               <div className="emoj-group">
                                 <ul>
                                   <li className="emoj-action">
@@ -1224,42 +1252,42 @@ const Chat = () => {
                                       <ul>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-02.svg" alt="Icon" />
+                                            <img src={emonji02} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-05.svg" alt="Icon" />
+                                            <img src={emonji05} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-06.svg" alt="Icon" />
+                                            <img src={emonji06} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-07.svg" alt="Icon" />
+                                            <img src={emonji07} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-08.svg" alt="Icon" />
+                                            <img src={emonji08} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-03.svg" alt="Icon" />
+                                            <img src={emonji03} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-10.svg" alt="Icon" />
+                                            <img src={emonji10} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-09.svg" alt="Icon" />
+                                            <img src={emonji09} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li className="add-emoj">
@@ -1303,42 +1331,42 @@ const Chat = () => {
                                       <ul>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-02.svg" alt="Icon" />
+                                            <img src={emonji02} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-05.svg" alt="Icon" />
+                                            <img src={emonji05} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-06.svg" alt="Icon" />
+                                            <img src={emonji06} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-07.svg" alt="Icon" />
+                                            <img src={emonji07} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-08.svg" alt="Icon" />
+                                            <img src={emonji08} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-03.svg" alt="Icon" />
+                                            <img src={emonji03} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-10.svg" alt="Icon" />
+                                            <img src={emonji10} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li>
                                           <Link to="#">
-                                            <ImageWithBasePath src="assets/img/icons/emonji-09.svg" alt="Icon" />
+                                            <img src={emonji09} alt="Icon" />
                                           </Link>
                                         </li>
                                         <li className="add-emoj">
@@ -1370,17 +1398,15 @@ const Chat = () => {
                           </div>
                         </div>
                         <div className="chat-avatar">
-                          <ImageWithBasePath
-                            src="assets/img/users/user-49.png"
+                          <img
+                            src={user49}
                             className="rounded-circle dreams_chat"
-                            alt="image"
-                          />
+                            alt="image" />
+                          
                         </div>
                       </div>
                     </div>
-
-                  </Scrollbars>
-
+                  </Scrollbar>
                 </div>
               </div>
               <div className="chat-footer">
@@ -1395,56 +1421,45 @@ const Chat = () => {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Type Your Message"
-                      />
+                        placeholder="Type Your Message" />
+                      
                     </div>
                     <div className="form-item emoj-action-foot">
-                      <Link to="#"
+                      <Link
+                        to="#"
                         className="action-circle"
-                        onClick={() => setShowEmoji2(!showEmoji2)}
-                      >
+                        onClick={() => setShowEmoji2(!showEmoji2)}>
+                        
                         <i className="ti ti-mood-smile" />
                       </Link>
-                      <div className="emoj-group-list-foot down-emoji-circle" style={{ display: showEmoji2 ? "block" : "none" }}>
+                      <div
+                        className="emoj-group-list-foot down-emoji-circle"
+                        style={{ display: showEmoji2 ? "block" : "none" }}>
+                        
                         <ul>
                           <li>
                             <Link to="#">
-                              <ImageWithBasePath
-                                src="assets/img/icons/emonji-02.svg"
-                                alt="Icon"
-                              />
+                              <img src={emonji02} alt="Icon" />
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              <ImageWithBasePath
-                                src="assets/img/icons/emonji-05.svg"
-                                alt="Icon"
-                              />
+                              <img src={emonji05} alt="Icon" />
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              <ImageWithBasePath
-                                src="assets/img/icons/emonji-06.svg"
-                                alt="Icon"
-                              />
+                              <img src={emonji06} alt="Icon" />
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              <ImageWithBasePath
-                                src="assets/img/icons/emonji-07.svg"
-                                alt="Icon"
-                              />
+                              <img src={emonji07} alt="Icon" />
                             </Link>
                           </li>
                           <li>
                             <Link to="#">
-                              <ImageWithBasePath
-                                src="assets/img/icons/emonji-08.svg"
-                                alt="Icon"
-                              />
+                              <img src={emonji08} alt="Icon" />
                             </Link>
                           </li>
                           <li className="add-emoj">
@@ -1459,16 +1474,16 @@ const Chat = () => {
                       <Link
                         to="#"
                         className="action-circle file-action position-absolute"
-                        onClick={() => setShowEmoji(!showEmoji)}
-                      >
+                        onClick={() => setShowEmoji(!showEmoji)}>
+                        
                         <i className="ti ti-folder" />
                       </Link>
                       <input
                         type="file"
                         className="open-file position-relative"
                         name="files"
-                        id="files"
-                      />
+                        id="files" />
+                      
                     </div>
                     <div className="form-item">
                       <Link to="#" data-bs-toggle="dropdown">
@@ -1527,8 +1542,8 @@ const Chat = () => {
                       type="button"
                       className="close"
                       data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <span aria-hidden="true">×</span>
                     </button>
                   </div>
@@ -1538,19 +1553,19 @@ const Chat = () => {
                         <div className="input-blocks">
                           <label>Date</label>
                           <div className="input-groupicon calender-input">
-                            <Calendar className="info-img" />
+                            <i className="feather icon-calendar info-img" />
                             <input
                               type="text"
                               className="datetimepicker form-control"
-                              placeholder="Select Date"
-                            />
+                              placeholder="Select Date" />
+                            
                           </div>
                         </div>
                       </div>
                       <div className="col-lg-4 col-md-6 col-sm-12">
                         <div className="input-blocks">
                           <label>From</label>
-                          <select className="react-select">
+                          <select>
                             <option>Choose</option>
                             <option>Store 1</option>
                           </select>
@@ -1559,7 +1574,7 @@ const Chat = () => {
                       <div className="col-lg-4 col-md-6 col-sm-12">
                         <div className="input-blocks">
                           <label>To</label>
-                          <select className="react-select">
+                          <select>
                             <option>Choose</option>
                             <option>Store 2</option>
                           </select>
@@ -1572,8 +1587,8 @@ const Chat = () => {
                           <label>Product Name</label>
                           <input
                             type="text"
-                            placeholder="Please type product code and select"
-                          />
+                            placeholder="Please type product code and select" />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
@@ -1630,7 +1645,7 @@ const Chat = () => {
                         <div className="col-lg-3 col-md-6 col-sm-12">
                           <div className="input-blocks">
                             <label>Status</label>
-                            <select className="react-select">
+                            <select>
                               <option>Choose</option>
                               <option>Sent</option>
                               <option>Pending</option>
@@ -1650,8 +1665,8 @@ const Chat = () => {
                         <Link
                           to="#"
                           className="btn btn-cancel me-2"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Cancel
                         </Link>
                         <Link to="#" className="btn btn-submit">
@@ -1680,8 +1695,8 @@ const Chat = () => {
                       type="button"
                       className="close"
                       data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <span aria-hidden="true">×</span>
                     </button>
                   </div>
@@ -1693,22 +1708,19 @@ const Chat = () => {
                             <div className="input-blocks">
                               <label>Date</label>
                               <div className="input-groupicon calender-input">
-                                <i
-                                  data-feather="calendar"
-                                  className="info-img"
-                                />
+                                <i className="feather icon-plus-calendar info-img" />
                                 <input
                                   type="text"
                                   className="datetimepicker"
-                                  placeholder="19 Jan 2023"
-                                />
+                                  placeholder="19 Jan 2023" />
+                                
                               </div>
                             </div>
                           </div>
                           <div className="col-lg-4 col-md-6 col-sm-12">
                             <div className="input-blocks">
                               <label>From</label>
-                              <select className="react-select">
+                              <select>
                                 <option>Store 1</option>
                                 <option>Choose</option>
                               </select>
@@ -1717,7 +1729,7 @@ const Chat = () => {
                           <div className="col-lg-4 col-md-6 col-sm-12">
                             <div className="input-blocks">
                               <label>To</label>
-                              <select className="react-select">
+                              <select>
                                 <option>Store 2</option>
                                 <option>Choose</option>
                               </select>
@@ -1729,13 +1741,10 @@ const Chat = () => {
                               <div className="input-groupicon">
                                 <input
                                   type="text"
-                                  placeholder="Scan/Search Product by code and select..."
-                                />
+                                  placeholder="Scan/Search Product by code and select..." />
+                                
                                 <div className="addonset">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/scanners.svg"
-                                    alt="img"
-                                  />
+                                  <img src={scanners} alt="img" />
                                 </div>
                               </div>
                             </div>
@@ -1767,12 +1776,12 @@ const Chat = () => {
                                         <div className="productimgname">
                                           <Link
                                             to="#"
-                                            className="product-img stock-img"
-                                          >
-                                            <ImageWithBasePath
-                                              src="assets/img/products/stock-img-02.png"
-                                              alt="product"
-                                            />
+                                            className="product-img stock-img">
+                                            
+                                            <img
+                                              src={stockImg02}
+                                              alt="product" />
+                                            
                                           </Link>
                                           <Link to="#">Nike Jordan</Link>
                                         </div>
@@ -1781,21 +1790,15 @@ const Chat = () => {
                                         <div className="product-quantity">
                                           <span className="quantity-btn">
                                             +
-                                            <i
-                                              data-feather="plus-circle"
-                                              className="plus-circle"
-                                            />
+                                            <i className="feather icon-plus-circle plus-circle" />
                                           </span>
                                           <input
                                             type="text"
                                             className="quntity-input"
-                                            defaultValue={10}
-                                          />
+                                            defaultValue={10} />
+                                          
                                           <span className="quantity-btn">
-                                            <i
-                                              data-feather="minus-circle"
-                                              className="feather-search"
-                                            />
+                                            <i className="feather icon-minus-circle feather-search" />
                                           </span>
                                         </div>
                                       </td>
@@ -1806,11 +1809,8 @@ const Chat = () => {
                                       <td className="text-end">0.00</td>
                                       <td className="text-end">1500</td>
                                       <td>
-                                        <Link className="delete-set">
-                                          <ImageWithBasePath
-                                            src="assets/img/icons/delete.svg"
-                                            alt="svg"
-                                          />
+                                        <Link to="#" className="delete-set">
+                                          <img src={deleteImg} alt="svg" />
                                         </Link>
                                       </td>
                                     </tr>
@@ -1866,7 +1866,7 @@ const Chat = () => {
                           <div className="col-lg-3 col-sm-6 col-12">
                             <div className="input-blocks">
                               <label>Status</label>
-                              <select className="react-select">
+                              <select>
                                 <option>Sent</option>
                                 <option>Pending</option>
                               </select>
@@ -1891,8 +1891,8 @@ const Chat = () => {
                         <Link
                           to="#"
                           className="btn btn-cancel me-2"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Cancel
                         </Link>
                         <Link to="#" className="btn btn-submit">
@@ -1921,8 +1921,8 @@ const Chat = () => {
                       type="button"
                       className="close"
                       data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <span aria-hidden="true">×</span>
                     </button>
                   </div>
@@ -1931,7 +1931,7 @@ const Chat = () => {
                       <div className="col-lg-4 col-sm-6 col-12">
                         <div className="input-blocks">
                           <label>From</label>
-                          <select className="react-select">
+                          <select>
                             <option>Choose</option>
                             <option>Store 1</option>
                           </select>
@@ -1940,7 +1940,7 @@ const Chat = () => {
                       <div className="col-lg-4 col-sm-6 col-12">
                         <div className="input-blocks">
                           <label>To</label>
-                          <select className="react-select">
+                          <select>
                             <option>Choose</option>
                             <option>Store 2</option>
                           </select>
@@ -1949,7 +1949,7 @@ const Chat = () => {
                       <div className="col-lg-4 col-sm-6 col-12">
                         <div className="input-blocks">
                           <label>Satus</label>
-                          <select className="react-select">
+                          <select>
                             <option>Choose</option>
                             <option>Sent</option>
                             <option>Pending</option>
@@ -1960,8 +1960,8 @@ const Chat = () => {
                         <div className="row">
                           <div>
                             {/* <div className="input-blocks download">
-                          <Link className="btn btn-submit">Download Sample File</Link>
-                      </div> */}
+                              <Link className="btn btn-submit">Download Sample File</Link>
+                              </div> */}
                             <div className="modal-footer-btn download-file">
                               <Link to="#" className="btn btn-submit">
                                 Download Sample File
@@ -1976,10 +1976,7 @@ const Chat = () => {
                           <div className="image-upload download">
                             <input type="file" />
                             <div className="image-uploads">
-                              <ImageWithBasePath
-                                src="assets/img/download-img.png"
-                                alt="img"
-                              />
+                              <img src={downloadImg} alt="img" />
                               <h4>
                                 Drag and drop a <span>file to upload</span>
                               </h4>
@@ -2006,8 +2003,8 @@ const Chat = () => {
                         <Link
                           to="#"
                           className="btn btn-cancel me-2"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Cancel
                         </Link>
                         <Link to="/purchase-list" className="btn btn-submit">
@@ -2023,8 +2020,8 @@ const Chat = () => {
         </div>
         {/* /Import Purchase */}
       </div>
-    </>
-  );
+    </>);
+
 };
 
 export default Chat;

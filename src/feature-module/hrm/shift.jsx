@@ -1,78 +1,141 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  PlusCircle,
-} from "feather-icons-react/build/IconComponents";
-import { useSelector } from "react-redux";
-import Table from "../../core/pagination/datatable.jsx";
-import EditShift from "../../core/modals/hrm/editshift.jsx";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons.jsx";
-import RefreshIcon from "../../core/common/tooltip-content/refresh.jsx";
-import CollapesIcon from "../../core/common/tooltip-content/collapes.jsx";
-import AddShift from "../../core/modals/hrm/addshift.jsx";
-import CommonFooter from "../../core/common/footer/commonFooter.jsx";
+import CommonFooter from "../../components/footer/commonFooter";
+import PrimeDataTable from "../../components/data-table";
+import AddShift from "../../core/modals/hrm/addshift";
+import EditShift from "../../core/modals/hrm/editshift";
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
+
+export const shiftlistdata = [
+{
+  id: 1,
+  shiftname: "Fixed",
+  time: "09:00 AM - 6:00 PM",
+  weekoff: "Sunday, Monday",
+  createdon: "04 Aug 2023",
+  status: "Active"
+},
+{
+  id: 2,
+  shiftname: "Rotating",
+  time: "06:00 AM - 3:00 PM",
+  weekoff: "Saturday, Sunday",
+  createdon: "21 July 2023",
+  status: "Inactive"
+},
+{
+  id: 3,
+  shiftname: "Split",
+  time: "03:00 AM - 9:00 PM",
+  weekoff: "Tuesday, Saturday",
+  createdon: "31 Jan 2022",
+  status: "Active"
+},
+{
+  id: 4,
+  shiftname: "On-Call",
+  time: "09:00 AM - 6:00 PM",
+  weekoff: "Monday",
+  createdon: "15 May 2023",
+  status: "Active"
+},
+{
+  id: 5,
+  shiftname: "Weekend",
+  time: "06:00 AM - 3:00 PM",
+  weekoff: "Friday",
+  createdon: "04 Aug 2023",
+  status: "Active"
+}];
+
 
 const Shift = () => {
-  const dataSource = useSelector((state) => state.rootReducer.shiftlist_data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _searchQuerysetTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [selectedShifts, setSelectedShifts] = useState([]);
+
+
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
 
   const columns = [
-    {
-      title: "Shift Name",
-      dataIndex: "shiftname",
-      sorter: (a, b) => a.shiftname.length - b.shiftname.length,
-    },
+  {
+    header:
+    <label className="checkboxs">
+          <input type="checkbox" id="select-all" />
+          <span className="checkmarks" />
+        </label>,
 
-    {
-      title: "Time",
-      dataIndex: "time",
-      sorter: (a, b) => a.time.length - b.time.length,
-    },
-    {
-      title: "Week Off",
-      dataIndex: "weekoff",
-      sorter: (a, b) => a.weekoff.length - b.weekoff.length,
-    },
-    {
-      title: "Created On",
-      dataIndex: "createdon",
-      sorter: (a, b) => a.createdon.length - b.createdon.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      render: (text) => (
-        <span className="badge badge-success d-inline-flex align-items-center badge-xs">
-           {text}
+    body: () =>
+    <label className="checkboxs">
+          <input type="checkbox" />
+          <span className="checkmarks" />
+        </label>,
+
+    sortable: false,
+    key: "checked"
+  },
+  {
+    field: "shiftname",
+    header: "Shift Name",
+    sortable: true
+  },
+  {
+    field: "time",
+    header: "Time",
+    sortable: true
+  },
+  {
+    field: "weekoff",
+    header: "Week Off",
+    sortable: true
+  },
+  {
+    field: "createdon",
+    header: "Created On",
+    sortable: true
+  },
+  {
+    field: "status",
+    header: "Status",
+    sortable: true,
+    body: (rowData) =>
+    <span className="badge badge-success d-inline-flex align-items-center badge-xs">
+          {rowData.status}
         </span>
-      ),
-      sorter: (a, b) => a.status.length - b.status.length,
-    },
 
-    {
-      title: "",
-      dataIndex: "actions",
-      key: "actions",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
-            <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-units"
-            >
-              <i data-feather="edit" className="feather-edit"></i>
-            </Link>
-            <Link className="confirm-text p-2" to="#" data-bs-toggle="modal" data-bs-target="#delete-modal">
-              <i
-                data-feather="trash-2"
-                className="feather-trash-2" ></i>
-            </Link>
-          </div>
+  },
+  {
+    header: "",
+    field: "actions",
+    key: "actions",
+    sortable: false,
+    body: (_row) =>
+    <div className="edit-delete-action d-flex align-items-center">
+          <Link
+        className="me-2 p-2 d-flex align-items-center border rounded"
+        to="#"
+        data-bs-toggle="modal"
+        data-bs-target="#edit-customer">
+        
+            <i className="feather icon-edit"></i>
+          </Link>
+          <Link
+        className="p-2 d-flex align-items-center border rounded"
+        to="#"
+        data-bs-toggle="modal" data-bs-target="#delete-modal">
+        
+            <i className="feather icon-trash-2"></i>
+          </Link>
         </div>
-      ),
-    },
-  ];
+
+  }];
+
 
   return (
     <div>
@@ -85,19 +148,15 @@ const Shift = () => {
                 <h6>Manage your shifts</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-shift"
-              >
-              <i className='ti ti-circle-plus me-1'></i>
+                data-bs-target="#add-shift">
+                
+                <i className="ti ti-circle-plus me-1"></i>
                 Add Shift
               </Link>
             </div>
@@ -106,15 +165,18 @@ const Shift = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Select Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -134,8 +196,8 @@ const Shift = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Sort By : Last 7 Days
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -170,7 +232,20 @@ const Shift = () => {
             </div>
             <div className="card-body">
               <div className="table-responsive">
-                <Table columns={columns} dataSource={dataSource} />
+                {/* <Table columns={columns} dataSource={shiftlistdata} /> */}
+                <PrimeDataTable
+                  column={columns}
+                  data={shiftlistdata}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedShifts}
+                  onSelectionChange={(e) => setSelectedShifts(e.value)}
+                  dataKey="id" />
+                
               </div>
             </div>
           </div>
@@ -180,44 +255,9 @@ const Shift = () => {
       </div>
       <AddShift />
       <EditShift />
-      {/* delete modal */}
-      <div className="modal fade" id="delete-modal">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="page-wrapper-new p-0">
-              <div className="content p-5 px-3 text-center">
-                <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                  <i className="ti ti-trash fs-24 text-danger" />
-                </span>
-                <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
-                  Delete Shift
-                </h4>
-                <p className="text-gray-6 mb-0 fs-16">
-                  Are you sure you want to delete shift?
-                </p>
-                <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                    data-bs-dismiss="modal"
-                  >
-                    Cancel
-                  </button>
-                  <Link
-                    to="#"
-                    className="btn btn-submit fs-13 fw-medium p-2 px-3" data-bs-dismiss="modal"
-                  >
-                    Yes Delete
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* /delete modal */}
-    </div>
-  );
+    <DeleteModal />
+    </div>);
+
 };
 
 export default Shift;

@@ -1,4 +1,5 @@
-import React from "react";
+import { dragDrop, folder, xls, zip } from "../../../utils/imagepath";
+
 import { Link } from "react-router-dom";
 
 const FileModal = () => {
@@ -9,8 +10,8 @@ const FileModal = () => {
         <div
           className="modal fade modal-default pos-modal upload-modal"
           id="upload-file"
-          aria-labelledby="upload-file"
-        >
+          aria-labelledby="upload-file">
+          
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header p-4">
@@ -19,8 +20,8 @@ const FileModal = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -28,7 +29,7 @@ const FileModal = () => {
                 <div className="drag-drop text-center mb-4">
                   <div className="upload">
                     <Link to="#">
-                      <img src="assets/img/icons/drag-drop.svg" alt />
+                      <img src={dragDrop} alt="" />
                     </Link>
                     <p>
                       Drag and drop a <Link to="#">file to upload</Link>
@@ -47,41 +48,38 @@ const FileModal = () => {
                     style={{ width: "75%" }}
                     aria-valuenow={75}
                     aria-valuemin={0}
-                    aria-valuemax={100}
-                  />
+                    aria-valuemax={100} />
+                  
                 </div>
                 <ul>
                   <li className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center w-85">
                       <img
-                        src="assets/img/icons/folder.svg"
+                        src={folder}
                         alt="Folder"
-                        className="me-2"
-                      />
+                        className="me-2" />
+                      
                       <div className="flex-fill">
                         <h6>
                           <Link to="#">
                             latest-version.zip
-                            <i
-                              data-feather="check-circle"
-                              className="ms-2 feather-16"
-                            />
+                            <i className="feather icon-check-circle ms-2 feather-16" />
                           </Link>
                         </h6>
                         <span>616 MB</span>
                       </div>
                     </div>
                     <Link to="#" className="text-danger text-right">
-                      <i data-feather="trash-2" className="feather-16" />
+                      <i className="feather icon-trash-2 feather-16" />
                     </Link>
                   </li>
                   <li className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center w-85">
                       <img
-                        src="assets/img/icons/xls.svg"
+                        src={xls}
                         alt="Folder"
-                        className="me-2"
-                      />
+                        className="me-2" />
+                      
                       <div className="flex-fill">
                         <h6>
                           <Link to="#">Update work history.xls</Link>
@@ -94,33 +92,33 @@ const FileModal = () => {
                             style={{ width: "75%" }}
                             aria-valuenow={75}
                             aria-valuemin={0}
-                            aria-valuemax={100}
-                          />
+                            aria-valuemax={100} />
+                          
                         </div>
                       </div>
                     </div>
                     <div className="d-flex align-items-center">
                       <Link
                         to="#"
-                        className="text-danger me-2 d-flex align-items-center"
-                      >
-                        <i data-feather="trash-2" className="feather-16" />
+                        className="text-danger me-2 d-flex align-items-center">
+                        
+                        <i className="feather icon-trash-2 feather-16" />
                       </Link>
                       <Link
                         to="#"
-                        className="text-default d-flex align-items-center"
-                      >
-                        <i data-feather="pause-circle" className="feather-16" />
+                        className="text-default d-flex align-items-center">
+                        
+                        <i className="feather icon-pause-circle feather-16" />
                       </Link>
                     </div>
                   </li>
                   <li className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center w-85">
                       <img
-                        src="assets/img/icons/zip.svg"
+                        src={zip}
                         alt="Folder"
-                        className="me-2"
-                      />
+                        className="me-2" />
+                      
                       <div className="flex-fill">
                         <h6>
                           <Link to="#">Updated Project.zip</Link>
@@ -132,23 +130,23 @@ const FileModal = () => {
                             role="progressbar"
                             aria-valuenow={0}
                             aria-valuemin={0}
-                            aria-valuemax={100}
-                          />
+                            aria-valuemax={100} />
+                          
                         </div>
                       </div>
                     </div>
                     <div className="d-flex align-items-center">
                       <Link
                         to="#"
-                        className="text-danger me-2 d-flex align-items-center"
-                      >
-                        <i data-feather="trash-2" className="feather-16" />
+                        className="text-danger me-2 d-flex align-items-center">
+                        
+                        <i className="feather icon-trash-2 feather-16" />
                       </Link>
                       <Link
                         to="#"
-                        className="text-default d-flex align-items-center"
-                      >
-                        <i data-feather="play-circle" className="feather-16" />
+                        className="text-default d-flex align-items-center">
+                        
+                        <i className="feather icon-play-circle feather-16" />
                       </Link>
                     </div>
                   </li>
@@ -162,8 +160,8 @@ const FileModal = () => {
         <div
           className="modal fade modal-default pos-modal upload-modal"
           id="upload-folder"
-          aria-labelledby="upload-folder"
-        >
+          aria-labelledby="upload-folder">
+          
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header p-4">
@@ -172,8 +170,8 @@ const FileModal = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -181,7 +179,7 @@ const FileModal = () => {
                 <div className="drag-drop text-center mb-4">
                   <div className="upload">
                     <Link to="#">
-                      <img src="assets/img/icons/drag-drop.svg" alt />
+                      <img src={dragDrop} alt="#" />
                     </Link>
                     <p>
                       Drag and drop a <Link to="#">file to upload</Link>
@@ -200,46 +198,43 @@ const FileModal = () => {
                     style={{ width: "100%" }}
                     aria-valuenow={100}
                     aria-valuemin={0}
-                    aria-valuemax={100}
-                  />
+                    aria-valuemax={100} />
+                  
                 </div>
                 <ul>
                   <li className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center w-85">
                       <img
-                        src="assets/img/icons/folder.svg"
+                        src={folder}
                         alt="Folder"
-                        className="me-2"
-                      />
+                        className="me-2" />
+                      
                       <div className="flex-fill">
                         <h6>
                           <Link to="#">
                             latest-version
-                            <i
-                              data-feather="check-circle"
-                              className="ms-2 feather-16"
-                            />
+                            <i className="feather icon-check-circle ms-2 feather-16" />
                           </Link>
                         </h6>
                         <span>616 MB</span>
                       </div>
                     </div>
                     <Link to="#" className="text-danger text-right">
-                      <i data-feather="trash-2" className="feather-16" />
+                      <i className="feather icon-trash-2 feather-16" />
                     </Link>
                   </li>
                   <li className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center w-85">
                       <img
-                        src="assets/img/icons/xls.svg"
+                        src={xls}
                         alt="Folder"
-                        className="me-2"
-                      />
+                        className="me-2" />
+                      
                       <div className="flex-fill">
                         <h6>
                           <Link to="#">
                             Update work history.xls
-                            <i data-feather="trash-2" className="feather-16" />
+                            <i className="feather icon-trash-2 feather-16" />
                           </Link>
                         </h6>
                         <span>16 MB</span>
@@ -247,25 +242,25 @@ const FileModal = () => {
                     </div>
                     <div className="d-flex align-items-center">
                       <Link to="#" className="text-danger me-2">
-                        <i data-feather="trash-2" className="feather-16" />
+                        <i className="feather icon-trash-2 feather-16" />
                       </Link>
                       <Link to="#" className="text-default">
-                        <i data-feather="pause-circle" className="feather-16" />
+                        <i className="feather icon-pause-circle feather-16" />
                       </Link>
                     </div>
                   </li>
                   <li className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center w-85">
                       <img
-                        src="assets/img/icons/zip.svg"
+                        src={zip}
                         alt="Folder"
-                        className="me-2"
-                      />
+                        className="me-2" />
+                      
                       <div className="flex-fill">
                         <h6>
                           <Link to="#">
                             updated project.zip
-                            <i data-feather="trash-2" className="feather-16" />
+                            <i className="feather icon-trash-2 feather-16" />
                           </Link>
                         </h6>
                         <span>14 MB</span>
@@ -273,10 +268,10 @@ const FileModal = () => {
                     </div>
                     <div className="d-flex align-items-center">
                       <Link to="#" className="text-danger me-2">
-                        <i data-feather="trash-2" className="feather-16" />
+                        <i className="feather icon-trash-2 feather-16" />
                       </Link>
                       <Link to="#" className="text-default">
-                        <i data-feather="play-circle" className="feather-16" />
+                        <i className="feather icon-play-circle feather-16" />
                       </Link>
                     </div>
                   </li>
@@ -286,8 +281,8 @@ const FileModal = () => {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Clear
                 </button>
                 <button type="button" className="btn btn-primary">
@@ -302,8 +297,8 @@ const FileModal = () => {
         <div
           className="modal fade modal-default pos-modal upload-message"
           id="upload-message"
-          aria-labelledby="upload-message"
-        >
+          aria-labelledby="upload-message">
+          
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header p-4">
@@ -312,8 +307,8 @@ const FileModal = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -329,16 +324,16 @@ const FileModal = () => {
                     style={{ width: "100%" }}
                     aria-valuenow={100}
                     aria-valuemin={0}
-                    aria-valuemax={100}
-                  />
+                    aria-valuemax={100} />
+                  
                 </div>
               </div>
               <div className="modal-footer d-sm-flex justify-content-end">
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Clear
                 </button>
                 <button type="button" className="btn btn-primary">
@@ -353,8 +348,8 @@ const FileModal = () => {
         <div
           className="modal fade modal-default pos-modal"
           id="create-folder"
-          aria-labelledby="create-folder"
-        >
+          aria-labelledby="create-folder">
+          
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header p-4">
@@ -363,8 +358,8 @@ const FileModal = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -379,8 +374,8 @@ const FileModal = () => {
                   <button
                     type="button"
                     className="btn btn-secondary me-2"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
                   <button type="button" className="btn btn-primary">
@@ -393,8 +388,8 @@ const FileModal = () => {
         </div>
         {/* /Create Folder */}
       </div>
-    </>
-  );
+    </>);
+
 };
 
 export default FileModal;

@@ -1,8 +1,8 @@
-import React from 'react'
+
 
 const Spinner = () => {
-    return (
-        <div>
+  return (
+    <div>
             {/* Page Wrapper */}
             <div className="page-wrapper cardhead">
                 <div className="content container-fluid">
@@ -129,10 +129,10 @@ const Spinner = () => {
                                     <div className="d-flex align-items-center justify-content-between">
                                         <strong>Loading...</strong>
                                         <div
-                                            className="spinner-border"
-                                            role="status"
-                                            aria-hidden="true"
-                                        />
+                      className="spinner-border"
+                      role="status"
+                      aria-hidden="true" />
+                    
                                     </div>
                                 </div>
                             </div>
@@ -227,131 +227,131 @@ const Spinner = () => {
                                 <div className="card-body">
                                     <div className="btn-list">
                                         <button
-                                            className="btn btn-primary-light"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-primary-light"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-border spinner-border-sm align-middle me-1"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-border spinner-border-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Loading...</span>
                                         </button>
                                         <button
-                                            className="btn btn-primary-light"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-primary-light"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-border spinner-border-sm align-middle me-1"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-border spinner-border-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             Loading...
                                         </button>
                                         <button
-                                            className="btn btn-primary-light"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-primary-light"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-grow spinner-grow-sm align-middle"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-grow spinner-grow-sm align-middle"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Loading...</span>
                                         </button>
                                         <button
-                                            className="btn btn-primary-light"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-primary-light"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-grow spinner-grow-sm align-middle me-1"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-grow spinner-grow-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             Loading...
                                         </button>
                                         <button
-                                            className="btn btn-secondary-light"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-secondary-light"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-grow spinner-grow-sm align-middle me-1"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-grow spinner-grow-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             Loading...
                                         </button>
                                         <button
-                                            className="btn btn-success-light"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-success-light"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-grow spinner-grow-sm align-middle me-1" 
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-grow spinner-grow-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             Loading...
                                         </button>
                                         <button
-                                            className="btn btn-info-light"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-info-light"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-grow spinner-grow-sm align-middle me-1"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-grow spinner-grow-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             Loading...
                                         </button>
                                         <button
-                                            className="btn btn-warning-light"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-warning-light"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-grow spinner-grow-sm align-middle me-1"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-grow spinner-grow-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             Loading...
                                         </button>
                                         <button
-                                            className="btn btn-danger-light"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-danger-light"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-grow spinner-grow-sm align-middle me-1"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-grow spinner-grow-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             Loading...
                                         </button>
-                                        <button className="btn btn-light" type="button" disabled="">
+                                        <button className="btn btn-light" type="button" disabled>
                                             <span
-                                                className="spinner-grow spinner-grow-sm align-middle me-1"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-grow spinner-grow-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             Loading...
                                         </button>
                                         <button
-                                            className="btn btn-dark text-fixed-white"
-                                            type="button"
-                                            disabled=""
-                                        >
+                      className="btn btn-dark text-fixed-white"
+                      type="button"
+                      disabled>
+                      
                                             <span
-                                                className="spinner-grow spinner-grow-sm align-middle me-1"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
+                        className="spinner-grow spinner-grow-sm align-middle me-1"
+                        role="status"
+                        aria-hidden="true" />
+                      
                                             Loading...
                                         </button>
                                     </div>
@@ -363,8 +363,8 @@ const Spinner = () => {
                 </div>
             </div>
             {/* /Page Wrapper */}
-        </div>
-    )
-}
+        </div>);
 
-export default Spinner
+};
+
+export default Spinner;

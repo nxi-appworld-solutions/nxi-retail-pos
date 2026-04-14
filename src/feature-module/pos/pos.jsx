@@ -1,50 +1,64 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import CartCounter from '../../core/common/counter/counter'
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+
 import Select from "react-select";
-import { Check } from 'feather-icons-react/build/IconComponents';
-import PosModals from '../../core/modals/pos-modal/posModals';
+import { Check } from "react-feather";
+import CartCounter from "../../components/counter/counter";
+import PosModals from "../../core/modals/pos-modal/posModalstjsx";
+
 
 const Pos = () => {
-    const [activeTab, setActiveTab] = useState('all')
-    const [showAlert, setShowAlert] = useState(true)
-    const [showAlert1, setShowAlert1] = useState(true)
-    const Location = useLocation();
-    const options = [
-        { value: "1", label: "Walk in Customer" },
-        { value: "2", label: "John" },
-        { value: "3", label: "Smith" },
-        { value: "4", label: "Ana" },
-        { value: "4", label: "Elza" },
-    ];
+  const [activeTab, setActiveTab] = useState("all");
+  const [showAlert, setShowAlert] = useState(true);
+  const [showAlert1, setShowAlert1] = useState(true);
 
-    useEffect(() => {
-        document.addEventListener("click", function (event) {
-            if (event.target.closest(".product-info")) {
-                let productInfo = event.target.closest(".product-info");
-                productInfo.classList.toggle("active");
+  const Location = useLocation();
+  const options = [
+  { value: "1", label: "Walk in Customer" },
+  { value: "2", label: "John" },
+  { value: "3", label: "Smith" },
+  { value: "4", label: "Ana" },
+  { value: "4", label: "Elza" }];
 
-                if (document.querySelectorAll(".product-info.active").length > 0) {
-                    // If "active" exists, hide .empty-cart and show .product-list
-                    document.querySelector(".product-wrap .empty-cart").style.display = "none";
-                    document.querySelector(".product-wrap .product-list").style.display = "block";
-                } else {
-                    // If not "active", reverse the behavior
-                    document.querySelector(".product-wrap .empty-cart").style.display = "flex";
-                    document.querySelector(".product-wrap .product-list").style.display = "none";
-                }
-            }
-        });
-        document.body.classList.add("pos-page");
-        return () => {
-            document.body.classList.remove("pos-page");
+  useEffect(() => {
+    const handleClick = (event) => {
+      const target = event.target;
+      const productInfo = target.closest(".product-info");
+
+      if (productInfo) {
+        productInfo.classList.toggle("active");
+
+        const hasActive =
+        document.querySelectorAll(".product-info.active").length > 0;
+
+        const emptyCart = document.querySelector(
+          ".product-wrap .empty-cart"
+        );
+        const productList = document.querySelector(
+          ".product-wrap .product-list"
+        );
+
+        if (hasActive) {
+          if (emptyCart) emptyCart.style.display = "none";
+          if (productList) productList.style.display = "block";
+        } else {
+          if (emptyCart) emptyCart.style.display = "flex";
+          if (productList) productList.style.display = "none";
         }
+      }
+    };
 
-    }, [Location.pathname, showAlert1])
+    document.addEventListener("click", handleClick);
+    document.body.classList.add("pos-page");
 
+    return () => {
+      document.removeEventListener("click", handleClick);
+      document.body.classList.remove("pos-page");
+    };
+  }, [Location.pathname, showAlert1]);
 
-    return (
-        <div className='main-wrapper pos-five'>
+  return (
+    <div className='main-wrapper pos-five'>
             <div className="page-wrapper pos-pg-wrapper ms-0">
                 <div className="content pos-design p-0">
                     <div className="row pos-wrapper">
@@ -57,9 +71,9 @@ const Pos = () => {
                                             <li id="all" onClick={() => setActiveTab('all')} className={activeTab === 'all' ? 'active' : ''}>
                                                 <Link to="#">
                                                     <img
-                                                        src="assets/img/categories/category-01.svg"
-                                                        alt="Categories"
-                                                    />
+                            src="src/assets/img/categories/category-01.svg"
+                            alt="Categories" />
+                          
                                                 </Link>
                                                 <h6>
                                                     <Link to="#">All</Link>
@@ -68,9 +82,9 @@ const Pos = () => {
                                             <li id="headphones" onClick={() => setActiveTab('headphones')} className={activeTab === 'headphones' ? 'active' : ''}>
                                                 <Link to="#">
                                                     <img
-                                                        src="assets/img/categories/category-02.svg"
-                                                        alt="Categories"
-                                                    />
+                            src="src/assets/img/categories/category-02.svg"
+                            alt="Categories" />
+                          
                                                 </Link>
                                                 <h6>
                                                     <Link to="#">Headset</Link>
@@ -79,9 +93,9 @@ const Pos = () => {
                                             <li id="shoes" onClick={() => setActiveTab('shoes')} className={activeTab === 'shoes' ? 'active' : ''}>
                                                 <Link to="#">
                                                     <img
-                                                        src="assets/img/categories/category-03.svg"
-                                                        alt="Categories"
-                                                    />
+                            src="src/assets/img/categories/category-03.svg"
+                            alt="Categories" />
+                          
                                                 </Link>
                                                 <h6>
                                                     <Link to="#">Shoes</Link>
@@ -90,9 +104,9 @@ const Pos = () => {
                                             <li id="mobiles" onClick={() => setActiveTab('mobiles')} className={activeTab === 'mobiles' ? 'active' : ''}>
                                                 <Link to="#">
                                                     <img
-                                                        src="assets/img/categories/category-04.svg"
-                                                        alt="Categories"
-                                                    />
+                            src="src/assets/img/categories/category-04.svg"
+                            alt="Categories" />
+                          
                                                 </Link>
                                                 <h6>
                                                     <Link to="#">Mobiles</Link>
@@ -101,9 +115,9 @@ const Pos = () => {
                                             <li id="watches" onClick={() => setActiveTab('watches')} className={activeTab === 'watches' ? 'active' : ''}>
                                                 <Link to="#">
                                                     <img
-                                                        src="assets/img/categories/category-05.svg"
-                                                        alt="Categories"
-                                                    />
+                            src="src/assets/img/categories/category-05.svg"
+                            alt="Categories" />
+                          
                                                 </Link>
                                                 <h6>
                                                     <Link to="#">Watches</Link>
@@ -112,9 +126,9 @@ const Pos = () => {
                                             <li id="laptops" onClick={() => setActiveTab('laptops')} className={activeTab === 'laptops' ? 'active' : ''}>
                                                 <Link to="#">
                                                     <img
-                                                        src="assets/img/categories/category-06.svg"
-                                                        alt="Categories"
-                                                    />
+                            src="src/assets/img/categories/category-06.svg"
+                            alt="Categories" />
+                          
                                                 </Link>
                                                 <h6>
                                                     <Link to="#">Laptops</Link>
@@ -123,9 +137,9 @@ const Pos = () => {
                                             <li id="appliances" onClick={() => setActiveTab('appliances')} className={activeTab === 'appliances' ? 'active' : ''}>
                                                 <Link to="#">
                                                     <img
-                                                        src="assets/img/categories/category-07.svg"
-                                                        alt="Categories"
-                                                    />
+                            src="src/assets/img/categories/category-07.svg"
+                            alt="Categories" />
+                          
                                                 </Link>
                                                 <h6>
                                                     <Link to="#">Appliance</Link>
@@ -145,10 +159,10 @@ const Pos = () => {
                                                         <i className="ti ti-search" />
                                                     </span>
                                                     <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        placeholder="Search Product"
-                                                    />
+                            type="text"
+                            className="form-control"
+                            placeholder="Search Product" />
+                          
                                                 </div>
                                                 <Link to="#" className="btn btn-sm btn-dark mb-2 me-2">
                                                     <i className="ti ti-tag me-1" />
@@ -165,12 +179,12 @@ const Pos = () => {
                                                 <div className={`tab_content ${activeTab === 'all' ? 'active' : ''} `} data-tab="all">
                                                     <div className="row g-3">
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-01.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-01.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -184,18 +198,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$15800</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-02.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-02.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -209,18 +223,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1000</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-03.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-03.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -234,18 +248,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$6800</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-04.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-04.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -259,18 +273,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$7800</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card active mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card active mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-05.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-05.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -284,18 +298,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$5478</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-06.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-06.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -309,18 +323,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$987</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-07.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-07.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -336,18 +350,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1454</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-08.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-08.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -361,18 +375,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$6587</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-09.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-09.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -386,18 +400,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1457</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-10.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-10.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -411,18 +425,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$4744</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-11.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-11.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -438,18 +452,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$789</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-18.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-13.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -463,7 +477,7 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$7847</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -473,12 +487,12 @@ const Pos = () => {
                                                 <div className={`tab_content ${activeTab === 'headphones' ? 'active' : ''} `} data-tab="headphones">
                                                     <div className="row g-3">
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-05.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-05.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -492,18 +506,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$5478</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-08.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-08.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <Check className="feather-16" />
                                                                     </span>
@@ -517,7 +531,7 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$6587</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -527,12 +541,12 @@ const Pos = () => {
                                                 <div className={`tab_content ${activeTab === 'shoes' ? 'active' : ''} `} data-tab="shoes">
                                                     <div className="row g-3">
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-04.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-04.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -546,18 +560,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$7800</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-06.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-06.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -571,18 +585,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$987</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-18.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-13.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -596,7 +610,7 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$7847</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -606,12 +620,12 @@ const Pos = () => {
                                                 <div className={`tab_content ${activeTab === 'mobiles' ? 'active' : ''} `} data-tab="mobiles">
                                                     <div className="row g-3">
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-01.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-01.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -625,18 +639,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$15800</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-14.png"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-14.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -650,7 +664,7 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$3654</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -660,12 +674,12 @@ const Pos = () => {
                                                 <div className={`tab_content ${activeTab === 'watches' ? 'active' : ''} `} data-tab="watches">
                                                     <div className="row g-3">
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-03.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-03.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -679,18 +693,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$6800</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-09.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-09.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -704,18 +718,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1457</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-11.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-11.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -731,7 +745,7 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$789</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -741,12 +755,12 @@ const Pos = () => {
                                                 <div className={`tab_content ${activeTab === 'laptops' ? 'active' : ''} `} data-tab="laptops">
                                                     <div className="row g-3">
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-02.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-02.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -760,18 +774,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1000</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-07.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-07.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -787,18 +801,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1454</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-10.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-10.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -812,18 +826,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$4744</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-13.png"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-13.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -837,18 +851,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$4784</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-14.png"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-14.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -862,7 +876,7 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1245</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -872,12 +886,12 @@ const Pos = () => {
                                                 <div className={`tab_content ${activeTab === 'appliances' ? 'active' : ''} `} data-tab="appliances">
                                                     <div className="row g-3">
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-01.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-01.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -891,18 +905,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$15800</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-02.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-02.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -916,18 +930,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1000</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-03.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-03.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -941,18 +955,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$6800</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-04.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-04.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -966,18 +980,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$7800</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-05.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-05.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -991,18 +1005,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$5478</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-06.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-06.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -1016,18 +1030,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$987</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-07.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-07.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -1043,18 +1057,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1454</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-08.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-08.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -1068,18 +1082,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$6587</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-09.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-09.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -1093,18 +1107,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$1457</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-10.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-10.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -1118,18 +1132,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$4744</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-11.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-11.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -1145,18 +1159,18 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$789</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-3">
-                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex="0">
+                                                            <div className="product-info card mb-0" onClick={() => setShowAlert1(!showAlert1)} tabIndex={0}>
                                                                 <Link to="#" className="pro-img">
                                                                     <img
-                                                                        src="assets/img/products/pos-product-18.svg"
-                                                                        alt="Products"
-                                                                    />
+                                    src="src/assets/img/products/pos-product-13.png"
+                                    alt="Products" />
+                                  
                                                                     <span>
                                                                         <i className="ti ti-circle-check-filled" />
                                                                     </span>
@@ -1170,7 +1184,7 @@ const Pos = () => {
                                                                 <div className="d-flex align-items-center justify-content-between price">
                                                                     <p className="text-gray-9 mb-0">$7847</p>
                                                                     <div className="qty-item m-0">
-                                                                        <CartCounter defaultValue={4} />
+                                                                        <CartCounter />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1208,31 +1222,31 @@ const Pos = () => {
                                                 <div className="flex-grow-1">
 
                                                     <Select
-                                                        options={options}
-                                                        classNamePrefix="react-select select"
-                                                        placeholder="Choose a Name"
-                                                        defaultValue={options[0]}
-                                                    />
+                            options={options}
+                            classNamePrefix="react-select select"
+                            placeholder="Choose a Name"
+                            defaultValue={options[0]} />
+                          
                                                 </div>
                                                 <Link
-                                                    to="#"
-                                                    className="btn btn-teal btn-icon fs-20"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#create"
-                                                >
+                          to="#"
+                          className="btn btn-teal btn-icon fs-20"
+                          data-bs-toggle="modal"
+                          data-bs-target="#create">
+                          
                                                     <i className="ti ti-user-plus" />
                                                 </Link>
                                                 <Link
-                                                    to="#"
-                                                    className="btn btn-info btn-icon fs-20"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#barcode"
-                                                >
+                          to="#"
+                          className="btn btn-info btn-icon fs-20"
+                          data-bs-toggle="modal"
+                          data-bs-target="#barcode">
+                          
                                                     <i className="ti ti-scan" />
                                                 </Link>
                                             </div>
                                             {showAlert &&
-                                                <div className="customer-item border border-orange bg-orange-100 d-flex align-items-center justify-content-between flex-wrap gap-2 mt-3">
+                      <div className="customer-item border border-orange bg-orange-100 d-flex align-items-center justify-content-between flex-wrap gap-2 mt-3">
                                                     <div>
                                                         <h6 className="fs-16 fw-bold mb-1">James Anderson</h6>
                                                         <div className="d-inline-flex align-items-center gap-2 customer-bonus">
@@ -1251,9 +1265,9 @@ const Pos = () => {
                                                         </div>
                                                     </div>
                                                     <Link
-                                                        to="#"
-                                                        className="btn btn-orange btn-sm"
-                                                    >
+                          to="#"
+                          className="btn btn-orange btn-sm">
+                          
                                                         Apply
                                                     </Link>
                                                     <Link to="#" className="close-icon" onClick={() => setShowAlert(false)}>
@@ -1271,9 +1285,9 @@ const Pos = () => {
                                                     </div>
                                                 </div>
                                                 <Link
-                                                    to="#"
-                                                    className="d-flex align-items-center clear-icon fs-10 fw-medium"
-                                                >
+                          to="#"
+                          className="d-flex align-items-center clear-icon fs-10 fw-medium">
+                          
                                                     Clear all
                                                 </Link>
                                             </div>
@@ -1299,20 +1313,20 @@ const Pos = () => {
                                                                     <td>
                                                                         <div className="d-flex align-items-center">
                                                                             <Link
-                                                                                className="delete-icon"
-                                                                                to="#"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#delete"
-                                                                            >
+                                        className="delete-icon"
+                                        to="#"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#delete">
+                                        
                                                                                 <i className="ti ti-trash-x-filled" />
                                                                             </Link>
                                                                             <h6 className="fs-13 fw-normal">
                                                                                 <Link
-                                                                                    to="#"
-                                                                                    className=" link-default"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#products"
-                                                                                >
+                                          to="#"
+                                          className=" link-default"
+                                          data-bs-toggle="modal"
+                                          data-bs-target="#products">
+                                          
                                                                                     iPhone 14 64GB
                                                                                 </Link>
                                                                             </h6>
@@ -1320,7 +1334,7 @@ const Pos = () => {
                                                                     </td>
                                                                     <td>
                                                                         <div className="qty-item m-0">
-                                                                            <CartCounter defaultValue={1} />
+                                                                            <CartCounter />
                                                                         </div>
                                                                     </td>
                                                                     <td className="fs-13 fw-semibold text-gray-9 text-end">
@@ -1331,20 +1345,20 @@ const Pos = () => {
                                                                     <td>
                                                                         <div className="d-flex align-items-center">
                                                                             <Link
-                                                                                className="delete-icon"
-                                                                                to="#"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#delete"
-                                                                            >
+                                        className="delete-icon"
+                                        to="#"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#delete">
+                                        
                                                                                 <i className="ti ti-trash-x-filled" />
                                                                             </Link>
                                                                             <h6 className="fs-13 fw-normal ">
                                                                                 <Link
-                                                                                    to="#"
-                                                                                    className="link-default"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#products"
-                                                                                >
+                                          to="#"
+                                          className="link-default"
+                                          data-bs-toggle="modal"
+                                          data-bs-target="#products">
+                                          
                                                                                     Red Nike Angelo
                                                                                 </Link>
                                                                             </h6>
@@ -1352,7 +1366,7 @@ const Pos = () => {
                                                                     </td>
                                                                     <td>
                                                                         <div className="qty-item m-0">
-                                                                            <CartCounter defaultValue={4} />
+                                                                            <CartCounter />
                                                                         </div>
                                                                     </td>
                                                                     <td className="fs-13 fw-semibold text-gray-9 text-end">
@@ -1363,20 +1377,20 @@ const Pos = () => {
                                                                     <td>
                                                                         <div className="d-flex align-items-center">
                                                                             <Link
-                                                                                className="delete-icon"
-                                                                                to="#"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#delete"
-                                                                            >
+                                        className="delete-icon"
+                                        to="#"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#delete">
+                                        
                                                                                 <i className="ti ti-trash-x-filled" />
                                                                             </Link>
                                                                             <h6 className="fs-13 fw-normal ">
                                                                                 <Link
-                                                                                    to="#"
-                                                                                    className="link-default"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#products"
-                                                                                >
+                                          to="#"
+                                          className="link-default"
+                                          data-bs-toggle="modal"
+                                          data-bs-target="#products">
+                                          
                                                                                     Tablet 1.02 inch
                                                                                 </Link>
                                                                             </h6>
@@ -1384,7 +1398,7 @@ const Pos = () => {
                                                                     </td>
                                                                     <td>
                                                                         <div className="qty-item m-0">
-                                                                            <CartCounter defaultValue={4} />
+                                                                            <CartCounter />
                                                                         </div>
                                                                     </td>
                                                                     <td className="fs-13 fw-semibold text-gray-9 text-end">
@@ -1395,20 +1409,20 @@ const Pos = () => {
                                                                     <td>
                                                                         <div className="d-flex align-items-center">
                                                                             <Link
-                                                                                className="delete-icon"
-                                                                                to="#"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#delete"
-                                                                            >
+                                        className="delete-icon"
+                                        to="#"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#delete">
+                                        
                                                                                 <i className="ti ti-trash-x-filled" />
                                                                             </Link>
                                                                             <h6 className="fs-13 fw-normal ">
                                                                                 <Link
-                                                                                    to="#"
-                                                                                    className="link-default"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#products"
-                                                                                >
+                                          to="#"
+                                          className="link-default"
+                                          data-bs-toggle="modal"
+                                          data-bs-target="#products">
+                                          
                                                                                     IdeaPad Slim 3i
                                                                                 </Link>
                                                                             </h6>
@@ -1416,7 +1430,7 @@ const Pos = () => {
                                                                     </td>
                                                                     <td>
                                                                         <div className="qty-item m-0">
-                                                                            <CartCounter defaultValue={4} />
+                                                                            <CartCounter />
                                                                         </div>
                                                                     </td>
                                                                     <td className="fs-13 fw-semibold text-gray-9 text-end">
@@ -1431,7 +1445,7 @@ const Pos = () => {
                                             <div className="discount-item d-flex align-items-center justify-content-between  bg-purple-transparent mt-3 flex-wrap gap-2">
                                                 <div className="d-flex align-items-center">
                                                     <span className="bg-purple discount-icon br-5 flex-shrink-0 me-2">
-                                                        <img src="assets/img/icons/discount-icon.svg" alt="img" />
+                                                        <img src="src/assets/img/icons/discount-icon.svg" alt="img" />
                                                     </span>
                                                     <div>
                                                         <h6 className="fs-14 fw-bold text-purple mb-1">
@@ -1456,11 +1470,11 @@ const Pos = () => {
                                                         <td>
                                                             Shipping
                                                             <Link
-                                                                to="#"
-                                                                className="ms-3 link-default"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#shipping-cost"
-                                                            >
+                                to="#"
+                                className="ms-3 link-default"
+                                data-bs-toggle="modal"
+                                data-bs-target="#shipping-cost">
+                                
                                                                 <i className="ti ti-edit" />
                                                             </Link>
                                                         </td>
@@ -1470,11 +1484,11 @@ const Pos = () => {
                                                         <td>
                                                             Tax
                                                             <Link
-                                                                to="#"
-                                                                className="ms-3 link-default"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#order-tax"
-                                                            >
+                                to="#"
+                                className="ms-3 link-default"
+                                data-bs-toggle="modal"
+                                data-bs-target="#order-tax">
+                                
                                                                 <i className="ti ti-edit" />
                                                             </Link>
                                                         </td>
@@ -1484,11 +1498,11 @@ const Pos = () => {
                                                         <td>
                                                             Coupon
                                                             <Link
-                                                                to="#"
-                                                                className="ms-3 link-default"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#coupon-code"
-                                                            >
+                                to="#"
+                                className="ms-3 link-default"
+                                data-bs-toggle="modal"
+                                data-bs-target="#coupon-code">
+                                
                                                                 <i className="ti ti-edit" />
                                                             </Link>
                                                         </td>
@@ -1498,11 +1512,11 @@ const Pos = () => {
                                                         <td>
                                                             <span className="text-danger">Discount</span>
                                                             <Link
-                                                                to="#"
-                                                                className="ms-3 link-default"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#discount"
-                                                            >
+                                to="#"
+                                className="ms-3 link-default"
+                                data-bs-toggle="modal"
+                                data-bs-target="#discount">
+                                
                                                                 <i className="ti ti-edit" />
                                                             </Link>
                                                         </td>
@@ -1512,12 +1526,12 @@ const Pos = () => {
                                                         <td>
                                                             <div className="form-check form-switch">
                                                                 <input
-                                                                    className="form-check-input"
-                                                                    type="checkbox"
-                                                                    role="switch"
-                                                                    id="round"
-                                                                    defaultChecked
-                                                                />
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  role="switch"
+                                  id="round"
+                                  defaultChecked />
+                                
                                                                 <label className="form-check-label" htmlFor="round">
                                                                     Roundoff
                                                                 </label>
@@ -1548,147 +1562,147 @@ const Pos = () => {
                                         <div className="row align-items-center methods g-2">
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#payment-cash"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
+                          data-bs-toggle="modal"
+                          data-bs-target="#payment-cash">
+                          
                                                     <img
-                                                        src="assets/img/icons/cash-icon.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/cash-icon.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">Cash</p>
                                                 </Link>
                                             </div>
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#payment-card"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
+                          data-bs-toggle="modal"
+                          data-bs-target="#payment-card">
+                          
                                                     <img
-                                                        src="assets/img/icons/card.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/card.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">Card</p>
                                                 </Link>
                                             </div>
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#payment-points"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
+                          data-bs-toggle="modal"
+                          data-bs-target="#payment-points">
+                          
                                                     <img
-                                                        src="assets/img/icons/points.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/points.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">Points</p>
                                                 </Link>
                                             </div>
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#payment-deposit"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
+                          data-bs-toggle="modal"
+                          data-bs-target="#payment-deposit">
+                          
                                                     <img
-                                                        src="assets/img/icons/deposit.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/deposit.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">Deposit</p>
                                                 </Link>
                                             </div>
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#payment-cheque"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
+                          data-bs-toggle="modal"
+                          data-bs-target="#payment-cheque">
+                          
                                                     <img
-                                                        src="assets/img/icons/cheque.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/cheque.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">Cheque</p>
                                                 </Link>
                                             </div>
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#gift-payment"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
+                          data-bs-toggle="modal"
+                          data-bs-target="#gift-payment">
+                          
                                                     <img
-                                                        src="assets/img/icons/giftcard.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/giftcard.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">Gift Card</p>
                                                 </Link>
                                             </div>
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#scan-payment"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
+                          data-bs-toggle="modal"
+                          data-bs-target="#scan-payment">
+                          
                                                     <img
-                                                        src="assets/img/icons/scan-icon.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/scan-icon.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">Scan</p>
                                                 </Link>
                                             </div>
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill">
+                          
                                                     <img
-                                                        src="assets/img/icons/paylater.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/paylater.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">Pay Later</p>
                                                 </Link>
                                             </div>
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill">
+                          
                                                     <img
-                                                        src="assets/img/icons/external.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/external.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">External</p>
                                                 </Link>
                                             </div>
                                             <div className="col-sm-6 col-md-4 d-flex">
                                                 <Link
-                                                    to="#"
-                                                    className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#split-payment"
-                                                >
+                          to="#"
+                          className="payment-item d-flex align-items-center justify-content-center p-2 flex-fill"
+                          data-bs-toggle="modal"
+                          data-bs-target="#split-payment">
+                          
                                                     <img
-                                                        src="assets/img/icons/split-bill.svg"
-                                                        className="me-2"
-                                                        alt="img"
-                                                    />
+                            src="src/assets/img/icons/split-bill.svg"
+                            className="me-2"
+                            alt="img" />
+                          
                                                     <p className="fs-14 fw-medium">Split Bill</p>
                                                 </Link>
                                             </div>
@@ -1697,18 +1711,18 @@ const Pos = () => {
                                 </div>
                                 <div className="btn-row d-flex align-items-center justify-content-between gap-3">
                                     <Link
-                                        to="#"
-                                        className="btn btn-white d-flex align-items-center justify-content-center flex-fill m-0"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#hold-order"
-                                    >
+                    to="#"
+                    className="btn btn-white d-flex align-items-center justify-content-center flex-fill m-0"
+                    data-bs-toggle="modal"
+                    data-bs-target="#hold-order">
+                    
                                         <i className="ti ti-printer me-2" />
                                         Print Order
                                     </Link>
                                     <Link
-                                        to="#"
-                                        className="btn btn-secondary d-flex align-items-center justify-content-center flex-fill m-0"
-                                    >
+                    to="#"
+                    className="btn btn-secondary d-flex align-items-center justify-content-center flex-fill m-0">
+                    
                                         <i className="ti ti-shopping-cart me-2" />
                                         Place Order
                                     </Link>
@@ -1720,54 +1734,54 @@ const Pos = () => {
                     <div className="pos-footer bg-white p-3 border-top">
                         <div className="d-flex align-items-center justify-content-center flex-wrap gap-2">
                             <Link
-                                to="#"
-                                className="btn btn-orange d-inline-flex align-items-center justify-content-center"
-                                data-bs-toggle="modal"
-                                data-bs-target="#hold-order"
-                            >
+                to="#"
+                className="btn btn-orange d-inline-flex align-items-center justify-content-center"
+                data-bs-toggle="modal"
+                data-bs-target="#hold-order">
+                
                                 <i className="ti ti-player-pause me-2" />
                                 Hold
                             </Link>
                             <Link
-                                to="#"
-                                className="btn btn-info d-inline-flex align-items-center justify-content-center"
-                            >
+                to="#"
+                className="btn btn-info d-inline-flex align-items-center justify-content-center">
+                
                                 <i className="ti ti-trash me-2" />
                                 Void
                             </Link>
                             <Link
-                                to="#"
-                                className="btn btn-cyan d-flex align-items-center justify-content-center"
-                                data-bs-toggle="modal"
-                                data-bs-target="#payment-completed"
-                            >
+                to="#"
+                className="btn btn-cyan d-flex align-items-center justify-content-center"
+                data-bs-toggle="modal"
+                data-bs-target="#payment-completed">
+                
                                 <i className="ti ti-cash-banknote me-2" />
                                 Payment
                             </Link>
                             <Link
-                                to="#"
-                                className="btn btn-secondary d-inline-flex align-items-center justify-content-center"
-                                data-bs-toggle="modal"
-                                data-bs-target="#orders"
-                            >
+                to="#"
+                className="btn btn-secondary d-inline-flex align-items-center justify-content-center"
+                data-bs-toggle="modal"
+                data-bs-target="#orders">
+                
                                 <i className="ti ti-shopping-cart me-2" />
                                 View Orders
                             </Link>
                             <Link
-                                to="#"
-                                className="btn btn-indigo d-inline-flex align-items-center justify-content-center"
-                                data-bs-toggle="modal"
-                                data-bs-target="#reset"
-                            >
+                to="#"
+                className="btn btn-indigo d-inline-flex align-items-center justify-content-center"
+                data-bs-toggle="modal"
+                data-bs-target="#reset">
+                
                                 <i className="ti ti-reload me-2" />
                                 Reset
                             </Link>
                             <Link
-                                to="#"
-                                className="btn btn-danger d-inline-flex align-items-center justify-content-center"
-                                data-bs-toggle="modal"
-                                data-bs-target="#recents"
-                            >
+                to="#"
+                className="btn btn-danger d-inline-flex align-items-center justify-content-center"
+                data-bs-toggle="modal"
+                data-bs-target="#recents">
+                
                                 <i className="ti ti-refresh-dot me-2" />
                                 Transaction
                             </Link>
@@ -1776,10 +1790,8 @@ const Pos = () => {
                 </div>
             </div>
             <PosModals />
-        </div>
+        </div>);
 
+};
 
-    )
-}
-
-export default Pos
+export default Pos;

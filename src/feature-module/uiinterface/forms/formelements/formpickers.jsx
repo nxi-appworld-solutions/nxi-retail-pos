@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { DatePicker, TimePicker } from 'antd';
 
 import { ColorPicker } from 'antd';
@@ -9,13 +9,13 @@ const { RangePicker } = DatePicker;
 
 
 const FormPikers = () => {
-    const onChange  = (date, dateString) => {
-        console.log(date, dateString);
-    };
- 
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
 
-    return (
-        <div className="page-wrapper cardhead">
+
+  return (
+    <div className="page-wrapper cardhead">
             <div className="content">
                 {/* Page Header */}
                 <div className="page-header">
@@ -32,10 +32,10 @@ const FormPikers = () => {
                         <div className="card">
                             <h5 className="card-header">Flatpickr</h5>
                             <div className="card-body">
-                                <div className="row">
+                                <div className="row row-gap-3">
                                     {/* Date Picker*/}
                                     <div className="col-md-6 col-12 mb-6">
-                                        <label htmlFor="flatpickr-date" className="form-label">
+                                        <label htmlFor="flatpickr-date" className="form-label d-block">
                                             Date Picker
                                         </label>
                                         <DatePicker onChange={onChange} />
@@ -43,7 +43,7 @@ const FormPikers = () => {
                                     {/* /Date Picker */}
                                     {/* Time Picker*/}
                                     <div className="col-md-6 col-12 mb-6">
-                                        <label htmlFor="flatpickr-time" className="form-label">
+                                        <label htmlFor="flatpickr-time" className="form-label d-block">
                                             Time Picker
                                         </label>
                                         <TimePicker onChange={onChange} needConfirm />
@@ -52,7 +52,7 @@ const FormPikers = () => {
 
                                     {/* Range Picker*/}
                                     <div className="col-md-6 col-12 mb-6">
-                                        <label htmlFor="flatpickr-range" className="form-label">
+                                        <label htmlFor="flatpickr-range" className="form-label d-block">
                                             Range Picker
                                         </label>
                                         <RangePicker />
@@ -88,9 +88,9 @@ const FormPikers = () => {
                     {/* /Color Picker*/}
                 </div>
             </div>
-        </div>
+        </div>);
 
-    )
-}
 
-export default FormPikers
+};
+
+export default FormPikers;

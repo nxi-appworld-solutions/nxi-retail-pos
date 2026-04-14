@@ -1,22 +1,41 @@
-import React, { useState } from "react";
-import TooltipIcons from "../../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../../core/common/tooltip-content/collapes";
-import { PlusCircle } from "feather-icons-react/build/IconComponents";
-import CommonTagsInput from "../../../core/common/Taginput";
-import TextEditor from "../../inventory/texteditor";
-import Select from "react-select";
-import { all_routes } from "../../../Router/all_routes";
+import { useState } from "react";
+import { all_routes } from "../../../routes/all_routes";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
+import {
+  blog01,
+  blog02,
+  blog03,
+  blog04,
+  blog05,
+  blog06,
+  blog07,
+  blog08,
+  blog09,
+  user02,
+  user03,
+  user04,
+  user05,
+  user06,
+  user07,
+  user08,
+  user09,
+  user10 } from
+"../../../utils/imagepath";
+import CommonSelect from "../../../components/select/common-select";
+import TableTopHead from "../../../components/table-top-head";
+import CommonChipsInput from "../../../components/chip";
+import { Editor } from "primereact/editor";
+import DeleteModal from "../../../components/delete-modal";
 
 const AllBlogs = () => {
-  const [tags, setTags] = useState(["PointOfSale", "RetailTech", "POSIntegration"]);
+  const [tags, setTags] = useState(["PointOfSale"]);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [text, setText] = useState("");
   const option1 = [
-    { label: "1", value: "Evlovution" },
-    { label: "2", value: "Guide" },
-    { label: "3", value: "Security" },
-  ];
+  { label: "1", value: "Evlovution" },
+  { label: "2", value: "Guide" },
+  { label: "3", value: "Security" }];
+
   return (
     <>
       <div className="page-wrapper">
@@ -28,19 +47,15 @@ const AllBlogs = () => {
                 <h6>Manage your blogs</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add_blog"
-              >
-                <PlusCircle data-feather="plus-circle" className="me-1" />
+                data-bs-target="#add_blog">
+                
+                <i className="feather icon-plus-circle me-1" />
                 Add Blog
               </Link>
             </div>
@@ -56,32 +71,26 @@ const AllBlogs = () => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Search"
-                  />
+                    placeholder="Search" />
+                  
                 </div>
                 <div className="d-flex my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                   <div className="dropdown me-3">
                     <Link
                       to="#"
                       className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                      data-bs-toggle="dropdown"
-                    >
+                      data-bs-toggle="dropdown">
+                      
                       Select Status
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Active
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Inactive
                         </Link>
                       </li>
@@ -91,32 +100,23 @@ const AllBlogs = () => {
                     <Link
                       to="#"
                       className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                      data-bs-toggle="dropdown"
-                    >
+                      data-bs-toggle="dropdown">
+                      
                       Sort By : Last 7 Days
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Recently Added
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Ascending
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Desending
                         </Link>
                       </li>
@@ -132,17 +132,17 @@ const AllBlogs = () => {
                 <div className="card-body">
                   <div className="img-sec w-100 position-relative mb-3">
                     <Link to={all_routes.blogDetails}>
-                      <ImageWithBasePath
-                        src="assets/img/blogs/blog-01.jpg"
+                      <img
+                        src={blog01}
                         className="img-fluid rounded w-100"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <Link
                         to={all_routes.blogDetails}
-                        className="trend-tag badge bg-soft-info shadow-none fs-10 fw-medium"
-                      >
+                        className="trend-tag badge bg-soft-info shadow-none fs-10 fw-medium">
+                        
                         Features
                       </Link>
                       <span className="badge badge-success dot-icon">
@@ -157,13 +157,13 @@ const AllBlogs = () => {
                       </span>
                       <Link
                         to="#"
-                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center d-inline-flex align-items-center"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/users/user-02.jpg"
+                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center d-inline-flex align-items-center">
+                        
+                        <img
+                          src={user02}
                           className="avatar avatar-xs rounded-circle me-2 flex-shrink-0"
-                          alt="Img"
-                        />
+                          alt="Img" />
+                        
                         Gertrude Bowie
                       </Link>
                     </div>
@@ -172,31 +172,30 @@ const AllBlogs = () => {
                         to="#"
                         className="link-default p-1 d-flex align-items-center me-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit_blog"
-                      >
+                        data-bs-target="#edit_blog">
+                        
                         <i className="ti ti-edit" />
                       </Link>
                       <Link
                         to="#"
                         className="link-default p-1 d-flex align-items-center"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete_modal"
-                      >
+                        data-bs-target="#delete_modal">
+                        
                         <i className="ti ti-trash" />
                       </Link>
                     </div>
                   </div>
-                  <div >
+                  <div>
                     <h5>
                       <Link
                         to={all_routes.blogDetails}
-                        className="fs-16  text-truncate"
-                      >
+                        className="fs-16  text-truncate">
+                        
                         What is a POS System? A Beginner’s Guide
                       </Link>
                     </h5>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -205,17 +204,17 @@ const AllBlogs = () => {
                 <div className="card-body">
                   <div className="img-sec w-100 position-relative mb-3">
                     <Link to={all_routes.blogDetails}>
-                      <ImageWithBasePath
-                        src="assets/img/blogs/blog-02.jpg"
+                      <img
+                        src={blog02}
                         className="img-fluid rounded w-100"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <Link
                         to={all_routes.blogDetails}
-                        className="trend-tag badge bg-soft-info shadow-none"
-                      >
+                        className="trend-tag badge bg-soft-info shadow-none">
+                        
                         Business
                       </Link>
                       <span className="badge badge-success dot-icon">
@@ -230,13 +229,13 @@ const AllBlogs = () => {
                       </span>
                       <Link
                         to="#"
-                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/users/user-03.jpg"
+                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center">
+                        
+                        <img
+                          src={user03}
                           className="avatar avatar-xs rounded-circle me-2 flex-shrink-0"
-                          alt="Img"
-                        />
+                          alt="Img" />
+                        
                         Edward Marcus
                       </Link>
                     </div>
@@ -245,31 +244,30 @@ const AllBlogs = () => {
                         to="#"
                         className="link-default p-1 d-flex align-items-center me-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit_blog"
-                      >
+                        data-bs-target="#edit_blog">
+                        
                         <i className="ti ti-edit" />
                       </Link>
                       <Link
                         to="#"
                         className="link-defau p-1 d-flex align-items-centerlt"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete_modal"
-                      >
+                        data-bs-target="#delete_modal">
+                        
                         <i className="ti ti-trash" />
                       </Link>
                     </div>
                   </div>
-                  <div >
-                    <h5 >
+                  <div>
+                    <h5>
                       <Link
                         to={all_routes.blogDetails}
-                        className="fs-16 text-truncate"
-                      >
+                        className="fs-16 text-truncate">
+                        
                         Best POS Systems for Retail Businesses
                       </Link>
                     </h5>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -278,17 +276,17 @@ const AllBlogs = () => {
                 <div className="card-body">
                   <div className="img-sec w-100 position-relative mb-3">
                     <Link to={all_routes.blogDetails}>
-                      <ImageWithBasePath
-                        src="assets/img/blogs/blog-03.jpg"
+                      <img
+                        src={blog03}
                         className="img-fluid rounded w-100"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <Link
                         to={all_routes.blogDetails}
-                        className="trend-tag badge bg-soft-info shadow-none"
-                      >
+                        className="trend-tag badge bg-soft-info shadow-none">
+                        
                         Features
                       </Link>
                       <span className="badge badge-success dot-icon">
@@ -303,13 +301,13 @@ const AllBlogs = () => {
                       </span>
                       <Link
                         to="#"
-                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/users/user-05.jpg"
+                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center">
+                        
+                        <img
+                          src={user05}
                           className="avatar avatar-xs rounded-circle me-2 flex-shrink-0"
-                          alt="Img"
-                        />
+                          alt="Img" />
+                        
                         Mark Phillips
                       </Link>
                     </div>
@@ -318,31 +316,30 @@ const AllBlogs = () => {
                         to="#"
                         className="link-default p-1 d-flex align-items-center me-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit_blog"
-                      >
+                        data-bs-target="#edit_blog">
+                        
                         <i className="ti ti-edit" />
                       </Link>
                       <Link
                         to="#"
                         className="link-defau p-1 d-flex align-items-centerlt"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete_modal"
-                      >
+                        data-bs-target="#delete_modal">
+                        
                         <i className="ti ti-trash" />
                       </Link>
                     </div>
                   </div>
-                  <div >
+                  <div>
                     <h5>
                       <Link
                         to={all_routes.blogDetails}
-                        className="fs-16 text-truncate"
-                      >
+                        className="fs-16 text-truncate">
+                        
                         Key Features of a Modern POS
                       </Link>
                     </h5>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -351,17 +348,17 @@ const AllBlogs = () => {
                 <div className="card-body">
                   <div className="img-sec w-100 position-relative mb-3">
                     <Link to={all_routes.blogDetails}>
-                      <ImageWithBasePath
-                        src="assets/img/blogs/blog-04.jpg"
+                      <img
+                        src={blog04}
                         className="img-fluid rounded w-100"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <Link
                         to={all_routes.blogDetails}
-                        className="trend-tag badge bg-soft-info shadow-none"
-                      >
+                        className="trend-tag badge bg-soft-info shadow-none">
+                        
                         Business
                       </Link>
                       <span className="badge badge-success dot-icon">
@@ -376,13 +373,13 @@ const AllBlogs = () => {
                       </span>
                       <Link
                         to="#"
-                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/users/user-04.jpg"
+                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center">
+                        
+                        <img
+                          src={user04}
                           className="avatar avatar-xs rounded-circle me-2 flex-shrink-0"
-                          alt="Img"
-                        />
+                          alt="Img" />
+                        
                         Nidia Hale
                       </Link>
                     </div>
@@ -391,31 +388,30 @@ const AllBlogs = () => {
                         to="#"
                         className="link-default p-1 d-flex align-items-center me-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit_blog"
-                      >
+                        data-bs-target="#edit_blog">
+                        
                         <i className="ti ti-edit" />
                       </Link>
                       <Link
                         to="#"
                         className="link-defau p-1 d-flex align-items-centerlt"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete_modal"
-                      >
+                        data-bs-target="#delete_modal">
+                        
                         <i className="ti ti-trash" />
                       </Link>
                     </div>
                   </div>
-                  <div >
-                    <h5 >
+                  <div>
+                    <h5>
                       <Link
                         to={all_routes.blogDetails}
-                        className="fs-16 text-truncate"
-                      >
+                        className="fs-16 text-truncate">
+                        
                         Integrating POS with E-Commerce
                       </Link>
                     </h5>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -424,17 +420,17 @@ const AllBlogs = () => {
                 <div className="card-body">
                   <div className="img-sec w-100 position-relative mb-3">
                     <Link to={all_routes.blogDetails}>
-                      <ImageWithBasePath
-                        src="assets/img/blogs/blog-05.jpg"
+                      <img
+                        src={blog05}
                         className="img-fluid rounded w-100"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <Link
                         to={all_routes.blogDetails}
-                        className="trend-tag badge bg-soft-info shadow-none"
-                      >
+                        className="trend-tag badge bg-soft-info shadow-none">
+                        
                         Features
                       </Link>
                       <span className="badge badge-success dot-icon">
@@ -449,13 +445,13 @@ const AllBlogs = () => {
                       </span>
                       <Link
                         to="#"
-                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/users/user-06.jpg"
+                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center">
+                        
+                        <img
+                          src={user06}
                           className="avatar avatar-xs rounded-circle me-2 flex-shrink-0"
-                          alt="Img"
-                        />
+                          alt="Img" />
+                        
                         Rebecca Dale
                       </Link>
                     </div>
@@ -464,16 +460,16 @@ const AllBlogs = () => {
                         to="#"
                         className="link-default p-1 d-flex align-items-center me-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit_blog"
-                      >
+                        data-bs-target="#edit_blog">
+                        
                         <i className="ti ti-edit" />
                       </Link>
                       <Link
                         to="#"
                         className="link-defau p-1 d-flex align-items-centerlt"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete_modal"
-                      >
+                        data-bs-target="#delete_modal">
+                        
                         <i className="ti ti-trash" />
                       </Link>
                     </div>
@@ -482,13 +478,12 @@ const AllBlogs = () => {
                     <h5>
                       <Link
                         to={all_routes.blogDetails}
-                        className="fs-16 text-truncate"
-                      >
+                        className="fs-16 text-truncate">
+                        
                         AI &amp; the Future of POS Systems
                       </Link>
                     </h5>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -497,17 +492,17 @@ const AllBlogs = () => {
                 <div className="card-body">
                   <div className="img-sec w-100 position-relative mb-3">
                     <Link to={all_routes.blogDetails}>
-                      <ImageWithBasePath
-                        src="assets/img/blogs/blog-06.jpg"
+                      <img
+                        src={blog06}
                         className="img-fluid rounded w-100"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <Link
                         to={all_routes.blogDetails}
-                        className="trend-tag badge bg-soft-info shadow-none"
-                      >
+                        className="trend-tag badge bg-soft-info shadow-none">
+                        
                         Technology
                       </Link>
                       <span className="badge badge-success dot-icon">
@@ -522,13 +517,13 @@ const AllBlogs = () => {
                       </span>
                       <Link
                         to="#"
-                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/users/user-08.jpg"
+                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center">
+                        
+                        <img
+                          src={user08}
                           className="avatar avatar-xs rounded-circle me-2 flex-shrink-0"
-                          alt="Img"
-                        />
+                          alt="Img" />
+                        
                         Jimmy Johnson
                       </Link>
                     </div>
@@ -537,31 +532,30 @@ const AllBlogs = () => {
                         to="#"
                         className="link-default p-1 d-flex align-items-center me-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit_blog"
-                      >
+                        data-bs-target="#edit_blog">
+                        
                         <i className="ti ti-edit" />
                       </Link>
                       <Link
                         to="#"
                         className="link-defau p-1 d-flex align-items-centerlt"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete_modal"
-                      >
+                        data-bs-target="#delete_modal">
+                        
                         <i className="ti ti-trash" />
                       </Link>
                     </div>
                   </div>
-                  <div >
+                  <div>
                     <h5>
                       <Link
                         to={all_routes.blogDetails}
-                        className="fs-16 text-truncate"
-                      >
+                        className="fs-16 text-truncate">
+                        
                         Retail vs Restaurant POS: Key Differences
                       </Link>
                     </h5>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -570,17 +564,17 @@ const AllBlogs = () => {
                 <div className="card-body">
                   <div className="img-sec w-100 position-relative mb-3">
                     <Link to={all_routes.blogDetails}>
-                      <ImageWithBasePath
-                        src="assets/img/blogs/blog-07.jpg"
+                      <img
+                        src={blog07}
                         className="img-fluid rounded w-100"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <Link
                         to={all_routes.blogDetails}
-                        className="trend-tag badge bg-soft-info shadow-none"
-                      >
+                        className="trend-tag badge bg-soft-info shadow-none">
+                        
                         Features
                       </Link>
                       <span className="badge badge-success dot-icon">
@@ -595,13 +589,13 @@ const AllBlogs = () => {
                       </span>
                       <Link
                         to="#"
-                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/users/user-07.jpg"
+                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center">
+                        
+                        <img
+                          src={user07}
                           className="avatar avatar-xs rounded-circle me-2 flex-shrink-0"
-                          alt="Img"
-                        />
+                          alt="Img" />
+                        
                         Stanley Pierre
                       </Link>
                     </div>
@@ -610,16 +604,16 @@ const AllBlogs = () => {
                         to="#"
                         className="link-default p-1 d-flex align-items-center me-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit_blog"
-                      >
+                        data-bs-target="#edit_blog">
+                        
                         <i className="ti ti-edit" />
                       </Link>
                       <Link
                         to="#"
                         className="link-defau p-1 d-flex align-items-centerlt"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete_modal"
-                      >
+                        data-bs-target="#delete_modal">
+                        
                         <i className="ti ti-trash" />
                       </Link>
                     </div>
@@ -628,13 +622,12 @@ const AllBlogs = () => {
                     <h5>
                       <Link
                         to={all_routes.blogDetails}
-                        className="fs-16 text-truncate"
-                      >
+                        className="fs-16 text-truncate">
+                        
                         Understanding PCI Compliance for POS{" "}
                       </Link>
                     </h5>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -643,17 +636,17 @@ const AllBlogs = () => {
                 <div className="card-body">
                   <div className="img-sec w-100 position-relative mb-3">
                     <Link to={all_routes.blogDetails}>
-                      <ImageWithBasePath
-                        src="assets/img/blogs/blog-08.jpg"
+                      <img
+                        src={blog08}
                         className="img-fluid rounded w-100"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <Link
                         to={all_routes.blogDetails}
-                        className="trend-tag badge bg-soft-info shadow-none"
-                      >
+                        className="trend-tag badge bg-soft-info shadow-none">
+                        
                         Technology
                       </Link>
                       <span className="badge badge-success dot-icon">
@@ -668,13 +661,13 @@ const AllBlogs = () => {
                       </span>
                       <Link
                         to="#"
-                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/users/user-10.jpg"
+                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center">
+                        
+                        <img
+                          src={user10}
                           className="avatar avatar-xs rounded-circle me-2 flex-shrink-0"
-                          alt="Img"
-                        />
+                          alt="Img" />
+                        
                         Alice Garcia
                       </Link>
                     </div>
@@ -683,16 +676,16 @@ const AllBlogs = () => {
                         to="#"
                         className="link-default p-1 d-flex align-items-center me-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit_blog"
-                      >
+                        data-bs-target="#edit_blog">
+                        
                         <i className="ti ti-edit" />
                       </Link>
                       <Link
                         to="#"
                         className="link-defau p-1 d-flex align-items-centerlt"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete_modal"
-                      >
+                        data-bs-target="#delete_modal">
+                        
                         <i className="ti ti-trash" />
                       </Link>
                     </div>
@@ -701,13 +694,12 @@ const AllBlogs = () => {
                     <h5>
                       <Link
                         to={all_routes.blogDetails}
-                        className="fs-16 text-truncate"
-                      >
+                        className="fs-16 text-truncate">
+                        
                         Cloud vs On-Premise POS: Which is Better?
                       </Link>
                     </h5>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -716,17 +708,17 @@ const AllBlogs = () => {
                 <div className="card-body">
                   <div className="img-sec w-100 position-relative mb-3">
                     <Link to={all_routes.blogDetails}>
-                      <ImageWithBasePath
-                        src="assets/img/blogs/blog-09.jpg"
+                      <img
+                        src={blog09}
                         className="img-fluid rounded w-100"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div>
                       <Link
                         to={all_routes.blogDetails}
-                        className="trend-tag badge bg-soft-info shadow-none"
-                      >
+                        className="trend-tag badge bg-soft-info shadow-none">
+                        
                         Features
                       </Link>
                       <span className="badge badge-success dot-icon">
@@ -741,13 +733,13 @@ const AllBlogs = () => {
                       </span>
                       <Link
                         to="#"
-                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center"
-                      >
-                        <ImageWithBasePath
-                          src="assets/img/users/user-09.jpg"
+                        className="border-start link-default fs-14 fw-normal ps-2 me-2 text-truncate d-inline-flex align-items-center">
+                        
+                        <img
+                          src={user09}
                           className="avatar avatar-xs rounded-circle me-2 flex-shrink-0"
-                          alt="Img"
-                        />
+                          alt="Img" />
+                        
                         James Currier
                       </Link>
                     </div>
@@ -756,16 +748,16 @@ const AllBlogs = () => {
                         to="#"
                         className="link-default p-1 d-flex align-items-center me-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit_blog"
-                      >
+                        data-bs-target="#edit_blog">
+                        
                         <i className="ti ti-edit" />
                       </Link>
                       <Link
                         to="#"
                         className="link-defau p-1 d-flex align-items-centerlt"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete_modal"
-                      >
+                        data-bs-target="#delete_modal">
+                        
                         <i className="ti ti-trash" />
                       </Link>
                     </div>
@@ -774,13 +766,12 @@ const AllBlogs = () => {
                     <h5>
                       <Link
                         to={all_routes.blogDetails}
-                        className="fs-16 text-truncate"
-                      >
+                        className="fs-16 text-truncate">
+                        
                         The Role of POS in Inventory Management
                       </Link>
                     </h5>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -793,12 +784,11 @@ const AllBlogs = () => {
           </p>
           <p>
             Designed &amp; Developed by{" "}
-            <a href="javascript:void(0);" className="text-primary">
+            <Link to="#" className="text-primary">
               Dreams
-            </a>
+            </Link>
           </p>
         </div>
-
       </div>
       {/* Add Blog */}
       <div className="modal fade" id="add_blog">
@@ -810,12 +800,12 @@ const AllBlogs = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0 p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
-            <form >
+            <form>
               <div className="modal-body pb-0">
                 <div className="row">
                   <div className="col-md-12">
@@ -823,10 +813,7 @@ const AllBlogs = () => {
                       <div className="profile-pic-upload">
                         <div className="profile-pic">
                           <span>
-                            <i
-                              data-feather="plus-circle"
-                              className="plus-down-add"
-                            />{" "}
+                            <i className="feather icon-plus-circle plus-down-add" />{" "}
                             Add Image
                           </span>
                         </div>
@@ -859,11 +846,13 @@ const AllBlogs = () => {
                         Category<span className="text-danger ms-1">*</span>
                       </label>
 
-                      <Select
-                        classNamePrefix="react-select"
+                      <CommonSelect
+                        filter={false}
                         options={option1}
                         placeholder="Choose"
-                      />
+                        value={selectedOption}
+                        onChange={(e) => setSelectedOption(e.value)} />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -871,12 +860,11 @@ const AllBlogs = () => {
                       <label className="form-label">
                         Tags<span className="text-danger ms-1">*</span>
                       </label>
-                      <CommonTagsInput
+                      <CommonChipsInput
                         value={tags}
                         onChange={setTags}
-                        placeholder="Add new"
-                        className="input-tags form-control" // Optional custom class
-                      />
+                        className="" />
+                      
                     </div>
                   </div>
                   <div className="col-lg-12">
@@ -884,7 +872,11 @@ const AllBlogs = () => {
                       <label className="form-label">
                         Description<span className="text-danger ms-1">*</span>
                       </label>
-                      <TextEditor />
+                      <Editor
+                        value={text}
+                        onTextChange={(e) => setText(e.htmlValue)}
+                        style={{ height: "200px" }} />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -902,11 +894,15 @@ const AllBlogs = () => {
                 <button
                   type="button"
                   className="btn btn-secondary me-2"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Cancel
                 </button>
-                <button type="button" data-bs-dismiss="modal" className="btn btn-primary">
+                <button
+                  type="button"
+                  data-bs-dismiss="modal"
+                  className="btn btn-primary">
+                  
                   Add Blog
                 </button>
               </div>
@@ -925,24 +921,21 @@ const AllBlogs = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0 p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
-            <form >
+            <form>
               <div className="modal-body pb-0">
                 <div className="row">
                   <div className="col-md-12">
                     <div className="new-employee-field">
                       <div className="profile-pic-upload">
                         <div className="profile-pic edit-review people-profile-pic p-2 border rounded">
-                          <ImageWithBasePath src="assets/img/users/user-08.jpg" alt="Img" />
+                          <img src={user08} alt="Img" />
                           <Link to="#">
-                            <i
-                              data-feather="x-square"
-                              className="x-square-add"
-                            />
+                            <i className="feather icon-x-square x-square-add" />
                           </Link>
                         </div>
                         <div className="mb-3">
@@ -968,8 +961,8 @@ const AllBlogs = () => {
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue="What is a POS System? A Beginner’s Guide"
-                      />
+                        defaultValue="What is a POS System? A Beginner’s Guide" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -977,12 +970,13 @@ const AllBlogs = () => {
                       <label className="form-label">
                         Category <span className="text-danger"> *</span>
                       </label>
-                      <Select
-                        classNamePrefix="react-select"
+                      <CommonSelect
+                        filter={false}
                         options={option1}
                         placeholder="Choose"
-                        defaultValue={option1[0]}
-                      />
+                        value={selectedOption}
+                        onChange={(e) => setSelectedOption(e.value)} />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -990,12 +984,12 @@ const AllBlogs = () => {
                       <label className="form-label">
                         Tags <span className="text-danger"> *</span>
                       </label>
-                      <CommonTagsInput
+                      <CommonChipsInput
                         value={tags}
                         onChange={setTags}
                         placeholder="Add new"
-                        className="input-tags form-control" // Optional custom class
-                      />
+                        className="" />
+                      
                     </div>
                   </div>
                   <div className="col-lg-12">
@@ -1021,11 +1015,15 @@ const AllBlogs = () => {
                 <button
                   type="button"
                   className="btn btn-secondary me-2"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Cancel
                 </button>
-                <button type="button" data-bs-dismiss="modal" className="btn btn-primary">
+                <button
+                  type="button"
+                  data-bs-dismiss="modal"
+                  className="btn btn-primary">
+                  
                   Save Changes
                 </button>
               </div>
@@ -1034,35 +1032,9 @@ const AllBlogs = () => {
         </div>
       </div>
       {/* /Edit Blog */}
-      {/* Delete Modal */}
-      <div className="modal fade" id="delete_modal">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-body text-center">
-              <span className="avatar avatar-xl bg-soft-danger rounded-circle text-danger mb-3">
-                <i className="ti ti-trash-x fs-36" />
-              </span>
-              <h4 className="mb-1">Delete Blog</h4>
-              <p className="mb-3">Are you sure you want to delete blog?</p>
-              <div className="d-flex justify-content-center">
-                <Link
-                  to="#"
-                  className="btn btn-secondary me-3"
-                  data-bs-dismiss="modal"
-                >
-                  Cancel
-                </Link>
-                <Link to="#" data-bs-dismiss="modal" className="btn btn-primary">
-                  Yes, Delete
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* /Delete Modal */}
-    </>
-  );
+      <DeleteModal />
+    </>);
+
 };
 
 export default AllBlogs;

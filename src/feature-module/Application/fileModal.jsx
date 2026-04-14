@@ -1,14 +1,17 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import TextEditor from "../inventory/texteditor";
-
+import { Editor } from "primereact/editor";
+import { avatar01, avatar15, avatar25, avatar26, avatar29, avatar_02, avatar_03, avatar_04, avatar_06, pdfIcon } from "../../utils/imagepath";
 
 const FileModal = () => {
+  const [text, setText] = useState("");
   return (
     <>
       {/* Preview */}
-      <div className="sidebar-themesettings offcanvas offcanvas-end" id="preview">
+      <div
+        className="sidebar-themesettings offcanvas offcanvas-end"
+        id="preview">
+        
         <div className="offcanvas-header d-flex align-items-center justify-content-between bg-dark">
           <div>
             <h4 className="mb-1 text-white">Preview</h4>
@@ -16,21 +19,21 @@ const FileModal = () => {
           <div className="d-flex align-items-center">
             <Link
               to="#"
-              className="d-flex align-items-center justify-content-center me-3"
-            >
+              className="d-flex align-items-center justify-content-center me-3">
+              
               <i className="ti ti-star-filled filled text-warning" />
             </Link>
             <Link
               to="#"
-              className="d-flex align-items-center justify-content-center text-white me-3"
-            >
+              className="d-flex align-items-center justify-content-center text-white me-3">
+              
               <i className="ti ti-trash" />
             </Link>
             <Link
               to="#"
               className="custom-btn-close d-flex align-items-center justify-content-center text-white"
-              data-bs-dismiss="offcanvas"
-            >
+              data-bs-dismiss="offcanvas">
+              
               <i className="ti ti-x" />
             </Link>
           </div>
@@ -38,7 +41,7 @@ const FileModal = () => {
         <div className="offcanvas-body p-0">
           <div className="bg-light document-wrap text-center">
             <div className="mb-2">
-              <ImageWithBasePath src="assets/img/icons/pdf-icon.svg" alt="icon" />
+              <img src={pdfIcon} alt="icon" />
             </div>
             <h4 className="mb-1">
               Document Final Proof Read
@@ -66,7 +69,11 @@ const FileModal = () => {
             </div>
             <div className="mb-4">
               <h6 className="mb-2 fw-medium">Description</h6>
-              <TextEditor />
+              <Editor
+                value={text}
+                onTextChange={(e) => setText(e.htmlValue)}
+                style={{ height: "200px" }} />
+              
             </div>
             <h4 className="mb-3">Recent Activity</h4>
             <div className="card shadow-none">
@@ -75,16 +82,16 @@ const FileModal = () => {
                 <ul className="recent-activity mb-3">
                   <li className="d-flex">
                     <span className="avatar avatar-md">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-01.jpg"
+                      <img
+                        src={avatar01}
                         className="rounded-circle"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </span>
                     <div className="ms-2 flex-grow-1">
                       <p className="mb-0">
-                        <span className="text-title">Mercy</span> Added New File in{" "}
-                        <span className="text-title">Drive</span>
+                        <span className="text-title">Mercy</span> Added New File
+                        in <span className="text-title">Drive</span>
                       </p>
                       <p className="mb-0">05:22 PM</p>
                       <div className="bg-light rounded p-2 d-flex align-items-center justify-content-between mt-1">
@@ -98,16 +105,16 @@ const FileModal = () => {
                   </li>
                   <li className="d-flex">
                     <span className="avatar avatar-md">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-15.jpg"
+                      <img
+                        src={avatar15}
                         className="rounded-circle"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </span>
                     <div className="ms-2 flex-grow-1">
                       <p className="mb-0">
-                        <span className="text-title">Druman</span> Added New File in{" "}
-                        <span className="text-title">ROOT FOLDER</span>
+                        <span className="text-title">Druman</span> Added New
+                        File in <span className="text-title">ROOT FOLDER</span>
                       </p>
                       <p className="mb-0">05:23 PM</p>
                       <div className="bg-light rounded p-2 d-flex align-items-center justify-content-between mt-1">
@@ -138,16 +145,16 @@ const FileModal = () => {
                 <ul className="recent-activity mb-3">
                   <li className="d-flex">
                     <span className="avatar avatar-md">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-29.jpg"
+                      <img
+                        src={avatar29}
                         className="rounded-circle"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </span>
                     <div className="ms-2 flex-grow-1">
                       <p className="mb-0">
-                        <span className="text-title">Mercy</span> Added New File in{" "}
-                        <span className="text-title">Personal Assets</span>
+                        <span className="text-title">Mercy</span> Added New File
+                        in <span className="text-title">Personal Assets</span>
                       </p>
                       <p className="mb-0">05:22 PM</p>
                       <div className="bg-light rounded p-2 d-flex align-items-center justify-content-between mt-1">
@@ -161,16 +168,16 @@ const FileModal = () => {
                   </li>
                   <li className="d-flex">
                     <span className="avatar avatar-md">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-25.jpg"
+                      <img
+                        src={avatar25}
                         className="rounded-circle"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </span>
                     <div className="ms-2 flex-grow-1">
                       <p className="mb-0">
-                        <span className="text-title">Jackson</span> Added New File
-                        in <span className="text-title">Drive</span>
+                        <span className="text-title">Jackson</span> Added New
+                        File in <span className="text-title">Drive</span>
                       </p>
                       <p className="mb-0">05:23 PM</p>
                       <div className="bg-light rounded p-2 d-flex align-items-center justify-content-between mt-1">
@@ -190,9 +197,10 @@ const FileModal = () => {
               <Link
                 to="#"
                 className="fs-12 mb-3"
-                data-bs-toggle="modal" data-inert={true}
-                data-bs-target="#add_member"
-              >
+                data-bs-toggle="modal"
+                data-inert={true}
+                data-bs-target="#add_member">
+                
                 Add Members
               </Link>
             </div>
@@ -201,11 +209,11 @@ const FileModal = () => {
                 <div className="d-flex align-items-center justify-content-between mb-2">
                   <div className="d-flex align-items-center mb-2">
                     <span className="avatar avatar-md">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-29.jpg"
+                      <img
+                        src={avatar29}
                         className="rounded-circle"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </span>
                     <div className="ms-2">
                       <h6 className="fw-medium">Anthony Lewis</h6>
@@ -219,11 +227,11 @@ const FileModal = () => {
                 <div className="d-flex align-items-center justify-content-between mb-2">
                   <div className="d-flex align-items-center mb-2">
                     <span className="avatar avatar-md">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-06.jpg"
+                      <img
+                        src={avatar_06}
                         className="rounded-circle"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </span>
                     <div className="ms-2">
                       <h6 className="fw-medium">Harvey Smith</h6>
@@ -237,11 +245,11 @@ const FileModal = () => {
                 <div className="d-flex align-items-center justify-content-between mb-2">
                   <div className="d-flex align-items-center mb-2">
                     <span className="avatar avatar-md">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-02.jpg"
+                      <img
+                        src={avatar_02}
                         className="rounded-circle"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </span>
                     <div className="ms-2">
                       <h6 className="fw-medium">Stephan Peralt</h6>
@@ -255,11 +263,11 @@ const FileModal = () => {
                 <div className="d-flex align-items-center justify-content-between mb-2">
                   <div className="d-flex align-items-center mb-2">
                     <span className="avatar avatar-md">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-26.jpg"
+                      <img
+                        src={avatar26}
                         className="rounded-circle"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </span>
                     <div className="ms-2">
                       <h6 className="fw-medium">Doglas Martini</h6>
@@ -273,11 +281,11 @@ const FileModal = () => {
                 <div className="d-flex align-items-center justify-content-between mb-2">
                   <div className="d-flex align-items-center mb-2">
                     <span className="avatar avatar-md">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-01.jpg"
+                      <img
+                        src={avatar01}
                         className="rounded-circle"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </span>
                     <div className="ms-2">
                       <h6 className="fw-medium">Linda Ray</h6>
@@ -304,12 +312,12 @@ const FileModal = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
-            <form >
+            <form>
               <div className="modal-body">
                 <div className="mb-0">
                   <label className="form-label">Folder Name</label>
@@ -320,11 +328,15 @@ const FileModal = () => {
                 <button
                   type="button"
                   className="btn btn-light me-2"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Cancel
                 </button>
-                <button type="button" data-bs-dismiss="modal" className="btn btn-primary">
+                <button
+                  type="button"
+                  data-bs-dismiss="modal"
+                  className="btn btn-primary">
+                  
                   Add New Folder
                 </button>
               </div>
@@ -343,8 +355,8 @@ const FileModal = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
@@ -356,35 +368,35 @@ const FileModal = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Search Email"
-                />
+                  placeholder="Search Email" />
+                
               </div>
               <div className="form-check ps-0">
                 <label className="form-check-label member-check-list activate d-flex align-items-center justify-content-between p-2 rounded mb-1">
                   <span className="d-flex align-items-center text-dark">
                     <span className="avatar avatar-md avatar-rounded">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-01.jpg"
+                      <img
+                        src={avatar01}
                         className="me-2"
-                        alt="Img"
-                      />
+                        alt="Img" />
+                      
                     </span>
                     Sophie
                   </span>
                   <input
                     type="checkbox"
                     className="form-check-input"
-                    defaultChecked
-                  />
+                    defaultChecked />
+                  
                 </label>
                 <label className="form-check-label member-check-list d-flex align-items-center justify-content-between p-2 rounded mb-1">
                   <span className="d-flex align-items-center text-dark">
                     <span className="avatar avatar-md avatar-rounded">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-02.jpg"
+                      <img
+                        src={avatar_02}
                         className="me-2"
-                        alt="Img"
-                      />
+                        alt="Img" />
+                      
                     </span>
                     Cameron
                   </span>
@@ -393,11 +405,11 @@ const FileModal = () => {
                 <label className="form-check-label member-check-list d-flex align-items-center justify-content-between p-2 rounded mb-1">
                   <span className="d-flex align-items-center text-dark">
                     <span className="avatar avatar-md avatar-rounded">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-03.jpg"
+                      <img
+                        src={avatar_03}
                         className="me-2"
-                        alt="Img"
-                      />
+                        alt="Img" />
+                      
                     </span>
                     Doris
                   </span>
@@ -406,11 +418,11 @@ const FileModal = () => {
                 <label className="form-check-label member-check-list d-flex align-items-center justify-content-between p-2 rounded mb-1">
                   <span className="d-flex align-items-center text-dark">
                     <span className="avatar avatar-md avatar-rounded">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-04.jpg"
+                      <img
+                        src={avatar_04}
                         className="me-2"
-                        alt="Img"
-                      />
+                        alt="Img" />
+                      
                     </span>
                     Rufana
                   </span>
@@ -419,11 +431,11 @@ const FileModal = () => {
                 <label className="form-check-label member-check-list d-flex align-items-center justify-content-between p-2 rounded mb-1">
                   <span className="d-flex align-items-center text-dark">
                     <span className="avatar avatar-md avatar-rounded">
-                      <ImageWithBasePath
-                        src="assets/img/profiles/avatar-04.jpg"
+                      <img
+                        src={avatar_04}
                         className="me-2"
-                        alt="Img"
-                      />
+                        alt="Img" />
+                      
                     </span>
                     Michael
                   </span>
@@ -435,9 +447,8 @@ const FileModal = () => {
         </div>
       </div>
       {/* /Add Customer */}
-    </>
+    </>);
 
-  );
 };
 
 export default FileModal;

@@ -1,8 +1,9 @@
-import React from 'react'
+import { Link } from "react-router-dom";
+
 
 const Typography = () => {
-    return (
-        <div>
+  return (
+    <div>
             {/* Page Wrapper */}
             <div className="page-wrapper">
                 <div className="content">
@@ -117,54 +118,54 @@ const Typography = () => {
                                 </div>
                                 <div className="card-body">
                                     <p>
-                                        <a to="#" className="text-primary">
+                                        <Link to="#" className="text-primary">
                                             Primary link
-                                        </a>
+                                        </Link>
                                     </p>
                                     <p>
-                                        <a to="#" className="text-secondary">
+                                        <Link to="#" className="text-secondary">
                                             Secondary link
-                                        </a>
+                                        </Link>
                                     </p>
                                     <p>
-                                        <a to="#" className="text-success">
+                                        <Link to="#" className="text-success">
                                             Success link
-                                        </a>
+                                        </Link>
                                     </p>
                                     <p>
-                                        <a to="#" className="text-danger">
+                                        <Link to="#" className="text-danger">
                                             Danger link
-                                        </a>
+                                        </Link>
                                     </p>
                                     <p>
-                                        <a to="#" className="text-warning">
+                                        <Link to="#" className="text-warning">
                                             Warning link
-                                        </a>
+                                        </Link>
                                     </p>
                                     <p>
-                                        <a to="#" className="text-info">
+                                        <Link to="#" className="text-info">
                                             Info link
-                                        </a>
+                                        </Link>
                                     </p>
                                     <p>
-                                        <a to="#" className="text-light bg-dark">
+                                        <Link to="#" className="text-light bg-dark">
                                             Light link
-                                        </a>
+                                        </Link>
                                     </p>
                                     <p>
-                                        <a to="#" className="text-dark">
+                                        <Link to="#" className="text-dark">
                                             Dark link
-                                        </a>
+                                        </Link>
                                     </p>
                                     <p>
-                                        <a to="#" className="text-muted">
+                                        <Link to="#" className="text-muted">
                                             Muted link
-                                        </a>
+                                        </Link>
                                     </p>
                                     <p>
-                                        <a to="#" className="text-white bg-dark mb-0">
+                                        <Link to="#" className="text-white bg-dark mb-0">
                                             White link
-                                        </a>
+                                        </Link>
                                     </p>
                                 </div>
                             </div>
@@ -570,9 +571,9 @@ const Typography = () => {
                                     <p className="text-decoration-line-through">
                                         This text has a line going through it.
                                     </p>
-                                    <a to="#" className="text-decoration-none">
+                                    <Link to="#" className="text-decoration-none">
                                         This link has its text decoration removed
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -656,12 +657,12 @@ const Typography = () => {
                                 <div className="card-body">
                                     <p className="text-muted mb-0">
                                         Muted text with a{" "}
-                                        <a
-                                            to="#"
-                                            className="text-reset text-decoration-underline text-dark"
-                                        >
+                                        <Link
+                      to="#"
+                      className="text-reset text-decoration-underline text-dark">
+                      
                                             reset link
-                                        </a>
+                                        </Link>
                                         .
                                     </p>
                                 </div>
@@ -732,9 +733,9 @@ const Typography = () => {
                                 </div>
                                 <div className="card-body">
                                     <div
-                                        className="badge bg-primary text-wrap mb-3"
-                                        style={{ width: "6rem" }}
-                                    >
+                    className="badge bg-primary text-wrap mb-3"
+                    style={{ width: "6rem" }}>
+                    
                                         This text should wrap.
                                     </div>
                                     <p className="text-muted mb-2">
@@ -743,9 +744,9 @@ const Typography = () => {
                                         wrapping
                                     </p>
                                     <div
-                                        className="text-nowrap bg-light border text-dark"
-                                        style={{ width: "8rem" }}
-                                    >
+                    className="text-nowrap bg-light border text-dark"
+                    style={{ width: "8rem" }}>
+                    
                                         This text should overflow the parent.
                                     </div>
                                 </div>
@@ -766,8 +767,8 @@ const Typography = () => {
                 </div>
             </div>
             {/* /Page Wrapper */}
-        </div>
-    )
-}
+        </div>);
 
-export default Typography
+};
+
+export default Typography;

@@ -1,139 +1,149 @@
-import {
-  ChevronUp,
-  Edit,
-  Eye,
-  RotateCcw,
-  Trash2,
-} from "feather-icons-react/build/IconComponents";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
 import Brand from "../../core/modals/inventory/brand";
-import { all_routes } from "../../Router/all_routes";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import Table from "../../core/pagination/datatable";
-import { setToogleHeader } from "../../core/redux/action";
-import { Download } from "react-feather";
+import { all_routes } from "../../routes/all_routes";
+import PrimeDataTable from "../../components/data-table";
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
+import { api_url } from "../../environment";
+import Loader from "../../components/loader/Loader";
 
 const ProductList = () => {
-  const dataSource = useSelector((state) => state.rootReducer.product_list);
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.rootReducer.toggle_header);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  // const [Category, setCategory] = useState([]);
+  // const [SubCategory, setSubCategory] = useState([]);
 
   const route = all_routes;
 
-
   const columns = [
     {
-      title: "SKU",
-      dataIndex: "sku",
-      sorter: (a, b) => a.sku.length - b.sku.length,
+      header: "SKU",
+      field: "sku",
+      key: "sku",
+      sortable: true,
     },
     {
-      title: "Product",
-      dataIndex: "product",
-      render: (text, record) => (
+      header: "Product",
+      field: "product",
+      key: "product",
+      sortable: true,
+      body: (data) => (
         <div className="d-flex align-items-center">
           <Link to="#" className="avatar avatar-md me-2">
-            <ImageWithBasePath alt="" src={record.productImage} />
+            <img alt="" src={data.productImage} />
           </Link>
-          <Link to="#">{text}</Link>
+          <Link to="#">{data.product}</Link>
         </div>
       ),
-      sorter: (a, b) => a.product.length - b.product.length,
-    },
-
-
-    {
-      title: "Category",
-      dataIndex: "category",
-      sorter: (a, b) => a.category.length - b.category.length,
-    },
-
-    {
-      title: "Brand",
-      dataIndex: "brand",
-      sorter: (a, b) => a.brand.length - b.brand.length,
     },
     {
-      title: "Price",
-      dataIndex: "price",
-      sorter: (a, b) => a.price.length - b.price.length,
+      header: "Category",
+      field: "category",
+      key: "category",
+      sortable: true,
     },
     {
-      title: "Unit",
-      dataIndex: "unit",
-      sorter: (a, b) => a.unit.length - b.unit.length,
+      header: "Brand",
+      field: "brand",
+      key: "brand",
+      sortable: true,
     },
     {
-      title: "Qty",
-      dataIndex: "qty",
-      sorter: (a, b) => a.qty.length - b.qty.length,
+      header: "Price",
+      field: "price",
+      key: "price",
+      sortable: true,
     },
-
     {
-      title: "Created By",
-      dataIndex: "createdby",
-      render: (text, record) => (
-        <span className="userimgname">
-          <Link to="/profile" className="product-img">
-            <ImageWithBasePath alt="" src={record.img} />
+      header: "Unit",
+      field: "unit",
+      key: "unit",
+      sortable: true,
+    },
+    {
+      header: "Qty",
+      field: "qty",
+      key: "qty",
+      sortable: true,
+    },
+    {
+      header: "Created By",
+      field: "createdby",
+      key: "createdby",
+      sortable: true,
+    },
+    {
+      header: "",
+      field: "actions",
+      key: "actions",
+      sortable: false,
+      body: (_row) => (
+        <div className="edit-delete-action d-flex align-items-center">
+          <Link
+            className="me-2 p-2 d-flex align-items-center border rounded"
+            to="#"
+            data-bs-toggle="modal"
+            data-bs-target="#edit-customer"
+          >
+            <i className="feather icon-edit"></i>
           </Link>
-          <Link to="/profile">{text}</Link>
-        </span>
-      ),
-      sorter: (a, b) => a.createdby.length - b.createdby.length,
-    },
-    {
-      title: "Action",
-      dataIndex: "action",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
-            <Link className="me-2 p-2" to={route.productdetails}>
-              <Eye className="feather-view" />
-            </Link>
-            <Link className="me-2 p-2" to={route.editproduct}>
-              <Edit className="feather-edit" />
-            </Link>
-            <Link
-              className="confirm-text p-2"
-              to="#" data-bs-toggle="modal" data-bs-target="#delete-modal"
-            >
-              <Trash2 className="feather-trash-2" />
-            </Link>
-          </div>
+          <Link
+            className="p-2 d-flex align-items-center border rounded"
+            to="#"
+            data-bs-toggle="modal"
+            data-bs-target="#delete-modal"
+          >
+            <i className="feather icon-trash-2"></i>
+          </Link>
         </div>
       ),
-      sorter: (a, b) => a.createdby.length - b.createdby.length,
     },
   ];
 
-  const renderTooltip = (props) => (
-    <Tooltip id="pdf-tooltip" {...props}>
-      Pdf
-    </Tooltip>
-  );
-  const renderExcelTooltip = (props) => (
-    <Tooltip id="excel-tooltip" {...props}>
-      Excel
-    </Tooltip>
-  );
+  useEffect(() => {
+    fetchProducts();
+    // fetchCategories();
+    // fetchSubCategories();
+  }, []);
 
-  const renderRefreshTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Refresh
-    </Tooltip>
-  );
-  const renderCollapseTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Collapse
-    </Tooltip>
-  );
+  const fetchProducts = async () => {
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${api_url}/GetMaster?masterType=6`);
+      const json = await res.json();
+      console.log("Products data:", json);
+
+      const formattedData = json?.data?.map((row) => ({
+        Id: row.code,
+        product: row.name,
+        sku: row.c1,
+        category: row.parentGrpName,
+        brand: row.dynamicFields.Brand.name,
+        unit: row.dynamicFields.Unit.name,
+        qty: row.d1,
+        price: row.d2,
+        createdby: row.createdBy || "SYSTEM",
+        createdAt: row.createdAt,
+      }));
+      setProducts(formattedData);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
+    {loading && <Loader loading/>}
       <div className="page-wrapper">
         <div className="content">
           <div className="page-header">
@@ -143,52 +153,10 @@ const ProductList = () => {
                 <h6>Manage your products</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <li>
-                <OverlayTrigger placement="top" overlay={renderTooltip}>
-                  <Link>
-                    <ImageWithBasePath src="assets/img/icons/pdf.svg" alt="img" />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderExcelTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <ImageWithBasePath
-                      src="assets/img/icons/excel.svg"
-                      alt="img"
-                    />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-
-              <li>
-                <OverlayTrigger placement="top" overlay={renderRefreshTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <RotateCcw />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderCollapseTooltip}>
-                  <Link
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    id="collapse-header"
-                    className={data ? "active" : ""}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      dispatch(setToogleHeader(!data));
-                    }}
-                  >
-                    <ChevronUp />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link to={route.addproduct} className="btn btn-primary">
-              <i className='ti ti-circle-plus me-1'></i>
+                <i className="ti ti-circle-plus me-1"></i>
                 Add New Product
               </Link>
             </div>
@@ -199,7 +167,7 @@ const ProductList = () => {
                 data-bs-toggle="modal"
                 data-bs-target="#view-notes"
               >
-                <Download className="feather me-2" />
+                <i className="feather icon-download feather me-2" />
                 Import Product
               </Link>
             </div>
@@ -207,8 +175,12 @@ const ProductList = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-              </div>
+              <SearchFromApi
+                callback={(e) => setSearchQuery(e)}
+                rows={rows}
+                setRows={setRows}
+              />
+
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
@@ -220,34 +192,22 @@ const ProductList = () => {
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Lenovo IdeaPad 3
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Beats Pro{" "}
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Nike Jordan
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Apple Series 5 Watch
                       </Link>
                     </li>
@@ -263,34 +223,22 @@ const ProductList = () => {
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         James Kirwin
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Francis Chang
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Antonio Engle
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Leo Kelly
                       </Link>
                     </li>
@@ -306,34 +254,22 @@ const ProductList = () => {
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Computers
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Electronics
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Shoe
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Electronics
                       </Link>
                     </li>
@@ -349,34 +285,22 @@ const ProductList = () => {
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Lenovo
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Beats
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Nike
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Apple
                       </Link>
                     </li>
@@ -392,42 +316,27 @@ const ProductList = () => {
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Recently Added
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Ascending
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Desending
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Last Month
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Last 7 Days
                       </Link>
                     </li>
@@ -436,135 +345,23 @@ const ProductList = () => {
               </div>
             </div>
             <div className="card-body">
-
-              {/* <div className="table-top">
-              <div className="search-set">
-                <div className="search-input">
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    className="form-control form-control-sm formsearch"
-                  />
-                  <Link to className="btn btn-searchset">
-                    <i data-feather="search" className="feather-search" />
-                  </Link>
-                </div>
-              </div>
-              <div className="search-path">
-                <Link
-                  className={`btn btn-filter ${
-                    isFilterVisible ? "setclose" : ""
-                  }`}
-                  id="filter_search"
-                >
-                  <Filter
-                    className="filter-icon"
-                    onClick={toggleFilterVisibility}
-                  />
-                  <span onClick={toggleFilterVisibility}>
-                    <ImageWithBasePath
-                      src="assets/img/icons/closes.svg"
-                      alt="img"
-                    />
-                  </span>
-                </Link>
-              </div>
-              <div className="form-sort">
-                <Sliders className="info-img" />
-                <Select
-                  className="img-select"
-                  classNamePrefix="react-select"
-                  options={options}
-                  placeholder="14 09 23"
-                />
-              </div>
-            </div> */}
-              {/* /Filter */}
-              {/* <div
-              className={`card${isFilterVisible ? " visible" : ""}`}
-              id="filter_inputs"
-              style={{ display: isFilterVisible ? "block" : "none" }}
-            >
-              <div className="card-body pb-0">
-                <div className="row">
-                  <div className="col-lg-12 col-sm-12">
-                    <div className="row">
-                      <div className="col-lg-2 col-sm-6 col-12">
-                        <div className="input-blocks">
-                          <Box className="info-img" />
-                          <Select
-                            className="img-select"
-                            classNamePrefix="react-select"
-                            options={productlist}
-                            placeholder="Choose Product"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-2 col-sm-6 col-12">
-                        <div className="input-blocks">
-                          <StopCircle className="info-img" />
-                          <Select
-                            className="img-select"
-                            classNamePrefix="react-select"
-                            options={categorylist}
-                            placeholder="Choose Category"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-2 col-sm-6 col-12">
-                        <div className="input-blocks">
-                          <GitMerge className="info-img" />
-                          <Select
-                            className="img-select"
-                            classNamePrefix="react-select"
-                            options={subcategorylist}
-                            placeholder="Choose Sub Category"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-2 col-sm-6 col-12">
-                        <div className="input-blocks">
-                          <StopCircle className="info-img" />
-                          <Select
-                            className="img-select"
-                            classNamePrefix="react-select"
-                            options={brandlist}
-                            placeholder="Nike"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-2 col-sm-6 col-12">
-                        <div className="input-blocks">
-                          <i className="fas fa-money-bill info-img" />
-
-                          <Select
-                            className="img-select"
-                            classNamePrefix="react-select"
-                            options={price}
-                            placeholder="Price"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-2 col-sm-6 col-12">
-                        <div className="input-blocks">
-                          <Link className="btn btn-filters ms-auto">
-                            {" "}
-                            <i
-                              data-feather="search"
-                              className="feather-search"
-                            />{" "}
-                            Search{" "}
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
               {/* /Filter */}
               <div className="table-responsive">
-                <Table columns={columns} dataSource={dataSource} />
+                {/* <Table columns={columns} dataSource={productlistdata} /> */}
+                <PrimeDataTable
+                  column={columns}
+                  data={products}
+                  searchQuery={_searchQuery}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedProducts}
+                  onSelectionChange={(e) => setSelectedProducts(e.value)}
+                  dataKey="id"
+                />
               </div>
             </div>
           </div>
@@ -572,46 +369,8 @@ const ProductList = () => {
           <Brand />
         </div>
       </div>
-      <>
-        {/* delete modal */}
-        <div className="modal fade" id="delete-modal">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content p-5 px-3 text-center">
-                  <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                    <i className="ti ti-trash fs-24 text-danger" />
-                  </span>
-                  <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
-                    Delete Product
-                  </h4>
-                  <p className="text-gray-6 mb-0 fs-16">
-                    Are you sure you want to delete product?
-                  </p>
-                  <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-primary fs-13 fw-medium p-2 px-3" data-bs-dismiss="modal"
-                    >
-                      Yes Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-
+      <DeleteModal />
     </>
-
   );
 };
 

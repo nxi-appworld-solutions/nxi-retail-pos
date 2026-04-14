@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import Select from "react-select";
+import CommonFooter from "../../components/footer/commonFooter";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import { stockImg02 } from "../../utils/imagepath";
+import CommonSelect from "../../components/select/common-select";
+import DeleteModal from "../../components/delete-modal";
 import QRcodeModelPopup from "../../core/modals/inventory/qrcode";
-import {
-  MinusCircle,
-  PlusCircle,
-} from "feather-icons-react/build/IconComponents";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { PaperSize, Store, WareHouse } from "../../core/common/selectOption/selectOption";
 
 const QRcode = () => {
-
   const [quantity, setQuantity] = useState(4);
+  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
+  const [selectedStore, setSelectedStore] = useState(null);
+  const [selectedPaperSize, setSelectedPaperSize] = useState(null);
 
   const handleDecrement = () => {
     if (quantity > 1) {
@@ -25,6 +23,17 @@ const QRcode = () => {
   const handleIncrement = () => {
     setQuantity(quantity + 1);
   };
+  const WareHouse = [
+  { value: "main", label: "Main Warehouse" },
+  { value: "secondary", label: "Secondary Warehouse" }];
+
+  const Store = [
+  { value: "store1", label: "Store 1" },
+  { value: "store2", label: "Store 2" }];
+
+  const PaperSize = [
+  { value: "A4", label: "A4" },
+  { value: "A5", label: "A5" }];
 
   return (
     <div>
@@ -53,21 +62,27 @@ const QRcode = () => {
                       <label className="form-label">
                         Warehouse<span className="text-danger ms-1">*</span>
                       </label>
-                      <Select
-                        classNamePrefix="react-select"
+                      <CommonSelect
+                        className="w-100"
                         options={WareHouse}
+                        value={selectedWarehouse}
+                        onChange={(e) => setSelectedWarehouse(e.value)}
                         placeholder="Choose"
-                      />
+                        filter={false} />
+                      
                     </div>
                     <div className="col-sm-6 seacrh-barcode-item-one">
                       <label className="form-label">
                         Store<span className="text-danger ms-1">*</span>
                       </label>
-                      <Select
-                        classNamePrefix="react-select"
+                      <CommonSelect
+                        className="w-100"
                         options={Store}
+                        value={selectedStore}
+                        onChange={(e) => setSelectedStore(e.value)}
                         placeholder="Choose"
-                      />
+                        filter={false} />
+                      
                     </div>
                   </div>
                 </div>
@@ -85,21 +100,29 @@ const QRcode = () => {
                         data-bs-toggle="dropdown"
                         data-bs-auto-close="outside"
                         className="form-control"
-                        placeholder="Search Product by Code"
-                      />
+                        placeholder="Search Product by Code" />
+                      
                       <div className="resultBox"></div>
                       <div className="icon">
                         <i className="fas fa-search" />
                       </div>
                       <div
                         className="dropdown-menu search-dropdown w-100 h-auto rounded-1 mt-2"
-                        aria-labelledby="dropdownsearchClickable"
-                      >
+                        aria-labelledby="dropdownsearchClickable">
+                        
                         <ul>
-                          <li className="fs-14 text-gray-9 mb-2">Amazon Echo Dot</li>
-                          <li className="fs-14 text-gray-9 mb-2">Armani Belt</li>
-                          <li className="fs-14 text-gray-9 mb-2">Apple Watch</li>
-                          <li className="fs-14 text-gray-9">Apple Iphone 14 Pro</li>
+                          <li className="fs-14 text-gray-9 mb-2">
+                            Amazon Echo Dot
+                          </li>
+                          <li className="fs-14 text-gray-9 mb-2">
+                            Armani Belt
+                          </li>
+                          <li className="fs-14 text-gray-9 mb-2">
+                            Apple Watch
+                          </li>
+                          <li className="fs-14 text-gray-9">
+                            Apple Iphone 14 Pro
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -125,14 +148,8 @@ const QRcode = () => {
                       <tr>
                         <td>
                           <div className="d-flex align-items-center">
-                            <Link
-                              to="#"
-                              className="avatar avatar-md me-2"
-                            >
-                              <ImageWithBasePath
-                                src="assets/img/products/stock-img-02.png"
-                                alt="product"
-                              />
+                            <Link to="#" className="avatar avatar-md me-2">
+                              <img src={stockImg02} alt="product" />
                             </Link>
                             <Link to="#">Nike Jordan</Link>
                           </div>
@@ -142,19 +159,23 @@ const QRcode = () => {
                         <td>32RRR554</td>
                         <td>
                           <div className="product-quantity">
-                            <span className="quantity-btn">
-                              <MinusCircle />
-                              onClick={handleDecrement}
+                            <span
+                              className="quantity-btn"
+                              onClick={handleDecrement}>
+                              
+                              <i className="feather icon-minus-circle" />
                             </span>
                             <input
                               type="text"
                               className="quntity-input"
-                              defaultValue={4}
-                            />
-                            <span className="quantity-btn">
+                              defaultValue={4} />
+                            
+                            <span
+                              className="quantity-btn"
+                              onClick={handleIncrement}>
+                              
                               +
-                              <PlusCircle className="plus-circle" />
-                              onClick={handleIncrement}
+                              <i className="feather icon-plus-circle plus-circle" />
                             </span>
                           </div>
                         </td>
@@ -164,9 +185,9 @@ const QRcode = () => {
                               data-bs-toggle="modal"
                               data-bs-target="#delete-modal"
                               className="barcode-delete-icon"
-                              to="#"
-                            >
-                              <i data-feather="trash-2" className="feather-trash-2" />
+                              to="#">
+                              
+                              <i className="feather icon-trash-2" />
                             </Link>
                           </div>
                         </td>
@@ -183,11 +204,14 @@ const QRcode = () => {
                     <label className="form-label">
                       Paper Size<span className="text-danger ms-1">*</span>
                     </label>
-                    <Select
-                      classNamePrefix="react-select"
+                    <CommonSelect
+                      className="w-100"
                       options={PaperSize}
+                      value={selectedPaperSize}
+                      onChange={(e) => setSelectedPaperSize(e.value)}
                       placeholder="Choose"
-                    />
+                      filter={false} />
+                    
                   </form>
                 </div>
                 <div className="col-lg-6 pt-3">
@@ -201,8 +225,8 @@ const QRcode = () => {
                               type="checkbox"
                               id="user7"
                               className="check"
-                              defaultChecked
-                            />
+                              defaultChecked />
+                            
                             <label htmlFor="user7" className="checktoggle mb-0">
                               {" "}
                             </label>
@@ -219,8 +243,8 @@ const QRcode = () => {
                 to="#"
                 className="btn btn-submit me-2 mt-0 fs-13 btn-primary shadow-none"
                 data-bs-toggle="modal"
-                data-bs-target="#prints-barcode"
-              >
+                data-bs-target="#prints-barcode">
+                
                 <span>
                   <i className="fas fa-eye me-2" />
                 </span>
@@ -228,8 +252,8 @@ const QRcode = () => {
               </Link>
               <Link
                 to="#"
-                className="btn btn-cancel me-2 fs-13 btn-secondary shadow-none"
-              >
+                className="btn btn-cancel me-2 fs-13 btn-secondary shadow-none">
+                
                 <span>
                   <i className="fas fa-power-off me-2" />
                 </span>
@@ -237,8 +261,8 @@ const QRcode = () => {
               </Link>
               <Link
                 to="#"
-                className="btn btn-cancel close-btn fs-13 btn-danger shadow-none"
-              >
+                className="btn btn-cancel close-btn fs-13 btn-danger shadow-none">
+                
                 <span>
                   <i className="fas fa-print me-2" />
                 </span>
@@ -251,8 +275,9 @@ const QRcode = () => {
       </div>
 
       <QRcodeModelPopup />
-    </div>
-  );
+      <DeleteModal />
+    </div>);
+
 };
 
 export default QRcode;

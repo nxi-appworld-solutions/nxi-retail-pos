@@ -1,13 +1,15 @@
-import React from 'react'
-import CommonFooter from '../../core/common/footer/commonFooter'
-import ImageWithBasePath from '../../core/img/imagewithbasebath'
-import { Link } from 'react-router-dom'
-import RefreshIcon from '../../core/common/tooltip-content/refresh'
-import CollapesIcon from '../../core/common/tooltip-content/collapes'
 
+import CommonFooter from '../../components/footer/commonFooter';
+
+import { Link } from 'react-router-dom';
+import RefreshIcon from '../../components/tooltip-content/refresh';
+import CollapesIcon from '../../components/tooltip-content/collapes';
+import { posProduct01, posProduct02, posProduct03, posProduct04, posProduct05, posProduct06,
+posProduct07, posProduct08, posProduct10, posProduct09 } from
+"../../utils/imagepath";
 const Wishlist = () => {
-    return (
-        <div>
+  return (
+    <div>
             <div className="page-wrapper">
                 <div className="content">
                     <div className="page-header">
@@ -31,17 +33,17 @@ const Wishlist = () => {
                                         <i className="ti ti-search" />
                                     </span>
                                     <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Search Product"
-                                    />
+                    type="text"
+                    className="form-control"
+                    placeholder="Search Product" />
+                  
                                 </div>
                                 <Link
-                                    to="#"
-                                    className="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#remove_all"
-                                >
+                  to="#"
+                  className="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#remove_all">
+                  
                                     <i className="ti ti-trash" /> Remove All
                                 </Link>
                             </div>
@@ -52,15 +54,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-01.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct01}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -102,15 +104,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-02.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct02}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -152,15 +154,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-03.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct03}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -202,15 +204,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-04.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct04}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -252,15 +254,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card ">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-05.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct05}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -302,15 +304,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-06.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct06}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -352,15 +354,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-07.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct07}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -402,15 +404,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-08.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct08}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -452,15 +454,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-09.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct09}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -502,15 +504,15 @@ const Wishlist = () => {
                                     <div className="col-sm-6 col-md-6 col-lg-3 col-xl-3">
                                         <div className="product-info default-cover card">
                                             <Link to="#" className="img-bg">
-                                                <ImageWithBasePath
-                                                    src="assets/img/products/pos-product-10.png"
-                                                    alt="Products"
-                                                />
+                                                <img
+                          src={posProduct10}
+                          alt="Products" />
+                        
                                                 <span
-                                                    className=" p-1 rounded-circle d-flex align-items-center"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#remove"
-                                                >
+                          className=" p-1 rounded-circle d-flex align-items-center"
+                          data-bs-toggle="modal"
+                          data-bs-target="#remove">
+                          
                                                     <i className="ti ti-heart text-white" />
                                                 </span>
                                             </Link>
@@ -563,7 +565,7 @@ const Wishlist = () => {
                         <div className="modal-content">
                             <div className="modal-body p-0">
                                 <div className="success-wrap text-center">
-                                    <form >
+                                    <form>
                                         <div className="icon-success bg-danger-transparent text-danger mb-2">
                                             <i className="ti ti-trash" />
                                         </div>
@@ -573,10 +575,10 @@ const Wishlist = () => {
                                         </p>
                                         <div className="d-flex align-items-center justify-content-center gap-2 flex-wrap">
                                             <button
-                                                type="button"
-                                                className="btn btn-md btn-secondary"
-                                                data-bs-dismiss="modal"
-                                            >
+                        type="button"
+                        className="btn btn-md btn-secondary"
+                        data-bs-dismiss="modal">
+                        
                                                 No, Cancel
                                             </button>
                                             <button type="button" className="btn btn-md btn-primary" data-bs-dismiss="modal">
@@ -596,7 +598,7 @@ const Wishlist = () => {
                         <div className="modal-content">
                             <div className="modal-body p-0">
                                 <div className="success-wrap text-center">
-                                    <form >
+                                    <form>
                                         <div className="icon-success bg-danger-transparent text-danger mb-2">
                                             <i className="ti ti-trash" />
                                         </div>
@@ -606,10 +608,10 @@ const Wishlist = () => {
                                         </p>
                                         <div className="d-flex align-items-center justify-content-center gap-2 flex-wrap">
                                             <button
-                                                type="button"
-                                                className="btn btn-md btn-secondary"
-                                                data-bs-dismiss="modal"
-                                            >
+                        type="button"
+                        className="btn btn-md btn-secondary"
+                        data-bs-dismiss="modal">
+                        
                                                 No, Cancel
                                             </button>
                                             <button type="button" className="btn btn-md btn-primary" data-bs-dismiss="modal">
@@ -625,8 +627,8 @@ const Wishlist = () => {
                 {/* /Remove all Product */}
             </>
 
-        </div>
-    )
-}
+        </div>);
 
-export default Wishlist
+};
+
+export default Wishlist;

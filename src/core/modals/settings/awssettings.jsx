@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const AwsSettings = () => {
   return (
@@ -19,8 +19,8 @@ const AwsSettings = () => {
                         type="checkbox"
                         id="user4"
                         className="check"
-                        defaultChecked
-                      />
+                        defaultChecked />
+                      
                       <label htmlFor="user4" className="checktoggle">
                         {" "}
                       </label>
@@ -29,8 +29,8 @@ const AwsSettings = () => {
                       type="button"
                       className="close"
                       data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <span aria-hidden="true">×</span>
                     </button>
                   </div>
@@ -85,11 +85,15 @@ const AwsSettings = () => {
                         <button
                           type="button"
                           className="btn btn-cancel me-2"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Cancel
                         </button>
-                        <button type="button" className="btn btn-submit" data-bs-dismiss="modal">
+                        <button
+                          type="button"
+                          className="btn btn-submit"
+                          data-bs-dismiss="modal">
+                          
                           Submit
                         </button>
                       </div>
@@ -102,9 +106,8 @@ const AwsSettings = () => {
         </div>
         {/* /Aws Config */}
       </>
+    </div>);
 
-    </div>
-  )
-}
+};
 
-export default AwsSettings
+export default AwsSettings;

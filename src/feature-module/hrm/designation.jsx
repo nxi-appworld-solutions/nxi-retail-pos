@@ -1,16 +1,22 @@
-import React from 'react'
-import ImageWithBasePath from '../../core/img/imagewithbasebath';
-import { Link } from 'react-router-dom';
-import AddDesignation from '../../core/modals/hrm/adddesignation';
-import EditDesignation from '../../core/modals/hrm/editdesignation';
-import TooltipIcons from '../../core/common/tooltip-content/tooltipIcons';
-import RefreshIcon from '../../core/common/tooltip-content/refresh';
-import CollapesIcon from '../../core/common/tooltip-content/collapes';
-import CommonFooter from '../../core/common/footer/commonFooter';
+
+import { Link } from "react-router-dom";
+import CommonFooter from "../../components/footer/commonFooter";
+import { avatar15, avatar16, avatar18, avatar_17 } from "../../utils/imagepath";
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import { useState } from "react";
+import SearchFromApi from "../../components/data-table/search";
+import AddDesignation from "../../core/modals/hrm/adddesignation";
+import EditDesignation from "../../core/modals/hrm/editdesignation";
 
 const Designation = () => {
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
 
 
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
   return (
     <>
       <div className="page-wrapper">
@@ -22,19 +28,15 @@ const Designation = () => {
                 <h6>Manage your designation</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-department"
-              >
-                <i className='ti ti-circle-plus me-1'></i>
+                data-bs-target="#add-department">
+                
+                <i className="ti ti-circle-plus me-1"></i>
                 Add Designation
               </Link>
             </div>
@@ -43,14 +45,18 @@ const Designation = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set"></div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Department
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -75,8 +81,8 @@ const Designation = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Select Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -96,8 +102,8 @@ const Designation = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Sort By : Last 7 Days
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -167,31 +173,31 @@ const Designation = () => {
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -213,17 +219,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -243,31 +249,31 @@ const Designation = () => {
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -289,17 +295,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -319,31 +325,31 @@ const Designation = () => {
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -365,17 +371,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -388,38 +394,40 @@ const Designation = () => {
                         </label>
                       </td>
                       <td>
-                        <span className="text-gray-900">System Administrator</span>
+                        <span className="text-gray-900">
+                          System Administrator
+                        </span>
                       </td>
                       <td>Admin</td>
                       <td>
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -441,17 +449,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -471,31 +479,31 @@ const Designation = () => {
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -517,17 +525,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -547,31 +555,31 @@ const Designation = () => {
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -593,17 +601,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -623,31 +631,31 @@ const Designation = () => {
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -669,17 +677,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -699,31 +707,31 @@ const Designation = () => {
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -745,17 +753,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -775,31 +783,31 @@ const Designation = () => {
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -821,17 +829,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -851,31 +859,31 @@ const Designation = () => {
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <Link
                               className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                              to="#"
-                            >
-                              <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                              to="#">
+                              
+                              <img src={avatar_17} alt="img" />
                               <span className="position-absolute top-50 start-50 translate-middle text-center">
                                 +2
                               </span>
@@ -897,17 +905,17 @@ const Designation = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-department"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-department">
+                            
+                            <i className="feather icon-edit feather-edit" />
                           </Link>
                           <Link
                             className="p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
+                            data-bs-target="#delete-modal">
+                            
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -925,48 +933,10 @@ const Designation = () => {
       <EditDesignation />
 
       {/* delete modal */}
-      <div className="modal fade" id="delete-modal">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="page-wrapper-new p-0">
-              <div className="content p-5 px-3 text-center">
-                <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                  <i className="ti ti-trash fs-24 text-danger" />
-                </span>
-                <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
-                  Delete Designation
-                </h4>
-                <p className="text-gray-6 mb-0 fs-16">
-                  Are you sure you want to delete designation?
-                </p>
-                <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                    data-bs-dismiss="modal"
-                  >
-                    Cancel
-                  </button>
-                  <Link
-                    to="#"
-                    className="btn btn-submit fs-13 fw-medium p-2 px-3" data-bs-dismiss="modal"
-                  >
-                    Yes Delete
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DeleteModal />
       {/* /delete modal -- */}
+    </>);
 
+};
 
-    </>
-
-
-  )
-}
-
-export default Designation
-
+export default Designation;

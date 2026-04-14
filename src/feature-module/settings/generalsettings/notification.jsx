@@ -1,25 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { ChevronUp, RotateCcw } from "feather-icons-react/build/IconComponents";
-import { setToogleHeader } from "../../../core/redux/action";
 import SettingsSideBar from "../settingssidebar";
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+import RefreshIcon from "../../../components/tooltip-content/refresh";
 
 const Notification = () => {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.rootReducer.toggle_header);
 
-  const renderRefreshTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Refresh
-    </Tooltip>
-  );
-  const renderCollapseTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Collapse
-    </Tooltip>
-  );
   return (
     <div>
       <div className="page-wrapper">
@@ -32,28 +16,8 @@ const Notification = () => {
               </div>
             </div>
             <ul className="table-top-head">
-              <li>
-                <OverlayTrigger placement="top" overlay={renderRefreshTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <RotateCcw />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderCollapseTooltip}>
-                  <Link
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    id="collapse-header"
-                    className={data ? "active" : ""}
-                    onClick={() => {
-                      dispatch(setToogleHeader(!data));
-                    }}
-                  >
-                    <ChevronUp />
-                  </Link>
-                </OverlayTrigger>
-              </li>
+              <RefreshIcon />
+              <CollapesIcon />
             </ul>
           </div>
           <div className="row">
@@ -68,15 +32,17 @@ const Notification = () => {
                     <div>
                       <div className="d-flex align-items-center justify-content-between mb-3">
                         <div>
-                          <h6 className="fw-medium">Mobile Push Notifications</h6>
+                          <h6 className="fw-medium">
+                            Mobile Push Notifications
+                          </h6>
                         </div>
                         <div className="status-toggle modal-status">
                           <input
                             type="checkbox"
                             id="user1"
                             className="check"
-                            defaultChecked=""
-                          />
+                            defaultChecked={false} />
+                          
                           <label htmlFor="user1" className="checktoggle">
                             {" "}
                           </label>
@@ -91,8 +57,8 @@ const Notification = () => {
                             type="checkbox"
                             id="user2"
                             className="check"
-                            defaultChecked=""
-                          />
+                            defaultChecked={false} />
+                          
                           <label htmlFor="user2" className="checktoggle">
                             {" "}
                           </label>
@@ -107,8 +73,8 @@ const Notification = () => {
                             type="checkbox"
                             id="user3"
                             className="check"
-                            defaultChecked=""
-                          />
+                            defaultChecked={false} />
+                          
                           <label htmlFor="user3" className="checktoggle">
                             {" "}
                           </label>
@@ -123,8 +89,8 @@ const Notification = () => {
                             type="checkbox"
                             id="user4"
                             className="check"
-                            defaultChecked=""
-                          />
+                            defaultChecked={false} />
+                          
                           <label htmlFor="user4" className="checktoggle">
                             {" "}
                           </label>
@@ -149,9 +115,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="users4"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="users4" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="users4"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -160,9 +129,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="users5"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="users5" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="users5"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -171,9 +143,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="users6"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="users6" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="users6"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -185,9 +160,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user5"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user5" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user5"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -196,9 +174,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user6"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user6" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user6"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -207,9 +188,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user7"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user7" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user7"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -221,9 +205,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user8"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user8" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user8"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -232,9 +219,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user9"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user9" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user9"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -243,9 +233,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user10"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user10" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user10"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -257,9 +250,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user11"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user11" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user11"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -268,9 +264,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user12"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user12" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user12"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -279,9 +278,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user13"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user13" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user13"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -293,9 +295,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user14"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user14" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user14"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -304,9 +309,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user15"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user15" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user15"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -315,9 +323,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user16"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user16" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user16"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -329,9 +340,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user17"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user17" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user17"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -340,9 +354,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user18"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user18" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user18"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                               <td>
@@ -351,9 +368,12 @@ const Notification = () => {
                                     type="checkbox"
                                     id="user19"
                                     className="check"
-                                    defaultChecked=""
-                                  />
-                                  <label htmlFor="user19" className="checktoggle" />
+                                    defaultChecked={false} />
+                                  
+                                  <label
+                                    htmlFor="user19"
+                                    className="checktoggle" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -363,14 +383,13 @@ const Notification = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Notification;

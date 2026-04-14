@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const Timeline = () => {
   return (
@@ -141,8 +141,8 @@ const Timeline = () => {
           {/* /Ribbon */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Timeline;

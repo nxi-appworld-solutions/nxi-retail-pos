@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+
 import { Link } from "react-router-dom";
 import {
   AccountBookFilled,
@@ -27,9 +27,6 @@ import {
   DoubleLeftOutlined,
   VerticalLeftOutlined,
   VerticalRightOutlined,
-  VerticalAlignTopOutlin,
-  VerticalAlignMiddleOut,
-  VerticalAlignBottomOut,
   ForwardOutlined,
   BackwardOutlined,
   RollbackOutlined,
@@ -187,8 +184,8 @@ import {
   RedditOutlined,
   SketchOutlined,
   WhatsAppOutlined,
-  DingtalkOutlined,
-} from "@ant-design/icons";
+  DingtalkOutlined } from
+"@ant-design/icons";
 const ThemifyIcons = () => {
   return (
     <>
@@ -783,7 +780,7 @@ const ThemifyIcons = () => {
         </div>
       </div>
       {/* /Page Wrapper */}
-    </>
-  );
+    </>);
+
 };
 export default ThemifyIcons;

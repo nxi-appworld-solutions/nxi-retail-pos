@@ -1,12 +1,10 @@
-import React from "react";
-import { DatePicker } from "antd";
 import { Link } from "react-router-dom";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
+import CommonFooter from "../../components/footer/commonFooter";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
 
 const ProfitLoss = () => {
-
   return (
     <div className="page-wrapper">
       <div className="content">
@@ -25,10 +23,7 @@ const ProfitLoss = () => {
         <div className="d-flex align-items-center justify-content-end">
           <div className="mb-3 me-3">
             <div className="input-icon-start position-relative">
-              <DatePicker
-                className="form-control datetimepicker"
-                placeholder="dd/mm/yyyy"
-              />
+              <CommonDateRangePicker />
               <span className="input-icon-left">
                 <i className="ti ti-calendar" />
               </span>
@@ -172,9 +167,8 @@ const ProfitLoss = () => {
         </div>
       </div>
       <CommonFooter />
-    </div>
+    </div>);
 
-  );
 };
 
 export default ProfitLoss;

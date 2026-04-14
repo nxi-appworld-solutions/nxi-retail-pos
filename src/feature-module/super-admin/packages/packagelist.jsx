@@ -1,107 +1,114 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import ImageWithBasePath from '../../../core/img/imagewithbasebath'
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import CommonFooter from '../../../core/common/footer/commonFooter';
-import Table from "../../../core/pagination/datatable";
+import PrimeDataTable from "../../../components/data-table";
 import { package_list } from '../../../core/json/packagelist';
+import CommonFooter from '../../../components/footer/commonFooter';
+import TooltipIcons from '../../../components/tooltip-content/tooltipIcons';
+import RefreshIcon from '../../../components/tooltip-content/refresh';
+import CollapesIcon from '../../../components/tooltip-content/collapes';
 
 const Packages = () => {
   const data = package_list;
+  const [rows, setRows] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(data.length);
+  const [selectedPackages, setSelectedPackages] = useState([]);
+  
   const columns = [
-    {
-      title: "Plan Name",
-      dataIndex: "Plan_Name",
-      render: (text) => (
-        <h6 className="fw-medium">
-          <Link to="#">{text}</Link>
-        </h6>
-      ),
-      sorter: (a, b) => a.CompanyName.length - b.CompanyName.length,
-    },
-    {
-      title: "Plan Type",
-      dataIndex: "Plan_Type",
-      sorter: (a, b) => a.Plan_Type.length - b.Plan_Type.length,
-    },
-    {
-      title: "Total Subscribers",
-      dataIndex: "Total_Subscribers",
-      sorter: (a, b) => a.Total_Subscribers.length - b.Total_Subscribers.length,
-    },
-    {
-      title: "Price",
-      dataIndex: "Price",
-      sorter: (a, b) => a.Price.length - b.Price.length,
-    },
-    {
-      title: "Created Date",
-      dataIndex: "Created_Date",
-      sorter: (a, b) => a.Created_Date.length - b.Created_Date.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      render: (text) => (
-        <span className={`badge ${text === 'Active' ? 'badge-success' : 'badge-danger'} d-inline-flex align-items-center badge-xs`}>
-          <i className="ti ti-point-filled me-1" />
-          {text}
-        </span>
+  {
+    header: "Plan Name",
+    field: "Plan_Name",
+    body: (rowData) =>
+    <h6 className="fw-medium">
+          <Link to="#">{rowData.Plan_Name}</Link>
+        </h6>,
 
-      ),
-      sorter: (a, b) => a.Status.length - b.Status.length,
-    },
-    {
-      title: "",
-      dataIndex: "actions",
-      render: () => (
-        <div className="action-icon d-inline-flex align-items-center">
+    sortable: true
+  },
+  {
+    header: "Plan Type",
+    field: "Plan_Type",
+    sortable: true
+  },
+  {
+    header: "Total Subscribers",
+    field: "Total_Subscribers",
+    sortable: true
+  },
+  {
+    header: "Price",
+    field: "Price",
+    sortable: true
+  },
+  {
+    header: "Created Date",
+    field: "Created_Date",
+    sortable: true
+  },
+  {
+    header: "Status",
+    field: "Status",
+    body: (rowData) =>
+    <span className={`badge ${rowData.Status === 'Active' ? 'badge-success' : 'badge-danger'} d-inline-flex align-items-center badge-xs`}>
+          <i className="ti ti-point-filled me-1" />
+          {rowData.Status}
+        </span>,
+
+    sortable: true
+  },
+  {
+    header: "",
+    field: "actions",
+    body: () =>
+    <div className="action-icon d-inline-flex align-items-center">
           <Link
-            to="#"
-            className="p-2 d-flex align-items-center border rounded me-2"
-            data-bs-toggle="modal"
-            data-bs-target="#edit_plans"
-          >
+        to="#"
+        className="p-2 d-flex align-items-center border rounded me-2"
+        data-bs-toggle="modal"
+        data-bs-target="#edit_plans">
+        
             <i className="ti ti-edit" />
           </Link>
           <Link
-            to="#"
-            data-bs-toggle="modal"
-            data-bs-target="#delete_modal"
-            className="p-2 d-flex align-items-center border rounded"
-          >
+        to="#"
+        data-bs-toggle="modal"
+        data-bs-target="#delete_modal"
+        className="p-2 d-flex align-items-center border rounded">
+        
             <i className="ti ti-trash" />
           </Link>
-        </div>
-      ),
-    },
-  ]
+        </div>,
+
+    sortable: false
+  }];
+
 
   const planName = [
-    { value: "Advanced", label: "Advanced" },
-    { value: "Basic", label: "Basic" },
-    { value: "Enterprise", label: "Enterprise" },
-  ];
+  { value: "Advanced", label: "Advanced" },
+  { value: "Basic", label: "Basic" },
+  { value: "Enterprise", label: "Enterprise" }];
+
   const planType = [
-    { value: "Monthly", label: "Monthly" },
-    { value: "Yearly", label: "Yearly" },
-  ];
+  { value: "Monthly", label: "Monthly" },
+  { value: "Yearly", label: "Yearly" }];
+
   const planPosition = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-  ];
+  { value: "1", label: "1" },
+  { value: "2", label: "2" }];
+
   const plancurrency = [
-    { value: "Fixed", label: "Fixed" },
-    { value: "Percentage", label: "Percentage" },
-  ];
+  { value: "Fixed", label: "Fixed" },
+  { value: "Percentage", label: "Percentage" }];
+
   const discountType = [
-    { value: "Fixed", label: "Fixed" },
-    { value: "Percentage", label: "Percentage" },
-  ];
+  { value: "Fixed", label: "Fixed" },
+  { value: "Percentage", label: "Percentage" }];
+
   const status = [
-    { value: "Active", label: "Active" },
-    { value: "Inactive", label: "Inactive" },
-  ];
+  { value: "Active", label: "Active" },
+  { value: "Inactive", label: "Inactive" }];
+
   return (
     <>
       {/* Page Wrapper */}
@@ -115,39 +122,17 @@ const Packages = () => {
               </div>
             </div>
             <ul className="table-top-head">
-              <li>
-                <Link data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf">
-                  <img src="assets/img/icons/pdf.svg" alt="img" />
-                </Link>
-              </li>
-              <li>
-                <Link data-bs-toggle="tooltip" data-bs-placement="top" title="Excel">
-                  <img src="assets/img/icons/excel.svg" alt="img" />
-                </Link>
-              </li>
-              <li>
-                <Link data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh">
-                  <i data-feather="rotate-ccw" className="feather-rotate-ccw" />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Collapse"
-                  id="collapse-header"
-                >
-                  <i data-feather="chevron-up" className="feather-chevron-up" />
-                </Link>
-              </li>
+              <TooltipIcons />
+              <RefreshIcon />
+              <CollapesIcon />
             </ul>
             <div className="page-btn">
               <Link
                 to="#"
                 data-bs-toggle="modal"
                 data-bs-target="#add_plans"
-                className="btn btn-primary"
-              >
+                className="btn btn-primary">
+                
                 <i className='ti ti-circle-plus me-1'></i>
                 Add Packages
               </Link>
@@ -249,24 +234,24 @@ const Packages = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Select Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
                       <Link
                         to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                        className="dropdown-item rounded-1">
+                        
                         Active
                       </Link>
                     </li>
                     <li>
                       <Link
                         to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                        className="dropdown-item rounded-1">
+                        
                         Inactive
                       </Link>
                     </li>
@@ -276,48 +261,48 @@ const Packages = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Sort By : Last 7 Days
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
                       <Link
                         to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                        className="dropdown-item rounded-1">
+                        
                         Recently Added
                       </Link>
                     </li>
                     <li>
                       <Link
                         to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                        className="dropdown-item rounded-1">
+                        
                         Ascending
                       </Link>
                     </li>
                     <li>
                       <Link
                         to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                        className="dropdown-item rounded-1">
+                        
                         Desending
                       </Link>
                     </li>
                     <li>
                       <Link
                         to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                        className="dropdown-item rounded-1">
+                        
                         Last Month
                       </Link>
                     </li>
                     <li>
                       <Link
                         to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                        className="dropdown-item rounded-1">
+                        
                         Last 7 Days
                       </Link>
                     </li>
@@ -327,7 +312,19 @@ const Packages = () => {
             </div>
             <div className="card-body p-0">
               <div className='table-responsive'>
-                <Table dataSource={data} columns={columns} />
+                <PrimeDataTable
+                  column={columns}
+                  data={data}
+                  totalRecords={totalRecords}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  rows={rows}
+                  setRows={setRows}
+                  selectionMode="checkbox"
+                  selection={selectedPackages}
+                  onSelectionChange={(e) => setSelectedPackages(e.value)}
+                  dataKey="id"
+                />
               </div>
             </div>
           </div>
@@ -345,8 +342,8 @@ const Packages = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
@@ -356,11 +353,11 @@ const Packages = () => {
                   <div className="col-md-12">
                     <div className="d-flex align-items-center flex-wrap row-gap-3 bg-light w-100 rounded p-3 mb-4">
                       <div className="d-flex align-items-center justify-content-center avatar avatar-xxl rounded-circle border border-dashed me-2 flex-shrink-0 text-dark frames">
-                        <ImageWithBasePath
+                        <img
                           src="assets/img/profiles/avatar-30.jpg"
                           alt="img"
-                          className="rounded-circle"
-                        />
+                          className="rounded-circle" />
+                        
                       </div>
                       <div className="profile-upload">
                         <div className="mb-2">
@@ -373,13 +370,13 @@ const Packages = () => {
                             <input
                               type="file"
                               className="form-control image-sign"
-                              multiple
-                            />
+                              multiple />
+                            
                           </div>
                           <Link
                             to="#"
-                            className="btn btn-light btn-sm"
-                          >
+                            className="btn btn-light btn-sm">
+                            
                             Cancel
                           </Link>
                         </div>
@@ -394,8 +391,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planName}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -406,8 +403,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planType}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -418,8 +415,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planPosition}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -430,8 +427,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={plancurrency}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -448,8 +445,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={plancurrency}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-3">
@@ -461,8 +458,8 @@ const Packages = () => {
                         <Select
                           classNamePrefix="react-select"
                           options={discountType}
-                          placeholder="Choose"
-                        />
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                   </div>
@@ -649,8 +646,8 @@ const Packages = () => {
                           <input
                             className="form-check-input me-2"
                             type="checkbox"
-                            role="switch"
-                          />
+                            role="switch" />
+                          
                         </div>
                       </div>
                     </div>
@@ -673,8 +670,8 @@ const Packages = () => {
                           <input
                             className="form-check-input me-2"
                             type="checkbox"
-                            role="switch"
-                          />
+                            role="switch" />
+                          
                         </div>
                       </div>
                     </div>
@@ -686,8 +683,8 @@ const Packages = () => {
                         <Select
                           classNamePrefix="react-select"
                           options={status}
-                          placeholder="Choose"
-                        />
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                   </div>
@@ -703,11 +700,11 @@ const Packages = () => {
                 <button
                   type="button"
                   className="btn btn-light me-2"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Cancel
                 </button>
-                <Link to="button" data-bs-dismiss="modal" className="btn btn-primary" >
+                <Link to="button" data-bs-dismiss="modal" className="btn btn-primary">
                   Add Plan
                 </Link>
               </div>
@@ -726,8 +723,8 @@ const Packages = () => {
                 type="button"
                 className="btn-close custom-btn-close p-0"
                 data-bs-dismiss="modal"
-                aria-label="Close"
-              >
+                aria-label="Close">
+                
                 <i className="ti ti-x" />
               </button>
             </div>
@@ -737,11 +734,11 @@ const Packages = () => {
                   <div className="col-md-12">
                     <div className="d-flex align-items-center flex-wrap row-gap-3 bg-light w-100 rounded p-3 mb-4">
                       <div className="d-flex align-items-center justify-content-center avatar avatar-xxl rounded-circle border border-dashed me-2 flex-shrink-0 text-dark frames">
-                        <ImageWithBasePath
+                        <img
                           src="assets/img/profiles/avatar-30.jpg"
                           alt="img"
-                          className="rounded-circle"
-                        />
+                          className="rounded-circle" />
+                        
                       </div>
                       <div className="profile-upload">
                         <div className="mb-2">
@@ -754,13 +751,13 @@ const Packages = () => {
                             <input
                               type="file"
                               className="form-control image-sign"
-                              multiple
-                            />
+                              multiple />
+                            
                           </div>
                           <Link
                             to="#"
-                            className="btn btn-light btn-sm"
-                          >
+                            className="btn btn-light btn-sm">
+                            
                             Cancel
                           </Link>
                         </div>
@@ -775,8 +772,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planName}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -787,8 +784,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planType}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -799,8 +796,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={planPosition}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -811,8 +808,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={plancurrency}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -829,8 +826,8 @@ const Packages = () => {
                       <Select
                         classNamePrefix="react-select"
                         options={plancurrency}
-                        placeholder="Choose"
-                      />
+                        placeholder="Choose" />
+                      
                     </div>
                   </div>
                   <div className="col-md-3">
@@ -842,8 +839,8 @@ const Packages = () => {
                         <Select
                           classNamePrefix="react-select"
                           options={discountType}
-                          placeholder="Choose"
-                        />
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                   </div>
@@ -1030,8 +1027,8 @@ const Packages = () => {
                           <input
                             className="form-check-input me-2"
                             type="checkbox"
-                            role="switch"
-                          />
+                            role="switch" />
+                          
                         </div>
                       </div>
                     </div>
@@ -1054,8 +1051,8 @@ const Packages = () => {
                           <input
                             className="form-check-input me-2"
                             type="checkbox"
-                            role="switch"
-                          />
+                            role="switch" />
+                          
                         </div>
                       </div>
                     </div>
@@ -1067,8 +1064,8 @@ const Packages = () => {
                         <Select
                           classNamePrefix="react-select"
                           options={status}
-                          placeholder="Choose"
-                        />
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                   </div>
@@ -1084,8 +1081,8 @@ const Packages = () => {
                 <button
                   type="button"
                   className="btn btn-light me-2"
-                  data-bs-dismiss="modal"
-                >
+                  data-bs-dismiss="modal">
+                  
                   Cancel
                 </button>
                 <button type="button" data-bs-dismiss="modal" className="btn btn-primary">
@@ -1115,8 +1112,8 @@ const Packages = () => {
                   <Link
                     to="#"
                     className="btn btn-secondary me-3"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </Link>
                   <Link to="#" className="btn btn-primary" data-bs-dismiss="modal">
@@ -1130,10 +1127,10 @@ const Packages = () => {
         {/* /Delete Modal */}
       </>
 
-    </>
+    </>);
 
 
-  )
-}
 
-export default Packages
+};
+
+export default Packages;

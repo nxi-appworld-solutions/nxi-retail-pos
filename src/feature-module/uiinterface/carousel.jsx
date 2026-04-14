@@ -1,9 +1,10 @@
-import React from 'react'
-import ImageWithBasePath from '../../core/img/imagewithbasebath'
+import { img1, img2, img3, img4, avatar_03 } from "../../utils/imagepath";
+
+
 
 const Carousel = () => {
-    return (
-        <div>
+  return (
+    <div>
             {/* Page Wrapper */}
             <div className="page-wrapper">
                 <div className="content">
@@ -26,31 +27,31 @@ const Carousel = () => {
                                 </div>
                                 <div className="card-body">
                                     <div
-                                        id="carouselExampleSlidesOnly"
-                                        className="carousel slide"
-                                        data-bs-ride="carousel"
-                                    >
+                    id="carouselExampleSlidesOnly"
+                    className="carousel slide"
+                    data-bs-ride="carousel">
+                    
                                         <div className="carousel-inner" role="listbox">
                                             <div className="carousel-item active">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-1.jpg"
-                                                    alt="First slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img1}
+                          alt="First slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-3.jpg"
-                                                    alt="Second slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img3}
+                          alt="Second slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-4.jpg"
-                                                    alt="Third slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img4}
+                          alt="Third slide" />
+                        
                                             </div>
                                         </div>
                                     </div>
@@ -69,55 +70,55 @@ const Carousel = () => {
                                 </div>
                                 <div className="card-body">
                                     <div
-                                        id="carouselExampleControls"
-                                        className="carousel slide"
-                                        data-bs-ride="carousel"
-                                    >
+                    id="carouselExampleControls"
+                    className="carousel slide"
+                    data-bs-ride="carousel">
+                    
                                         <div className="carousel-inner" role="listbox">
                                             <div className="carousel-item active">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-1.jpg"
-                                                    alt="First slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img1}
+                          alt="First slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-3.jpg"
-                                                    alt="Second slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img3}
+                          alt="Second slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-4.jpg"
-                                                    alt="Third slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img4}
+                          alt="Third slide" />
+                        
                                             </div>
                                         </div>
                                         <a
-                                            className="carousel-control-prev"
-                                            href="#carouselExampleControls"
-                                            role="button"
-                                            data-bs-slide="prev"
-                                        >
+                      className="carousel-control-prev"
+                      href="#carouselExampleControls"
+                      role="button"
+                      data-bs-slide="prev">
+                      
                                             <span
-                                                className="carousel-control-prev-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Previous</span>
                                         </a>
                                         <a
-                                            className="carousel-control-next"
-                                            href="#carouselExampleControls"
-                                            role="button"
-                                            data-bs-slide="next"
-                                        >
+                      className="carousel-control-next"
+                      href="#carouselExampleControls"
+                      role="button"
+                      data-bs-slide="next">
+                      
                                             <span
-                                                className="carousel-control-next-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-next-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Next</span>
                                         </a>
                                     </div>
@@ -139,70 +140,70 @@ const Carousel = () => {
                                 </div>
                                 <div className="card-body">
                                     <div
-                                        id="carouselExampleIndicators"
-                                        className="carousel slide"
-                                        data-bs-ride="carousel"
-                                    >
+                    id="carouselExampleIndicators"
+                    className="carousel slide"
+                    data-bs-ride="carousel">
+                    
                                         <ol className="carousel-indicators">
                                             <li
-                                                data-bs-target="#carouselExampleIndicators"
-                                                data-bs-slide-to={0}
-                                                className="active"
-                                            />
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to={0}
+                        className="active" />
+                      
                                             <li
-                                                data-bs-target="#carouselExampleIndicators"
-                                                data-bs-slide-to={1}
-                                            />
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to={1} />
+                      
                                             <li
-                                                data-bs-target="#carouselExampleIndicators"
-                                                data-bs-slide-to={2}
-                                            />
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to={2} />
+                      
                                         </ol>
                                         <div className="carousel-inner" role="listbox">
                                             <div className="carousel-item active">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-1.jpg"
-                                                    alt="First slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img1}
+                          alt="First slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-2.jpg"
-                                                    alt="Second slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img2}
+                          alt="Second slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-4.jpg"
-                                                    alt="Third slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img4}
+                          alt="Third slide" />
+                        
                                             </div>
                                         </div>
                                         <a
-                                            className="carousel-control-prev"
-                                            href="#carouselExampleIndicators"
-                                            role="button"
-                                            data-bs-slide="prev"
-                                        >
+                      className="carousel-control-prev"
+                      href="#carouselExampleIndicators"
+                      role="button"
+                      data-bs-slide="prev">
+                      
                                             <span
-                                                className="carousel-control-prev-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Previous</span>
                                         </a>
                                         <a
-                                            className="carousel-control-next"
-                                            href="#carouselExampleIndicators"
-                                            role="button"
-                                            data-bs-slide="next"
-                                        >
+                      className="carousel-control-next"
+                      href="#carouselExampleIndicators"
+                      role="button"
+                      data-bs-slide="next">
+                      
                                             <span
-                                                className="carousel-control-next-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-next-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Next</span>
                                         </a>
                                     </div>
@@ -223,17 +224,17 @@ const Carousel = () => {
                                 </div>
                                 <div className="card-body">
                                     <div
-                                        id="carouselExampleCaption"
-                                        className="carousel slide"
-                                        data-bs-ride="carousel"
-                                    >
+                    id="carouselExampleCaption"
+                    className="carousel slide"
+                    data-bs-ride="carousel">
+                    
                                         <div className="carousel-inner" role="listbox">
                                             <div className="carousel-item active">
-                                                <ImageWithBasePath
-                                                    src="assets/img/img-1.jpg"
-                                                    alt="Slide"
-                                                    className="d-block img-fluid"
-                                                />
+                                                <img
+                          src={img1}
+                          alt="Slide"
+                          className="d-block img-fluid" />
+                        
                                                 <div className="carousel-caption d-none d-md-block">
                                                     <h3 className="text-white">First slide label</h3>
                                                     <p>
@@ -242,11 +243,11 @@ const Carousel = () => {
                                                 </div>
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    src="assets/img/img-2.jpg"
-                                                    alt="Slide"
-                                                    className="d-block img-fluid"
-                                                />
+                                                <img
+                          src={img2}
+                          alt="Slide"
+                          className="d-block img-fluid" />
+                        
                                                 <div className="carousel-caption d-none d-md-block">
                                                     <h3 className="text-white">Second slide label</h3>
                                                     <p>
@@ -255,11 +256,11 @@ const Carousel = () => {
                                                 </div>
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    src="assets/img/img-3.jpg"
-                                                    alt="Slide"
-                                                    className="d-block img-fluid"
-                                                />
+                                                <img
+                          src={img3}
+                          alt="Slide"
+                          className="d-block img-fluid" />
+                        
                                                 <div className="carousel-caption d-none d-md-block">
                                                     <h3 className="text-white">Third slide label</h3>
                                                     <p>
@@ -269,27 +270,27 @@ const Carousel = () => {
                                             </div>
                                         </div>
                                         <a
-                                            className="carousel-control-prev"
-                                            href="#carouselExampleCaption"
-                                            role="button"
-                                            data-bs-slide="prev"
-                                        >
+                      className="carousel-control-prev"
+                      href="#carouselExampleCaption"
+                      role="button"
+                      data-bs-slide="prev">
+                      
                                             <span
-                                                className="carousel-control-prev-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Previous</span>
                                         </a>
                                         <a
-                                            className="carousel-control-next"
-                                            href="#carouselExampleCaption"
-                                            role="button"
-                                            data-bs-slide="next"
-                                        >
+                      className="carousel-control-next"
+                      href="#carouselExampleCaption"
+                      role="button"
+                      data-bs-slide="next">
+                      
                                             <span
-                                                className="carousel-control-next-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-next-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Next</span>
                                         </a>
                                     </div>
@@ -311,55 +312,55 @@ const Carousel = () => {
                                 </div>
                                 <div className="card-body">
                                     <div
-                                        id="carouselExampleFade"
-                                        className="carousel slide carousel-fade"
-                                        data-bs-ride="carousel"
-                                    >
+                    id="carouselExampleFade"
+                    className="carousel slide carousel-fade"
+                    data-bs-ride="carousel">
+                    
                                         <div className="carousel-inner">
                                             <div className="carousel-item active">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-1.jpg"
-                                                    alt="First slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img1}
+                          alt="First slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-2.jpg"
-                                                    alt="Second slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img2}
+                          alt="Second slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-3.jpg"
-                                                    alt="Third slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img3}
+                          alt="Third slide" />
+                        
                                             </div>
                                         </div>
                                         <a
-                                            className="carousel-control-prev"
-                                            href="#carouselExampleFade"
-                                            role="button"
-                                            data-bs-slide="prev"
-                                        >
+                      className="carousel-control-prev"
+                      href="#carouselExampleFade"
+                      role="button"
+                      data-bs-slide="prev">
+                      
                                             <span
-                                                className="carousel-control-prev-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Previous</span>
                                         </a>
                                         <a
-                                            className="carousel-control-next"
-                                            href="#carouselExampleFade"
-                                            role="button"
-                                            data-bs-slide="next"
-                                        >
+                      className="carousel-control-next"
+                      href="#carouselExampleFade"
+                      role="button"
+                      data-bs-slide="next">
+                      
                                             <span
-                                                className="carousel-control-next-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-next-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Next</span>
                                         </a>
                                     </div>
@@ -380,55 +381,55 @@ const Carousel = () => {
                                 </div>
                                 <div className="card-body">
                                     <div
-                                        id="carouselExampleInterval"
-                                        className="carousel slide"
-                                        data-bs-ride="carousel"
-                                    >
+                    id="carouselExampleInterval"
+                    className="carousel slide"
+                    data-bs-ride="carousel">
+                    
                                         <div className="carousel-inner">
                                             <div className="carousel-item active">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-2.jpg"
-                                                    alt="First slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img2}
+                          alt="First slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-3.jpg"
-                                                    alt="Second slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img3}
+                          alt="Second slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    className="d-block img-fluid"
-                                                    src="assets/img/img-4.jpg"
-                                                    alt="Third slide"
-                                                />
+                                                <img
+                          className="d-block img-fluid"
+                          src={img4}
+                          alt="Third slide" />
+                        
                                             </div>
                                         </div>
                                         <a
-                                            className="carousel-control-prev"
-                                            href="#carouselExampleInterval"
-                                            role="button"
-                                            data-bs-slide="prev"
-                                        >
+                      className="carousel-control-prev"
+                      href="#carouselExampleInterval"
+                      role="button"
+                      data-bs-slide="prev">
+                      
                                             <span
-                                                className="carousel-control-prev-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Previous</span>
                                         </a>
                                         <a
-                                            className="carousel-control-next"
-                                            href="#carouselExampleInterval"
-                                            role="button"
-                                            data-bs-slide="next"
-                                        >
+                      className="carousel-control-next"
+                      href="#carouselExampleInterval"
+                      role="button"
+                      data-bs-slide="next">
+                      
                                             <span
-                                                className="carousel-control-next-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-next-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Next</span>
                                         </a>
                                     </div>
@@ -446,56 +447,56 @@ const Carousel = () => {
                                 </div>
                                 <div className="card-body">
                                     <div
-                                        id="carouselExampleControlsNoTouching"
-                                        className="carousel slide"
-                                        data-bs-touch="false"
-                                        data-bs-interval="false"
-                                    >
+                    id="carouselExampleControlsNoTouching"
+                    className="carousel slide"
+                    data-bs-touch="false"
+                    data-bs-interval="false">
+                    
                                         <div className="carousel-inner">
                                             <div className="carousel-item active">
-                                                <ImageWithBasePath
-                                                    src="assets/img/img-2.jpg"
-                                                    className="d-block w-100"
-                                                    alt="Slide"
-                                                />
+                                                <img
+                          src={img2}
+                          className="d-block w-100"
+                          alt="Slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    src="assets/img/img-3.jpg"
-                                                    className="d-block w-100"
-                                                    alt="Slide"
-                                                />
+                                                <img
+                          src={img3}
+                          className="d-block w-100"
+                          alt="Slide" />
+                        
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    src="assets/img/img-4.jpg"
-                                                    className="d-block w-100"
-                                                    alt="Slide"
-                                                />
+                                                <img
+                          src={img4}
+                          className="d-block w-100"
+                          alt="Slide" />
+                        
                                             </div>
                                         </div>
                                         <button
-                                            className="carousel-control-prev"
-                                            type="button"
-                                            data-bs-target="#carouselExampleControlsNoTouching"
-                                            data-bs-slide="prev"
-                                        >
+                      className="carousel-control-prev"
+                      type="button"
+                      data-bs-target="#carouselExampleControlsNoTouching"
+                      data-bs-slide="prev">
+                      
                                             <span
-                                                className="carousel-control-prev-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Previous</span>
                                         </button>
                                         <button
-                                            className="carousel-control-next"
-                                            type="button"
-                                            data-bs-target="#carouselExampleControlsNoTouching"
-                                            data-bs-slide="next"
-                                        >
+                      className="carousel-control-next"
+                      type="button"
+                      data-bs-target="#carouselExampleControlsNoTouching"
+                      data-bs-slide="next">
+                      
                                             <span
-                                                className="carousel-control-next-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-next-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Next</span>
                                         </button>
                                     </div>
@@ -511,42 +512,42 @@ const Carousel = () => {
                                 </div>
                                 <div className="card-body">
                                     <div
-                                        id="carouselExampleDark"
-                                        className="carousel slide"
-                                        data-bs-ride="carousel"
-                                    >
+                    id="carouselExampleDark"
+                    className="carousel slide"
+                    data-bs-ride="carousel">
+                    
                                         <div className="carousel-indicators">
                                             <button
-                                                type="button"
-                                                data-bs-target="#carouselExampleDark"
-                                                data-bs-slide-to={0}
-                                                className="active"
-                                                aria-current="true"
-                                                aria-label="Slide 1"
-                                            />
+                        type="button"
+                        data-bs-target="#carouselExampleDark"
+                        data-bs-slide-to={0}
+                        className="active"
+                        aria-current="true"
+                        aria-label="Slide 1" />
+                      
                                             <button
-                                                type="button"
-                                                data-bs-target="#carouselExampleDark"
-                                                data-bs-slide-to={1}
-                                                aria-label="Slide 2"
-                                            />
+                        type="button"
+                        data-bs-target="#carouselExampleDark"
+                        data-bs-slide-to={1}
+                        aria-label="Slide 2" />
+                      
                                             <button
-                                                type="button"
-                                                data-bs-target="#carouselExampleDark"
-                                                data-bs-slide-to={2}
-                                                aria-label="Slide 3"
-                                            />
+                        type="button"
+                        data-bs-target="#carouselExampleDark"
+                        data-bs-slide-to={2}
+                        aria-label="Slide 3" />
+                      
                                         </div>
                                         <div className="carousel-inner">
                                             <div
-                                                className="carousel-item active"
-                                                data-bs-interval={10000}
-                                            >
-                                                <ImageWithBasePath
-                                                    src="assets/img/img-2.jpg"
-                                                    className="d-block w-100"
-                                                    alt="Slide"
-                                                />
+                        className="carousel-item active"
+                        data-bs-interval={10000}>
+                        
+                                                <img
+                          src={img2}
+                          className="d-block w-100"
+                          alt="Slide" />
+                        
                                                 <div className="carousel-caption d-none d-md-block">
                                                     <h5 className="text-fixed-white">First slide label</h5>
                                                     <p className="op-7">
@@ -556,11 +557,11 @@ const Carousel = () => {
                                                 </div>
                                             </div>
                                             <div className="carousel-item" data-bs-interval={2000}>
-                                                <ImageWithBasePath
-                                                    src="assets/img/img-3.jpg"
-                                                    className="d-block w-100"
-                                                    alt="Slide"
-                                                />
+                                                <img
+                          src={img3}
+                          className="d-block w-100"
+                          alt="Slide" />
+                        
                                                 <div className="carousel-caption d-none d-md-block">
                                                     <h5 className="text-fixed-white">Second slide label</h5>
                                                     <p className="op-7">
@@ -570,11 +571,11 @@ const Carousel = () => {
                                                 </div>
                                             </div>
                                             <div className="carousel-item">
-                                                <ImageWithBasePath
-                                                    src="assets/img/img-4.jpg"
-                                                    className="d-block w-100"
-                                                    alt="Slide"
-                                                />
+                                                <img
+                          src={img4}
+                          className="d-block w-100"
+                          alt="Slide" />
+                        
                                                 <div className="carousel-caption d-none d-md-block">
                                                     <h5 className="text-fixed-white">Third slide label</h5>
                                                     <p className="op-7">
@@ -585,27 +586,27 @@ const Carousel = () => {
                                             </div>
                                         </div>
                                         <button
-                                            className="carousel-control-prev"
-                                            type="button"
-                                            data-bs-target="#carouselExampleDark"
-                                            data-bs-slide="prev"
-                                        >
+                      className="carousel-control-prev"
+                      type="button"
+                      data-bs-target="#carouselExampleDark"
+                      data-bs-slide="prev">
+                      
                                             <span
-                                                className="carousel-control-prev-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-prev-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Previous</span>
                                         </button>
                                         <button
-                                            className="carousel-control-next"
-                                            type="button"
-                                            data-bs-target="#carouselExampleDark"
-                                            data-bs-slide="next"
-                                        >
+                      className="carousel-control-next"
+                      type="button"
+                      data-bs-target="#carouselExampleDark"
+                      data-bs-slide="next">
+                      
                                             <span
-                                                className="carousel-control-next-icon"
-                                                aria-hidden="true"
-                                            />
+                        className="carousel-control-next-icon"
+                        aria-hidden="true" />
+                      
                                             <span className="visually-hidden">Next</span>
                                         </button>
                                     </div>
@@ -617,8 +618,8 @@ const Carousel = () => {
                 </div>
             </div>
             {/* /Page Wrapper */}
-        </div>
-    )
-}
+        </div>);
 
-export default Carousel
+};
+
+export default Carousel;

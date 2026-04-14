@@ -1,23 +1,28 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
-import Select from "react-select";
 import SettingsSideBar from "../settingssidebar";
-import RefreshIcon from "../../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../../core/common/tooltip-content/collapes";
-import CommonFooter from "../../../core/common/footer/commonFooter";
-import { all_routes } from "../../../Router/all_routes";
+import RefreshIcon from "../../../components/tooltip-content/refresh";
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+import CommonFooter from "../../../components/footer/commonFooter";
+import { all_routes } from "../../../routes/all_routes";
+import {
+  flag01Icon,
+  flag02Icon,
+  flag03Icon,
+  flag04Icon } from
+"../../../utils/imagepath";
+import CommonSelect from "../../../components/select/common-select";
 
 const LanguageSettings = () => {
-
   const route = all_routes;
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
 
   const languageOptions = [
-    { value: "selectLanguage", label: "Select Language" },
-    { value: "english", label: "English" },
-    { value: "arabic", label: "Arabic" },
-    { value: "chinese", label: "Chinese" },
-  ];
+  { value: "selectLanguage", label: "Select Language" },
+  { value: "english", label: "English" },
+  { value: "arabic", label: "Arabic" },
+  { value: "chinese", label: "Chinese" }];
+
 
   return (
     <div>
@@ -44,18 +49,20 @@ const LanguageSettings = () => {
                     <h4>Language</h4>
                     <div className="page-btn d-flex align-items-center ms-0">
                       <div className="select-language">
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          filter={false}
                           options={languageOptions}
-                          placeholder="Choose"
-                        />
+                          value={selectedLanguage}
+                          onChange={(e) => setSelectedLanguage(e.value)}
+                          placeholder="Choose" />
+                        
                       </div>
                       <Link
                         to="#"
                         className="btn btn-primary ms-3"
                         data-bs-toggle="modal"
-                        data-bs-target="#add-language"
-                      >
+                        data-bs-target="#add-language">
+                        
                         Add Translation
                       </Link>
                     </div>
@@ -71,13 +78,17 @@ const LanguageSettings = () => {
                                   <span className="btn-searchset">
                                     <i className="ti ti-search fs-14 feather-search" />
                                   </span>
-                                  <input type="text" className="form-control" placeholder="search" />
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="search" />
+                                  
                                 </div>
                               </div>
                               <div className="search-path">
                                 <div className="d-flex align-items-center">
                                   <Link className="btn btn-secondary" to="#">
-                                    <i data-feather="filter" className="filter-icon" />
+                                    <i className="feather icon-filter filter-icon" />
                                     Import Sample
                                   </Link>
                                 </div>
@@ -89,7 +100,10 @@ const LanguageSettings = () => {
                                   <tr>
                                     <th className="no-sort">
                                       <label className="checkboxs">
-                                        <input type="checkbox" id="select-all" />
+                                        <input
+                                          type="checkbox"
+                                          id="select-all" />
+                                        
                                         <span className="checkmarks" />
                                       </label>
                                     </th>
@@ -114,11 +128,11 @@ const LanguageSettings = () => {
                                     </td>
                                     <td>
                                       <div className="language-name d-flex align-items-center">
-                                        <ImageWithBasePath
-                                          src="assets/img/icons/flag-01.svg"
+                                        <img
+                                          src={flag01Icon}
                                           className="me-2"
-                                          alt="Img"
-                                        />
+                                          alt="Img" />
+                                        
                                         English
                                       </div>
                                     </td>
@@ -129,9 +143,12 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="user1"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="user1" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="user1"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td>
@@ -140,16 +157,22 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="users1"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="users1" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="users1"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td>2145</td>
                                     <td>1815</td>
                                     <td>
                                       <div className="d-flex align-items-center">
-                                        <div className="circle-progress" data-value={80}>
+                                        <div
+                                          className="circle-progress"
+                                          data-value={80}>
+                                          
                                           <span className="progress-left">
                                             <span className="progress-bar border-warning" />
                                           </span>
@@ -157,7 +180,9 @@ const LanguageSettings = () => {
                                             <span className="progress-bar border-warning" />
                                           </span>
                                         </div>
-                                        <div className="progress-value ms-2">80%</div>
+                                        <div className="progress-value ms-2">
+                                          80%
+                                        </div>
                                       </div>
                                     </td>
                                     <td>
@@ -166,45 +191,42 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="status1"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="status1" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="status1"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td className="action-table-data">
                                       <div className="edit-delete-action">
                                         <Link
                                           to={route.languagesettingsweb}
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           Web
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           App
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           Admin
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="me-2 language-import"
-                                        >
-                                          <i
-                                            data-feather="download"
-                                            className="feather-download"
-                                          />
+                                          className="me-2 language-import">
+                                          
+                                          <i className="feather icon-download  feather-download" />
                                         </Link>
                                         <Link to="#">
-                                          <i
-                                            data-feather="trash-2"
-                                            className="feather-trash-2"
-                                          />
+                                          <i className="feather icon-trash-2" />
                                         </Link>
                                       </div>
                                     </td>
@@ -218,11 +240,11 @@ const LanguageSettings = () => {
                                     </td>
                                     <td>
                                       <div className="language-name d-flex align-items-center">
-                                        <ImageWithBasePath
-                                          src="assets/img/icons/flag-02.svg"
+                                        <img
+                                          src={flag02Icon}
                                           className="me-2"
-                                          alt="Img"
-                                        />
+                                          alt="Img" />
+                                        
                                         German
                                       </div>
                                     </td>
@@ -233,9 +255,12 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="user2"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="user2" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="user2"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td>
@@ -244,16 +269,22 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="users2"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="users2" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="users2"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td>2045</td>
                                     <td>2045</td>
                                     <td>
                                       <div className="d-flex align-items-center">
-                                        <div className="circle-progress" data-value={70}>
+                                        <div
+                                          className="circle-progress"
+                                          data-value={70}>
+                                          
                                           <span className="progress-left">
                                             <span className="progress-bar border-cyan" />
                                           </span>
@@ -261,7 +292,9 @@ const LanguageSettings = () => {
                                             <span className="progress-bar border-cyan" />
                                           </span>
                                         </div>
-                                        <div className="progress-value ms-2">70%</div>
+                                        <div className="progress-value ms-2">
+                                          70%
+                                        </div>
                                       </div>
                                     </td>
                                     <td>
@@ -270,45 +303,42 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="status2"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="status2" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="status2"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td className="action-table-data">
                                       <div className="edit-delete-action">
                                         <Link
                                           to={route.languagesettingsweb}
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           Web
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           App
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           Admin
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="me-2 language-import"
-                                        >
-                                          <i
-                                            data-feather="download"
-                                            className="feather-download"
-                                          />
+                                          className="me-2 language-import">
+                                          
+                                          <i className="feather icon-download  feather-download" />
                                         </Link>
                                         <Link to="#">
-                                          <i
-                                            data-feather="trash-2"
-                                            className="feather-trash-2"
-                                          />
+                                          <i className="feather icon-trash-2" />
                                         </Link>
                                       </div>
                                     </td>
@@ -322,11 +352,11 @@ const LanguageSettings = () => {
                                     </td>
                                     <td>
                                       <div className="language-name d-flex align-items-center">
-                                        <ImageWithBasePath
-                                          src="assets/img/icons/flag-03.svg"
+                                        <img
+                                          src={flag03Icon}
                                           className="me-2"
-                                          alt="Img"
-                                        />
+                                          alt="Img" />
+                                        
                                         Arabic
                                       </div>
                                     </td>
@@ -337,9 +367,12 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="user3"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="user3" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="user3"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td>
@@ -348,16 +381,22 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="users3"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="users3" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="users3"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td>2245</td>
                                     <td>295</td>
                                     <td>
                                       <div className="d-flex align-items-center">
-                                        <div className="circle-progress" data-value={50}>
+                                        <div
+                                          className="circle-progress"
+                                          data-value={50}>
+                                          
                                           <span className="progress-left">
                                             <span className="progress-bar border-purple" />
                                           </span>
@@ -365,7 +404,9 @@ const LanguageSettings = () => {
                                             <span className="progress-bar border-purple" />
                                           </span>
                                         </div>
-                                        <div className="progress-value ms-2">50%</div>
+                                        <div className="progress-value ms-2">
+                                          50%
+                                        </div>
                                       </div>
                                     </td>
                                     <td>
@@ -374,45 +415,42 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="status3"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="status3" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="status3"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td className="action-table-data">
                                       <div className="edit-delete-action">
                                         <Link
                                           to={route.languagesettingsweb}
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           Web
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           App
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           Admin
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="me-2 language-import"
-                                        >
-                                          <i
-                                            data-feather="download"
-                                            className="feather-download"
-                                          />
+                                          className="me-2 language-import">
+                                          
+                                          <i className="feather icon-download  feather-download" />
                                         </Link>
                                         <Link to="#">
-                                          <i
-                                            data-feather="trash-2"
-                                            className="feather-trash-2"
-                                          />
+                                          <i className="feather icon-trash-2" />
                                         </Link>
                                       </div>
                                     </td>
@@ -426,11 +464,11 @@ const LanguageSettings = () => {
                                     </td>
                                     <td>
                                       <div className="language-name d-flex align-items-center">
-                                        <ImageWithBasePath
-                                          src="assets/img/icons/flag-04.svg"
+                                        <img
+                                          src={flag04Icon}
                                           className="me-2"
-                                          alt="Img"
-                                        />
+                                          alt="Img" />
+                                        
                                         French
                                       </div>
                                     </td>
@@ -441,9 +479,12 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="user4"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="user4" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="user4"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td>
@@ -452,16 +493,22 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="users4"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="users4" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="users4"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td>2535</td>
                                     <td>1145</td>
                                     <td>
                                       <div className="d-flex align-items-center">
-                                        <div className="circle-progress" data-value={30}>
+                                        <div
+                                          className="circle-progress"
+                                          data-value={30}>
+                                          
                                           <span className="progress-left">
                                             <span className="progress-bar border-danger" />
                                           </span>
@@ -469,7 +516,9 @@ const LanguageSettings = () => {
                                             <span className="progress-bar border-danger" />
                                           </span>
                                         </div>
-                                        <div className="progress-value ms-2">30%</div>
+                                        <div className="progress-value ms-2">
+                                          30%
+                                        </div>
                                       </div>
                                     </td>
                                     <td>
@@ -478,45 +527,42 @@ const LanguageSettings = () => {
                                           type="checkbox"
                                           id="status4"
                                           className="check"
-                                          defaultChecked
-                                        />
-                                        <label htmlFor="status4" className="checktoggle" />
+                                          defaultChecked />
+                                        
+                                        <label
+                                          htmlFor="status4"
+                                          className="checktoggle" />
+                                        
                                       </div>
                                     </td>
                                     <td className="action-table-data">
                                       <div className="edit-delete-action">
                                         <Link
                                           to={route.languagesettingsweb}
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           Web
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           App
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="btn border text-dark bg-white me-2"
-                                        >
+                                          className="btn border text-dark bg-white me-2">
+                                          
                                           Admin
                                         </Link>
                                         <Link
                                           to="#"
-                                          className="me-2 language-import"
-                                        >
-                                          <i
-                                            data-feather="download"
-                                            className="feather-download"
-                                          />
+                                          className="me-2 language-import">
+                                          
+                                          <i className="feather icon-download  feather-download" />
                                         </Link>
                                         <Link to="#">
-                                          <i
-                                            data-feather="trash-2"
-                                            className="feather-trash-2"
-                                          />
+                                          <i className="feather icon-trash-2" />
                                         </Link>
                                       </div>
                                     </td>
@@ -530,7 +576,6 @@ const LanguageSettings = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -550,12 +595,12 @@ const LanguageSettings = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
-              <form action="language-settings-web.html">
+              <form>
                 <div className="modal-body">
                   <div className="card">
                     <div className="card-body">
@@ -570,26 +615,23 @@ const LanguageSettings = () => {
                         <div className="d-flex align-items-center">
                           <div className="back-btn">
                             <Link
-                              to="language-settings.html"
-                              className="btn btn-secondary me-3"
-                            >
-                              <i
-                                data-feather="arrow-left"
-                                className="filter-icon me-2"
-                              />
+                              to={route.languagesettings}
+                              className="btn btn-secondary me-3">
+                              
+                              <i className="feather icon-arrow-left filter-icon me-2" />
                               Back to Translations{" "}
                             </Link>
                           </div>
                           <div className="page-btn me-2">
                             <Link
                               to="#"
-                              className="d-flex align-items-center selected-language"
-                            >
-                              <ImageWithBasePath
-                                src="assets/img/icons/flag-03.svg"
+                              className="d-flex align-items-center selected-language">
+                              
+                              <img
+                                src={flag03Icon}
                                 className="me-2"
-                                alt="Img"
-                              />
+                                alt="Img" />
+                              
                               Arabic
                             </Link>
                           </div>
@@ -598,18 +640,20 @@ const LanguageSettings = () => {
                             <div className="d-flex align-items-center">
                               <div
                                 className="progress progress-xs"
-                                style={{ width: 90 }}
-                              >
+                                style={{ width: 90 }}>
+                                
                                 <div
                                   className="progress-bar bg-orange rounded"
                                   role="progressbar"
                                   style={{ width: "80%" }}
                                   aria-valuenow={100}
                                   aria-valuemin={0}
-                                  aria-valuemax={100}
-                                />
+                                  aria-valuemax={100} />
+                                
                               </div>
-                              <span className="d-inline-flex fs-12 ms-2">80%</span>
+                              <span className="d-inline-flex fs-12 ms-2">
+                                80%
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -630,8 +674,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="منتجات"
-                                  />
+                                    defaultValue="منتجات" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -642,8 +686,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="المنتجات منتهية الصلاحية"
-                                  />
+                                    defaultValue="المنتجات منتهية الصلاحية" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -654,8 +698,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="مخزونات منخفضة"
-                                  />
+                                    defaultValue="مخزونات منخفضة" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -666,8 +710,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="فئة"
-                                  />
+                                    defaultValue="فئة" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -678,8 +722,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="الفئة الفرعية"
-                                  />
+                                    defaultValue="الفئة الفرعية" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -690,8 +734,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="ماركة"
-                                  />
+                                    defaultValue="ماركة" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -702,8 +746,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="وحدة"
-                                  />
+                                    defaultValue="وحدة" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -714,8 +758,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="الضمانات"
-                                  />
+                                    defaultValue="الضمانات" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -726,8 +770,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="طباعة الباركود"
-                                  />
+                                    defaultValue="طباعة الباركود" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -738,8 +782,8 @@ const LanguageSettings = () => {
                                   <input
                                     type="text"
                                     className="form-control"
-                                    defaultValue="طباعة رمز الاستجابة السريعة"
-                                  />
+                                    defaultValue="طباعة رمز الاستجابة السريعة" />
+                                  
                                 </div>
                               </td>
                             </tr>
@@ -755,9 +799,8 @@ const LanguageSettings = () => {
         </div>
         {/* /Language */}
       </>
+    </div>);
 
-    </div>
-  );
 };
 
 export default LanguageSettings;

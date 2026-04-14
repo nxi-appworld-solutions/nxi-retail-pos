@@ -1,198 +1,205 @@
-import React from 'react'
-import CommonFooter from '../../core/common/footer/commonFooter'
-import { all_routes } from '../../Router/all_routes'
-import RefreshIcon from '../../core/common/tooltip-content/refresh';
-import CollapesIcon from '../../core/common/tooltip-content/collapes';
-import { DatePicker } from 'antd';
-import { Category, ProductName } from '../../core/common/selectOption/selectOption';
-import TooltipIcons from '../../core/common/tooltip-content/tooltipIcons';
-import Table from "../../core/pagination/datatable";
-import { Link } from 'react-router-dom';
-import ImageWithBasePath from '../../core/img/imagewithbasebath';
-import Select from "react-select";
-import { SoldStockData } from '../../core/json/soldstockdata';
+import { useState } from "react";
+import CommonFooter from "../../components/footer/commonFooter";
+import { all_routes } from "../../routes/all_routes";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
+import { Link } from "react-router-dom";
+import { SoldStockData } from "../../core/json/soldstockdata";
+import PrimeDataTable from "../../components/data-table";
+import CommonSelect from "../../components/select/common-select";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
 
 const SoldStock = () => {
+  const route = all_routes;
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const data = SoldStockData;
+  const [listData, _setListData] = useState(data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const ProductName = [{ label: "Lenovo 3rd Generation", value: "1" }];
+  const Category = [{ label: "Laptop", value: "1" }];
+  const columns = [
+  {
+    header: "SKU",
+    field: "SKU",
+    sorter: (a, b) => a.SKU.length - b.SKU.length
+  },
+  {
+    header: "Product Name",
+    field: "Product_Name",
+    body: (data) =>
+    <div className="d-flex align-items-center">
+          <Link className="avatar avatar-md" to="#">
+            <img src={data.img} className="img-fluid" alt="img" />
+          </Link>
+          <div className="ms-2">
+            <p className="text-dark mb-0">{data.Product_Name}</p>
+          </div>
+        </div>,
 
-    const route = all_routes;
+    sorter: (a, b) => a.Product_Name.length - b.Product_Name.length
+  },
 
-    const data = SoldStockData;
+  {
+    header: "Unit",
+    field: "Unit",
+    sorter: (a, b) => a.Unit.length - b.Unit.length
+  },
 
-    const columns = [
-        {
-            title: "SKU",
-            dataIndex: "SKU",
-            sorter: (a, b) => a.SKU.length - b.SKU.length,
-        },
-        {
-            title: "Product Name",
-            dataIndex: "Product_Name",
-            render: (text, record) => (
-                <div className="d-flex align-items-center">
-                    <Link className="avatar avatar-md" to="#">
-                        <ImageWithBasePath
-                            src={record.img}
-                            className="img-fluid"
-                            alt="img"
-                        />
-                    </Link>
-                    <div className="ms-2">
-                        <p className="text-dark mb-0">
-                            {text}
-                            {text}
-                        </p>
-                    </div>
+  {
+    header: "Quantity",
+    field: "Quantity",
+    sorter: (a, b) => a.Quantity.length - b.Quantity.length
+  },
+  {
+    header: "Tax Value",
+    field: "Tax_Value",
+    sorter: (a, b) => a.Tax_Value.length - b.Tax_Value.length
+  },
+
+  {
+    header: "Total",
+    field: "Total",
+    sorter: (a, b) => a.Total.length - b.Total.length
+  }];
+
+
+  return (
+    <div>
+      <div className="page-wrapper">
+        <div className="content">
+          <div className="table-tab">
+            <ul className="nav nav-pills">
+              <li className="nav-item">
+                <Link className="nav-link" to={route.inventoryreport}>
+                  Inventory Report
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={route.stockhistory}>
+                  Stock History
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to={route.soldstock}>
+                  Sold Stock
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div className="page-header">
+              <div className="add-item d-flex">
+                <div className="page-title">
+                  <h4>Sold Stock</h4>
+                  <h6>View Reports of Sold Stock</h6>
                 </div>
-
-            ),
-            sorter: (a, b) => a.Product_Name.length - b.Product_Name.length,
-        },
-
-
-        {
-            title: "Unit",
-            dataIndex: "Unit",
-            sorter: (a, b) => a.Unit.length - b.Unit.length,
-        },
-
-        {
-            title: "Quantity",
-            dataIndex: "Quantity",
-            sorter: (a, b) => a.Quantity.length - b.Quantity.length,
-        },
-        {
-            title: "Tax Value",
-            dataIndex: "Tax_Value",
-            sorter: (a, b) => a.Tax_Value.length - b.Tax_Value.length,
-        },
-
-        {
-            title: "Total",
-            dataIndex: "Total",
-            sorter: (a, b) => a.Total.length - b.Total.length,
-        },
-    
-    ];
-
-    return (
-        <div>
-            <div className="page-wrapper">
-                <div className="content">
-                    <div className="table-tab">
-                        <ul className="nav nav-pills">
-                            <li className="nav-item">
-                                <Link className="nav-link" href={route.inventoryreport}>
-                                    Inventory Report
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" href={route.stockhistory}>
-                                    Stock History
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" href={route.soldstock}>
-                                    Sold Stock
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <div className="page-header">
-                            <div className="add-item d-flex">
-                                <div className="page-title">
-                                    <h4>Sold Stock</h4>
-                                    <h6>View Reports of Sold Stock</h6>
-                                </div>
-                            </div>
-                            <ul className="table-top-head">
-                               <RefreshIcon />
-                                <CollapesIcon/>
-                            </ul>
-                        </div>
-                        <div className="card border-0">
-                            <div className="card-body pb-1">
-                                <form >
-                                    <div className="row align-items-end">
-                                        <div className="col-lg-10">
-                                            <div className="row">
-                                                <div className="col-md-4">
-                                                    <div className="mb-3">
-                                                        <label className="form-label">Choose Date</label>
-                                                        <div className="input-icon-start position-relative">
-                                                            <DatePicker
-                                                                className="form-control datetimepicker"
-                                                                placeholder="dd/mm/yyyy"
-                                                            />
-                                                            <span className="input-icon-left">
-                                                                <i className="ti ti-calendar" />
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-4">
-                                                    <div className="mb-3">
-                                                        <label className="form-label">Category</label>
-                                                        <Select
-                                                            classNamePrefix="react-select"
-                                                            options={Category}
-                                                            placeholder="Choose"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-md-4">
-                                                    <div className="mb-3">
-                                                        <label className="form-label">Products</label>
-                                                        <Select
-                                                            classNamePrefix="react-select"
-                                                            options={ProductName}
-                                                            placeholder="Choose"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-2">
-                                            <div className="mb-3">
-                                                <button className="btn btn-primary w-100" type="submit">
-                                                    Generate Report
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        {/* /product list */}
-                        <div className="card table-list-card no-search">
-                            <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-                                <div>
-                                    <h4>Customer Report</h4>
-                                </div>
-                                <ul className="table-top-head">
-                                    <TooltipIcons />
-                                    <li>
-                                        <Link data-bs-toggle="tooltip" data-bs-placement="top" title="Print">
-                                            <i className="ti ti-printer" />
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="card-body">
-                                <div className="table-responsive">
-                                    <Table columns={columns} dataSource={data} />
-                                </div>
-                            </div>
-                        </div>
-                        {/* /product list */}
-                    </div>
-                </div>
-                <CommonFooter />
+              </div>
+              <ul className="table-top-head">
+                <RefreshIcon />
+                <CollapesIcon />
+              </ul>
             </div>
-
-
+            <div className="card border-0">
+              <div className="card-body pb-1">
+                <form>
+                  <div className="row align-items-end">
+                    <div className="col-lg-10">
+                      <div className="row">
+                        <div className="col-md-4">
+                          <div className="mb-3">
+                            <label className="form-label">Choose Date</label>
+                            <div className="input-icon-start position-relative">
+                              <CommonDateRangePicker />
+                              <span className="input-icon-left">
+                                <i className="ti ti-calendar" />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-4">
+                          <div className="mb-3">
+                            <label className="form-label">Category</label>
+                            <CommonSelect
+                              className="w-100"
+                              options={Category}
+                              value={selectedCategory}
+                              onChange={(e) => setSelectedCategory(e.value)}
+                              placeholder="Choose"
+                              filter={false} />
+                            
+                          </div>
+                        </div>
+                        <div className="col-md-4">
+                          <div className="mb-3">
+                            <label className="form-label">Products</label>
+                            <CommonSelect
+                              className="w-100"
+                              options={ProductName}
+                              value={selectedProduct}
+                              onChange={(e) => setSelectedProduct(e.value)}
+                              placeholder="Choose"
+                              filter={false} />
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-lg-2">
+                      <div className="mb-3">
+                        <button className="btn btn-primary w-100" type="submit">
+                          Generate Report
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            {/* /product list */}
+            <div className="card table-list-card no-search">
+              <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
+                <div>
+                  <h4>Customer Report</h4>
+                </div>
+                <ul className="table-top-head">
+                  <TooltipIcons />
+                  <li>
+                    <Link
+                      to="#"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Print">
+                      
+                      <i className="ti ti-printer" />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div className="card-body p-0">
+                <div className="table-responsive">
+                  <PrimeDataTable
+                    column={columns}
+                    data={listData}
+                    rows={rows}
+                    setRows={setRows}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    totalRecords={totalRecords} />
+                  
+                </div>
+              </div>
+            </div>
+            {/* /product list */}
+          </div>
         </div>
-    )
-}
+        <CommonFooter />
+      </div>
+    </div>);
 
-export default SoldStock
+};
+
+export default SoldStock;

@@ -1,37 +1,42 @@
-import React from "react";
-import { Eye, Star, Trash2 } from "react-feather/dist";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
-import TextEditor from "../../feature-module/inventory/texteditor";
-import { DatePicker } from "antd";
-import { Calendar } from "feather-icons-react/build/IconComponents";
-import ImageWithBasePath from "../img/imagewithbasebath";
+import CommonSelect from "../../components/select/common-select";
+import CommonDatePicker from "../../components/date-picker/common-date-picker";
+import { Editor } from "primereact/editor";
+import DeleteModal from "../../components/delete-modal";
+import { avatar23, avatar24, avatar25 } from "../../utils/imagepath";
 
 const TodoModal = () => {
-
+  const [selectedAssignee, setSelectedAssignee] = useState(null);
+  const [selectedTag, setSelectedTag] = useState(null);
+  const [selectedPriority, setSelectedPriority] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
+  const [date1, setDate1] = useState(new Date());
+  const [date2, setDate2] = useState(new Date());
+  const [text, setText] = useState("");
   const optionsPriority = [
-    { value: "High", label: "High" },
-    { value: "Medium", label: "Medium" },
-    { value: "Low", label: "Low" },
-  ];
+  { value: "High", label: "High" },
+  { value: "Medium", label: "Medium" },
+  { value: "Low", label: "Low" }];
+
   const Assignee = [
-    { value: "Sophie", label: "Sophie" },
-    { value: "Cameron", label: "Cameron" },
-    { value: "Doris", label: "Doris" },
-    { value: "Rufana", label: "Rufana" },
-  ];
+  { value: "Sophie", label: "Sophie" },
+  { value: "Cameron", label: "Cameron" },
+  { value: "Doris", label: "Doris" },
+  { value: "Rufana", label: "Rufana" }];
+
   const Tag = [
-    { value: "Internal", label: "Internal" },
-    { value: "Projects", label: "Projects" },
-    { value: "Meetings", label: "Meetings" },
-    { value: "Reminder", label: "Reminder" },
-  ];
+  { value: "Internal", label: "Internal" },
+  { value: "Projects", label: "Projects" },
+  { value: "Meetings", label: "Meetings" },
+  { value: "Reminder", label: "Reminder" }];
+
   const Status = [
-    { value: "Completed", label: "Completed" },
-    { value: "Pending", label: "Pending" },
-    { value: "Onhold", label: "Onhold" },
-    { value: "Inprogress", label: "Inprogress" },
-  ]
+  { value: "Completed", label: "Completed" },
+  { value: "Pending", label: "Pending" },
+  { value: "Onhold", label: "Onhold" },
+  { value: "Inprogress", label: "Inprogress" }];
+
   return (
     <div>
       <>
@@ -47,8 +52,8 @@ const TodoModal = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -64,59 +69,72 @@ const TodoModal = () => {
                     <div className="col-12">
                       <div className="mb-3">
                         <label className="form-label">Assignee</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          filter={false}
                           options={Assignee}
-                          placeholder="Choose"
-                        />
+                          value={selectedAssignee}
+                          onChange={(e) => setSelectedAssignee(e.value)}
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="mb-3">
                         <label className="form-label">Tag</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          filter={false}
                           options={Tag}
-                          placeholder="Choose"
-                        />
+                          value={selectedTag}
+                          onChange={(e) => setSelectedTag(e.value)}
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="mb-3">
                         <label className="form-label">Priority</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          filter={false}
                           options={optionsPriority}
-                          placeholder="Choose"
-                        />
+                          value={selectedPriority}
+                          onChange={(e) => setSelectedPriority(e.value)}
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="input-blocks todo-calendar">
                         <label className="form-label">Due Date</label>
                         <div className="input-groupicon calender-input">
-                          <DatePicker
-                            className="form-control datetimepicker"
-                            placeholder="dd/mm/yyyy"
-                          />
-                          <Calendar className="info-img" />
+                          <CommonDatePicker
+                            value={date1}
+                            onChange={setDate1}
+                            className="w-100" />
+                          
+                          <i className="feather icon-calendar info-img" />
                         </div>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="mb-3">
                         <label className="form-label">Status</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          filter={false}
                           options={Status}
-                          placeholder="Choose"
-                        />
+                          value={selectedStatus}
+                          onChange={(e) => setSelectedStatus(e.value)}
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                     <div className="col-lg-12">
                       <div className="mb-3 summer-description-box notes-summernote">
                         <label className="form-label">Descriptions</label>
-                        <TextEditor />
+                        <Editor
+                          value={text}
+                          onTextChange={(e) => setText(e.htmlValue)}
+                          style={{ height: "200px" }} />
+                        
                         <p>Maximum 60 Characters</p>
                       </div>
                     </div>
@@ -126,11 +144,15 @@ const TodoModal = () => {
                   <button
                     type="button"
                     className="btn btn-secondary me-2"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
-                  <button type="button" className="btn btn-primary" data-bs-dismiss="modal">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal">
+                    
                     Submit
                   </button>
                 </div>
@@ -150,30 +172,30 @@ const TodoModal = () => {
                 <div className=" edit-note-head d-flex align-items-center">
                   <Link to="#" className="me-2">
                     <span>
-                      <Trash2 />
+                      <i className="feather icon-trash-2" />
                     </span>
                   </Link>
                   <Link to="#" className="me-2">
                     <span>
-                      <Star />
+                      <i className="feather icon-star" />
                     </span>
                   </Link>
                   <Link to="#" className="me-2">
                     <span>
-                      <Eye />
+                      <i className="feather icon-eye" />
                     </span>
                   </Link>
                   <button
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
               </div>
-              <form >
+              <form>
                 <div className="modal-body">
                   <div className="row">
                     <div className="col-12">
@@ -182,66 +204,79 @@ const TodoModal = () => {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Meet Lisa to discuss project details"
-                        />
+                          placeholder="Meet Lisa to discuss project details" />
+                        
                       </div>
                     </div>
                     <div className="col-12">
                       <div className="input-blocks">
                         <label className="form-label">Assignee</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          filter={false}
                           options={Assignee}
-                          placeholder="Choose"
-                        />
+                          value={selectedAssignee}
+                          onChange={(e) => setSelectedAssignee(e.value)}
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="input-blocks">
                         <label className="form-label">Tag</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          filter={false}
                           options={Tag}
-                          placeholder="Choose"
-                        />
+                          value={selectedTag}
+                          onChange={(e) => setSelectedTag(e.value)}
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="input-blocks">
                         <label className="form-label">Priority</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          filter={false}
                           options={optionsPriority}
-                          placeholder="Choose"
-                        />
+                          value={selectedPriority}
+                          onChange={(e) => setSelectedPriority(e.value)}
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="input-blocks todo-calendar">
                         <label className="form-label">Due Date</label>
                         <div className="input-groupicon calender-input">
-                          <DatePicker
-                            className="form-control datetimepicker"
-                            placeholder="dd/mm/yyyy"
-                          />
-                          <Calendar className="info-img" />
+                          <CommonDatePicker
+                            value={date2}
+                            onChange={setDate2}
+                            className="w-100" />
+                          
+                          <i className="feather icon-calendar info-img" />
                         </div>
                       </div>
                     </div>
                     <div className="col-6">
                       <div className="input-blocks">
                         <label className="form-label">Status</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          filter={false}
                           options={Status}
-                          placeholder="Choose"
-                        />
+                          value={selectedStatus}
+                          onChange={(e) => setSelectedStatus(e.value)}
+                          placeholder="Choose" />
+                        
                       </div>
                     </div>
                     <div className="col-lg-12">
                       <div className="input-blocks summer-description-box notes-summernote">
                         <label className="form-label">Descriptions</label>
-                        <TextEditor />
+                        <Editor
+                          value={text}
+                          onTextChange={(e) => setText(e.htmlValue)}
+                          style={{ height: "200px" }} />
+                        
                         <p>Maximum 60 Characters</p>
                       </div>
                     </div>
@@ -251,11 +286,15 @@ const TodoModal = () => {
                   <button
                     type="button"
                     className="btn btn-secondary me-2"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
-                  <button type="btton" className="btn btn-primary" data-bs-dismiss="modal">
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal">
+                    
                     Save Changes
                   </button>
                 </div>
@@ -277,19 +316,23 @@ const TodoModal = () => {
                     <div className="delete-heads">
                       <h4>Are You Sure?</h4>
                       <p>
-                        Do you really want to delete this item, This process cannot be
-                        undone.
+                        Do you really want to delete this item, This process
+                        cannot be undone.
                       </p>
                     </div>
                     <div className="modal-footer-btn delete-footer">
                       <Link
                         to="#"
                         className="btn btn-secondary me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </Link>
-                      <Link to="#" className="btn btn-primary" data-bs-dismiss="modal">
+                      <Link
+                        to="#"
+                        className="btn btn-primary"
+                        data-bs-dismiss="modal">
+                        
                         Delete
                       </Link>
                     </div>
@@ -314,20 +357,20 @@ const TodoModal = () => {
                 <div className=" edit-noted-head d-flex align-items-center">
                   <Link to="#">
                     <span className="me-2">
-                      <Trash2 />
+                      <i className="feather icon-trash-2" />
                     </span>
                   </Link>
                   <Link to="#" className="me-2">
                     <span className="me-2">
-                      <Star />
+                      <i className="feather icon-star" />
                     </span>
                   </Link>
                   <button
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -339,12 +382,12 @@ const TodoModal = () => {
                       <h6>Meet Lisa to discuss project details</h6>
                       <p>
                         Hiking is a long, vigorous walk, usually on trails or
-                        footpaths in the countryside. Walking for pleasure developed
-                        in Europe during the eighteenth century. Religious pilgrimages
-                        have existed much longer but they involve walking long
-                        distances for a spiritual purpose associated with specific
-                        religions and also we achieve inner peace while we hike at a
-                        local park.
+                        footpaths in the countryside. Walking for pleasure
+                        developed in Europe during the eighteenth century.
+                        Religious pilgrimages have existed much longer but they
+                        involve walking long distances for a spiritual purpose
+                        associated with specific religions and also we achieve
+                        inner peace while we hike at a local park.
                       </p>
                       <p className="badged high">
                         <i className="fas fa-circle" /> High
@@ -354,8 +397,8 @@ const TodoModal = () => {
                       <Link
                         to="#"
                         className="btn btn-primary me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Close
                       </Link>
                     </div>
@@ -378,8 +421,8 @@ const TodoModal = () => {
                     type="button"
                     className="btn-close custom-btn-close p-0 p-0"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="ti ti-x" />
                   </button>
                 </div>
@@ -389,7 +432,8 @@ const TodoModal = () => {
                       <div className="col-12">
                         <div className="mb-3">
                           <label className="form-label">
-                            Todo Title<span className="text-danger ms-1">*</span>
+                            Todo Title
+                            <span className="text-danger ms-1">*</span>
                           </label>
                           <input type="text" className="form-control" />
                         </div>
@@ -399,11 +443,13 @@ const TodoModal = () => {
                           <label className="form-label">
                             Tag<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={Tag}
-                            placeholder="Choose"
-                          />
+                            value={selectedTag}
+                            onChange={(e) => setSelectedTag(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                       <div className="col-6">
@@ -411,17 +457,20 @@ const TodoModal = () => {
                           <label className="form-label">
                             Priority<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsPriority}
-                            placeholder="Choose"
-                          />
+                            value={selectedPriority}
+                            onChange={(e) => setSelectedPriority(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
                         <div className="mb-3 summer-description-box notes-summernote">
                           <label className="form-label">
-                            Descriptions<span className="text-danger ms-1">*</span>
+                            Descriptions
+                            <span className="text-danger ms-1">*</span>
                           </label>
                           <div className="summernote" />
                         </div>
@@ -429,13 +478,16 @@ const TodoModal = () => {
                       <div className="col-12">
                         <div className="mb-3">
                           <label className="form-label">
-                            Add Assignee<span className="text-danger ms-1">*</span>
+                            Add Assignee
+                            <span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={Assignee}
-                            placeholder="Choose"
-                          />
+                            value={selectedAssignee}
+                            onChange={(e) => setSelectedAssignee(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                       <div className="col-12">
@@ -443,11 +495,13 @@ const TodoModal = () => {
                           <label className="form-label">
                             Status<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={Status}
-                            placeholder="Choose"
-                          />
+                            value={selectedStatus}
+                            onChange={(e) => setSelectedStatus(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                     </div>
@@ -456,11 +510,15 @@ const TodoModal = () => {
                     <button
                       type="button"
                       className="btn btn-secondary me-2"
-                      data-bs-dismiss="modal"
-                    >
+                      data-bs-dismiss="modal">
+                      
                       Cancel
                     </button>
-                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-bs-dismiss="modal">
+                      
                       Add New Todo
                     </button>
                   </div>
@@ -479,24 +537,25 @@ const TodoModal = () => {
                     type="button"
                     className="btn-close custom-btn-close p-0 p-0"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="ti ti-x" />
                   </button>
                 </div>
-                <form >
+                <form>
                   <div className="modal-body">
                     <div className="row">
                       <div className="col-12">
                         <div className="mb-3">
                           <label className="form-label">
-                            Todo Title<span className="text-danger ms-1">*</span>
+                            Todo Title
+                            <span className="text-danger ms-1">*</span>
                           </label>
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue="Update calendar and schedule"
-                          />
+                            defaultValue="Update calendar and schedule" />
+                          
                         </div>
                       </div>
                       <div className="col-6">
@@ -504,11 +563,13 @@ const TodoModal = () => {
                           <label className="form-label">
                             Tag<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={Tag}
-                            placeholder="Choose"
-                          />
+                            value={selectedTag}
+                            onChange={(e) => setSelectedTag(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                       <div className="col-6">
@@ -516,31 +577,41 @@ const TodoModal = () => {
                           <label className="form-label">
                             Priority<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsPriority}
-                            placeholder="Choose"
-                          />
+                            value={selectedPriority}
+                            onChange={(e) => setSelectedPriority(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
                         <div className="mb-3 summer-description-box notes-summernote">
                           <label className="form-label">
-                            Descriptions<span className="text-danger ms-1">*</span>
+                            Descriptions
+                            <span className="text-danger ms-1">*</span>
                           </label>
-                          <TextEditor />
+                          <Editor
+                            value={text}
+                            onTextChange={(e) => setText(e.htmlValue)}
+                            style={{ height: "200px" }} />
+                          
                         </div>
                       </div>
                       <div className="col-12">
                         <div className="mb-3">
                           <label className="form-label">
-                            Add Assignee<span className="text-danger ms-1">*</span>
+                            Add Assignee
+                            <span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={Assignee}
-                            placeholder="Choose"
-                          />
+                            value={selectedAssignee}
+                            onChange={(e) => setSelectedAssignee(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                       <div className="col-12">
@@ -548,11 +619,13 @@ const TodoModal = () => {
                           <label className="form-label">
                             Status<span className="text-danger ms-1">*</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={Status}
-                            placeholder="Choose"
-                          />
+                            value={selectedStatus}
+                            onChange={(e) => setSelectedStatus(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                     </div>
@@ -561,11 +634,15 @@ const TodoModal = () => {
                     <button
                       type="button"
                       className="btn btn-secondary me-2"
-                      data-bs-dismiss="modal"
-                    >
+                      data-bs-dismiss="modal">
+                      
                       Cancel
                     </button>
-                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-bs-dismiss="modal">
+                      
                       Submit
                     </button>
                   </div>
@@ -596,8 +673,8 @@ const TodoModal = () => {
                     type="button"
                     className="btn-close custom-btn-close p-0 bg-transparent fs-16 text-white position-static"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <i className="ti ti-x" />
                   </button>
                 </div>
@@ -631,11 +708,12 @@ const TodoModal = () => {
                   <div className="mb-3">
                     <h5 className="mb-2">Description</h5>
                     <p>
-                      Hiking is a long, vigorous walk, usually on trails or footpaths in
-                      the countryside. Walking for pleasure developed in Europe during
-                      the eighteenth century. Religious pilgrimages have existed much
-                      longer but they involve walking long distances for a spiritual
-                      purpose associated with specific religions and also we achieve
+                      Hiking is a long, vigorous walk, usually on trails or
+                      footpaths in the countryside. Walking for pleasure
+                      developed in Europe during the eighteenth century.
+                      Religious pilgrimages have existed much longer but they
+                      involve walking long distances for a spiritual purpose
+                      associated with specific religions and also we achieve
                       inner peace while we hike at a local park.
                     </p>
                   </div>
@@ -651,25 +729,25 @@ const TodoModal = () => {
                     <h5 className="mb-2">Assignee</h5>
                     <div className="avatar-list-stacked avatar-group-sm">
                       <span className="avatar avatar-rounded">
-                        <ImageWithBasePath
+                        <img
                           className="border border-white"
-                          src="assets/img/profiles/avatar-23.jpg"
-                          alt="img"
-                        />
+                          src={avatar23}
+                          alt="img" />
+                        
                       </span>
                       <span className="avatar avatar-rounded">
-                        <ImageWithBasePath
+                        <img
                           className="border border-white"
-                          src="assets/img/profiles/avatar-24.jpg"
-                          alt="img"
-                        />
+                          src={avatar24}
+                          alt="img" />
+                        
                       </span>
                       <span className="avatar avatar-rounded">
-                        <ImageWithBasePath
+                        <img
                           className="border border-white"
-                          src="assets/img/profiles/avatar-25.jpg"
-                          alt="img"
-                        />
+                          src={avatar25}
+                          alt="img" />
+                        
                       </span>
                     </div>
                   </div>
@@ -678,42 +756,11 @@ const TodoModal = () => {
             </div>
           </div>
           {/* /Todo Details */}
-          {/* Delete Modal */}
-          <div className="modal fade" id="delete_modal">
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-body text-center">
-                  <span className="avatar avatar-xl bg-transparent-danger text-danger mb-3">
-                    <i className="ti ti-trash-x fs-36" />
-                  </span>
-                  <h4 className="mb-1">Confirm Delete</h4>
-                  <p className="mb-3">
-                    You want to delete all the marked items, this cant be undone once
-                    you delete.
-                  </p>
-                  <div className="d-flex justify-content-center">
-                    <Link
-                      to="#"
-                      className="btn btn-secondary me-3"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </Link>
-                    <Link to="#" className="btn btn-primary" data-bs-dismiss="modal">
-                      Yes, Delete
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* /Delete Modal */}
+          <DeleteModal />
         </>
-
       </>
+    </div>);
 
-    </div>
-  );
 };
 
 export default TodoModal;

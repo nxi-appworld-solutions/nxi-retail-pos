@@ -1,5 +1,5 @@
-import React from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+
+
 
 const Grid = () => {
   return (
@@ -568,11 +568,11 @@ const Grid = () => {
                   clear the float if the text is shorter.
                 </p>
                 <div className="clearfix">
-                  <ImageWithBasePath
+                  <img
                     src="assets/img/supplier/edit-supplier.jpg"
                     className="bd-placeholder-img col-md-6 float-md-end mb-3 ms-md-3 rounded img-fluid"
-                    alt="..."
-                  />
+                    alt="..." />
+                  
                   <p>
                     A paragraph of placeholder text. We&apos;re using it here to
                     show the use of the clearfix class. We&apos;re adding quite
@@ -600,8 +600,8 @@ const Grid = () => {
           {/* /Wrap */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Grid;

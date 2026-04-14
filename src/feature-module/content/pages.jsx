@@ -1,10 +1,16 @@
-import React from 'react'
-import TooltipIcons from '../../core/common/tooltip-content/tooltipIcons'
-import RefreshIcon from '../../core/common/tooltip-content/refresh'
-import CollapesIcon from '../../core/common/tooltip-content/collapes'
-import { PlusCircle } from 'feather-icons-react/build/IconComponents'
+import { useState } from "react";
+import SearchFromApi from "../../components/data-table/search";
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import { Link } from "react-router";
 
 const PagesList = () => {
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
   return (
     <>
       <div className="page-wrapper">
@@ -16,128 +22,87 @@ const PagesList = () => {
                 <h6>Manage your pages</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
-              <a
-                href="#"
+              <Link
+                to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-testimonial"
-              >
-                <PlusCircle data-feather="plus-circle" className="me-1" />
+                data-bs-target="#add-testimonial">
+                
+                <i className="feather icon-plus-circle me-1" />
                 Add Page
-              </a>
+              </Link>
             </div>
           </div>
           {/* product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-                <div className="search-input">
-                  <a href="#" className="btn btn-searchset">
-                    <i className="ti ti-search fs-14 feather-search" />
-                  </a>
-                  <div id="DataTables_Table_0_filter" className="dataTables_filter">
-                    <label>
-                      {" "}
-                      <input
-                        type="search"
-                        className="form-control form-control-sm"
-                        placeholder="Search"
-                        aria-controls="DataTables_Table_0"
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Select Status
-                  </a>
+                  </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <a
-                        href="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Active
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Inactive
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         New Joiners
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
                 <div className="dropdown">
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Sort By : Last 7 Days
-                  </a>
+                  </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <a
-                        href="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Recently Added
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Ascending
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Desending
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Last Month
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Last 7 Days
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -182,22 +147,22 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -221,22 +186,22 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -260,22 +225,22 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -299,22 +264,22 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -338,22 +303,22 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -377,22 +342,22 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -416,22 +381,22 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -455,22 +420,22 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -494,22 +459,22 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -533,35 +498,38 @@ const PagesList = () => {
                       </td>
                       <td className="action-table-data">
                         <div className="edit-delete-action">
-                          <a
+                          <Link
                             className="me-2 p-2"
-                            href="#"
+                            to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-testimonial"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
-                          </a>
-                          <a
+                            data-bs-target="#edit-testimonial">
+                            
+                            <i className="ti ti-edit" />
+                          </Link>
+                          <Link
                             data-bs-toggle="modal"
                             data-bs-target="#delete-modal"
                             className="p-2"
-                            href="#"
-                          >
-                            <i data-feather="trash-2" className="feather-trash-2" />
-                          </a>
+                            to="#">
+                            
+                            <i className="ti ti-trash" />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
-                <div className='d-flex justify-content-between'>
-                  <div className="dataTables_length" id="DataTables_Table_0_length">
+                <div className="d-flex justify-content-between">
+                  <div
+                    className="dataTables_length"
+                    id="DataTables_Table_0_length">
+                    
                     <label>
                       <select
                         name="DataTables_Table_0_length"
                         aria-controls="DataTables_Table_0"
-                        className="form-select form-select-sm"
-                      >
+                        className="form-select form-select-sm">
+                        
                         <option value={10}>10</option>
                         <option value={25}>25</option>
                         <option value={50}>50</option>
@@ -572,73 +540,72 @@ const PagesList = () => {
                   </div>
                   <div
                     className="dataTables_paginate paging_simple_numbers"
-                    id="DataTables_Table_0_paginate"
-                  >
+                    id="DataTables_Table_0_paginate">
+                    
                     <ul className="pagination">
                       <li
                         className="paginate_button page-item previous disabled"
-                        id="DataTables_Table_0_previous"
-                      >
-                        <a
+                        id="DataTables_Table_0_previous">
+                        
+                        <Link
+                          to="#"
                           aria-controls="DataTables_Table_0"
                           aria-disabled="true"
                           role="link"
                           data-dt-idx="previous"
                           tabIndex={-1}
-                          className="page-link"
-                        >
+                          className="page-link">
+                          
                           <i className="fa fa-angle-left" />{" "}
-                        </a>
+                        </Link>
                       </li>
                       <li className="paginate_button page-item active">
-                        <a
-                          href="#"
+                        <Link
+                          to="#"
                           aria-controls="DataTables_Table_0"
                           role="link"
                           aria-current="page"
                           data-dt-idx={0}
                           tabIndex={0}
-                          className="page-link"
-                        >
+                          className="page-link">
+                          
                           1
-                        </a>
+                        </Link>
                       </li>
                       <li
                         className="paginate_button page-item next disabled"
-                        id="DataTables_Table_0_next"
-                      >
-                        <a
+                        id="DataTables_Table_0_next">
+                        
+                        <Link
+                          to="#"
                           aria-controls="DataTables_Table_0"
                           aria-disabled="true"
                           role="link"
                           data-dt-idx="next"
                           tabIndex={-1}
-                          className="page-link"
-                        >
+                          className="page-link">
+                          
                           {" "}
                           <i className=" fa fa-angle-right" />
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
           {/* /product list */}
         </div>
         <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-          <p className="mb-0">2014-2025 © DreamsPOS. All Right Reserved</p>
+          <p className="mb-0">2014-2026 © DreamsPOS. All Right Reserved</p>
           <p>
             Designed &amp; Developed By{" "}
-            <a href="#" className="text-primary">
+            <Link to="#" className="text-primary">
               Dreams
-            </a>
+            </Link>
           </p>
         </div>
-
-
       </div>
       <>
         {/* Add Testimonial */}
@@ -653,12 +620,12 @@ const PagesList = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
-              <form >
+              <form>
                 <div className="modal-body">
                   <div className="row">
                     <div className="col-lg-12 mb-3">
@@ -683,7 +650,11 @@ const PagesList = () => {
                       <label className="form-label">
                         Description <span className="text-danger">*</span>
                       </label>
-                      <textarea className="form-control" rows={4} defaultValue={""} />
+                      <textarea
+                        className="form-control"
+                        rows={4}
+                        defaultValue={""} />
+                      
                     </div>
                     <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
                       <span className="status-label">Status</span>
@@ -691,8 +662,8 @@ const PagesList = () => {
                         type="checkbox"
                         id="users6"
                         className="check"
-                        defaultChecked
-                      />
+                        defaultChecked />
+                      
                       <label htmlFor="users6" className="checktoggle mb-0" />
                     </div>
                   </div>
@@ -701,14 +672,14 @@ const PagesList = () => {
                   <button
                     type="button"
                     className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="btn btn-primary fs-13 fw-medium p-2 px-3"
-                  >
+                    className="btn btn-primary fs-13 fw-medium p-2 px-3">
+                    
                     Add Page
                   </button>
                 </div>
@@ -729,12 +700,12 @@ const PagesList = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
-              <form >
+              <form>
                 <div className="modal-body">
                   <div className="row">
                     <div className="col-lg-12 mb-3">
@@ -744,8 +715,8 @@ const PagesList = () => {
                       <input
                         type="email"
                         className="form-control"
-                        defaultValue="Products"
-                      />
+                        defaultValue="Products" />
+                      
                     </div>
                     <div className="col-lg-12 mb-3">
                       <label className="form-label">
@@ -754,8 +725,8 @@ const PagesList = () => {
                       <input
                         type="email"
                         className="form-control"
-                        defaultValue="products"
-                      />
+                        defaultValue="products" />
+                      
                     </div>
                     <div className="col-lg-12 mb-3">
                       <label className="form-label">
@@ -767,7 +738,11 @@ const PagesList = () => {
                       <label className="form-label">
                         Description <span className="text-danger">*</span>
                       </label>
-                      <textarea className="form-control" rows={4} defaultValue={""} />
+                      <textarea
+                        className="form-control"
+                        rows={4}
+                        defaultValue={""} />
+                      
                     </div>
                     <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
                       <span className="status-label">Status</span>
@@ -775,8 +750,8 @@ const PagesList = () => {
                         type="checkbox"
                         id="users7"
                         className="check"
-                        defaultChecked
-                      />
+                        defaultChecked />
+                      
                       <label htmlFor="users7" className="checktoggle mb-0" />
                     </div>
                   </div>
@@ -785,8 +760,8 @@ const PagesList = () => {
                   <button
                     type="button"
                     className="btn me-2 btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
+                    data-bs-dismiss="modal">
+                    
                     Cancel
                   </button>
                   <button type="submit" className="btn btn-primary">
@@ -799,43 +774,11 @@ const PagesList = () => {
         </div>
         {/* /Edit Testimonial */}
         {/* delete modal */}
-        <div className="modal fade" id="delete-modal">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content p-5 px-3 text-center">
-                  <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                    <i className="ti ti-trash fs-24 text-danger" />
-                  </span>
-                  <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">Delete Page</h4>
-                  <p className="text-gray-6 mb-0 fs-16">
-                    Are you sure you want to delete page?
-                  </p>
-                  <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      className="btn btn-submit fs-13 fw-medium p-2 px-3"
-                    >
-                      Yes Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <DeleteModal />
         {/* /delete modal */}
       </>
-    </>
+    </>);
 
-  )
-}
+};
 
-export default PagesList
+export default PagesList;

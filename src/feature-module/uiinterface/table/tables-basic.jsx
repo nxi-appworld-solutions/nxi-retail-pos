@@ -1,7 +1,6 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
-import { all_routes } from "../../../Router/all_routes";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
+import { all_routes } from "../../../routes/all_routes";
 
 const TablesBasic = () => {
   const route = all_routes;
@@ -596,12 +595,12 @@ const TablesBasic = () => {
                                 type="checkbox"
                                 defaultValue=""
                                 id="checkebox-sm"
-                                defaultChecked
-                              />
+                                defaultChecked />
+                              
                               <label
                                 className="form-check-label"
-                                htmlFor="checkebox-sm"
-                              >
+                                htmlFor="checkebox-sm">
+                                
                                 Zelensky
                               </label>
                             </div>
@@ -614,14 +613,14 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-edit" />
                               </Link>
                             </div>
@@ -634,12 +633,12 @@ const TablesBasic = () => {
                                 className="form-check-input"
                                 type="checkbox"
                                 defaultValue=""
-                                id="checkebox-sm1"
-                              />
+                                id="checkebox-sm1" />
+                              
                               <label
                                 className="form-check-label"
-                                htmlFor="checkebox-sm1"
-                              >
+                                htmlFor="checkebox-sm1">
+                                
                                 Kim Jong
                               </label>
                             </div>
@@ -654,14 +653,14 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-edit" />
                               </Link>
                             </div>
@@ -674,12 +673,12 @@ const TablesBasic = () => {
                                 className="form-check-input"
                                 type="checkbox"
                                 defaultValue=""
-                                id="checkebox-sm2"
-                              />
+                                id="checkebox-sm2" />
+                              
                               <label
                                 className="form-check-label"
-                                htmlFor="checkebox-sm2"
-                              >
+                                htmlFor="checkebox-sm2">
+                                
                                 Obana
                               </label>
                             </div>
@@ -692,14 +691,14 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-edit" />
                               </Link>
                             </div>
@@ -712,12 +711,12 @@ const TablesBasic = () => {
                                 className="form-check-input"
                                 type="checkbox"
                                 defaultValue=""
-                                id="checkebox-sm3"
-                              />
+                                id="checkebox-sm3" />
+                              
                               <label
                                 className="form-check-label"
-                                htmlFor="checkebox-sm3"
-                              >
+                                htmlFor="checkebox-sm3">
+                                
                                 Sean Paul
                               </label>
                             </div>
@@ -730,14 +729,14 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-edit" />
                               </Link>
                             </div>
@@ -750,12 +749,12 @@ const TablesBasic = () => {
                                 className="form-check-input"
                                 type="checkbox"
                                 defaultValue=""
-                                id="checkebox-sm4"
-                              />
+                                id="checkebox-sm4" />
+                              
                               <label
                                 className="form-check-label"
-                                htmlFor="checkebox-sm4"
-                              >
+                                htmlFor="checkebox-sm4">
+                                
                                 Karizma
                               </label>
                             </div>
@@ -770,14 +769,14 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-light"
-                              >
+                                className="btn btn-icon btn-sm btn-light">
+                                
                                 <i className="feather-edit" />
                               </Link>
                             </div>
@@ -814,20 +813,20 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-success rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-success rounded-pill">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-info rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-info rounded-pill">
+                                
                                 <i className="feather-edit" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-danger rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-danger rounded-pill">
+                                
                                 <i className="feather-trash" />
                               </Link>
                             </div>
@@ -841,20 +840,20 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-success rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-success rounded-pill">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-info rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-info rounded-pill">
+                                
                                 <i className="feather-edit" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-danger rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-danger rounded-pill">
+                                
                                 <i className="feather-trash" />
                               </Link>
                             </div>
@@ -868,20 +867,20 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-success rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-success rounded-pill">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-info rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-info rounded-pill">
+                                
                                 <i className="feather-edit" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-danger rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-danger rounded-pill">
+                                
                                 <i className="feather-trash" />
                               </Link>
                             </div>
@@ -895,20 +894,20 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-success rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-success rounded-pill">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-info rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-info rounded-pill">
+                                
                                 <i className="feather-edit" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-soft-danger rounded-pill"
-                              >
+                                className="btn btn-icon btn-sm btn-soft-danger rounded-pill">
+                                
                                 <i className="feather-trash" />
                               </Link>
                             </div>
@@ -941,10 +940,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <div className="avatar avatar-sm me-2 avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-10.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-10.jpg"
+                                  alt="img" />
+                                
                               </div>
                               <div>
                                 <div className="lh-1">
@@ -966,27 +965,27 @@ const TablesBasic = () => {
                           <td>
                             <div className="avatar-list-stacked">
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-2.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-2.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-8.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-8.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-2.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-2.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <Link
                                 className="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                to="#"
-                              >
+                                to="#">
+                                
                                 +5
                               </Link>
                             </div>
@@ -999,8 +998,8 @@ const TablesBasic = () => {
                                 style={{ width: "52%" }}
                                 aria-valuenow={52}
                                 aria-valuemin={0}
-                                aria-valuemax={100}
-                              ></div>
+                                aria-valuemax={100}>
+                              </div>
                             </div>
                           </td>
                         </tr>
@@ -1008,10 +1007,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <div className="avatar avatar-sm me-2 avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-2.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-2.jpg"
+                                  alt="img" />
+                                
                               </div>
                               <div>
                                 <div className="lh-1">
@@ -1033,21 +1032,21 @@ const TablesBasic = () => {
                           <td>
                             <div className="avatar-list-stacked">
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-4.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-4.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-6.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-6.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <Link
                                 className="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                to="#"
-                              >
+                                to="#">
+                                
                                 +6
                               </Link>
                             </div>
@@ -1060,8 +1059,8 @@ const TablesBasic = () => {
                                 style={{ width: "40%" }}
                                 aria-valuenow={40}
                                 aria-valuemin={0}
-                                aria-valuemax={100}
-                              ></div>
+                                aria-valuemax={100}>
+                              </div>
                             </div>
                           </td>
                         </tr>
@@ -1069,10 +1068,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <div className="avatar avatar-sm me-2 avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-16.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-16.jpg"
+                                  alt="img" />
+                                
                               </div>
                               <div>
                                 <div className="lh-1">
@@ -1094,27 +1093,27 @@ const TablesBasic = () => {
                           <td>
                             <div className="avatar-list-stacked">
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-1.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-1.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-11.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-11.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-15.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-15.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <Link
                                 className="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                to="#"
-                              >
+                                to="#">
+                                
                                 +2
                               </Link>
                             </div>
@@ -1127,8 +1126,8 @@ const TablesBasic = () => {
                                 style={{ width: "17%" }}
                                 aria-valuenow={17}
                                 aria-valuemin={0}
-                                aria-valuemax={100}
-                              ></div>
+                                aria-valuemax={100}>
+                              </div>
                             </div>
                           </td>
                         </tr>
@@ -1136,10 +1135,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <div className="avatar avatar-sm me-2 avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-13.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-13.jpg"
+                                  alt="img" />
+                                
                               </div>
                               <div>
                                 <div className="lh-1">
@@ -1159,21 +1158,21 @@ const TablesBasic = () => {
                           <td>
                             <div className="avatar-list-stacked">
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-4.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-4.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-6.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-6.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <Link
                                 className="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                to="#"
-                              >
+                                to="#">
+                                
                                 +5
                               </Link>
                             </div>
@@ -1186,8 +1185,8 @@ const TablesBasic = () => {
                                 style={{ width: "72%" }}
                                 aria-valuenow={72}
                                 aria-valuemin={0}
-                                aria-valuemax={100}
-                              ></div>
+                                aria-valuemax={100}>
+                              </div>
                             </div>
                           </td>
                         </tr>
@@ -1221,10 +1220,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <div className="avatar avatar-sm me-2 avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-15.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-15.jpg"
+                                  alt="img" />
+                                
                               </div>
                               <div>
                                 <div className="lh-1">
@@ -1251,10 +1250,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <div className="avatar avatar-sm me-2 avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-12.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-12.jpg"
+                                  alt="img" />
+                                
                               </div>
                               <div>
                                 <div className="lh-1">
@@ -1281,10 +1280,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <div className="avatar avatar-sm me-2 avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-5.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-5.jpg"
+                                  alt="img" />
+                                
                               </div>
                               <div>
                                 <div className="lh-1">
@@ -1311,10 +1310,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <div className="avatar avatar-sm me-2 avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-11.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-11.jpg"
+                                  alt="img" />
+                                
                               </div>
                               <div>
                                 <div className="lh-1">
@@ -1370,10 +1369,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <span className="avatar avatar-xs me-2 online avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-3.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-3.jpg"
+                                  alt="img" />
+                                
                               </span>
                               Mayor Kelly
                             </div>
@@ -1388,27 +1387,27 @@ const TablesBasic = () => {
                           <td>
                             <div className="avatar-list-stacked">
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-2.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-2.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-8.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-8.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-2.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-2.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <Link
                                 className="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                to="#"
-                              >
+                                to="#">
+                                
                                 +4
                               </Link>
                             </div>
@@ -1421,8 +1420,8 @@ const TablesBasic = () => {
                                 style={{ width: "52%" }}
                                 aria-valuenow={52}
                                 aria-valuemin={0}
-                                aria-valuemax={100}
-                              ></div>
+                                aria-valuemax={100}>
+                              </div>
                             </div>
                           </td>
                           <td>$10,984.29</td>
@@ -1430,14 +1429,14 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-success"
-                              >
+                                className="btn btn-icon btn-sm btn-success">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-info"
-                              >
+                                className="btn btn-icon btn-sm btn-info">
+                                
                                 <i className="feather-edit" />
                               </Link>
                             </div>
@@ -1447,10 +1446,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <span className="avatar avatar-xs me-2 online avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-12.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-12.jpg"
+                                  alt="img" />
+                                
                               </span>
                               Andrew Garfield
                             </div>
@@ -1465,33 +1464,33 @@ const TablesBasic = () => {
                           <td>
                             <div className="avatar-list-stacked">
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-1.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-1.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-5.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-5.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-11.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-11.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-15.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-15.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <Link
                                 className="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                to="#"
-                              >
+                                to="#">
+                                
                                 +4
                               </Link>
                             </div>
@@ -1504,8 +1503,8 @@ const TablesBasic = () => {
                                 style={{ width: "91%" }}
                                 aria-valuenow={91}
                                 aria-valuemin={0}
-                                aria-valuemax={100}
-                              ></div>
+                                aria-valuemax={100}>
+                              </div>
                             </div>
                           </td>
                           <td>$1.4billion</td>
@@ -1513,14 +1512,14 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-success"
-                              >
+                                className="btn btn-icon btn-sm btn-success">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-info"
-                              >
+                                className="btn btn-icon btn-sm btn-info">
+                                
                                 <i className="feather-edit" />
                               </Link>
                             </div>
@@ -1530,10 +1529,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <span className="avatar avatar-xs me-2 online avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-14.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-14.jpg"
+                                  alt="img" />
+                                
                               </span>
                               Simon Cowel
                             </div>
@@ -1548,21 +1547,21 @@ const TablesBasic = () => {
                           <td>
                             <div className="avatar-list-stacked">
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-6.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-6.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-16.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-16.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <Link
                                 className="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                to="#"
-                              >
+                                to="#">
+                                
                                 +10
                               </Link>
                             </div>
@@ -1575,8 +1574,8 @@ const TablesBasic = () => {
                                 style={{ width: "45%" }}
                                 aria-valuenow={45}
                                 aria-valuemin={0}
-                                aria-valuemax={100}
-                              ></div>
+                                aria-valuemax={100}>
+                              </div>
                             </div>
                           </td>
                           <td>$7,123.21</td>
@@ -1584,14 +1583,14 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-success"
-                              >
+                                className="btn btn-icon btn-sm btn-success">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-info"
-                              >
+                                className="btn btn-icon btn-sm btn-info">
+                                
                                 <i className="feather-edit" />
                               </Link>
                             </div>
@@ -1601,10 +1600,10 @@ const TablesBasic = () => {
                           <td>
                             <div className="d-flex align-items-center">
                               <span className="avatar avatar-xs me-2 online avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-5.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-5.jpg"
+                                  alt="img" />
+                                
                               </span>
                               Mirinda Hers
                             </div>
@@ -1619,27 +1618,27 @@ const TablesBasic = () => {
                           <td>
                             <div className="avatar-list-stacked">
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-3.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-3.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-10.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-10.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <span className="avatar avatar-sm avatar-rounded">
-                                <ImageWithBasePath
-                                  src="assets/img/avatar/avatar-14.jpg"
-                                  alt="img"
-                                />
+                                <img
+                                  src="src/assets/img/avatar/avatar-14.jpg"
+                                  alt="img" />
+                                
                               </span>
                               <Link
                                 className="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                to="#"
-                              >
+                                to="#">
+                                
                                 +6
                               </Link>
                             </div>
@@ -1652,8 +1651,8 @@ const TablesBasic = () => {
                                 style={{ width: "21%" }}
                                 aria-valuenow={21}
                                 aria-valuemin={0}
-                                aria-valuemax={100}
-                              ></div>
+                                aria-valuemax={100}>
+                              </div>
                             </div>
                           </td>
                           <td>$2,325.45</td>
@@ -1661,14 +1660,14 @@ const TablesBasic = () => {
                             <div className="hstack gap-2 fs-15">
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-success"
-                              >
+                                className="btn btn-icon btn-sm btn-success">
+                                
                                 <i className="feather-download" />
                               </Link>
                               <Link
                                 to="#"
-                                className="btn btn-icon btn-sm btn-info"
-                              >
+                                className="btn btn-icon btn-sm btn-info">
+                                
                                 <i className="feather-edit" />
                               </Link>
                             </div>
@@ -1846,8 +1845,8 @@ const TablesBasic = () => {
           {/* /Table Head */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default TablesBasic;

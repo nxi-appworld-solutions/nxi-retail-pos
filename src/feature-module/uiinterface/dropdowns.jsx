@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+
+import { Link } from 'react-router-dom';
 
 const Dropdowns = () => {
-    return (
-        <div>
+  return (
+    <div>
             <div className="page-wrapper">
                 <div className="content">
                     <div className="page-header">
@@ -21,11 +21,11 @@ const Dropdowns = () => {
                                 <div className="card-body d-flex flex-wrap gap-2">
                                     <div className="dropdown">
                                         <button
-                                            className="btn btn-primary dropdown-toggle"
-                                            type="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      className="btn btn-primary dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Dropdown Button
                                         </button>
                                         <ul className="dropdown-menu">
@@ -48,12 +48,12 @@ const Dropdowns = () => {
                                     </div>
                                     <div className="dropdown">
                                       <Link
-                                            className="btn btn-secondary dropdown-toggle"
-                                            to="#"
-                                            role="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      className="btn btn-secondary dropdown-toggle"
+                      to="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Dropdown Link
                                         </Link>
                                         <ul className="dropdown-menu">
@@ -88,11 +88,11 @@ const Dropdowns = () => {
                                     <div className="btn-list d-flex flex-wrap gap-2">
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-primary dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-primary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -123,11 +123,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-secondary dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-secondary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -158,11 +158,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-success dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-success dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -193,11 +193,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-info dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-info dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -228,11 +228,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-warning dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-warning dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -263,11 +263,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-danger dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-danger dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -311,11 +311,11 @@ const Dropdowns = () => {
                                     <div className="btn-list d-flex flex-wrap gap-2">
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-primary dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-primary dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -346,11 +346,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-secondary dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-secondary dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -381,11 +381,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-success dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-success dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -416,11 +416,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-info dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-info dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -451,11 +451,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-warning dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-warning dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -486,11 +486,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-danger dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-danger dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -534,11 +534,11 @@ const Dropdowns = () => {
                                     <div className="btn-list d-flex flex-wrap gap-2">
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-primary dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-primary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -569,11 +569,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-secondary dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-secondary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -604,11 +604,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-success dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-success dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -639,11 +639,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-info dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-info dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -674,11 +674,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-warning dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-warning dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -709,11 +709,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-danger dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-danger dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -757,11 +757,11 @@ const Dropdowns = () => {
                                     <div className="btn-list d-flex flex-wrap gap-2">
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-primary dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-primary dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -792,11 +792,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-secondary dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-secondary dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -827,11 +827,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-success dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-success dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -862,11 +862,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-info dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-info dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -897,11 +897,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-warning dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-warning dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -932,11 +932,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-outline-danger dropdown-toggle rounded-pill"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-outline-danger dropdown-toggle rounded-pill"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Action
                                             </button>
                                             <ul className="dropdown-menu">
@@ -982,11 +982,11 @@ const Dropdowns = () => {
                                             Action
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-primary dropdown-toggle dropdown-toggle-split me-2"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-primary dropdown-toggle dropdown-toggle-split me-2"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1020,11 +1020,11 @@ const Dropdowns = () => {
                                             Action
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-secondary dropdown-toggle dropdown-toggle-split me-2"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-secondary dropdown-toggle dropdown-toggle-split me-2"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1058,11 +1058,11 @@ const Dropdowns = () => {
                                             Action
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-info dropdown-toggle dropdown-toggle-split me-2"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-info dropdown-toggle dropdown-toggle-split me-2"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1096,11 +1096,11 @@ const Dropdowns = () => {
                                             Action
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-success dropdown-toggle dropdown-toggle-split me-2"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-success dropdown-toggle dropdown-toggle-split me-2"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1134,11 +1134,11 @@ const Dropdowns = () => {
                                             Action
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-warning dropdown-toggle dropdown-toggle-split me-2"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-warning dropdown-toggle dropdown-toggle-split me-2"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1172,11 +1172,11 @@ const Dropdowns = () => {
                                             Action
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-danger dropdown-toggle dropdown-toggle-split me-2"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-danger dropdown-toggle dropdown-toggle-split me-2"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1216,11 +1216,11 @@ const Dropdowns = () => {
                                 <div className="card-body">
                                     <div className="btn-group my-1 me-2">
                                         <button
-                                            className="btn btn-primary btn-lg dropdown-toggle"
-                                            type="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      className="btn btn-primary btn-lg dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Large button
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1254,11 +1254,11 @@ const Dropdowns = () => {
                                             Large split button
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-lg btn-success dropdown-toggle dropdown-toggle-split"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-lg btn-success dropdown-toggle dropdown-toggle-split"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1290,11 +1290,11 @@ const Dropdowns = () => {
                                     {/* samll button groups (default and split) */}
                                     <div className="btn-group my-1 me-2">
                                         <button
-                                            className="btn btn-primary btn-sm dropdown-toggle"
-                                            type="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      className="btn btn-primary btn-sm dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Small button
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1328,11 +1328,11 @@ const Dropdowns = () => {
                                             Small split button
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-sm btn-danger dropdown-toggle dropdown-toggle-split"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-sm btn-danger dropdown-toggle dropdown-toggle-split"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1374,11 +1374,11 @@ const Dropdowns = () => {
                                 <div className="card-body">
                                     <div className="btn-group dropup my-1">
                                         <button
-                                            type="button"
-                                            className="btn btn-primary dropdown-toggle me-2"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-primary dropdown-toggle me-2"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Dropup
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1412,11 +1412,11 @@ const Dropdowns = () => {
                                             Split dropup
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-info dropdown-toggle dropdown-toggle-split"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-info dropdown-toggle dropdown-toggle-split"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1458,11 +1458,11 @@ const Dropdowns = () => {
                                 <div className="card-body">
                                     <div className="btn-group dropend my-1">
                                         <button
-                                            type="button"
-                                            className="btn btn-primary dropdown-toggle me-2"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-primary dropdown-toggle me-2"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Dropright
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1496,11 +1496,11 @@ const Dropdowns = () => {
                                             Split dropend
                                         </button>
                                         <button
-                                            type="button"
-                                            className="btn btn-info dropdown-toggle dropdown-toggle-split"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-info dropdown-toggle dropdown-toggle-split"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             <span className="visually-hidden">Toggle Dropright</span>
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1542,11 +1542,11 @@ const Dropdowns = () => {
                                 <div className="card-body">
                                     <div className="btn-group dropstart my-1">
                                         <button
-                                            type="button"
-                                            className="btn btn-primary dropdown-toggle me-2"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-primary dropdown-toggle me-2"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Dropstart
                                         </button>
                                         <ul className="dropdown-menu">
@@ -1578,11 +1578,11 @@ const Dropdowns = () => {
                                     <div className="btn-group">
                                         <div className="btn-group dropstart my-1" role="group">
                                             <button
-                                                type="button"
-                                                className="btn btn-info dropdown-toggle dropdown-toggle-split"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-info dropdown-toggle dropdown-toggle-split"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 <span className="visually-hidden">Toggle Dropstart</span>
                                             </button>
                                             <ul className="dropdown-menu">
@@ -1627,11 +1627,11 @@ const Dropdowns = () => {
                                 </div>
                                 <div className="card-body">
                                     <button
-                                        type="button"
-                                        className="btn btn-primary dropdown-toggle me-1"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
+                    type="button"
+                    className="btn btn-primary dropdown-toggle me-1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    
                                         Dropstart
                                     </button>
                                     <ul className="dropdown-menu">
@@ -1642,10 +1642,10 @@ const Dropdowns = () => {
                                         </li>
                                         <li>
                                           <Link
-                                                className="dropdown-item active"
-                                                to="#"
-                                                aria-current="true"
-                                            >
+                        className="dropdown-item active"
+                        to="#"
+                        aria-current="true">
+                        
                                                 Active link
                                             </Link>
                                         </li>
@@ -1667,11 +1667,11 @@ const Dropdowns = () => {
                                 </div>
                                 <div className="card-body">
                                     <button
-                                        type="button"
-                                        className="btn btn-primary dropdown-toggle me-1"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
+                    type="button"
+                    className="btn btn-primary dropdown-toggle me-1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    
                                         Dropstart
                                     </button>
                                     <ul className="dropdown-menu">
@@ -1682,10 +1682,10 @@ const Dropdowns = () => {
                                         </li>
                                         <li>
                                           <Link
-                                                className="dropdown-item disabled"
-                                                to="#"
-                                                aria-current="true"
-                                            >
+                        className="dropdown-item disabled"
+                        to="#"
+                        aria-current="true">
+                        
                                                 Active link
                                             </Link>
                                         </li>
@@ -1707,51 +1707,51 @@ const Dropdowns = () => {
                                 </div>
                                 <div className="card-body">
                                     <button
-                                        className="btn btn-secondary dropdown-toggle"
-                                        type="button"
-                                        id="dropdownMenu2"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    >
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenu2"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    
                                         Dropdown
                                     </button>
                                     <div className="dropdown-menu">
                                         <form className="px-4 py-3">
                                             <div className="mb-3">
                                                 <label
-                                                    htmlFor="exampleDropdownFormEmail1"
-                                                    className="form-label"
-                                                >
+                          htmlFor="exampleDropdownFormEmail1"
+                          className="form-label">
+                          
                                                     Email address
                                                 </label>
                                                 <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    id="exampleDropdownFormEmail1"
-                                                    placeholder="email@example.com"
-                                                />
+                          type="email"
+                          className="form-control"
+                          id="exampleDropdownFormEmail1"
+                          placeholder="email@example.com" />
+                        
                                             </div>
                                             <div className="mb-3">
                                                 <label
-                                                    htmlFor="exampleDropdownFormPassword1"
-                                                    className="form-label"
-                                                >
+                          htmlFor="exampleDropdownFormPassword1"
+                          className="form-label">
+                          
                                                     Password
                                                 </label>
                                                 <input
-                                                    type="password"
-                                                    className="form-control"
-                                                    id="exampleDropdownFormPassword1"
-                                                    placeholder="Password"
-                                                />
+                          type="password"
+                          className="form-control"
+                          id="exampleDropdownFormPassword1"
+                          placeholder="Password" />
+                        
                                             </div>
                                             <div className="mb-3">
                                                 <div className="form-check">
                                                     <input
-                                                        type="checkbox"
-                                                        className="form-check-input"
-                                                        id="dropdownCheck"
-                                                    />
+                            type="checkbox"
+                            className="form-check-input"
+                            id="dropdownCheck" />
+                          
                                                     <label className="form-check-label" htmlFor="dropdownCheck">
                                                         Remember me
                                                     </label>
@@ -1783,13 +1783,13 @@ const Dropdowns = () => {
                                     <div className="btn-list">
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-primary dropdown-toggle"
-                                                type="button"
-                                                id="defaultDropdown"
-                                                data-bs-toggle="dropdown"
-                                                data-bs-auto-close="true"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-primary dropdown-toggle"
+                        type="button"
+                        id="defaultDropdown"
+                        data-bs-toggle="dropdown"
+                        data-bs-auto-close="true"
+                        aria-expanded="false">
+                        
                                                 Default dropdown
                                             </button>
                                             <ul className="dropdown-menu" aria-labelledby="defaultDropdown">
@@ -1812,19 +1812,19 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-secondary dropdown-toggle"
-                                                type="button"
-                                                id="dropdownMenuClickableOutside"
-                                                data-bs-toggle="dropdown"
-                                                data-bs-auto-close="inside"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuClickableOutside"
+                        data-bs-toggle="dropdown"
+                        data-bs-auto-close="inside"
+                        aria-expanded="false">
+                        
                                                 Clickable outside
                                             </button>
                                             <ul
-                                                className="dropdown-menu"
-                                                aria-labelledby="dropdownMenuClickableOutside"
-                                            >
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuClickableOutside">
+                        
                                                 <li>
                                                   <Link className="dropdown-item" to="#">
                                                         Menu item
@@ -1844,19 +1844,19 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-info dropdown-toggle"
-                                                type="button"
-                                                id="dropdownMenuClickableInside"
-                                                data-bs-toggle="dropdown"
-                                                data-bs-auto-close="outside"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-info dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuClickableInside"
+                        data-bs-toggle="dropdown"
+                        data-bs-auto-close="outside"
+                        aria-expanded="false">
+                        
                                                 Clickable inside
                                             </button>
                                             <ul
-                                                className="dropdown-menu"
-                                                aria-labelledby="dropdownMenuClickableInside"
-                                            >
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuClickableInside">
+                        
                                                 <li>
                                                   <Link className="dropdown-item" to="#">
                                                         Menu item
@@ -1876,19 +1876,19 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-warning dropdown-toggle"
-                                                type="button"
-                                                id="dropdownMenuClickableInsise"
-                                                data-bs-toggle="dropdown"
-                                                data-bs-auto-close="false"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-warning dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuClickableInsise"
+                        data-bs-toggle="dropdown"
+                        data-bs-auto-close="false"
+                        aria-expanded="false">
+                        
                                                 Manual close
                                             </button>
                                             <ul
-                                                className="dropdown-menu"
-                                                aria-labelledby="dropdownMenuClickableInsise"
-                                            >
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuClickableInsise">
+                        
                                                 <li>
                                                   <Link className="dropdown-item" to="#">
                                                         Menu item
@@ -1923,12 +1923,12 @@ const Dropdowns = () => {
                                     </p>
                                     <div className="dropdown-center">
                                         <button
-                                            className="btn btn-primary dropdown-toggle"
-                                            type="button"
-                                            id="dropdownCenterBtn"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      className="btn btn-primary dropdown-toggle"
+                      type="button"
+                      id="dropdownCenterBtn"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Centered dropdown
                                         </button>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownCenterBtn">
@@ -1966,12 +1966,12 @@ const Dropdowns = () => {
                                     </p>
                                     <div className="dropup-center dropup">
                                         <button
-                                            className="btn btn-secondary dropdown-toggle"
-                                            type="button"
-                                            id="dropupCenterBtn"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      className="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      id="dropupCenterBtn"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Centered dropup
                                         </button>
                                         <ul className="dropdown-menu" aria-labelledby="dropupCenterBtn">
@@ -2009,12 +2009,12 @@ const Dropdowns = () => {
                                     </p>
                                     <div className="dropdown">
                                         <button
-                                            className="btn btn-info dropdown-toggle"
-                                            type="button"
-                                            id="dropdownMenu1"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      className="btn btn-info dropdown-toggle"
+                      type="button"
+                      id="dropdownMenu1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Dropdown
                                         </button>
                                         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -2051,19 +2051,19 @@ const Dropdowns = () => {
                                     <div className="d-flex align-items-center">
                                         <div className="dropdown me-1">
                                             <button
-                                                type="button"
-                                                className="btn btn-primary dropdown-toggle"
-                                                id="dropdownMenuOffset"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                                data-bs-offset="10,20"
-                                            >
+                        type="button"
+                        className="btn btn-primary dropdown-toggle"
+                        id="dropdownMenuOffset"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        data-bs-offset="10,20">
+                        
                                                 Offset
                                             </button>
                                             <ul
-                                                className="dropdown-menu"
-                                                aria-labelledby="dropdownMenuOffset"
-                                            >
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuOffset">
+                        
                                                 <li>
                                                   <Link className="dropdown-item" to="#">
                                                         Action
@@ -2086,19 +2086,19 @@ const Dropdowns = () => {
                                                 Reference
                                             </button>
                                             <button
-                                                type="button"
-                                                className="btn btn-info dropdown-toggle dropdown-toggle-split"
-                                                id="dropdownMenuReference"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                                data-bs-reference="parent"
-                                            >
+                        type="button"
+                        className="btn btn-info dropdown-toggle dropdown-toggle-split"
+                        id="dropdownMenuReference"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        data-bs-reference="parent">
+                        
                                                 <span className="visually-hidden">Toggle Dropdown</span>
                                             </button>
                                             <ul
-                                                className="dropdown-menu"
-                                                aria-labelledby="dropdownMenuReference"
-                                            >
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuReference">
+                        
                                                 <li>
                                                   <Link className="dropdown-item" to="#">
                                                         Action
@@ -2139,18 +2139,18 @@ const Dropdowns = () => {
                                     <div className="btn-list">
                                         <div className="btn-group my-1">
                                             <button
-                                                className="btn btn-primary dropdown-toggle mb-0"
-                                                type="button"
-                                                id="dropdownMenuButton"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-primary dropdown-toggle mb-0"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Dropdown
                                             </button>
                                             <ul
-                                                className="dropdown-menu"
-                                                aria-labelledby="dropdownMenuButton"
-                                            >
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton">
+                        
                                                 <li>
                                                   <Link className="dropdown-item" to="#">
                                                         Menu item
@@ -2170,11 +2170,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group my-1">
                                             <button
-                                                type="button"
-                                                className="btn btn-secondary dropdown-toggle mb-0"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-secondary dropdown-toggle mb-0"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Right-aligned menu
                                             </button>
                                             <ul className="dropdown-menu dropdown-menu-end">
@@ -2197,12 +2197,12 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group my-1">
                                             <button
-                                                type="button"
-                                                className="btn btn-info dropdown-toggle mb-0"
-                                                data-bs-toggle="dropdown"
-                                                data-bs-display="static"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-info dropdown-toggle mb-0"
+                        data-bs-toggle="dropdown"
+                        data-bs-display="static"
+                        aria-expanded="false">
+                        
                                                 Left-aligned, right-aligned lg
                                             </button>
                                             <ul className="dropdown-menu dropdown-menu-lg-end">
@@ -2225,12 +2225,12 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group my-1">
                                             <button
-                                                type="button"
-                                                className="btn btn-warning dropdown-toggle mb-0"
-                                                data-bs-toggle="dropdown"
-                                                data-bs-display="static"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-warning dropdown-toggle mb-0"
+                        data-bs-toggle="dropdown"
+                        data-bs-display="static"
+                        aria-expanded="false">
+                        
                                                 Right-aligned, left-aligned lg
                                             </button>
                                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
@@ -2253,11 +2253,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group dropstart my-1">
                                             <button
-                                                type="button"
-                                                className="btn btn-success dropdown-toggle mb-0"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-success dropdown-toggle mb-0"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Dropstart
                                             </button>
                                             <ul className="dropdown-menu">
@@ -2280,11 +2280,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group dropend my-1">
                                             <button
-                                                type="button"
-                                                className="btn btn-danger dropdown-toggle mb-0"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-danger dropdown-toggle mb-0"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Dropend
                                             </button>
                                             <ul className="dropdown-menu">
@@ -2307,11 +2307,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group dropup my-1">
                                             <button
-                                                type="button"
-                                                className="btn btn-teal dropdown-toggle mb-0"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-teal dropdown-toggle mb-0"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Dropup
                                             </button>
                                             <ul className="dropdown-menu">
@@ -2346,12 +2346,12 @@ const Dropdowns = () => {
                                 <div className="card-body">
                                     <div className="dropdown">
                                         <button
-                                            className="btn btn-dark dropdown-toggle"
-                                            type="button"
-                                            id="dropdownMenuButton3"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      className="btn btn-dark dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton3"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Dropdown button
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-dark">
@@ -2385,11 +2385,11 @@ const Dropdowns = () => {
                                 <div className="card-body">
                                     <div className="btn-group">
                                         <button
-                                            type="button"
-                                            className="btn btn-primary dropdown-toggle"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-primary dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Right-aligned menu example
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-end">
@@ -2423,12 +2423,12 @@ const Dropdowns = () => {
                                 <div className="card-body">
                                     <div className="btn-group">
                                         <button
-                                            type="button"
-                                            className="btn btn-secondary dropdown-toggle text-wrap"
-                                            data-bs-toggle="dropdown"
-                                            data-bs-display="static"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-secondary dropdown-toggle text-wrap"
+                      data-bs-toggle="dropdown"
+                      data-bs-display="static"
+                      aria-expanded="false">
+                      
                                             Left-aligned but right aligned when large screen
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-lg-end">
@@ -2460,12 +2460,12 @@ const Dropdowns = () => {
                                 <div className="card-body">
                                     <div className="btn-group">
                                         <button
-                                            type="button"
-                                            className="btn btn-info dropdown-toggle text-wrap"
-                                            data-bs-toggle="dropdown"
-                                            data-bs-display="static"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-info dropdown-toggle text-wrap"
+                      data-bs-toggle="dropdown"
+                      data-bs-display="static"
+                      aria-expanded="false">
+                      
                                             Left-aligned but right aligned when large screen
                                         </button>
                                         <ul className="dropdown-menu dropdown-menu-lg-start">
@@ -2500,11 +2500,11 @@ const Dropdowns = () => {
                                     <div className="btn-list">
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-primary dropdown-toggle"
-                                                type="button"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-primary dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Primary
                                             </button>
                                             <ul className="dropdown-menu dropdown-menu-primary">
@@ -2527,11 +2527,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-secondary dropdown-toggle"
-                                                type="button"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Secondary
                                             </button>
                                             <ul className="dropdown-menu dropdown-menu-secondary">
@@ -2554,19 +2554,19 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-warning dropdown-toggle"
-                                                type="button"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-warning dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Warning
                                             </button>
                                             <ul className="dropdown-menu dropmenu-item-warning">
                                                 <li>
                                                   <Link
-                                                        className="dropdown-item active"
-                                                        to="#"
-                                                    >
+                            className="dropdown-item active"
+                            to="#">
+                            
                                                         Active
                                                     </Link>
                                                 </li>
@@ -2589,19 +2589,19 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-info dropdown-toggle"
-                                                type="button"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-info dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Info
                                             </button>
                                             <ul className="dropdown-menu dropmenu-item-info">
                                                 <li>
                                                   <Link
-                                                        className="dropdown-item active"
-                                                        to="#"
-                                                    >
+                            className="dropdown-item active"
+                            to="#">
+                            
                                                         Active
                                                     </Link>
                                                 </li>
@@ -2624,11 +2624,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-soft-success dropdown-toggle"
-                                                type="button"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-soft-success dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Success
                                             </button>
                                             <ul className="dropdown-menu dropmenu-light-success">
@@ -2644,9 +2644,9 @@ const Dropdowns = () => {
                                                 </li>
                                                 <li>
                                                   <Link
-                                                        className="dropdown-item active"
-                                                        to="#"
-                                                    >
+                            className="dropdown-item active"
+                            to="#">
+                            
                                                         Active
                                                     </Link>
                                                 </li>
@@ -2659,11 +2659,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                className="btn btn-soft-danger dropdown-toggle"
-                                                type="button"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        className="btn btn-soft-danger dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Danger
                                             </button>
                                             <ul className="dropdown-menu dropmenu-light-danger">
@@ -2679,9 +2679,9 @@ const Dropdowns = () => {
                                                 </li>
                                                 <li>
                                                   <Link
-                                                        className="dropdown-item active"
-                                                        to="#"
-                                                    >
+                            className="dropdown-item active"
+                            to="#">
+                            
                                                         Active
                                                     </Link>
                                                 </li>
@@ -2707,11 +2707,11 @@ const Dropdowns = () => {
                                     <div className="btn-list">
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-primary-ghost dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-primary-ghost dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Primary
                                             </button>
                                             <ul className="dropdown-menu">
@@ -2742,11 +2742,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-secondary-ghost dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-secondary-ghost dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Secondary
                                             </button>
                                             <ul className="dropdown-menu">
@@ -2777,11 +2777,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-success-ghost dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-success-ghost dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Success
                                             </button>
                                             <ul className="dropdown-menu">
@@ -2812,11 +2812,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-info-ghost dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-info-ghost dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Info
                                             </button>
                                             <ul className="dropdown-menu">
@@ -2847,11 +2847,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-warning-ghost dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-warning-ghost dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Warning
                                             </button>
                                             <ul className="dropdown-menu">
@@ -2882,11 +2882,11 @@ const Dropdowns = () => {
                                         </div>
                                         <div className="btn-group">
                                             <button
-                                                type="button"
-                                                className="btn btn-danger-ghost dropdown-toggle"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                            >
+                        type="button"
+                        className="btn btn-danger-ghost dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        
                                                 Danger
                                             </button>
                                             <ul className="dropdown-menu">
@@ -3046,9 +3046,9 @@ const Dropdowns = () => {
                                 <div className="card-body">
                                     <div className="bd-example">
                                         <div
-                                            className="dropdown-menu p-4 text-muted"
-                                            style={{ maxWidth: 200 }}
-                                        >
+                      className="dropdown-menu p-4 text-muted"
+                      style={{ maxWidth: 200 }}>
+                      
                                             <p>
                                                 Some example text that&aposs free-flowing within the dropdown
                                                 menu.
@@ -3064,8 +3064,8 @@ const Dropdowns = () => {
                 </div>
             </div>
 
-        </div>
-    )
-}
+        </div>);
 
-export default Dropdowns
+};
+
+export default Dropdowns;

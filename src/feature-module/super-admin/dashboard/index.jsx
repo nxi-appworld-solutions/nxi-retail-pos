@@ -1,59 +1,58 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import ReactApexChart from "react-apexcharts";
-import ImageWithBasePath from '../../../core/img/imagewithbasebath';
-import { all_routes } from '../../../Router/all_routes';
-import CollapesIcon from '../../../core/common/tooltip-content/collapes';
-import CommonFooter from '../../../core/common/footer/commonFooter';
-import PredefinedDateRanges from '../../../core/common/range-picker/datePicker';
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+import CommonFooter from "../../../components/footer/commonFooter";
+
+import { all_routes } from "../../../routes/all_routes";
+import CommonDateRangePicker from "../../../components/date-range-picker/common-date-range-picker";
 
 const SuperAdminDashboard = () => {
-  const routes = all_routes
-  const [CompanyChart] = React.useState({
+  const routes = all_routes;
+  const [CompanyChart] = useState({
     chart: {
       height: 240,
-      type: 'bar',
+      type: "bar",
       toolbar: {
-        show: false,
+        show: false
       }
     },
-    colors: ['#212529'],
-    responsive: [{
+    colors: ["#212529"],
+    responsive: [
+    {
       breakpoint: 480,
       options: {
         legend: {
-          position: 'bottom',
+          position: "bottom",
           offsetX: -10,
           offsetY: 0
         }
       }
     }],
+
     plotOptions: {
       bar: {
         borderRadius: 10,
-        borderRadiusWhenStacked: 'all',
+        borderRadiusWhenStacked: "all",
         horizontal: false,
-        endingShape: 'rounded',
         colors: {
-          backgroundBarColors: ['#f3f4f5'], // Background color for bars
-          backgroundBarOpacity: 0.5,
-          hover: {
-            enabled: true,
-            borderColor: '#F26522', // Color when hovering over the bar
-          }
+          backgroundBarColors: ["#f3f4f5"], // Background color for bars
+          backgroundBarOpacity: 0.5
         }
-      },
+      }
     },
-    series: [{
-      name: 'Company',
+    series: [
+    {
+      name: "Company",
       data: [40, 60, 20, 80, 60, 60, 60]
     }],
+
     xaxis: {
-      categories: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+      categories: ["M", "T", "W", "T", "F", "S", "S"],
       labels: {
         style: {
-          colors: '#6B7280',
-          fontSize: '13px',
+          colors: "#6B7280",
+          fontSize: "13px"
         }
       }
     },
@@ -64,11 +63,11 @@ const SuperAdminDashboard = () => {
       }
     },
     grid: {
-      borderColor: '#E5E7EB',
+      borderColor: "#E5E7EB",
       strokeDashArray: 5,
       padding: {
-        left: -8,
-      },
+        left: -8
+      }
     },
     legend: {
       show: false
@@ -78,60 +77,77 @@ const SuperAdminDashboard = () => {
     },
     fill: {
       opacity: 1
-    },
-  })
-  const [RevenueChart] = React.useState({
+    }
+  });
+  const [RevenueChart] = useState({
     chart: {
       height: 230,
-      type: 'bar',
+      type: "bar",
       stacked: true,
       toolbar: {
-        show: false,
+        show: false
       }
     },
-    colors: ['#FF6F28', '#F8F9FA'],
-    responsive: [{
+    colors: ["#FF6F28", "#F8F9FA"],
+    responsive: [
+    {
       breakpoint: 480,
       options: {
         legend: {
-          position: 'bottom',
+          position: "bottom",
           offsetX: -10,
           offsetY: 0
         }
       }
     }],
+
     plotOptions: {
       bar: {
         borderRadius: 5,
-        borderRadiusWhenStacked: 'all',
-        horizontal: false,
-        endingShape: 'rounded'
-      },
+        borderRadiusWhenStacked: "all",
+        horizontal: false
+      }
     },
-    series: [{
-      name: 'Income',
+    series: [
+    {
+      name: "Income",
       data: [40, 30, 45, 80, 85, 90, 80, 80, 80, 85, 20, 80]
-    }, {
-      name: 'Expenses',
+    },
+    {
+      name: "Expenses",
       data: [60, 70, 55, 20, 15, 10, 20, 20, 20, 15, 80, 20]
     }],
+
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"],
+
       labels: {
         style: {
-          colors: '#6B7280',
-          fontSize: '13px',
+          colors: "#6B7280",
+          fontSize: "13px"
         }
       }
     },
     yaxis: {
-      min: 0,    // Set the minimum value of the Y-axis to 0
+      min: 0, // Set the minimum value of the Y-axis to 0
       max: 100,
       labels: {
         offsetX: -15,
         style: {
-          colors: '#6B7280',
-          fontSize: '13px',
+          colors: "#6B7280",
+          fontSize: "13px"
         },
         formatter: function (value) {
           return value + "K"; // Divide by 1000 and append 'K'
@@ -139,11 +155,11 @@ const SuperAdminDashboard = () => {
       }
     },
     grid: {
-      borderColor: 'transparent',
+      borderColor: "transparent",
       strokeDashArray: 5,
       padding: {
-        left: -8,
-      },
+        left: -8
+      }
     },
     legend: {
       show: false
@@ -154,66 +170,69 @@ const SuperAdminDashboard = () => {
     tooltip: {
       y: {
         formatter: function (val) {
-          return val / 10 + " k"
+          return val / 10 + " k";
         }
       }
     },
     fill: {
       opacity: 1
-    },
-  })
-  const [PlanChart] = React.useState({
+    }
+  });
+  const [PlanChart] = useState({
     chart: {
       height: 240,
-      type: 'donut',
+      type: "donut",
       toolbar: {
-        show: false,
+        show: false
       }
     },
-    colors: ['#FFC107', '#1B84FF', '#F26522'],
+    colors: ["#FFC107", "#1B84FF", "#F26522"],
     series: [20, 60, 20],
-    labels: ['Enterprise', 'Premium', 'Basic'],
+    labels: ["Enterprise", "Premium", "Basic"],
     plotOptions: {
       pie: {
         donut: {
-          size: '50%',
+          size: "50%",
           labels: {
             show: false
-          },
-          borderRadius: 30
+          }
         }
       }
     },
     stroke: {
-      lineCap: 'round',
+      lineCap: "round",
       show: true,
-      width: 0,    // Space between donut sections
-      colors: '#fff'
+      width: 0, // Space between donut sections
+      colors: ["#fff"]
     },
     dataLabels: {
       enabled: false
     },
     legend: { show: false },
-    responsive: [{
+    responsive: [
+    {
       breakpoint: 480,
       options: {
         chart: {
-          height: 180,
+          height: 180
         },
         legend: {
-          position: 'bottom'
+          position: "bottom"
         }
       }
     }]
-  })
-  const [ApexChart] = React.useState({
-    series: [{
+
+  });
+  const [ApexChart] = useState({
+    series: [
+    {
       name: "Messages",
       data: [5, 10, 7, 5, 10, 7, 5]
     }],
 
+
     chart: {
-      type: 'bar',
+      type: "bar",
       width: 70,
       toolbar: {
         show: false
@@ -226,7 +245,7 @@ const SuperAdminDashboard = () => {
         top: 3,
         left: 14,
         blur: 4,
-        opacity: .12,
+        opacity: 0.12,
         color: "#fff"
       },
       sparkline: {
@@ -245,8 +264,7 @@ const SuperAdminDashboard = () => {
     plotOptions: {
       bar: {
         horizontal: !1,
-        columnWidth: "35%",
-        endingShape: "rounded"
+        columnWidth: "35%"
       }
     },
     dataLabels: {
@@ -259,13 +277,22 @@ const SuperAdminDashboard = () => {
     },
     colors: ["#FF6F28"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+      categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep"],
+
       labels: {
-        show: false,
+        show: false
       }
     },
     tooltip: {
-      show: false,
       theme: "dark",
       fixed: {
         enabled: false
@@ -278,15 +305,17 @@ const SuperAdminDashboard = () => {
         show: false
       }
     }
-  })
-  const [ApexChart2] = React.useState({
-    series: [{
+  });
+  const [ApexChart2] = useState({
+    series: [
+    {
       name: "Messages",
       data: [5, 3, 7, 6, 3, 10, 5]
     }],
 
+
     chart: {
-      type: 'bar',
+      type: "bar",
       width: 70,
       toolbar: {
         show: false
@@ -299,7 +328,7 @@ const SuperAdminDashboard = () => {
         top: 3,
         left: 14,
         blur: 4,
-        opacity: .12,
+        opacity: 0.12,
         color: "#fff"
       },
       sparkline: {
@@ -318,8 +347,7 @@ const SuperAdminDashboard = () => {
     plotOptions: {
       bar: {
         horizontal: !1,
-        columnWidth: "35%",
-        endingShape: "rounded"
+        columnWidth: "35%"
       }
     },
     dataLabels: {
@@ -332,13 +360,22 @@ const SuperAdminDashboard = () => {
     },
     colors: ["#4B3088"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+      categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep"],
+
       labels: {
-        show: false,
+        show: false
       }
     },
     tooltip: {
-      show: false,
       theme: "dark",
       fixed: {
         enabled: false
@@ -351,15 +388,17 @@ const SuperAdminDashboard = () => {
         show: false
       }
     }
-  })
-  const [ApexChart3] = React.useState({
-    series: [{
+  });
+  const [ApexChart3] = useState({
+    series: [
+    {
       name: "Messages",
       data: [8, 10, 10, 8, 8, 10, 8]
     }],
 
+
     chart: {
-      type: 'bar',
+      type: "bar",
       width: 70,
       toolbar: {
         show: false
@@ -372,7 +411,7 @@ const SuperAdminDashboard = () => {
         top: 3,
         left: 14,
         blur: 4,
-        opacity: .12,
+        opacity: 0.12,
         color: "#fff"
       },
       sparkline: {
@@ -391,8 +430,7 @@ const SuperAdminDashboard = () => {
     plotOptions: {
       bar: {
         horizontal: !1,
-        columnWidth: "35%",
-        endingShape: "rounded"
+        columnWidth: "35%"
       }
     },
     dataLabels: {
@@ -405,13 +443,22 @@ const SuperAdminDashboard = () => {
     },
     colors: ["#177DBC"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+      categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep"],
+
       labels: {
-        show: false,
+        show: false
       }
     },
     tooltip: {
-      show: false,
       theme: "dark",
       fixed: {
         enabled: false
@@ -424,15 +471,17 @@ const SuperAdminDashboard = () => {
         show: false
       }
     }
-  })
-  const [ApexChart4] = React.useState({
-    series: [{
+  });
+  const [ApexChart4] = useState({
+    series: [
+    {
       name: "Messages",
       data: [5, 10, 7, 5, 10, 7, 5]
     }],
 
+
     chart: {
-      type: 'bar',
+      type: "bar",
       width: 70,
       toolbar: {
         show: false
@@ -445,7 +494,7 @@ const SuperAdminDashboard = () => {
         top: 3,
         left: 14,
         blur: 4,
-        opacity: .12,
+        opacity: 0.12,
         color: "#fff"
       },
       sparkline: {
@@ -464,8 +513,7 @@ const SuperAdminDashboard = () => {
     plotOptions: {
       bar: {
         horizontal: !1,
-        columnWidth: "35%",
-        endingShape: "rounded"
+        columnWidth: "35%"
       }
     },
     dataLabels: {
@@ -478,13 +526,22 @@ const SuperAdminDashboard = () => {
     },
     colors: ["#2DCB73"],
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+      categories: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep"],
+
       labels: {
-        show: false,
+        show: false
       }
     },
     tooltip: {
-      show: false,
       theme: "dark",
       fixed: {
         enabled: false
@@ -497,7 +554,7 @@ const SuperAdminDashboard = () => {
         show: false
       }
     }
-  })
+  });
   return (
     <div className="page-wrapper">
       <div className="content">
@@ -505,7 +562,8 @@ const SuperAdminDashboard = () => {
           <div>
             <h2 className="mb-1">Welcome, Admin</h2>
             <p>
-              You have <span className="text-primary fw-bold">200+</span> Orders, Today
+              You have <span className="text-primary fw-bold">200+</span>{" "}
+              Orders, Today
             </p>
           </div>
           <ul className="table-top-head">
@@ -514,7 +572,7 @@ const SuperAdminDashboard = () => {
                 <span className="input-icon-addon fs-16 text-gray-9">
                   <i className="ti ti-calendar" />
                 </span>
-                <PredefinedDateRanges />
+                <CommonDateRangePicker />
               </div>
             </li>
             <CollapesIcon />
@@ -525,33 +583,41 @@ const SuperAdminDashboard = () => {
           <div className=" d-flex align-items-center justify-content-between flex-wrap">
             <div className="mb-3">
               <h2 className="mb-1 text-white">Welcome Back, Adrian</h2>
-              <p className="text-light">14 New Companies Subscribed Today !!!</p>
+              <p className="text-light">
+                14 New Companies Subscribed Today !!!
+              </p>
             </div>
             <div className="d-flex align-items-center flex-wrap mb-1">
-              <Link to={routes.superAdminCompanies} className="btn btn-dark btn-md me-2 mb-2">
+              <Link
+                to={routes.companies}
+                className="btn btn-dark btn-md me-2 mb-2">
+                
                 Companies
               </Link>
-              <Link to={routes.superAdminPackages} className="btn btn-light btn-md mb-2">
+              <Link
+                to={routes.packagelist}
+                className="btn btn-light btn-md mb-2">
+                
                 All Packages
               </Link>
             </div>
           </div>
           <div className="welcome-bg">
-            <ImageWithBasePath
-              src="assets/img/bg/welcome-bg-02.svg"
+            <img
+              src="src/assets/img/bg/welcome-bg-02.svg"
               alt="img"
-              className="welcome-bg-01"
-            />
-            <ImageWithBasePath
-              src="assets/img/bg/welcome-bg-03.svg"
+              className="welcome-bg-01" />
+            
+            <img
+              src="src/assets/img/bg/welcome-bg-03.svg"
               alt="img"
-              className="welcome-bg-02"
-            />
-            <ImageWithBasePath
-              src="assets/img/bg/welcome-bg-01.svg"
+              className="welcome-bg-02" />
+            
+            <img
+              src="src/assets/img/bg/welcome-bg-01.svg"
               alt="img"
-              className="welcome-bg-03"
-            />
+              className="welcome-bg-03" />
+            
           </div>
         </div>
         {/* /Welcome Wrap */}
@@ -564,7 +630,9 @@ const SuperAdminDashboard = () => {
                   <span className="avatar avatar-md bg-dark mb-3">
                     <i className="ti ti-building fs-16" />
                   </span>
-                  <span className="badge bg-success fw-normal mb-3">+19.01%</span>
+                  <span className="badge bg-success fw-normal mb-3">
+                    +19.01%
+                  </span>
                 </div>
                 <div className="d-flex align-items-center justify-content-between">
                   <div>
@@ -575,8 +643,8 @@ const SuperAdminDashboard = () => {
                     options={ApexChart}
                     series={ApexChart.series}
                     type="bar"
-                    width={70}
-                  />
+                    width={70} />
+                  
                 </div>
               </div>
             </div>
@@ -601,8 +669,8 @@ const SuperAdminDashboard = () => {
                     options={ApexChart2}
                     series={ApexChart2.series}
                     type="bar"
-                    width={70}
-                  />
+                    width={70} />
+                  
                 </div>
               </div>
             </div>
@@ -627,8 +695,8 @@ const SuperAdminDashboard = () => {
                     options={ApexChart3}
                     series={ApexChart3.series}
                     type="bar"
-                    width={70}
-                  />
+                    width={70} />
+                  
                 </div>
               </div>
             </div>
@@ -653,8 +721,8 @@ const SuperAdminDashboard = () => {
                     options={ApexChart4}
                     series={ApexChart4.series}
                     type="bar"
-                    width={70}
-                  />
+                    width={70} />
+                  
                 </div>
               </div>
             </div>
@@ -671,33 +739,24 @@ const SuperAdminDashboard = () => {
                   <Link
                     to="#"
                     className="btn btn-white border btn-sm d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     <i className="ti ti-calendar me-1" />
                     This Week
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         This Month
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         This Week
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Today
                       </Link>
                     </li>
@@ -710,11 +769,11 @@ const SuperAdminDashboard = () => {
                   options={CompanyChart}
                   series={CompanyChart.series}
                   type="bar"
-                  height={240}
-                />
+                  height={240} />
+                
                 <p className="f-13 d-inline-flex align-items-center">
-                  <span className="badge badge-success me-1">+6%</span> 5 Companies
-                  from last month
+                  <span className="badge badge-success me-1">+6%</span> 5
+                  Companies from last month
                 </p>
               </div>
             </div>
@@ -729,33 +788,24 @@ const SuperAdminDashboard = () => {
                   <Link
                     to="#"
                     className="btn btn-white border btn-sm d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     <i className="ti ti-calendar me-1" />
                     2025
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         2024
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         2025
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         2023
                       </Link>
                     </li>
@@ -767,8 +817,8 @@ const SuperAdminDashboard = () => {
                   <div className="mb-1">
                     <h5 className="mb-1">$45787</h5>
                     <p>
-                      <span className="text-success fw-bold">+40%</span> increased
-                      from last year
+                      <span className="text-success fw-bold">+40%</span>{" "}
+                      increased from last year
                     </p>
                   </div>
                   <p className="fs-13 text-gray-9 d-flex align-items-center mb-1">
@@ -781,8 +831,8 @@ const SuperAdminDashboard = () => {
                   options={RevenueChart}
                   series={RevenueChart.series}
                   type="bar"
-                  height={230}
-                />
+                  height={230} />
+                
               </div>
             </div>
           </div>
@@ -796,33 +846,24 @@ const SuperAdminDashboard = () => {
                   <Link
                     to="#"
                     className="btn btn-white border btn-sm d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     <i className="ti ti-calendar me-1" />
                     This Month
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         This Month
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         This Week
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Today
                       </Link>
                     </li>
@@ -834,8 +875,8 @@ const SuperAdminDashboard = () => {
                   options={PlanChart}
                   series={PlanChart.series}
                   type="donut"
-                  height={240}
-                />
+                  height={240} />
+                
                 <div className="d-flex align-items-center justify-content-between mb-2">
                   <p className="f-13 mb-0">
                     <i className="ti ti-circle-filled text-primary me-1" />
@@ -869,9 +910,9 @@ const SuperAdminDashboard = () => {
               <div className="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
                 <h5 className="mb-2">Recent Transactions</h5>
                 <Link
-                  to={routes.superAdminPurchaseTransaction}
-                  className="btn btn-light btn-md mb-2"
-                >
+                  to={routes.purchasetransaction}
+                  className="btn btn-light btn-md mb-2">
+                  
                   View All
                 </Link>
               </div>
@@ -880,13 +921,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/company/company-02.svg"
+                      className="avatar bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/company/company-02.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -908,13 +949,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/company/company-03.svg"
+                      className="avatar bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/company/company-03.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -936,13 +977,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/company/company-05.svg"
+                      className="avatar bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/company/company-05.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -964,13 +1005,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/company/company-07.svg"
+                      className="avatar bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/company/company-07.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -992,13 +1033,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/company/company-08.svg"
+                      className="avatar bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/company/company-08.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -1026,9 +1067,9 @@ const SuperAdminDashboard = () => {
               <div className="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
                 <h5 className="mb-2">Recently Registered</h5>
                 <Link
-                  to={routes.superAdminPurchaseTransaction}
-                  className="btn btn-light btn-md mb-2"
-                >
+                  to={routes.purchasetransaction}
+                  className="btn btn-light btn-md mb-2">
+                  
                   View All
                 </Link>
               </div>
@@ -1037,13 +1078,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/icons/company-icon-11.svg"
+                      className="avatar bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/icons/company-icon-11.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -1060,13 +1101,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar  bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/icons/company-icon-12.svg"
+                      className="avatar  bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/icons/company-icon-12.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -1083,13 +1124,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar  bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/icons/company-icon-13.svg"
+                      className="avatar  bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/icons/company-icon-13.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -1106,13 +1147,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar  bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/icons/company-icon-14.svg"
+                      className="avatar  bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/icons/company-icon-14.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -1129,13 +1170,13 @@ const SuperAdminDashboard = () => {
                   <div className="d-flex align-items-center mb-2">
                     <Link
                       to="#"
-                      className="avatar  bg-gray-100 rounded-circle flex-shrink-0"
-                    >
-                      <ImageWithBasePath
-                        src="assets/img/icons/company-icon-15.svg"
+                      className="avatar  bg-gray-100 rounded-circle flex-shrink-0">
+                      
+                      <img
+                        src="src/assets/img/icons/company-icon-15.svg"
                         className="img-fluid w-auto h-auto"
-                        alt="img"
-                      />
+                        alt="img" />
+                      
                     </Link>
                     <div className="ms-2 flex-fill">
                       <h6 className="fs-medium text-truncate mb-1">
@@ -1161,8 +1202,8 @@ const SuperAdminDashboard = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white border btn-sm d-inline-flex align-items-center fs-13"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Expired
                   </Link>
                   <div className="dropdown-menu dropdown-menu-end p-3">
@@ -1172,8 +1213,8 @@ const SuperAdminDashboard = () => {
                           to="#"
                           className="dropdown-item d-block rounded-1"
                           data-bs-toggle="tab"
-                          data-bs-target="#expired"
-                        >
+                          data-bs-target="#expired">
+                          
                           Expired
                         </Link>
                       </li>
@@ -1182,8 +1223,8 @@ const SuperAdminDashboard = () => {
                           to="#"
                           className="dropdown-item d-block rounded-1"
                           data-bs-toggle="tab"
-                          data-bs-target="#request"
-                        >
+                          data-bs-target="#request">
+                          
                           Request
                         </Link>
                       </li>
@@ -1198,13 +1239,13 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center mb-2">
                         <Link
                           to="#"
-                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/icons/company-icon-16.svg"
+                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/icons/company-icon-16.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1216,24 +1257,23 @@ const SuperAdminDashboard = () => {
                       <div className="text-sm-end mb-2">
                         <Link
                           to="#"
-                          className="link-info text-decoration-underline d-block mb-1"
-                        >
+                          className="link-info text-decoration-underline d-block mb-1">
+                          
                           Send Reminder
                         </Link>
-                        
                       </div>
                     </div>
                     <div className="d-sm-flex justify-content-between flex-wrap mb-3">
                       <div className="d-flex align-items-center mb-2">
                         <Link
                           to="#"
-                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/icons/company-icon-14.svg"
+                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/icons/company-icon-14.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1245,24 +1285,23 @@ const SuperAdminDashboard = () => {
                       <div className="text-sm-end mb-2">
                         <Link
                           to="#"
-                          className="link-info text-decoration-underline d-block mb-1"
-                        >
+                          className="link-info text-decoration-underline d-block mb-1">
+                          
                           Send Reminder
                         </Link>
-                        
                       </div>
                     </div>
                     <div className="d-sm-flex justify-content-between flex-wrap mb-3">
                       <div className="d-flex align-items-center mb-2">
                         <Link
                           to="#"
-                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/icons/company-icon-18.svg"
+                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/icons/company-icon-18.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1274,24 +1313,23 @@ const SuperAdminDashboard = () => {
                       <div className="text-sm-end mb-2">
                         <Link
                           to="#"
-                          className="link-info text-decoration-underline d-block mb-1"
-                        >
+                          className="link-info text-decoration-underline d-block mb-1">
+                          
                           Send Reminder
                         </Link>
-                       
                       </div>
                     </div>
                     <div className="d-flex justify-content-between flex-wrap mb-3">
                       <div className="d-flex align-items-center mb-2">
                         <Link
                           to="#"
-                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/company/company-07.svg"
+                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/company/company-07.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1303,24 +1341,23 @@ const SuperAdminDashboard = () => {
                       <div className="text-sm-end mb-2">
                         <Link
                           to="#"
-                          className="link-info text-decoration-underline d-block mb-1"
-                        >
+                          className="link-info text-decoration-underline d-block mb-1">
+                          
                           Send Reminder
                         </Link>
-                       
                       </div>
                     </div>
                     <div className="d-sm-flex justify-content-between flex-wrap mb-1">
                       <div className="d-flex align-items-center mb-2">
                         <Link
                           to="#"
-                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/company/company-08.svg"
+                          className="avatar  bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/company/company-08.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1332,11 +1369,10 @@ const SuperAdminDashboard = () => {
                       <div className="text-sm-end mb-2">
                         <Link
                           to="#"
-                          className="link-info text-decoration-underline d-block mb-1"
-                        >
+                          className="link-info text-decoration-underline d-block mb-1">
+                          
                           Send Reminder
                         </Link>
-                        
                       </div>
                     </div>
                   </div>
@@ -1345,13 +1381,13 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center overflow-hidden">
                         <Link
                           to="#"
-                          className="avatar bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/icons/company-icon-16.svg"
+                          className="avatar bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/icons/company-icon-16.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill overflow-hidden">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1365,14 +1401,14 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center">
                         <Link
                           to="#"
-                          className="link-success text-decoration-underline fs-13 fw-medium me-3"
-                        >
+                          className="link-success text-decoration-underline fs-13 fw-medium me-3">
+                          
                           Approve
                         </Link>
                         <Link
                           to="#"
-                          className="link-danger text-decoration-underline fs-13 fw-medium"
-                        >
+                          className="link-danger text-decoration-underline fs-13 fw-medium">
+                          
                           Reject
                         </Link>
                       </div>
@@ -1381,13 +1417,13 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center overflow-hidden">
                         <Link
                           to="#"
-                          className="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/icons/company-icon-14.svg"
+                          className="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/icons/company-icon-14.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill overflow-hidden">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1401,14 +1437,14 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center">
                         <Link
                           to="#"
-                          className="link-success text-decoration-underline fs-13 fw-medium me-3"
-                        >
+                          className="link-success text-decoration-underline fs-13 fw-medium me-3">
+                          
                           Approve
                         </Link>
                         <Link
                           to="#"
-                          className="link-danger text-decoration-underline fs-13 fw-medium"
-                        >
+                          className="link-danger text-decoration-underline fs-13 fw-medium">
+                          
                           Reject
                         </Link>
                       </div>
@@ -1417,13 +1453,13 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center overflow-hidden">
                         <Link
                           to="#"
-                          className="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/icons/company-icon-18.svg"
+                          className="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/icons/company-icon-18.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill overflow-hidden">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1437,14 +1473,14 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center">
                         <Link
                           to="#"
-                          className="link-success text-decoration-underline fs-13 fw-medium me-3"
-                        >
+                          className="link-success text-decoration-underline fs-13 fw-medium me-3">
+                          
                           Approve
                         </Link>
                         <Link
                           to="#"
-                          className="link-danger text-decoration-underline fs-13 fw-medium"
-                        >
+                          className="link-danger text-decoration-underline fs-13 fw-medium">
+                          
                           Reject
                         </Link>
                       </div>
@@ -1453,13 +1489,13 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center overflow-hidden">
                         <Link
                           to="#"
-                          className="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/company/company-07.svg"
+                          className="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/company/company-07.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill overflow-hidden">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1473,14 +1509,14 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center">
                         <Link
                           to="#"
-                          className="link-success text-decoration-underline fs-13 fw-medium me-3"
-                        >
+                          className="link-success text-decoration-underline fs-13 fw-medium me-3">
+                          
                           Approve
                         </Link>
                         <Link
                           to="#"
-                          className="link-danger text-decoration-underline fs-13 fw-medium"
-                        >
+                          className="link-danger text-decoration-underline fs-13 fw-medium">
+                          
                           Reject
                         </Link>
                       </div>
@@ -1489,13 +1525,13 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center overflow-hidden">
                         <Link
                           to="#"
-                          className="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0"
-                        >
-                          <ImageWithBasePath
-                            src="assets/img/company/company-08.svg"
+                          className="avatar avatar-md bg-gray-100 rounded-circle flex-shrink-0">
+                          
+                          <img
+                            src="src/assets/img/company/company-08.svg"
                             className="img-fluid w-auto h-auto"
-                            alt="img"
-                          />
+                            alt="img" />
+                          
                         </Link>
                         <div className="ms-2 flex-fill overflow-hidden">
                           <h6 className="fs-medium text-truncate mb-1">
@@ -1509,14 +1545,14 @@ const SuperAdminDashboard = () => {
                       <div className="d-flex align-items-center">
                         <Link
                           to="#"
-                          className="link-success text-decoration-underline fs-13 fw-medium me-3"
-                        >
+                          className="link-success text-decoration-underline fs-13 fw-medium me-3">
+                          
                           Approve
                         </Link>
                         <Link
                           to="#"
-                          className="link-danger text-decoration-underline fs-13 fw-medium"
-                        >
+                          className="link-danger text-decoration-underline fs-13 fw-medium">
+                          
                           Reject
                         </Link>
                       </div>
@@ -1530,9 +1566,8 @@ const SuperAdminDashboard = () => {
         </div>
       </div>
       <CommonFooter />
-    </div>
+    </div>);
 
-  )
-}
+};
 
-export default SuperAdminDashboard
+export default SuperAdminDashboard;

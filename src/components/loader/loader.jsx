@@ -1,19 +1,43 @@
-/* eslint-disable react/prop-types */
 import React from "react";
-import { ScaleLoader } from "react-spinners";
-import { PropTypes } from "prop-types";
-import "../../style/css/global.css";
 
-const Loader = ({ loading }) => {
+const Loader = ({ loading = false, fullScreen = true, size = 50 }) => {
+  if (!loading) return null;
+
   return (
-    <div className="container_loading">
-      <ScaleLoader color="#ff7b00" loading={loading} />
-    </div>
+    <>
+      <style>{`
+        .loader-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.6);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+        }
+
+        .loader-spinner {
+          border: 4px solid #eee;
+          border-top: 4px solid #28a745;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
+
+      <div className={fullScreen ? "loader-overlay" : ""}>
+        <div className="loader-spinner" style={{ width: size, height: size }} />
+      </div>
+    </>
   );
 };
-
-// Loader.propTypes = {
-//   loading: PropTypes.bool.isRequired,
-// };
 
 export default Loader;

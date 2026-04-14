@@ -1,6 +1,7 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
-import { all_routes } from "../../../../Router/all_routes";
+import { all_routes } from "../../../../routes/all_routes";
+
 
 const CheckboxRadios = () => {
   const route = all_routes;
@@ -34,12 +35,12 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="checkbox"
                       defaultValue=""
-                      id="flexCheckDefault"
-                    />
+                      id="flexCheckDefault" />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexCheckDefault"
-                    >
+                      htmlFor="flexCheckDefault">
+                      
                       Default checkbox
                     </label>
                   </div>
@@ -49,12 +50,12 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       defaultValue=""
                       id="flexCheckChecked"
-                      defaultChecked="true"
-                    />
+                      defaultChecked />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexCheckChecked"
-                    >
+                      htmlFor="flexCheckChecked">
+                      
                       Checked checkbox
                     </label>
                   </div>
@@ -73,12 +74,12 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       defaultValue=""
                       id="flexCheckDisabled"
-                      disabled=""
-                    />
+                      disabled />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexCheckDisabled"
-                    >
+                      htmlFor="flexCheckDisabled">
+                      
                       Disabled checkbox
                     </label>
                   </div>
@@ -88,13 +89,13 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       defaultValue=""
                       id="flexCheckCheckedDisabled"
-                      defaultChecked="true"
-                      disabled=""
-                    />
+                      defaultChecked />
+
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexCheckCheckedDisabled"
-                    >
+                      htmlFor="flexCheckCheckedDisabled">
+                      
                       Disabled checked checkbox
                     </label>
                   </div>
@@ -112,12 +113,12 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="radio"
                       name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                    />
+                      id="flexRadioDefault1" />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexRadioDefault1"
-                    >
+                      htmlFor="flexRadioDefault1">
+                      
                       Default radio
                     </label>
                   </div>
@@ -127,12 +128,12 @@ const CheckboxRadios = () => {
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault2"
-                      defaultChecked="true"
-                    />
+                      defaultChecked />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexRadioDefault2"
-                    >
+                      htmlFor="flexRadioDefault2">
+                      
                       Default checked radio
                     </label>
                   </div>
@@ -151,12 +152,12 @@ const CheckboxRadios = () => {
                       type="radio"
                       name="flexRadioDisabled"
                       id="flexRadioDisabled"
-                      disabled=""
-                    />
+                      disabled />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexRadioDisabled"
-                    >
+                      htmlFor="flexRadioDisabled">
+                      
                       Disabled radio
                     </label>
                   </div>
@@ -166,13 +167,13 @@ const CheckboxRadios = () => {
                       type="radio"
                       name="flexRadioDisabled"
                       id="flexRadioCheckedDisabled"
-                      defaultChecked="true"
-                      disabled=""
-                    />
+                      defaultChecked
+                      disabled />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexRadioCheckedDisabled"
-                    >
+                      htmlFor="flexRadioCheckedDisabled">
+                      
                       Disabled checked radio
                     </label>
                   </div>
@@ -190,8 +191,8 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="checkbox"
                       defaultValue=""
-                      id="defaultCheck1"
-                    />
+                      id="defaultCheck1" />
+                    
                     <label className="form-check-label" htmlFor="defaultCheck1">
                       Default checkbox
                     </label>
@@ -202,8 +203,8 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       defaultValue=""
                       id="defaultCheck2"
-                      disabled=""
-                    />
+                      disabled />
+                    
                     <label className="form-check-label" htmlFor="defaultCheck2">
                       Disabled checkbox
                     </label>
@@ -215,12 +216,12 @@ const CheckboxRadios = () => {
                       name="exampleRadios"
                       id="exampleRadios1"
                       defaultValue="option1"
-                      defaultChecked="true"
-                    />
+                      defaultChecked />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="exampleRadios1"
-                    >
+                      htmlFor="exampleRadios1">
+                      
                       Default radio
                     </label>
                   </div>
@@ -231,12 +232,12 @@ const CheckboxRadios = () => {
                       name="exampleRadios"
                       id="exampleRadios3"
                       defaultValue="option3"
-                      disabled=""
-                    />
+                      disabled />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="exampleRadios3"
-                    >
+                      htmlFor="exampleRadios3">
+                      
                       Disabled radio
                     </label>
                   </div>
@@ -254,12 +255,12 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="checkbox"
                       role="switch"
-                      id="flexSwitchCheckDefault"
-                    />
+                      id="flexSwitchCheckDefault" />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexSwitchCheckDefault"
-                    >
+                      htmlFor="flexSwitchCheckDefault">
+                      
                       Default switch checkbox input
                     </label>
                   </div>
@@ -269,12 +270,12 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       role="switch"
                       id="flexSwitchCheckChecked"
-                      defaultChecked="true"
-                    />
+                      defaultChecked />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexSwitchCheckChecked"
-                    >
+                      htmlFor="flexSwitchCheckChecked">
+                      
                       Checked switch checkbox input
                     </label>
                   </div>
@@ -284,12 +285,12 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       role="switch"
                       id="flexSwitchCheckDisabled"
-                      disabled=""
-                    />
+                      disabled />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexSwitchCheckDisabled"
-                    >
+                      htmlFor="flexSwitchCheckDisabled">
+                      
                       Disabled switch checkbox input
                     </label>
                   </div>
@@ -299,13 +300,13 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       role="switch"
                       id="flexSwitchCheckCheckedDisabled"
-                      defaultChecked="true"
-                      disabled=""
-                    />
+                      defaultChecked
+                      disabled />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="flexSwitchCheckCheckedDisabled"
-                    >
+                      htmlFor="flexSwitchCheckCheckedDisabled">
+                      
                       Disabled checked switch checkbox input
                     </label>
                   </div>
@@ -324,8 +325,8 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       defaultValue=""
                       id="checkebox-sm"
-                      defaultChecked="true"
-                    />
+                      defaultChecked />
+                    
                     <label className="form-check-label" htmlFor="checkebox-sm">
                       Default
                     </label>
@@ -336,8 +337,8 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       defaultValue=""
                       id="checkebox-md"
-                      defaultChecked="true"
-                    />
+                      defaultChecked />
+                    
                     <label className="form-check-label" htmlFor="checkebox-md">
                       Medium
                     </label>
@@ -348,8 +349,8 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       defaultValue=""
                       id="checkebox-lg"
-                      defaultChecked="true"
-                    />
+                      defaultChecked />
+                    
                     <label className="form-check-label" htmlFor="checkebox-lg">
                       Large
                     </label>
@@ -368,8 +369,8 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="radio"
                       name="Radio"
-                      id="Radio-sm"
-                    />
+                      id="Radio-sm" />
+                    
                     <label className="form-check-label" htmlFor="Radio-sm">
                       Default
                     </label>
@@ -379,8 +380,8 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="radio"
                       name="Radio"
-                      id="Radio-md"
-                    />
+                      id="Radio-md" />
+                    
                     <label className="form-check-label" htmlFor="Radio-md">
                       Medium
                     </label>
@@ -391,8 +392,8 @@ const CheckboxRadios = () => {
                       type="radio"
                       name="Radio"
                       id="Radio-lg"
-                      defaultChecked="true"
-                    />
+                      defaultChecked />
+                    
                     <label className="form-check-label" htmlFor="Radio-lg">
                       Large
                     </label>
@@ -411,8 +412,8 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="checkbox"
                       role="switch"
-                      id="switch-sm"
-                    />
+                      id="switch-sm" />
+                    
                     <label className="form-check-label" htmlFor="switch-sm">
                       Default
                     </label>
@@ -422,8 +423,8 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="checkbox"
                       role="switch"
-                      id="switch-md"
-                    />
+                      id="switch-md" />
+                    
                     <label className="form-check-label" htmlFor="switch-md">
                       Medium
                     </label>
@@ -433,8 +434,8 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="checkbox"
                       role="switch"
-                      id="switch-lg"
-                    />
+                      id="switch-lg" />
+                    
                     <label className="form-check-label" htmlFor="switch-lg">
                       Large
                     </label>
@@ -453,12 +454,12 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="checkbox"
                       id="inlineCheckbox1"
-                      defaultValue="option1"
-                    />
+                      defaultValue="option1" />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="inlineCheckbox1"
-                    >
+                      htmlFor="inlineCheckbox1">
+                      
                       1
                     </label>
                   </div>
@@ -467,12 +468,12 @@ const CheckboxRadios = () => {
                       className="form-check-input"
                       type="checkbox"
                       id="inlineCheckbox2"
-                      defaultValue="option2"
-                    />
+                      defaultValue="option2" />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="inlineCheckbox2"
-                    >
+                      htmlFor="inlineCheckbox2">
+                      
                       2
                     </label>
                   </div>
@@ -482,12 +483,12 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       id="inlineCheckbox3"
                       defaultValue="option3"
-                      disabled=""
-                    />
+                      disabled />
+                    
                     <label
                       className="form-check-label"
-                      htmlFor="inlineCheckbox3"
-                    >
+                      htmlFor="inlineCheckbox3">
+                      
                       3 (disabled)
                     </label>
                   </div>
@@ -497,8 +498,8 @@ const CheckboxRadios = () => {
                       type="radio"
                       name="inlineRadioOptions"
                       id="inlineRadio1"
-                      defaultValue="option1"
-                    />
+                      defaultValue="option1" />
+                    
                     <label className="form-check-label" htmlFor="inlineRadio1">
                       1
                     </label>
@@ -509,8 +510,8 @@ const CheckboxRadios = () => {
                       type="radio"
                       name="inlineRadioOptions"
                       id="inlineRadio2"
-                      defaultValue="option2"
-                    />
+                      defaultValue="option2" />
+                    
                     <label className="form-check-label" htmlFor="inlineRadio2">
                       2
                     </label>
@@ -522,8 +523,8 @@ const CheckboxRadios = () => {
                       name="inlineRadioOptions"
                       id="inlineRadio3"
                       defaultValue="option3"
-                      disabled=""
-                    />
+                      disabled />
+                    
                     <label className="form-check-label" htmlFor="inlineRadio3">
                       3 (disabled)
                     </label>
@@ -543,8 +544,8 @@ const CheckboxRadios = () => {
                       type="checkbox"
                       id="checkboxNoLabel"
                       defaultValue=""
-                      aria-label="..."
-                    />
+                      aria-label="..." />
+                    
                   </span>
                   <span>
                     <input
@@ -553,8 +554,8 @@ const CheckboxRadios = () => {
                       name="radioNoLabel"
                       id="radioNoLabel1"
                       defaultValue=""
-                      aria-label="..."
-                    />
+                      aria-label="..." />
+                    
                   </span>
                 </div>
               </div>
@@ -562,8 +563,8 @@ const CheckboxRadios = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default CheckboxRadios;

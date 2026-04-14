@@ -1,111 +1,110 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import Table from "../../core/pagination/datatable";
-import CommonFooter from "../../core/common/footer/commonFooter";
+
+import PrimeDataTable from "../../components/data-table";
+
+import CommonFooter from "../../components/footer/commonFooter";
 import GiftCardModals from "../../core/modals/coupons/giftCardModals";
 import { GiftData } from "../../core/json/giftCardData";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
 
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
+import { useState } from "react";
 
 const GiftCards = () => {
-
   const dataSource = GiftData;
 
   const columns = [
-    {
-      title: "Gift Card",
-      dataIndex: "GiftCard",
-      sorter: (a, b) => a.GiftCard.length - b.GiftCard.length,
-    },
-    {
-      title: "Customer",
-      dataIndex: "Customer",
-      render: (text, data) => (
-        <div className="userimgname">
+  {
+    header: "Gift Card",
+    field: "GiftCard"
+  },
+  {
+    header: "Customer",
+    field: "Customer",
+    body: (text) =>
+    <div className="userimgname">
           <span className="avatar avatar-md me-2">
             <Link to="#">
-              <ImageWithBasePath src={`assets/img/users/${data.Image}`} alt="user" />
+              <img src={text?.Image} alt="user" />
             </Link>
           </span>
-          <Link to="#">{text}</Link>
+          <Link to="#">{text?.Customer}</Link>
         </div>
-      ),
-      sorter: (a, b) => a.Customer.length - b.Customer.length,
-    },
-    {
-      title: "IssuedDate",
-      dataIndex: "IssuedDate",
-      sorter: (a, b) => a.IssuedDate.length - b.IssuedDate.length,
-    },
-    {
-      title: "ExpiryDate",
-      dataIndex: "ExpiryDate",
-      sorter: (a, b) => a.ExpiryDate.length - b.ExpiryDate.length,
-    },
-    {
-      title: "Amount",
-      dataIndex: "Amount",
-      sorter: (a, b) => a.Amount.length - b.Amount.length,
-    },
-    {
-      title: "Balance",
-      dataIndex: "Balance",
-      sorter: (a, b) => a.Balance.length - b.Balance.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      render: (text) => (
-        <span className={`badge table-badge ${text === 'Active' ? 'bg-success' : text === 'Redeemed' ? 'bg-pink' : text === 'Expired' ? 'bg-light' : 'bg-danger'} fw-medium fs-10`}>
-          {text}
+
+  },
+  {
+    header: "IssuedDate",
+    field: "IssuedDate"
+  },
+  {
+    header: "ExpiryDate",
+    field: "ExpiryDate"
+  },
+  {
+    header: "Amount",
+    field: "Amount"
+  },
+  {
+    header: "Balance",
+    field: "Balance"
+  },
+  {
+    header: "Status",
+    field: "Status",
+    body: (text) =>
+    <span
+      className={`badge table-badge ${text?.Status === "Active" ? "bg-success" : text === "Redeemed" ? "bg-pink" : text === "Expired" ? "bg-light" : "bg-danger"} fw-medium fs-10`}>
+      
+          {text?.Status}
         </span>
-      ),
-      sorter: (a, b) => a.Status.length - b.Status.length,
-    },
-    {
-      title: "",
-      dataIndex: "actions",
-      key: "actions",
-      render: () => (
-        <div className="action-table-data">
+
+  },
+  {
+    header: "",
+    field: "actions",
+    key: "actions",
+    body: () =>
+    <div className="action-table-data">
           <div className="edit-delete-action">
             <Link
-              data-bs-toggle="modal"
-              data-bs-target="#gift-card-details"
-              className="me-2 edit-icon  p-2"
-              to="#"
-            >
-              <i data-feather="eye" className="feather-eye" />
+          data-bs-toggle="modal"
+          data-bs-target="#gift-card-details"
+          className="me-2 edit-icon  p-2"
+          to="#">
+          
+              <i className="ti ti-eye" />
             </Link>
             <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-units"
-            >
-              <i data-feather="edit" className="feather-edit" />
+          className="me-2 p-2"
+          to="#"
+          data-bs-toggle="modal"
+          data-bs-target="#edit-units">
+          
+              <i className="ti ti-edit" />
             </Link>
             <Link
-              data-bs-toggle="modal"
-              data-bs-target="#delete-modal"
-              className="p-2"
-              to="#"
-            >
-              <i data-feather="trash-2" className="feather-trash-2" />
+          data-bs-toggle="modal"
+          data-bs-target="#delete-modal"
+          className="p-2"
+          to="#">
+          
+              <i className="ti ti-trash" />
             </Link>
           </div>
+        </div>,
 
-        </div>
-      ),
-    },
-  ];
-
+    sortable: false
+  }];
 
 
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
 
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
 
   return (
     <div>
@@ -118,19 +117,15 @@ const GiftCards = () => {
                 <h6>Manage your gift cards</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+          <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-units"
-              >
-              <i className='ti ti-circle-plus me-1'></i>
+                data-bs-target="#add-units">
+                
+                <i className="ti ti-circle-plus me-1"></i>
                 Add Gift Card
               </Link>
             </div>
@@ -138,16 +133,18 @@ const GiftCards = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Type
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -167,8 +164,8 @@ const GiftCards = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -188,8 +185,8 @@ const GiftCards = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Sort By : Last 7 Days
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -224,9 +221,16 @@ const GiftCards = () => {
             </div>
 
             <div className="card-body">
-
               <div className="table-responsive">
-                <Table columns={columns} dataSource={dataSource} />
+                <PrimeDataTable
+                  column={columns}
+                  data={dataSource}
+                  totalRecords={10}
+                  rows={10}
+                  setRows={() => {}}
+                  currentPage={1}
+                  setCurrentPage={() => {}} />
+                
               </div>
             </div>
           </div>
@@ -235,9 +239,9 @@ const GiftCards = () => {
         <CommonFooter />
       </div>
       <GiftCardModals />
+      <DeleteModal />
+    </div>);
 
-    </div>
-  );
 };
 
 export default GiftCards;

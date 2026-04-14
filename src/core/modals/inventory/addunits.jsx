@@ -1,59 +1,128 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { all_routes } from "../../../Router/all_routes";
+import { useEffect, useState } from "react";
+import BaseModal from "../../common/modal/baseModal";
+import useModal from "../../../routes/modal_root/useModal";
+import Loader from "../../../components/loader/Loader";
+import useForm from "../../hooks/useForm";
+import { unitFormSchema } from "../../forms/formSchemas";
+import toast from "react-hot-toast";
+import { api_url } from "../../../environment";
 
-const AddUnit = () => {
-  const route = all_routes;
+const Addunits = () => {
+  const { close, payload } = useModal();
+  const { form, setForm, handleChange, resetForm } = useForm(unitFormSchema);
+  const [loading, setLoading] = useState(false);
+  const isEdit = !!payload?.data;
+
+  useEffect(() => {
+    if (payload?.data) {
+      setForm({
+        code: payload.data.code,
+        name: payload.data.name,
+        alias: payload.data.alias,
+        status: payload.data.status === "Active",
+      });
+    } else {
+      resetForm();
+    }
+  }, [payload]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("code", form.code);
+      formData.append("name", form.name);
+      formData.append("alias", form.alias);
+      formData.append("masterType", 8);
+      formData.append("status", form.status);
+
+      const res = await fetch(`${api_url}/saveMaster`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      // console.log("data", data);
+
+      if (data.status === 1) {
+        toast.success(data.msg || "Unit saved successfully");
+        payload?.onSuccess?.();
+        if (isEdit) {
+          close();
+        } else {
+          resetForm();
+        }
+      } else {
+        toast.error(data.msg || "Error saving unit");
+      }
+    } catch (err) {
+      toast.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
-      <div className="modal fade" id="add-units">
-        <div className="modal-dialog modal-dialog-centered custom-modal-two">
-          <div className="modal-content">
-            <div className="page-wrapper-new p-0">
-              <div className="content">
-                <div className="modal-header border-0 custom-modal-header">
-                  <div className="page-title">
-                    <h4>Add New Category</h4>
-                  </div>
-                  <button
-                    type="button"
-                    className="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <form
-                  id="add-unit"
-                  className="modal-body custom-modal-body"
-                  // onSubmit={handleSubmit}
-                >
-                  <div>
-                    <label className="form-label">Name</label>
-                    <input type="text" className="form-control" />
-                  </div>
-                  <div className="modal-footer">
-                    <Link
-                      to="#"
-                      className="btn btn-cancel me-2"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </Link>
-                    <Link to={route.addproduct} className="btn btn-submit">
-                      Submit
-                    </Link>
-                  </div>
-                </form>
-              </div>
+      {loading && <Loader loading />}
+      <BaseModal
+        title="Add Unit"
+        footer={
+          <button
+            type="submit"
+            form="unitForm"
+            className="btn btn-primary fs-13 fw-medium p-2 px-3"
+          >
+            Save
+          </button>
+        }
+      >
+        <form id="unitForm" onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">
+              Unit<span className="text-danger ms-1">*</span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              className="form-control"
+              value={form.name}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">
+              Short Name<span className="text-danger ms-1">*</span>
+            </label>
+            <input
+              type="text"
+              name="alias"
+              className="form-control"
+              value={form.alias}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-0">
+            <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
+              <span className="status-label">Status</span>
+              <input
+                id="unitStatus"
+                type="checkbox"
+                name="status"
+                className="check"
+                checked={form.status}
+                onChange={handleChange}
+              />
+
+              <label htmlFor="unitStatus" className="checktoggle" />
             </div>
           </div>
-        </div>
-      </div>
-      {/* /Add Category */}
+        </form>
+      </BaseModal>
     </>
   );
 };
 
-export default AddUnit;
+export default Addunits;

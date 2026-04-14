@@ -1,20 +1,14 @@
-/* eslint-disable react/jsx-no-undef */
-/* eslint-disable no-unused-vars */
-
-import React from "react";
 import { Link } from "react-router-dom";
 import EditIpAddress from "../../../core/modals/settings/editipaddress";
 import AddIpAddress from "../../../core/modals/settings/addipaddress";
 import SettingsSideBar from "../settingssidebar";
-import RefreshIcon from "../../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../../core/common/tooltip-content/collapes";
+import RefreshIcon from "../../../components/tooltip-content/refresh";
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+import DeleteModal from "../../../components/delete-modal";
 
 const BanIpaddress = () => {
-
-
-
   return (
-    <div>
+    <>
       <div className="page-wrapper">
         <div className="content settings-content">
           <div className="page-header settings-pg-header">
@@ -35,13 +29,15 @@ const BanIpaddress = () => {
                 <SettingsSideBar />
                 <div className="card flex-fill mb-0 w-50">
                   <div className="card-header d-flex align-items-center">
-                    <h5 className="card-title flex-grow-1 mb-0">Ban IP Address</h5>
+                    <h5 className="card-title flex-grow-1 mb-0">
+                      Ban IP Address
+                    </h5>
                     <div className="flex-shrink-0">
                       <button
                         className="btn btn-primary add-btn"
                         data-bs-toggle="modal"
-                        data-bs-target="#add-banip"
-                      >
+                        data-bs-target="#add-banip">
+                        
                         <i className="ti ti-circle-plus me-1" />
                         Add Ban IP Address
                       </button>
@@ -60,7 +56,9 @@ const BanIpaddress = () => {
                         </thead>
                         <tbody>
                           <tr>
-                            <td className="text-gray-9 fw-medium">211.11.0.25</td>
+                            <td className="text-gray-9 fw-medium">
+                              211.11.0.25
+                            </td>
                             <td>
                               <p>Suspicious Activity</p>
                             </td>
@@ -71,23 +69,25 @@ const BanIpaddress = () => {
                                   className="me-2 p-2"
                                   to="#"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-banip"
-                                >
-                                  <i data-feather="edit" className="feather-edit" />
+                                  data-bs-target="#edit-banip">
+                                  
+                                  <i className="ti ti-edit" />
                                 </Link>
                                 <Link
                                   data-bs-toggle="modal"
                                   data-bs-target="#delete-modal"
                                   className="p-2"
-                                  to="javascript:void(0);"
-                                >
-                                  <i data-feather="trash-2" className="feather-trash-2" />
+                                  to="#;">
+                                  
+                                  <i className="ti ti-trash" />
                                 </Link>
                               </div>
                             </td>
                           </tr>
                           <tr>
-                            <td className="text-gray-9 fw-medium">211.03.0.11</td>
+                            <td className="text-gray-9 fw-medium">
+                              211.03.0.11
+                            </td>
                             <td>
                               <p>Spam or Abuse</p>
                             </td>
@@ -98,23 +98,25 @@ const BanIpaddress = () => {
                                   className="me-2 p-2"
                                   to="#"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-banip"
-                                >
-                                  <i data-feather="edit" className="feather-edit" />
+                                  data-bs-target="#edit-banip">
+                                  
+                                  <i className="ti ti-edit" />
                                 </Link>
                                 <Link
                                   data-bs-toggle="modal"
                                   data-bs-target="#delete-modal"
                                   className="p-2"
-                                  to="javascript:void(0);"
-                                >
-                                  <i data-feather="trash-2" className="feather-trash-2" />
+                                  to="#;">
+                                  
+                                  <i className="ti ti-trash" />
                                 </Link>
                               </div>
                             </td>
                           </tr>
                           <tr>
-                            <td className="text-gray-9 fw-medium">211.24.0.17</td>
+                            <td className="text-gray-9 fw-medium">
+                              211.24.0.17
+                            </td>
                             <td>
                               <p>Unauthorized Access</p>
                             </td>
@@ -125,23 +127,25 @@ const BanIpaddress = () => {
                                   className="me-2 p-2"
                                   to="#"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-banip"
-                                >
-                                  <i data-feather="edit" className="feather-edit" />
+                                  data-bs-target="#edit-banip">
+                                  
+                                  <i className="ti ti-edit" />
                                 </Link>
                                 <Link
                                   data-bs-toggle="modal"
                                   data-bs-target="#delete-modal"
                                   className="p-2"
-                                  to="javascript:void(0);"
-                                >
-                                  <i data-feather="trash-2" className="feather-trash-2" />
+                                  to="#;">
+                                  
+                                  <i className="ti ti-trash" />
                                 </Link>
                               </div>
                             </td>
                           </tr>
                           <tr>
-                            <td className="text-gray-9 fw-medium">211.12.0.34</td>
+                            <td className="text-gray-9 fw-medium">
+                              211.12.0.34
+                            </td>
                             <td>
                               <p>Violation of Terms</p>
                             </td>
@@ -152,17 +156,17 @@ const BanIpaddress = () => {
                                   className="me-2 p-2"
                                   to="#"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#edit-banip"
-                                >
-                                  <i data-feather="edit" className="feather-edit" />
+                                  data-bs-target="#edit-banip">
+                                  
+                                  <i className="ti ti-edit" />
                                 </Link>
                                 <Link
                                   data-bs-toggle="modal"
                                   data-bs-target="#delete-modal"
                                   className="p-2"
-                                  to="javascript:void(0);"
-                                >
-                                  <i data-feather="trash-2" className="feather-trash-2" />
+                                  to="#;">
+                                  
+                                  <i className="ti ti-trash" />
                                 </Link>
                               </div>
                             </td>
@@ -172,13 +176,12 @@ const BanIpaddress = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
         <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-          <p className="mb-0">2014-2025 © DreamsPOS. All Right Reserved</p>
+          <p className="mb-0">2014-2026 © DreamsPOS. All Right Reserved</p>
           <p>
             Designed &amp; Developed By{" "}
             <Link to="#" className="text-primary">
@@ -189,42 +192,9 @@ const BanIpaddress = () => {
       </div>
       <AddIpAddress />
       <EditIpAddress />
-      {/* delete modal */}
-      <div className="modal fade" id="delete-modal">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="page-wrapper-new p-0">
-              <div className="content p-5 px-3 text-center">
-                <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                  <i className="ti ti-trash fs-24 text-danger" />
-                </span>
-                <h4 className="fs-20 fw-bold mb-2 mt-1">Delete Ban IP Address</h4>
-                <p className="mb-0 fs-16">
-                  Are you sure you want to delete ban IP address?
-                </p>
-                <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                    data-bs-dismiss="modal"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-primary fs-13 fw-medium p-2 px-3"
-                    data-bs-dismiss="modal"
-                  >
-                    Yes Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+      <DeleteModal />
+    </>);
+
 };
 
 export default BanIpaddress;

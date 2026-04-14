@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import {
   AccountBookFilled,
@@ -140,8 +140,8 @@ import {
   ThunderboltFilled,
   ToolFilled,
   TrademarkCircleFilled,
-  TrophyFilled,
-} from "@ant-design/icons";
+  TrophyFilled } from
+"@ant-design/icons";
 
 const PE7Icons = () => {
   return (
@@ -605,7 +605,7 @@ const PE7Icons = () => {
         </div>
       </div>
       {/* /Page Wrapper */}
-    </>
-  );
+    </>);
+
 };
 export default PE7Icons;

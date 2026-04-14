@@ -1,31 +1,45 @@
-import { Lock, Mail } from "feather-icons-react/build/IconComponents";
-import React from "react";
+import { useState } from "react";
+import { Lock, Mail } from "react-feather";
 import { Link } from "react-router-dom";
-import Select from "react-select";
-import { all_routes } from "../../../../../Router/all_routes";
+import CommonSelect from "../../../../../components/select/common-select";
+import { all_routes } from "../../../../../routes/all_routes";
+
 
 const FormHorizontal = () => {
   const route = all_routes;
+  const [bloodGroup, setBloodGroup] = useState(null);
+  const [state, setState] = useState(null);
+  const [country, setCountry] = useState(null);
+  const [autoSizingSelect, setAutoSizingSelect] = useState(null);
+  const [specificSizeSelect, setSpecificSizeSelect] = useState(null);
+
   const bloodgroup = [
-    { value: "Select", label: "Select" },
-    { value: "A+", label: "A+" },
-    { value: "O+", label: "O+" },
-    { value: "B+", label: "B+" },
-    { value: "AB+", label: "AB+" },
-  ];
+  { value: "Select", label: "Select" },
+  { value: "A+", label: "A+" },
+  { value: "O+", label: "O+" },
+  { value: "B+", label: "B+" },
+  { value: "AB+", label: "AB+" }];
+
   const statelist = [
-    { value: "Select State", label: "Select State" },
-    { value: "California", label: "California" },
-    { value: "Texas", label: "Texas" },
-    { value: "Florida", label: "Florida" },
-  ];
+  { value: "Select State", label: "Select State" },
+  { value: "California", label: "California" },
+  { value: "Texas", label: "Texas" },
+  { value: "Florida", label: "Florida" }];
+
   const countrylist = [
-    { value: "Select Country", label: "Select Country" },
-    { value: "USA", label: "USA" },
-    { value: "France", label: "France" },
-    { value: "India", label: "India" },
-    { value: "Spain", label: "Spain" },
+  { value: "Select Country", label: "Select Country" },
+  { value: "USA", label: "USA" },
+  { value: "France", label: "France" },
+  { value: "India", label: "India" },
+  { value: "Spain", label: "Spain" }];
+
+  const selectOptions = [
+    { value: "", label: "Choose..." },
+    { value: 1, label: "One" },
+    { value: 2, label: "Two" },
+    { value: 3, label: "Three" }
   ];
+
 
   return (
     <div>
@@ -209,12 +223,12 @@ const FormHorizontal = () => {
                                 name="gender"
                                 id="gender_male"
                                 defaultValue="option1"
-                                defaultChecked
-                              />
+                                defaultChecked />
+                              
                               <label
                                 className="form-check-label"
-                                htmlFor="gender_male"
-                              >
+                                htmlFor="gender_male">
+                                
                                 Male
                               </label>
                             </div>
@@ -224,12 +238,12 @@ const FormHorizontal = () => {
                                 type="radio"
                                 name="gender"
                                 id="gender_female"
-                                defaultValue="option2"
-                              />
+                                defaultValue="option2" />
+                              
                               <label
                                 className="form-check-label"
-                                htmlFor="gender_female"
-                              >
+                                htmlFor="gender_female">
+                                
                                 Female
                               </label>
                             </div>
@@ -240,11 +254,13 @@ const FormHorizontal = () => {
                             Blood Group
                           </label>
                           <div className="col-lg-9">
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={bloodgroup}
+                              value={bloodGroup}
+                              onChange={(e) => setBloodGroup(e.value)}
                               placeholder="Select"
-                            />
+                              filter={false} />
                           </div>
                         </div>
                       </div>
@@ -388,11 +404,13 @@ const FormHorizontal = () => {
                             State
                           </label>
                           <div className="col-lg-9">
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={statelist}
+                              value={state}
+                              onChange={(e) => setState(e.value)}
                               placeholder="Select"
-                            />
+                              filter={false} />
                           </div>
                         </div>
                         <div className="row mb-3">
@@ -405,8 +423,8 @@ const FormHorizontal = () => {
                               cols={5}
                               className="form-control"
                               placeholder="Enter message"
-                              defaultValue={""}
-                            />
+                              defaultValue={""} />
+                            
                           </div>
                         </div>
                       </div>
@@ -423,8 +441,8 @@ const FormHorizontal = () => {
                                   <input
                                     type="text"
                                     placeholder="First Name"
-                                    className="form-control"
-                                  />
+                                    className="form-control" />
+                                  
                                 </div>
                               </div>
                               <div className="col-md-6">
@@ -432,8 +450,8 @@ const FormHorizontal = () => {
                                   <input
                                     type="text"
                                     placeholder="Last Name"
-                                    className="form-control"
-                                  />
+                                    className="form-control" />
+                                  
                                 </div>
                               </div>
                             </div>
@@ -464,18 +482,20 @@ const FormHorizontal = () => {
                             <div className="row mt-4">
                               <div className="col-md-6">
                                 <div className="mb-3">
-                                  <Select
-                                    classNamePrefix="react-select"
+                                  <CommonSelect
+                                    className="w-100"
                                     options={countrylist}
+                                    value={country}
+                                    onChange={(e) => setCountry(e.value)}
                                     placeholder="Select"
-                                  />
+                                    filter={false} />
                                 </div>
                                 <div className="mb-3">
                                   <input
                                     type="text"
                                     placeholder="ZIP code"
-                                    className="form-control"
-                                  />
+                                    className="form-control" />
+                                  
                                 </div>
                               </div>
                               <div className="col-md-6">
@@ -483,15 +503,15 @@ const FormHorizontal = () => {
                                   <input
                                     type="text"
                                     placeholder="State/Province"
-                                    className="form-control"
-                                  />
+                                    className="form-control" />
+                                  
                                 </div>
                                 <div className="mb-3">
                                   <input
                                     type="text"
                                     placeholder="City"
-                                    className="form-control"
-                                  />
+                                    className="form-control" />
+                                  
                                 </div>
                               </div>
                             </div>
@@ -520,8 +540,8 @@ const FormHorizontal = () => {
                     <div className="row mb-3">
                       <label
                         htmlFor="inputEmail1"
-                        className="col-sm-2 col-form-label"
-                      >
+                        className="col-sm-2 col-form-label">
+                        
                         Email
                       </label>
                       <div className="col-sm-10">
@@ -529,8 +549,8 @@ const FormHorizontal = () => {
                           <input
                             type="email"
                             className="form-control"
-                            id="inputEmail1"
-                          />
+                            id="inputEmail1" />
+                          
                           <div className="input-group-text">
                             <Mail />
                           </div>
@@ -540,8 +560,8 @@ const FormHorizontal = () => {
                     <div className="row mb-3">
                       <label
                         htmlFor="inputPassword1"
-                        className="col-sm-2 col-form-label"
-                      >
+                        className="col-sm-2 col-form-label">
+                        
                         Password
                       </label>
                       <div className="col-sm-10">
@@ -549,8 +569,8 @@ const FormHorizontal = () => {
                           <input
                             type="password"
                             className="form-control"
-                            id="inputPassword1"
-                          />
+                            id="inputPassword1" />
+                          
                           <div className="input-group-text">
                             <Lock />
                           </div>
@@ -573,8 +593,8 @@ const FormHorizontal = () => {
                   <div className="row mb-3">
                     <label
                       htmlFor="colFormLabelSm"
-                      className="col-sm-2 col-form-label col-form-label-sm"
-                    >
+                      className="col-sm-2 col-form-label col-form-label-sm">
+                      
                       Email
                     </label>
                     <div className="col-sm-10">
@@ -582,15 +602,15 @@ const FormHorizontal = () => {
                         type="email"
                         className="form-control form-control-sm"
                         id="colFormLabelSm"
-                        placeholder="col-form-label-sm"
-                      />
+                        placeholder="col-form-label-sm" />
+                      
                     </div>
                   </div>
                   <div className="row mb-3">
                     <label
                       htmlFor="colFormLabel"
-                      className="col-sm-2 col-form-label"
-                    >
+                      className="col-sm-2 col-form-label">
+                      
                       Email
                     </label>
                     <div className="col-sm-10">
@@ -598,15 +618,15 @@ const FormHorizontal = () => {
                         type="email"
                         className="form-control"
                         id="colFormLabel"
-                        placeholder="col-form-label"
-                      />
+                        placeholder="col-form-label" />
+                      
                     </div>
                   </div>
                   <div className="row">
                     <label
                       htmlFor="colFormLabelLg"
-                      className="col-sm-2 col-form-label col-form-label-lg"
-                    >
+                      className="col-sm-2 col-form-label col-form-label-lg">
+                      
                       Email
                     </label>
                     <div className="col-sm-10">
@@ -614,8 +634,8 @@ const FormHorizontal = () => {
                         type="email"
                         className="form-control form-control-lg"
                         id="colFormLabelLg"
-                        placeholder="col-form-label-lg"
-                      />
+                        placeholder="col-form-label-lg" />
+                      
                     </div>
                   </div>
                 </div>
@@ -633,22 +653,22 @@ const FormHorizontal = () => {
                     <div className="col-auto">
                       <label
                         className="visually-hidden"
-                        htmlFor="autoSizingInput"
-                      >
+                        htmlFor="autoSizingInput">
+                        
                         Name
                       </label>
                       <input
                         type="text"
                         className="form-control"
                         id="autoSizingInput"
-                        placeholder="Jane Doe"
-                      />
+                        placeholder="Jane Doe" />
+                      
                     </div>
                     <div className="col-auto">
                       <label
                         className="visually-hidden"
-                        htmlFor="autoSizingInputGroup"
-                      >
+                        htmlFor="autoSizingInputGroup">
+                        
                         Username
                       </label>
                       <div className="input-group">
@@ -657,35 +677,36 @@ const FormHorizontal = () => {
                           type="text"
                           className="form-control"
                           id="autoSizingInputGroup"
-                          placeholder="Username"
-                        />
+                          placeholder="Username" />
+                        
                       </div>
                     </div>
                     <div className="col-auto">
                       <label
                         className="visually-hidden"
-                        htmlFor="autoSizingSelect"
-                      >
+                        htmlFor="autoSizingSelect">
+                        
                         Preference
                       </label>
-                      <select className="form-select" id="autoSizingSelect">
-                        <option value="">Choose...</option>
-                        <option value={1}>One</option>
-                        <option value={2}>Two</option>
-                        <option value={3}>Three</option>
-                      </select>
+                      <CommonSelect
+                        className="w-100"
+                        options={selectOptions}
+                        value={autoSizingSelect}
+                        onChange={(e) => setAutoSizingSelect(e.value)}
+                        placeholder="Choose..."
+                        filter={false} />
                     </div>
                     <div className="col-auto">
                       <div className="form-check">
                         <input
                           className="form-check-input"
                           type="checkbox"
-                          id="autoSizingCheck"
-                        />
+                          id="autoSizingCheck" />
+                        
                         <label
                           className="form-check-label"
-                          htmlFor="autoSizingCheck"
-                        >
+                          htmlFor="autoSizingCheck">
+                          
                           Remember me
                         </label>
                       </div>
@@ -704,22 +725,22 @@ const FormHorizontal = () => {
                     <div className="col-sm-3">
                       <label
                         className="visually-hidden"
-                        htmlFor="specificSizeInputName"
-                      >
+                        htmlFor="specificSizeInputName">
+                        
                         Name
                       </label>
                       <input
                         type="text"
                         className="form-control"
                         id="specificSizeInputName"
-                        placeholder="Jane Doe"
-                      />
+                        placeholder="Jane Doe" />
+                      
                     </div>
                     <div className="col-sm-3">
                       <label
                         className="visually-hidden"
-                        htmlFor="specificSizeInputGroupUsername"
-                      >
+                        htmlFor="specificSizeInputGroupUsername">
+                        
                         Username
                       </label>
                       <div className="input-group">
@@ -728,35 +749,36 @@ const FormHorizontal = () => {
                           type="text"
                           className="form-control"
                           id="specificSizeInputGroupUsername"
-                          placeholder="Username"
-                        />
+                          placeholder="Username" />
+                        
                       </div>
                     </div>
                     <div className="col-sm-3">
                       <label
                         className="visually-hidden"
-                        htmlFor="specificSizeSelect"
-                      >
+                        htmlFor="specificSizeSelect">
+                        
                         Preference
                       </label>
-                      <select className="form-select" id="specificSizeSelect">
-                        <option value="">Choose...</option>
-                        <option value={1}>One</option>
-                        <option value={2}>Two</option>
-                        <option value={3}>Three</option>
-                      </select>
+                      <CommonSelect
+                        className="w-100"
+                        options={selectOptions}
+                        value={specificSizeSelect}
+                        onChange={(e) => setSpecificSizeSelect(e.value)}
+                        placeholder="Choose..."
+                        filter={false} />
                     </div>
                     <div className="col-auto">
                       <div className="form-check">
                         <input
                           className="form-check-input"
                           type="checkbox"
-                          id="autoSizingCheck2"
-                        />
+                          id="autoSizingCheck2" />
+                        
                         <label
                           className="form-check-label"
-                          htmlFor="autoSizingCheck2"
-                        >
+                          htmlFor="autoSizingCheck2">
+                          
                           Remember me
                         </label>
                       </div>
@@ -773,8 +795,8 @@ const FormHorizontal = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default FormHorizontal;

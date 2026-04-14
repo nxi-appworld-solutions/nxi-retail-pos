@@ -1,25 +1,41 @@
-import React, { useState } from "react";
-import { MoreVertical } from "react-feather";
-import { Link } from "react-router-dom/dist";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { Grid, List, PlusCircle, Trash2 } from "feather-icons-react/build/IconComponents";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import DefaultEditor from "react-simple-wysiwyg";
-import { HOD } from "../../core/common/selectOption/selectOption";
-import Select from "react-select";
-import { all_routes } from "../../Router/all_routes";
-import Edit from "feather-icons-react/build/IconComponents/Edit";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import { all_routes } from "../../routes/all_routes";
+import {
+  avatar15,
+  avatar16,
+  avatar18,
+  avatar_17,
+  user01,
+  user02,
+  user03,
+  user04,
+  user05,
+  user06,
+  user07,
+  user08,
+  user09,
+  user11,
+  user12,
+  user13 } from
+"../../utils/imagepath";
+import CommonSelect from "../../components/select/common-select";
+import DeleteModal from "../../components/delete-modal";
+import { Editor } from "primereact/editor";
 
 const DepartmentGrid = () => {
+  const [selectedHOD, setSelectedHOD] = useState(null);
+  const [text, setText] = useState("");
 
-  const [values, setValue] = useState();
-  function onChange(e) {
-    setValue(e.target.value);
-  }
 
   const route = all_routes;
+  const HOD = [
+  { label: "Mitchum Daniel", value: "1" },
+  { label: "Susan Lopez", value: "2" }];
+
 
   return (
     <div>
@@ -36,13 +52,13 @@ const DepartmentGrid = () => {
               <li>
                 <div className="d-flex me-2 pe-2 border-end">
                   <Link to={route.departmentlist} className="btn-list me-2">
-                    <List className="feather-user" />
+                    <i className="feather icon-list feather-user" />
                   </Link>
                   <Link
                     to={route.departmentgrid}
-                    className="btn-grid active bg-primary me-2"
-                  >
-                    <Grid className="feather-user text-white" />
+                    className="btn-grid active bg-primary me-2">
+                    
+                    <i className="feather icon-grid feather-user text-white" />
                   </Link>
                 </div>
               </li>
@@ -55,9 +71,9 @@ const DepartmentGrid = () => {
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-department"
-              >
-              <i className='ti ti-circle-plus me-1'></i>
+                data-bs-target="#add-department">
+                
+                <i className="ti ti-circle-plus me-1"></i>
                 Add Department
               </Link>
             </div>
@@ -68,13 +84,13 @@ const DepartmentGrid = () => {
                 <div className="search-set mb-0">
                   <div className="search-input">
                     <Link to="#" className="btn btn-searchset">
-                      <i data-feather="search" className="feather-search" />
+                      <i className="feather icon-search" />
                     </Link>
                     <input
                       type="search"
                       className="form-control"
-                      placeholder="Search"
-                    />
+                      placeholder="Search" />
+                    
                   </div>
                 </div>
                 <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
@@ -82,32 +98,23 @@ const DepartmentGrid = () => {
                     <Link
                       to="#"
                       className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                      data-bs-toggle="dropdown"
-                    >
+                      data-bs-toggle="dropdown">
+                      
                       Select Status
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Active
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Inactive
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           New Joiners
                         </Link>
                       </li>
@@ -117,48 +124,33 @@ const DepartmentGrid = () => {
                     <Link
                       to="#"
                       className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                      data-bs-toggle="dropdown"
-                    >
+                      data-bs-toggle="dropdown">
+                      
                       Sort By : Last 7 Days
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Recently Added
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Ascending
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Desending
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Last Month
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Last 7 Days
                         </Link>
                       </li>
@@ -183,9 +175,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -193,9 +185,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -204,9 +196,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -215,7 +207,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-01.jpg" alt="Img" />
+                        <img src={user01} alt="Img" />
                       </div>
                       <h4>Mitchum Daniel</h4>
                     </div>
@@ -223,31 +215,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 08</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -270,9 +262,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -280,9 +272,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -291,9 +283,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -302,7 +294,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-02.jpg" alt="Img" />
+                        <img src={user02} alt="Img" />
                       </div>
                       <h4>Susan Lopez</h4>
                     </div>
@@ -310,31 +302,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 10</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -357,9 +349,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -367,9 +359,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -378,9 +370,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2  className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -389,7 +381,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-03.jpg" alt="Img" />
+                        <img src={user03} alt="Img" />
                       </div>
                       <h4>Robert Grossman</h4>
                     </div>
@@ -397,31 +389,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 05</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -444,9 +436,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -454,9 +446,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -465,9 +457,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -476,7 +468,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-06.jpg" alt="Img" />
+                        <img src={user06} alt="Img" />
                       </div>
                       <h4>Janet Hembre</h4>
                     </div>
@@ -484,31 +476,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 10</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -531,9 +523,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -541,9 +533,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -552,9 +544,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -563,7 +555,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-04.jpg" alt="Img" />
+                        <img src={user04} alt="Img" />
                       </div>
                       <h4>Russell Belle</h4>
                     </div>
@@ -571,31 +563,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 06</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar_17}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -618,9 +610,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -628,9 +620,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -639,9 +631,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -650,7 +642,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-05.jpg" alt="Img" />
+                        <img src={user05} alt="Img" />
                       </div>
                       <h4>Edward Muniz</h4>
                     </div>
@@ -658,31 +650,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 06</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -705,9 +697,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -715,9 +707,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -726,9 +718,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -737,7 +729,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-07.jpg" alt="Img" />
+                        <img src={user07} alt="Img" />
                       </div>
                       <h4>Susan Moore</h4>
                     </div>
@@ -745,31 +737,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 08</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -792,9 +784,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -802,9 +794,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -813,9 +805,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -824,7 +816,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-08.jpg" alt="Img" />
+                        <img src={user08} alt="Img" />
                       </div>
                       <h4>Lance Jackson</h4>
                     </div>
@@ -832,31 +824,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 07</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -879,9 +871,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -889,9 +881,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -900,9 +892,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -911,7 +903,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-11.jpg" alt="Img" />
+                        <img src={user11} alt="Img" />
                       </div>
                       <h4>Travis Marcotte</h4>
                     </div>
@@ -919,31 +911,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 10</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -966,9 +958,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -976,9 +968,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -987,9 +979,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -998,7 +990,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-12.jpg" alt="Img" />
+                        <img src={user12} alt="Img" />
                       </div>
                       <h4>Malinda Ruiz</h4>
                     </div>
@@ -1006,31 +998,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 08</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -1053,9 +1045,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -1063,9 +1055,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -1074,9 +1066,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2  className="info-img me-2"/>
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -1085,7 +1077,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-09.jpg" alt="Img" />
+                        <img src={user09} alt="Img" />
                       </div>
                       <h4>David Slater</h4>
                     </div>
@@ -1093,31 +1085,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 06</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -1140,9 +1132,9 @@ const DepartmentGrid = () => {
                           to="#"
                           className="action-icon border-0"
                           data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <MoreVertical className="feather-user" />
+                          aria-expanded="false">
+                          
+                          <i className="feather-user feather icon-more-vertical" />
                         </Link>
                         <ul className="dropdown-menu dropdown-menu-end ">
                           <li>
@@ -1150,9 +1142,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item"
                               data-bs-toggle="modal"
-                              data-bs-target="#edit-department"
-                            >
-                              <Edit className="info-img me-2"/>
+                              data-bs-target="#edit-department">
+                              
+                              <i className="feather icon-edit info-img me-2" />
                               Edit
                             </Link>
                           </li>
@@ -1161,9 +1153,9 @@ const DepartmentGrid = () => {
                               to="#"
                               className="dropdown-item mb-0"
                               data-bs-toggle="modal"
-                              data-bs-target="#delete-modal"
-                            >
-                              <Trash2 className="info-img me-2" />
+                              data-bs-target="#delete-modal">
+                              
+                              <i className="feather icon-trash-2 info-img me-2" />
                               Delete
                             </Link>
                           </li>
@@ -1172,7 +1164,7 @@ const DepartmentGrid = () => {
                     </div>
                     <div className="bg-light rounded p-3 text-center mb-4">
                       <div className="avatar avatar-lg mb-2">
-                        <ImageWithBasePath src="assets/img/users/user-13.jpg" alt="Img" />
+                        <img src={user13} alt="Img" />
                       </div>
                       <h4>Michele Kim</h4>
                     </div>
@@ -1180,31 +1172,31 @@ const DepartmentGrid = () => {
                       <p className="mb-0">Total Members: 04</p>
                       <div className="avatar-list-stacked avatar-group-sm">
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-15.jpg"
-                            alt="img"
-                          />
+                            src={avatar15}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-16.jpg"
-                            alt="img"
-                          />
+                            src={avatar16}
+                            alt="img" />
+                          
                         </span>
                         <span className="avatar avatar-rounded">
-                          <ImageWithBasePath
+                          <img
                             className="border border-white"
-                            src="assets/img/profiles/avatar-18.jpg"
-                            alt="img"
-                          />
+                            src={avatar18}
+                            alt="img" />
+                          
                         </span>
                         <Link
                           className="avatar avatar-rounded text-fixed-white fs-10 fw-medium position-relative"
-                          to="#"
-                        >
-                          <ImageWithBasePath src="assets/img/profiles/avatar-17.jpg" alt="img" />
+                          to="#">
+                          
+                          <img src={avatar_17} alt="img" />
                           <span className="position-absolute top-50 start-50 translate-middle text-center">
                             +2
                           </span>
@@ -1218,7 +1210,7 @@ const DepartmentGrid = () => {
           </div>
         </div>
         <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-          <p className="mb-0">2014-2025 © DreamsPOS. All Right Reserved</p>
+          <p className="mb-0">2014-2026 © DreamsPOS. All Right Reserved</p>
           <p>
             Designed &amp; Developed By{" "}
             <Link to="#" className="text-primary">
@@ -1242,8 +1234,8 @@ const DepartmentGrid = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -1263,17 +1255,24 @@ const DepartmentGrid = () => {
                           <label className="form-label">
                             HOD <span className="text-danger"> *</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={HOD}
+                            value={selectedHOD}
+                            onChange={(e) => setSelectedHOD(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
                         <div className="mb-3 summer-description-box">
                           <label className="form-label">Description</label>
-                          <DefaultEditor value={values} onChange={onChange} />
+                          <Editor
+                            value={text}
+                            onTextChange={(e) => setText(e.htmlValue)}
+                            style={{ height: "200px" }} />
+                          
                         </div>
                       </div>
                       <div className="input-blocks m-0">
@@ -1283,8 +1282,8 @@ const DepartmentGrid = () => {
                             type="checkbox"
                             id="user5"
                             className="check"
-                            defaultChecked
-                          />
+                            defaultChecked />
+                          
                           <label htmlFor="user5" className="checktoggle">
                             {" "}
                           </label>
@@ -1296,11 +1295,15 @@ const DepartmentGrid = () => {
                     <button
                       type="button"
                       className="btn btn-secondary me-2"
-                      data-bs-dismiss="modal"
-                    >
+                      data-bs-dismiss="modal">
+                      
                       Cancel
                     </button>
-                    <Link to="#" className="btn btn-primary" data-bs-dismiss="modal">
+                    <Link
+                      to="#"
+                      className="btn btn-primary"
+                      data-bs-dismiss="modal">
+                      
                       Save Changes
                     </Link>
                   </div>
@@ -1325,12 +1328,12 @@ const DepartmentGrid = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <form >
+                <form>
                   <div className="modal-body">
                     <div className="row">
                       <div className="col-lg-12">
@@ -1341,8 +1344,8 @@ const DepartmentGrid = () => {
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue="UI/UX"
-                          />
+                            defaultValue="UI/UX" />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
@@ -1350,17 +1353,24 @@ const DepartmentGrid = () => {
                           <label className="form-label">
                             HOD <span className="text-danger"> *</span>
                           </label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={HOD}
+                            value={selectedHOD}
+                            onChange={(e) => setSelectedHOD(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
                         <div className="mb-3 summer-description-box">
                           <label className="form-label">Description</label>
-                          <DefaultEditor value={values} onChange={onChange} />
+                          <Editor
+                            value={text}
+                            onTextChange={(e) => setText(e.htmlValue)}
+                            style={{ height: "200px" }} />
+                          
                         </div>
                       </div>
                       <div className="input-blocks m-0">
@@ -1370,8 +1380,8 @@ const DepartmentGrid = () => {
                             type="checkbox"
                             id="user3"
                             className="check"
-                            defaultChecked
-                          />
+                            defaultChecked />
+                          
                           <label htmlFor="user3" className="checktoggle">
                             {" "}
                           </label>
@@ -1383,11 +1393,15 @@ const DepartmentGrid = () => {
                     <button
                       type="button"
                       className="btn btn-secondary me-2"
-                      data-bs-dismiss="modal"
-                    >
+                      data-bs-dismiss="modal">
+                      
                       Cancel
                     </button>
-                    <Link to="#" className="btn btn-primary" data-bs-dismiss="modal">
+                    <Link
+                      to="#"
+                      className="btn btn-primary"
+                      data-bs-dismiss="modal">
+                      
                       Save Changes
                     </Link>
                   </div>
@@ -1399,46 +1413,10 @@ const DepartmentGrid = () => {
       </div>
       {/* /Edit Department */}
       {/* delete modal */}
-      <div className="modal fade" id="delete-modal">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="page-wrapper-new p-0">
-              <div className="content p-5 px-3 text-center">
-                <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                  <i className="ti ti-trash fs-24 text-danger" />
-                </span>
-                <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
-                  Delete Department
-                </h4>
-                <p className="text-gray-6 mb-0 fs-16">
-                  Are you sure you want to delete department?
-                </p>
-                <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                    data-bs-dismiss="modal"
-                  >
-                    Cancel
-                  </button>
-                  <Link
-                    to="#"
-                    className="btn btn-submit fs-13 fw-medium p-2 px-3"
-                    data-bs-dismiss="modal"
-                  >
-                    Yes Delete
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DeleteModal />
       {/* /delete modal */}
+    </div>);
 
-
-    </div>
-  );
 };
 
 export default DepartmentGrid;

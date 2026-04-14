@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+
+import { Link } from 'react-router-dom';
 
 const Buttons = () => {
-    return (
-        <div>
+  return (
+    <div>
         <div className="page-wrapper">
             <div className="content">
                 <div className="page-header">
@@ -155,51 +155,51 @@ const Buttons = () => {
                             <div className="card-body">
                                 <div className="btn-list">
                                     <button
-                                        type="button"
-                                        className="btn btn-outline-primary rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-outline-primary rounded-pill">
+                      
                                         Primary
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-outline-secondary rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-outline-secondary rounded-pill">
+                      
                                         Secondary
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-outline-success rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-outline-success rounded-pill">
+                      
                                         Success
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-outline-danger rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-outline-danger rounded-pill">
+                      
                                         Danger
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-outline-warning rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-outline-warning rounded-pill">
+                      
                                         Warning
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-outline-info rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-outline-info rounded-pill">
+                      
                                         Info
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-outline-light rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-outline-light rounded-pill">
+                      
                                         Light
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-outline-dark rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-outline-dark rounded-pill">
+                      
                                         Dark
                                     </button>
                                 </div>
@@ -261,33 +261,33 @@ const Buttons = () => {
                             <div className="card-body">
                                 <div className="btn-list">
                                     <button
-                                        type="button"
-                                        className="btn btn-soft-primary rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-soft-primary rounded-pill">
+                      
                                         Primary
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-soft-secondary rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-soft-secondary rounded-pill">
+                      
                                         Secondary
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-soft-success rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-soft-success rounded-pill">
+                      
                                         Success
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-soft-danger rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-soft-danger rounded-pill">
+                      
                                         Danger
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-soft-warning rounded-pill"
-                                    >
+                      type="button"
+                      className="btn btn-soft-warning rounded-pill">
+                      
                                         Warning
                                     </button>
                                     <button type="button" className="btn btn-soft-info rounded-pill">
@@ -356,42 +356,42 @@ const Buttons = () => {
                             <div className="card-body">
                                 <div className="btn-list">
                                     <button
-                                        type="button"
-                                        className="btn btn-square btn-outline-primary"
-                                    >
+                      type="button"
+                      className="btn btn-square btn-outline-primary">
+                      
                                         Primary
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-square btn-outline-secondary"
-                                    >
+                      type="button"
+                      className="btn btn-square btn-outline-secondary">
+                      
                                         Secondary
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-square btn-outline-success"
-                                    >
+                      type="button"
+                      className="btn btn-square btn-outline-success">
+                      
                                         Success
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-square btn-outline-danger"
-                                    >
+                      type="button"
+                      className="btn btn-square btn-outline-danger">
+                      
                                         Danger
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-square btn-outline-warning"
-                                    >
+                      type="button"
+                      className="btn btn-square btn-outline-warning">
+                      
                                         Warning
                                     </button>
                                     <button type="button" className="btn btn-square btn-outline-info">
                                         Info
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-square btn-outline-light"
-                                    >
+                      type="button"
+                      className="btn btn-square btn-outline-light">
+                      
                                         Light
                                     </button>
                                     <button type="button" className="btn btn-square btn-outline-dark">
@@ -447,20 +447,20 @@ const Buttons = () => {
                                         Button
                                     </button>
                                     <input
-                                        className="btn btn-primary me-1"
-                                        type="button"
-                                        defaultValue="Input"
-                                    />
+                      className="btn btn-primary me-1"
+                      type="button"
+                      defaultValue="Input" />
+                    
                                     <input
-                                        className="btn btn-primary me-1"
-                                        type="submit"
-                                        defaultValue="Submit"
-                                    />
+                      className="btn btn-primary me-1"
+                      type="submit"
+                      defaultValue="Submit" />
+                    
                                     <input
-                                        className="btn btn-primary me-1"
-                                        type="reset"
-                                        defaultValue="Reset"
-                                    />
+                      className="btn btn-primary me-1"
+                      type="reset"
+                      defaultValue="Reset" />
+                    
                                 </div>
                             </div>
                         </div>
@@ -538,15 +538,15 @@ const Buttons = () => {
                             <div className="card-body">
                                 <div className="btn-list">
                                     <button type="button" className="btn btn-primary">
-                                        <i className="fas fa-spinner fa-spin me-2"/>
+                                        <i className="fas fa-spinner fa-spin me-2" />
                                         Loading...
                                     </button>
                                     <button type="button" className="btn btn-secondary">
-                                    <i className="fas fa-spinner fa-spin me-2"/>
+                                    <i className="fas fa-spinner fa-spin me-2" />
                                     Loading...
                                     </button>
                                     <button type="button" className="btn btn-warning">
-                                    <i className="fas fa-spinner fa-spin me-2"/>
+                                    <i className="fas fa-spinner fa-spin me-2" />
                                     Loading...
                                     </button>
                                 </div>
@@ -567,34 +567,34 @@ const Buttons = () => {
                             <div className="card-body">
                                 <div className="btn-list d-md-flex d-block">
                                     <button className="btn btn-icon btn-primary">
-                                        <i className="fas fa-bell"/>
+                                        <i className="fas fa-bell" />
                                     </button>
                                     <button className="btn btn-icon btn-success">
-                                    <i className="fas fa-bell"/>
+                                    <i className="fas fa-bell" />
 
                                     </button>
                                     <button className="btn btn-icon btn-soft-primary rounded-pill">
-                                    <i className="fas fa-bell"/>
+                                    <i className="fas fa-bell" />
 
                                     </button>
                                     <button className="btn btn-icon btn-soft-success rounded-pill">
-                                    <i className="fas fa-bell"/>
+                                    <i className="fas fa-bell" />
 
                                     </button>
                                     <button className="btn btn-icon btn-outline-primary rounded-pill">
-                                    <i className="fas fa-bell"/>
+                                    <i className="fas fa-bell" />
 
                                     </button>
                                     <button className="btn btn-icon btn-outline-success rounded-pill">
-                                    <i className="fas fa-bell"/>
+                                    <i className="fas fa-bell" />
 
                                     </button>
                                     <button type="button" className="btn btn-primary">
-                                    <i className="fas fa-bell me-2"/>
+                                    <i className="fas fa-bell me-2" />
                                         Like
                                     </button>
                                     <button type="button" className="btn btn-success">
-                                    <i className="fas fa-bell me-2"/>
+                                    <i className="fas fa-bell me-2" />
                                     Like
                                     </button>
                                 </div>
@@ -654,8 +654,8 @@ const Buttons = () => {
                 </div>
             </div>
         </div>
-        </div>
-    )
-}
+        </div>);
 
-export default Buttons
+};
+
+export default Buttons;

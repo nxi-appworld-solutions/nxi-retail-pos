@@ -1,32 +1,39 @@
+import CommonSelect from "../../../components/select/common-select";
+import { stockImg02, downloadImg } from "../../../utils/imagepath";
 import React from "react";
-import Select from "react-select";
-import ImageWithBasePath from "../../img/imagewithbasebath";
 import { Link } from "react-router-dom";
 
 const StockTransferModal = () => {
+  const [selectedWarehouseFrom, setSelectedWarehouseFrom] =
+  React.useState(null);
+  const [selectedWarehouseTo, setSelectedWarehouseTo] = React.useState(null);
+  const [selectedStoreFrom, setSelectedStoreFrom] = React.useState(null);
+  const [selectedStoreTo, setSelectedStoreTo] = React.useState(null);
+  const [selectedStatus, setSelectedStatus] = React.useState(null);
+
   const optionsChoose = [
-    { value: "choose", label: "Choose" },
-    { value: "lobarHandy", label: "Lobar Handy" },
-    { value: "quaintWarehouse", label: "Quaint Warehouse" },
-  ];
+  { value: "choose", label: "Choose" },
+  { value: "lobarHandy", label: "Lobar Handy" },
+  { value: "quaintWarehouse", label: "Quaint Warehouse" }];
+
 
   const optionsSelosyLogerro = [
-    { value: "choose", label: "Choose" },
-    { value: "selosy", label: "Selosy" },
-    { value: "logerro", label: "Logerro" },
-  ];
+  { value: "choose", label: "Choose" },
+  { value: "selosy", label: "Selosy" },
+  { value: "logerro", label: "Logerro" }];
+
 
   const optionsStore1Store2 = [
-    { value: "choose", label: "Choose" },
-    { value: "store1", label: "Store 1" },
-    { value: "store2", label: "Store 2" },
-  ];
+  { value: "choose", label: "Choose" },
+  { value: "store1", label: "Store 1" },
+  { value: "store2", label: "Store 2" }];
+
 
   const optionsSentPending = [
-    { value: "choose", label: "Choose" },
-    { value: "sent", label: "Sent" },
-    { value: "pending", label: "Pending" },
-  ];
+  { value: "choose", label: "Choose" },
+  { value: "sent", label: "Sent" },
+  { value: "pending", label: "Pending" }];
+
   return (
     <div>
       {/* Add Stock */}
@@ -43,8 +50,8 @@ const StockTransferModal = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -54,16 +61,27 @@ const StockTransferModal = () => {
                       <div className="col-lg-6">
                         <div className="input-blocks">
                           <label>Warehouse From</label>
-                          <Select classNamePrefix="react-select" options={optionsChoose} />
+                          <CommonSelect
+                            className="w-100"
+                            options={optionsChoose}
+                            value={selectedWarehouseFrom}
+                            onChange={(e) => setSelectedWarehouseFrom(e.value)}
+                            placeholder="Choose"
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="input-blocks">
                           <label>Warehouse To</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={optionsSelosyLogerro}
-                          />
+                            value={selectedWarehouseTo}
+                            onChange={(e) => setSelectedWarehouseTo(e.value)}
+                            placeholder="Choose"
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
@@ -78,12 +96,9 @@ const StockTransferModal = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Select Product"
-                          />
-                          <i
-                            data-feather="search"
-                            className="feather-search custom-search"
-                          />
+                            placeholder="Select Product" />
+                          
+                          <i className="feather icon-search feather-search custom-search" />
                         </div>
                       </div>
                       <div className="col-lg-12">
@@ -91,8 +106,8 @@ const StockTransferModal = () => {
                           <label>Notes</label>
                           <textarea
                             className="form-control"
-                            defaultValue={""}
-                          />
+                            defaultValue={""} />
+                          
                         </div>
                       </div>
                     </div>
@@ -100,8 +115,8 @@ const StockTransferModal = () => {
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <button type="submit" className="btn btn-submit">
@@ -130,8 +145,8 @@ const StockTransferModal = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -142,27 +157,35 @@ const StockTransferModal = () => {
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue="Nike Jordan"
-                      />
-                      <i
-                        data-feather="search"
-                        className="feather-search custom-search"
-                      />
+                        defaultValue="Nike Jordan" />
+                      
+                      <i className="feather icon-search feather-search custom-search" />
                     </div>
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="input-blocks">
                           <label>Warehouse From</label>
-                          <Select classNamePrefix="react-select" options={optionsChoose} />
+                          <CommonSelect
+                            className="w-100"
+                            options={optionsChoose}
+                            value={selectedWarehouseFrom}
+                            onChange={(e) => setSelectedWarehouseFrom(e.value)}
+                            placeholder="Choose"
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="input-blocks">
                           <label>Warehouse To</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={optionsSelosyLogerro}
-                          />
+                            value={selectedWarehouseTo}
+                            onChange={(e) => setSelectedWarehouseTo(e.value)}
+                            placeholder="Choose"
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
@@ -171,8 +194,8 @@ const StockTransferModal = () => {
                           <input
                             type="text"
                             className="form-control"
-                            defaultValue={32434545}
-                          />
+                            defaultValue={32434545} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
@@ -182,12 +205,9 @@ const StockTransferModal = () => {
                             type="text"
                             className="form-control"
                             placeholder="Select Product"
-                            defaultValue="Nike Jordan"
-                          />
-                          <i
-                            data-feather="search"
-                            className="feather-search custom-search"
-                          />
+                            defaultValue="Nike Jordan" />
+                          
+                          <i className="feather icon-search feather-search custom-search" />
                         </div>
                       </div>
                       <div className="col-lg-12">
@@ -209,12 +229,12 @@ const StockTransferModal = () => {
                                     <div className="productimgname">
                                       <Link
                                         to="#"
-                                        className="product-img stock-img"
-                                      >
-                                        <ImageWithBasePath
-                                          src="assets/img/products/stock-img-02.png"
-                                          alt="product"
-                                        />
+                                        className="product-img stock-img">
+                                        
+                                        <img
+                                          src={stockImg02}
+                                          alt="product" />
+                                        
                                       </Link>
                                       <Link to="#">Nike Jordan</Link>
                                     </div>
@@ -224,22 +244,19 @@ const StockTransferModal = () => {
                                   <td>
                                     <div className="product-quantity">
                                       <span className="quantity-btn">
-                                        <i
-                                          data-feather="minus-circle"
-                                          className="feather-search"
-                                        />
+                                        <i className="feather icon-minus-circle feather-search" />
                                       </span>
                                       <input
                                         type="text"
                                         className="quntity-input"
-                                        defaultValue={2}
-                                      />
+                                        defaultValue={2} />
+                                      
                                       <span className="quantity-btn">
                                         +
                                         <i
-                                          data-feather="plus-circle"
-                                          className="plus-circle"
-                                        />
+
+                                          className="feather icon-plus-circle plus-circle" />
+                                        
                                       </span>
                                     </div>
                                   </td>
@@ -249,18 +266,12 @@ const StockTransferModal = () => {
                                         className="me-2 p-2"
                                         to="#"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#edit-units"
-                                      >
-                                        <i
-                                          data-feather="edit"
-                                          className="feather-edit"
-                                        />
+                                        data-bs-target="#edit-units">
+                                        
+                                        <i className="feather icon-edit feather-edit" />
                                       </Link>
                                       <Link className="confirm-text p-2" to="#">
-                                        <i
-                                          data-feather="trash-2"
-                                          className="feather-trash-2"
-                                        />
+                                        <i className="feather icon-trash-2" />
                                       </Link>
                                     </div>
                                   </td>
@@ -276,9 +287,9 @@ const StockTransferModal = () => {
                           <textarea
                             className="form-control"
                             defaultValue={
-                              "The Jordan brand is owned by Nike (owned by the Knight family), as, at the time, the company was building its strategy to work with athletes to launch shows that could inspire consumers.Although Jordan preferred Converse and Adidas, they simply could not match the offer Nike made. "
-                            }
-                          />
+                            "The Jordan brand is owned by Nike (owned by the Knight family), as, at the time, the company was building its strategy to work with athletes to launch shows that could inspire consumers.Although Jordan preferred Converse and Adidas, they simply could not match the offer Nike made. "
+                            } />
+                          
                         </div>
                       </div>
                     </div>
@@ -286,8 +297,8 @@ const StockTransferModal = () => {
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <button type="submit" className="btn btn-submit">
@@ -316,8 +327,8 @@ const StockTransferModal = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -328,28 +339,40 @@ const StockTransferModal = () => {
                     <div className="col-lg-4 col-sm-6 col-12">
                       <div className="input-blocks">
                         <label>From</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={optionsStore1Store2}
-                        />
+                          value={selectedStoreFrom}
+                          onChange={(e) => setSelectedStoreFrom(e.value)}
+                          placeholder="Choose"
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-lg-4 col-sm-6 col-12">
                       <div className="input-blocks">
                         <label>To</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={optionsStore1Store2}
-                        />
+                          value={selectedStoreTo}
+                          onChange={(e) => setSelectedStoreTo(e.value)}
+                          placeholder="Choose"
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-lg-4 col-sm-6 col-12">
                       <div className="input-blocks">
-                        <label>Satus</label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <label>Status</label>
+                        <CommonSelect
+                          className="w-100"
                           options={optionsSentPending}
-                        />
+                          value={selectedStatus}
+                          onChange={(e) => setSelectedStatus(e.value)}
+                          placeholder="Choose"
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="col-lg-12 col-sm-6 col-12">
@@ -369,10 +392,7 @@ const StockTransferModal = () => {
                         <div className="image-upload download">
                           <input type="file" />
                           <div className="image-uploads">
-                            <ImageWithBasePath
-                              src="assets/img/download-img.png"
-                              alt="img"
-                            />
+                            <img src={downloadImg} alt="img" />
                             <h4>
                               Drag and drop a <span>file to upload</span>
                             </h4>
@@ -399,8 +419,8 @@ const StockTransferModal = () => {
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <button type="submit" className="btn btn-submit">
@@ -415,8 +435,8 @@ const StockTransferModal = () => {
         </div>
       </div>
       {/* /Import Transfer */}
-    </div>
-  );
+    </div>);
+
 };
 
 export default StockTransferModal;

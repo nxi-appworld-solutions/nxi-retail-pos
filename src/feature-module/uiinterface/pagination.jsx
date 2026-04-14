@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,8 +6,8 @@ import {
   faAngleRight,
   faArrowLeftLong,
   faArrowRightLong,
-  faEllipsisH,
-} from "@fortawesome/free-solid-svg-icons";
+  faEllipsisH } from
+"@fortawesome/free-solid-svg-icons";
 
 const Pagination = () => {
   return (
@@ -76,8 +76,8 @@ const Pagination = () => {
                         {/* <i className="fas fa-arrow-left-long me-2" /> */}
                         <FontAwesomeIcon
                           icon={faArrowLeftLong}
-                          className="me-2"
-                        />
+                          className="me-2" />
+                        
                         Previous
                       </Link>
                     </li>
@@ -97,8 +97,8 @@ const Pagination = () => {
                         {/* <i className="fas fa-arrow-right-long ms-2" /> */}
                         <FontAwesomeIcon
                           icon={faArrowRightLong}
-                          className="ms-2"
-                        />
+                          className="ms-2" />
+                        
                       </Link>
                     </li>
                   </ul>
@@ -227,7 +227,7 @@ const Pagination = () => {
                 <nav aria-label="Page navigation">
                   <ul className="pagination justify-content-center mb-3">
                     <li className="page-item disabled">
-                      <Link className="page-link">Previous</Link>
+                      <Link to="#" className="page-link">Previous</Link>
                     </li>
                     <li className="page-item">
                       <Link className="page-link" to="#">
@@ -254,7 +254,7 @@ const Pagination = () => {
                 <nav aria-label="Page navigation">
                   <ul className="pagination justify-content-end mb-0">
                     <li className="page-item disabled">
-                      <Link className="page-link">Previous</Link>
+                      <Link to="#" className="page-link">Previous</Link>
                     </li>
                     <li className="page-item">
                       <Link className="page-link" to="#">
@@ -292,7 +292,7 @@ const Pagination = () => {
                 <nav aria-label="..." className="me-3">
                   <ul className="pagination  mb-3">
                     <li className="page-item disabled">
-                      <Link className="page-link">Previous</Link>
+                      <Link to="#" className="page-link">Previous</Link>
                     </li>
                     <li className="page-item">
                       <Link className="page-link" to="#">
@@ -344,16 +344,16 @@ const Pagination = () => {
               <div className="card-body">
                 <nav
                   aria-label="Page navigation"
-                  className="pagination-style-1"
-                >
+                  className="pagination-style-1">
+                  
                   <ul className="pagination mb-0">
                     <li className="page-item disabled">
                       <Link className="page-link" to="#">
                         {/* <i className="fas fa-angle-left align-middle" /> */}
                         <FontAwesomeIcon
                           icon={faAngleLeft}
-                          className="align-middle"
-                        />
+                          className="align-middle" />
+                        
                       </Link>
                     </li>
                     <li className="page-item">
@@ -381,8 +381,8 @@ const Pagination = () => {
                       <Link className="page-link" to="#">
                         <FontAwesomeIcon
                           icon={faAngleRight}
-                          className="align-middle"
-                        />
+                          className="align-middle" />
+                        
                       </Link>
                     </li>
                   </ul>
@@ -400,8 +400,8 @@ const Pagination = () => {
               <div className="card-body">
                 <nav
                   aria-label="Page navigation"
-                  className="pagination-style-2"
-                >
+                  className="pagination-style-2">
+                  
                   <ul className="pagination mb-0 flex-wrap">
                     <li className="page-item disabled">
                       <Link className="page-link" to="#">
@@ -449,8 +449,8 @@ const Pagination = () => {
               <div className="card-body">
                 <nav
                   aria-label="Page navigation"
-                  className="pagination-style-3"
-                >
+                  className="pagination-style-3">
+                  
                   <ul className="pagination mb-0 flex-wrap">
                     <li className="page-item disabled">
                       <Link className="page-link" to="#">
@@ -498,8 +498,8 @@ const Pagination = () => {
               <div className="card-body">
                 <nav
                   aria-label="Page navigation"
-                  className="pagination-style-4"
-                >
+                  className="pagination-style-4">
+                  
                   <ul className="pagination mb-0 flex-wrap">
                     <li className="page-item disabled">
                       <Link className="page-link" to="#">
@@ -545,8 +545,8 @@ const Pagination = () => {
           {/* /Pagination Style 4 */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Pagination;

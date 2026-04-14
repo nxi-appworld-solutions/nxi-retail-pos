@@ -1,7 +1,6 @@
-import React from "react";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
 import { Link } from "react-router-dom";
-import { all_routes } from "../../../Router/all_routes";
+import { all_routes } from "../../../routes/all_routes";
+import { error500 } from "../../../utils/imagepath";
 
 const Error500 = () => {
   const route = all_routes;
@@ -9,11 +8,7 @@ const Error500 = () => {
     <div className="main-wrapper">
       <div className="error-box">
         <div className="error-img">
-          <ImageWithBasePath
-            src="assets/img/authentication/error-500.png"
-            className="img-fluid"
-            alt="img"
-          />
+          <img src={error500} className="img-fluid" alt="img" />
         </div>
         <h3 className="h2 mb-3">Oops, something went wrong</h3>
         <p>
@@ -24,8 +19,8 @@ const Error500 = () => {
           Back to Dashboard
         </Link>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Error500;

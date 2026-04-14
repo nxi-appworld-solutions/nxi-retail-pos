@@ -1,8 +1,9 @@
-import React from 'react'
+import { Link } from "react-router-dom";
+
 
 const ButtonsGroup = () => {
-    return (
-        <div className="page-wrapper">
+  return (
+    <div className="page-wrapper">
             <div className="content">
                 <div className="page-header">
                     <div className="page-title">
@@ -19,10 +20,10 @@ const ButtonsGroup = () => {
                                 <div className="row g-3">
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-primary" type="button">
                                                 Left
                                             </button>
@@ -36,10 +37,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-secondary" type="button">
                                                 Left
                                             </button>
@@ -53,10 +54,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-success" type="button">
                                                 Left
                                             </button>
@@ -70,10 +71,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-info" type="button">
                                                 Left
                                             </button>
@@ -87,10 +88,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-warning" type="button">
                                                 Left
                                             </button>
@@ -104,10 +105,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-danger" type="button">
                                                 Left
                                             </button>
@@ -121,10 +122,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-light" type="button">
                                                 Left
                                             </button>
@@ -138,10 +139,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12 button-group-mb-sm">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-dark" type="button">
                                                 Left
                                             </button>
@@ -166,10 +167,10 @@ const ButtonsGroup = () => {
                                 <div className="row g-3">
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-outline-primary" type="button">
                                                 Left
                                             </button>
@@ -183,10 +184,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-outline-secondary" type="button">
                                                 Left
                                             </button>
@@ -200,10 +201,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-outline-success" type="button">
                                                 Left
                                             </button>
@@ -217,10 +218,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-outline-info" type="button">
                                                 Left
                                             </button>
@@ -234,10 +235,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-outline-warning" type="button">
                                                 Left
                                             </button>
@@ -251,10 +252,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-outline-danger" type="button">
                                                 Left
                                             </button>
@@ -268,36 +269,36 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button
-                                                className="btn btn-outline-light txt-dark"
-                                                type="button"
-                                            >
+                        className="btn btn-outline-light txt-dark"
+                        type="button">
+                        
                                                 Left
                                             </button>
                                             <button
-                                                className="btn btn-outline-light txt-dark"
-                                                type="button"
-                                            >
+                        className="btn btn-outline-light txt-dark"
+                        type="button">
+                        
                                                 Middle
                                             </button>
                                             <button
-                                                className="btn btn-outline-light txt-dark"
-                                                type="button"
-                                            >
+                        className="btn btn-outline-light txt-dark"
+                        type="button">
+                        
                                                 Right
                                             </button>
                                         </div>
                                     </div>
                                     <div className="col-xxl-3 col-md-6 col-sm-12 button-group-mb-sm">
                                         <div
-                                            className="btn-group"
-                                            role="group"
-                                            aria-label="Basic example"
-                                        >
+                      className="btn-group"
+                      role="group"
+                      aria-label="Basic example">
+                      
                                             <button className="btn btn-outline-dark" type="button">
                                                 Left
                                             </button>
@@ -321,10 +322,10 @@ const ButtonsGroup = () => {
                                     <div className="row g-3">
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-primary" type="button">
                                                     Left
                                                 </button>
@@ -338,10 +339,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-secondary" type="button">
                                                     Left
                                                 </button>
@@ -355,10 +356,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-success" type="button">
                                                     Left
                                                 </button>
@@ -372,10 +373,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-info" type="button">
                                                     Left
                                                 </button>
@@ -389,10 +390,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-warning" type="button">
                                                     Left
                                                 </button>
@@ -406,10 +407,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-danger" type="button">
                                                     Left
                                                 </button>
@@ -423,10 +424,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-light" type="button">
                                                     Left
                                                 </button>
@@ -440,10 +441,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12 button-group-mb-sm">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-dark" type="button">
                                                     Left
                                                 </button>
@@ -468,10 +469,10 @@ const ButtonsGroup = () => {
                                     <div className="row g-3">
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-primary" type="button">
                                                     Left
                                                 </button>
@@ -485,10 +486,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-secondary" type="button">
                                                     Left
                                                 </button>
@@ -502,10 +503,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-success" type="button">
                                                     Left
                                                 </button>
@@ -519,10 +520,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-info" type="button">
                                                     Left
                                                 </button>
@@ -536,10 +537,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-warning" type="button">
                                                     Left
                                                 </button>
@@ -553,10 +554,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-danger" type="button">
                                                     Left
                                                 </button>
@@ -570,36 +571,36 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button
-                                                    className="btn btn-outline-light txt-dark"
-                                                    type="button"
-                                                >
+                          className="btn btn-outline-light txt-dark"
+                          type="button">
+                          
                                                     Left
                                                 </button>
                                                 <button
-                                                    className="btn btn-outline-light txt-dark"
-                                                    type="button"
-                                                >
+                          className="btn btn-outline-light txt-dark"
+                          type="button">
+                          
                                                     Middle
                                                 </button>
                                                 <button
-                                                    className="btn btn-outline-light txt-dark"
-                                                    type="button"
-                                                >
+                          className="btn btn-outline-light txt-dark"
+                          type="button">
+                          
                                                     Right
                                                 </button>
                                             </div>
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12 button-group-mb-sm">
                                             <div
-                                                className="btn-group btn-group-pill"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-pill"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-dark" type="button">
                                                     Left
                                                 </button>
@@ -624,10 +625,10 @@ const ButtonsGroup = () => {
                                     <div className="row g-3">
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-primary" type="button">
                                                     Left
                                                 </button>
@@ -641,10 +642,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-secondary" type="button">
                                                     Left
                                                 </button>
@@ -658,10 +659,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-success" type="button">
                                                     Left
                                                 </button>
@@ -675,10 +676,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-info" type="button">
                                                     Left
                                                 </button>
@@ -692,10 +693,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-warning" type="button">
                                                     Left
                                                 </button>
@@ -709,10 +710,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-danger" type="button">
                                                     Left
                                                 </button>
@@ -726,10 +727,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-light" type="button">
                                                     Left
                                                 </button>
@@ -743,10 +744,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-dark" type="button">
                                                     Left
                                                 </button>
@@ -771,10 +772,10 @@ const ButtonsGroup = () => {
                                     <div className="row g-3">
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-primary" type="button">
                                                     Left
                                                 </button>
@@ -788,10 +789,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-secondary" type="button">
                                                     Left
                                                 </button>
@@ -805,10 +806,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-success" type="button">
                                                     Left
                                                 </button>
@@ -822,10 +823,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-info" type="button">
                                                     Left
                                                 </button>
@@ -839,10 +840,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-warning" type="button">
                                                     Left
                                                 </button>
@@ -856,10 +857,10 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-danger" type="button">
                                                     Left
                                                 </button>
@@ -873,36 +874,36 @@ const ButtonsGroup = () => {
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button
-                                                    className="btn btn-outline-light txt-dark"
-                                                    type="button"
-                                                >
+                          className="btn btn-outline-light txt-dark"
+                          type="button">
+                          
                                                     Left
                                                 </button>
                                                 <button
-                                                    className="btn btn-outline-light txt-dark"
-                                                    type="button"
-                                                >
+                          className="btn btn-outline-light txt-dark"
+                          type="button">
+                          
                                                     Middle
                                                 </button>
                                                 <button
-                                                    className="btn btn-outline-light txt-dark"
-                                                    type="button"
-                                                >
+                          className="btn btn-outline-light txt-dark"
+                          type="button">
+                          
                                                     Right
                                                 </button>
                                             </div>
                                         </div>
                                         <div className="col-xxl-3 col-md-6 col-sm-12 button-group-mb-sm">
                                             <div
-                                                className="btn-group btn-group-square"
-                                                role="group"
-                                                aria-label="Basic example"
-                                            >
+                        className="btn-group btn-group-square"
+                        role="group"
+                        aria-label="Basic example">
+                        
                                                 <button className="btn btn-outline-dark" type="button">
                                                     Left
                                                 </button>
@@ -969,21 +970,21 @@ const ButtonsGroup = () => {
                             <div className="card-body">
                                 <div className="btn-group">
                                     <button
-                                        type="button"
-                                        className="btn btn-soft-danger btn-outline-danger"
-                                    >
+                    type="button"
+                    className="btn btn-soft-danger btn-outline-danger">
+                    
                                         Left
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-soft-danger btn-outline-danger"
-                                    >
+                    type="button"
+                    className="btn btn-soft-danger btn-outline-danger">
+                    
                                         Middle
                                     </button>
                                     <button
-                                        type="button"
-                                        className="btn btn-soft-danger btn-outline-danger"
-                                    >
+                    type="button"
+                    className="btn btn-soft-danger btn-outline-danger">
+                    
                                         Right
                                     </button>
                                 </div>
@@ -1017,10 +1018,10 @@ const ButtonsGroup = () => {
                             </div>
                             <div className="card-body">
                                 <div
-                                    className="btn-group"
-                                    role="group"
-                                    aria-label="Basic mixed styles example"
-                                >
+                  className="btn-group"
+                  role="group"
+                  aria-label="Basic mixed styles example">
+                  
                                     <button type="button" className="btn btn-danger">
                                         Left
                                     </button>
@@ -1041,10 +1042,10 @@ const ButtonsGroup = () => {
                             </div>
                             <div className="card-body">
                                 <div
-                                    className="btn-group"
-                                    role="group"
-                                    aria-label="Button group with nested dropdown"
-                                >
+                  className="btn-group"
+                  role="group"
+                  aria-label="Button group with nested dropdown">
+                  
                                     <button type="button" className="btn btn-primary">
                                         1
                                     </button>
@@ -1053,23 +1054,23 @@ const ButtonsGroup = () => {
                                     </button>
                                     <div className="btn-group" role="group">
                                         <button
-                                            type="button"
-                                            className="btn btn-primary dropdown-toggle"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
+                      type="button"
+                      className="btn btn-primary dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      
                                             Dropdown
                                         </button>
                                         <ul className="dropdown-menu">
                                             <li>
-                                                <a className="dropdown-item" to="#">
+                                                <Link className="dropdown-item" to="#">
                                                     Dropdown link
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li>
-                                                <a className="dropdown-item" to="#">
+                                                <Link className="dropdown-item" to="#">
                                                     Dropdown link
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>
@@ -1098,10 +1099,10 @@ const ButtonsGroup = () => {
                             </div>
                             <div className="card-body">
                                 <div
-                                    className="btn-group"
-                                    role="group"
-                                    aria-label="Basic checkbox toggle button group"
-                                >
+                  className="btn-group"
+                  role="group"
+                  aria-label="Basic checkbox toggle button group">
+                  
                                     <input type="checkbox" className="btn-check" id="btncheck1" />
                                     <label className="btn btn-outline-primary" htmlFor="btncheck1">
                                         Checkbox 1
@@ -1125,35 +1126,35 @@ const ButtonsGroup = () => {
                             </div>
                             <div className="card-body radio-button-group">
                                 <div
-                                    className="btn-group"
-                                    role="group"
-                                    aria-label="Basic radio toggle button group"
-                                >
+                  className="btn-group"
+                  role="group"
+                  aria-label="Basic radio toggle button group">
+                  
                                     <input
-                                        type="radio"
-                                        className="btn-check"
-                                        name="btnradio"
-                                        id="btnradio1"
-                                        defaultChecked
-                                    />
+                    type="radio"
+                    className="btn-check"
+                    name="btnradio"
+                    id="btnradio1"
+                    defaultChecked />
+                  
                                     <label className="btn btn-outline-primary" htmlFor="btnradio1">
                                         Radio 1
                                     </label>
                                     <input
-                                        type="radio"
-                                        className="btn-check"
-                                        name="btnradio"
-                                        id="btnradio2"
-                                    />
+                    type="radio"
+                    className="btn-check"
+                    name="btnradio"
+                    id="btnradio2" />
+                  
                                     <label className="btn btn-outline-primary" htmlFor="btnradio2">
                                         Radio 2
                                     </label>
                                     <input
-                                        type="radio"
-                                        className="btn-check"
-                                        name="btnradio"
-                                        id="btnradio3"
-                                    />
+                    type="radio"
+                    className="btn-check"
+                    name="btnradio"
+                    id="btnradio3" />
+                  
                                     <label className="btn btn-outline-primary" htmlFor="btnradio3">
                                         Radio 3
                                     </label>
@@ -1170,10 +1171,10 @@ const ButtonsGroup = () => {
                             </div>
                             <div className="card-body">
                                 <div
-                                    className="btn-group btn-group-lg mb-3"
-                                    role="group"
-                                    aria-label="Large button group"
-                                >
+                  className="btn-group btn-group-lg mb-3"
+                  role="group"
+                  aria-label="Large button group">
+                  
                                     <button type="button" className="btn btn-outline-primary">
                                         Left
                                     </button>
@@ -1186,10 +1187,10 @@ const ButtonsGroup = () => {
                                 </div>
                                 <br />
                                 <div
-                                    className="btn-group mb-3"
-                                    role="group"
-                                    aria-label="Default button group"
-                                >
+                  className="btn-group mb-3"
+                  role="group"
+                  aria-label="Default button group">
+                  
                                     <button type="button" className="btn btn-outline-primary">
                                         Left
                                     </button>
@@ -1202,10 +1203,10 @@ const ButtonsGroup = () => {
                                 </div>
                                 <br />
                                 <div
-                                    className="btn-group btn-group-sm"
-                                    role="group"
-                                    aria-label="Small button group"
-                                >
+                  className="btn-group btn-group-sm"
+                  role="group"
+                  aria-label="Small button group">
+                  
                                     <button type="button" className="btn btn-outline-primary">
                                         Left
                                     </button>
@@ -1226,15 +1227,15 @@ const ButtonsGroup = () => {
                             </div>
                             <div className="card-body">
                                 <div
-                                    className="btn-toolbar mb-4"
-                                    role="toolbar"
-                                    aria-label="Toolbar with button groups"
-                                >
+                  className="btn-toolbar mb-4"
+                  role="toolbar"
+                  aria-label="Toolbar with button groups">
+                  
                                     <div
-                                        className="btn-group me-2 my-1"
-                                        role="group"
-                                        aria-label="First group"
-                                    >
+                    className="btn-group me-2 my-1"
+                    role="group"
+                    aria-label="First group">
+                    
                                         <button type="button" className="btn btn-primary">
                                             1
                                         </button>
@@ -1249,10 +1250,10 @@ const ButtonsGroup = () => {
                                         </button>
                                     </div>
                                     <div
-                                        className="btn-group me-2 my-1"
-                                        role="group"
-                                        aria-label="Second group"
-                                    >
+                    className="btn-group me-2 my-1"
+                    role="group"
+                    aria-label="Second group">
+                    
                                         <button type="button" className="btn btn-secondary">
                                             5
                                         </button>
@@ -1264,25 +1265,25 @@ const ButtonsGroup = () => {
                                         </button>
                                     </div>
                                     <div
-                                        className="btn-group my-1"
-                                        role="group"
-                                        aria-label="Third group"
-                                    >
+                    className="btn-group my-1"
+                    role="group"
+                    aria-label="Third group">
+                    
                                         <button type="button" className="btn btn-info">
                                             8
                                         </button>
                                     </div>
                                 </div>
                                 <div
-                                    className="btn-toolbar mb-3"
-                                    role="toolbar"
-                                    aria-label="Toolbar with button groups"
-                                >
+                  className="btn-toolbar mb-3"
+                  role="toolbar"
+                  aria-label="Toolbar with button groups">
+                  
                                     <div
-                                        className="btn-group me-2 my-1"
-                                        role="group"
-                                        aria-label="First group"
-                                    >
+                    className="btn-group me-2 my-1"
+                    role="group"
+                    aria-label="First group">
+                    
                                         <button type="button" className="btn btn-outline-secondary">
                                             1
                                         </button>
@@ -1301,24 +1302,24 @@ const ButtonsGroup = () => {
                                             @
                                         </div>
                                         <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Input group example"
-                                            aria-label="Input group example"
-                                            aria-describedby="btnGroupAddon"
-                                        />
+                      type="text"
+                      className="form-control"
+                      placeholder="Input group example"
+                      aria-label="Input group example"
+                      aria-describedby="btnGroupAddon" />
+                    
                                     </div>
                                 </div>
                                 <div
-                                    className="btn-toolbar justify-content-between"
-                                    role="toolbar"
-                                    aria-label="Toolbar with button groups"
-                                >
+                  className="btn-toolbar justify-content-between"
+                  role="toolbar"
+                  aria-label="Toolbar with button groups">
+                  
                                     <div
-                                        className="btn-group my-1"
-                                        role="group"
-                                        aria-label="First group"
-                                    >
+                    className="btn-group my-1"
+                    role="group"
+                    aria-label="First group">
+                    
                                         <button type="button" className="btn btn-outline-secondary">
                                             1
                                         </button>
@@ -1337,12 +1338,12 @@ const ButtonsGroup = () => {
                                             @
                                         </div>
                                         <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Input group example"
-                                            aria-label="Input group example"
-                                            aria-describedby="btnGroupAddon2"
-                                        />
+                      type="text"
+                      className="form-control"
+                      placeholder="Input group example"
+                      aria-label="Input group example"
+                      aria-describedby="btnGroupAddon2" />
+                    
                                     </div>
                                 </div>
                             </div>
@@ -1357,98 +1358,98 @@ const ButtonsGroup = () => {
                                 <div className="row gap-2">
                                     <div className="col-sm-3">
                                         <div
-                                            className="btn-group-vertical"
-                                            role="group"
-                                            aria-label="Vertical button group"
-                                        >
+                      className="btn-group-vertical"
+                      role="group"
+                      aria-label="Vertical button group">
+                      
                                             <button type="button" className="btn btn-primary">
                                                 Button
                                             </button>
                                             <div className="btn-group" role="group">
                                                 <button
-                                                    type="button"
-                                                    className="btn btn-primary dropdown-toggle"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
+                          type="button"
+                          className="btn btn-primary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          
                                                     Dropdown
                                                 </button>
                                                 <ul className="dropdown-menu">
                                                     <li>
-                                                        <a className="dropdown-item" to="#">
+                                                        <Link className="dropdown-item" to="#">
                                                             Dropdown link
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <a className="dropdown-item" to="#">
+                                                        <Link className="dropdown-item" to="#">
                                                             Dropdown link
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div className="btn-group dropstart" role="group">
                                                 <button
-                                                    type="button"
-                                                    className="btn btn-primary dropdown-toggle"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
+                          type="button"
+                          className="btn btn-primary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          
                                                     Dropdown
                                                 </button>
                                                 <ul className="dropdown-menu">
                                                     <li>
-                                                        <a className="dropdown-item" to="#">
+                                                        <Link className="dropdown-item" to="#">
                                                             Dropdown link
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <a className="dropdown-item" to="#">
+                                                        <Link className="dropdown-item" to="#">
                                                             Dropdown link
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div className="btn-group dropend" role="group">
                                                 <button
-                                                    type="button"
-                                                    className="btn btn-primary dropdown-toggle"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
+                          type="button"
+                          className="btn btn-primary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          
                                                     Dropdown
                                                 </button>
                                                 <ul className="dropdown-menu">
                                                     <li>
-                                                        <a className="dropdown-item" to="#">
+                                                        <Link className="dropdown-item" to="#">
                                                             Dropdown link
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <a className="dropdown-item" to="#">
+                                                        <Link className="dropdown-item" to="#">
                                                             Dropdown link
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div className="btn-group dropup" role="group">
                                                 <button
-                                                    type="button"
-                                                    className="btn btn-primary dropdown-toggle"
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
+                          type="button"
+                          className="btn btn-primary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                          
                                                     Dropdown
                                                 </button>
                                                 <ul className="dropdown-menu">
                                                     <li>
-                                                        <a className="dropdown-item" to="#">
+                                                        <Link className="dropdown-item" to="#">
                                                             Dropdown link
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                     <li>
-                                                        <a className="dropdown-item" to="#">
+                                                        <Link className="dropdown-item" to="#">
                                                             Dropdown link
-                                                        </a>
+                                                        </Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1456,10 +1457,10 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-sm-3">
                                         <div
-                                            className="btn-group-vertical"
-                                            role="group"
-                                            aria-label="Vertical button group"
-                                        >
+                      className="btn-group-vertical"
+                      role="group"
+                      aria-label="Vertical button group">
+                      
                                             <button type="button" className="btn btn-primary">
                                                 Button
                                             </button>
@@ -1476,45 +1477,45 @@ const ButtonsGroup = () => {
                                     </div>
                                     <div className="col-sm-3">
                                         <div
-                                            className="btn-group-vertical"
-                                            role="group"
-                                            aria-label="Vertical radio toggle button group"
-                                        >
+                      className="btn-group-vertical"
+                      role="group"
+                      aria-label="Vertical radio toggle button group">
+                      
                                             <input
-                                                type="radio"
-                                                className="btn-check"
-                                                name="vbtn-radio"
-                                                id="vbtn-radio1"
-                                                defaultChecked
-                                            />
+                        type="radio"
+                        className="btn-check"
+                        name="vbtn-radio"
+                        id="vbtn-radio1"
+                        defaultChecked />
+                      
                                             <label
-                                                className="btn btn-outline-primary"
-                                                htmlFor="vbtn-radio1"
-                                            >
+                        className="btn btn-outline-primary"
+                        htmlFor="vbtn-radio1">
+                        
                                                 Radio 1
                                             </label>
                                             <input
-                                                type="radio"
-                                                className="btn-check"
-                                                name="vbtn-radio"
-                                                id="vbtn-radio2"
-                                            />
+                        type="radio"
+                        className="btn-check"
+                        name="vbtn-radio"
+                        id="vbtn-radio2" />
+                      
                                             <label
-                                                className="btn btn-outline-primary"
-                                                htmlFor="vbtn-radio2"
-                                            >
+                        className="btn btn-outline-primary"
+                        htmlFor="vbtn-radio2">
+                        
                                                 Radio 2
                                             </label>
                                             <input
-                                                type="radio"
-                                                className="btn-check"
-                                                name="vbtn-radio"
-                                                id="vbtn-radio3"
-                                            />
+                        type="radio"
+                        className="btn-check"
+                        name="vbtn-radio"
+                        id="vbtn-radio3" />
+                      
                                             <label
-                                                className="btn btn-outline-primary"
-                                                htmlFor="vbtn-radio3"
-                                            >
+                        className="btn btn-outline-primary"
+                        htmlFor="vbtn-radio3">
+                        
                                                 Radio 3
                                             </label>
                                         </div>
@@ -1525,9 +1526,9 @@ const ButtonsGroup = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>);
 
-    )
-}
 
-export default ButtonsGroup
+};
+
+export default ButtonsGroup;

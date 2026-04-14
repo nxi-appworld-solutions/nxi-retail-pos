@@ -1,105 +1,113 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import AddLeaveEmployee from "../../core/modals/hrm/addleaveemployee";
 import EditLeaveEmployee from "../../core/modals/hrm/editleaveemployee";
-import Table from "../../core/pagination/datatable";
 import { leavesEmployee } from "../../core/json/leavesemployee";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { DatePicker } from "antd";
-import { Calendar } from "feather-icons-react/build/IconComponents";
-import CommonFooter from "../../core/common/footer/commonFooter";
+
+import CommonFooter from "../../components/footer/commonFooter";
+import PrimeDataTable from "../../components/data-table";
+import TableTopHead from "../../components/table-top-head";
+import CommonDatePicker from "../../components/date-picker/common-date-picker";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
 
 const LeavesEmployee = () => {
   const leavesEmployeedata = leavesEmployee;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [selectedEmployeeLeaves, setSelectedEmployeeLeaves] = useState([]);
 
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
+  const [date, setDate] = useState(new Date());
   const columns = [
-    {
-      title: "EmpId",
-      dataIndex: "empId",
-      // sorter: (a, b) => a.empId.length - b.empId.length,
-      sorter: (a, b) => a.empId.localeCompare(b.empId)
-
-    },
-    {
-      title: "Type",
-      dataIndex: "type",
-      sorter: (a, b) => a.type.length - b.type.length,
-    },
-
-    {
-      title: "Date",
-      dataIndex: "date",
-      sorter: (a, b) => a.date.length - b.date.length,
-    },
-    {
-      title: "Duration",
-      dataIndex: "duration",
-      sorter: (a, b) => a.duration.length - b.duration.length,
-    },
-    {
-      title: "AppliedOn",
-      dataIndex: "appliedOn",
-      sorter: (a, b) => a.appliedOn.length - b.appliedOn.length,
-    },
-    {
-      title: "Reason",
-      dataIndex: "reason",
-      sorter: (a, b) => a.reason.length - b.reason.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "approval",
-      sorter: (a, b) => a.approval.length - b.approval.length,
-      render: (text) => (
-        <span
-          className={`badge  d-inline-flex align-items-center badge-xs ${text === "Applied" ? "badge-purple" : text === "Approved" ? "badge-success" : "badge-danger"
-            }`}
-        >
-          <i className="ti ti-point-filled me-1"></i>{text}
+  {
+    field: "empId",
+    header: "EmpId",
+    sortable: true
+  },
+  {
+    field: "type",
+    header: "Type",
+    sortable: true
+  },
+  {
+    field: "date",
+    header: "Date",
+    sortable: true
+  },
+  {
+    field: "duration",
+    header: "Duration",
+    sortable: true
+  },
+  {
+    field: "appliedOn",
+    header: "AppliedOn",
+    sortable: true
+  },
+  {
+    field: "reason",
+    header: "Reason",
+    sortable: true
+  },
+  {
+    field: "approval",
+    header: "Status",
+    sortable: true,
+    body: (rowData) =>
+    <span
+      className={`badge d-inline-flex align-items-center badge-xs ${
+      rowData.approval === "Applied" ?
+      "badge-purple" :
+      rowData.approval === "Approved" ?
+      "badge-success" :
+      "badge-danger"}`
+      }>
+      
+          <i className="ti ti-point-filled me-1" />
+          {rowData.approval}
         </span>
-      ),
-    },
-    {
-      title: "Actions",
-      dataIndex: "action",
-      sorter: (a, b) => a.action.length - b.action.length,
-      render: (text) => (
-        <td className="action-table-data justify-content-end">
-          <div className="edit-delete-action">
-            <Link
-              to=""
-              className={`me-2 p-2 ${text !== 'Rejected' && text !== 'Applied' ? 'd-none' : ''}`}
-            >
-              <i
-                data-feather={`${text === 'Rejected' ? 'x-circle' : 'info'}`}
-                className={`${text === 'Rejected' ? 'feather-x-circle' : text === 'Applied' ? 'feather-info' : ''}`}
-              ></i>
-            </Link>
-            <Link className="me-2 p-2" to="#" data-bs-toggle="modal" data-bs-target="#edit-leave">
-              <i data-feather="edit" className="feather-edit"></i>
-            </Link>
-            <Link className="confirm-text p-2" to="#" data-bs-toggle="modal" data-bs-target="#delete-modal">
-              <i data-feather="trash-2" className="feather-trash-2"></i>
-            </Link>
-          </div>
 
-        </td>
-      ),
-    },
+  },
+  {
+    header: "",
+    field: "actions",
+    key: "actions",
+    sortable: false,
+    body: (_row) =>
+    <div className="edit-delete-action d-flex align-items-center">
+          <Link
+        className="me-2 p-2 d-flex align-items-center border rounded"
+        to="#"
+        data-bs-toggle="modal"
+        data-bs-target="#edit-customer">
+        
+            <i className="feather icon-edit"></i>
+          </Link>
+          <Link
+        className="p-2 d-flex align-items-center border rounded"
+        to="#"
+        data-bs-toggle="modal" data-bs-target="#delete-modal">
+        
+            <i className="feather icon-trash-2"></i>
+          </Link>
+        </div>
 
-  ];
+  }];
+
 
   const [searchText] = useState("");
   const filteredData = leavesEmployeedata.filter((entry) => {
     return Object.keys(entry).some((key) => {
-      return String(entry[key])
-        .toLowerCase()
-        .includes(searchText.toLowerCase());
+      return String(entry[key]).
+      toLowerCase().
+      includes(searchText.toLowerCase());
     });
   });
-
 
   return (
     <div>
@@ -112,18 +120,14 @@ const LeavesEmployee = () => {
                 <h6>Manage your Leaves</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+          <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-leave"
-              >
+                data-bs-target="#add-leave">
+                
                 Apply Leave
               </Link>
             </div>
@@ -132,24 +136,28 @@ const LeavesEmployee = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="me-2 date-select-small">
                   <div className="input-groupicon trail-balance">
-                    <Calendar className="info-img" />
-                    <DatePicker
-                      className="form-control datetimepicker"
-                      placeholder="dd/mm/yyyy"
-                    />
+                    <i className="feather icon-calendar info-img" />
+                  <CommonDatePicker
+                      value={date}
+                      onChange={setDate}
+                      className="w-100" />
+                    
                   </div>
                 </div>
                 <div className="dropdown">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Select Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -170,7 +178,19 @@ const LeavesEmployee = () => {
 
             <div className="card-body">
               <div className="table-responsive">
-                <Table columns={columns} dataSource={filteredData} />
+                <PrimeDataTable
+                  column={columns}
+                  data={filteredData}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedEmployeeLeaves}
+                  onSelectionChange={(e) => setSelectedEmployeeLeaves(e.value)}
+                  dataKey="id" />
+                
               </div>
             </div>
           </div>
@@ -180,47 +200,9 @@ const LeavesEmployee = () => {
       </div>
       <AddLeaveEmployee />
       <EditLeaveEmployee />
+      <DeleteModal />
+    </div>);
 
-      {/* delete modal */}
-      <div className="modal fade" id="delete-modal">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="page-wrapper-new p-0">
-              <div className="content p-5 px-3 text-center">
-                <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                  <i className="ti ti-trash fs-24 text-danger" />
-                </span>
-                <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
-                  Delete Leave
-                </h4>
-                <p className="text-gray-6 mb-0 fs-16">
-                  Are you sure you want to delete leave?
-                </p>
-                <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                    data-bs-dismiss="modal"
-                  >
-                    Cancel
-                  </button>
-                  <Link
-                    to="#"
-                    className="btn btn-submit fs-13 fw-medium p-2 px-3" data-bs-dismiss="modal"
-                  >
-                    Yes Delete
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* /delete modal */}
-
-
-    </div>
-  );
 };
 
 export default LeavesEmployee;

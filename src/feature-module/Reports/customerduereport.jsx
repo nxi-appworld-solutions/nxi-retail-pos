@@ -1,107 +1,112 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { all_routes } from "../../Router/all_routes";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { DatePicker, Table } from "antd";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
+import { all_routes } from "../../routes/all_routes";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
 import { customerduereportdata } from "../../core/json/customerreportdata";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import Select from "react-select";
-
+import PrimeDataTable from "../../components/data-table";
+import CommonSelect from "../../components/select/common-select";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
 
 const CustomerDueReport = () => {
-
   const data = customerduereportdata;
+  const [listData, _setListData] = useState(data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  const [selectedPaymentStatus, setSelectedPaymentStatus] = useState(null);
 
   const route = all_routes;
 
   const Customer = [
-    { value: "All", label: "All" },
-    { value: "Carl Evans", label: "Carl Evans" },
-    { value: "Minerva Rameriz", label: "Minerva Rameriz" },
-    { value: "Robert Lamon", label: "Robert Lamon" },
-  ];
+  { value: "All", label: "All" },
+  { value: "Carl Evans", label: "Carl Evans" },
+  { value: "Minerva Rameriz", label: "Minerva Rameriz" },
+  { value: "Robert Lamon", label: "Robert Lamon" }];
+
   const PaymentMethod = [
-    { value: "All", label: "All" },
-    { value: "Cash", label: "Cash" },
-    { value: "Paypal", label: "Paypal" },
-    { value: "Stripe", label: "Stripe" },
-  ];
+  { value: "All", label: "All" },
+  { value: "Cash", label: "Cash" },
+  { value: "Paypal", label: "Paypal" },
+  { value: "Stripe", label: "Stripe" }];
+
   const PaymentStatus = [
-    { value: "All", label: "All" },
-    { value: "Completed", label: "Completed" },
-    { value: "Unpaid", label: "Unpaid" },
-    { value: "Paid", label: "Paid" },
-  ];
+  { value: "All", label: "All" },
+  { value: "Completed", label: "Completed" },
+  { value: "Unpaid", label: "Unpaid" },
+  { value: "Paid", label: "Paid" }];
+
 
   const columns = [
-    {
-      title: "Reference",
-      dataIndex: "Reference",
-      render: (text) => (
-        <Link to="#" className="text-orange">
-          {text}
-        </Link>
+  {
+    header: "Reference",
+    field: "Reference",
+    body: (text) =>
+    <Link to="#" className="text-orange">
+          {text.Reference}
+        </Link>,
 
-      ),
-      sorter: (a, b) => a.Reference.length - b.Reference.length,
-    },
-    {
-      title: "Code",
-      dataIndex: "Code",
-      sorter: (a, b) => a.Code.length - b.Code.length,
-    },
+    sorter: (a, b) => a.Reference.length - b.Reference.length
+  },
+  {
+    header: "Code",
+    field: "Code",
+    sorter: (a, b) => a.Code.length - b.Code.length
+  },
 
-    {
-      title: "Customer",
-      dataIndex: "Customer",
-      render: (text, record) => (
-        <>
+  {
+    header: "Customer",
+    field: "Customer",
+    body: (text) =>
+    <>
           <div className="d-flex align-items-center">
             <Link to="#" className="avatar avatar-md">
-              <ImageWithBasePath src={record.image} className="img-fluid" alt="img" />
+              <img src={text.image} className="img-fluid" alt="img" />
             </Link>
             <div className="ms-2">
               <p className="text-dark mb-0">
-                <Link to="#">{text}</Link>
+                <Link to="#">{text.Customer}</Link>
               </p>
             </div>
           </div>
+        </>,
 
-        </>
-      ),
-      sorter: (a, b) => a.Customer.length - b.Customer.length,
-    },
+    sorter: (a, b) => a.Customer.length - b.Customer.length
+  },
 
-    {
-      title: "Total Orders",
-      dataIndex: "Total_Orders",
-      sorter: (a, b) => a.Total_Orders.length - b.Total_Orders.length,
-    },
-    {
-      title: "Amount",
-      dataIndex: "Amount",
-      sorter: (a, b) => a.Amount.length - b.Amount.length,
-    },
+  {
+    header: "Total Orders",
+    field: "Total_Orders",
+    sorter: (a, b) => a.Total_Orders.length - b.Total_Orders.length
+  },
+  {
+    header: "Amount",
+    field: "Amount",
+    sorter: (a, b) => a.Amount.length - b.Amount.length
+  },
 
-    {
-      title: "Payment Method",
-      dataIndex: "Payment_Method",
-      sorter: (a, b) => a.Payment_Method.length - b.Payment_Method.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      render: (text) => (
-        <span className={`badge  ${text === 'Paid' ? 'badge-success' : text==='Overdue' ? 'badge-purple' : 'badge-danger'} d-inline-flex align-items-center badge-xs`}>
-          {text}
-        </span>
-      ),
-      sorter: (a, b) => a.Status.length - b.Status.length,
-    },
+  {
+    header: "Payment Method",
+    field: "Payment_Method",
+    sorter: (a, b) =>
+    a.Payment_Method.length - b.Payment_Method.length
+  },
+  {
+    header: "Status",
+    field: "Status",
+    body: (text) =>
+    <span
+      className={`badge  ${text === "Paid" ? "badge-success" : text === "Overdue" ? "badge-purple" : "badge-danger"} d-inline-flex align-items-center badge-xs`}>
+      
+          {text.Status}
+        </span>,
 
-  ];
+    sorter: (a, b) => a.Status.length - b.Status.length
+  }];
+
 
   return (
     <div className="page-wrapper">
@@ -135,7 +140,7 @@ const CustomerDueReport = () => {
           </div>
           <div className="card border-0">
             <div className="card-body pb-1">
-              <form action="customer-report.html">
+              <form>
                 <div className="row align-items-end">
                   <div className="col-lg-10">
                     <div className="row">
@@ -143,10 +148,7 @@ const CustomerDueReport = () => {
                         <div className="mb-3">
                           <label className="form-label">Choose Date</label>
                           <div className="input-icon-start position-relative">
-                            <DatePicker
-                              className="form-control datetimepicker"
-                              placeholder="dd/mm/yyyy"
-                            />
+                            <CommonDateRangePicker />
                             <span className="input-icon-left">
                               <i className="ti ti-calendar" />
                             </span>
@@ -156,31 +158,40 @@ const CustomerDueReport = () => {
                       <div className="col-md-3">
                         <div className="mb-3">
                           <label className="form-label">Customer</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={Customer}
+                            value={selectedCustomer}
+                            onChange={(e) => setSelectedCustomer(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-md-3">
                         <div className="mb-3">
                           <label className="form-label">Payment Method</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={PaymentMethod}
+                            value={selectedPaymentMethod}
+                            onChange={(e) => setSelectedPaymentMethod(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-md-3">
                         <div className="mb-3">
                           <label className="form-label">Payment Status</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={PaymentStatus}
+                            value={selectedPaymentStatus}
+                            onChange={(e) => setSelectedPaymentStatus(e.value)}
                             placeholder="Choose"
-                          />
+                            filter={false} />
+                          
                         </div>
                       </div>
                     </div>
@@ -205,33 +216,27 @@ const CustomerDueReport = () => {
               <ul className="table-top-head">
                 <TooltipIcons />
                 <li>
-                  <a data-bs-toggle="tooltip" data-bs-placement="top" title="Print">
+                  <Link to="#"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Print">
+                    
                     <i className="ti ti-printer" />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="card-body">
               <div className="table-responsive">
-                <Table
-                  columns={columns}
-                  dataSource={data}
-                  summary={() => {
-                    return (
-                      <>
-                        <Table.Summary.Row>
-                          <Table.Summary.Cell index={3}><h6>Total</h6></Table.Summary.Cell>
-                          <Table.Summary.Cell ></Table.Summary.Cell>
-                          <Table.Summary.Cell ></Table.Summary.Cell>
-                          <Table.Summary.Cell ><h6>$33268.53</h6></Table.Summary.Cell>
-                          <Table.Summary.Cell ><h6>$25651.53</h6></Table.Summary.Cell>
-                          <Table.Summary.Cell ><h6>$0.0</h6></Table.Summary.Cell>
-                          <Table.Summary.Cell ></Table.Summary.Cell>
-                        </Table.Summary.Row>
-                      </>
-                    );
-                  }}
-                />
+                <PrimeDataTable
+                  column={columns}
+                  data={listData}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords} />
+                
               </div>
             </div>
           </div>
@@ -239,18 +244,16 @@ const CustomerDueReport = () => {
         </div>
       </div>
       <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-        <p className="mb-0">2014-2025 © DreamsPOS. All Right Reserved</p>
+        <p className="mb-0">2014-2026 © DreamsPOS. All Right Reserved</p>
         <p>
           Designed &amp; Developed By{" "}
-          <a href="#" className="text-orange">
+          <Link to="#" className="text-orange">
             Dreams
-          </a>
+          </Link>
         </p>
       </div>
-    </div>
+    </div>);
 
-
-  );
 };
 
 export default CustomerDueReport;

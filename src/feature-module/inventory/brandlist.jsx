@@ -1,81 +1,123 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom/dist";
-import Table from "../../core/pagination/datatable";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import { PlusCircle, X } from "feather-icons-react/build/IconComponents";
-import CommonDeleteModal from "../../core/common/modal/commonDeleteModal";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import CommonFooter from "../../components/footer/commonFooter";
+import PrimeDataTable from "../../components/data-table";
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
+import useAppModal from "../../core/common/modal/useAppModal";
+import { MODAL_TYPES } from "../../routes/modal_root/modalTypes";
+import Loader from "../../components/loader/Loader";
+import { api_url } from "../../environment";
+import { formatDate } from "../../utils/common";
+
 const BrandList = () => {
-  const dataSource = useSelector((state) => state.rootReducer.brand_list);
+  const { open } = useAppModal();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const columns = [
     {
-      title: "Brand",
-      dataIndex: "brand",
-      sorter: (a, b) => a.brand.length - b.brand.length,
-    },
-
-    {
-      title: "Image",
-      dataIndex: "logo",
-      render: (text, record) => (
+      field: "name",
+      header: "Brand",
+      key: "name",
+      sortable: true,
+      body: (_row) => (
         <span className="productimgname">
           <Link to="#" className="product-img stock-img">
-            <ImageWithBasePath alt="" src={record.logo} />
+            <img alt="" src={_row.image} />
           </Link>
+          <span>{_row.name}</span>
         </span>
       ),
-      sorter: (a, b) => a.logo.length - b.logo.length,
-      width: "5%",
     },
     {
-      title: "Created Date",
-      dataIndex: "createdon",
-      sorter: (a, b) => a.createdon.length - b.createdon.length,
+      field: "alias",
+      header: "Alias",
+      key: "alias",
+      sortable: true,
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      render: (text) => (
+      field: "createdon",
+      header: "Created Date",
+      key: "createdon",
+      sortable: true,
+      body: (data) => <div>{formatDate(data.createdon)}</div>,
+    },
+    {
+      field: "status",
+      header: "Status",
+      key: "status",
+      sortable: true,
+      body: (rowData) => (
         <span className="badge table-badge bg-success fw-medium fs-10">
-          {text}
+          {rowData.status}
         </span>
       ),
-      sorter: (a, b) => a.status.length - b.status.length,
     },
     {
-      title: "",
-      dataIndex: "actions",
+      header: "",
+      field: "actions",
       key: "actions",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
-            <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-brand"
-            >
-              <i data-feather="edit" className="feather-edit"></i>
-            </Link>
-            <Link data-bs-toggle="modal" data-bs-target="#delete-modal" className="p-2" to="#">
-              <i
-                data-feather="trash-2"
-                className="feather-trash-2"
-              ></i>
-            </Link>
-          </div>
+      sortable: false,
+      body: (_row) => (
+        <div className="edit-delete-action d-flex align-items-center">
+          <Link
+            className="me-2 p-2 d-flex align-items-center border rounded"
+            to="#"
+            onClick={() =>
+              open(MODAL_TYPES.BRAND, { data: _row, onSuccess: fetchBrand })
+            }
+          >
+            <i className="feather icon-edit"></i>
+          </Link>
+          <Link
+            className="p-2 d-flex align-items-center border rounded"
+            to="#"
+            data-bs-toggle="modal"
+            data-bs-target="#delete-modal"
+          >
+            <i className="feather icon-trash-2"></i>
+          </Link>
         </div>
       ),
     },
   ];
 
+  useEffect(() => {
+    fetchBrand();
+  }, []);
+
+  const fetchBrand = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${api_url}/GetMaster?masterType=7`);
+      const json = await res.json();
+
+      const formattedData = json?.data?.map((row) => ({
+        code: row.code,
+        name: row.name,
+        alias: row.alias,
+        image: row.image,
+        createdon: row.createdOn,
+        status: row.status ? "Inactive" : "Active",
+      }));
+      setBrands(formattedData);
+    } catch (error) {
+      toast.error("Error fetching categories:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div>
+    <>
+      {loading && <Loader loading />}
       <div className="page-wrapper">
         <div className="content">
           <div className="page-header">
@@ -85,19 +127,15 @@ const BrandList = () => {
                 <h6>Manage your brands</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
-                to="#"
                 className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#add-brand"
+                onClick={() =>
+                  open(MODAL_TYPES.BRAND, { data: null, onSuccess: fetchBrand })
+                }
               >
-                <i className='ti ti-circle-plus me-1'></i>
+                <i className="ti ti-circle-plus me-1"></i>
                 Add Brand
               </Link>
             </div>
@@ -105,10 +143,13 @@ const BrandList = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-              </div>
-              <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+              <SearchFromApi
+                callback={(e) => setSearchQuery(e)}
+                rows={rows}
+                setRows={setRows}
+              />
 
+              <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
@@ -119,18 +160,12 @@ const BrandList = () => {
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Active
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Inactive
                       </Link>
                     </li>
@@ -146,42 +181,27 @@ const BrandList = () => {
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Recently Added
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Ascending
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Desending
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Last Month
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Last 7 Days
                       </Link>
                     </li>
@@ -191,7 +211,20 @@ const BrandList = () => {
             </div>
             <div className="card-body">
               <div className="table-responsive brand-table">
-                <Table columns={columns} dataSource={dataSource} />
+                <PrimeDataTable
+                  column={columns}
+                  data={brands}
+                  searchQuery={_searchQuery}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedBrands}
+                  onSelectionChange={(e) => setSelectedBrands(e.value)}
+                  dataKey="id"
+                />
               </div>
             </div>
           </div>
@@ -199,172 +232,8 @@ const BrandList = () => {
         </div>
         <CommonFooter />
       </div>
-      <>
-        {/* Add Brand */}
-        <div className="modal fade" id="add-brand">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content">
-                  <div className="modal-header">
-                    <div className="page-title">
-                      <h4>Add Brand</h4>
-                    </div>
-                    <button
-                      type="button"
-                      className="close bg-danger text-white fs-16"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div className="modal-body custom-modal-body new-employee-field">
-                    <form>
-                      <div className="profile-pic-upload mb-3">
-                        <div className="profile-pic brand-pic">
-                          <span>
-                            <PlusCircle className="plus-down-add" />  Add Image
-                          </span>
-                        </div>
-                        <div>
-                          <div className="image-upload mb-0">
-                            <input type="file" />
-                            <div className="image-uploads">
-                              <h4>Upload Image</h4>
-                            </div>
-                          </div>
-                          <p className="mt-2">JPEG, PNG up to 2 MB</p>
-                        </div>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Brand<span className="text-danger ms-1">*</span>
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="mb-0">
-                        <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
-                          <span className="status-label">Status</span>
-                          <input
-                            type="checkbox"
-                            id="user2"
-                            className="check"
-                            defaultChecked
-                          />
-                          <label htmlFor="user2" className="checktoggle" />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <Link
-                      to="#"
-                      data-bs-dismiss="modal"
-                      className="btn btn-primary fs-13 fw-medium p-2 px-3"
-                    >
-                      Add Brand
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* /Add Brand */}
-        {/* Edit Brand */}
-        <div className="modal fade" id="edit-brand">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content">
-                  <div className="modal-header">
-                    <div className="page-title">
-                      <h4>Edit Brand</h4>
-                    </div>
-                    <button
-                      type="button"
-                      className="close bg-danger text-white fs-16"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div className="modal-body custom-modal-body new-employee-field">
-                    <form>
-                      <div className="profile-pic-upload mb-3">
-                        <div className="profile-pic brand-pic">
-                          <span>
-                            <ImageWithBasePath src="assets/img/brand/brand-icon-02.png" alt="Img" />
-                          </span>
-                          <Link to="#" className="remove-photo">
-                            <X className="x-square-add" />
-                          </Link>
-                        </div>
-                        <div>
-                          <div className="image-upload mb-0">
-                            <input type="file" />
-                            <div className="image-uploads">
-                              <h4>Change Image</h4>
-                            </div>
-                          </div>
-                          <p className="mt-2">JPEG, PNG up to 2 MB</p>
-                        </div>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Brand<span className="text-danger ms-1">*</span>
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="mb-0">
-                        <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
-                          <span className="status-label">Status</span>
-                          <input
-                            type="checkbox"
-                            id="user4"
-                            className="check"
-                            defaultChecked
-                          />
-                          <label htmlFor="user4" className="checktoggle" />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <Link
-                      to="#"
-                      data-bs-dismiss="modal"
-                      className="btn btn-primary fs-13 fw-medium p-2 px-3"
-                    >
-                      Save Changes
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Edit Brand */}
-        <CommonDeleteModal />
-      </>
-
-    </div>
+      <DeleteModal />
+    </>
   );
 };
 

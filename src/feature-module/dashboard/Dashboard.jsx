@@ -1,83 +1,91 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CountUp from "react-countup";
-import {
-  File,
-  User,
-  UserCheck,
-} from "feather-icons-react/build/IconComponents";
 import Chart from "react-apexcharts";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { ArrowRight } from "react-feather";
-import { all_routes } from "../../Router/all_routes";
+import { all_routes } from "../../routes/all_routes";
+import {
+  dash1,
+  dash2,
+  dash3,
+  dash4,
+  expireProduct01,
+  expireProduct02,
+  expireProduct03,
+  expireProduct04,
+  fileTextIcon1,
+  stockImg01,
+  stockImg02,
+  stockImg03,
+  stockImg06 } from
+"../../utils/imagepath";
 
 const Dashboard = () => {
   const route = all_routes;
   const [chartOptions] = useState({
     series: [
-      {
-        name: "Sales",
-        data: [130, 210, 300, 290, 150, 50, 210, 280, 105],
-      },
-      {
-        name: "Purchase",
-        data: [-150, -90, -50, -180, -50, -70, -100, -90, -105],
-      },
-    ],
+    {
+      name: "Sales",
+      data: [130, 210, 300, 290, 150, 50, 210, 280, 105]
+    },
+    {
+      name: "Purchase",
+      data: [-150, -90, -50, -180, -50, -70, -100, -90, -105]
+    }],
+
     colors: ["#28C76F", "#EA5455"],
     chart: {
       type: "bar",
       height: 320,
       stacked: true,
       zoom: {
-        enabled: true,
-      },
+        enabled: true
+      }
     },
     responsive: [
-      {
-        breakpoint: 280,
-        options: {
-          legend: {
-            position: "bottom",
-            offsetY: 0,
-          },
-        },
-      },
-    ],
+    {
+      breakpoint: 280,
+      options: {
+        legend: {
+          position: "bottom",
+          offsetY: 0
+        }
+      }
+    }],
+
     plotOptions: {
       bar: {
         horizontal: false,
         borderRadius: 4,
         borderRadiusApplication: "end", // "around" / "end"
         borderRadiusWhenStacked: "all", // "all"/"last"
-        columnWidth: "20%",
-      },
+        columnWidth: "20%"
+      }
     },
     dataLabels: {
-      enabled: false,
+      enabled: false
     },
     yaxis: {
       min: -200,
       max: 400,
-      tickAmount: 5,
+      tickAmount: 5
     },
     xaxis: {
       categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-      ],
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep"]
+
     },
     legend: { show: false },
     fill: {
-      opacity: 1,
-    },
+      opacity: 1
+    }
   });
 
   return (
@@ -90,10 +98,7 @@ const Dashboard = () => {
                 <div className="card-body d-flex align-items-center">
                   <div className="dash-widgetimg">
                     <span>
-                      <ImageWithBasePath
-                        src="assets/img/icons/dash1.svg"
-                        alt="img"
-                      />
+                      <img src={dash1} alt="img" />
                     </span>
                   </div>
                   <div className="dash-widgetcontent">
@@ -103,8 +108,8 @@ const Dashboard = () => {
                         start={0}
                         end={307144}
                         duration={3}
-                        prefix="₹"
-                      />
+                        prefix="$" />
+                      
                     </h5>
                     <p className="mb-0">Total Purchase Due</p>
                   </div>
@@ -116,10 +121,7 @@ const Dashboard = () => {
                 <div className="card-body d-flex align-items-center">
                   <div className="dash-widgetimg">
                     <span>
-                      <ImageWithBasePath
-                        src="assets/img/icons/dash2.svg"
-                        alt="img"
-                      />
+                      <img src={dash2} alt="img" />
                     </span>
                   </div>
                   <div className="dash-widgetcontent">
@@ -129,8 +131,8 @@ const Dashboard = () => {
                           start={0}
                           end={4385.0}
                           duration={3}
-                          prefix="₹"
-                        />
+                          prefix="$" />
+                        
                       </span>
                     </h5>
                     <p className="mb-0">Total Sales Due</p>
@@ -143,10 +145,7 @@ const Dashboard = () => {
                 <div className="card-body d-flex align-items-center">
                   <div className="dash-widgetimg">
                     <span>
-                      <ImageWithBasePath
-                        src="assets/img/icons/dash3.svg"
-                        alt="img"
-                      />
+                      <img src={dash3} alt="img" />
                     </span>
                   </div>
                   <div className="dash-widgetcontent">
@@ -156,8 +155,8 @@ const Dashboard = () => {
                           start={0}
                           end={385656.5}
                           duration={3}
-                          prefix="₹"
-                        />
+                          prefix="$" />
+                        
                       </span>
                     </h5>
                     <p className="mb-0">Total Sale Amount</p>
@@ -170,10 +169,7 @@ const Dashboard = () => {
                 <div className="card-body d-flex align-items-center">
                   <div className="dash-widgetimg">
                     <span>
-                      <ImageWithBasePath
-                        src="assets/img/icons/dash4.svg"
-                        alt="img"
-                      />
+                      <img src={dash4} alt="img" />
                     </span>
                   </div>
                   <div className="dash-widgetcontent">
@@ -183,8 +179,8 @@ const Dashboard = () => {
                           start={0}
                           end={400.0}
                           duration={3}
-                          prefix="₹"
-                        />
+                          prefix="$" />
+                        
                       </span>
                     </h5>
                     <p className="mb-0">Total Expense Amount</p>
@@ -199,7 +195,7 @@ const Dashboard = () => {
                   <h5>Customers</h5>
                 </div>
                 <div className="dash-imgs">
-                  <User />
+                  <i className="feather icon-user"></i>
                 </div>
               </div>
             </div>
@@ -210,7 +206,7 @@ const Dashboard = () => {
                   <h5>Suppliers</h5>
                 </div>
                 <div className="dash-imgs">
-                  <UserCheck />
+                  <i className="feather user-check"></i>
                 </div>
               </div>
             </div>
@@ -221,11 +217,7 @@ const Dashboard = () => {
                   <h5>Purchase Invoice</h5>
                 </div>
                 <div className="dash-imgs">
-                  <ImageWithBasePath
-                    src="assets/img/icons/file-text-icon-01.svg"
-                    className="img-fluid"
-                    alt="icon"
-                  />
+                  <img src={fileTextIcon1} className="img-fluid" alt="icon" />
                 </div>
               </div>
             </div>
@@ -236,7 +228,7 @@ const Dashboard = () => {
                   <h5>Sales Invoice</h5>
                 </div>
                 <div className="dash-imgs">
-                  <File />
+                  <i className="feather icon-file"></i>
                 </div>
               </div>
             </div>
@@ -263,14 +255,14 @@ const Dashboard = () => {
                         type="button"
                         id="dropdownMenuButton"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                        aria-expanded="false">
+                        
                         2025
                       </button>
                       <ul
                         className="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton"
-                      >
+                        aria-labelledby="dropdownMenuButton">
+                        
                         <li>
                           <Link to="#" className="dropdown-item">
                             2023
@@ -296,8 +288,8 @@ const Dashboard = () => {
                     options={chartOptions}
                     series={chartOptions.series}
                     type="bar"
-                    height={320}
-                  />
+                    height={320} />
+                  
                 </div>
               </div>
             </div>
@@ -309,7 +301,7 @@ const Dashboard = () => {
                     <Link to="#" className="view-all d-flex align-items-center">
                       View All
                       <span className="ps-2 d-flex align-items-center">
-                        <ArrowRight className="feather-16" />
+                        <i className="feather icon-arrow-right feather icon-16" />
                       </span>
                     </Link>
                   </div>
@@ -330,72 +322,60 @@ const Dashboard = () => {
                           <td className="d-flex align-items-center">
                             <Link
                               to={route.productlist}
-                              className="avatar avatar-lg me-2"
-                            >
-                              <ImageWithBasePath
-                                src="assets/img/products/stock-img-01.png"
-                                alt="product"
-                              />
+                              className="avatar avatar-lg me-2">
+                              
+                              <img src={stockImg01} alt="product" />
                             </Link>
                             <Link to={route.productlist} className="fw-bold">
                               Lenevo 3rd Generation
                             </Link>
                           </td>
-                          <td>₹12500</td>
+                          <td>$12500</td>
                         </tr>
                         <tr>
                           <td>2</td>
                           <td className="d-flex align-items-center">
                             <Link
                               to={route.productlist}
-                              className="avatar avatar-lg me-2"
-                            >
-                              <ImageWithBasePath
-                                src="assets/img/products/stock-img-06.png"
-                                alt="product"
-                              />
+                              className="avatar avatar-lg me-2">
+                              
+                              <img src={stockImg06} alt="product" />
                             </Link>
                             <Link to={route.productlist} className="fw-bold">
                               Bold V3.2
                             </Link>
                           </td>
-                          <td>₹1600</td>
+                          <td>$1600</td>
                         </tr>
                         <tr>
                           <td>3</td>
                           <td className="d-flex align-items-center">
                             <Link
                               to={route.productlist}
-                              className="avatar avatar-lg me-2"
-                            >
-                              <ImageWithBasePath
-                                src="assets/img/products/stock-img-02.png"
-                                alt="product"
-                              />
+                              className="avatar avatar-lg me-2">
+                              
+                              <img src={stockImg02} alt="product" />
                             </Link>
                             <Link to={route.productlist} className="fw-bold">
                               Nike Jordan
                             </Link>
                           </td>
-                          <td>₹2000</td>
+                          <td>$2000</td>
                         </tr>
                         <tr>
                           <td>4</td>
                           <td className="d-flex align-items-center">
                             <Link
                               to={route.productlist}
-                              className="avatar avatar-lg me-2"
-                            >
-                              <ImageWithBasePath
-                                src="assets/img/products/stock-img-03.png"
-                                alt="product"
-                              />
+                              className="avatar avatar-lg me-2">
+                              
+                              <img src={stockImg03} alt="product" />
                             </Link>
                             <Link to={route.productlist} className="fw-bold">
                               Apple Series 5 Watch
                             </Link>
                           </td>
-                          <td>₹800</td>
+                          <td>$800</td>
                         </tr>
                       </tbody>
                     </table>
@@ -437,10 +417,7 @@ const Dashboard = () => {
                       <td>
                         <div className="d-flex align-items-center">
                           <Link to="#" className="avatar avatar-lg me-2">
-                            <ImageWithBasePath
-                              src="assets/img/products/expire-product-01.png"
-                              alt="product"
-                            />
+                            <img src={expireProduct01} alt="product" />
                           </Link>
                           <Link to="#" className="fw-bold">
                             Red Premium Handy{" "}
@@ -453,13 +430,10 @@ const Dashboard = () => {
                       <td className="action-table-data">
                         <div className="edit-delete-action">
                           <Link className="me-2 p-2" to="#">
-                            <i data-feather="edit" className="feather-edit" />
+                            <i className="feather icon-edit" />
                           </Link>
                           <Link className=" confirm-text p-2" to="#">
-                            <i
-                              data-feather="trash-2"
-                              className="feather-trash-2"
-                            />
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -474,10 +448,7 @@ const Dashboard = () => {
                       <td>
                         <div className="d-flex align-items-center">
                           <Link to="#" className="avatar avatar-lg me-2">
-                            <ImageWithBasePath
-                              src="assets/img/products/expire-product-02.png"
-                              alt="product"
-                            />
+                            <img src={expireProduct02} alt="product" />
                           </Link>
                           <Link to="#" className="fw-bold">
                             Iphone 14 Pro
@@ -490,13 +461,10 @@ const Dashboard = () => {
                       <td className="action-table-data">
                         <div className="edit-delete-action">
                           <Link className="me-2 p-2" to="#">
-                            <i data-feather="edit" className="feather-edit" />
+                            <i className="feather icon-edit" />
                           </Link>
                           <Link className="confirm-text p-2" to="#">
-                            <i
-                              data-feather="trash-2"
-                              className="feather-trash-2"
-                            />
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -511,10 +479,7 @@ const Dashboard = () => {
                       <td>
                         <div className="d-flex align-items-center">
                           <Link to="#" className="avatar avatar-lg me-2">
-                            <ImageWithBasePath
-                              src="assets/img/products/expire-product-03.png"
-                              alt="product"
-                            />
+                            <img src={expireProduct03} alt="product" />
                           </Link>
                           <Link to="#" className="fw-bold">
                             Black Slim 200{" "}
@@ -527,13 +492,10 @@ const Dashboard = () => {
                       <td className="action-table-data">
                         <div className="edit-delete-action">
                           <Link className="me-2 p-2" to="#">
-                            <i data-feather="edit" className="feather-edit" />
+                            <i className="feather icon-edit" />
                           </Link>
                           <Link className=" confirm-text p-2" to="#">
-                            <i
-                              data-feather="trash-2"
-                              className="feather-trash-2"
-                            />
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -548,10 +510,7 @@ const Dashboard = () => {
                       <td>
                         <div className="d-flex align-items-center">
                           <Link to="#" className="avatar avatar-lg me-2">
-                            <ImageWithBasePath
-                              src="assets/img/products/expire-product-04.png"
-                              alt="product"
-                            />
+                            <img src={expireProduct04} alt="product" />
                           </Link>
                           <Link to="#" className="fw-bold">
                             Woodcraft Sandal
@@ -564,13 +523,10 @@ const Dashboard = () => {
                       <td className="action-table-data">
                         <div className="edit-delete-action">
                           <Link className="me-2 p-2" to="#">
-                            <i data-feather="edit" className="feather-edit" />
+                            <i className="feather icon-edit" />
                           </Link>
                           <Link className=" confirm-text p-2" to="#">
-                            <i
-                              data-feather="trash-2"
-                              className="feather-trash-2"
-                            />
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -585,10 +541,7 @@ const Dashboard = () => {
                       <td>
                         <div className="d-flex align-items-center">
                           <Link to="#" className="avatar avatar-lg me-2">
-                            <ImageWithBasePath
-                              src="assets/img/products/stock-img-03.png"
-                              alt="product"
-                            />
+                            <img src={stockImg03} alt="product" />
                           </Link>
                           <Link to="#" className="fw-bold">
                             Apple Series 5 Watch{" "}
@@ -604,15 +557,12 @@ const Dashboard = () => {
                             className="me-2 p-2"
                             to="#"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit-units"
-                          >
-                            <i data-feather="edit" className="feather-edit" />
+                            data-bs-target="#edit-units">
+                            
+                            <i className="feather icon-edit" />
                           </Link>
                           <Link className=" confirm-text p-2" to="#">
-                            <i
-                              data-feather="trash-2"
-                              className="feather-trash-2"
-                            />
+                            <i className="feather icon-trash-2" />
                           </Link>
                         </div>
                       </td>
@@ -624,8 +574,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Dashboard;

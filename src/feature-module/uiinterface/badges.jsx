@@ -1,7 +1,7 @@
-import { AlertOctagon, Check, Info, X } from 'feather-icons-react/build/IconComponents'
-import React from 'react'
-import { Plus } from 'react-feather'
-import ImageWithBasePath from '../../core/img/imagewithbasebath'
+import { AlertOctagon, Check, Info, X } from 'react-feather';
+import { Plus } from 'react-feather';
+import { avator1 } from '../../utils/imagepath';
+
 
 const Badges = () => {
   return (
@@ -183,8 +183,8 @@ const Badges = () => {
                 <div className="card-body d-flex flex-wrap gap-4">
                   <button
                     type="button"
-                    className="btn btn-primary position-relative"
-                  >
+                    className="btn btn-primary position-relative">
+                    
                     Inbox
                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                       99+
@@ -193,27 +193,27 @@ const Badges = () => {
                   </button>
                   <button
                     type="button"
-                    className="btn btn-secondary position-relative"
-                  >
+                    className="btn btn-secondary position-relative">
+                    
                     Profile
                     <span className="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle">
                       <span className="visually-hidden">New alerts</span>
                     </span>
                   </button>
                   <span className="avatar">
-                    <ImageWithBasePath src="assets/img/profiles/avator1.jpg" alt="img" />
+                    <img src={avator1} alt="img" />
                     <span className="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle">
                       <span className="visually-hidden">New alerts</span>
                     </span>
                   </span>
                   <span className="avatar avatar-rounded">
-                    <ImageWithBasePath src="assets/img/profiles/avator1.jpg" alt="img" />
+                    <img src={avator1} alt="img" />
                     <span className="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light              rounded-circle">
                       <span className="visually-hidden">New alerts</span>
                     </span>
                   </span>
                   <span className="avatar avatar-rounded">
-                    <ImageWithBasePath src="assets/img/profiles/avator1.jpg" alt="img" />
+                    <img src={avator1} alt="img" />
                     <span className="position-absolute top-0 start-100 translate-middle badge bg-secondary rounded-pill shadow-lg">
                       1000+
                       <span className="visually-hidden">New alerts</span>
@@ -253,20 +253,20 @@ const Badges = () => {
                 <div className="card-body d-flex flex-wrap gap-2">
                   <button
                     type="button"
-                    className="btn btn-outline-primary my-1 me-2"
-                  >
+                    className="btn btn-outline-primary my-1 me-2">
+                    
                     Notifications <span className="badge bg-primary ms-2">3</span>
                   </button>
                   <button
                     type="button"
-                    className="btn btn-outline-success my-1 me-2"
-                  >
+                    className="btn btn-outline-success my-1 me-2">
+                    
                     Notifications <span className="badge bg-success ms-2">15</span>
                   </button>
                   <button
                     type="button"
-                    className="btn btn-outline-danger my-1 me-2"
-                  >
+                    className="btn btn-outline-danger my-1 me-2">
+                    
                     Notifications <span className="badge bg-danger ms-2">24</span>
                   </button>
                 </div>
@@ -314,27 +314,27 @@ const Badges = () => {
                       <span className="badge bg-secondary me-1">
                         <span className="badge-label">Secondary</span>
                         <span>
-                        <Plus className="ms-1"  style={{ height: 12, width: 12 }}/>
+                        <Plus className="ms-1" style={{ height: 12, width: 12 }} />
                         </span>
                       </span>
                       <span className="badge bg-success me-1">
                         <span className="badge-label">Success</span>
-                        <Check className="ms-1"  style={{ height: 12, width: 12 }}/>
+                        <Check className="ms-1" style={{ height: 12, width: 12 }} />
 
                       </span>
                       <span className="badge bg-info me-1">
                         <span className="badge-label">Info</span>
-                        <Info className="ms-1"  style={{ height: 12, width: 12 }}/>
+                        <Info className="ms-1" style={{ height: 12, width: 12 }} />
 
                       </span>
                       <span className="badge bg-warning me-1">
                         <span className="badge-label">Warning</span>
-                        <AlertOctagon className="ms-1"  style={{ height: 12, width: 12 }}/>
+                        <AlertOctagon className="ms-1" style={{ height: 12, width: 12 }} />
 
                       </span>
                       <span className="badge bg-danger me-1">
                         <span className="badge-label">Danger</span>
-                        <X className="ms-1"  style={{ height: 12, width: 12 }}/>
+                        <X className="ms-1" style={{ height: 12, width: 12 }} />
 
                       </span>
                     </div>
@@ -347,30 +347,30 @@ const Badges = () => {
                       <span className="badge bg-outline-secondary me-1">
                         <span className="badge-label">Secondary</span>
                         <span>
-                        <Plus className="ms-1"  style={{ height: 12, width: 12 }}/>
+                        <Plus className="ms-1" style={{ height: 12, width: 12 }} />
                         </span>
                       </span>
                       <span className="badge bg-outline-success me-1">
                         <span className="badge-label">Success</span>
                         <span>
-                        <Check className="ms-1"  style={{ height: 12, width: 12 }}/>
+                        <Check className="ms-1" style={{ height: 12, width: 12 }} />
                         </span>
                       </span>
                       <span className="badge bg-outline-info me-1">
                         <span className="badge-label">Info</span>
                         <span>
-                        <Info className="ms-1"  style={{ height: 12, width: 12 }}/>
+                        <Info className="ms-1" style={{ height: 12, width: 12 }} />
                         </span>
                       </span>
                       <span className="badge bg-outline-warning me-1">
                         <span className="badge-label">Warning</span>
                        <span>
-                        <AlertOctagon className="ms-1"  style={{ height: 12, width: 12 }}/>
+                        <AlertOctagon className="ms-1" style={{ height: 12, width: 12 }} />
                         </span>
                       </span>
                       <span className="badge bg-outline-danger me-1">
                         <span className="badge-label">Danger</span>
-                          <span><X className="x"  style={{ height: 12, width: 12 }}/></span>
+                          <span><X className="x" style={{ height: 12, width: 12 }} /></span>
                       </span>
                     </div>
                   </div>
@@ -382,9 +382,9 @@ const Badges = () => {
         </div>
       </div>
       {/* /Page Wrapper */}
-    </div>
+    </div>);
 
-  )
-}
 
-export default Badges
+};
+
+export default Badges;

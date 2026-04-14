@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 
 const Offcanvas = () => {
@@ -27,8 +27,8 @@ const Offcanvas = () => {
                     data-bs-toggle="offcanvas"
                     to="#offcanvasExample"
                     role="button"
-                    aria-controls="offcanvasExample"
-                  >
+                    aria-controls="offcanvasExample">
+                    
                     Link with href
                   </Link>
                   <button
@@ -36,8 +36,8 @@ const Offcanvas = () => {
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasExample"
-                    aria-controls="offcanvasExample"
-                  >
+                    aria-controls="offcanvasExample">
+                    
                     Button with data-bs-target
                   </button>
                 </div>{" "}
@@ -46,8 +46,8 @@ const Offcanvas = () => {
                   className="offcanvas offcanvas-start"
                   tabIndex={-1}
                   id="offcanvasExample"
-                  aria-labelledby="offcanvasExampleLabel"
-                >
+                  aria-labelledby="offcanvasExampleLabel">
+                  
                   <div className="offcanvas-header">
                     <h5 className="offcanvas-title" id="offcanvasExampleLabel">
                       Offcanvas
@@ -56,8 +56,8 @@ const Offcanvas = () => {
                       type="button"
                       className="btn-close text-reset"
                       data-bs-dismiss="offcanvas"
-                      aria-label="Close"
-                    />
+                      aria-label="Close" />
+                    
                   </div>{" "}
                   {/* end offcanvas-header*/}
                   <div className="offcanvas-body">
@@ -66,19 +66,19 @@ const Offcanvas = () => {
                       elements you have chosen. Like, text, images, lists, etc.
                     </div>
                     <h5 className="mt-3">List</h5>
-                    <ul className>
-                      <li className>
+                    <ul>
+                      <li>
                         Nemo enim ipsam voluptatem quia aspernatur
                       </li>
-                      <li className>Neque porro quisquam est, qui dolorem</li>
-                      <li className>Quis autem vel eum iure qui in ea</li>
+                      <li>Neque porro quisquam est, qui dolorem</li>
+                      <li>Quis autem vel eum iure qui in ea</li>
                     </ul>
-                    <ul className>
-                      <li className>
+                    <ul>
+                      <li>
                         At vero eos et accusamus et iusto odio dignissimos
                       </li>
-                      <li className>Et harum quidem rerum facilis</li>
-                      <li className>
+                      <li>Et harum quidem rerum facilis</li>
+                      <li>
                         Temporibus autem quibusdam et aut officiis
                       </li>
                     </ul>
@@ -106,8 +106,8 @@ const Offcanvas = () => {
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasScrolling"
-                    aria-controls="offcanvasScrolling"
-                  >
+                    aria-controls="offcanvasScrolling">
+                    
                     Enable body scrolling
                   </button>
                   <button
@@ -115,8 +115,8 @@ const Offcanvas = () => {
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasWithBackdrop"
-                    aria-controls="offcanvasWithBackdrop"
-                  >
+                    aria-controls="offcanvasWithBackdrop">
+                    
                     Enable backdrop (default)
                   </button>
                   <button
@@ -124,8 +124,8 @@ const Offcanvas = () => {
                     type="button"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasWithBothOptions"
-                    aria-controls="offcanvasWithBothOptions"
-                  >
+                    aria-controls="offcanvasWithBothOptions">
+                    
                     Enable both scrolling &amp; backdrop
                   </button>
                 </div>{" "}
@@ -136,21 +136,21 @@ const Offcanvas = () => {
                   data-bs-backdrop="false"
                   tabIndex={-1}
                   id="offcanvasScrolling"
-                  aria-labelledby="offcanvasScrollingLabel"
-                >
+                  aria-labelledby="offcanvasScrollingLabel">
+                  
                   <div className="offcanvas-header">
                     <h5
                       className="offcanvas-title"
-                      id="offcanvasScrollingLabel"
-                    >
+                      id="offcanvasScrollingLabel">
+                      
                       Colored with scrolling
                     </h5>
                     <button
                       type="button"
                       className="btn-close text-reset"
                       data-bs-dismiss="offcanvas"
-                      aria-label="Close"
-                    />
+                      aria-label="Close" />
+                    
                   </div>{" "}
                   {/* end offcanvas-header*/}
                   <div className="offcanvas-body">
@@ -160,18 +160,18 @@ const Offcanvas = () => {
                     </div>
                     <h5 className="mt-3">List</h5>
                     <ul className="ps-3">
-                      <li className>
+                      <li>
                         Nemo enim ipsam voluptatem quia aspernatur
                       </li>
-                      <li className>Neque porro quisquam est, qui dolorem</li>
-                      <li className>Quis autem vel eum iure qui in ea</li>
+                      <li>Neque porro quisquam est, qui dolorem</li>
+                      <li>Quis autem vel eum iure qui in ea</li>
                     </ul>
                     <ul className="ps-3">
-                      <li className>
+                      <li>
                         At vero eos et accusamus et iusto odio dignissimos
                       </li>
-                      <li className>Et harum quidem rerum facilis</li>
-                      <li className>
+                      <li>Et harum quidem rerum facilis</li>
+                      <li>
                         Temporibus autem quibusdam et aut officiis
                       </li>
                     </ul>
@@ -183,21 +183,21 @@ const Offcanvas = () => {
                   className="offcanvas offcanvas-start"
                   tabIndex={-1}
                   id="offcanvasWithBackdrop"
-                  aria-labelledby="offcanvasWithBackdropLabel"
-                >
+                  aria-labelledby="offcanvasWithBackdropLabel">
+                  
                   <div className="offcanvas-header">
                     <h5
                       className="offcanvas-title"
-                      id="offcanvasWithBackdropLabel"
-                    >
+                      id="offcanvasWithBackdropLabel">
+                      
                       Offcanvas with backdrop
                     </h5>
                     <button
                       type="button"
                       className="btn-close text-reset"
                       data-bs-dismiss="offcanvas"
-                      aria-label="Close"
-                    />
+                      aria-label="Close" />
+                    
                   </div>{" "}
                   {/* end offcanvas-header*/}
                   <div className="offcanvas-body">
@@ -207,18 +207,18 @@ const Offcanvas = () => {
                     </div>
                     <h5 className="mt-3">List</h5>
                     <ul className="ps-3">
-                      <li className>
+                      <li>
                         Nemo enim ipsam voluptatem quia aspernatur
                       </li>
-                      <li className>Neque porro quisquam est, qui dolorem</li>
-                      <li className>Quis autem vel eum iure qui in ea</li>
+                      <li>Neque porro quisquam est, qui dolorem</li>
+                      <li>Quis autem vel eum iure qui in ea</li>
                     </ul>
                     <ul className="ps-3">
-                      <li className>
+                      <li>
                         At vero eos et accusamus et iusto odio dignissimos
                       </li>
-                      <li className>Et harum quidem rerum facilis</li>
-                      <li className>
+                      <li>Et harum quidem rerum facilis</li>
+                      <li>
                         Temporibus autem quibusdam et aut officiis
                       </li>
                     </ul>
@@ -231,21 +231,21 @@ const Offcanvas = () => {
                   data-bs-scroll="true"
                   tabIndex={-1}
                   id="offcanvasWithBothOptions"
-                  aria-labelledby="offcanvasWithBothOptionsLabel"
-                >
+                  aria-labelledby="offcanvasWithBothOptionsLabel">
+                  
                   <div className="offcanvas-header">
                     <h5
                       className="offcanvas-title"
-                      id="offcanvasWithBothOptionsLabel"
-                    >
+                      id="offcanvasWithBothOptionsLabel">
+                      
                       Backdroped with scrolling
                     </h5>
                     <button
                       type="button"
                       className="btn-close text-reset"
                       data-bs-dismiss="offcanvas"
-                      aria-label="Close"
-                    />
+                      aria-label="Close" />
+                    
                   </div>{" "}
                   {/* end offcanvas-header*/}
                   <div className="offcanvas-body">
@@ -255,18 +255,18 @@ const Offcanvas = () => {
                     </div>
                     <h5 className="mt-3">List</h5>
                     <ul className="ps-3">
-                      <li className>
+                      <li>
                         Nemo enim ipsam voluptatem quia aspernatur
                       </li>
-                      <li className>Neque porro quisquam est, qui dolorem</li>
-                      <li className>Quis autem vel eum iure qui in ea</li>
+                      <li>Neque porro quisquam est, qui dolorem</li>
+                      <li>Quis autem vel eum iure qui in ea</li>
                     </ul>
                     <ul className="ps-3">
-                      <li className>
+                      <li>
                         At vero eos et accusamus et iusto odio dignissimos
                       </li>
-                      <li className>Et harum quidem rerum facilis</li>
-                      <li className>
+                      <li>Et harum quidem rerum facilis</li>
+                      <li>
                         Temporibus autem quibusdam et aut officiis
                       </li>
                     </ul>
@@ -309,8 +309,8 @@ const Offcanvas = () => {
                       type="button"
                       data-bs-toggle="offcanvas"
                       data-bs-target="#offcanvasTop"
-                      aria-controls="offcanvasTop"
-                    >
+                      aria-controls="offcanvasTop">
+                      
                       Toggle Top offcanvas
                     </button>
                     <button
@@ -318,8 +318,8 @@ const Offcanvas = () => {
                       type="button"
                       data-bs-toggle="offcanvas"
                       data-bs-target="#offcanvasRight"
-                      aria-controls="offcanvasRight"
-                    >
+                      aria-controls="offcanvasRight">
+                      
                       Toggle right offcanvas
                     </button>
                     <button
@@ -327,8 +327,8 @@ const Offcanvas = () => {
                       type="button"
                       data-bs-toggle="offcanvas"
                       data-bs-target="#offcanvasBottom"
-                      aria-controls="offcanvasBottom"
-                    >
+                      aria-controls="offcanvasBottom">
+                      
                       Toggle bottom offcanvas
                     </button>
                     <button
@@ -336,8 +336,8 @@ const Offcanvas = () => {
                       type="button"
                       data-bs-toggle="offcanvas"
                       data-bs-target="#offcanvasLeft"
-                      aria-controls="offcanvasLeft"
-                    >
+                      aria-controls="offcanvasLeft">
+                      
                       Toggle Left offcanvas
                     </button>
                   </div>{" "}
@@ -346,16 +346,16 @@ const Offcanvas = () => {
                     className="offcanvas offcanvas-top"
                     tabIndex={-1}
                     id="offcanvasTop"
-                    aria-labelledby="offcanvasTopLabel"
-                  >
+                    aria-labelledby="offcanvasTopLabel">
+                    
                     <div className="offcanvas-header">
                       <h5 id="offcanvasTopLabel">Offcanvas Top</h5>
                       <button
                         type="button"
                         className="btn-close text-reset"
                         data-bs-dismiss="offcanvas"
-                        aria-label="Close"
-                      />
+                        aria-label="Close" />
+                      
                     </div>{" "}
                     {/* end offcanvas-header*/}
                     <div className="offcanvas-body">
@@ -366,11 +366,11 @@ const Offcanvas = () => {
                       </div>
                       <h5 className="mt-3">List</h5>
                       <ul className="ps-3">
-                        <li className>
+                        <li>
                           Nemo enim ipsam voluptatem quia aspernatur
                         </li>
-                        <li className>Neque porro quisquam est, qui dolorem</li>
-                        <li className>Quis autem vel eum iure qui in ea</li>
+                        <li>Neque porro quisquam est, qui dolorem</li>
+                        <li>Quis autem vel eum iure qui in ea</li>
                       </ul>
                     </div>{" "}
                     {/* end offcanvas-body*/}
@@ -380,16 +380,16 @@ const Offcanvas = () => {
                     className="offcanvas offcanvas-end"
                     tabIndex={-1}
                     id="offcanvasRight"
-                    aria-labelledby="offcanvasRightLabel"
-                  >
+                    aria-labelledby="offcanvasRightLabel">
+                    
                     <div className="offcanvas-header">
                       <h5 id="offcanvasRightLabel">Offcanvas right</h5>
                       <button
                         type="button"
                         className="btn-close text-reset"
                         data-bs-dismiss="offcanvas"
-                        aria-label="Close"
-                      />
+                        aria-label="Close" />
+                      
                     </div>{" "}
                     {/* end offcanvas-header*/}
                     <div className="offcanvas-body">
@@ -400,11 +400,11 @@ const Offcanvas = () => {
                       </div>
                       <h5 className="mt-3">List</h5>
                       <ul className="ps-3">
-                        <li className>
+                        <li>
                           Nemo enim ipsam voluptatem quia aspernatur
                         </li>
-                        <li className>Neque porro quisquam est, qui dolorem</li>
-                        <li className>Quis autem vel eum iure qui in ea</li>
+                        <li>Neque porro quisquam est, qui dolorem</li>
+                        <li>Quis autem vel eum iure qui in ea</li>
                       </ul>
                     </div>{" "}
                     {/* end offcanvas-body*/}
@@ -414,8 +414,8 @@ const Offcanvas = () => {
                     className="offcanvas offcanvas-bottom"
                     tabIndex={-1}
                     id="offcanvasBottom"
-                    aria-labelledby="offcanvasBottomLabel"
-                  >
+                    aria-labelledby="offcanvasBottomLabel">
+                    
                     <div className="offcanvas-header">
                       <h5 className="offcanvas-title" id="offcanvasBottomLabel">
                         Offcanvas bottom
@@ -424,8 +424,8 @@ const Offcanvas = () => {
                         type="button"
                         className="btn-close text-reset"
                         data-bs-dismiss="offcanvas"
-                        aria-label="Close"
-                      />
+                        aria-label="Close" />
+                      
                     </div>{" "}
                     {/* end offcanvas-header*/}
                     <div className="offcanvas-body">
@@ -436,11 +436,11 @@ const Offcanvas = () => {
                       </div>
                       <h5 className="mt-3">List</h5>
                       <ul className="ps-3">
-                        <li className>
+                        <li>
                           Nemo enim ipsam voluptatem quia aspernatur
                         </li>
-                        <li className>Neque porro quisquam est, qui dolorem</li>
-                        <li className>Quis autem vel eum iure qui in ea</li>
+                        <li>Neque porro quisquam est, qui dolorem</li>
+                        <li>Quis autem vel eum iure qui in ea</li>
                       </ul>
                     </div>{" "}
                     {/* end offcanvas-body*/}
@@ -450,16 +450,16 @@ const Offcanvas = () => {
                     className="offcanvas offcanvas-start"
                     tabIndex={-1}
                     id="offcanvasLeft"
-                    aria-labelledby="offcanvasLeftLabel"
-                  >
+                    aria-labelledby="offcanvasLeftLabel">
+                    
                     <div className="offcanvas-header">
                       <h5 id="offcanvasLeftLabel">Offcanvas Left</h5>
                       <button
                         type="button"
                         className="btn-close text-reset"
                         data-bs-dismiss="offcanvas"
-                        aria-label="Close"
-                      />
+                        aria-label="Close" />
+                      
                     </div>{" "}
                     {/* end offcanvas-header*/}
                     <div className="offcanvas-body">
@@ -470,11 +470,11 @@ const Offcanvas = () => {
                       </div>
                       <h5 className="mt-3">List</h5>
                       <ul className="ps-3">
-                        <li className>
+                        <li>
                           Nemo enim ipsam voluptatem quia aspernatur
                         </li>
-                        <li className>Neque porro quisquam est, qui dolorem</li>
-                        <li className>Quis autem vel eum iure qui in ea</li>
+                        <li>Neque porro quisquam est, qui dolorem</li>
+                        <li>Quis autem vel eum iure qui in ea</li>
                       </ul>
                     </div>{" "}
                     {/* end offcanvas-body*/}
@@ -489,8 +489,8 @@ const Offcanvas = () => {
           {/* end col*/}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Offcanvas;

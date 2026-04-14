@@ -1,23 +1,26 @@
 import React from "react";
-import Select from "react-select";
-import ImageWithBasePath from "../../img/imagewithbasebath";
 import { Link } from "react-router-dom";
-import { MinusCircle, PlusCircle } from "react-feather";
+import CommonSelect from "../../../components/select/common-select";
+import { stockImg02 } from "../../../utils/imagepath";
 
 const StockadjustmentModal = () => {
+  const [selectedWarehouse, setSelectedWarehouse] = React.useState(null);
+  const [selectedType, setSelectedType] = React.useState(null);
+  const [selectedPerson, setSelectedPerson] = React.useState(null);
+
   const optionsChoose = [
-    { value: "choose", label: "Choose" },
-    { value: "lobarHandy", label: "Lobar Handy" },
-    { value: "quaintWarehouse", label: "Quaint Warehouse" },
-  ];
+  { value: "choose", label: "Choose" },
+  { value: "lobarHandy", label: "Lobar Handy" },
+  { value: "quaintWarehouse", label: "Quaint Warehouse" }];
+
 
   const optionsAddition = [{ value: "addition", label: "Addition" }];
 
   const optionsStevenGravely = [
-    { value: "choose", label: "Choose" },
-    { value: "steven", label: "Steven" },
-    { value: "gravely", label: "Gravely" },
-  ];
+  { value: "choose", label: "Choose" },
+  { value: "steven", label: "Steven" },
+  { value: "gravely", label: "Gravely" }];
+
   return (
     <div>
       {/* Add Adjustment */}
@@ -34,8 +37,8 @@ const StockadjustmentModal = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -44,16 +47,20 @@ const StockadjustmentModal = () => {
                     <div className="input-blocks search-form">
                       <label>Product</label>
                       <input type="text" className="form-control" />
-                      <i data-feather="search" className="feather-search" />
+                      <i className="feather icon-search" />
                     </div>
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="input-blocks">
                           <label>Warehouse</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={optionsChoose}
-                          />
+                            value={selectedWarehouse}
+                            onChange={(e) => setSelectedWarehouse(e.value)}
+                            placeholder="Choose"
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-6">
@@ -82,12 +89,12 @@ const StockadjustmentModal = () => {
                                     <div className="productimgname">
                                       <Link
                                         to="#"
-                                        className="product-img stock-img"
-                                      >
-                                        <ImageWithBasePath
-                                          src="assets/img/products/stock-img-02.png"
-                                          alt="product"
-                                        />
+                                        className="product-img stock-img">
+                                        
+                                        <img
+                                          src={stockImg02}
+                                          alt="product" />
+                                        
                                       </Link>
                                       <Link to="#">Nike Jordan</Link>
                                     </div>
@@ -97,24 +104,28 @@ const StockadjustmentModal = () => {
                                   <td>
                                     <div className="product-quantity">
                                       <span className="quantity-btn">
-                                        <MinusCircle className="feather-search" />
+                                        <i className="feather icon-minus-circle feather-search" />
                                       </span>
                                       <input
                                         type="text"
                                         className="quntity-input"
-                                        defaultValue={2}
-                                      />
+                                        defaultValue={2} />
+                                      
                                       <span className="quantity-btn">
                                         +
-                                        <PlusCircle className="plus-circle" />
+                                        <i className="feather icon-plus-circle plus-circle" />
                                       </span>
                                     </div>
                                   </td>
                                   <td>
-                                    <Select
-                                      classNamePrefix="react-select"
+                                    <CommonSelect
+                                      className="w-100"
                                       options={optionsAddition}
-                                    />
+                                      value={selectedType}
+                                      onChange={(e) => setSelectedType(e.value)}
+                                      placeholder="Choose"
+                                      filter={false} />
+                                    
                                   </td>
                                   <td className="action-table-data">
                                     <div className="edit-delete-action">
@@ -122,18 +133,12 @@ const StockadjustmentModal = () => {
                                         className="me-2 p-2"
                                         to="#"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#edit-units"
-                                      >
-                                        <i
-                                          data-feather="edit"
-                                          className="feather-edit"
-                                        />
+                                        data-bs-target="#edit-units">
+                                        
+                                        <i className="feather icon-edit feather-edit" />
                                       </Link>
                                       <Link className="confirm-text p-2" to="#">
-                                        <i
-                                          data-feather="trash-2"
-                                          className="feather-trash-2"
-                                        />
+                                        <i className="feather icon-trash-2" />
                                       </Link>
                                     </div>
                                   </td>
@@ -146,10 +151,14 @@ const StockadjustmentModal = () => {
                       <div className="col-lg-12">
                         <div className="input-blocks">
                           <label>Responsible Person</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={optionsStevenGravely}
-                          />
+                            value={selectedPerson}
+                            onChange={(e) => setSelectedPerson(e.value)}
+                            placeholder="Choose"
+                            filter={false} />
+                          
                         </div>
                       </div>
                     </div>
@@ -163,8 +172,8 @@ const StockadjustmentModal = () => {
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <button type="submit" className="btn btn-submit">
@@ -193,8 +202,8 @@ const StockadjustmentModal = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -205,18 +214,22 @@ const StockadjustmentModal = () => {
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue="Nike Jordan"
-                      />
-                      <i data-feather="search" className="feather-search" />
+                        defaultValue="Nike Jordan" />
+                      
+                      <i className="feather icon-search" />
                     </div>
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="input-blocks">
                           <label>Warehouse</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={optionsChoose}
-                          />
+                            value={selectedWarehouse}
+                            onChange={(e) => setSelectedWarehouse(e.value)}
+                            placeholder="Choose"
+                            filter={false} />
+                          
                         </div>
                       </div>
                       <div className="col-lg-6">
@@ -245,12 +258,12 @@ const StockadjustmentModal = () => {
                                     <div className="productimgname">
                                       <Link
                                         to="#"
-                                        className="product-img stock-img"
-                                      >
-                                        <ImageWithBasePath
-                                          src="assets/img/products/stock-img-02.png"
-                                          alt="product"
-                                        />
+                                        className="product-img stock-img">
+                                        
+                                        <img
+                                          src={stockImg02}
+                                          alt="product" />
+                                        
                                       </Link>
                                       <Link to="#">Nike Jordan</Link>
                                     </div>
@@ -260,24 +273,28 @@ const StockadjustmentModal = () => {
                                   <td>
                                     <div className="product-quantity">
                                       <span className="quantity-btn">
-                                        <MinusCircle className="feather-search" />
+                                        <i className="feather icon-minus-circle feather-search" />
                                       </span>
                                       <input
                                         type="text"
                                         className="quntity-input"
-                                        defaultValue={2}
-                                      />
+                                        defaultValue={2} />
+                                      
                                       <span className="quantity-btn">
                                         +
-                                        <PlusCircle className="plus-circle" />
+                                        <i className="feather icon-plus-circle plus-circle" />
                                       </span>
                                     </div>
                                   </td>
                                   <td>
-                                    <Select
-                                      classNamePrefix="react-select"
+                                    <CommonSelect
+                                      className="w-100"
                                       options={optionsAddition}
-                                    />
+                                      value={selectedType}
+                                      onChange={(e) => setSelectedType(e.value)}
+                                      placeholder="Choose"
+                                      filter={false} />
+                                    
                                   </td>
                                   <td className="action-table-data">
                                     <div className="edit-delete-action">
@@ -285,18 +302,12 @@ const StockadjustmentModal = () => {
                                         className="me-2 p-2"
                                         to="#"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#edit-units"
-                                      >
-                                        <i
-                                          data-feather="edit"
-                                          className="feather-edit"
-                                        />
+                                        data-bs-target="#edit-units">
+                                        
+                                        <i className="feather icon-edit feather-edit" />
                                       </Link>
                                       <Link className="confirm-text p-2" to="#">
-                                        <i
-                                          data-feather="trash-2"
-                                          className="feather-trash-2"
-                                        />
+                                        <i className="feather icon-trash-2" />
                                       </Link>
                                     </div>
                                   </td>
@@ -309,10 +320,14 @@ const StockadjustmentModal = () => {
                       <div className="col-lg-12">
                         <div className="input-blocks">
                           <label>Responsible Person</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            className="w-100"
                             options={optionsStevenGravely}
-                          />
+                            value={selectedPerson}
+                            onChange={(e) => setSelectedPerson(e.value)}
+                            placeholder="Choose"
+                            filter={false} />
+                          
                         </div>
                       </div>
                     </div>
@@ -322,17 +337,17 @@ const StockadjustmentModal = () => {
                         <textarea
                           className="form-control"
                           defaultValue={
-                            "The Jordan brand is owned by Nike (owned by the Knight family), as, at the time, the company was building its strategy to work with athletes to launch shows that could inspire consumers.Although Jordan preferred Converse and Adidas, they simply could not match the offer Nike made. "
-                          }
-                        />
+                          "The Jordan brand is owned by Nike (owned by the Knight family), as, at the time, the company was building its strategy to work with athletes to launch shows that could inspire consumers.Although Jordan preferred Converse and Adidas, they simply could not match the offer Nike made. "
+                          } />
+                        
                       </div>
                     </div>
                     <div className="modal-footer-btn">
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <button type="submit" className="btn btn-submit">
@@ -361,8 +376,8 @@ const StockadjustmentModal = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -385,8 +400,8 @@ const StockadjustmentModal = () => {
         </div>
       </div>
       {/* /View Notes */}
-    </div>
-  );
+    </div>);
+
 };
 
 export default StockadjustmentModal;

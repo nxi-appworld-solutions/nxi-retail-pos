@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Chart } from "primereact/chart";
 import { useEffect } from "react";
@@ -17,31 +17,31 @@ const ChartJs = () => {
     const data = {
       labels: ["Q1", "Q2", "Q3", "Q4"],
       datasets: [
-        {
-          label: "Sales",
-          data: [540, 325, 702, 620],
-          backgroundColor: [
-            "rgba(255, 159, 64, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-          ],
-          borderColor: [
-            "rgb(255, 159, 64)",
-            "rgb(75, 192, 192)",
-            "rgb(54, 162, 235)",
-            "rgb(153, 102, 255)",
-          ],
-          borderWidth: 1,
-        },
-      ],
+      {
+        label: "Sales",
+        data: [540, 325, 702, 620],
+        backgroundColor: [
+        "rgba(255, 159, 64, 0.2)",
+        "rgba(75, 192, 192, 0.2)",
+        "rgba(54, 162, 235, 0.2)",
+        "rgba(153, 102, 255, 0.2)"],
+
+        borderColor: [
+        "rgb(255, 159, 64)",
+        "rgb(75, 192, 192)",
+        "rgb(54, 162, 235)",
+        "rgb(153, 102, 255)"],
+
+        borderWidth: 1
+      }]
+
     };
     const options = {
       scales: {
         y: {
-          beginAtZero: true,
-        },
-      },
+          beginAtZero: true
+        }
+      }
     };
 
     setChartData(data);
@@ -58,19 +58,19 @@ const ChartJs = () => {
     const verticaldata = {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
-        {
-          label: "My First dataset",
-          backgroundColor: documentStyle.getPropertyValue("--blue-500"),
-          borderColor: documentStyle.getPropertyValue("--blue-500"),
-          data: [65, 59, 80, 81, 56, 55, 40],
-        },
-        {
-          label: "My Second dataset",
-          backgroundColor: documentStyle.getPropertyValue("--pink-500"),
-          borderColor: documentStyle.getPropertyValue("--pink-500"),
-          data: [28, 48, 40, 19, 86, 27, 90],
-        },
-      ],
+      {
+        label: "My First dataset",
+        backgroundColor: documentStyle.getPropertyValue("--blue-500"),
+        borderColor: documentStyle.getPropertyValue("--blue-500"),
+        data: [65, 59, 80, 81, 56, 55, 40]
+      },
+      {
+        label: "My Second dataset",
+        backgroundColor: documentStyle.getPropertyValue("--pink-500"),
+        borderColor: documentStyle.getPropertyValue("--pink-500"),
+        data: [28, 48, 40, 19, 86, 27, 90]
+      }]
+
     };
     const verticalOptions = {
       maintainAspectRatio: false,
@@ -78,33 +78,33 @@ const ChartJs = () => {
       plugins: {
         legend: {
           labels: {
-            fontColor: textColor,
-          },
-        },
+            fontColor: textColor
+          }
+        }
       },
       scales: {
         x: {
           ticks: {
             color: textColorSecondary,
             font: {
-              weight: 500,
-            },
+              weight: 500
+            }
           },
           grid: {
             display: false,
-            drawBorder: false,
-          },
+            drawBorder: false
+          }
         },
         y: {
           ticks: {
-            color: textColorSecondary,
+            color: textColorSecondary
           },
           grid: {
             color: surfaceBorder,
-            drawBorder: false,
-          },
-        },
-      },
+            drawBorder: false
+          }
+        }
+      }
     };
 
     setChartVertical(verticaldata);
@@ -121,25 +121,25 @@ const ChartJs = () => {
     const stackedData = {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
-        {
-          type: "bar",
-          label: "Dataset 1",
-          backgroundColor: documentStyle.getPropertyValue("--blue-500"),
-          data: [50, 25, 12, 48, 90, 76, 42],
-        },
-        {
-          type: "bar",
-          label: "Dataset 2",
-          backgroundColor: documentStyle.getPropertyValue("--green-500"),
-          data: [21, 84, 24, 75, 37, 65, 34],
-        },
-        {
-          type: "bar",
-          label: "Dataset 3",
-          backgroundColor: documentStyle.getPropertyValue("--yellow-500"),
-          data: [41, 52, 24, 74, 23, 21, 32],
-        },
-      ],
+      {
+        type: "bar",
+        label: "Dataset 1",
+        backgroundColor: documentStyle.getPropertyValue("--blue-500"),
+        data: [50, 25, 12, 48, 90, 76, 42]
+      },
+      {
+        type: "bar",
+        label: "Dataset 2",
+        backgroundColor: documentStyle.getPropertyValue("--green-500"),
+        data: [21, 84, 24, 75, 37, 65, 34]
+      },
+      {
+        type: "bar",
+        label: "Dataset 3",
+        backgroundColor: documentStyle.getPropertyValue("--yellow-500"),
+        data: [41, 52, 24, 74, 23, 21, 32]
+      }]
+
     };
     const stackedOptions = {
       maintainAspectRatio: false,
@@ -147,34 +147,34 @@ const ChartJs = () => {
       plugins: {
         tooltips: {
           mode: "index",
-          intersect: false,
+          intersect: false
         },
         legend: {
           labels: {
-            color: textColor,
-          },
-        },
+            color: textColor
+          }
+        }
       },
       scales: {
         x: {
           stacked: true,
           ticks: {
-            color: textColorSecondary,
+            color: textColorSecondary
           },
           grid: {
-            color: surfaceBorder,
-          },
+            color: surfaceBorder
+          }
         },
         y: {
           stacked: true,
           ticks: {
-            color: textColorSecondary,
+            color: textColorSecondary
           },
           grid: {
-            color: surfaceBorder,
-          },
-        },
-      },
+            color: surfaceBorder
+          }
+        }
+      }
     };
 
     setStackedChart(stackedData);
@@ -191,23 +191,23 @@ const ChartJs = () => {
     const lineData = {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
-        {
-          label: "Dataset 1",
-          fill: false,
-          borderColor: documentStyle.getPropertyValue("--blue-500"),
-          yAxisID: "y",
-          tension: 0.4,
-          data: [65, 59, 80, 81, 56, 55, 10],
-        },
-        {
-          label: "Dataset 2",
-          fill: false,
-          borderColor: documentStyle.getPropertyValue("--green-500"),
-          yAxisID: "y1",
-          tension: 0.4,
-          data: [28, 48, 40, 19, 86, 27, 90],
-        },
-      ],
+      {
+        label: "Dataset 1",
+        fill: false,
+        borderColor: documentStyle.getPropertyValue("--blue-500"),
+        yAxisID: "y",
+        tension: 0.4,
+        data: [65, 59, 80, 81, 56, 55, 10]
+      },
+      {
+        label: "Dataset 2",
+        fill: false,
+        borderColor: documentStyle.getPropertyValue("--green-500"),
+        yAxisID: "y1",
+        tension: 0.4,
+        data: [28, 48, 40, 19, 86, 27, 90]
+      }]
+
     };
     const lineOptions = {
       stacked: false,
@@ -216,43 +216,43 @@ const ChartJs = () => {
       plugins: {
         legend: {
           labels: {
-            color: textColor,
-          },
-        },
+            color: textColor
+          }
+        }
       },
       scales: {
         x: {
           ticks: {
-            color: textColorSecondary,
+            color: textColorSecondary
           },
           grid: {
-            color: surfaceBorder,
-          },
+            color: surfaceBorder
+          }
         },
         y: {
           type: "linear",
           display: true,
           position: "left",
           ticks: {
-            color: textColorSecondary,
+            color: textColorSecondary
           },
           grid: {
-            color: surfaceBorder,
-          },
+            color: surfaceBorder
+          }
         },
         y1: {
           type: "linear",
           display: true,
           position: "right",
           ticks: {
-            color: textColorSecondary,
+            color: textColorSecondary
           },
           grid: {
             drawOnChartArea: false,
-            color: surfaceBorder,
-          },
-        },
-      },
+            color: surfaceBorder
+          }
+        }
+      }
     };
 
     setLineChartData(lineData);
@@ -294,8 +294,8 @@ const ChartJs = () => {
                       type="bar"
                       data={chartData}
                       options={chartOptions}
-                      style={{ height: "300px" }}
-                    />
+                      style={{ height: "300px" }} />
+                    
                   </div>
                 </div>
               </div>
@@ -314,8 +314,8 @@ const ChartJs = () => {
                       type="bar"
                       data={chartVertical}
                       options={chartVerticalOptions}
-                      style={{ height: "300px" }}
-                    />
+                      style={{ height: "300px" }} />
+                    
                   </div>
                 </div>
               </div>
@@ -334,8 +334,8 @@ const ChartJs = () => {
                       type="bar"
                       data={stackedChart}
                       options={stackedOptions}
-                      style={{ height: "300px" }}
-                    />
+                      style={{ height: "300px" }} />
+                    
                   </div>
                 </div>
               </div>
@@ -354,8 +354,8 @@ const ChartJs = () => {
                       type="line"
                       data={lineChartData}
                       options={lineChartOptions}
-                      style={{ height: "300px" }}
-                    />
+                      style={{ height: "300px" }} />
+                    
                   </div>
                 </div>
               </div>
@@ -366,7 +366,7 @@ const ChartJs = () => {
         </div>
       </div>
       {/* /Page Wrapper */}
-    </>
-  );
+    </>);
+
 };
 export default ChartJs;

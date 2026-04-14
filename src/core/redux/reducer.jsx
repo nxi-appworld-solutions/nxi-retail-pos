@@ -1,6 +1,6 @@
 import initialState from "./initial.value";
 
-const rootReducer = (state = initialState, action) => {
+const MainReducer = (state = initialState, action) => {
   switch (action.type) {
     case "Product_list":
       return { ...state, product_list: action.payload };
@@ -66,4 +66,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export default rootReducer;
+export default MainReducer;

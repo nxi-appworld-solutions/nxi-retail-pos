@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { useState } from "react";
+
 import { Link } from "react-router-dom";
-import CommonFooter from "../../core/common/footer/commonFooter";
+import CommonFooter from "../../components/footer/commonFooter";
+import { user49 } from "../../utils/imagepath";
 
 const Profile = () => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
@@ -28,13 +29,13 @@ const Profile = () => {
               <i className="ti ti-user text-primary me-1" />
               Basic Information
             </h5>
-            <div className="profile-pic-upload image-field">
+            <div className="profile-pic-upload image-field profile-pic-upload-new">
               <div className="profile-pic p-2">
-                <ImageWithBasePath
-                  src="./assets/img/users/user-49.png"
+                <img
+                  src={user49}
                   className="object-fit-cover h-100 rounded-1"
-                  alt="user"
-                />
+                  alt="user" />
+                
                 <button type="button" className="close rounded-1">
                   <span aria-hidden="true">×</span>
                 </button>
@@ -58,8 +59,8 @@ const Profile = () => {
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue="Jeffry"
-                  />
+                    defaultValue="Jeffry" />
+                  
                 </div>
               </div>
               <div className="col-lg-6 col-sm-12">
@@ -70,8 +71,8 @@ const Profile = () => {
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue="Jordan"
-                  />
+                    defaultValue="Jordan" />
+                  
                 </div>
               </div>
               <div className="col-lg-6 col-sm-12">
@@ -82,8 +83,8 @@ const Profile = () => {
                   <input
                     type="email"
                     className="form-control"
-                    defaultValue="jeffry@example.com"
-                  />
+                    defaultValue="jeffry@example.com" />
+                  
                 </div>
               </div>
               <div className="col-lg-6 col-sm-12">
@@ -94,8 +95,8 @@ const Profile = () => {
                   <input
                     type="text"
                     defaultValue={+17468314286}
-                    className="form-control"
-                  />
+                    className="form-control" />
+                  
                 </div>
               </div>
               <div className="col-lg-6 col-sm-12">
@@ -106,8 +107,8 @@ const Profile = () => {
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue="Jeffry Jordan"
-                  />
+                    defaultValue="Jeffry Jordan" />
+                  
                 </div>
               </div>
               <div className="col-lg-6 col-sm-12">
@@ -118,28 +119,22 @@ const Profile = () => {
                   <div className="pass-group">
                     <input
                       type={isPasswordVisible ? "text" : "password"}
-                      className="pass-input form-control"
-                    />
+                      className="pass-input form-control" />
+                    
                     <span
-                      className={`ti toggle-password ${isPasswordVisible ? "ti-eye" : "ti-eye-off"
-                        }`}
-                      onClick={togglePasswordVisibility}
-                    ></span>
+                      className={`ti toggle-password text-gray-9 ${
+                      isPasswordVisible ? "ti-eye" : "ti-eye-off"}`
+                      }
+                      onClick={togglePasswordVisibility}>
+                    </span>
                   </div>
-
                 </div>
               </div>
               <div className="col-12 d-flex justify-content-end">
-                <Link
-                  to="#"
-                  className="btn btn-secondary me-2 shadow-none"
-                >
+                <Link to="#" className="btn btn-secondary me-2 shadow-none">
                   Cancel
                 </Link>
-                <Link
-                  to="#"
-                  className="btn btn-primary shadow-none"
-                >
+                <Link to="#" className="btn btn-primary shadow-none">
                   Save Changes
                 </Link>
               </div>
@@ -149,9 +144,8 @@ const Profile = () => {
         {/* /product list */}
       </div>
       <CommonFooter />
-    </div>
+    </div>);
 
-  );
 };
 
 export default Profile;

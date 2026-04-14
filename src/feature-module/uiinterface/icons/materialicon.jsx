@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import {
   QuestionCircleFilled,
@@ -198,8 +198,8 @@ import {
   VideoCameraFilled,
   WalletFilled,
   ZhihuCircleFilled,
-  ZhihuSquareFilled,
-} from "@ant-design/icons";
+  ZhihuSquareFilled } from
+"@ant-design/icons";
 const MaterialIcons = () => {
   return (
     <div className="page-wrapper cardhead">
@@ -831,7 +831,7 @@ const MaterialIcons = () => {
           {/* /Chart */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 export default MaterialIcons;

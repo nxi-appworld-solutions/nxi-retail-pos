@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router";
 
 const Blankpage = () => {
   return (
@@ -11,29 +11,29 @@ const Blankpage = () => {
           </div>
           <ul className="table-top-head">
             <li>
-              <a
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Refresh"
-              >
-                <i data-feather="rotate-ccw" className="feather-rotate-ccw" />
-              </a>
+              <Link to="#"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Refresh">
+                
+                <i className="feather icon-rotate-ccw feather-rotate-ccw" />
+              </Link>
             </li>
             <li>
-              <a
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Collapse"
-                id="collapse-header"
-              >
-                <i data-feather="chevron-up" className="feather-chevron-up" />
-              </a>
+              <Link to="#"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Collapse"
+              id="collapse-header">
+                
+                <i className="feather icon-chevron-up feather-chevron-up" />
+              </Link>
             </li>
           </ul>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Blankpage;

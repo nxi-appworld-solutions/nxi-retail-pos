@@ -1,93 +1,86 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Table from "../../core/pagination/datatable";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import DiscountPlanModal from "../../core/modals/coupons/discountPlanModal";
+import PrimeDataTable from "../../components/data-table";
+import CommonFooter from "../../components/footer/commonFooter";
 import { discountData } from "../../core/json/discountData";
-
+import DiscountPlanModal from "../../core/modals/coupons/discountPlanModal";
+import TableTopHead from "../../components/table-top-head";
+import SearchFromApi from "../../components/data-table/search";
 
 const Discount = () => {
-
   const dataSource = discountData;
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [rows, setRows] = useState(10);
+  const [selectedDiscounts, setSelectedDiscounts] = useState([]);
+
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
 
   const columns = [
-    {
-      title: "Name",
-      dataIndex: "Name",
-      sorter: (a, b) => a.Name.length - b.Name.length,
-    },
-    {
-      title: "Value",
-      dataIndex: "Value",
-      sorter: (a, b) => a.Value.length - b.Value.length,
-    },
-    {
-      title: "DiscountPlan",
-      dataIndex: "DiscountPlan",
-      sorter: (a, b) => a.DiscountPlan.length - b.DiscountPlan.length,
-    },
-    {
-      title: "Valitidy",
-      dataIndex: "Valitidy",
-      sorter: (a, b) => a.Valitidy.length - b.Valitidy.length,
-    },
-    {
-      title: "Days",
-      dataIndex: "Days",
-      sorter: (a, b) => a.Days.length - b.Days.length,
-    },
-    {
-      title: "Products",
-      dataIndex: "Products",
-      sorter: (a, b) => a.Products.length - b.Products.length,
-    },
+  {
+    header: "Name",
+    field: "Name"
+  },
+  {
+    header: "Value",
+    field: "Value"
+  },
+  {
+    header: "DiscountPlan",
+    field: "DiscountPlan"
+  },
+  {
+    header: "Valitidy",
+    field: "Valitidy"
+  },
+  {
+    header: "Days",
+    field: "Days"
+  },
+  {
+    header: "Products",
+    field: "Products"
+  },
 
-    {
-      title: "Status",
-      dataIndex: "Status",
-      render: (text) => (
-        <span className={`badge table-badge ${text === 'Active' ? 'bg-success' : text === 'Redeemed' ? 'bg-pink' : text === 'Expired' ? 'bg-light' : 'bg-danger'} fw-medium fs-10`}>
-          {text}
+  {
+    header: "Status",
+    field: "Status",
+    body: (text) =>
+    <span
+      className={`badge table-badge ${text?.Status === "Active" ? "bg-success" : text === "Redeemed" ? "bg-pink" : text === "Expired" ? "bg-light" : "bg-danger"} fw-medium fs-10`}>
+      
+          {text?.Status}
         </span>
-      ),
-      sorter: (a, b) => a.Status.length - b.Status.length,
-    },
-    {
-      title: "",
-      dataIndex: "actions",
-      key: "actions",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
 
+  },
+  {
+    header: "",
+    field: "actions",
+    key: "actions",
+    body: () =>
+    <div className="action-table-data">
+          <div className="edit-delete-action">
             <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-units"
-            >
-              <i data-feather="edit" className="feather-edit" />
+          className="me-2 p-2"
+          to="#"
+          data-bs-toggle="modal"
+          data-bs-target="#edit-units">
+          
+              <i className="ti ti-edit" />
             </Link>
             <Link
-              data-bs-toggle="modal"
-              data-bs-target="#delete-modal"
-              className="p-2"
-              to="#"
-            >
-              <i data-feather="trash-2" className="feather-trash-2" />
+          data-bs-toggle="modal"
+          data-bs-target="#delete-modal"
+          className="p-2"
+          to="#">
+          
+              <i className="ti ti-trash" />
             </Link>
           </div>
-
         </div>
-      ),
-    },
-  ];
 
-
-
+  }];
 
 
   return (
@@ -101,19 +94,15 @@ const Discount = () => {
                 <h6>Manage Your discount</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-units"
-              >
-              <i className='ti ti-circle-plus me-1'></i>
+                data-bs-target="#add-units">
+                
+                <i className="ti ti-circle-plus me-1"></i>
                 Add Discount
               </Link>
             </div>
@@ -121,16 +110,18 @@ const Discount = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Customer
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -160,8 +151,8 @@ const Discount = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -177,15 +168,24 @@ const Discount = () => {
                     </li>
                   </ul>
                 </div>
-
               </div>
             </div>
 
-
             <div className="card-body">
-
               <div className="table-responsive">
-                <Table columns={columns} dataSource={dataSource} />
+                <PrimeDataTable
+                  column={columns}
+                  data={dataSource}
+                  totalRecords={10}
+                  rows={10}
+                  setRows={() => {}}
+                  currentPage={1}
+                  setCurrentPage={() => {}}
+                  selectionMode="checkbox"
+                  selection={selectedDiscounts}
+                  onSelectionChange={(e) => setSelectedDiscounts(e.value)}
+                  dataKey="id" />
+                
               </div>
             </div>
           </div>
@@ -194,9 +194,9 @@ const Discount = () => {
         <CommonFooter />
       </div>
       <DiscountPlanModal />
+     
+    </div>);
 
-    </div>
-  );
 };
 
 export default Discount;

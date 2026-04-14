@@ -1,94 +1,248 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import CommonDeleteModal from "../../core/common/modal/commonDeleteModal";
-import CommonTable from "../../core/common/table/commonTable";
-import TableTopFilter from "../../core/common/table/tableTopFilter";
-import AddCategorys from "../../components/modals/addCategory";
-import CommonTableHeader from "../../core/common/table/tableHeader";
+import EditCategoryList from "../../core/modals/inventory/editcategorylist";
+import CommonFooter from "../../components/footer/commonFooter";
+import PrimeDataTable from "../../components/data-table";
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
+import { MODAL_TYPES } from "../../routes/modal_root/modalTypes";
+import useAppModal from "../../core/common/modal/useAppModal";
+import { api_url } from "../../environment";
+import { formatDate } from "../../utils/common";
+import toast from "react-hot-toast";
+import Loader from "../../components/loader/Loader";
 
 const CategoryList = () => {
-  const dataSource = useSelector(
-    (state) => state.rootReducer.categotylist_data
-  );
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const { open } = useAppModal();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [_searchQuery]);
 
   const columns = [
     {
-      title: "Category",
-      dataIndex: "category",
-      sorter: (a, b) => a.category.length - b.category.length,
+      header: "Category",
+      field: "category",
+      key: "category",
+      sortable: true,
     },
     {
-      title: "Category Slug",
-      dataIndex: "categoryslug",
-      sorter: (a, b) => a.categoryslug.length - b.categoryslug.length,
+      header: "Category Slug",
+      field: "categoryslug",
+      key: "categoryslug",
+      sortable: true,
     },
     {
-      title: "Created On",
-      dataIndex: "createdon",
-      sorter: (a, b) => a.createdon.length - b.createdon.length,
+      header: "Created On",
+      field: "createdon",
+      key: "createdon",
+      sortable: true,
+      body: (data) => <div>{formatDate(data.createdon)}</div>,
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      render: (text) => (
-        <span className="badge bg-success fw-medium fs-10">{text}</span>
+      header: "Status",
+      field: "status",
+      key: "status",
+      sortable: true,
+      body: (data) => (
+        <span className="badge bg-success fw-medium fs-10">{data.status}</span>
       ),
-      sorter: (a, b) => a.status.length - b.status.length,
     },
     {
-      title: "",
-      dataIndex: "actions",
+      header: "",
+      field: "actions",
       key: "actions",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
-            <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-category"
-            >
-              <i data-feather="edit" className="feather-edit"></i>
-            </Link>
-            <Link
-              data-bs-toggle="modal"
-              data-bs-target="#delete-modal"
-              className="p-2"
-              to="#"
-            >
-              <i data-feather="trash-2" className="feather-trash-2"></i>
-            </Link>
-          </div>
+      sortable: false,
+      body: (_row) => (
+        <div className="edit-delete-action d-flex align-items-center">
+          <Link
+            className="me-2 p-2 d-flex align-items-center border rounded"
+            onClick={() =>
+              open(MODAL_TYPES.CATEGORY, {
+                data: _row,
+                onSuccess: fetchCategories,
+              })
+            }
+          >
+            <i className="feather icon-edit"></i>
+          </Link>
+          <Link
+            className="p-2 d-flex align-items-center border rounded"
+            to="#"
+            data-bs-toggle="modal"
+            data-bs-target="#delete-modal"
+          >
+            <i className="feather icon-trash-2"></i>
+          </Link>
         </div>
       ),
     },
   ];
 
-  const openModal = () => {
-    // Logic to open modal can be added here
-    // For example, you can dispatch an action or set a state to trigger the modal
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${api_url}/GetMaster?masterType=5`);
+      const json = await res.json();
+
+      const formattedData = json?.data.map((category) => ({
+        code: category.code,
+        category: category.name,
+        categoryslug: category.alias,
+        createdon: category.createdOn,
+        status: category.status ? "Inactive" : "Active",
+      }));
+
+      setCategories(formattedData);
+    } catch (error) {
+      toast.error("Error fetching categories:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div>
+      {loading && <Loader loading={loading} />}
       <div className="page-wrapper">
         <div className="content">
-          <CommonTableHeader
-            title="Category"
-            modalId="add-categorys"
-            onAdd={() => openModal()}
-          />
-          <div className="card table-list-card">
-            <TableTopFilter />
-            <CommonTable columns={columns} data={dataSource} />
+          <div className="page-header">
+            <div className="add-item d-flex">
+              <div className="page-title">
+                <h4 className="fw-bold">Category</h4>
+                <h6>Manage your categories</h6>
+              </div>
+            </div>
+            <TableTopHead />
+            <div className="page-btn">
+              <Link
+                className="btn btn-primary"
+                onClick={() =>
+                  open(MODAL_TYPES.CATEGORY, {
+                    data: null,
+                    onSuccess: fetchCategories,
+                  })
+                }
+              >
+                <i className="ti ti-circle-plus me-1"></i>
+                Add Category
+              </Link>
+            </div>
           </div>
+          {/* /product list */}
+          <div className="card table-list-card">
+            <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
+              <SearchFromApi
+                callback={(e) => setSearchQuery(e)}
+                rows={rows}
+                setRows={setRows}
+              />
+
+              <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+                <div className="dropdown me-2">
+                  <Link
+                    to="#"
+                    className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
+                    data-bs-toggle="dropdown"
+                  >
+                    Status
+                  </Link>
+                  <ul className="dropdown-menu  dropdown-menu-end p-3">
+                    <li>
+                      <Link to="#" className="dropdown-item rounded-1">
+                        Active
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="#" className="dropdown-item rounded-1">
+                        Inactive
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+                <div className="dropdown">
+                  <Link
+                    to="#"
+                    className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
+                    data-bs-toggle="dropdown"
+                  >
+                    Sort By : Last 7 Days
+                  </Link>
+                  <ul className="dropdown-menu  dropdown-menu-end p-3">
+                    <li>
+                      <Link to="#" className="dropdown-item rounded-1">
+                        Recently Added
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="#" className="dropdown-item rounded-1">
+                        Ascending
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="#" className="dropdown-item rounded-1">
+                        Desending
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="#" className="dropdown-item rounded-1">
+                        Last Month
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="#" className="dropdown-item rounded-1">
+                        Last 7 Days
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive category-table">
+                <PrimeDataTable
+                  column={columns}
+                  data={categories}
+                  searchQuery={_searchQuery}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedCategories}
+                  onSelectionChange={(e) => setSelectedCategories(e.value)}
+                  dataKey="id"
+                  // onRowClick={(e) => {
+                  //   if (e.originalEvent.target.type === "checkbox") return;
+                  //   setSelectedRow(e.data);
+                  //   open(MODAL_TYPES.CATEGORY, { data: e.data });
+                  // }}
+                />
+              </div>
+            </div>
+          </div>
+          {/* /product list */}
         </div>
         <CommonFooter />
       </div>
-      <AddCategorys />
-      <CommonDeleteModal />
+
+      <EditCategoryList />
+      <DeleteModal />
     </div>
   );
 };

@@ -1,88 +1,102 @@
-import { DatePicker } from "antd";
-import React, { useState } from "react";
+
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
-import { all_routes } from "../../Router/all_routes";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import { ArrowLeft, Calendar } from "feather-icons-react/build/IconComponents";
-import DefaultEditor from "react-simple-wysiwyg";
+import { all_routes } from "../../routes/all_routes";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CommonDatePicker from "../../components/date-picker/common-date-picker";
+import CommonSelect from "../../components/select/common-select";
+import { Editor } from "primereact/editor";
+import { user01 } from "../../utils/imagepath";
 
 const EditEmployee = () => {
-
   const route = all_routes;
+  const [date1, setDate1] = useState(new Date());
+  const [date2, setDate2] = useState(new Date());
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [selectedNationality, setSelectedNationality] = useState(
+    null
+  );
+  const [selectedShift, setSelectedShift] = useState(null);
+  const [selectedDepartment, setSelectedDepartment] = useState(
+    null
+  );
+  const [selectedDesignation, setSelectedDesignation] = useState(
+    null
+  );
+  const [selectedBloodGroup, setSelectedBloodGroup] = useState(
+    null
+  );
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedState, setSelectedState] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [text, setText] = useState("");
 
   const [passwordVisibility, setPasswordVisibility] = useState({
     password: false,
-    confirmPassword: false,
+    confirmPassword: false
   });
 
   const togglePasswordVisibility = (field) => {
     setPasswordVisibility((prevState) => ({
       ...prevState,
-      [field]: !prevState[field],
+      [field]: !prevState[field]
     }));
   };
 
-  const [values, setValue] = useState();
-  function onChange(e) {
-    setValue(e.target.value);
-  }
 
   const gender = [
-    { value: "Choose", label: "Choose" },
-    { value: "Male", label: "Male" },
-    { value: "Female", label: "Female" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" }];
+
   const nationality = [
-    { value: "Choose", label: "Choose" },
-    { value: "United Kingdom", label: "United Kingdom" },
-    { value: "India", label: "India" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "United Kingdom", label: "United Kingdom" },
+  { value: "India", label: "India" }];
+
   const Shift = [
-    { value: "Choose", label: "Choose" },
-    { value: "Regular", label: "Regular" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "Regular", label: "Regular" }];
+
   const departments = [
-    { value: "Choose", label: "Choose" },
-    { value: "UI/UX", label: "UI/UX" },
-    { value: "Support", label: "Support" },
-    { value: "HR", label: "HR" },
-    { value: "Engineering", label: "Engineering" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "UI/UX", label: "UI/UX" },
+  { value: "Support", label: "Support" },
+  { value: "HR", label: "HR" },
+  { value: "Engineering", label: "Engineering" }];
+
   const designation = [
-    { value: "Choose", label: "Choose" },
-    { value: "Designer", label: "Designer" },
-    { value: "Developer", label: "Developer" },
-    { value: "Tester", label: "Tester" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "Designer", label: "Designer" },
+  { value: "Developer", label: "Developer" },
+  { value: "Tester", label: "Tester" }];
+
   const bloodgroup = [
-    { value: "Select", label: "Select" },
-    { value: "A+", label: "A+" },
-    { value: "A-", label: "A-" },
-    { value: "B+", label: "B-" },
-    { value: "O+", label: "O-" },
-    { value: "O+", label: "O-" },
-    { value: "AB+", label: "AB-" },
-    { value: "AB+", label: "AB-" },
-  ];
+  { value: "Select", label: "Select" },
+  { value: "A+", label: "A+" },
+  { value: "A-", label: "A-" },
+  { value: "B+", label: "B-" },
+  { value: "O+", label: "O-" },
+  { value: "O+", label: "O-" },
+  { value: "AB+", label: "AB-" },
+  { value: "AB+", label: "AB-" }];
+
   const country = [
-    { value: "Choose", label: "Choose" },
-    { value: "United Kingdom", label: "United Kingdom" },
-    { value: "USA", label: "USA" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "United Kingdom", label: "United Kingdom" },
+  { value: "USA", label: "USA" }];
+
 
   const state = [
-    { value: "Choose", label: "Choose" },
-    { value: "California", label: "California" },
-    { value: "Paris", label: "Paris" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "California", label: "California" },
+  { value: "Paris", label: "Paris" }];
+
   const city = [
-    { value: "Choose", label: "Choose" },
-    { value: "Los Angeles", label: "Los Angeles" },
-    { value: "New Jersey", label: "New Jersey" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "Los Angeles", label: "Los Angeles" },
+  { value: "New Jersey", label: "New Jersey" }];
 
 
   return (
@@ -102,7 +116,7 @@ const EditEmployee = () => {
             </ul>
             <div className="page-btn">
               <Link to={route.employeelist} className="btn btn-secondary">
-                <ArrowLeft className="me-2" />
+                <i className="feather icon-arrow-left me-2" />
                 Back to List
               </Link>
             </div>
@@ -116,19 +130,14 @@ const EditEmployee = () => {
                     className="accordion-button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseOne"
-                    aria-controls="collapseOne"
-                  >
+                    aria-controls="collapseOne">
+                    
                     <div className="addproduct-icon d-flex align-items-center justify-content-between flex-fill">
                       <h5 className="d-inline-flex align-items-center">
-                        <i
-                          data-feather="info"
-                          className="feather-edit text-primary me-2"
-                        />
+                        <i className="feather icon-info feather-edit text-primary me-2" />
                         <span>Employee Information</span>
                       </h5>
-                      <Link to="#">
-                        <i data-feather="chevron-down" className="chevron-down-add" />
-                      </Link>
+                      
                     </div>
                   </div>
                 </div>
@@ -136,14 +145,14 @@ const EditEmployee = () => {
                   id="collapseOne"
                   className="accordion-collapse collapse show"
                   aria-labelledby="headingOne"
-                  data-bs-parent="#accordionExample"
-                >
+                  data-bs-parent="#accordionExample">
+                  
                   <div className="accordion-body">
                     <div className="new-employee-field">
                       <div className="profile-pic-upload edit-pic">
                         <div className="profile-pic">
                           <span>
-                            <ImageWithBasePath src="assets/img/users/user-01.jpg" alt="Img" />
+                            <img src={user01} alt="Img" />
                           </span>
                         </div>
                         <div className="me-3 mb-0">
@@ -159,25 +168,27 @@ const EditEmployee = () => {
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">
-                              First Name<span className="text-danger ms-1">*</span>
+                              First Name
+                              <span className="text-danger ms-1">*</span>
                             </label>
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="Mitchum"
-                            />
+                              defaultValue="Mitchum" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">
-                              Last Name<span className="text-danger ms-1">*</span>
+                              Last Name
+                              <span className="text-danger ms-1">*</span>
                             </label>
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="Daniel"
-                            />
+                              defaultValue="Daniel" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
@@ -188,8 +199,8 @@ const EditEmployee = () => {
                             <input
                               type="email"
                               className="form-control"
-                              defaultValue="mir34345@example.com"
-                            />
+                              defaultValue="mir34345@example.com" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
@@ -201,33 +212,36 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="+1 54554 54788"
-                            />
+                              defaultValue="+1 54554 54788" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">
-                              Emp Code<span className="text-danger ms-1">*</span>
+                              Emp Code
+                              <span className="text-danger ms-1">*</span>
                             </label>
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="POS001"
-                            />
+                              defaultValue="POS001" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="input-blocks">
                             <label className="form-label">
-                              Date of Birth<span className="text-danger ms-1">*</span>
+                              Date of Birth
+                              <span className="text-danger ms-1">*</span>
                             </label>
                             <div className="input-groupicon calender-input">
-                              <Calendar className="info-img" />
-                              <DatePicker
-                                className="form-control datetimepicker"
-                                placeholder="dd/mm/yyyy"
-                              />
+                              <i className="feather icon-calendar info-img" />
+                              <CommonDatePicker
+                                value={date1}
+                                onChange={setDate1}
+                                className="w-100" />
+                              
                             </div>
                           </div>
                         </div>
@@ -236,36 +250,45 @@ const EditEmployee = () => {
                             <label className="form-label">
                               Gender<span className="text-danger ms-1">*</span>
                             </label>
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={gender}
+                              value={selectedGender}
+                              onChange={(e) => setSelectedGender(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">
-                              Nationality<span className="text-danger ms-1">*</span>
+                              Nationality
+                              <span className="text-danger ms-1">*</span>
                             </label>
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={nationality}
+                              value={selectedNationality}
+                              onChange={(e) => setSelectedNationality(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="input-blocks">
                             <label className="form-label">
-                              Joining Date<span className="text-danger ms-1">*</span>
+                              Joining Date
+                              <span className="text-danger ms-1">*</span>
                             </label>
                             <div className="input-groupicon calender-input">
-                              <Calendar className="info-img" />
-                              <DatePicker
-                                className="form-control datetimepicker"
-                                placeholder="dd/mm/yyyy"
-                              />
+                              <i className="feather icon-calendar info-img" />
+                              <CommonDatePicker
+                                value={date2}
+                                onChange={setDate2}
+                                className="w-100" />
+                              
                             </div>
                           </div>
                         </div>
@@ -277,55 +300,67 @@ const EditEmployee = () => {
                               </label>
                               <Link to="#">
                                 <span>
-                                  <i
-                                    data-feather="plus-circle"
-                                    className="plus-down-add"
-                                  />
+                                  <i className="feather icon-plus-circle plus-down-add" />
                                   Add new
                                 </span>
                               </Link>
                             </div>
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={Shift}
+                              value={selectedShift}
+                              onChange={(e) => setSelectedShift(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">
-                              Department<span className="text-danger ms-1">*</span>
+                              Department
+                              <span className="text-danger ms-1">*</span>
                             </label>
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={departments}
+                              value={selectedDepartment}
+                              onChange={(e) => setSelectedDepartment(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">
-                              Designation<span className="text-danger ms-1">*</span>
+                              Designation
+                              <span className="text-danger ms-1">*</span>
                             </label>
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={designation}
+                              value={selectedDesignation}
+                              onChange={(e) => setSelectedDesignation(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">
-                              Blood Group<span className="text-danger ms-1">*</span>
+                              Blood Group
+                              <span className="text-danger ms-1">*</span>
                             </label>
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={bloodgroup}
+                              value={selectedBloodGroup}
+                              onChange={(e) => setSelectedBloodGroup(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                         </div>
                         {/* Editor */}
@@ -333,7 +368,11 @@ const EditEmployee = () => {
                           <div className="input-blocks summer-description-box transfer mb-3">
                             <label>About</label>
                             <div id="summernote">
-                              <DefaultEditor value={values} onChange={onChange} />
+                              <Editor
+                                value={text}
+                                onTextChange={(e) => setText(e.htmlValue)}
+                                style={{ height: "200px" }} />
+                              
                             </div>
                             <p className="mt-1">Maximum 60 Characters</p>
                           </div>
@@ -350,19 +389,14 @@ const EditEmployee = () => {
                     className="accordion-button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseThree"
-                    aria-controls="collapseThree"
-                  >
+                    aria-controls="collapseThree">
+                    
                     <div className="addproduct-icon d-flex align-items-center justify-content-between flex-fill">
                       <h5 className="d-inline-flex align-items-center">
-                        <i
-                          data-feather="map-pin"
-                          className="feather-edit text-primary me-2"
-                        />
+                        <i className="feather icon-map-pin feather-edit text-primary me-2" />
                         <span>Address Information</span>
                       </h5>
-                      <Link to="#">
-                        <i data-feather="chevron-down" className="chevron-down-add" />
-                      </Link>
+                     
                     </div>
                   </div>
                 </div>
@@ -370,8 +404,8 @@ const EditEmployee = () => {
                   id="collapseThree"
                   className="accordion-collapse collapse show"
                   aria-labelledby="heading3"
-                  data-bs-parent="#accordionExample"
-                >
+                  data-bs-parent="#accordionExample">
+                  
                   <div className="accordion-body">
                     <div className="other-info">
                       <div className="row">
@@ -381,38 +415,47 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="1861 Bayonne Ave, Manchester"
-                            />
+                              defaultValue="1861 Bayonne Ave, Manchester" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">Country</label>
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={country}
+                              value={selectedCountry}
+                              onChange={(e) => setSelectedCountry(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">State</label>
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={state}
+                              value={selectedState}
+                              onChange={(e) => setSelectedState(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="mb-3">
                             <label className="form-label">City</label>
-                            <Select
-                              classNamePrefix="react-select"
+                            <CommonSelect
+                              className="w-100"
                               options={city}
+                              value={selectedCity}
+                              onChange={(e) => setSelectedCity(e.value)}
                               placeholder="Choose"
-                            />
+                              filter={false} />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
@@ -421,8 +464,8 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue={90001}
-                            />
+                              defaultValue={90001} />
+                            
                           </div>
                         </div>
                       </div>
@@ -436,19 +479,14 @@ const EditEmployee = () => {
                     className="accordion-button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseFour"
-                    aria-controls="collapseFour"
-                  >
+                    aria-controls="collapseFour">
+                    
                     <div className="addproduct-icon d-flex align-items-center justify-content-between flex-fill">
                       <h5 className="d-inline-flex align-items-center">
-                        <i
-                          data-feather="info"
-                          className="feather-edit text-primary me-2"
-                        />
+                        <i className="feather icon-info feather-edit text-primary me-2" />
                         <span>Emergency Information</span>
                       </h5>
-                      <Link to="#">
-                        <i data-feather="chevron-down" className="chevron-down-add" />
-                      </Link>
+                      
                     </div>
                   </div>
                 </div>
@@ -456,8 +494,8 @@ const EditEmployee = () => {
                   id="collapseFour"
                   className="accordion-collapse collapse show"
                   aria-labelledby="heading4"
-                  data-bs-parent="#accordionExample"
-                >
+                  data-bs-parent="#accordionExample">
+                  
                   <div className="accordion-body">
                     <div className="other-info">
                       <div className="row">
@@ -469,8 +507,8 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="+1 43566 67788"
-                            />
+                              defaultValue="+1 43566 67788" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
@@ -479,8 +517,8 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="Mother"
-                            />
+                              defaultValue="Mother" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
@@ -489,8 +527,8 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="Andrea Jermiah"
-                            />
+                              defaultValue="Andrea Jermiah" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
@@ -524,16 +562,14 @@ const EditEmployee = () => {
                     className="accordion-button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseFive"
-                    aria-controls="collapseFive"
-                  >
+                    aria-controls="collapseFive">
+                    
                     <div className="addproduct-icon d-flex align-items-center justify-content-between flex-fill">
                       <h5 className="d-inline-flex align-items-center">
                         <i className="ti ti-building-bank feather-edit text-primary me-2" />
                         <span>Bank Information</span>
                       </h5>
-                      <Link to="#">
-                        <i data-feather="chevron-down" className="chevron-down-add" />
-                      </Link>
+                     
                     </div>
                   </div>
                 </div>
@@ -541,8 +577,8 @@ const EditEmployee = () => {
                   id="collapseFive"
                   className="accordion-collapse collapse show"
                   aria-labelledby="heading5"
-                  data-bs-parent="#accordionExample"
-                >
+                  data-bs-parent="#accordionExample">
+                  
                   <div className="accordion-body">
                     <div className="other-info">
                       <div className="row">
@@ -552,8 +588,8 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="Swizz International"
-                            />
+                              defaultValue="Swizz International" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-3 col-md-6">
@@ -562,8 +598,8 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue={350501501690}
-                            />
+                              defaultValue={350501501690} />
+                            
                           </div>
                         </div>
                         <div className="col-lg-3 col-md-6">
@@ -572,8 +608,8 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="SW7994"
-                            />
+                              defaultValue="SW7994" />
+                            
                           </div>
                         </div>
                         <div className="col-lg-3 col-md-6">
@@ -582,8 +618,8 @@ const EditEmployee = () => {
                             <input
                               type="text"
                               className="form-control"
-                              defaultValue="Alabama USA"
-                            />
+                              defaultValue="Alabama USA" />
+                            
                           </div>
                         </div>
                       </div>
@@ -597,19 +633,14 @@ const EditEmployee = () => {
                     className="accordion-button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseTwo"
-                    aria-controls="collapseTwo"
-                  >
+                    aria-controls="collapseTwo">
+                    
                     <div className="addproduct-icon d-flex align-items-center justify-content-between flex-fill">
                       <h5 className="d-inline-flex align-items-center">
-                        <i
-                          data-feather="info"
-                          className="feather-edit text-primary me-2"
-                        />
+                        <i className="feather icon-info feather-edit text-primary me-2" />
                         <span>Password</span>
                       </h5>
-                      <Link to="#">
-                        <i data-feather="chevron-down" className="chevron-down-add" />
-                      </Link>
+                    
                     </div>
                   </div>
                 </div>
@@ -617,8 +648,8 @@ const EditEmployee = () => {
                   id="collapseTwo"
                   className="accordion-collapse collapse show"
                   aria-labelledby="heading6"
-                  data-bs-parent="#accordionExample"
-                >
+                  data-bs-parent="#accordionExample">
+                  
                   <div className="accordion-body">
                     <div className="pass-info">
                       <div className="row">
@@ -630,37 +661,44 @@ const EditEmployee = () => {
                             <div className="pass-group">
                               <input
                                 type={passwordVisibility ? "text" : "password"}
-                                className="pass-input form-control"
-                              />
+                                className="pass-input form-control" />
+                              
                               <span
-                                className={`ti toggle-password ${passwordVisibility.password ? "ti-eye" : "ti-eye-off"
-                                  }`}
-                                onClick={togglePasswordVisibility}
-                              ></span>
+                                className={`ti toggle-password text-gray-9 ${
+                                passwordVisibility.password ?
+                                "ti-eye" :
+                                "ti-eye-off"}`
+                                }
+                                onClick={togglePasswordVisibility}>
+                              </span>
                             </div>
                           </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="">
                             <label className="form-label">
-                              Confirm Password <span className="text-danger"> *</span>
+                              Confirm Password{" "}
+                              <span className="text-danger"> *</span>
                             </label>
                             <div className="pass-group">
                               <input
                                 type={
-                                  passwordVisibility.confirmPassword ? "text" : "password"
+                                passwordVisibility.confirmPassword ?
+                                "text" :
+                                "password"
                                 }
-                                className="pass-input form-control"
-                              />
+                                className="pass-input form-control" />
+                              
                               <span
-                                className={`ti toggle-password ${passwordVisibility.confirmPassword
-                                  ? "ti-eye"
-                                  : "ti-eye-off"
-                                  }`}
-                                onClick={() =>
-                                  togglePasswordVisibility("confirmPassword")
+                                className={`ti toggle-password text-gray-9 ${
+                                passwordVisibility.confirmPassword ?
+                                "ti-eye" :
+                                "ti-eye-off"}`
                                 }
-                              ></span>
+                                onClick={() =>
+                                togglePasswordVisibility("confirmPassword")
+                                }>
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -671,7 +709,7 @@ const EditEmployee = () => {
               </div>
             </div>
             {/* /product list */}
-            <div className="text-end mb-3">
+            <div className="text-end mt-3 mb-3">
               <button type="button" className="btn btn-secondary me-2">
                 Cancel
               </button>
@@ -691,9 +729,8 @@ const EditEmployee = () => {
           </p>
         </div>
       </div>
+    </div>);
 
-    </div>
-  );
 };
 
 export default EditEmployee;

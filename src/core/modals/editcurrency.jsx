@@ -1,8 +1,8 @@
-import React from 'react'
+
 
 const EditCurrency = () => {
-    return (
-        <div>
+  return (
+    <div>
             <>
                 {/* Edit Currency */}
                 <div className="modal fade" id="edit-currency">
@@ -15,11 +15,11 @@ const EditCurrency = () => {
                                             <h4>Edit Currency</h4>
                                         </div>
                                         <button
-                                            type="button"
-                                            className="close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"
-                                        >
+                      type="button"
+                      className="close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close">
+                      
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
@@ -32,10 +32,10 @@ const EditCurrency = () => {
                                                             Currency Name <span> *</span>
                                                         </label>
                                                         <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            defaultValue="Euro"
-                                                        />
+                              type="text"
+                              className="form-control"
+                              defaultValue="Euro" />
+                            
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-12">
@@ -44,10 +44,10 @@ const EditCurrency = () => {
                                                             Currency Symbol <span> *</span>
                                                         </label>
                                                         <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            defaultValue="EUR"
-                                                        />
+                              type="text"
+                              className="form-control"
+                              defaultValue="EUR" />
+                            
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-12">
@@ -56,10 +56,10 @@ const EditCurrency = () => {
                                                             Currency Code <span> *</span>
                                                         </label>
                                                         <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            defaultValue="€"
-                                                        />
+                              type="text"
+                              className="form-control"
+                              defaultValue="€" />
+                            
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-12">
@@ -68,21 +68,21 @@ const EditCurrency = () => {
                                                             Currency Rate <span> *</span>
                                                         </label>
                                                         <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            defaultValue="Default"
-                                                        />
+                              type="text"
+                              className="form-control"
+                              defaultValue="Default" />
+                            
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-12">
                                                     <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
                                                         <span className="status-label">Status</span>
                                                         <input
-                                                            type="checkbox"
-                                                            id="user5"
-                                                            className="check"
-                                                            defaultChecked
-                                                        />
+                              type="checkbox"
+                              id="user5"
+                              className="check"
+                              defaultChecked />
+                            
                                                         <label htmlFor="user5" className="checktoggle" />
                                                     </div>
                                                 </div>
@@ -90,10 +90,10 @@ const EditCurrency = () => {
                                         </div>
                                         <div className="modal-footer">
                                             <button
-                                                type="button"
-                                                className="btn btn-secondary me-2"
-                                                data-bs-dismiss="modal"
-                                            >
+                        type="button"
+                        className="btn btn-secondary me-2"
+                        data-bs-dismiss="modal">
+                        
                                                 Cancel
                                             </button>
                                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal">
@@ -110,8 +110,8 @@ const EditCurrency = () => {
             </>
 
 
-        </div>
-    )
-}
+        </div>);
 
-export default EditCurrency
+};
+
+export default EditCurrency;

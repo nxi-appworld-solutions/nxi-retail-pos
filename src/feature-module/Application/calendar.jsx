@@ -1,94 +1,63 @@
-/* eslint-disable no-dupe-keys */
-/* eslint-disable no-const-assign */
-/* eslint-disable no-unused-vars */
-import React, { useRef, useState } from "react";
-// import FullCalendar from "@fullcalendar/react";
-// import dayGridPlugin from "@fullcalendar/daygrid";
-// import timeGridPlugin from "@fullcalendar/timegrid";
-// import interactionPlugin from "@fullcalendar/interaction";
-import "../../style/css/fullcalendar.min.css";
+import { useRef, useState } from "react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import "../../assets/css/fullcalendar.min.css";
 import { Calendar } from "primereact/calendar";
-
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { DatePicker, TimePicker } from "antd";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import { PlusCircle } from "feather-icons-react/build/IconComponents";
-import dayjs from 'dayjs';
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
+import { emailbg01, emailbg02 } from "../../utils/imagepath";
+import CommonDatePicker from "../../components/date-picker/common-date-picker";
+import CommonTimePicker from "../../components/time-picker";
+import CommonFooter from "../../components/footer/commonFooter";
 
 const Calendars = () => {
-
-  const onChange = () => {
-    // console.log(time, timeString, "timepicker");
-  };
-
-  const [showAddEventModal, setShowAddEventModal] = useState(false);
-  const [showEventDetailsModal, setShowEventDetailsModal] = useState(false);
-  const [eventDetails, setEventDetails] = useState(
-    ""
-  );
-
-  const getModalContainer = () => {
-    const modalElement = document.getElementById('modal-datepicker');
-    return modalElement ? modalElement : document.body; // Fallback to document.body if modalElement is null
-  };
-  const getModalContainer2 = () => {
-    const modalElement = document.getElementById('modal_datepicker');
-    return modalElement ? modalElement : document.body; // Fallback to document.body if modalElement is null
-  };
   const calendarRef = useRef(null);
   const [date, setDate] = useState(null);
-
-  const handleDateClick = () => {
-    setShowAddEventModal(true);
-  };
-
-  const handleEventClick = (info) => {
-    setEventDetails(info.event.title);
-    setShowEventDetailsModal(true);
-  };
-
-  const handleAddEventClose = () => setShowAddEventModal(false);
-  const handleEventDetailsClose = () => setShowEventDetailsModal(false);
+  const [date1, setDate1] = useState(new Date());
+  const [date2, setDate2] = useState(new Date());
+  const [selectedTime1, setSelectedTime1] = useState(null);
+  const [selectedTime2, setSelectedTime2] = useState(null);
 
   const events = [
     {
-      title: 'Meeting with Team Dev',
-      className: 'badge badge-pink-transparent',
-      backgroundColor: '#FFEDF6',
+      title: "Meeting with Team Dev",
+      className: "badge badge-pink-transparent",
+      backgroundColor: "#FFEDF6",
       textColor: "#FD3995",
       start: new Date(Date.now() - 168000000).toJSON().slice(0, 10),
       end: new Date(Date.now() - 168000000).toJSON().slice(0, 10),
     },
     {
-      title: 'UI/UX Team...',
-      className: 'badge badge-secondary-transparent',
-      backgroundColor: '#EDF2F4',
+      title: "UI/UX Team...",
+      className: "badge badge-secondary-transparent",
+      backgroundColor: "#EDF2F4",
       textColor: "#0C4B5E",
-      start: new Date(Date.now() + 338000000).toJSON().slice(0, 10)
+      start: new Date(Date.now() + 338000000).toJSON().slice(0, 10),
     },
     {
-      title: 'Data Update...',
-      className: 'badge badge-purple-transparent',
-      backgroundColor: '#F7EEF9',
+      title: "Data Update...",
+      className: "badge badge-purple-transparent",
+      backgroundColor: "#F7EEF9",
       textColor: "#AB47BC",
-      start: new Date(Date.now() - 338000000).toJSON().slice(0, 10)
+      start: new Date(Date.now() - 338000000).toJSON().slice(0, 10),
     },
     {
-      title: 'Meeting with Team Dev',
-      className: 'badge badge-dark-transparent',
-      backgroundColor: '#E8E9EA',
+      title: "Meeting with Team Dev",
+      className: "badge badge-dark-transparent",
+      backgroundColor: "#E8E9EA",
       textColor: "#212529",
-      start: new Date(Date.now() + 68000000).toJSON().slice(0, 10)
+      start: new Date(Date.now() + 68000000).toJSON().slice(0, 10),
     },
     {
-      title: 'Design System',
-      className: 'badge badge-danger-transparent',
-      backgroundColor: '#FAE7E7',
+      title: "Design System",
+      className: "badge badge-danger-transparent",
+      backgroundColor: "#FAE7E7",
       textColor: "#E70D0D",
-      start: new Date(Date.now() + 88000000).toJSON().slice(0, 10)
+      start: new Date(Date.now() + 88000000).toJSON().slice(0, 10),
     },
   ];
 
@@ -104,13 +73,14 @@ const Calendars = () => {
               </div>
             </div>
             <ul className="table-top-head">
-             
               <li className="me-2">
                 <div className="input-icon-end position-relative calender-datepicker">
-                  <DatePicker
-                    className="form-control"
-                    placeholder="dd/mm/yyyy"
+                  <CommonDatePicker
+                    value={date1}
+                    onChange={setDate1}
+                    className="w-100"
                   />
+
                   <span className="input-icon-addon">
                     <i className="ti ti-chevron-down ms-1" />
                   </span>
@@ -127,7 +97,7 @@ const Calendars = () => {
                 data-bs-toggle="modal"
                 data-bs-target="#add_event"
               >
-                <i className='ti ti-circle-plus me-1'></i>
+                <i className="ti ti-circle-plus me-1"></i>
                 Create
               </Link>
             </div>
@@ -143,7 +113,7 @@ const Calendars = () => {
                       <Calendar
                         className="datepickers mb-4"
                         value={date}
-                        onChange={(e) => setDate(e)} // Ensure proper typing for e
+                        onChange={(e) => setDate(e.value)} // Ensure proper typing for e
                         inline={true}
                       />
                     </div>
@@ -154,7 +124,8 @@ const Calendars = () => {
                         <Link
                           to="#"
                           className="link-primary"
-                          data-bs-toggle="modal" data-inert={true}
+                          data-bs-toggle="modal"
+                          data-inert={true}
                           data-bs-target="#add_event"
                         >
                           <i className="ti ti-square-rounded-plus-filled fs-16" />
@@ -165,49 +136,49 @@ const Calendars = () => {
                       </p>
                       <div id="external-events">
                         <div
-                          className="fc-event bg-transparent-success mb-1"
+                          className="fc-event bg-success-transparent  mb-1"
                           data-event='{ "title": "Team Events" }'
-                          data-event-classname="bg-transparent-success"
+                          data-event-classname="bg-success-transparent "
                         >
                           <i className="ti ti-square-rounded text-success me-2" />
                           Team Events
                         </div>
                         <div
-                          className="fc-event bg-transparent-warning mb-1"
+                          className="fc-event bg-warning-transparent mb-1"
                           data-event='{ "title": "Team Events" }'
-                          data-event-classname="bg-transparent-warning"
+                          data-event-classname="bg-warning-transparent"
                         >
                           <i className="ti ti-square-rounded text-warning me-2" />
                           Work
                         </div>
                         <div
-                          className="fc-event bg-transparent-danger mb-1"
+                          className="fc-event bg-danger-transparent mb-1"
                           data-event='{ "title": "External" }'
-                          data-event-classname="bg-transparent-danger"
+                          data-event-classname="bg-danger-transparent"
                         >
                           <i className="ti ti-square-rounded text-danger me-2" />
                           External
                         </div>
                         <div
-                          className="fc-event bg-transparent-skyblue mb-1"
+                          className="fc-event bg-cyan-transparent mb-1"
                           data-event='{ "title": "Projects" }'
-                          data-event-classname="bg-transparent-skyblue"
+                          data-event-classname="bg-cyan-transparent"
                         >
                           <i className="ti ti-square-rounded text-skyblue me-2" />
                           Projects
                         </div>
                         <div
-                          className="fc-event bg-transparent-purple mb-1"
+                          className="fc-event bg-pink-transparent  mb-1"
                           data-event='{ "title": "Applications" }'
-                          data-event-classname="bg-transparent-purple"
+                          data-event-classname="bg-pink-transparent "
                         >
                           <i className="ti ti-square-rounded text-purple me-2" />
                           Applications
                         </div>
                         <div
-                          className="fc-event bg-transparent-info mb-0"
+                          className="fc-event bg-info-transparent mb-0"
                           data-event='{ "title": "Desgin" }'
-                          data-event-classname="bg-transparent-info"
+                          data-event-classname="bg-info-transparent"
                         >
                           <i className="ti ti-square-rounded text-info me-2" />
                           Desgin
@@ -225,7 +196,9 @@ const Calendars = () => {
                       </h5>
                       <div className="border-start border-purple border-3 mb-3">
                         <div className="ps-3">
-                          <h6 className="fw-medium mb-1">Meeting with Team Dev</h6>
+                          <h6 className="fw-medium mb-1">
+                            Meeting with Team Dev
+                          </h6>
                           <p className="fs-12">
                             <i className="ti ti-calendar-check text-info me-2" />
                             15 Mar 2025
@@ -256,21 +229,24 @@ const Calendars = () => {
                     {/* /Upcoming Event */}
                     {/* Upgrade Details */}
                     <div className="bg-dark rounded text-center position-relative p-4">
-                      <span className="avatar avatar-lg rounded-circle bg-white mb-2">
+                      <span className="avatar avatar-lg rounded-circle bg-white position-relative z-1 mb-2">
                         <i className="ti ti-alert-triangle text-dark" />
                       </span>
-                      <h6 className="text-white mb-3">
+                      <h6 className="text-white position-relative z-1 mb-3">
                         Enjoy Unlimited Access on a small price monthly.
                       </h6>
-                      <Link to="#" className="btn btn-white">
+                      <Link
+                        to="#"
+                        className="btn btn-white position-relative z-1"
+                      >
                         Upgrade Now <i className="ti ti-arrow-right" />
                       </Link>
                       <div className="box-bg">
                         <span className="bg-right">
-                          <ImageWithBasePath src="assets/img/bg/email-bg-01.png" alt="Img" />
+                          <img src={emailbg01} alt="Img" />
                         </span>
                         <span className="bg-left">
-                          <ImageWithBasePath src="assets/img/bg/email-bg-02.png" alt="Img" />
+                          <img src={emailbg02} alt="Img" />
                         </span>
                       </div>
                     </div>
@@ -278,14 +254,13 @@ const Calendars = () => {
                   </div>
                 </div>
               </div>
-
             </div>
             {/* /Calendar Sidebar */}
             <div className="col-xxl-9 col-xl-8 theiaStickySidebar">
               <div className="stickybar">
                 <div className="card border-0">
                   <div className="card-body">
-                    {/* <FullCalendar
+                    <FullCalendar
                       plugins={[
                         dayGridPlugin,
                         timeGridPlugin,
@@ -298,16 +273,15 @@ const Calendars = () => {
                         center: "title",
                         end: "dayGridMonth,dayGridWeek,dayGridDay",
                       }}
-                      eventClick={handleEventClick}
                       ref={calendarRef}
-                    /> */}
+                    />
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
+        <CommonFooter />
       </div>
       <>
         {/* Add New Event */}
@@ -342,10 +316,12 @@ const Calendars = () => {
                           Event Date<span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-icon-end position-relative">
-                          <DatePicker
-                            className="form-control datetimepicker"
-                            placeholder="dd/mm/yyyy"
+                          <CommonDatePicker
+                            value={date2}
+                            onChange={setDate2}
+                            className="w-100"
                           />
+
                           <span className="input-icon-addon">
                             <i className="ti ti-calendar text-gray-7" />
                           </span>
@@ -358,11 +334,11 @@ const Calendars = () => {
                           Start Time<span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-icon-end position-relative">
-                          <TimePicker
-                            className="input-group-text"
-                            onChange={onChange}
-                            defaultValue={dayjs("00:00:00", "HH:mm:ss")}
+                          <CommonTimePicker
+                            selectedTime={selectedTime1}
+                            onChange={setSelectedTime1}
                           />
+
                           <span className="input-icon-addon">
                             <i className="ti ti-clock text-gray-7" />
                           </span>
@@ -375,11 +351,11 @@ const Calendars = () => {
                           End Time<span className="text-danger ms-1">*</span>
                         </label>
                         <div className="input-icon-end position-relative">
-                        <TimePicker
-                            className="input-group-text"
-                            onChange={onChange}
-                            defaultValue={dayjs("00:00:00", "HH:mm:ss")}
+                          <CommonTimePicker
+                            selectedTime={selectedTime2}
+                            onChange={setSelectedTime2}
                           />
+
                           <span className="input-icon-addon">
                             <i className="ti ti-clock text-gray-7" />
                           </span>
@@ -389,13 +365,15 @@ const Calendars = () => {
                     <div className="col-12">
                       <div className="mb-3">
                         <label className="form-label">
-                          Event Location<span className="text-danger ms-1">*</span>
+                          Event Location
+                          <span className="text-danger ms-1">*</span>
                         </label>
                         <input type="text" className="form-control" />
                       </div>
                       <div className="mb-0">
                         <label className="form-label">
-                          Descriptions<span className="text-danger ms-1">*</span>
+                          Descriptions
+                          <span className="text-danger ms-1">*</span>
                         </label>
                         <textarea
                           className="form-control"
@@ -414,7 +392,11 @@ const Calendars = () => {
                   >
                     Cancel
                   </button>
-                  <Link to="#" className="btn btn-primary" data-bs-dismiss="modal">
+                  <Link
+                    to="#"
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
                     Add Event
                   </Link>
                 </div>
@@ -454,9 +436,9 @@ const Calendars = () => {
                   Las Vegas, US
                 </p>
                 <p className="d-flex align-items-center fw-medium text-black mb-0">
-                  <i className="ti ti-calendar-check text-default me-2" />A recurring
-                  or repeating event is simply any event that you will occur more than
-                  once on your calendar.
+                  <i className="ti ti-calendar-check text-default me-2" />A
+                  recurring or repeating event is simply any event that you will
+                  occur more than once on your calendar.
                 </p>
               </div>
             </div>
@@ -464,7 +446,6 @@ const Calendars = () => {
         </div>
         {/* /Event */}
       </>
-
     </>
   );
 };

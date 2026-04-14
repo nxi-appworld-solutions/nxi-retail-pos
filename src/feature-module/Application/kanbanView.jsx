@@ -1,41 +1,25 @@
-import React,{ useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { DatePicker } from "antd";
 import dragula from "dragula";
 import "dragula/dist/dragula.css";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { setToogleHeader } from "../../core/redux/action";
-import Select from "react-select";
-import { RotateCcw, Sliders } from "react-feather";
-import { ChevronUp } from "feather-icons-react/build/IconComponents";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import CommonDatePicker from "../../components/date-picker/common-date-picker";
+import CommonSelect from "../../components/select/common-select";
+import { avatar01, avatar16, avatar19, avatar29, avatar_02, avatar_03, kanbanArrow } from "../../utils/imagepath";
 const KanbanView = () => {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.rootReducer.toggle_header);
-  const options = [
-    { value: "sortByDate", label: "Sort by Date" },
-    { value: "Ascending", label: "Ascending" },
-    { value: "Descending", label: "Descending" },
-    { value: "Recently Viewed", label: "Recently Viewed" },
-    { value: "Recently Added", label: "Recently Added" },
-    { value: "Creation Date", label: "Creation Date" },
-  ];
-  const renderRefreshTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Refresh
-    </Tooltip>
-  );
-  const renderCollapseTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Collapse
-    </Tooltip>
-  );
+  const [date1, setDate1] = useState(new Date());
+  const [date2, setDate2] = useState(new Date());
+  const [selectedSort, setSelectedSort] = useState(null);
 
-  const getModalContainer = () => {
-    const modalElement = document.getElementById('modal-datepicker');
-    return modalElement ? modalElement : document.body; // Fallback to document.body if modalElement is null
-  };
+  const options = [
+  { value: "sortByDate", label: "Sort by Date" },
+  { value: "Ascending", label: "Ascending" },
+  { value: "Descending", label: "Descending" },
+  { value: "Recently Viewed", label: "Recently Viewed" },
+  { value: "Recently Added", label: "Recently Added" },
+  { value: "Creation Date", label: "Creation Date" }];
+
 
   const container1Ref = useRef(null);
   const container2Ref = useRef(null);
@@ -56,23 +40,23 @@ const KanbanView = () => {
 
   useEffect(() => {
     const containers = [
-      container1Ref.current,
-      container2Ref.current,
-      container3Ref.current,
-      container4Ref.current,
-      container5Ref.current,
-      container6Ref.current,
-      container7Ref.current,
-      container8Ref.current,
-      container9Ref.current,
-      container10Ref.current,
-      container11Ref.current,
-      container12Ref.current,
-      container13Ref.current,
-      container14Ref.current,
-      container15Ref.current,
-      container16Ref.current,
-    ].filter((container) => container !== null);
+    container1Ref.current,
+    container2Ref.current,
+    container3Ref.current,
+    container4Ref.current,
+    container5Ref.current,
+    container6Ref.current,
+    container7Ref.current,
+    container8Ref.current,
+    container9Ref.current,
+    container10Ref.current,
+    container11Ref.current,
+    container12Ref.current,
+    container13Ref.current,
+    container14Ref.current,
+    container15Ref.current,
+    container16Ref.current].
+    filter((container) => container !== null);
 
     const drake = dragula(containers);
     return () => {
@@ -87,74 +71,59 @@ const KanbanView = () => {
         <div className="content">
           {/* Breadcrumb */}
           <div className="page-header">
-						<div className="add-item d-flex">
-							<div className="page-title">
-								<h4>Kanban View</h4>
-								<h6>Manage your tasks</h6>
-							</div>
-						</div>
-						<div className="d-flex flex-sm-row flex-column align-items-sm-center align-items-start">
-							<div className="form-sort me-2 mb-sm-0 mb-3">
-              <Sliders className="info-img" />
-              <Select className="img-select"
-                classNamePrefix="react-select"
-                options={options}
-                placeholder="Sort by Date"
-              />
-							</div>
-							<ul className="table-top-head">
-              <li>
-                <OverlayTrigger placement="top" overlay={renderRefreshTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <RotateCcw />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderCollapseTooltip}>
-                  <Link
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    id="collapse-header"
-                    className={data ? "active" : ""}
-                    onClick={() => {
-                      dispatch(setToogleHeader(!data));
-                    }}
-                  >
-                    <ChevronUp />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-							</ul>
-						</div>
-					</div>
+            <div className="add-item d-flex">
+              <div className="page-title">
+                <h4>Kanban View</h4>
+                <h6>Manage your tasks</h6>
+              </div>
+            </div>
+            <div className="d-flex flex-sm-row flex-column align-items-sm-center align-items-start">
+              <div className="form-sort me-2 mb-sm-0 mb-3">
+                <i className="feather icon-sliders info-img" />
+                <CommonSelect
+                  className="img-select"
+                  options={options}
+                  value={selectedSort}
+                  onChange={(e) => setSelectedSort(e.value)}
+                  placeholder="Sort by Date"
+                  filter={false} />
+                
+              </div>
+              <ul className="table-top-head">
+                <RefreshIcon />
+                <CollapesIcon />
+              </ul>
+            </div>
+          </div>
           <div className="card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
               <h4>Projects</h4>
               <div className="d-flex align-items-center flex-wrap row-gap-3">
                 <div className="avatar-list-stacked avatar-group-sm me-3">
                   <span className="avatar avatar-rounded">
-                    <ImageWithBasePath
+                    <img
                       className="border border-white"
-                      src="assets/img/profiles/avatar-19.jpg"
-                      alt="img"
-                    />
+                      src={avatar19}
+                      alt="img" />
+                    
                   </span>
                   <span className="avatar avatar-rounded">
-                    <ImageWithBasePath
+                    <img
                       className="border border-white"
-                      src="assets/img/profiles/avatar-29.jpg"
-                      alt="img"
-                    />
+                      src={avatar29}
+                      alt="img" />
+                    
                   </span>
                   <span className="avatar avatar-rounded">
-                    <ImageWithBasePath
+                    <img
                       className="border border-white"
-                      src="assets/img/profiles/avatar-16.jpg"
-                      alt="img"
-                    />
+                      src={avatar16}
+                      alt="img" />
+                    
                   </span>
-                  <span className="avatar avatar-rounded bg-primary fs-12">1+</span>
+                  <span className="avatar avatar-rounded bg-primary fs-12">
+                    1+
+                  </span>
                 </div>
                 <div className="d-flex align-items-center me-3">
                   <p className="mb-0 me-3 pe-3 border-end fs-14">
@@ -174,8 +143,8 @@ const KanbanView = () => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Search Project"
-                  />
+                    placeholder="Search Project" />
+                  
                 </div>
               </div>
             </div>
@@ -187,8 +156,8 @@ const KanbanView = () => {
                     <ul
                       className="nav nav-pills border d-inline-flex p-1 rounded bg-light todo-tabs"
                       id="pills-tab"
-                      role="tablist"
-                    >
+                      role="tablist">
+                      
                       <li className="nav-item" role="presentation">
                         <button
                           className="nav-link btn btn-sm btn-icon py-3 d-flex align-items-center justify-content-center w-auto active"
@@ -196,8 +165,8 @@ const KanbanView = () => {
                           data-bs-target="#pills-home"
                           type="button"
                           role="tab"
-                          aria-selected="true"
-                        >
+                          aria-selected="true">
+                          
                           All
                         </button>
                       </li>
@@ -208,8 +177,8 @@ const KanbanView = () => {
                           data-bs-target="#pills-contact"
                           type="button"
                           role="tab"
-                          aria-selected="false"
-                        >
+                          aria-selected="false">
+                          
                           High
                         </button>
                       </li>
@@ -220,8 +189,8 @@ const KanbanView = () => {
                           data-bs-target="#pills-medium"
                           type="button"
                           role="tab"
-                          aria-selected="false"
-                        >
+                          aria-selected="false">
+                          
                           Medium
                         </button>
                       </li>
@@ -232,8 +201,8 @@ const KanbanView = () => {
                           data-bs-target="#pills-low"
                           type="button"
                           role="tab"
-                          aria-selected="false"
-                        >
+                          aria-selected="false">
+                          
                           Low
                         </button>
                       </li>
@@ -242,65 +211,47 @@ const KanbanView = () => {
                 </div>
                 <div className="col-lg-8">
                   <div className="d-flex align-items-center justify-content-lg-end flex-wrap row-gap-3 mb-3">
-                    
                     <div className="input-icon w-120 position-relative me-2">
                       <span className="input-icon-addon">
                         <i className="ti ti-calendar text-gray-9" />
                       </span>
-                      <DatePicker
-                        className="form-control datetimepicker"
-                        format={{
-                          format: "DD-MM-YYYY",
-                          type: "mask",
-                        }}
-                        getPopupContainer={getModalContainer}
-                        placeholder="Create Date"
-                      />
+                      <CommonDatePicker
+                        value={date1}
+                        onChange={setDate1}
+                        className="w-100" />
+                      
                     </div>
                     <div className="input-icon w-120 position-relative me-2">
                       <span className="input-icon-addon">
                         <i className="ti ti-calendar text-gray-9" />
                       </span>
-                      <DatePicker
-                        className="form-control datetimepicker"
-                        format={{
-                          format: "DD-MM-YYYY",
-                          type: "mask",
-                        }}
-                        getPopupContainer={getModalContainer}
-                        placeholder="Due Date"
-                      />
+                      <CommonDatePicker
+                        value={date2}
+                        onChange={setDate2}
+                        className="w-100" />
+                      
                     </div>
                     <div className="dropdown me-2">
                       <Link
                         to="#"
                         className="dropdown-toggle btn btn-white d-inline-flex align-items-center p-2"
-                        data-bs-toggle="dropdown"
-                      >
+                        data-bs-toggle="dropdown">
+                        
                         Select Status
                       </Link>
                       <ul className="dropdown-menu  dropdown-menu-end p-3">
                         <li>
-                          <Link
-                            to="#"
-                            className="dropdown-item rounded-1"
-                          >
+                          <Link to="#" className="dropdown-item rounded-1">
                             Inprogress
                           </Link>
                         </li>
                         <li>
-                          <Link
-                            to="#"
-                            className="dropdown-item rounded-1"
-                          >
+                          <Link to="#" className="dropdown-item rounded-1">
                             On-hold
                           </Link>
                         </li>
                         <li>
-                          <Link
-                            to="#"
-                            className="dropdown-item rounded-1"
-                          >
+                          <Link to="#" className="dropdown-item rounded-1">
                             Completed
                           </Link>
                         </li>
@@ -312,32 +263,23 @@ const KanbanView = () => {
                         <Link
                           to="#"
                           className="dropdown-toggle btn btn-white d-inline-flex align-items-center border-0 bg-transparent p-0 text-dark"
-                          data-bs-toggle="dropdown"
-                        >
+                          data-bs-toggle="dropdown">
+                          
                           Created Date
                         </Link>
                         <ul className="dropdown-menu  dropdown-menu-end p-3">
                           <li>
-                            <Link
-                              to="#"
-                              className="dropdown-item rounded-1"
-                            >
+                            <Link to="#" className="dropdown-item rounded-1">
                               Created Date
                             </Link>
                           </li>
                           <li>
-                            <Link
-                              to="#"
-                              className="dropdown-item rounded-1"
-                            >
+                            <Link to="#" className="dropdown-item rounded-1">
                               Last 7 Days
                             </Link>
                           </li>
                           <li>
-                            <Link
-                              to="#"
-                              className="dropdown-item rounded-1"
-                            >
+                            <Link to="#" className="dropdown-item rounded-1">
                               Due Date
                             </Link>
                           </li>
@@ -351,8 +293,8 @@ const KanbanView = () => {
                 <div
                   className="tab-pane fade show active"
                   id="pills-home"
-                  role="tabpanel"
-                >
+                  role="tabpanel">
+                  
                   <div className="d-flex align-items-start overflow-auto project-status pb-4">
                     <div className="p-3 rounded bg-transparent-secondary w-100 me-3">
                       <div className="bg-white p-2 rounded mb-2">
@@ -362,22 +304,24 @@ const KanbanView = () => {
                               <span className="bg-pink rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">New</h5>
-                            <span className="badge bg-light rounded-pill">02</span>
+                            <span className="badge bg-light rounded-pill">
+                              02
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -386,9 +330,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -415,16 +360,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -433,9 +378,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -445,11 +391,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -481,66 +427,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -566,16 +512,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -584,9 +530,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -596,11 +543,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -632,66 +579,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -704,8 +651,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -719,22 +666,24 @@ const KanbanView = () => {
                               <span className="bg-skyblue rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">Inprogress</h5>
-                            <span className="badge bg-light rounded-pill">13</span>
+                            <span className="badge bg-light rounded-pill">
+                              13
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -743,9 +692,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -772,16 +722,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -790,9 +740,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -802,11 +753,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -838,66 +789,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -923,16 +874,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -941,9 +892,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -953,11 +905,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -989,66 +941,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -1074,16 +1026,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -1092,9 +1044,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -1104,11 +1057,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -1140,66 +1093,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -1212,8 +1165,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -1227,22 +1180,24 @@ const KanbanView = () => {
                               <span className="bg-danger rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">On-hold</h5>
-                            <span className="badge bg-light rounded-pill">04</span>
+                            <span className="badge bg-light rounded-pill">
+                              04
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -1251,9 +1206,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -1280,16 +1236,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -1298,9 +1254,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -1310,11 +1267,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -1346,66 +1303,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -1431,16 +1388,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -1449,9 +1406,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -1461,11 +1419,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -1497,66 +1455,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -1569,8 +1527,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -1584,22 +1542,24 @@ const KanbanView = () => {
                               <span className="bg-success rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">Completed</h5>
-                            <span className="badge bg-light rounded-pill">10</span>
+                            <span className="badge bg-light rounded-pill">
+                              10
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -1608,9 +1568,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -1637,16 +1598,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -1655,9 +1616,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -1667,11 +1629,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -1703,66 +1665,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -1775,8 +1737,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -1784,7 +1746,11 @@ const KanbanView = () => {
                     </div>
                   </div>
                 </div>
-                <div className="tab-pane fade" id="pills-contact" role="tabpanel">
+                <div
+                  className="tab-pane fade"
+                  id="pills-contact"
+                  role="tabpanel">
+                  
                   <div className="d-flex align-items-start overflow-auto project-status pb-4">
                     <div className="p-3 rounded bg-transparent-secondary w-100 me-3">
                       <div className="bg-white p-2 rounded mb-2">
@@ -1794,22 +1760,24 @@ const KanbanView = () => {
                               <span className="bg-pink rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">New</h5>
-                            <span className="badge bg-light rounded-pill">02</span>
+                            <span className="badge bg-light rounded-pill">
+                              02
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -1818,9 +1786,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -1847,16 +1816,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -1865,9 +1834,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -1877,11 +1847,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -1913,66 +1883,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -1998,16 +1968,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -2016,9 +1986,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -2028,11 +1999,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -2064,66 +2035,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -2136,8 +2107,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -2151,22 +2122,24 @@ const KanbanView = () => {
                               <span className="bg-skyblue rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">Inprogress</h5>
-                            <span className="badge bg-light rounded-pill">13</span>
+                            <span className="badge bg-light rounded-pill">
+                              13
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -2175,9 +2148,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -2204,16 +2178,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -2222,9 +2196,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -2234,11 +2209,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -2270,66 +2245,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -2355,16 +2330,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -2373,9 +2348,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -2385,11 +2361,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -2421,66 +2397,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -2493,8 +2469,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -2508,22 +2484,24 @@ const KanbanView = () => {
                               <span className="bg-danger rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">On-hold</h5>
-                            <span className="badge bg-light rounded-pill">04</span>
+                            <span className="badge bg-light rounded-pill">
+                              04
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -2532,9 +2510,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -2561,16 +2540,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -2579,9 +2558,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -2591,11 +2571,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -2627,66 +2607,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -2699,8 +2679,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -2714,22 +2694,24 @@ const KanbanView = () => {
                               <span className="bg-success rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">Completed</h5>
-                            <span className="badge bg-light rounded-pill">10</span>
+                            <span className="badge bg-light rounded-pill">
+                              10
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -2738,9 +2720,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -2767,16 +2750,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -2785,9 +2768,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -2797,11 +2781,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -2833,66 +2817,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -2905,8 +2889,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -2914,7 +2898,11 @@ const KanbanView = () => {
                     </div>
                   </div>
                 </div>
-                <div className="tab-pane fade" id="pills-medium" role="tabpanel">
+                <div
+                  className="tab-pane fade"
+                  id="pills-medium"
+                  role="tabpanel">
+                  
                   <div className="d-flex align-items-start overflow-auto project-status pb-4">
                     <div className="p-3 rounded bg-transparent-secondary w-100 me-3">
                       <div className="bg-white p-2 rounded mb-2">
@@ -2924,22 +2912,24 @@ const KanbanView = () => {
                               <span className="bg-pink rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">New</h5>
-                            <span className="badge bg-light rounded-pill">02</span>
+                            <span className="badge bg-light rounded-pill">
+                              02
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -2948,9 +2938,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -2977,16 +2968,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -2995,9 +2986,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -3007,11 +2999,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -3043,66 +3035,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -3128,16 +3120,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -3146,9 +3138,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -3158,11 +3151,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -3194,66 +3187,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -3266,8 +3259,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -3281,22 +3274,24 @@ const KanbanView = () => {
                               <span className="bg-skyblue rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">Inprogress</h5>
-                            <span className="badge bg-light rounded-pill">13</span>
+                            <span className="badge bg-light rounded-pill">
+                              13
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -3305,9 +3300,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -3334,16 +3330,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -3352,9 +3348,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -3364,11 +3361,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -3400,66 +3397,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -3485,16 +3482,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -3503,9 +3500,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -3515,11 +3513,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -3551,66 +3549,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -3623,8 +3621,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -3638,22 +3636,24 @@ const KanbanView = () => {
                               <span className="bg-danger rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">On-hold</h5>
-                            <span className="badge bg-light rounded-pill">04</span>
+                            <span className="badge bg-light rounded-pill">
+                              04
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -3662,9 +3662,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -3691,16 +3692,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -3709,9 +3710,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -3721,11 +3723,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -3757,66 +3759,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -3829,8 +3831,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -3844,22 +3846,24 @@ const KanbanView = () => {
                               <span className="bg-success rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">Completed</h5>
-                            <span className="badge bg-light rounded-pill">10</span>
+                            <span className="badge bg-light rounded-pill">
+                              10
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -3868,9 +3872,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -3897,16 +3902,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -3915,9 +3920,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -3927,11 +3933,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -3963,66 +3969,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -4035,8 +4041,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -4054,22 +4060,24 @@ const KanbanView = () => {
                               <span className="bg-pink rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">New</h5>
-                            <span className="badge bg-light rounded-pill">02</span>
+                            <span className="badge bg-light rounded-pill">
+                              02
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -4078,9 +4086,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -4107,16 +4116,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -4125,9 +4134,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -4137,11 +4147,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -4173,66 +4183,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -4258,16 +4268,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -4276,9 +4286,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -4288,11 +4299,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -4324,66 +4335,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -4396,8 +4407,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -4411,22 +4422,24 @@ const KanbanView = () => {
                               <span className="bg-skyblue rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">Inprogress</h5>
-                            <span className="badge bg-light rounded-pill">13</span>
+                            <span className="badge bg-light rounded-pill">
+                              13
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -4435,9 +4448,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -4464,16 +4478,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -4482,9 +4496,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -4494,11 +4509,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -4530,66 +4545,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -4615,16 +4630,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -4633,9 +4648,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -4645,11 +4661,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -4681,66 +4697,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -4753,8 +4769,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -4768,22 +4784,24 @@ const KanbanView = () => {
                               <span className="bg-danger rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">On-hold</h5>
-                            <span className="badge bg-light rounded-pill">04</span>
+                            <span className="badge bg-light rounded-pill">
+                              04
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -4792,9 +4810,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -4821,16 +4840,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -4839,9 +4858,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -4851,11 +4871,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -4887,66 +4907,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -4959,8 +4979,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -4974,22 +4994,24 @@ const KanbanView = () => {
                               <span className="bg-success rounded-circle d-block p-1" />
                             </span>
                             <h5 className="me-2">Completed</h5>
-                            <span className="badge bg-light rounded-pill">10</span>
+                            <span className="badge bg-light rounded-pill">
+                              10
+                            </span>
                           </div>
                           <div className="dropdown">
                             <Link
                               to="#"
                               className="d-inline-flex align-items-center"
-                              data-bs-toggle="dropdown"
-                            >
+                              data-bs-toggle="dropdown">
+                              
                               <i className="ti ti-dots-vertical" />
                             </Link>
                             <ul className="dropdown-menu dropdown-menu-end p-3">
                               <li>
                                 <Link
                                   to="#"
-                                  className="dropdown-item rounded-1"
-                                >
+                                  className="dropdown-item rounded-1">
+                                  
                                   <i className="ti ti-edit me-2" />
                                   Edit
                                 </Link>
@@ -4998,9 +5020,10 @@ const KanbanView = () => {
                                 <Link
                                   to="#"
                                   className="dropdown-item rounded-1"
-                                  data-bs-toggle="modal" data-inert={true}
-                                  data-bs-target="#delete_modal"
-                                >
+                                  data-bs-toggle="modal"
+                                  data-inert={true}
+                                  data-bs-target="#delete_modal">
+                                  
                                   <i className="ti ti-trash me-2" />
                                   Delete
                                 </Link>
@@ -5027,16 +5050,16 @@ const KanbanView = () => {
                                   <Link
                                     to="#"
                                     className="d-inline-flex align-items-center"
-                                    data-bs-toggle="dropdown"
-                                  >
+                                    data-bs-toggle="dropdown">
+                                    
                                     <i className="ti ti-dots-vertical" />
                                   </Link>
                                   <ul className="dropdown-menu dropdown-menu-end p-3">
                                     <li>
                                       <Link
                                         to="#"
-                                        className="dropdown-item rounded-1"
-                                      >
+                                        className="dropdown-item rounded-1">
+                                        
                                         <i className="ti ti-edit me-2" />
                                         Edit
                                       </Link>
@@ -5045,9 +5068,10 @@ const KanbanView = () => {
                                       <Link
                                         to="#"
                                         className="dropdown-item rounded-1"
-                                        data-bs-toggle="modal" data-inert={true}
-                                        data-bs-target="#delete_modal"
-                                      >
+                                        data-bs-toggle="modal"
+                                        data-inert={true}
+                                        data-bs-target="#delete_modal">
+                                        
                                         <i className="ti ti-trash me-2" />
                                         Delete
                                       </Link>
@@ -5057,11 +5081,11 @@ const KanbanView = () => {
                               </div>
                               <div className="d-flex align-items-center mb-2">
                                 <span className="avatar avatar-xs rounded-circle bg-warning me-2">
-                                  <ImageWithBasePath
-                                    src="assets/img/icons/kanban-arrow.svg"
+                                  <img
+                                    src={kanbanArrow}
                                     className="w-auto h-auto"
-                                    alt="Img"
-                                  />
+                                    alt="Img" />
+                                  
                                 </span>
                                 <h6 className="d-flex align-items-center">
                                   Project Title{" "}
@@ -5093,66 +5117,66 @@ const KanbanView = () => {
                               <div className="d-flex align-items-center justify-content-between">
                                 <div className="avatar-list-stacked avatar-group-sm me-3">
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-19.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar19}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-29.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar29}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-16.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar16}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-01.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar01}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-02.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_02}
+                                      alt="img" />
+                                    
                                   </span>
                                   <span className="avatar avatar-rounded">
-                                    <ImageWithBasePath
+                                    <img
                                       className="border border-white"
-                                      src="assets/img/profiles/avatar-03.jpg"
-                                      alt="img"
-                                    />
+                                      src={avatar_03}
+                                      alt="img" />
+                                    
                                   </span>
                                   <Link
                                     to="#"
-                                    className="avatar avatar-rounded bg-primary fs-12 text-white"
-                                  >
+                                    className="avatar avatar-rounded bg-primary fs-12 text-white">
+                                    
                                     1+
                                   </Link>
                                 </div>
                                 <div className="d-flex align-items-center">
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark me-2"
-                                  >
+                                    className="d-flex align-items-center text-dark me-2">
+                                    
                                     <i className="ti ti-message-circle text-gray me-1" />
                                     14
                                   </Link>
                                   <Link
                                     to="#"
-                                    className="d-flex align-items-center text-dark"
-                                  >
+                                    className="d-flex align-items-center text-dark">
+                                    
                                     <i className="ti ti-paperclip text-gray me-1" />
                                     14
                                   </Link>
@@ -5165,8 +5189,8 @@ const KanbanView = () => {
                       <div className="pt-2">
                         <Link
                           to="#"
-                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center"
-                        >
+                          className="btn btn-white border border-dashed d-flex align-items-center justify-content-center">
+                          
                           <i className="ti ti-plus me-2" />
                           New Project
                         </Link>
@@ -5189,9 +5213,8 @@ const KanbanView = () => {
         </div>
       </div>
       {/* /Page Wrapper */}
-    </>
+    </>);
 
-  );
 };
 
 export default KanbanView;

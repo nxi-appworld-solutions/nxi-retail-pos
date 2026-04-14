@@ -1,5 +1,3 @@
-import { brandlistdata } from "../json/brandlistdata";
-import { dashboarrecentproductddata } from "../json/dashboarddata";
 import { expiredproductdata } from "../json/dashboardexpiredproduct";
 import { salestransaction } from "../json/salesdashboardrecenttranscation";
 import { unitsdata } from "../json/unitsdata";
@@ -29,8 +27,10 @@ import { lowstockdata } from "../json/lowstockdata";
 import { categorylist } from "../json/categorylistdata";
 import { subcateorydata } from "../json/subcategorydata";
 import { callhistorydata } from "../json/callhistorydata";
+import { brandlistdata } from "../json/brandlistdata";
+import { dashboarrecentproductddata } from "../json/dashboarddata";
 
-const { productlistdata } = require("../json/productlistdata");
+import { productlistdata } from "../json/productlistdata";
 
 const initialState = {
   product_list: productlistdata,
@@ -66,7 +66,7 @@ const initialState = {
   categotylist_data: categorylist,
   subcategory_data: subcateorydata,
   callhistory_data: callhistorydata,
-  layoutstyledata: localStorage.getItem("layoutStyling"),
+  layoutstyledata: localStorage.getItem("layoutStyling")
 };
 
 export default initialState;

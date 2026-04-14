@@ -1,105 +1,131 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Edit, Eye, Trash2 } from "react-feather";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { useSelector } from "react-redux";
-import Table from "../../core/pagination/datatable";
-import SupplierModal from "../../core/modals/peoples/supplierModal";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
+import { suppliersData } from "../../core/json/suppliers-data";
+import PrimeDataTable from "../../components/data-table";
+import SearchFromApi from "../../components/data-table/search";
+import DeleteModal from "../../components/delete-modal";
+import CommonSelect from "../../components/select/common-select";
+import TableTopHead from "../../components/table-top-head";
+import CommonFooter from "../../components/footer/commonFooter";
+import { editSupplier } from "../../utils/imagepath";
+import { useState } from "react";
+import { Link } from "react-router";
 
 const Suppliers = () => {
-  const data = useSelector((state) => state.rootReducer.supplierdata);
+  const [listData, _setListData] = useState(suppliersData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [selectedSuppliers, setSelectedSuppliers] = useState([]);
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const cityOptions = [
+  { label: "Select", value: "" },
+  { label: "Los Angles", value: "los-angles" },
+  { label: "New York City", value: "new-york-city" },
+  { label: "Houston", value: "houston" }];
+
+
+  const stateOptions = [
+  { label: "Select", value: "" },
+  { label: "California", value: "california" },
+  { label: "New York", value: "new-york" },
+  { label: "Texas", value: "texas" }];
+
+
+  const countryOptions = [
+  { label: "Select", value: "" },
+  { label: "United States", value: "united-states" },
+  { label: "Canada", value: "canada" },
+  { label: "Germany", value: "germany" }];
 
 
   const columns = [
-    {
-      title: "Code",
-      dataIndex: "code",
-      sorter: (a, b) => a.code.length - b.code.length,
-    },
-    {
-      title: "Supplier Name",
-      dataIndex: "supplierName",
-      render: (text, record) => (
-        <span className="productimgname">
-          <Link to="#" className="avatar avatar-md me-2">
-            <ImageWithBasePath alt="" src={record.image} className="img-fluid rounded-2" />
+  {
+    header:
+    <label className="checkboxs">
+          <input type="checkbox" id="select-all" />
+          <span className="checkmarks" />
+        </label>,
+
+    body: () =>
+    <label className="checkboxs">
+          <input type="checkbox" />
+          <span className="checkmarks" />
+        </label>,
+
+    sortable: false,
+    key: "checked"
+  },
+  { header: "Code", field: "code", key: "code" },
+  {
+    header: "Supplier",
+    field: "supplier",
+    key: "supplier",
+    body: (data) =>
+    <div className="d-flex align-items-center">
+          <Link to="#" className="avatar avatar-md">
+            <img src={data.avatar} className="img-fluid rounded-2" alt="img" />
           </Link>
-          <Link to="#">{text}</Link>
-        </span>
-      ),
-      sorter: (a, b) => a.supplierName.length - b.supplierName.length,
-    },
-
-
-    {
-      title: "Email",
-      dataIndex: "email",
-      sorter: (a, b) => a.email.length - b.email.length,
-    },
-
-    {
-      title: "Phone",
-      dataIndex: "phone",
-      sorter: (a, b) => a.phone.length - b.phone.length,
-    },
-
-    {
-      title: "Country",
-      dataIndex: "country",
-      sorter: (a, b) => a.country.length - b.country.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      render: (text) => (
-        <>
-          <span className={`badge  d-inline-flex align-items-center badge-xs ${text === 'Active' ? 'badge-success' : 'badge-danger'}`}>
-            <i className="ti ti-point-filled me-1" />
-            {text}
-          </span>
-        </>
-      ),
-      sorter: (a, b) => a.status.length - b.status.length,
-    },
-
-    {
-      title: "",
-      dataIndex: "action",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
-            <div className="input-block add-lists"></div>
-
-            <Link className="me-2 p-2" to="#">
-              <Eye className="feather-view" />
-            </Link>
-
-            <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal" data-bs-target="#edit-supplier"
-            >
-              <Edit className="feather-edit" />
-            </Link>
-
-            <Link
-              className="confirm-text p-2"
-              to="#" data-bs-toggle="modal" data-bs-target="#delete-modal"
-            >
-              <Trash2 className="feather-trash-2" />
-            </Link>
+          <div className="ms-2">
+            <p className="text-gray-9 mb-0">
+              <Link to="#">{data.supplier}</Link>
+            </p>
           </div>
         </div>
-      ),
-      sorter: (a, b) => a.createdby.length - b.createdby.length,
-    },
-  ];
+
+  },
+  { header: "Email", field: "email", key: "email" },
+  { header: "Phone", field: "phone", key: "phone" },
+  { header: "Country", field: "country", key: "country" },
+  {
+    header: "Status",
+    field: "status",
+    key: "status",
+    body: (data) =>
+    <span className="badge badge-success d-inline-flex align-items-center badge-xs">
+          <i className="ti ti-point-filled me-1"></i>
+          {data.status}
+        </span>
+
+  },
+  {
+    header: "",
+    field: "actions",
+    key: "actions",
+    sortable: false,
+    body: (_row) =>
+    <div className="edit-delete-action">
+          <Link className="me-2 p-2" to="#">
+            <i className="feather icon-eye"></i>
+          </Link>
+          <Link
+        className="me-2 p-2"
+        to="#"
+        data-bs-toggle="modal"
+        data-bs-target="#edit-supplier">
+        
+            <i className="feather icon-edit"></i>
+          </Link>
+          <Link
+        className="p-2"
+        to="#"
+        data-bs-toggle="modal" data-bs-target="#delete-modal">
+        
+            <i className="feather icon-trash-2"></i>
+          </Link>
+        </div>
+
+  }];
+
+
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
 
   return (
     <>
+      {" "}
       <div className="page-wrapper">
         <div className="content">
           <div className="page-header">
@@ -109,37 +135,35 @@ const Suppliers = () => {
                 <h6>Manage your suppliers</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-supplier"
-              >
-              <i className='ti ti-circle-plus me-1'></i>
+                data-bs-target="#add-supplier">
+                
+                <i className="ti ti-circle-plus me-1" />
                 Add Supplier
               </Link>
             </div>
           </div>
           {/* /product list */}
-          <div className="card table-list-card">
+          <div className="card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
-                <div className="dropdown me-2">
+                <div className="dropdown">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
-                     Status
+                    data-bs-toggle="dropdown">
+                    
+                    Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
@@ -152,34 +176,405 @@ const Suppliers = () => {
                         Inactive
                       </Link>
                     </li>
-                    <li>
-                      <Link to="#" className="dropdown-item rounded-1">
-                        New Joiners
-                      </Link>
-                    </li>
                   </ul>
                 </div>
               </div>
             </div>
-
-            <div className="card-body">
+            <div className="card-body p-0">
               <div className="table-responsive">
-                <Table
-                  className="table datanew"
-                  columns={columns}
-                  dataSource={data}
-                  rowKey={(record) => record.id}
-                />
+                <PrimeDataTable
+                  column={columns}
+                  data={listData}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedSuppliers}
+                  onSelectionChange={(e) => setSelectedSuppliers(e.value)}
+                  dataKey="id" />
+                
               </div>
             </div>
           </div>
           {/* /product list */}
-        </div>d
+        </div>
+       <CommonFooter />
       </div>
-      <SupplierModal />
-    </>
+      {/* Add Supplier */}
+      <div className="modal fade" id="add-supplier">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="page-title">
+                <h4>Add Supplier</h4>
+              </div>
+              <button
+                type="button"
+                className="close"
+                data-bs-dismiss="modal"
+                aria-label="Close">
+                
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <form action="suppliers.html">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="new-employee-field">
+                      <div className="profile-pic-upload mb-2">
+                        <div className="profile-pic">
+                          <span>
+                            <i
 
-  );
+                              className="feather icon-plus-circle plus-down-add" />
+                            
+                            Add Image
+                          </span>
+                        </div>
+                        <div className="mb-0">
+                          <div className="image-upload mb-2">
+                            <input type="file" />
+                            <div className="image-uploads">
+                              <h4>Upload Image</h4>
+                            </div>
+                          </div>
+                          <p>JPEG, PNG up to 2 MB</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="mb-3">
+                      <label className="form-label">
+                        First Name <span className="text-danger">*</span>
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="mb-3">
+                      <label className="form-label">
+                        Last Name <span className="text-danger">*</span>
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                  <div className="col-lg-12">
+                    <div className="mb-3">
+                      <label className="form-label">
+                        Email <span className="text-danger">*</span>
+                      </label>
+                      <input type="email" className="form-control" />
+                    </div>
+                  </div>
+                  <div className="col-lg-12">
+                    <div className="mb-3">
+                      <label className="form-label">
+                        Phone <span className="text-danger">*</span>
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                  <div className="col-lg-12">
+                    <div className="mb-3">
+                      <label className="form-label">
+                        Address <span className="text-danger">*</span>
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                  <div className="col-lg-6 col-sm-10 col-10">
+                    <div className="mb-3">
+                      <label className="form-label">
+                        City <span className="text-danger">*</span>
+                      </label>
+                      <CommonSelect
+                        className="w-100"
+                        options={cityOptions}
+                        value={selectedCity}
+                        onChange={(e) => setSelectedCity(e.value)}
+                        placeholder="Select City"
+                        filter={false} />
+                      
+                    </div>
+                  </div>
+                  <div className="col-lg-6 col-sm-10 col-10">
+                    <div className="mb-3">
+                      <label className="form-label">
+                        State <span className="text-danger">*</span>
+                      </label>
+                      <CommonSelect
+                        className="w-100"
+                        options={stateOptions}
+                        value={selectedState}
+                        onChange={(e) => setSelectedState(e.value)}
+                        placeholder="Select State"
+                        filter={false} />
+                      
+                    </div>
+                  </div>
+                  <div className="col-lg-6 col-sm-10 col-10">
+                    <div className="mb-3">
+                      <label className="form-label">
+                        Country <span className="text-danger">*</span>
+                      </label>
+                      <CommonSelect
+                        className="w-100"
+                        options={countryOptions}
+                        value={selectedCountry}
+                        onChange={(e) => setSelectedCountry(e.value)}
+                        placeholder="Select Country"
+                        filter={false} />
+                      
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="mb-3">
+                      <label className="form-label">
+                        Postal Code <span className="text-danger">*</span>
+                      </label>
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                  <div className="col-md-12">
+                    <div className="mb-0">
+                      <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
+                        <span className="status-label">Status</span>
+                        <input
+                          type="checkbox"
+                          id="users5"
+                          className="check"
+                          defaultChecked />
+                        
+                        <label htmlFor="users5" className="checktoggle mb-0" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn me-2 btn-secondary"
+                  data-bs-dismiss="modal">
+                  
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Add Supplier
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      {/* /Add Supplier */}
+      {/* Edit Supplier */}
+      <div className="modal fade" id="edit-supplier">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="content">
+              <div className="modal-header">
+                <div className="page-title">
+                  <h4>Edit Supplier</h4>
+                </div>
+                <button
+                  type="button"
+                  className="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close">
+                  
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <form action="suppliers.html">
+                <div className="modal-body">
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="new-employee-field">
+                        <div className="profile-pic-upload edit-pic">
+                          <div className="profile-pic">
+                            <span>
+                              <img
+                                src={editSupplier}
+                                alt="Img" />
+                              
+                            </span>
+                            <div className="close-img">
+                              <i className="feather icon-x info-img" />
+                            </div>
+                          </div>
+                          <div className="mb-0">
+                            <div className="image-upload mb-0">
+                              <input type="file" />
+                              <div className="image-uploads">
+                                <h4>Change Image</h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="mb-3">
+                        <label className="form-label">
+                          First Name <span className="text-danger">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          defaultValue="Apex" />
+                        
+                      </div>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="mb-3">
+                        <label className="form-label">
+                          Last Name <span className="text-danger">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          defaultValue="Computers" />
+                        
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="mb-3">
+                        <label className="form-label">
+                          Email <span className="text-danger">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          defaultValue="carlevans@example.com" />
+                        
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="mb-3">
+                        <label className="form-label">
+                          Phone <span className="text-danger">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          defaultValue={+15964712634} />
+                        
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="mb-3">
+                        <label className="form-label">
+                          Address <span className="text-danger">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          defaultValue="46 Perry Street" />
+                        
+                      </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-10 col-10">
+                      <div className="mb-3">
+                        <label className="form-label">
+                          City <span className="text-danger">*</span>
+                        </label>
+                        <CommonSelect
+                          className="w-100"
+                          options={cityOptions}
+                          value={selectedCity}
+                          onChange={(e) => setSelectedCity(e.value)}
+                          placeholder="Select City"
+                          filter={false} />
+                        
+                      </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-10 col-10">
+                      <div className="mb-3">
+                        <label className="form-label">
+                          State <span className="text-danger">*</span>
+                        </label>
+                        <CommonSelect
+                          className="w-100"
+                          options={stateOptions}
+                          value={selectedState}
+                          onChange={(e) => setSelectedState(e.value)}
+                          placeholder="Select State"
+                          filter={false} />
+                        
+                      </div>
+                    </div>
+                    <div className="col-lg-6 col-sm-10 col-10">
+                      <div className="mb-3">
+                        <label className="form-label">
+                          Country <span className="text-danger">*</span>
+                        </label>
+                        <CommonSelect
+                          className="w-100"
+                          options={countryOptions}
+                          value={selectedCountry}
+                          onChange={(e) => setSelectedCountry(e.value)}
+                          placeholder="Select Country"
+                          filter={false} />
+                        
+                      </div>
+                    </div>
+                    <div className="col-lg-6">
+                      <div className="mb-3">
+                        <label className="form-label">
+                          Postal Code <span className="text-danger">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          defaultValue={10176} />
+                        
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="mb-0">
+                        <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
+                          <span className="status-label">Status</span>
+                          <input
+                            type="checkbox"
+                            id="users6"
+                            className="check"
+                            defaultChecked />
+                          
+                          <label
+                            htmlFor="users6"
+                            className="checktoggle mb-0" />
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn me-2 btn-secondary"
+                    data-bs-dismiss="modal">
+                    
+                    Cancel
+                  </button>
+                  <button type="submit" className="btn btn-primary">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* /Edit Supplier */}
+      <DeleteModal />
+    </>);
+
 };
 
 export default Suppliers;

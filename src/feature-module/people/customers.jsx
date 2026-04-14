@@ -1,105 +1,93 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import Select from "react-select";
-import { Edit, Eye, Trash2 } from "react-feather";
-import { useSelector } from "react-redux";
-import Table from "../../core/pagination/datatable";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import CommonFooter from "../../core/common/footer/commonFooter";
+import { customersData } from "../../core/json/customers-data";
+import PrimeDataTable from "../../components/data-table";
+import SearchFromApi from "../../components/data-table/search";
+import DeleteModal from "../../components/delete-modal";
+import CommonSelect from "../../components/select/common-select";
+import TableTopHead from "../../components/table-top-head";
+import { user41 } from "../../utils/imagepath";
+import { useState } from "react";
+import { Link } from "react-router";
+import useAppModal from "../../core/common/modal/useAppModal";
+import { MODAL_TYPES } from "../../routes/modal_root/modalTypes";
 
 const Customers = () => {
-  const data = useSelector((state) => state.rootReducer.customerdata);
+  const { open } = useAppModal();
+  const [listData, _setListData] = useState(customersData);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
 
-
-
-  const countries = [
-    { label: "Choose Country", value: "" },
-    { label: "India", value: "India" },
-    { label: "USA", value: "USA" },
-  ];
-  const city = [
-    { label: "Choose Country", value: "" },
-    { label: "United Kingdom", value: "United Kingdom" },
-    { label: "United State", value: "United State" },
-  ];
-  const state = [
-    { label: "Choose Country", value: "" },
-    { label: "United Kingdom", value: "United Kingdom" },
-    { label: "United State", value: "United State" },
-  ];
+  const [selectedCustomers, setSelectedCustomers] = useState([]);
 
   const columns = [
+    { header: "Code", field: "code", key: "code" },
     {
-      title: "Customer Name",
-      dataIndex: "CustomerName",
-      sorter: (a, b) => a.CustomerName.length - b.CustomerName.length,
-    },
-    {
-      title: "Code",
-      dataIndex: "Code",
-      sorter: (a, b) => a.Code.length - b.Code.length,
-    },
-    {
-      title: "Customer",
-      dataIndex: "Customer",
-      sorter: (a, b) => a.Customer.length - b.Customer.length,
-    },
-
-    {
-      title: "Email",
-      dataIndex: "Email",
-      sorter: (a, b) => a.Email.length - b.Email.length,
-    },
-
-    {
-      title: "Phone",
-      dataIndex: "Phone",
-      sorter: (a, b) => a.Phone.length - b.Phone.length,
-    },
-
-    {
-      title: "Country",
-      dataIndex: "Country",
-      sorter: (a, b) => a.Country.length - b.Country.length,
-    },
-
-    {
-      title: "Action",
-      dataIndex: "action",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
-            <div className="input-block add-lists"></div>
-
-            <Link className="me-2 p-2" to="#">
-              <Eye className="feather-view" />
-            </Link>
-
-            <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-units"
-            >
-              <Edit className="feather-edit" />
-            </Link>
-
-            <Link
-              className="confirm-text p-2"
-              to="#"
-              data-bs-toggle="modal" data-bs-target="#delete-modal"
-            >
-              <Trash2 className="feather-trash-2" />
-            </Link>
-          </div>
+      header: "Customer",
+      field: "customer",
+      key: "customer",
+      body: (data) => (
+        <div className="d-flex align-items-center">
+          <Link to="#" className="avatar avatar-md me-2">
+            <img src={data.avatar} alt="product" />
+          </Link>
+          <Link to="#">{data.customer}</Link>
         </div>
       ),
-      sorter: (a, b) => a.createdby.length - b.createdby.length,
+    },
+    { header: "Email", field: "email", key: "email" },
+    { header: "Phone", field: "phone", key: "phone" },
+    { header: "Country", field: "country", key: "country" },
+    {
+      header: "Status",
+      field: "status",
+      key: "status",
+      body: (data) => (
+        <span
+          className={`d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-${data.status === "Active" ? "success" : "danger"} fs-10`}
+        >
+          <i className="ti ti-point-filled me-1 fs-11"></i>
+          {data.status}
+        </span>
+      ),
+    },
+    {
+      header: "",
+      field: "actions",
+      key: "actions",
+      sortable: false,
+      body: (_row) => (
+        <div className="edit-delete-action d-flex align-items-center">
+          <Link
+            className="me-2 p-2 d-flex align-items-center border rounded"
+            to="#"
+          >
+            <i className="feather icon-eye"></i>
+          </Link>
+          <Link
+            className="me-2 p-2 d-flex align-items-center border rounded"
+            to="#"
+            data-bs-toggle="modal"
+            data-bs-target="#edit-customer"
+          >
+            <i className="feather icon-edit"></i>
+          </Link>
+          <Link
+            className="p-2 d-flex align-items-center border rounded"
+            to="#"
+            data-bs-toggle="modal"
+            data-bs-target="#delete-modal"
+          >
+            <i className="feather icon-trash-2"></i>
+          </Link>
+        </div>
+      ),
     },
   ];
+
+  const handleSearch = (value) => setSearchQuery(value);
+
+
 
   return (
     <>
@@ -112,30 +100,28 @@ const Customers = () => {
                 <h6>Manage your customers</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
-                to="#"
                 className="btn btn-primary text-white"
-                data-bs-toggle="modal"
-                data-bs-target="#add-units"
+                onClick={() => open(MODAL_TYPES.CUSTOMER)}
               >
-              <i className='ti ti-circle-plus me-1'></i>
+                <i className="ti ti-circle-plus me-1" />
                 Add Customer
               </Link>
             </div>
           </div>
           {/* /product list */}
-          <div className="card table-list-card">
+          <div className="card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows}
+              />
+
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
-                <div className="dropdown me-2">
+                <div className="dropdown">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
@@ -145,397 +131,53 @@ const Customers = () => {
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Active
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Inactive
                       </Link>
                     </li>
                   </ul>
                 </div>
-                
               </div>
             </div>
-            <div className="card-body">
+            <div className="card-body p-0">
               <div className="table-responsive">
-                <Table columns={columns} dataSource={data} />
+                <PrimeDataTable
+                  column={columns}
+                  data={listData}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedCustomers}
+                  onSelectionChange={(e) => setSelectedCustomers(e.value)}
+                  dataKey="code"
+                />
               </div>
             </div>
           </div>
           {/* /product list */}
         </div>
-        <CommonFooter />
+        <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
+          <p className="mb-0 text-gray-9">
+            2014 - 2025 © DreamsPOS. All Right Reserved
+          </p>
+          <p>
+            Designed &amp; Developed by{" "}
+            <Link to="#" className="text-primary">
+              Dreams
+            </Link>
+          </p>
+        </div>
       </div>
-
-      <>
-        {/* Add Customer */}
-        <div className="modal fade" id="add-units">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content">
-                  <div className="modal-header">
-                    <div className="page-title">
-                      <h4>Add Customer</h4>
-                    </div>
-                    <button
-                      type="button"
-                      className="close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    <form>
-                      <div className="new-employee-field">
-                        <div className="profile-pic-upload">
-                          <div className="profile-pic">
-                            <span>
-                              <i
-                                data-feather="plus-circle"
-                                className="plus-down-add"
-                              />{" "}
-                              Add Image
-                            </span>
-                          </div>
-                          <div className="mb-3">
-                            <div className="image-upload mb-0">
-                              <input type="file" />
-                              <div className="image-uploads">
-                                <h4>Upload Image</h4>
-                              </div>
-                            </div>
-                            <p className="mt-2">JPEG, PNG up to 2 MB</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            First Name<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input type="text" className="form-control" />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            Last Name<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input type="text" className="form-control" />
-                        </div>
-                        <div className="col-lg-12 mb-3">
-                          <label className="form-label">
-                            Email<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input type="email" className="form-control" />
-                        </div>
-                        <div className="col-lg-12 mb-3">
-                          <label className="form-label">
-                            Phone<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input type="tel" className="form-control" />
-                        </div>
-                        <div className="col-lg-12 mb-3">
-                          <label className="form-label">
-                            Address<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input type="text" className="form-control" />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            City<span className="text-danger ms-1">*</span>
-                          </label>
-                          <Select
-                            classNamePrefix="react-select"
-                            options={city}
-                            placeholder="Choose"
-                          />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            State<span className="text-danger ms-1">*</span>
-                          </label>
-                          <Select
-                            classNamePrefix="react-select"
-                            options={state}
-                            placeholder="Choose"
-                          />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            Country<span className="text-danger ms-1">*</span>
-                          </label>
-                          <Select
-                            classNamePrefix="react-select"
-                            options={countries}
-                            placeholder="Choose"
-                          />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            Postal Code<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input type="text" className="form-control" />
-                        </div>
-                        <div className="col-lg-12">
-                          <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
-                            <span className="status-label">Status</span>
-                            <input
-                              type="checkbox"
-                              id="user1"
-                              className="check"
-                              defaultChecked
-                            />
-                            <label htmlFor="user1" className="checktoggle">
-                              {" "}
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <Link
-                      to="#"
-                      className="btn btn-primary fs-13 fw-medium p-2 px-3" data-bs-dismiss="modal"
-                    >
-                      Add Customer
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* /Add Customer */}
-        {/* Edit Customer */}
-        <div className="modal fade" id="edit-units">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content">
-                  <div className="modal-header">
-                    <div className="page-title">
-                      <h4>Edit Customer</h4>
-                    </div>
-                    <button
-                      type="button"
-                      className="close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    <form>
-                      <div className="new-employee-field">
-                        <div className="profile-pic-upload image-field">
-                          <div className="profile-pic p-2">
-                            <ImageWithBasePath
-                              src="./assets/img/users/user-41.jpg"
-                              className="object-fit-cover h-100 rounded-1"
-                              alt="user"
-                            />
-                            <button type="button" className="close rounded-1">
-                              <span aria-hidden="true">×</span>
-                            </button>
-                          </div>
-                          <div className="mb-3">
-                            <div className="image-upload mb-0">
-                              <input type="file" />
-                              <div className="image-uploads">
-                                <h4>Change Image</h4>
-                              </div>
-                            </div>
-                            <p className="mt-2">JPEG, PNG up to 2 MB</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            First Name<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            defaultValue="Carl"
-                          />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            Last Name<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            defaultValue="Evans"
-                          />
-                        </div>
-                        <div className="col-lg-12 mb-3">
-                          <label className="form-label">
-                            Email<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input
-                            type="email"
-                            className="form-control"
-                            defaultValue="carlevans@example.com"
-                          />
-                        </div>
-                        <div className="col-lg-12 mb-3">
-                          <label className="form-label">
-                            Phone<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input
-                            type="tel"
-                            className="form-control"
-                            defaultValue={+12163547758}
-                          />
-                        </div>
-                        <div className="col-lg-12 mb-3">
-                          <label className="form-label">
-                            Address<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            defaultValue="87 Griffin Street"
-                          />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            City<span className="text-danger ms-1">*</span>
-                          </label>
-                          <Select
-                            classNamePrefix="react-select"
-                            options={city}
-                            placeholder="Choose"
-                          />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            State<span className="text-danger ms-1">*</span>
-                          </label>
-                          <Select
-                            classNamePrefix="react-select"
-                            options={state}
-                            placeholder="Choose"
-                          />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            Country<span className="text-danger ms-1">*</span>
-                          </label>
-                          <Select
-                            classNamePrefix="react-select"
-                            options={countries}
-                            placeholder="Choose"
-                          />
-                        </div>
-                        <div className="col-lg-6 mb-3">
-                          <label className="form-label">
-                            Postal Code<span className="text-danger ms-1">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            defaultValue={90001}
-                          />
-                        </div>
-                        <div className="col-lg-12">
-                          <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
-                            <span className="status-label">Status</span>
-                            <input
-                              type="checkbox"
-                              id="user2"
-                              className="check"
-                              defaultChecked
-                            />
-                            <label htmlFor="user2" className="checktoggle">
-                              {" "}
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <Link
-                      to="submit"
-                      className="btn btn-primary fs-13 fw-medium p-2 px-3" data-bs-dismiss="modal"
-                    >
-                      Save Changes
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* /Edit Customer */}
-        {/* delete modal */}
-        <div className="modal fade" id="delete-modal">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content p-5 px-3 text-center">
-                  <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                    <i className="ti ti-trash fs-24 text-danger" />
-                  </span>
-                  <h4 className="fs-20 fw-bold mb-2 mt-1">Delete Customer</h4>
-                  <p className="mb-0 fs-16">
-                    Are you sure you want to delete customer?
-                  </p>
-                  <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <Link
-                      to="#"
-                      className="btn btn-primary fs-13 fw-medium p-2 px-3" data-bs-dismiss="modal"
-                    >
-                      Yes Delete
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-
+      <DeleteModal />
     </>
-
-
   );
 };
 

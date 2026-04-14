@@ -1,5 +1,6 @@
-import React from "react";
+
 import CountUp from "react-countup";
+import { Link } from "react-router-dom";
 
 const Counter = () => {
   return (
@@ -12,7 +13,7 @@ const Counter = () => {
               <h3 className="page-title">Counter</h3>
               <ul className="breadcrumb">
                 <li className="breadcrumb-item">
-                  <a href="/">Dashboard</a>
+                  <Link to="/">Dashboard</Link>
                 </li>
                 <li className="breadcrumb-item active">Counter</li>
               </ul>
@@ -70,8 +71,8 @@ const Counter = () => {
                   start={59}
                   end={0}
                   duration={59}
-                  prefix="00 Day 00 : 02 :"
-                />
+                  prefix="00 Day 00 : 02 :" />
+                
               </div>
             </div>
           </div>
@@ -121,8 +122,8 @@ const Counter = () => {
                   onEnd={() => {
                     return "calls timer end";
                   }}
-                  className="linestripe"
-                />
+                  className="linestripe" />
+                
               </div>
             </div>
           </div>
@@ -141,16 +142,16 @@ const Counter = () => {
                   end={0}
                   duration={60}
                   prefix="02 Days 23 Hour 59 Min "
-                  suffix=" Sec.."
-                />
+                  suffix=" Sec.." />
+                
               </div>
             </div>
           </div>
           {/* /Counter */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Counter;

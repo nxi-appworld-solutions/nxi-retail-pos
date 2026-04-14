@@ -1,103 +1,108 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import CommonFooter from "../../components/footer/commonFooter";
+import PrimeDataTable from "../../components/data-table";
+import TableTopHead from "../../components/table-top-head";
 import { payrollListData } from "../../core/json/payrollList";
-import Table from "../../core/pagination/datatable";
-import Select from "react-select";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import { Employee } from "../../core/common/selectOption/selectOption";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { PlusCircle } from "feather-icons-react/build/IconComponents";
+import CommonSelect from "../../components/select/common-select";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
 
 const PayrollList = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [selectedPayrolls, setSelectedPayrolls] = useState([]);
 
-  // const route = all_routes;
-
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
   const datas = payrollListData;
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   const columns = [
-    {
-      title: "Employee",
-      dataIndex: "name",
-      sorter: (a, b) => a.name.localeCompare(b.name),
-      render: (text, record) => (
-        <div className="d-flex align-items-center">
-          <Link to={"employee-details.html"} className="avatar avatar-md">
-            <ImageWithBasePath src={record.image} className="img-fluid" alt="img" />
+  {
+    header: "Employee",
+    field: "name",
+    sortable: true,
+    body: (rowData) =>
+    <div className="d-flex align-items-center">
+          <Link to="employee-details.html" className="avatar avatar-md">
+            <img src={rowData.image} className="img-fluid" alt="img" />
           </Link>
           <div className="ms-2">
             <p className="text-dark mb-0">
-              <Link to="employee-details.html">{text}</Link>
+              <Link to="employee-details.html">{rowData.name}</Link>
             </p>
-            <p>
-              {record.role}
-            </p>
+            <p>{rowData.role}</p>
           </div>
         </div>
 
-      ),
-    },
-    {
-      title: "Employee ID",
-      dataIndex: "id2",
-      sorter: (a, b) => a.id2.localeCompare(b.id2),
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      sorter: (a, b) => a.email.localeCompare(b.email),
-    },
-    {
-      title: "Salary",
-      dataIndex: "salary",
-      sorter: (a, b) => a.salary.length - b.salary.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      sorter: (a, b) => a.status.length - b.status.length,
-      render: (status) => (
-        <span className={`badge  ${status === 'Paid' ? 'badge-success' : 'badge-danger'} d-inline-flex align-items-center badge-xs`}>
+  },
+  {
+    header: "Employee ID",
+    field: "id2",
+    sortable: true
+  },
+  {
+    header: "Email",
+    field: "email",
+    sortable: true
+  },
+  {
+    header: "Salary",
+    field: "salary",
+    sortable: true
+  },
+  {
+    header: "Status",
+    field: "status",
+    sortable: true,
+    body: (rowData) =>
+    <span
+      className={`badge ${
+      rowData.status === "Paid" ? "badge-success" : "badge-danger"} d-inline-flex align-items-center badge-xs`
+      }>
+      
           <i className="ti ti-point-filled me-1" />
-          {status}
+          {rowData.status}
         </span>
 
-      ),
-    },
-    {
-      title: "Action",
-      render: () => (
-        <div className="edit-delete-action">
-          <Link className="p-2 me-2" to="#">
-            <i data-feather="eye" className="feather-eye" />
-          </Link>
-          <Link className="p-2 me-2" to="#">
-            <i data-feather="download" className="feather-download" />
+  },
+
+  {
+    header: "",
+    field: "actions",
+    key: "actions",
+    sortable: false,
+    body: (_row) =>
+    <div className="edit-delete-action d-flex align-items-center">
+          <Link
+        className="me-2 p-2 d-flex align-items-center border rounded"
+        to="#"
+        data-bs-toggle="modal"
+        data-bs-target="#edit-customer">
+        
+            <i className="feather icon-edit"></i>
           </Link>
           <Link
-            data-bs-toggle="modal"
-            data-bs-target="#edit-department"
-            className="p-2 me-2"
-            to="#"
-          >
-            <i data-feather="edit" className="feather-edit" />
-          </Link>
-          <Link
-            data-bs-toggle="modal"
-            data-bs-target="#delete-modal"
-            className="p-2"
-            to="#"
-          >
-            <i data-feather="trash-2" className="feather-trash-2" />
+        className="p-2 d-flex align-items-center border rounded"
+        to="#"
+        data-bs-toggle="modal" data-bs-target="#delete-modal">
+        
+            <i className="feather icon-trash-2"></i>
           </Link>
         </div>
 
-      ),
-    },
-  ];
+  }];
+
+  const Employee = [
+  { value: "Choose", label: "Choose" },
+  { value: "Carl Evans", label: "Carl Evans" },
+  { value: "Minerva Rameriz", label: "Minerva Rameriz" },
+  { value: "Robert Lamon", label: "Robert Lamon" }];
+
 
   return (
     <>
@@ -110,19 +115,15 @@ const PayrollList = () => {
                 <h6>Manage your employee salaries</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-department"
-              >
-               <PlusCircle  className="me-2"/>
+                data-bs-target="#add-department">
+                
+                <i className="feather icon-plus-circle me-2" />
                 Add Payroll
               </Link>
             </div>
@@ -131,15 +132,18 @@ const PayrollList = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Select Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -160,7 +164,20 @@ const PayrollList = () => {
 
             <div className="card-body">
               <div className="table-responsive">
-                <Table columns={columns} dataSource={datas} />
+                {/* <Table columns={columns} dataSource={datas} /> */}
+                <PrimeDataTable
+                  column={columns}
+                  data={datas}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedPayrolls}
+                  onSelectionChange={(e) => setSelectedPayrolls(e.value)}
+                  dataKey="id" />
+                
               </div>
             </div>
           </div>
@@ -181,8 +198,8 @@ const PayrollList = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -194,11 +211,14 @@ const PayrollList = () => {
                         <label className="form-label">
                           Select Employee <span>*</span>
                         </label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={Employee}
+                          value={selectedEmployee}
+                          onChange={(e) => setSelectedEmployee(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="text-title">
@@ -219,9 +239,12 @@ const PayrollList = () => {
                             type="radio"
                             name="Radio"
                             id="Radio-sm1"
-                            defaultChecked
-                          />
-                          <label className="form-check-label" htmlFor="Radio-sm1">
+                            defaultChecked />
+                          
+                          <label
+                            className="form-check-label"
+                            htmlFor="Radio-sm1">
+                            
                             Paid
                           </label>
                         </div>
@@ -230,9 +253,12 @@ const PayrollList = () => {
                             className="form-check-input"
                             type="radio"
                             name="Radio"
-                            id="Radio-sm2"
-                          />
-                          <label className="form-check-label" htmlFor="Radio-sm2">
+                            id="Radio-sm2" />
+                          
+                          <label
+                            className="form-check-label"
+                            htmlFor="Radio-sm2">
+                            
                             Unpaid
                           </label>
                         </div>
@@ -279,7 +305,10 @@ const PayrollList = () => {
                         <input type="text" className="text-form form-control" />
                       </div>
                       <div className="subadd-btn mb-3 ms-3">
-                        <Link to="#" className="btn btn-icon btn-secondary btn-add">
+                        <Link
+                          to="#"
+                          className="btn btn-icon btn-secondary btn-add">
+                          
                           <i className="ti ti-circle-plus fs-16" />
                         </Link>
                       </div>
@@ -325,7 +354,10 @@ const PayrollList = () => {
                         <input type="text" className="text-form form-control" />
                       </div>
                       <div className="subadd-btn mb-3 ms-3">
-                        <Link to="#" className="btn btn-icon btn-secondary btn-add">
+                        <Link
+                          to="#"
+                          className="btn btn-icon btn-secondary btn-add">
+                          
                           <i className="ti ti-circle-plus fs-16" />
                         </Link>
                       </div>
@@ -365,7 +397,11 @@ const PayrollList = () => {
                         <button type="button" className="btn btn-reset me-2">
                           Reset
                         </button>
-                        <Link to="#" className="btn btn-save" data-bs-dismiss='modal'>
+                        <Link
+                          to="#"
+                          className="btn btn-save"
+                          data-bs-dismiss="modal">
+                          
                           Save
                         </Link>
                       </div>
@@ -389,12 +425,12 @@ const PayrollList = () => {
                   type="button"
                   className="close"
                   data-bs-dismiss="modal"
-                  aria-label="Close"
-                >
+                  aria-label="Close">
+                  
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
-              <form >
+              <form>
                 <div className="modal-body">
                   <div className="row">
                     <div className="col-sm-6 col-12">
@@ -402,11 +438,14 @@ const PayrollList = () => {
                         <label className="form-label">
                           Select Employee <span>*</span>
                         </label>
-                        <Select
-                          classNamePrefix="react-select"
+                        <CommonSelect
+                          className="w-100"
                           options={Employee}
+                          value={selectedEmployee}
+                          onChange={(e) => setSelectedEmployee(e.value)}
                           placeholder="Choose"
-                        />
+                          filter={false} />
+                        
                       </div>
                     </div>
                     <div className="text-title">
@@ -427,9 +466,12 @@ const PayrollList = () => {
                             type="radio"
                             name="Radio"
                             id="Radio-sm3"
-                            defaultChecked
-                          />
-                          <label className="form-check-label" htmlFor="Radio-sm3">
+                            defaultChecked />
+                          
+                          <label
+                            className="form-check-label"
+                            htmlFor="Radio-sm3">
+                            
                             Paid
                           </label>
                         </div>
@@ -438,9 +480,12 @@ const PayrollList = () => {
                             className="form-check-input"
                             type="radio"
                             name="Radio"
-                            id="Radio-sm4"
-                          />
-                          <label className="form-check-label" htmlFor="Radio-sm4">
+                            id="Radio-sm4" />
+                          
+                          <label
+                            className="form-check-label"
+                            htmlFor="Radio-sm4">
+                            
                             Unpaid
                           </label>
                         </div>
@@ -487,7 +532,10 @@ const PayrollList = () => {
                         <input type="text" className="text-form form-control" />
                       </div>
                       <div className="subadd-btn mb-3 ms-3">
-                        <Link to="#" className="btn btn-icon btn-secondary btn-add">
+                        <Link
+                          to="#"
+                          className="btn btn-icon btn-secondary btn-add">
+                          
                           <i className="ti ti-circle-plus fs-16" />
                         </Link>
                       </div>
@@ -533,7 +581,10 @@ const PayrollList = () => {
                         <input type="text" className="text-form form-control" />
                       </div>
                       <div className="subadd-btn mb-3 ms-3">
-                        <Link to="#" className="btn btn-icon btn-secondary btn-add">
+                        <Link
+                          to="#"
+                          className="btn btn-icon btn-secondary btn-add">
+                          
                           <i className="ti ti-circle-plus fs-16" />
                         </Link>
                       </div>
@@ -573,7 +624,11 @@ const PayrollList = () => {
                         <button type="button" className="btn btn-reset me-2">
                           Reset
                         </button>
-                        <Link to="#" className="btn btn-save" data-bs-dismiss="modal">
+                        <Link
+                          to="#"
+                          className="btn btn-save"
+                          data-bs-dismiss="modal">
+                          
                           Save
                         </Link>
                       </div>
@@ -585,46 +640,10 @@ const PayrollList = () => {
           </div>
         </div>
         {/* /Edit Department */}
-        {/* delete modal */}
-        <div className="modal fade" id="delete-modal">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content p-5 px-3 text-center">
-                  <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
-                    <i className="ti ti-trash fs-24 text-danger" />
-                  </span>
-                  <h4 className="fs-20 text-gray-9 fw-bold mb-2 mt-1">
-                    Delete Employee Salary
-                  </h4>
-                  <p className="text-gray-6 mb-0 fs-16">
-                    Are you sure you want to delete employee salary?
-                  </p>
-                  <div className="modal-footer-btn mt-3 d-flex justify-content-center">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <Link
-                      to="#"
-                      className="btn btn-submit fs-13 fw-medium p-2 px-3"
-                    >
-                      Yes Delete
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* /delete modal */}
+      <DeleteModal />
       </>
+    </>);
 
-    </>
-  );
 };
 
 export default PayrollList;

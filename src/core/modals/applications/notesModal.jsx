@@ -1,63 +1,37 @@
-import React from "react";
-import { Eye, Star, Trash2 } from "react-feather/dist";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
 import "bootstrap-daterangepicker/daterangepicker.css";
-import DateRangePicker from "react-bootstrap-daterangepicker";
-import TextEditor from "../../../feature-module/inventory/texteditor";
+import { Editor } from "primereact/editor";
+import CommonSelect from "../../../components/select/common-select";
+import CommonDateRangePicker from "../../../components/date-range-picker/common-date-range-picker";
+import DeleteModal from "../../../components/delete-modal";
+
 
 const NotesModal = () => {
-  const initialSettings = {
-    endDate: new Date("2020-08-11T12:30:00.000Z"),
-    ranges: {
-      "Last 30 Days": [
-        new Date("2020-07-12T04:57:17.076Z"),
-        new Date("2020-08-10T04:57:17.076Z"),
-      ],
-      "Last 7 Days": [
-        new Date("2020-08-04T04:57:17.076Z"),
-        new Date("2020-08-10T04:57:17.076Z"),
-      ],
-      "Last Month": [
-        new Date("2020-06-30T18:30:00.000Z"),
-        new Date("2020-07-31T18:29:59.999Z"),
-      ],
-      "This Month": [
-        new Date("2020-07-31T18:30:00.000Z"),
-        new Date("2020-08-31T18:29:59.999Z"),
-      ],
-      Today: [
-        new Date("2020-08-10T04:57:17.076Z"),
-        new Date("2020-08-10T04:57:17.076Z"),
-      ],
-      Yesterday: [
-        new Date("2020-08-09T04:57:17.076Z"),
-        new Date("2020-08-09T04:57:17.076Z"),
-      ],
-    },
-    startDate: new Date("2020-08-04T04:57:17.076Z"), // Set "Last 7 Days" as default
-    timePicker: false,
-  };
+  const [selectedAssignee, setSelectedAssignee] = useState(null);
+  const [selectedTag, setSelectedTag] = useState(null);
+  const [selectedPriority, setSelectedPriority] = useState(null);
+  const [text, setText] = useState("");
 
   const optionsChoose = [
-    { value: "Choose", label: "Choose" },
-    { value: "Recent1", label: "Recent1" },
-    { value: "Recent2", label: "Recent2" },
-  ];
+  { value: "Choose", label: "Choose" },
+  { value: "Recent1", label: "Recent1" },
+  { value: "Recent2", label: "Recent2" }];
+
 
   const optionsSelect = [
-    { value: "Select", label: "Select" },
-    { value: "Recent1", label: "Recent1" },
-    { value: "Recent2", label: "Recent2" },
-  ];
+  { value: "Select", label: "Select" },
+  { value: "Recent1", label: "Recent1" },
+  { value: "Recent2", label: "Recent2" }];
+
 
   const optionsOnHold = [{ value: "Onhold", label: "Onhold" }];
 
   const optionsPriority = [
-    { value: "High", label: "High" },
-    { value: "Medium", label: "Medium" },
-    { value: "Low", label: "Low" },
-  ];
+  { value: "High", label: "High" },
+  { value: "Medium", label: "Medium" },
+  { value: "Low", label: "Low" }];
+
   return (
     <div>
       {/* Add Note */}
@@ -74,8 +48,8 @@ const NotesModal = () => {
                     type="button"
                     className="close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -91,62 +65,67 @@ const NotesModal = () => {
                       <div className="col-12">
                         <div className="mb-3">
                           <label className="form-label">Assignee</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsChoose}
-                            placeholder="Choose"
-                          />
+                            value={selectedAssignee}
+                            onChange={(e) => setSelectedAssignee(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                       <div className="col-6">
                         <div className="mb-3">
                           <label className="form-label">Tag</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsSelect}
-                            placeholder="Select"
-                          />
+                            value={selectedTag}
+                            onChange={(e) => setSelectedTag(e.value)}
+                            placeholder="Select" />
+                          
                         </div>
                       </div>
                       <div className="col-6">
                         <div className="mb-3">
                           <label className="form-label">Priority</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsSelect}
-                            placeholder="Select"
-                          />
+                            value={selectedTag}
+                            onChange={(e) => setSelectedTag(e.value)}
+                            placeholder="Select" />
+                          
                         </div>
                       </div>
                       <div className="col-6">
                         <div className="input-blocks todo-calendar">
                           <label className="form-label">Due Date</label>
                           <div className="input-groupicon calender-input">
-                            <DateRangePicker initialSettings={initialSettings}>
-                              <input
-                                type="text"
-                                className="form-control  date-range bookingrange"
-                                placeholder="Select"
-                                defaultValue="13 Aug 1992"
-                              />
-                            </DateRangePicker>
+                           <CommonDateRangePicker />
                           </div>
                         </div>
                       </div>
                       <div className="col-6">
                         <div className="mb-3">
                           <label className="form-label">Status</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsSelect}
-                            placeholder="Select"
-                          />
+                            value={selectedTag}
+                            onChange={(e) => setSelectedTag(e.value)}
+                            placeholder="Select" />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
                         <div className="mb-3 summer-description-box notes-summernote">
                           <label className="form-label">Descriptions</label>
-                          <TextEditor />
+                           <Editor
+                            value={text}
+                            onTextChange={(e) => setText(e.htmlValue)}
+                            style={{ height: "200px" }} />
+                                         
                           <p>Maximum 60 Characters</p>
                         </div>
                       </div>
@@ -155,8 +134,8 @@ const NotesModal = () => {
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <button type="submit" className="btn btn-submit">
@@ -184,25 +163,25 @@ const NotesModal = () => {
                   <div className=" edit-note-head d-flex align-items-center">
                     <Link to="#" className="me-2">
                       <span>
-                        <Trash2 />
+                        <i className="feather icon-trash-2" />
                       </span>
                     </Link>
                     <Link to="#" className="me-2">
                       <span>
-                        <Star />
+                        <i className="feather icon-star" />
                       </span>
                     </Link>
                     <Link to="#" className="me-2">
                       <span>
-                        <Eye />
+                        <i className="feather icon-eye" />
                       </span>
                     </Link>
                     <button
                       type="button"
                       className="close"
                       data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <span aria-hidden="true">×</span>
                     </button>
                   </div>
@@ -216,39 +195,45 @@ const NotesModal = () => {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Meet Lisa to discuss project details"
-                          />
+                            placeholder="Meet Lisa to discuss project details" />
+                          
                         </div>
                       </div>
                       <div className="col-12">
                         <div className="input-blocks">
                           <label className="form-label">Assignee</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsSelect}
-                            placeholder="Select"
-                          />
+                            value={selectedTag}
+                            onChange={(e) => setSelectedTag(e.value)}
+                            placeholder="Select" />
+                          
                         </div>
                       </div>
                       <div className="col-6">
                         <div className="input-blocks">
                           <label className="form-label">Tag</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsOnHold}
-                            placeholder="Onhold"
-                          />
+                            value={selectedTag}
+                            onChange={(e) => setSelectedTag(e.value)}
+                            placeholder="Onhold" />
+                          
                         </div>
                       </div>
                       <div className="col-6">
                         <div className="input-blocks">
                           <label className="form-label">Priority</label>
 
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsPriority}
-                            placeholder="Priority"
-                          />
+                            value={selectedPriority}
+                            onChange={(e) => setSelectedPriority(e.value)}
+                            placeholder="Priority" />
+                          
                         </div>
                       </div>
                       <div className="col-6">
@@ -259,25 +244,31 @@ const NotesModal = () => {
                               type="text"
                               className="form-control date-range bookingrange"
                               placeholder="Select"
-                              defaultValue="13 Aug 1992"
-                            />
+                              defaultValue="13 Aug 1992" />
+                            
                           </div>
                         </div>
                       </div>
                       <div className="col-6">
                         <div className="input-blocks">
                           <label className="form-label">Status</label>
-                          <Select
-                            classNamePrefix="react-select"
+                          <CommonSelect
+                            filter={false}
                             options={optionsChoose}
-                            placeholder="Choose"
-                          />
+                            value={selectedAssignee}
+                            onChange={(e) => setSelectedAssignee(e.value)}
+                            placeholder="Choose" />
+                          
                         </div>
                       </div>
                       <div className="col-lg-12">
                         <div className="input-blocks summer-description-box notes-summernote">
                           <label className="form-label">Descriptions</label>
-                          <TextEditor />
+                           <Editor
+                            value={text}
+                            onTextChange={(e) => setText(e.htmlValue)}
+                            style={{ height: "200px" }} />
+                                         
                           <p>Maximum 60 Characters</p>
                         </div>
                       </div>
@@ -286,8 +277,8 @@ const NotesModal = () => {
                       <button
                         type="button"
                         className="btn btn-cancel me-2"
-                        data-bs-dismiss="modal"
-                      >
+                        data-bs-dismiss="modal">
+                        
                         Cancel
                       </button>
                       <button type="submit" className="btn btn-submit">
@@ -302,46 +293,7 @@ const NotesModal = () => {
         </div>
       </div>
       {/* /Edit Note */}
-      {/* Delete Note */}
-      <div className="modal fade" id="delete_modal">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="page-wrapper-new p-0">
-              <div className="content">
-                <div className="delete-popup">
-                  <div className="delete-image text-center mx-auto">
-                    <img
-                      src="./assets/img/icons/close-circle.png"
-                      alt="Img"
-                      className="img-fluid"
-                    />
-                  </div>
-                  <div className="delete-heads">
-                    <h4>Are You Sure?</h4>
-                    <p>
-                      Do you really want to delete this item, This process
-                      cannot be undone.
-                    </p>
-                  </div>
-                  <div className="modal-footer-btn delete-footer">
-                    <Link
-                      to="#"
-                      className="btn btn-cancel me-2"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </Link>
-                    <Link to="#" className="btn btn-submit">
-                      Delete
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* /Delete Note */}
+     <DeleteModal />
       {/* View Note */}
       <div className="modal fade" id="view-note-units">
         <div className="modal-dialog modal-dialog-centered">
@@ -356,20 +308,20 @@ const NotesModal = () => {
                   <div className=" edit-noted-head d-flex align-items-center">
                     <Link to="#">
                       <span>
-                        <i data-feather="trash-2" />
+                        <i className="feather icon-trash-2" />
                       </span>
                     </Link>
                     <Link to="#" className="me-2">
                       <span>
-                        <i data-feather="star" />
+                        <i className="feather icon-star" />
                       </span>
                     </Link>
                     <button
                       type="button"
                       className="close"
                       data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
+                      aria-label="Close">
+                      
                       <span aria-hidden="true">×</span>
                     </button>
                   </div>
@@ -394,10 +346,10 @@ const NotesModal = () => {
                       </div>
                       <div className="modal-footer-btn edit-footer-menu">
                         <Link
-                          to
+                          to="#"
                           className="btn btn-cancel me-2"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </Link>
                       </div>
@@ -410,8 +362,8 @@ const NotesModal = () => {
         </div>
       </div>
       {/* /View Note */}
-    </div>
-  );
+    </div>);
+
 };
 
 export default NotesModal;

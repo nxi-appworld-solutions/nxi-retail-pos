@@ -1,9 +1,9 @@
-import React from 'react'
-import ImageWithBasePath from '../../core/img/imagewithbasebath'
+import { avatar04, avatar1, avatar2, avatar5, avatar6, avatar7, avatar_03, avator1 } from "../../utils/imagepath";
+
 
 const Borders = () => {
-    return (
-        <>
+  return (
+    <>
             {/* Page Wrapper */}
             <div className="page-wrapper">
                 <div className="content">
@@ -90,17 +90,17 @@ const Borders = () => {
                                 <div className="card-body">
                                     <div className="mb-4">
                                         <label
-                                            htmlFor="exampleFormControlInput1"
-                                            className="form-label"
-                                        >
+                      htmlFor="exampleFormControlInput1"
+                      className="form-label">
+                      
                                             Email address
                                         </label>
                                         <input
-                                            type="email"
-                                            className="form-control border-success"
-                                            id="exampleFormControlInput1"
-                                            placeholder="name@example.com"
-                                        />
+                      type="email"
+                      className="form-control border-success"
+                      id="exampleFormControlInput1"
+                      placeholder="name@example.com" />
+                    
                                     </div>
                                     <div className="h4 pb-3 mb-4 text-danger border-bottom border-danger">
                                         Below Shows Danger Border
@@ -145,41 +145,41 @@ const Borders = () => {
                                     <h5 className="card-title">Border Radius</h5>
                                 </div>
                                 <div className="card-body">
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-1.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img rounded me-1"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-2.jpg"
-                                        className="avatar-xxl avatar  d-placeholder-img rounded-top me-1"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-3.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img rounded-end me-1"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-7.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img rounded-bottom me-2"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-4.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img rounded-start"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-5.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img rounded-circle"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-6.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img  rounded-pill"
-                                        alt="img"
-                                    />
+                                    <img
+                    src={avatar1}
+                    className="avatar-xxl avatar bd-placeholder-img rounded me-1"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar2}
+                    className="avatar-xxl avatar  d-placeholder-img rounded-top me-1"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar_03}
+                    className="avatar-xxl avatar bd-placeholder-img rounded-end me-1"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar7}
+                    className="avatar-xxl avatar bd-placeholder-img rounded-bottom me-2"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar04}
+                    className="avatar-xxl avatar bd-placeholder-img rounded-start"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar5}
+                    className="avatar-xxl avatar bd-placeholder-img rounded-circle"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar6}
+                    className="avatar-xxl avatar bd-placeholder-img  rounded-pill"
+                    alt="img" />
+                  
                                 </div>
                             </div>
                         </div>
@@ -191,36 +191,36 @@ const Borders = () => {
                                     <h5 className="card-title">Sizes</h5>
                                 </div>
                                 <div className="card-body">
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-1.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-0 me-1"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-2.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-1 me-1"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-3.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-2 me-1"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-4.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-3 me-2"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-5.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-4"
-                                        alt="img"
-                                    />
-                                    <ImageWithBasePath
-                                        src="assets/img/avatar/avatar-6.jpg"
-                                        className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-5"
-                                        alt="img"
-                                    />
+                                    <img
+                    src={avator1}
+                    className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-0 me-1"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar2}
+                    className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-1 me-1"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar_03}
+                    className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-2 me-1"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar04}
+                    className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-3 me-2"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar5}
+                    className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-4"
+                    alt="img" />
+                  
+                                    <img
+                    src={avatar6}
+                    className="avatar-xxl avatar bd-placeholder-img bd-placeholder-img rounded-5"
+                    alt="img" />
+                  
                                 </div>
                             </div>
                         </div>
@@ -229,9 +229,9 @@ const Borders = () => {
                 </div>
             </div>
             {/* /Page Wrapper */}
-        </>
+        </>);
 
-    )
-}
 
-export default Borders
+};
+
+export default Borders;

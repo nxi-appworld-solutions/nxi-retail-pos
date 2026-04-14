@@ -1,24 +1,25 @@
 import React from "react";
-import { Filter } from "react-feather";
 import { Link } from "react-router-dom";
-import Select from "react-select";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import CommonSelect from "../../components/select/common-select";
 
 const NotesContent = () => {
   const optionsBulk = [
-    { value: "bulkActions", label: "Bulk Actions" },
-    { value: "deleteMarked", label: "Delete Marked" },
-    { value: "unmarkAll", label: "Unmark All" },
-    { value: "markAll", label: "Mark All" },
-  ];
+  { value: "bulkActions", label: "Bulk Actions" },
+  { value: "deleteMarked", label: "Delete Marked" },
+  { value: "unmarkAll", label: "Unmark All" },
+  { value: "markAll", label: "Mark All" }];
+
 
   const optionsRecent = [
-    { value: "recent", label: "Recent" },
-    { value: "lastModified", label: "Last Modified" },
-    { value: "lastModifiedByMe", label: "Last Modified by me" },
-  ];
+  { value: "recent", label: "Recent" },
+  { value: "lastModified", label: "Last Modified" },
+  { value: "lastModifiedByMe", label: "Last Modified by me" }];
+
+  const [selectedBulk, setSelectedBulk] = React.useState(optionsBulk[0]);
+  const [selectedRecent, setSelectedRecent] = React.useState(optionsRecent[0]);
 
   const settings = {
     dots: false,
@@ -27,42 +28,45 @@ const NotesContent = () => {
     margin: 12,
     speed: 500,
     responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 776,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 567,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-    ],
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 2
+      }
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 2
+      }
+    },
+    {
+      breakpoint: 776,
+      settings: {
+        slidesToShow: 2
+      }
+    },
+    {
+      breakpoint: 567,
+      settings: {
+        slidesToShow: 2
+      }
+    }]
+
   };
   return (
     <>
       <div className="section-bulk-wrap">
         <div className="bulk-action-type">
           <div className="form-sort select-bluk ">
-            <Select
-              classNamePrefix="react-select"
+            <CommonSelect
+              className="w-100"
               options={optionsBulk}
-              defaultValue={optionsBulk[0]}
-            />
+              value={selectedBulk}
+              onChange={(e) => setSelectedBulk(e.value)}
+              placeholder="Bulk Actions"
+              filter={false} />
+            
           </div>
           <Link to="#" className="btn btn-added">
             Apply
@@ -70,7 +74,7 @@ const NotesContent = () => {
           <div className="search-set">
             <div className="search-input">
               <Link to="#" className="btn btn-searchset">
-                <i data-feather="search" className="feather-search" />
+                <i className="feather icon-search feather-search" />
               </Link>
               <div id="DataTables_Table_0_filter" className="dataTables_filter">
                 <label>
@@ -78,21 +82,24 @@ const NotesContent = () => {
                   <input
                     type="search"
                     className="form-control form-control-sm"
-                    placeholder="Search"
-                  />
+                    placeholder="Search" />
+                  
                 </label>
               </div>
             </div>
           </div>
         </div>
         <div className="form-sort">
-          <Filter className="feather-filter" />
+          <i className="feather icon-filter feather-filter" />
 
-          <Select className="img-select recent-select-notes"
-            classNamePrefix="react-select"
+          <CommonSelect
+            className="img-select recent-select-notes"
             options={optionsRecent}
-            defaultValue={optionsRecent[0]}
-          />
+            value={selectedRecent}
+            onChange={(e) => setSelectedRecent(e.value)}
+            placeholder="Recent"
+            filter={false} />
+          
         </div>
       </div>
       <div className="tab-content" id="v-pills-tabContent">
@@ -100,8 +107,8 @@ const NotesContent = () => {
           className="tab-pane fade active show"
           id="v-pills-profile"
           role="tabpanel"
-          aria-labelledby="v-pills-profile-tab"
-        >
+          aria-labelledby="v-pills-profile-tab">
+          
           <div className="section-notes-slider">
             <div className="row">
               <div className="notes-content">
@@ -124,8 +131,8 @@ const NotesContent = () => {
                       <Link
                         to="#"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                        aria-expanded="false">
+                        
                         <i className="fas fa-ellipsis-v" />
                       </Link>
                       <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -133,10 +140,10 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#edit-note-units"
-                        >
+                          data-bs-target="#edit-note-units">
+                          
                           <span>
-                            <i data-feather="edit" />
+                            <i className="feather icon-edit" />
                           </span>
                           Edit
                         </Link>
@@ -144,16 +151,16 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#delete-note-units"
-                        >
+                          data-bs-target="#delete-note-units">
+                          
                           <span>
-                            <i data-feather="trash-2" />
+                            <i className="feather icon-trash-2" />
                           </span>
                           Delete
                         </Link>
                         <Link to="#" className="dropdown-item">
                           <span>
-                            <i data-feather="star" />
+                            <i className="feather icon-star" />
                           </span>
                           Not Important
                         </Link>
@@ -161,10 +168,10 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#view-note-units"
-                        >
+                          data-bs-target="#view-note-units">
+                          
                           <span>
-                            <i data-feather="eye" />
+                            <i className="feather icon-plus-eye" />
                           </span>
                           View
                         </Link>
@@ -186,8 +193,8 @@ const NotesContent = () => {
                             <img
                               src="./assets/img/profiles/profile-01.png"
                               alt="Profile"
-                              className="img-fluid"
-                            />
+                              className="img-fluid" />
+                            
                           </span>
                         </Link>
                         <div className="d-flex">
@@ -205,7 +212,7 @@ const NotesContent = () => {
                         </Link>
                         <Link to="#">
                           <span>
-                            <i data-feather="trash-2" />
+                            <i className="feather icon-trash-2" />
                           </span>
                         </Link>
                       </div>
@@ -219,8 +226,8 @@ const NotesContent = () => {
                       <Link
                         to="#"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                        aria-expanded="false">
+                        
                         <i className="fas fa-ellipsis-v" />
                       </Link>
                       <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -228,10 +235,10 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#edit-note-units"
-                        >
+                          data-bs-target="#edit-note-units">
+                          
                           <span>
-                            <i data-feather="edit" />
+                            <i className="feather icon-edit" />
                           </span>
                           Edit
                         </Link>
@@ -239,16 +246,16 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#delete-note-units"
-                        >
+                          data-bs-target="#delete-note-units">
+                          
                           <span>
-                            <i data-feather="trash-2" />
+                            <i className="feather icon-trash-2" />
                           </span>
                           Delete
                         </Link>
                         <Link to="#" className="dropdown-item">
                           <span>
-                            <i data-feather="star" />
+                            <i className="feather icon-star" />
                           </span>
                           Not Important
                         </Link>
@@ -256,10 +263,10 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#view-note-units"
-                        >
+                          data-bs-target="#view-note-units">
+                          
                           <span>
-                            <i data-feather="eye" />
+                            <i className="feather icon-plus-eye" />
                           </span>
                           View
                         </Link>
@@ -280,8 +287,8 @@ const NotesContent = () => {
                             <img
                               src="./assets/img/profiles/profile-02.png"
                               alt="Profile"
-                              className="img-fluid"
-                            />
+                              className="img-fluid" />
+                            
                           </span>
                         </Link>
                         <div className="d-flex">
@@ -299,7 +306,7 @@ const NotesContent = () => {
                         </Link>
                         <Link to="#">
                           <span>
-                            <i data-feather="trash-2" />
+                            <i className="feather icon-trash-2" />
                           </span>
                         </Link>
                       </div>
@@ -313,8 +320,8 @@ const NotesContent = () => {
                       <Link
                         to="#"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                        aria-expanded="false">
+                        
                         <i className="fas fa-ellipsis-v" />
                       </Link>
                       <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -322,10 +329,10 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#edit-note-units"
-                        >
+                          data-bs-target="#edit-note-units">
+                          
                           <span>
-                            <i data-feather="edit" />
+                            <i className="feather icon-edit" />
                           </span>
                           Edit
                         </Link>
@@ -333,16 +340,16 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#delete-note-units"
-                        >
+                          data-bs-target="#delete-note-units">
+                          
                           <span>
-                            <i data-feather="trash-2" />
+                            <i className="feather icon-trash-2" />
                           </span>
                           Delete
                         </Link>
                         <Link to="#" className="dropdown-item">
                           <span>
-                            <i data-feather="star" />
+                            <i className="feather icon-star" />
                           </span>
                           Not Important
                         </Link>
@@ -350,10 +357,10 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#view-note-units"
-                        >
+                          data-bs-target="#view-note-units">
+                          
                           <span>
-                            <i data-feather="eye" />
+                            <i className="feather icon-plus-eye" />
                           </span>
                           View
                         </Link>
@@ -375,8 +382,8 @@ const NotesContent = () => {
                             <img
                               src="./assets/img/profiles/profile-03.png"
                               alt="Profile"
-                              className="img-fluid"
-                            />
+                              className="img-fluid" />
+                            
                           </span>
                         </Link>
                         <div className="d-flex">
@@ -394,7 +401,7 @@ const NotesContent = () => {
                         </Link>
                         <Link to="#">
                           <span>
-                            <i data-feather="trash-2" />
+                            <i className="feather icon-trash-2" />
                           </span>
                         </Link>
                       </div>
@@ -408,8 +415,8 @@ const NotesContent = () => {
                       <Link
                         to="#"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                        aria-expanded="false">
+                        
                         <i className="fas fa-ellipsis-v" />
                       </Link>
                       <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -417,10 +424,10 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#edit-note-units"
-                        >
+                          data-bs-target="#edit-note-units">
+                          
                           <span>
-                            <i data-feather="edit" />
+                            <i className="feather icon-edit" />
                           </span>
                           Edit
                         </Link>
@@ -428,16 +435,16 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#delete-note-units"
-                        >
+                          data-bs-target="#delete-note-units">
+                          
                           <span>
-                            <i data-feather="trash-2" />
+                            <i className="feather icon-trash-2" />
                           </span>
                           Delete
                         </Link>
                         <Link to="#" className="dropdown-item">
                           <span>
-                            <i data-feather="star" />
+                            <i className="feather icon-star" />
                           </span>
                           Not Important
                         </Link>
@@ -445,10 +452,10 @@ const NotesContent = () => {
                           to="#"
                           className="dropdown-item"
                           data-bs-toggle="modal"
-                          data-bs-target="#view-note-units"
-                        >
+                          data-bs-target="#view-note-units">
+                          
                           <span>
-                            <i data-feather="eye" />
+                            <i className="feather icon-plus-eye" />
                           </span>
                           View
                         </Link>
@@ -469,8 +476,8 @@ const NotesContent = () => {
                             <img
                               src="./assets/img/profiles/profile-02.png"
                               alt="Profile"
-                              className="img-fluid"
-                            />
+                              className="img-fluid" />
+                            
                           </span>
                         </Link>
                         <div className="d-flex">
@@ -488,7 +495,7 @@ const NotesContent = () => {
                         </Link>
                         <Link to="#">
                           <span>
-                            <i data-feather="trash-2" />
+                            <i className="feather icon-trash-2" />
                           </span>
                         </Link>
                       </div>
@@ -509,8 +516,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -518,10 +525,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -529,16 +536,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -546,10 +553,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -560,7 +567,7 @@ const NotesContent = () => {
                       <Link to="#">Backup Files EOD</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       25 Jul 2023
                     </p>
                     <p>
@@ -574,8 +581,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-26.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -588,12 +595,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -609,8 +616,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -618,10 +625,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -629,16 +636,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -646,10 +653,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -660,7 +667,7 @@ const NotesContent = () => {
                       <Link to="#">Download Server Logs</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       27 Jul 2023
                     </p>
                     <p>
@@ -675,8 +682,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-27.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -689,12 +696,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -710,8 +717,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -719,10 +726,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -730,16 +737,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -747,10 +754,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -761,7 +768,7 @@ const NotesContent = () => {
                       <Link to="#">Team meet at Starbucks</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       13 Aug 2023
                     </p>
                     <p>
@@ -775,8 +782,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-28.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -789,12 +796,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -810,8 +817,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -819,10 +826,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -830,16 +837,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -847,10 +854,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -861,7 +868,7 @@ const NotesContent = () => {
                       <Link to="#">Create a compost pile</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       23 Aug 2023
                     </p>
                     <p>
@@ -876,8 +883,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-29.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -890,12 +897,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -911,8 +918,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -920,10 +927,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -931,16 +938,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -948,10 +955,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -962,7 +969,7 @@ const NotesContent = () => {
                       <Link to="#">Take a hike at a local park</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       04 Sep 2023
                     </p>
                     <p>
@@ -977,8 +984,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-30.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -991,12 +998,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1012,8 +1019,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1021,10 +1028,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -1032,16 +1039,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1049,10 +1056,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1063,7 +1070,7 @@ const NotesContent = () => {
                       <Link to="#">Research a topic interested</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       17 Sep 2023
                     </p>
                     <p>
@@ -1078,8 +1085,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-31.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1092,12 +1099,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1111,8 +1118,8 @@ const NotesContent = () => {
           className="tab-pane fade"
           id="v-pills-messages"
           role="tabpanel"
-          aria-labelledby="v-pills-messages-tab"
-        >
+          aria-labelledby="v-pills-messages-tab">
+          
           <div className="section-card-body pt-0" id="notes-trash2">
             <div className="row">
               <div className="col-md-4 d-flex">
@@ -1124,8 +1131,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1133,10 +1140,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -1144,16 +1151,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1161,10 +1168,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1175,7 +1182,7 @@ const NotesContent = () => {
                       <Link to="#">Backup Files EOD</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       25 Jul 2023
                     </p>
                     <p>
@@ -1189,8 +1196,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-26.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1203,12 +1210,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1224,8 +1231,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1233,10 +1240,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -1244,16 +1251,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1261,10 +1268,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1275,7 +1282,7 @@ const NotesContent = () => {
                       <Link to="#">Download Server Logs</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       27 Jul 2023
                     </p>
                     <p>
@@ -1290,8 +1297,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-27.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1304,12 +1311,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1325,8 +1332,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1334,10 +1341,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -1345,16 +1352,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1362,10 +1369,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1376,7 +1383,7 @@ const NotesContent = () => {
                       <Link to="#">Team meet at Starbucks</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       13 Aug 2023
                     </p>
                     <p>
@@ -1390,8 +1397,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-28.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1404,12 +1411,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1425,8 +1432,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1434,10 +1441,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -1445,16 +1452,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1462,10 +1469,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1476,7 +1483,7 @@ const NotesContent = () => {
                       <Link to="#">Create a compost pile</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       23 Aug 2023
                     </p>
                     <p>
@@ -1491,8 +1498,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-29.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1505,12 +1512,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1526,8 +1533,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1535,10 +1542,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -1546,16 +1553,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1563,10 +1570,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1577,7 +1584,7 @@ const NotesContent = () => {
                       <Link to="#">Take a hike at a local park</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       04 Sep 2023
                     </p>
                     <p>
@@ -1592,8 +1599,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-30.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1606,12 +1613,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1627,8 +1634,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1636,10 +1643,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#edit-note-units"
-                      >
+                        data-bs-target="#edit-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Edit
                       </Link>
@@ -1647,16 +1654,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                         Not Important
                       </Link>
@@ -1664,10 +1671,10 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#view-note-units"
-                      >
+                        data-bs-target="#view-note-units">
+                        
                         <span>
-                          <i data-feather="eye" />
+                          <i className="feather icon-plus-eye" />
                         </span>
                         View
                       </Link>
@@ -1678,7 +1685,7 @@ const NotesContent = () => {
                       <Link to="#">Research a topic interested</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       17 Sep 2023
                     </p>
                     <p>
@@ -1693,8 +1700,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-31.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1707,12 +1714,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1726,14 +1733,14 @@ const NotesContent = () => {
           className="tab-pane fade"
           id="v-pills-settings"
           role="tabpanel"
-          aria-labelledby="v-pills-settings-tab"
-        >
+          aria-labelledby="v-pills-settings-tab">
+          
           <div className="row">
             <div className="col-12 d-flex align-items-center justify-content-end">
               <Link to="#" className="btn btn-cancel notes-trash-btn">
                 <span>
                   {" "}
-                  <i data-feather="trash-2" className="feather-trash-2" />
+                  <i className="feather icon-trash-2" />
                 </span>
                 Restore all
               </Link>
@@ -1750,8 +1757,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1759,16 +1766,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Permanent Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Restore Task
                       </Link>
@@ -1779,7 +1786,7 @@ const NotesContent = () => {
                       <Link to="#">Backup Files EOD</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       25 Jul 2023
                     </p>
                     <p>
@@ -1793,8 +1800,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-31.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1807,12 +1814,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1828,8 +1835,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1837,16 +1844,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Permanent Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Restore Task
                       </Link>
@@ -1857,7 +1864,7 @@ const NotesContent = () => {
                       <Link to="#">Download Server Logs</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       27 Jul 2023
                     </p>
                     <p>
@@ -1872,8 +1879,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-29.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1886,12 +1893,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -1907,8 +1914,8 @@ const NotesContent = () => {
                     <Link
                       to="#"
                       data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                      aria-expanded="false">
+                      
                       <i className="fas fa-ellipsis-v" />
                     </Link>
                     <div className="dropdown-menu notes-menu dropdown-menu-end">
@@ -1916,16 +1923,16 @@ const NotesContent = () => {
                         to="#"
                         className="dropdown-item"
                         data-bs-toggle="modal"
-                        data-bs-target="#delete-note-units"
-                      >
+                        data-bs-target="#delete-note-units">
+                        
                         <span>
-                          <i data-feather="edit" />
+                          <i className="feather icon-edit" />
                         </span>
                         Permanent Delete
                       </Link>
                       <Link to="#" className="dropdown-item">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                         Restore Task
                       </Link>
@@ -1936,7 +1943,7 @@ const NotesContent = () => {
                       <Link to="#">Team meet at Starbucks</Link>
                     </h4>
                     <p className="wrap-cal">
-                      <i data-feather="calendar" className="feather-calendar" />{" "}
+                      <i className="feather icon-plus-calendar feather-calendar" />{" "}
                       13 Aug 2023
                     </p>
                     <p>
@@ -1950,8 +1957,8 @@ const NotesContent = () => {
                           <img
                             src="./assets/img/users/user-30.jpg"
                             alt="Profile"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </span>
                       </Link>
                       <div className="d-flex">
@@ -1964,12 +1971,12 @@ const NotesContent = () => {
                     <div className="notes-star-delete">
                       <Link to="#">
                         <span>
-                          <i data-feather="star" />
+                          <i className="feather icon-star" />
                         </span>
                       </Link>
                       <Link to="#">
                         <span>
-                          <i data-feather="trash-2" />
+                          <i className="feather icon-trash-2" />
                         </span>
                       </Link>
                     </div>
@@ -2008,8 +2015,8 @@ const NotesContent = () => {
           </div>
         </div>
       </div>
-    </>
-  );
+    </>);
+
 };
 
 export default NotesContent;

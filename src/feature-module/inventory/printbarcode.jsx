@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import { PaperSize, Store, WareHouse } from "../../core/common/selectOption/selectOption";
-import { MinusCircle, PlusCircle } from "feather-icons-react/build/IconComponents";
-import CommonDeleteModal from "../../core/common/modal/commonDeleteModal";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-const PrintBarcode = () => {
+import CommonFooter from "../../components/footer/commonFooter";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import {
+  barcodeImg1,
+  barcodeImg2,
+  stockImg02,
+  stockImg03 } from
+"../../utils/imagepath";
+import CommonSelect from "../../components/select/common-select";
+import DeleteModal from "../../components/delete-modal";
 
+const PrintBarcode = () => {
   const [quantity, setQuantity] = useState(4);
+  const [selectedStore, setSelectedStore] = useState(null);
+  const [selectedPaperSize, setSelectedPaperSize] = useState(null);
+  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
 
   const handleDecrement = () => {
     if (quantity > 1) {
@@ -21,6 +27,19 @@ const PrintBarcode = () => {
   const handleIncrement = () => {
     setQuantity(quantity + 1);
   };
+
+  const WareHouse = [
+  { value: "main", label: "Main Warehouse" },
+  { value: "secondary", label: "Secondary Warehouse" }];
+
+  const Store = [
+  { value: "store1", label: "Store 1" },
+  { value: "store2", label: "Store 2" }];
+
+  const PaperSize = [
+  { value: "A4", label: "A4" },
+  { value: "A5", label: "A5" }];
+
 
   return (
     <>
@@ -49,21 +68,27 @@ const PrintBarcode = () => {
                       <label className="form-label">
                         Warehouse<span className="text-danger ms-1">*</span>
                       </label>
-                      <Select
-                        classNamePrefix="react-select"
+                      <CommonSelect
+                        className="w-100"
                         options={WareHouse}
+                        value={selectedWarehouse}
+                        onChange={(e) => setSelectedWarehouse(e.value)}
                         placeholder="Choose"
-                      />
+                        filter={false} />
+                      
                     </div>
                     <div className="col-sm-6 mb-3 seacrh-barcode-item-one">
                       <label className="form-label">
                         Store<span className="text-danger ms-1">*</span>
                       </label>
-                      <Select
-                        classNamePrefix="react-select"
+                      <CommonSelect
+                        className="w-100"
                         options={Store}
+                        value={selectedStore}
+                        onChange={(e) => setSelectedStore(e.value)}
                         placeholder="Choose"
-                      />
+                        filter={false} />
+                      
                     </div>
                   </div>
                 </div>
@@ -81,21 +106,29 @@ const PrintBarcode = () => {
                         data-bs-toggle="dropdown"
                         data-bs-auto-close="outside"
                         className="form-control text-gray-3"
-                        placeholder="Search Product by Code"
-                      />
+                        placeholder="Search Product by Code" />
+                      
                       <div className="resultBox"></div>
                       <div className="icon">
                         <i className="fas fa-search" />
                       </div>
                       <div
                         className="dropdown-menu search-dropdown w-100 h-auto rounded-1 mt-2"
-                        aria-labelledby="dropdownsearchClickable"
-                      >
+                        aria-labelledby="dropdownsearchClickable">
+                        
                         <ul>
-                          <li className="fs-14 text-gray-9 mb-2">Amazon Echo Dot</li>
-                          <li className="fs-14 text-gray-9 mb-2">Armani Belt</li>
-                          <li className="fs-14 text-gray-9 mb-2">Apple Watch</li>
-                          <li className="fs-14 text-gray-9">Apple Iphone 14 Pro</li>
+                          <li className="fs-14 text-gray-9 mb-2">
+                            Amazon Echo Dot
+                          </li>
+                          <li className="fs-14 text-gray-9 mb-2">
+                            Armani Belt
+                          </li>
+                          <li className="fs-14 text-gray-9 mb-2">
+                            Apple Watch
+                          </li>
+                          <li className="fs-14 text-gray-9">
+                            Apple Iphone 14 Pro
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -120,14 +153,8 @@ const PrintBarcode = () => {
                       <tr>
                         <td>
                           <div className="d-flex align-items-center">
-                            <Link
-                              to="#"
-                              className="avatar avatar-md me-2"
-                            >
-                              <ImageWithBasePath
-                                src="assets/img/products/stock-img-02.png"
-                                alt="product"
-                              />
+                            <Link to="#" className="avatar avatar-md me-2">
+                              <img src={stockImg02} alt="product" />
                             </Link>
                             <Link to="#">Nike Jordan</Link>
                           </div>
@@ -136,19 +163,23 @@ const PrintBarcode = () => {
                         <td>HG3FK</td>
                         <td>
                           <div className="product-quantity border-secondary-transparent">
-                            <span className="quantity-btn">
-                              <MinusCircle className="feather-search" />
-                              onClick={handleDecrement}
+                            <span
+                              className="quantity-btn"
+                              onClick={handleDecrement}>
+                              
+                              <i className="feather icon-minus-circle feather-search" />
                             </span>
                             <input
                               type="text"
                               className="quntity-input"
-                              defaultValue={4}
-                            />
-                            <span className="quantity-btn">
+                              defaultValue={4} />
+                            
+                            <span
+                              className="quantity-btn"
+                              onClick={handleIncrement}>
+                              
                               +
-                              <PlusCircle className="plus-circle" />
-                              onClick={handleIncrement}
+                              <i className="feather icon-plus-circle plus-circle" />
                             </span>
                           </div>
                         </td>
@@ -158,9 +189,9 @@ const PrintBarcode = () => {
                               data-bs-toggle="modal"
                               data-bs-target="#delete-modal"
                               className="barcode-delete-icon"
-                              to="#"
-                            >
-                              <i data-feather="trash-2" className="feather-trash-2" />
+                              to="#">
+                              
+                              <i className="feather icon-trash-2" />
                             </Link>
                           </div>
                         </td>
@@ -168,14 +199,8 @@ const PrintBarcode = () => {
                       <tr>
                         <td>
                           <div className="d-flex align-items-center">
-                            <Link
-                              to="#"
-                              className="avatar avatar-md me-2"
-                            >
-                              <ImageWithBasePath
-                                src="assets/img/products/stock-img-03.png"
-                                alt="product"
-                              />
+                            <Link to="#" className="avatar avatar-md me-2">
+                              <img src={stockImg03} alt="product" />
                             </Link>
                             <Link to="#">Apple Series 5 Watch</Link>
                           </div>
@@ -184,19 +209,23 @@ const PrintBarcode = () => {
                         <td>TEUIU7</td>
                         <td>
                           <div className="product-quantity border-secondary-transparent">
-                            <span className="quantity-btn">
-                              <MinusCircle className="feather-search" />
-                              onClick={handleDecrement}
+                            <span
+                              className="quantity-btn"
+                              onClick={handleDecrement}>
+                              
+                              <i className="feather icon-minus-circle feather-search" />
                             </span>
                             <input
                               type="text"
                               className="quntity-input"
-                              defaultValue={4}
-                            />
-                            <span className="quantity-btn">
+                              defaultValue={4} />
+                            
+                            <span
+                              className="quantity-btn"
+                              onClick={handleIncrement}>
+                              
                               +
-                              <PlusCircle className="plus-circle" />
-                              onClick={handleIncrement}
+                              <i className="feather icon-plus-circle plus-circle" />
                             </span>
                           </div>
                         </td>
@@ -206,9 +235,9 @@ const PrintBarcode = () => {
                               data-bs-toggle="modal"
                               data-bs-target="#delete-modal"
                               className="barcode-delete-icon"
-                              to="#"
-                            >
-                              <i data-feather="trash-2" className="feather-trash-2" />
+                              to="#">
+                              
+                              <i className="feather icon-trash-2" />
                             </Link>
                           </div>
                         </td>
@@ -225,11 +254,14 @@ const PrintBarcode = () => {
                     <label className="form-label">
                       Paper Size<span className="text-danger ms-1">*</span>
                     </label>
-                    <Select
-                      classNamePrefix="react-select"
+                    <CommonSelect
+                      className="w-100"
                       options={PaperSize}
+                      value={selectedPaperSize}
+                      onChange={(e) => setSelectedPaperSize(e.value)}
                       placeholder="Choose"
-                    />
+                      filter={false} />
+                    
                   </form>
                 </div>
                 <div className="col-lg-6 pt-3">
@@ -243,9 +275,12 @@ const PrintBarcode = () => {
                               type="checkbox"
                               id="user7"
                               className="check"
-                              defaultChecked
-                            />
-                            <label htmlFor="user7" className="checktoggle mb-0" />
+                              defaultChecked />
+                            
+                            <label
+                              htmlFor="user7"
+                              className="checktoggle mb-0" />
+                            
                           </div>
                         </div>
                       </div>
@@ -259,9 +294,12 @@ const PrintBarcode = () => {
                               type="checkbox"
                               id="user8"
                               className="check"
-                              defaultChecked
-                            />
-                            <label htmlFor="user8" className="checktoggle mb-0" />
+                              defaultChecked />
+                            
+                            <label
+                              htmlFor="user8"
+                              className="checktoggle mb-0" />
+                            
                           </div>
                         </div>
                       </div>
@@ -275,8 +313,8 @@ const PrintBarcode = () => {
                               type="checkbox"
                               id="user9"
                               className="check"
-                              defaultChecked
-                            />
+                              defaultChecked />
+                            
                             <label htmlFor="user9" className="checktoggle mb-0">
                               {" "}
                             </label>
@@ -293,26 +331,20 @@ const PrintBarcode = () => {
                 to="#"
                 className="btn btn-submit btn-primary me-2 mt-0"
                 data-bs-toggle="modal"
-                data-bs-target="#prints-barcode"
-              >
+                data-bs-target="#prints-barcode">
+                
                 <span>
                   <i className="fas fa-eye me-2" />
                 </span>
                 Generate Barcode
               </Link>
-              <Link
-                to="#"
-                className="btn btn-cancel btn-secondary fs-13 me-2"
-              >
+              <Link to="#" className="btn btn-cancel btn-secondary fs-13 me-2">
                 <span>
                   <i className="fas fa-power-off me-2" />
                 </span>
                 Reset Barcode
               </Link>
-              <Link
-                to="#"
-                className="btn btn-cancel btn-danger close-btn"
-              >
+              <Link to="#" className="btn btn-cancel btn-danger close-btn">
                 <span>
                   <i className="fas fa-print me-2" />
                 </span>
@@ -323,7 +355,6 @@ const PrintBarcode = () => {
         </div>
         <CommonFooter />
       </div>
-
 
       {/* Print Barcode */}
       <div className="modal fade" id="prints-barcode">
@@ -339,8 +370,8 @@ const PrintBarcode = () => {
                     type="button"
                     className="close bg-danger text-white fs-16 shadow-none"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
-                  >
+                    aria-label="Close">
+                    
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
@@ -348,8 +379,8 @@ const PrintBarcode = () => {
                   <div className="d-flex justify-content-end">
                     <Link
                       to="#"
-                      className="btn btn-cancel close-btn btn-danger shadow-none"
-                    >
+                      className="btn btn-cancel close-btn btn-danger shadow-none">
+                      
                       <span>
                         <i className="fas fa-print me-2" />
                       </span>
@@ -366,11 +397,11 @@ const PrintBarcode = () => {
                         <p>Nike Jordan</p>
                         <p>Price: $400</p>
                         <div className="barscaner-img">
-                          <ImageWithBasePath
-                            src="./assets/img/barcode/barcode-01.png"
+                          <img
+                            src={barcodeImg1}
                             alt="Barcode"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </div>
                       </div>
                     </div>
@@ -380,11 +411,11 @@ const PrintBarcode = () => {
                         <p>Nike Jordan</p>
                         <p>Price: $400</p>
                         <div className="barscaner-img">
-                          <ImageWithBasePath
-                            src="./assets/img/barcode/barcode-01.png"
+                          <img
+                            src={barcodeImg1}
                             alt="Barcode"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </div>
                       </div>
                     </div>
@@ -394,11 +425,11 @@ const PrintBarcode = () => {
                         <p>Nike Jordan</p>
                         <p>Price: $400</p>
                         <div className="barscaner-img">
-                          <ImageWithBasePath
-                            src="./assets/img/barcode/barcode-01.png"
+                          <img
+                            src={barcodeImg1}
                             alt="Barcode"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </div>
                       </div>
                     </div>
@@ -413,11 +444,11 @@ const PrintBarcode = () => {
                         <p>Apple Series 5 Watch</p>
                         <p>Price: $300</p>
                         <div className="barscaner-img">
-                          <ImageWithBasePath
-                            src="./assets/img/barcode/barcode-02.png"
+                          <img
+                            src={barcodeImg2}
                             alt="Barcode"
-                            className="img-fluid"
-                          />
+                            className="img-fluid" />
+                          
                         </div>
                       </div>
                     </div>
@@ -430,11 +461,9 @@ const PrintBarcode = () => {
       </div>
       {/* /Print Barcode */}
 
+      <DeleteModal />
+    </>);
 
-      <CommonDeleteModal />
-    </>
-
-  );
 };
 
 export default PrintBarcode;

@@ -1,20 +1,16 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { all_routes } from "../../../routes/all_routes";
+import RefreshIcon from "../../../components/tooltip-content/refresh";
+import CollapesIcon from "../../../components/tooltip-content/collapes";
+import CommonDateRangePicker from "../../../components/date-range-picker/common-date-range-picker";
 import TodoModal from "../../../core/modals/todoModal";
-import { DatePicker } from "antd";
-import ImageWithBasePath from "../../../core/img/imagewithbasebath";
-import { all_routes } from "../../../Router/all_routes";
-import { Grid, List } from "feather-icons-react/build/IconComponents";
-import PredefinedDateRanges from "../../../core/common/range-picker/datePicker";
-import RefreshIcon from "../../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../../core/common/tooltip-content/collapes";
-
-
+import { avatar01, avatar12, avatar14, avatar15, avatar16, avatar18, avatar19, avatar20, avatar21, avatar22, avatar23, avatar24, avatar25, avatar29, avatar_02, avatar_03, avatar_04, avatar_05, avatar_06, avatar_07, avatar_08, avatar_09, avatar_10, avatar_11, avatar_13, avatar_17 } from "../../../utils/imagepath";
+import CommonDatePicker from "../../../components/date-picker/common-date-picker";
 
 const TodoList = () => {
-
+  const [date, setDate] = useState(new Date());
   const route = all_routes;
-
 
   return (
     <>
@@ -32,12 +28,12 @@ const TodoList = () => {
               <ul className="table-top-head">
                 <li>
                   <Link to={route.todo} className="todo-grid-view active">
-                    <Grid className="feather-rotate-ccw" />
+                    <i className="feather icon-grid feather-rotate-ccw" />
                   </Link>
                 </li>
                 <li>
                   <Link to={route.todolist} className="todo-list-view">
-                    <List className="feather-rotate-ccw" />
+                    <i className="feather icon-list feather-rotate-ccw" />
                   </Link>
                 </li>
                 <RefreshIcon />
@@ -48,9 +44,9 @@ const TodoList = () => {
                   to="#"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#add_todo"
-                >
-                <i className='ti ti-circle-plus me-1'></i>
+                  data-bs-target="#add_todo">
+                  
+                  <i className="ti ti-circle-plus me-1"></i>
                   Create New
                 </Link>
               </div>
@@ -65,7 +61,7 @@ const TodoList = () => {
                 <div className="d-flex align-items-center flex-wrap row-gap-3">
                   <div className="me-3">
                     <div className="input-icon-end position-relative">
-                      <PredefinedDateRanges />
+                      <CommonDateRangePicker />
                       <span className="input-icon-addon">
                         <i className="ti ti-chevron-down" />
                       </span>
@@ -75,53 +71,38 @@ const TodoList = () => {
                     <span className="input-icon-addon">
                       <i className="ti ti-calendar" />
                     </span>
-                    <DatePicker
-                      className="form-control datetimepicker"
-                      format={{
-                        format: "DD-MM-YYYY",
-                        type: "mask",
-                      }}
-                      placeholder="DD-MM-YYYY"
-                    />
+                <CommonDatePicker
+                      value={date}
+                      onChange={setDate}
+                      className="w-100" />
+                    
                   </div>
                   <div className="dropdown me-2">
                     <Link
                       to="#"
                       className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                      data-bs-toggle="dropdown"
-                    >
+                      data-bs-toggle="dropdown">
+                      
                       Tags
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           All Tags
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Urgent
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           High
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Medium
                         </Link>
                       </li>
@@ -131,40 +112,28 @@ const TodoList = () => {
                     <Link
                       to="#"
                       className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                      data-bs-toggle="dropdown"
-                    >
+                      data-bs-toggle="dropdown">
+                      
                       Assignee
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Sophie
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Cameron
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Doris
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Rufana
                         </Link>
                       </li>
@@ -174,40 +143,28 @@ const TodoList = () => {
                     <Link
                       to="#"
                       className="dropdown-toggle btn btn-white d-inline-flex align-items-center"
-                      data-bs-toggle="dropdown"
-                    >
+                      data-bs-toggle="dropdown">
+                      
                       Select Status
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Completed
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Pending
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Inprogress
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Onhold
                         </Link>
                       </li>
@@ -217,33 +174,26 @@ const TodoList = () => {
                     <Link
                       to="#"
                       className="dropdown-toggle btn btn-white d-inline-flex align-items-center fs-12"
-                      data-bs-toggle="dropdown"
-                    >
-                      <span className="fs-12 d-inline-flex me-1">Sort By : </span>
+                      data-bs-toggle="dropdown">
+                      
+                      <span className="fs-12 d-inline-flex me-1">
+                        Sort By :{" "}
+                      </span>
                       Last 7 Days
                     </Link>
                     <ul className="dropdown-menu  dropdown-menu-end p-3">
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Last 7 Days
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Last 1 month
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to="#"
-                          className="dropdown-item rounded-1"
-                        >
+                        <Link to="#" className="dropdown-item rounded-1">
                           Last 1 year
                         </Link>
                       </li>
@@ -262,8 +212,8 @@ const TodoList = () => {
                             <input
                               className="form-check-input"
                               type="checkbox"
-                              id="select-all"
-                            />
+                              id="select-all" />
+                            
                           </div>
                         </th>
                         <th>Company Name</th>
@@ -281,7 +231,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star" />
@@ -302,25 +255,25 @@ const TodoList = () => {
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-19.jpg"
-                                alt="img"
-                              />
+                                src={avatar19}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-29.jpg"
-                                alt="img"
-                              />
+                                src={avatar29}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -329,16 +282,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 100%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-success rounded"
                               role="progressbar"
                               style={{ width: "100%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>14/01/2024</td>
@@ -353,17 +306,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -373,7 +328,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star-filled filled" />
@@ -394,25 +352,25 @@ const TodoList = () => {
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-01.jpg"
-                                alt="img"
-                              />
+                                src={avatar01}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-02.jpg"
-                                alt="img"
-                              />
+                                src={avatar_02}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-03.jpg"
-                                alt="img"
-                              />
+                                src={avatar_03}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -421,16 +379,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 15%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-danger rounded"
                               role="progressbar"
                               style={{ width: "15%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>21/01/2024</td>
@@ -445,17 +403,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -465,7 +425,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star" />
@@ -486,25 +449,25 @@ const TodoList = () => {
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-04.jpg"
-                                alt="img"
-                              />
+                                src={avatar_04}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-05.jpg"
-                                alt="img"
-                              />
+                                src={avatar_05}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-06.jpg"
-                                alt="img"
-                              />
+                                src={avatar_06}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -513,16 +476,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 45%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-warning rounded"
                               role="progressbar"
                               style={{ width: "45%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>20/02/2024</td>
@@ -537,17 +500,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -557,7 +522,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star" />
@@ -578,25 +546,25 @@ const TodoList = () => {
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-05.jpg"
-                                alt="img"
-                              />
+                                src={avatar_05}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-06.jpg"
-                                alt="img"
-                              />
+                                src={avatar_06}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-07.jpg"
-                                alt="img"
-                              />
+                                src={avatar_07}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -605,16 +573,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 40%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-warning rounded"
                               role="progressbar"
                               style={{ width: "40%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>15/03/2024</td>
@@ -629,17 +597,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -649,7 +619,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star" />
@@ -665,30 +638,32 @@ const TodoList = () => {
                           </p>
                         </td>
                         <td>
-                          <span className="badge badge-secondary">Reminder</span>
+                          <span className="badge badge-secondary">
+                            Reminder
+                          </span>
                         </td>
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-08.jpg"
-                                alt="img"
-                              />
+                                src={avatar_08}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-09.jpg"
-                                alt="img"
-                              />
+                                src={avatar_09}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-10.jpg"
-                                alt="img"
-                              />
+                                src={avatar_10}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -697,16 +672,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 65%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-purple rounded"
                               role="progressbar"
                               style={{ width: "65%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>12/04/2024</td>
@@ -721,17 +696,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -741,7 +718,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star" />
@@ -762,25 +742,25 @@ const TodoList = () => {
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-11.jpg"
-                                alt="img"
-                              />
+                                src={avatar_11}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-12.jpg"
-                                alt="img"
-                              />
+                                src={avatar12}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-13.jpg"
-                                alt="img"
-                              />
+                                src={avatar_13}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -789,16 +769,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 85%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-pink rounded"
                               role="progressbar"
                               style={{ width: "85%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>20/05/2024</td>
@@ -813,17 +793,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -833,7 +815,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star" />
@@ -854,25 +839,25 @@ const TodoList = () => {
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-14.jpg"
-                                alt="img"
-                              />
+                                src={avatar14}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-15.jpg"
-                                alt="img"
-                              />
+                                src={avatar15}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-16.jpg"
-                                alt="img"
-                              />
+                                src={avatar16}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -881,16 +866,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 100%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-success rounded"
                               role="progressbar"
                               style={{ width: "100%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>06/07/2024</td>
@@ -905,17 +890,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -925,7 +912,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star" />
@@ -946,25 +936,25 @@ const TodoList = () => {
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-17.jpg"
-                                alt="img"
-                              />
+                                src={avatar_17}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-18.jpg"
-                                alt="img"
-                              />
+                                src={avatar18}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-19.jpg"
-                                alt="img"
-                              />
+                                src={avatar19}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -973,16 +963,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 65%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-danger rounded"
                               role="progressbar"
                               style={{ width: "65%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>02/09/2024</td>
@@ -997,17 +987,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -1017,7 +1009,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star" />
@@ -1033,30 +1028,32 @@ const TodoList = () => {
                           </p>
                         </td>
                         <td>
-                          <span className="badge badge-secondary">Reminder</span>
+                          <span className="badge badge-secondary">
+                            Reminder
+                          </span>
                         </td>
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-20.jpg"
-                                alt="img"
-                              />
+                                src={avatar20}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-21.jpg"
-                                alt="img"
-                              />
+                                src={avatar21}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-22.jpg"
-                                alt="img"
-                              />
+                                src={avatar22}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -1065,16 +1062,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 75%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-purple rounded"
                               role="progressbar"
                               style={{ width: "75%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>15/11/2024</td>
@@ -1089,17 +1086,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -1109,7 +1108,10 @@ const TodoList = () => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="form-check form-check-md">
-                              <input className="form-check-input" type="checkbox" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox" />
+                              
                             </div>
                             <span className="mx-2 d-flex align-items-center rating-select">
                               <i className="ti ti-star" />
@@ -1130,25 +1132,25 @@ const TodoList = () => {
                         <td>
                           <div className="avatar-list-stacked avatar-group-sm">
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-23.jpg"
-                                alt="img"
-                              />
+                                src={avatar23}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-24.jpg"
-                                alt="img"
-                              />
+                                src={avatar24}
+                                alt="img" />
+                              
                             </span>
                             <span className="avatar avatar-rounded">
-                              <ImageWithBasePath
+                              <img
                                 className="border border-white"
-                                src="assets/img/profiles/avatar-25.jpg"
-                                alt="img"
-                              />
+                                src={avatar25}
+                                alt="img" />
+                              
                             </span>
                           </div>
                         </td>
@@ -1157,16 +1159,16 @@ const TodoList = () => {
                           <span className="d-block mb-1">Progress : 90%</span>
                           <div
                             className="progress progress-xs flex-grow-1 mb-2"
-                            style={{ width: 190 }}
-                          >
+                            style={{ width: 190 }}>
+                            
                             <div
                               className="progress-bar bg-pink rounded"
                               role="progressbar"
                               style={{ width: "90%" }}
                               aria-valuenow={30}
                               aria-valuemin={0}
-                              aria-valuemax={100}
-                            />
+                              aria-valuemax={100} />
+                            
                           </div>
                         </td>
                         <td>10/12/2024</td>
@@ -1181,17 +1183,19 @@ const TodoList = () => {
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#edit_todo"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#edit_todo">
+                              
                               <i className="ti ti-edit" />
                             </Link>
                             <Link
                               to="#"
                               className="btn btn-sm btn-icon"
-                              data-bs-toggle="modal" data-inert={true}
-                              data-bs-target="#delete_modal"
-                            >
+                              data-bs-toggle="modal"
+                              data-inert={true}
+                              data-bs-target="#delete_modal">
+                              
                               <i className="ti ti-trash" />
                             </Link>
                           </div>
@@ -1218,8 +1222,8 @@ const TodoList = () => {
       </>
 
       <TodoModal />
-    </>
-  );
+    </>);
+
 };
 
 export default TodoList;

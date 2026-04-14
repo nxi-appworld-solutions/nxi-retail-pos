@@ -18,8 +18,7 @@ const initialState = {
   dataLoader: localStorage.getItem("dataLoader") || "enable",
   isRtl: localStorage.getItem("rtl") || false,
   headerCollapse: false,
-  expandMenus: false,
-
+  expandMenus: false
 };
 
 const themeSettingSlice = createSlice({
@@ -118,7 +117,7 @@ const themeSettingSlice = createSlice({
       state.dataTopbarBg = "";
       state.dataColor = "primary";
       state.dataLoader = "enable";
-      state.isRtl=""
+      state.isRtl = "";
       localStorage.setItem("dataLayout", "default");
       localStorage.setItem("dataWidth", "fluid");
       localStorage.setItem("dataCard", "bordered");
@@ -134,8 +133,8 @@ const themeSettingSlice = createSlice({
     },
     setExpandMenu: (state, { payload }) => {
       state.expandMenus = payload;
-    },
-  },
+    }
+  }
 });
 
 export const {

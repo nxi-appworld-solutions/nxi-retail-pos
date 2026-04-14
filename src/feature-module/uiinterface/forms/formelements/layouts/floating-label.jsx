@@ -1,6 +1,7 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
-import { all_routes } from "../../../../../Router/all_routes";
+import { all_routes } from "../../../../../routes/all_routes";
+
 
 const FloatingLabel = () => {
   const route = all_routes;
@@ -36,8 +37,8 @@ const FloatingLabel = () => {
                       type="email"
                       className="form-control"
                       id="floatingInput"
-                      placeholder="name@example.com"
-                    />
+                      placeholder="name@example.com" />
+                    
                     <label htmlFor="floatingInput">Email address</label>
                   </div>
                   <div className="form-floating">
@@ -45,8 +46,8 @@ const FloatingLabel = () => {
                       type="password"
                       className="form-control"
                       id="floatingPassword"
-                      placeholder="Password"
-                    />
+                      placeholder="Password" />
+                    
                     <label htmlFor="floatingPassword">Password</label>
                   </div>
                 </div>
@@ -61,11 +62,11 @@ const FloatingLabel = () => {
                   <div className="form-floating mb-3">
                     <input
                       type="email"
-                      readOnly=""
+                      readOnly
                       className="form-control-plaintext"
                       id="floatingEmptyPlaintextInput"
-                      placeholder="name@example.com"
-                    />
+                      placeholder="name@example.com" />
+                    
                     <label htmlFor="floatingEmptyPlaintextInput">
                       Empty input
                     </label>
@@ -73,12 +74,12 @@ const FloatingLabel = () => {
                   <div className="form-floating">
                     <input
                       type="email"
-                      readOnly=""
+                      readOnly
                       className="form-control-plaintext"
                       id="floatingPlaintextInput"
                       placeholder="name@example.com"
-                      defaultValue="name@example.com"
-                    />
+                      defaultValue="name@example.com" />
+                    
                     <label htmlFor="floatingPlaintextInput">
                       Input with value
                     </label>
@@ -104,8 +105,8 @@ const FloatingLabel = () => {
                       className="form-control"
                       id="floatingInputValue"
                       placeholder="name@example.com"
-                      defaultValue="test@example.com"
-                    />
+                      defaultValue="test@example.com" />
+                    
                     <label htmlFor="floatingInputValue">Input with value</label>
                   </form>
                   <form className="form-floatin">
@@ -114,8 +115,8 @@ const FloatingLabel = () => {
                       className="form-control is-invalid"
                       id="floatingInputInvalid"
                       placeholder="name@example.com"
-                      defaultValue="test@example.com"
-                    />
+                      defaultValue="test@example.com" />
+                    
                     <label htmlFor="floatingInputInvalid">Invalid input</label>
                   </form>
                 </div>
@@ -132,8 +133,8 @@ const FloatingLabel = () => {
                       className="form-control"
                       placeholder="Leave a comment here"
                       id="floatingTextarea"
-                      defaultValue={""}
-                    />
+                      defaultValue={""} />
+                    
                     <label htmlFor="floatingTextarea">Description</label>
                   </div>
                   <div className="form-floating">
@@ -142,9 +143,9 @@ const FloatingLabel = () => {
                       placeholder="Leave a comment here"
                       id="floatingTextarea2"
                       rows={1}
-                      disabled=""
-                      defaultValue={""}
-                    />
+                      disabled
+                      defaultValue={""} />
+                    
                     <label htmlFor="floatingTextarea2">Disabled</label>
                   </div>
                 </div>
@@ -164,8 +165,8 @@ const FloatingLabel = () => {
                     <select
                       className="form-select"
                       id="floatingSelect"
-                      aria-label="Floating label select example"
-                    >
+                      aria-label="Floating label select example">
+                      
                       <option value="">Open this select menu</option>
                       <option value={1}>One</option>
                       <option value={2}>Two</option>
@@ -190,8 +191,8 @@ const FloatingLabel = () => {
                           className="form-control"
                           id="floatingInputGrid"
                           placeholder="name@example.com"
-                          defaultValue="mdo@example.com"
-                        />
+                          defaultValue="mdo@example.com" />
+                        
                         <label htmlFor="floatingInputGrid">Email address</label>
                       </div>
                     </div>
@@ -229,8 +230,8 @@ const FloatingLabel = () => {
                           type="email"
                           className="form-control"
                           id="floatingInputprimary"
-                          placeholder="name@example.com"
-                        />
+                          placeholder="name@example.com" />
+                        
                         <label htmlFor="floatingInputprimary">primary</label>
                       </div>
                     </div>
@@ -240,8 +241,8 @@ const FloatingLabel = () => {
                           type="email"
                           className="form-control"
                           id="floatingInputsecondary"
-                          placeholder="name@example.com"
-                        />
+                          placeholder="name@example.com" />
+                        
                         <label htmlFor="floatingInputsecondary">
                           secondary
                         </label>
@@ -253,8 +254,8 @@ const FloatingLabel = () => {
                           type="email"
                           className="form-control"
                           id="floatingInputwarning"
-                          placeholder="name@example.com"
-                        />
+                          placeholder="name@example.com" />
+                        
                         <label htmlFor="floatingInputwarning">warning</label>
                       </div>
                     </div>
@@ -264,8 +265,8 @@ const FloatingLabel = () => {
                           type="email"
                           className="form-control"
                           id="floatingInputinfo"
-                          placeholder="name@example.com"
-                        />
+                          placeholder="name@example.com" />
+                        
                         <label htmlFor="floatingInputinfo">info</label>
                       </div>
                     </div>
@@ -275,8 +276,8 @@ const FloatingLabel = () => {
                           type="email"
                           className="form-control"
                           id="floatingInputsuccess"
-                          placeholder="name@example.com"
-                        />
+                          placeholder="name@example.com" />
+                        
                         <label htmlFor="floatingInputsuccess">success</label>
                       </div>
                     </div>
@@ -286,8 +287,8 @@ const FloatingLabel = () => {
                           type="email"
                           className="form-control"
                           id="floatingInputdanger"
-                          placeholder="name@example.com"
-                        />
+                          placeholder="name@example.com" />
+                        
                         <label htmlFor="floatingInputdanger">danger</label>
                       </div>
                     </div>
@@ -299,8 +300,8 @@ const FloatingLabel = () => {
           {/* /Floating Label Colors */}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default FloatingLabel;

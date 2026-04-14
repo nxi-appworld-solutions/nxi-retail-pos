@@ -1,32 +1,30 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import copy from "clipboard-copy";
-import { all_routes } from "../../../Router/all_routes";
+import { all_routes } from "../../../routes/all_routes";
+
 
 const ClipBoard = () => {
   const inputCopyRef = useRef(null);
   const [isCopied, setIsCopied] = useState(false);
-  const route = all_routes;
+  const routes = all_routes;
 
   const handleCopy = () => {
     if (inputCopyRef.current) {
       copy(inputCopyRef.current.value);
       setIsCopied(true);
-
-      // Reset the copied state after a certain period (e.g., 2 seconds)
       setTimeout(() => {
         setIsCopied(false);
       }, 2000);
     }
   };
+
   const handleCut = () => {
     if (inputCopyRef.current) {
       copy(inputCopyRef.current.value);
-      inputCopyRef.current.value = ""; // Clear the input
+      inputCopyRef.current.value = "";
       setIsCopied(true);
-
-      // Reset the copied state after a certain period (e.g., 2 seconds)
       setTimeout(() => {
         setIsCopied(false);
       }, 2000);
@@ -40,7 +38,6 @@ const ClipBoard = () => {
     if (textareaCopyRef.current) {
       copy(textareaCopyRef.current.value);
       setIsCopied1(true);
-      // Reset the copied state after a certain period (e.g., 2 seconds)
       setTimeout(() => {
         setIsCopied(false);
       }, 2000);
@@ -52,100 +49,49 @@ const ClipBoard = () => {
       copy(textareaCopyRef.current.value);
       textareaCopyRef.current.value = "";
       setIsCopied(true);
-      // Reset the copied state after a certain period (e.g., 2 seconds)
       setTimeout(() => {
         setIsCopied(false);
       }, 2000);
     }
   };
-  // const [isCopied2, setIsCopied2] = useState(false);
 
-  // const handleCopyOTP = () => {
-  //   const otpValue = '22991'; // The OTP value you want to copy
-  //   copy(otpValue); // Copy the OTP value to clipboard
-  //   setIsCopied(true); // Set the state to indicate the OTP is copied
-  // };
   const [isCopied2, setIsCopied2] = useState(false);
   const otpRef = useRef(null);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      // Check if the clicked element is outside the OTP text span
       if (otpRef.current && !otpRef.current.contains(event.target)) {
-        // Check if there's any text selected within the OTP span
-        if (window.getSelection().toString() !== '') {
-          // Deselect the text
-          if (window.getSelection) {
-            window.getSelection().removeAllRanges();
-          } else if (document.selection) {
-            document.selection.empty();
-          }
+        if (window.getSelection()?.toString() !== '') {
+          window.getSelection()?.removeAllRanges();
         }
       }
     };
 
-    // Add event listener to detect clicks outside the OTP text span
     document.addEventListener('mousedown', handleOutsideClick);
 
     return () => {
-      // Cleanup: Remove event listener when component unmounts
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
 
   const handleCopyOTP = () => {
-    const otpValue = '22991'; // The OTP value you want to copy
-    copy(otpValue); // Copy the OTP value to clipboard
-    setIsCopied2(true); // Set the state to indicate the OTP is copied
+    const otpValue = '22991';
+    copy(otpValue);
+    setIsCopied2(true);
   };
 
   const handleOtpClick = () => {
-    // Check if there's any text selected within the OTP span
-    if (window.getSelection().toString() !== '' && otpRef.current) {
-      // Deselect the text
-      if (window.getSelection) {
-        window.getSelection().removeAllRanges();
-      } else if (document.selection) {
-        document.selection.empty();
-      }
+    if (window.getSelection()?.toString() !== '' && otpRef.current) {
+      window.getSelection()?.removeAllRanges();
     }
   };
 
-
-
-  // const advancedParagraphRef = useRef(null);
-  // const [copiedLink, setCopiedLink] = useState(null);
-  // // eslint-disable-next-line no-unused-vars
-  // const [copiedHiddenCode, setCopiedHiddenCode] = useState(null);
-
-  // const handleCopyLink = () => {
-  //   if (advancedParagraphRef.current) {
-  //     const linkToCopy = advancedParagraphRef.current.innerText;
-  //     copy(linkToCopy);
-  //     setCopiedLink(linkToCopy);
-  //     clearSelection();
-  //   }
-  // };
-
-  // const handleCopyHiddenCode = () => {
-  //   const hiddenCode = "2291";
-  //   copy(hiddenCode);
-  //   setCopiedHiddenCode(hiddenCode);
-  //   clearSelection();
-  // };
-
-  // const clearSelection = () => {
-  //   if (window.getSelection) {
-  //     const selection = window.getSelection();
-  //     selection.removeAllRanges();
-  //   }
-  // };
-  const advancedParagraphRef = useRef(null);
+  const advancedParagrapto = useRef(null);
   const [copiedLink, setCopiedLink] = useState(null);
 
   const handleCopyLink = () => {
-    if (advancedParagraphRef.current) {
-      const linkToCopy = advancedParagraphRef.current.innerText;
+    if (advancedParagrapto.current) {
+      const linkToCopy = advancedParagrapto.current.innerText;
       copy(linkToCopy);
       setCopiedLink(linkToCopy);
       clearSelection();
@@ -155,17 +101,16 @@ const ClipBoard = () => {
   const handleCopyHiddenCode = () => {
     const hiddenCode = '2291';
     copy(hiddenCode);
-    setCopiedLink(null); // Deselect the copied link when copying hidden code
+    setCopiedLink(null);
     clearSelection();
   };
 
   const clearSelection = () => {
-    if (window.getSelection) {
-      const selection = window.getSelection();
+    const selection = window.getSelection();
+    if (selection) {
       selection.removeAllRanges();
     }
   };
-
 
   return (
     <div>
@@ -178,7 +123,7 @@ const ClipBoard = () => {
                 <h3 className="page-title">Clipboard</h3>
                 <ul className="breadcrumb">
                   <li className="breadcrumb-item">
-                    <Link to={route.dashboard}>Dashboard</Link>
+                    <Link to={routes.dashboard}>Dashboard</Link>
                   </li>
                   <li className="breadcrumb-item active">Clipboard</li>
                 </ul>
@@ -198,17 +143,16 @@ const ClipBoard = () => {
                     <form className="form-horizontal">
                       <input
                         type="text"
-                        className={`form-control mb-4 ${isCopied ? "clipboardcopyedvalue" : ""
-                          }`}
+                        className={`form-control mb-4 ${isCopied ? "clipboardcopyedvalue" : ""}`}
                         id="input-copy"
                         defaultValue="http://www.admin-dashboard.com"
-                        ref={inputCopyRef}
-                      />
+                        ref={inputCopyRef} />
+                      
                       <button
                         className="mb-1 btn clip-btn btn-primary me-1"
                         type="button"
-                        onClick={handleCopy}
-                      >
+                        onClick={handleCopy}>
+                        
                         <i className="far fa-copy" /> Copy from Input
                       </button>
                       <Link
@@ -216,8 +160,8 @@ const ClipBoard = () => {
                         className="mb-1 btn clip-btn btn-dark"
                         to="#"
                         data-clipboard-action="cut"
-                        data-clipboard-target="#input-copy"
-                      >
+                        data-clipboard-target="#input-copy">
+                        
                         <i className="fas fa-cut" /> Cut from Input
                       </Link>
                     </form>
@@ -232,20 +176,19 @@ const ClipBoard = () => {
                   <div className="clipboard">
                     <form className="form-horizontal">
                       <textarea
-                        className={`form-control mb-4 ${isCopied1 ? "clipboardcopyedvalue" : ""
-                          }`}
+                        className={`form-control mb-4 ${isCopied1 ? "clipboardcopyedvalue" : ""}`}
                         rows={3}
                         id="textarea-copy"
                         defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
-                        ref={textareaCopyRef}
-                      />
+                        ref={textareaCopyRef} />
+                      
                       <Link
                         className="mb-1 btn clip-btn btn-primary me-1"
                         to="#"
                         data-clipboard-action="copy"
                         data-clipboard-target="#textarea-copy"
-                        onClick={handleCopyTextArea}
-                      >
+                        onClick={handleCopyTextArea}>
+                        
                         <i className="far fa-copy" /> Copy from Input
                       </Link>
                       <Link
@@ -253,8 +196,8 @@ const ClipBoard = () => {
                         to="#"
                         data-clipboard-action="cut"
                         data-clipboard-target="#textarea-copy"
-                        onClick={handleCutTextArea}
-                      >
+                        onClick={handleCutTextArea}>
+                        
                         <i className="fas fa-cut" /> Cut from Input
                       </Link>
                     </form>
@@ -270,13 +213,13 @@ const ClipBoard = () => {
                     <p className="otp-pass">
                       Here is your OTP{" "}
                       <span
-                      id="paragraph-copy1"
-                      className={isCopied2 ? 'orange-text' : ''}
-                      ref={otpRef}
-                      onClick={handleOtpClick}
-                    >
-                      22991
-                    </span>
+                        id="paragraph-copy1"
+                        className={isCopied2 ? 'orange-text' : ''}
+                        ref={otpRef}
+                        onClick={handleOtpClick}>
+                        
+                        22991
+                      </span>
                       .
                     </p>
                     <p className="mb-4">Please do not share it to anyone</p>
@@ -285,9 +228,8 @@ const ClipBoard = () => {
                       to="#"
                       data-clipboard-action="copy"
                       data-clipboard-target="#paragraph-copy1"
-                      onClick={handleCopyOTP}
-
-                    >
+                      onClick={handleCopyOTP}>
+                      
                       <i className="far fa-copy" /> Copy from Input
                     </Link>
                   </div>
@@ -300,11 +242,10 @@ const ClipBoard = () => {
                 <div className="card-body">
                   <div className="clipboard copy-txt">
                     <p
-                      className={`mb-4 ${copiedLink ? "clipboardcopyedvalue" : ""
-                        }`}
-                    >
+                      className={`mb-4 ${copiedLink ? "clipboardcopyedvalue" : ""}`}>
+                      
                       Link -&gt;{" "}
-                      <span ref={advancedParagraphRef}>
+                      <span ref={advancedParagrapto}>
                         {copiedLink || "http://www.example.com/example"}
                       </span>
                     </p>
@@ -313,18 +254,17 @@ const ClipBoard = () => {
                       to="#"
                       data-clipboard-action="copy"
                       data-clipboard-target="#advanced-paragraph"
-                      onClick={handleCopyLink}
-                    >
+                      onClick={handleCopyLink}>
+                      
                       <i className="far fa-copy" /> Copy Link
                     </Link>
                     <Link
-                      className={`mb-1 btn clip-btn btn-warning ${copiedLink ? "black-text" : ""
-                        }`}
+                      className={`mb-1 btn clip-btn btn-warning ${copiedLink ? "black-text" : ""}`}
                       to="#"
                       data-clipboard-action="copy"
                       data-clipboard-text={2291}
-                      onClick={handleCopyHiddenCode}
-                    >
+                      onClick={handleCopyHiddenCode}>
+                      
                       <i className="far fa-copy" /> Copy Hidden Code
                     </Link>
                   </div>
@@ -335,8 +275,8 @@ const ClipBoard = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default ClipBoard;

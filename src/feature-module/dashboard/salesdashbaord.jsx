@@ -1,66 +1,111 @@
-import React, { useEffect, useState } from "react";
-import {
-  Calendar,
-  ChevronUp,
-  Clock,
-  RotateCcw,
-} from "feather-icons-react/build/IconComponents";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+
 import { Link } from "react-router-dom";
 import Chart from "react-apexcharts";
-import { all_routes } from "../../Router/all_routes";
-import PredefinedDateRanges from "../../core/common/range-picker/datePicker";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import DashboardSummary from "../../pages/SalesDashboard/sections/DashboardSummary";
-import { dashboardCardSummary } from "../../services/service";
-import { toast } from "react-toastify";
-import Loader from "../../components/loader/loader";
+import { all_routes } from "../../routes/all_routes";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import {
+  expireProduct01,
+  expireProduct02,
+  expireProduct03,
+  expireProduct04,
+  HiIcon,
+  purchasedEarningsIcon,
+  stockImg01,
+  stockImg02,
+  stockImg03,
+  stockImg04,
+  stockImg05,
+  stockImg06,
+  totalSalesIcon,
+  weeklyEarning } from
+"../../utils/imagepath";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
 
 const SalesDashbaord = () => {
-  const [loading, setLoading] = useState(false);
-  const [cardSummary, setCardSummary] = useState(null);
   const route = all_routes;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const options = {
     series: [
-      {
-        name: "Sales Analysis",
-        data: [25, 30, 18, 15, 22, 20, 30, 20, 22, 18, 15, 20],
-      },
-    ],
+    {
+      name: "Sales Analysis",
+      data: [25, 30, 18, 15, 22, 20, 30, 20, 22, 18, 15, 20]
+    }],
+
     chart: {
       height: 273,
       type: "area",
       zoom: {
-        enabled: false,
-      },
+        enabled: false
+      }
     },
     colors: ["#FF9F43"],
     dataLabels: {
-      enabled: false,
+      enabled: false
     },
     stroke: {
-      curve: "straight",
+      curve: "straight"
     },
     title: {
       text: "",
-      align: "left",
+      align: "left"
     },
     xaxis: {
       categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"]
+
     },
     yaxis: {
       min: 10,
@@ -69,191 +114,24 @@ const SalesDashbaord = () => {
       labels: {
         formatter: (val) => {
           return val / 1 + "K";
-        },
-      },
+        }
+      }
     },
     legend: {
       position: "top",
-      horizontalAlign: "left",
-    },
-  };
-
-  useEffect(() => {
-    getDashboardCardSummary();
-  }, []);
-
-  const getDashboardCardSummary = async (e) => {
-    if (e) e.preventDefault();
-
-    setLoading(true);
-    try {
-      const resp = await dashboardCardSummary();
-      const row = resp?.data[0] || [];
-      const summary = {
-        totalSale: row?.totalSale || 0,
-        totalPurchase: row?.totalPurchase || 0,
-        totalPaid: row?.totalPaid || 0,
-        totalUnpaid: row?.totalUnpaid || 0,
-      };
-      setCardSummary(summary);
-    } catch (err) {
-      toast.error(`API error: ${err?.message}`);
-    } finally {
-      setLoading(false);
+      horizontalAlign: "left"
     }
   };
 
-  const salesDayChart = {
-    chart: {
-      height: 245,
-      type: "bar",
-      stacked: true,
-      toolbar: {
-        show: false,
-      },
-    },
-    colors: ["#FE9F43", "#FFE3CB"],
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          legend: {
-            position: "bottom",
-            offsetX: -10,
-            offsetY: 0,
-          },
-        },
-      },
-    ],
-    plotOptions: {
-      bar: {
-        borderRadius: 8,
-        borderRadiusWhenStacked: "all",
-        horizontal: false,
-        endingShape: "rounded",
-      },
-    },
-    series: [
-      {
-        name: "Sales",
-        data: [18, 20, 10, 18, 25, 18, 10, 20, 40, 8, 30, 20],
-      },
-      {
-        name: "Purchase",
-        data: [40, 30, 30, 50, 40, 50, 30, 30, 50, 30, 40, 30],
-      },
-    ],
-    xaxis: {
-      categories: [
-        "2 am",
-        "4 am",
-        "6 am",
-        "8 am",
-        "10 am",
-        "12 am",
-        "14 pm",
-        "16 pm",
-        "18 pm",
-        "20 pm",
-        "22 pm",
-        "24 pm",
-      ],
-      labels: {
-        style: {
-          colors: "#6B7280",
-          fontSize: "13px",
-        },
-      },
-    },
-    yaxis: {
-      labels: {
-        formatter: (val) => `${val}K`,
-        offsetX: -15,
-        style: {
-          colors: "#6B7280",
-          fontSize: "13px",
-        },
-      },
-    },
-    grid: {
-      borderColor: "#E5E7EB",
-      strokeDashArray: 5,
-      padding: {
-        left: -16,
-        top: 0,
-        bottom: 0,
-        right: 0,
-      },
-    },
-    legend: {
-      show: false,
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    fill: {
-      opacity: 1,
-    },
-  };
-
-  const customerChart = {
-    chart: {
-      type: "radialBar",
-      height: 130,
-      width: "100%",
-      parentHeightOffset: 0,
-      toolbar: {
-        show: false,
-      },
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          margin: 10,
-          size: "30%",
-        },
-        track: {
-          background: "#E6EAED",
-          strokeWidth: "100%",
-          margin: 5,
-        },
-        dataLabels: {
-          name: {
-            offsetY: -5,
-          },
-          value: {
-            offsetY: 5,
-          },
-        },
-      },
-    },
-    grid: {
-      padding: {
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-      },
-    },
-    stroke: {
-      lineCap: "round",
-    },
-    colors: ["#E04F16", "#0E9384"],
-    labels: ["First Time", "Return"],
-  };
-
-  const series = [70, 70];
-
   return (
     <>
-      {loading && <Loader />}
       <div className="page-wrapper">
         <div className="content">
           <div className="welcome d-lg-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center welcome-text">
               <h3 className="d-flex align-items-center">
-                <ImageWithBasePath src="assets/img/icons/hi.svg" alt="img" />
-                &nbsp;Hi Symbiosis Canteen,
+                <img src={HiIcon} alt="img" />
+                &nbsp;Hi John Smilga,
               </h3>
               &nbsp;
               <h6>here&apos;s what&apos;s happening with your store today.</h6>
@@ -263,7 +141,7 @@ const SalesDashbaord = () => {
                 <span className="input-icon-addon fs-16 text-gray-9">
                   <i className="ti ti-calendar" />
                 </span>
-                <PredefinedDateRanges />
+                <CommonDateRangePicker />
               </div>
               <ul className="table-top-head">
                 <RefreshIcon />
@@ -272,200 +150,224 @@ const SalesDashbaord = () => {
             </div>
           </div>
           <div className="row sales-cards">
-            <DashboardSummary
-              summary={cardSummary}
-              onRefresh={getDashboardCardSummary}
-            />
+            <div className="col-xl-6 col-sm-12 col-12 d-flex">
+              <div className="card d-flex align-items-center justify-content-between flex-fill mb-4">
+                <div>
+                  <h6>Weekly Earning</h6>
+                  <h3>
+                    $
+                    <span className="counters" data-count="95000.45">
+                      95000.45
+                    </span>
+                  </h3>
+                  <p className="sales-range">
+                    <span className="text-success">
+                      <i className="feather icon-chevron-up feather-16" />
+                      48%&nbsp;
+                    </span>
+                    increase compare to last week
+                  </p>
+                </div>
+                <img src={weeklyEarning} alt="img" />
+              </div>
+            </div>
+            <div className="col-xl-3 col-sm-6 col-12 d-flex">
+              <div className="card color-info bg-primary flex-fill mb-4">
+                <div className="mb-2">
+                  <img src={totalSalesIcon} alt="img" />
+                </div>
+                <h3 className="counters" data-count={10000.0}>
+                  10,000+
+                </h3>
+                <p>No of Total Sales</p>
+                <i
+                  className="feather icon-rotate-ccw feather-16 pr-tooltip"
+                  data-pr-tooltip="Refresh"
+                  data-pr-position="top"
+                  title="Refresh" />
+                
+              </div>
+            </div>
+            <div className="col-xl-3 col-sm-6 col-12 d-flex">
+              <div className="card color-info bg-secondary flex-fill mb-4">
+                <div className="mb-2">
+                  <img src={purchasedEarningsIcon} alt="img" />
+                </div>
+                <h3 className="counters" data-count={800.0}>
+                  800+
+                </h3>
+                <p>No of Total Sales</p>
+                <i
+                  className="feather icon-rotate-ccw feather-16 pr-tooltip"
+                  data-pr-tooltip="Refresh"
+                  data-pr-position="top"
+                  title="Refresh" />
+                
+              </div>
+            </div>
           </div>
           <div className="row">
-            <>
-              {/* Sales & Purchase */}
-              <div className="col-xxl-8 col-xl-7 col-sm-12 col-12 d-flex">
-                <div className="card flex-fill">
-                  <div className="card-header d-flex justify-content-between align-items-center">
-                    <div className="d-inline-flex align-items-center">
-                      <span className="title-icon bg-soft-primary fs-16 me-2">
-                        <i className="ti ti-shopping-cart" />
-                      </span>
-                      <h5 className="card-title mb-0">Sales &amp; Purchase</h5>
-                    </div>
-                    <ul className="nav btn-group custom-btn-group">
-                      <Link className="btn btn-outline-light" to="#">
-                        1D
-                      </Link>
-                      <Link className="btn btn-outline-light" to="#">
-                        1W
-                      </Link>
-                      <Link className="btn btn-outline-light" to="#">
-                        1M
-                      </Link>
-                      <Link className="btn btn-outline-light" to="#">
-                        3M
-                      </Link>
-                      <Link className="btn btn-outline-light" to="#">
-                        6M
-                      </Link>
-                      <Link className="btn btn-outline-light active" to="#">
-                        1Y
-                      </Link>
-                    </ul>
-                  </div>
-                  <div className="card-body pb-0">
-                    <div>
-                      <div className="d-flex align-items-center gap-2">
-                        <div className="border p-2 br-8">
-                          <p className="d-inline-flex align-items-center mb-1">
-                            <i className="ti ti-circle-filled fs-8 text-primary-300 me-1" />
-                            Total Purchase
-                          </p>
-                          <h4>3K</h4>
-                        </div>
-                        <div className="border p-2 br-8">
-                          <p className="d-inline-flex align-items-center mb-1">
-                            <i className="ti ti-circle-filled fs-8 text-primary me-1" />
-                            Total Sales
-                          </p>
-                          <h4>1K</h4>
-                        </div>
-                      </div>
-                      <div id="sales-daychart">
-                        <Chart
-                          options={salesDayChart}
-                          series={salesDayChart.series}
-                          type="bar"
-                          height={245}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-
-            {/* Top Selling Products */}
-            <div className="col-xxl-4 col-xl-5 d-flex">
-              <div className="card flex-fill">
-                <div className="card-header">
-                  <div className="d-inline-flex align-items-center">
-                    <span className="title-icon bg-soft-info fs-16 me-2">
-                      <i className="ti ti-info-circle" />
-                    </span>
-                    <h5 className="card-title mb-0">Overall Information</h5>
-                  </div>
+            <div className="col-sm-12 col-md-12 col-xl-4 d-flex">
+              <div className="card flex-fill w-100 mb-4">
+                <div className="card-header d-flex justify-content-between align-items-center">
+                  <h4 className="card-title mb-0">Best Seller</h4>
+                  <Link to="#" className="btn btn-outline-light btn-sm">
+                    View All
+                  </Link>
                 </div>
                 <div className="card-body">
-                  <div className="row g-3">
-                    <div className="col-md-4">
-                      <div className="info-item border bg-light p-3 text-center">
-                        <div className="mb-3 text-info fs-24">
-                          <i className="ti ti-user-check" />
-                        </div>
-                        <p className="mb-1">Suppliers</p>
-                        <h5>6987</h5>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="info-item border bg-light p-3 text-center">
-                        <div className="mb-3 text-orange fs-24">
-                          <i className="ti ti-users" />
-                        </div>
-                        <p className="mb-1">Customer</p>
-                        <h5>4896</h5>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="info-item border bg-light p-3 text-center">
-                        <div className="mb-3 text-teal fs-24">
-                          <i className="ti ti-shopping-cart" />
-                        </div>
-                        <p className="mb-1">Orders</p>
-                        <h5>487</h5>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card-footer pb-sm-0">
-                  <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <h6>Customers Overview</h6>
-                    <div className="dropdown dropdown-wraper">
-                      <Link
-                        to="#"
-                        className="dropdown-toggle btn btn-sm"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <i className="ti ti-calendar me-1" />
-                        Today
-                      </Link>
-                      <ul className="dropdown-menu p-3">
-                        <li>
-                          <Link to="#" className="dropdown-item">
-                            Today
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#" className="dropdown-item">
-                            Weekly
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="#" className="dropdown-item">
-                            Monthly
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="row align-items-center">
-                    <div className="col-sm-5">
-                      <div id="customer-chart">
-                        <Chart
-                          options={customerChart}
-                          series={series}
-                          type="radialBar"
-                          height={130}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-sm-7">
-                      <div className="row gx-0">
-                        <div className="col-sm-6">
-                          <div className="text-center border-end">
-                            <h2 className="mb-1">5.5K</h2>
-                            <p className="text-orange mb-2">First Time</p>
-                            <span className="badge badge-success badge-xs d-inline-flex align-items-center">
-                              <i className="ti ti-arrow-up-left me-1" />
-                              25%
-                            </span>
-                          </div>
-                        </div>
-                        <div className="col-sm-6">
-                          <div className="text-center">
-                            <h2 className="mb-1">3.5K</h2>
-                            <p className="text-teal mb-2">Return</p>
-                            <span className="badge badge-success badge-xs d-inline-flex align-items-center">
-                              <i className="ti ti-arrow-up-left me-1" />
-                              21%
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="table-responsive">
+                    <table className="table table-borderless best-seller">
+                      <tbody>
+                        <tr>
+                          <td className="pt-0 ps-0">
+                            <div className="d-flex align-items-center">
+                              <Link
+                                to={route.productlist}
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={stockImg01} alt="img" />
+                              </Link>
+                              <div>
+                                <h6 className="fw-medium">
+                                  <Link
+                                    to={route.productlist}
+                                    className="fw-bold">
+                                    
+                                    Lenovo 3rd Generation
+                                  </Link>
+                                </h6>
+                                <p>$4420</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="pt-0">
+                            <p className="text-gray-9 mb-1">Sales</p>
+                            <p className="text-gray-9 fw-medium">6547</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="ps-0">
+                            <div className="d-flex align-items-center">
+                              <Link
+                                to={route.productlist}
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={stockImg02} alt="img" />
+                              </Link>
+                              <div>
+                                <h6 className="fw-medium">
+                                  <Link
+                                    to={route.productlist}
+                                    className="fw-bold">
+                                    
+                                    Bold V3.2
+                                  </Link>
+                                </h6>
+                                <p>$1474</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p className="text-gray-9 mb-1">Sales</p>
+                            <p className="text-gray-9 fw-medium">3474</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="ps-0">
+                            <div className="d-flex align-items-center">
+                              <Link
+                                to={route.productlist}
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={stockImg06} alt="img" />
+                              </Link>
+                              <div>
+                                <h6 className="fw-medium">
+                                  <Link
+                                    to={route.productlist}
+                                    className="fw-bold">
+                                    
+                                    Nike Jordan
+                                  </Link>
+                                </h6>
+                                <p>$8784</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p className="text-gray-9 mb-1">Sales</p>
+                            <p className="text-gray-9 fw-medium">1478</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="ps-0">
+                            <div className="d-flex align-items-center">
+                              <Link
+                                to={route.productlist}
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={stockImg03} alt="img" />
+                              </Link>
+                              <div>
+                                <h6 className="fw-medium">
+                                  <Link
+                                    to={route.productlist}
+                                    className="fw-bold">
+                                    
+                                    Apple Series 5 Watch
+                                  </Link>
+                                </h6>
+                                <p>$3240</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p className="text-gray-9 mb-1">Sales</p>
+                            <p className="text-gray-9 fw-medium">987</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="ps-0">
+                            <div className="d-flex align-items-center">
+                              <Link
+                                to={route.productlist}
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={stockImg04} alt="img" />
+                              </Link>
+                              <div>
+                                <h6 className="fw-medium">
+                                  <Link
+                                    to={route.productlist}
+                                    className="fw-bold">
+                                    
+                                    Amazon Echo Dot
+                                  </Link>
+                                </h6>
+                                <p>$597</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p className="text-gray-9 mb-1">Sales</p>
+                            <p className="text-gray-9 fw-medium">784</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="row">
-            <div className="col-sm-12 col-md-12 col-xl-12 d-flex">
+            <div className="col-sm-12 col-md-12 col-xl-8 d-flex">
               <div className="card flex-fill w-100 mb-4">
                 <div className="card-header d-flex justify-content-between align-items-center">
                   <h4 className="card-title mb-0">Recent Transactions</h4>
                   <Link
                     to="purchase-transaction.html"
-                    className="btn btn-outline-light btn-sm"
-                  >
+                    className="btn btn-outline-light btn-sm">
+                    
                     View All
                   </Link>
                 </div>
@@ -488,24 +390,21 @@ const SalesDashbaord = () => {
                             <div className="d-flex align-items-center">
                               <Link
                                 to={route.productlist}
-                                className="avatar avatar-lg me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="assets/img/products/stock-img-05.png"
-                                  alt="img"
-                                />
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={stockImg05} alt="img" />
                               </Link>
                               <div>
                                 <h6 className="fw-bold">
                                   <Link
                                     to={route.productlist}
-                                    className="fw-bold"
-                                  >
+                                    className="fw-bold">
+                                    
                                     Lobar Handy
                                   </Link>
                                 </h6>
                                 <span className="d-flex align-items-center">
-                                  <Clock className="feather-14" />
+                                  <i className="feather icon-clock feather-14" />
                                   15 Mins
                                 </span>
                               </div>
@@ -522,7 +421,7 @@ const SalesDashbaord = () => {
                             </span>
                           </td>
                           <td className="fs-16 fw-bold text-gray-9">
-                            ₹1,099.00
+                            $1,099.00
                           </td>
                         </tr>
                         <tr>
@@ -531,24 +430,21 @@ const SalesDashbaord = () => {
                             <div className="d-flex align-items-center">
                               <Link
                                 to={route.productlist}
-                                className="avatar avatar-lg me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="assets/img/products/expire-product-01.png"
-                                  alt="img"
-                                />
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={expireProduct01} alt="img" />
                               </Link>
                               <div>
                                 <h6 className="fw-medium">
                                   <Link
                                     to={route.productlist}
-                                    className="fw-bold"
-                                  >
+                                    className="fw-bold">
+                                    
                                     Red Premium Handy
                                   </Link>
                                 </h6>
                                 <span className="d-flex align-items-center">
-                                  <Clock className="feather-14" />
+                                  <i className="feather icon-clock feather-14" />
                                   15 Mins
                                 </span>
                               </div>
@@ -564,7 +460,7 @@ const SalesDashbaord = () => {
                               Cancelled
                             </span>
                           </td>
-                          <td className="fs-16 fw-bold text-gray-9">₹600.55</td>
+                          <td className="fs-16 fw-bold text-gray-9">$600.55</td>
                         </tr>
                         <tr>
                           <td>3</td>
@@ -572,24 +468,21 @@ const SalesDashbaord = () => {
                             <div className="d-flex align-items-center">
                               <Link
                                 to={route.productlist}
-                                className="avatar avatar-lg me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="assets/img/products/expire-product-02.png"
-                                  alt="img"
-                                />
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={expireProduct02} alt="img" />
                               </Link>
                               <div>
                                 <h6 className="fw-bold">
                                   <Link
                                     to={route.productlist}
-                                    className="fw-bold"
-                                  >
+                                    className="fw-bold">
+                                    
                                     Iphone 14 Pro
                                   </Link>
                                 </h6>
                                 <span className="d-flex align-items-center">
-                                  <Clock className="feather-14" />
+                                  <i className="feather icon-clock feather-14" />
                                   15 Mins
                                 </span>
                               </div>
@@ -606,7 +499,7 @@ const SalesDashbaord = () => {
                             </span>
                           </td>
                           <td className="fs-16 fw-bold text-gray-9">
-                            ₹1,099.00
+                            $1,099.00
                           </td>
                         </tr>
                         <tr>
@@ -615,24 +508,21 @@ const SalesDashbaord = () => {
                             <div className="d-flex align-items-center">
                               <Link
                                 to={route.productlist}
-                                className="avatar avatar-lg me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="assets/img/products/expire-product-03.png"
-                                  alt="img"
-                                />
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={expireProduct03} alt="img" />
                               </Link>
                               <div>
                                 <h6 className="fw-bold">
                                   <Link
                                     to={route.productlist}
-                                    className="fw-bold"
-                                  >
+                                    className="fw-bold">
+                                    
                                     Black Slim 200
                                   </Link>
                                 </h6>
                                 <span className="d-flex align-items-center">
-                                  <Clock className="feather-14" />
+                                  <i className="feather icon-clock feather-14" />
                                   15 Mins
                                 </span>
                               </div>
@@ -649,7 +539,7 @@ const SalesDashbaord = () => {
                             </span>
                           </td>
                           <td className="fs-16 fw-bold text-gray-9">
-                            ₹1,569.00
+                            $1,569.00
                           </td>
                         </tr>
                         <tr>
@@ -658,24 +548,21 @@ const SalesDashbaord = () => {
                             <div className="d-flex align-items-center">
                               <Link
                                 to={route.productlist}
-                                className="avatar avatar-lg me-2"
-                              >
-                                <ImageWithBasePath
-                                  src="assets/img/products/expire-product-04.png"
-                                  alt="img"
-                                />
+                                className="avatar avatar-lg me-2">
+                                
+                                <img src={expireProduct04} alt="img" />
                               </Link>
                               <div>
                                 <h6 className="fw-bold">
                                   <Link
                                     to={route.productlist}
-                                    className="fw-bold"
-                                  >
+                                    className="fw-bold">
+                                    
                                     Woodcraft Sandal
                                   </Link>
                                 </h6>
                                 <span className="d-flex align-items-center">
-                                  <Clock className="feather-14" />
+                                  <i className="feather icon-clock feather-14" />
                                   15 Mins
                                 </span>
                               </div>
@@ -692,7 +579,7 @@ const SalesDashbaord = () => {
                             </span>
                           </td>
                           <td className="fs-16 fw-bold text-gray-9">
-                            ₹1,478.00
+                            $1,478.00
                           </td>
                         </tr>
                       </tbody>
@@ -715,15 +602,15 @@ const SalesDashbaord = () => {
                         type="button"
                         id="dropdown-sales"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <Calendar className="feather-14" />
+                        aria-expanded="false">
+                        
+                        <i className="feather icon-calendar feather-14" />
                         2023
                       </button>
                       <ul
                         className="dropdown-menu"
-                        aria-labelledby="dropdown-sales"
-                      >
+                        aria-labelledby="dropdown-sales">
+                        
                         <li>
                           <Link to="#" className="dropdown-item">
                             2023
@@ -748,8 +635,8 @@ const SalesDashbaord = () => {
                     options={options}
                     series={options.series}
                     type="area"
-                    height={273}
-                  />
+                    height={273} />
+                  
                 </div>
               </div>
             </div>
@@ -765,14 +652,14 @@ const SalesDashbaord = () => {
                         type="button"
                         id="dropdown-country-sales"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                        aria-expanded="false">
+                        
                         This Week
                       </button>
                       <ul
                         className="dropdown-menu"
-                        aria-labelledby="dropdown-country-sales"
-                      >
+                        aria-labelledby="dropdown-country-sales">
+                        
                         <li>
                           <Link to="#" className="dropdown-item">
                             This Month
@@ -792,15 +679,15 @@ const SalesDashbaord = () => {
                     <iframe
                       src="https://www.google.com/maps/embed"
                       style={{ border: "0", height: "265px", width: "364px" }}
-                      allowFullScreen=""
+                      allowFullScreen={true}
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      className="contact-map"
-                    />
+                      className="contact-map" />
+                    
                   </div>
                   <p className="sales-range">
                     <span className="text-success">
-                      <ChevronUp className="feather-16" />
+                      <i className="feather icon-chevron-up feather-16" />
                       48%&nbsp;
                     </span>
                     increase compare to last week
@@ -813,7 +700,7 @@ const SalesDashbaord = () => {
         </div>
         <div className="copyright-footer d-flex align-items-center justify-content-between border-top bg-white gap-3 flex-wrap">
           <p className="fs-13 text-gray-9 mb-0">
-            2014-2025 © DreamsPOS. All Right Reserved
+            2014-2026 © DreamsPOS. All Right Reserved
           </p>
           <p>
             Designed &amp; Developed By Dreams{" "}
@@ -823,8 +710,8 @@ const SalesDashbaord = () => {
           </p>
         </div>
       </div>
-    </>
-  );
+    </>);
+
 };
 
 export default SalesDashbaord;

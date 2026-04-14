@@ -1,105 +1,91 @@
-import React from "react";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { useDispatch, useSelector } from "react-redux";
-import Table from "../../core/pagination/datatable";
+import { useState } from "react";
+import AddUsers from "../../core/modals/usermanagement/addusers";
+import EditUser from "../../core/modals/usermanagement/edituser";
+
+import TooltipIcons from "../../components/tooltip-content/tooltipIcons";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import PrimeDataTable from "../../components/data-table";
+import { userlisadata } from "../../core/json/users";
+import useAppModal from "../../core/common/modal/useAppModal";
+import { MODAL_TYPES } from "../../routes/modal_root/modalTypes";
 
 const Users = () => {
-  const dataSource = useSelector((state) => state.rootReducer.userlist_data);
-
-  const renderTooltip = (props) => (
-    <Tooltip id="pdf-tooltip" {...props}>
-      Pdf
-    </Tooltip>
-  );
-
-  const renderExcelTooltip = (props) => (
-    <Tooltip id="excel-tooltip" {...props}>
-      Excel
-    </Tooltip>
-  );
-  const renderPrinterTooltip = (props) => (
-    <Tooltip id="printer-tooltip" {...props}>
-      Printer
-    </Tooltip>
-  );
-  const renderRefreshTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Refresh
-    </Tooltip>
-  );
-  const renderCollapseTooltip = (props) => (
-    <Tooltip id="refresh-tooltip" {...props}>
-      Collapse
-    </Tooltip>
-  );
+  const { open } = useAppModal();
+  const dataSource = userlisadata;
+  const [rows, setRows] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(dataSource.length);
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   const columns = [
     {
-      title: "User Name",
-      dataIndex: "username",
-      render: (text, record) => (
+      header: "User Name",
+      field: "username",
+      body: (rowData) => (
         <span className="userimgname">
-          <Link to="#" className="userslist-img bg-img">
-            <ImageWithBasePath alt="" src={record.img} />
+          <Link to="#" className="avatar avatar-md me-2">
+            <img alt="" src={rowData.img} />
           </Link>
           <div>
-            <Link to="#">{text}</Link>
+            <Link to="#">{rowData.username}</Link>
           </div>
         </span>
       ),
-      sorter: (a, b) => a.username.length - b.username.length,
+
+      sortable: true,
     },
 
     {
-      title: "Phone",
-      dataIndex: "phone",
-      sorter: (a, b) => a.phone.length - b.phone.length,
+      header: "Phone",
+      field: "phone",
+      sortable: true,
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      sorter: (a, b) => a.email.length - b.email.length,
+      header: "Email",
+      field: "email",
+      sortable: true,
     },
     {
-      title: "Role",
-      dataIndex: "role",
-      sorter: (a, b) => a.role.length - b.role.length,
+      header: "Role",
+      field: "role",
+      sortable: true,
     },
     {
-      title: "Created On",
-      dataIndex: "createdon",
-      sorter: (a, b) => a.createdon.length - b.createdon.length,
+      header: "Created On",
+      field: "createdon",
+      sortable: true,
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      render: (text) => (
+      header: "Status",
+      field: "status",
+      body: (rowData) => (
         <div>
-          {text === "Active" && (
+          {rowData.status === "Active" && (
             <span className="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-success fs-10">
               {" "}
               <i className="ti ti-point-filled me-1 fs-11"></i>
-              {text}
+              {rowData.status}
             </span>
           )}
-          {text === "Inactive" && (
+          {rowData.status === "Inactive" && (
             <span className="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-danger fs-10">
               {" "}
               <i className="ti ti-point-filled me-1 fs-11"></i>
-              {text}
+              {rowData.status}
             </span>
           )}
         </div>
       ),
-      sorter: (a, b) => a.status.length - b.status.length,
+
+      sortable: true,
     },
     {
-      title: "Actions",
-      dataIndex: "actions",
+      header: "Actions",
+      field: "actions",
       key: "actions",
-      render: () => (
+      body: () => (
         <div className="action-table-data">
           <div className="edit-delete-action">
             <Link className="me-2 p-2" to="#">
@@ -127,6 +113,8 @@ const Users = () => {
           </div>
         </div>
       ),
+
+      sortable: false,
     },
   ];
 
@@ -141,68 +129,20 @@ const Users = () => {
                 <h6>Manage Your Users</h6>
               </div>
             </div>
-            {/* <ul className="table-top-head">
-              <li>
-                <OverlayTrigger placement="top" overlay={renderTooltip}>
-                  <Link>
-                    <ImageWithBasePath
-                      src="assets/img/icons/pdf.svg"
-                      alt="img"
-                    />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderExcelTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <ImageWithBasePath
-                      src="assets/img/icons/excel.svg"
-                      alt="img"
-                    />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderPrinterTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <i data-feather="printer" className="feather-printer" />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderRefreshTooltip}>
-                  <Link data-bs-toggle="tooltip" data-bs-placement="top">
-                    <RotateCcw />
-                  </Link>
-                </OverlayTrigger>
-              </li>
-              <li>
-                <OverlayTrigger placement="top" overlay={renderCollapseTooltip}>
-                  <Link
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    id="collapse-header"
-                    className={data ? "active" : ""}
-                    onClick={() => {
-                      dispatch(setToogleHeader(!data));
-                    }}
-                  >
-                    <ChevronUp />
-                  </Link>
-                </OverlayTrigger>
-              </li>
+            <ul className="table-top-head">
+              <TooltipIcons />
+              <RefreshIcon />
+              <CollapesIcon />
             </ul>
             <div className="page-btn">
               <Link
-                to="#"
-                className="btn btn-added"
-                data-bs-toggle="modal"
-                data-bs-target="#add-units"
+                className="btn btn-primary text-white"
+                onClick={() => open(MODAL_TYPES.USER)}
               >
                 <i className="ti ti-circle-plus me-1"></i>
                 Add New User
               </Link>
-            </div> */}
+            </div>
           </div>
           {/* /product list */}
           <div className="card table-list-card">
@@ -232,13 +172,58 @@ const Users = () => {
                 </div>
               </div>
             </div>
+
             <div className="card-body">
               <div className="table-responsive">
-                <Table columns={columns} dataSource={dataSource} />
+                <PrimeDataTable
+                  column={columns}
+                  data={dataSource}
+                  totalRecords={totalRecords}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  rows={rows}
+                  setRows={setRows}
+                  selectionMode="checkbox"
+                  selection={selectedUsers}
+                  onSelectionChange={(e) => setSelectedUsers(e.value)}
+                  dataKey="id"
+                />
               </div>
             </div>
           </div>
           {/* /product list */}
+        </div>
+      </div>
+      <div className="modal fade" id="delete-modal">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="page-wrapper-new p-0">
+              <div className="content p-5 px-3 text-center">
+                <span className="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2">
+                  <i className="ti ti-trash fs-24 text-danger" />
+                </span>
+                <h4 className="fs-20 fw-bold mb-2 mt-1">Delete User</h4>
+                <p className="mb-0 fs-16">
+                  Are you sure you want to delete user?
+                </p>
+                <div className="modal-footer-btn mt-3 d-flex justify-content-center">
+                  <button
+                    type="button"
+                    className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
+                    data-bs-dismiss="modal">
+                    
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary fs-13 fw-medium p-2 px-3">
+                    
+                    Yes Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

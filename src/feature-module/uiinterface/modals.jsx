@@ -1,7 +1,6 @@
-import React from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+
 import { Link } from "react-router-dom";
-import { all_routes } from "../../Router/all_routes";
+import { all_routes } from "../../routes/all_routes";
 
 const Modals = () => {
   const route = all_routes;
@@ -27,8 +26,8 @@ const Modals = () => {
                   tabIndex={-1}
                   role="dialog"
                   aria-labelledby="standard-modalLabel"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -36,11 +35,14 @@ const Modals = () => {
                           Modal Heading
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <h6>Text in a modal</h6>
@@ -71,9 +73,9 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -89,8 +91,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#standard-modal"
-                  >
+                    data-bs-target="#standard-modal">
+                    
                     Launch Demo Modal
                   </button>
                 </div>
@@ -109,8 +111,8 @@ const Modals = () => {
                   type="button"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
-                >
+                  data-bs-target="#staticBackdrop">
+                  
                   Launch static backdrop modal
                 </button>
                 {/* Modal */}
@@ -121,8 +123,8 @@ const Modals = () => {
                   data-bs-keyboard="false"
                   tabIndex={-1}
                   aria-labelledby="staticBackdropLabel"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -130,11 +132,14 @@ const Modals = () => {
                           Modal title
                         </h5>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         Anim pariatur cliche reprehenderit, enim eiusmod high
@@ -147,9 +152,9 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -174,8 +179,8 @@ const Modals = () => {
                   type="button"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#scrollable-modal"
-                >
+                  data-bs-target="#scrollable-modal">
+                  
                   Scrolling Long Content
                 </button>
                 {/* Long Content Scroll Modal */}
@@ -185,23 +190,26 @@ const Modals = () => {
                   tabIndex={-1}
                   role="dialog"
                   aria-labelledby="scrollableModalTitle"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div
                     className="modal-dialog modal-dialog-scrollable"
-                    role="document"
-                  >
+                    role="document">
+                    
                     <div className="modal-content">
                       <div className="modal-header">
                         <h5 className="modal-title" id="scrollableModalTitle">
                           Modal title
                         </h5>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <p>
@@ -310,9 +318,9 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -342,8 +350,8 @@ const Modals = () => {
                   type="button"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModalScrollable5"
-                >
+                  data-bs-target="#exampleModalScrollable5">
+                  
                   Launch demo modal
                 </button>
                 <div
@@ -352,8 +360,8 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalScrollable5"
                   data-bs-keyboard="false"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -361,11 +369,13 @@ const Modals = () => {
                           Modal title
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
                       </div>
                       <div className="modal-body">
                         <div className="container-fluid">
@@ -408,9 +418,9 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -437,23 +447,26 @@ const Modals = () => {
                   id="exampleModalToggle"
                   aria-hidden="true"
                   aria-labelledby="exampleModalToggleLabel"
-                  tabIndex={-1}
-                >
+                  tabIndex={-1}>
+                  
                   <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                       <div className="modal-header">
                         <h4
                           className="modal-title"
-                          id="exampleModalToggleLabel"
-                        >
+                          id="exampleModalToggleLabel">
+                          
                           Modal 1
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         Show a second modal and hide this one with the button
@@ -464,8 +477,8 @@ const Modals = () => {
                           className="btn btn-primary"
                           data-bs-target="#exampleModalToggle2"
                           data-bs-toggle="modal"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Open second modal
                         </button>
                       </div>
@@ -479,23 +492,26 @@ const Modals = () => {
                   id="exampleModalToggle2"
                   aria-hidden="true"
                   aria-labelledby="exampleModalToggleLabel2"
-                  tabIndex={-1}
-                >
+                  tabIndex={-1}>
+                  
                   <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                       <div className="modal-header">
                         <h4
                           className="modal-title"
-                          id="exampleModalToggleLabel2"
-                        >
+                          id="exampleModalToggleLabel2">
+                          
                           Modal 2
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         Hide this modal and show the first with the button
@@ -506,8 +522,8 @@ const Modals = () => {
                           className="btn btn-primary"
                           data-bs-target="#exampleModalToggle"
                           data-bs-toggle="modal"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Back to first
                         </button>
                       </div>
@@ -519,8 +535,8 @@ const Modals = () => {
                   className="btn btn-primary"
                   data-bs-toggle="modal"
                   to="#exampleModalToggle"
-                  role="button"
-                >
+                  role="button">
+                  
                   Open first modal
                 </Link>
               </div>
@@ -541,8 +557,8 @@ const Modals = () => {
                   tabIndex={-1}
                   role="dialog"
                   aria-labelledby="myLargeModalLabel"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-lg">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -550,11 +566,14 @@ const Modals = () => {
                           Large modal
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">...</div>
                     </div>
@@ -567,8 +586,8 @@ const Modals = () => {
                   tabIndex={-1}
                   role="dialog"
                   aria-labelledby="mySmallModalLabel"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-sm">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -576,11 +595,14 @@ const Modals = () => {
                           Small modal
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">...</div>
                     </div>
@@ -593,8 +615,8 @@ const Modals = () => {
                   id="exampleModalLg"
                   tabIndex={-1}
                   aria-labelledby="exampleModalLgLabel"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-lg">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -602,11 +624,14 @@ const Modals = () => {
                           Extra Large Modal
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">...</div>
                     </div>
@@ -618,24 +643,24 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModalLg"
-                  >
+                    data-bs-target="#exampleModalLg">
+                    
                     Extra Large Modal
                   </button>
                   <button
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#bs-example-modal-lg"
-                  >
+                    data-bs-target="#bs-example-modal-lg">
+                    
                     Large Modal
                   </button>
                   <button
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#bs-example-modal-sm"
-                  >
+                    data-bs-target="#bs-example-modal-sm">
+                    
                     Small Modal
                   </button>
                 </div>
@@ -658,8 +683,8 @@ const Modals = () => {
                   className="modal fade"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-body">
@@ -667,14 +692,14 @@ const Modals = () => {
                           <div className="auth-logo">
                             <Link
                               to={route.dashboard}
-                              className="logo logo-dark"
-                            >
+                              className="logo logo-dark">
+                              
                               <span className="logo-lg">
-                                <ImageWithBasePath
-                                  src="assets/img/logo.png"
+                                <img
+                                  src="src/assets/img/logo.png"
                                   alt="Logo"
-                                  height={42}
-                                />
+                                  height={42} />
+                                
                               </span>
                             </Link>
                           </div>
@@ -689,14 +714,14 @@ const Modals = () => {
                               type="email"
                               id="username"
                               required
-                              placeholder="Michael Zenaty"
-                            />
+                              placeholder="Michael Zenaty" />
+                            
                           </div>
                           <div className="mb-3">
                             <label
                               htmlFor="emailaddress"
-                              className="form-label"
-                            >
+                              className="form-label">
+                              
                               Email address
                             </label>
                             <input
@@ -704,8 +729,8 @@ const Modals = () => {
                               type="email"
                               id="emailaddress"
                               required
-                              placeholder="john@deo.com"
-                            />
+                              placeholder="john@deo.com" />
+                            
                           </div>
                           <div className="mb-3">
                             <label htmlFor="password" className="form-label">
@@ -716,20 +741,20 @@ const Modals = () => {
                               type="password"
                               required
                               id="password"
-                              placeholder="Enter your password"
-                            />
+                              placeholder="Enter your password" />
+                            
                           </div>
                           <div className="mb-3">
                             <div className="form-check">
                               <input
                                 type="checkbox"
                                 className="form-check-input"
-                                id="customCheck1"
-                              />
+                                id="customCheck1" />
+                              
                               <label
                                 className="form-check-label"
-                                htmlFor="customCheck1"
-                              >
+                                htmlFor="customCheck1">
+                                
                                 I accept<Link to="#">Terms and Conditions</Link>
                               </label>
                             </div>
@@ -751,8 +776,8 @@ const Modals = () => {
                   className="modal fade"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-body">
@@ -760,14 +785,14 @@ const Modals = () => {
                           <div className="auth-logo">
                             <Link
                               to={route.dashboard}
-                              className="logo logo-dark"
-                            >
+                              className="logo logo-dark">
+                              
                               <span className="logo-lg">
-                                <ImageWithBasePath
-                                  src="assets/img/logo.png"
+                                <img
+                                  src="src/assets/img/logo.png"
                                   alt="Logo"
-                                  height={42}
-                                />
+                                  height={42} />
+                                
                               </span>
                             </Link>
                           </div>
@@ -776,8 +801,8 @@ const Modals = () => {
                           <div className="mb-3">
                             <label
                               htmlFor="emailaddress1"
-                              className="form-label"
-                            >
+                              className="form-label">
+                              
                               Email address
                             </label>
                             <input
@@ -785,8 +810,8 @@ const Modals = () => {
                               type="email"
                               id="emailaddress1"
                               required
-                              placeholder="john@deo.com"
-                            />
+                              placeholder="john@deo.com" />
+                            
                           </div>
                           <div className="mb-3">
                             <label htmlFor="password1" className="form-label">
@@ -797,20 +822,20 @@ const Modals = () => {
                               type="password"
                               required
                               id="password1"
-                              placeholder="Enter your password"
-                            />
+                              placeholder="Enter your password" />
+                            
                           </div>
                           <div className="mb-3">
                             <div className="form-check">
                               <input
                                 type="checkbox"
                                 className="form-check-input"
-                                id="customCheck2"
-                              />
+                                id="customCheck2" />
+                              
                               <label
                                 className="form-check-label"
-                                htmlFor="customCheck2"
-                              >
+                                htmlFor="customCheck2">
+                                
                                 Remember me
                               </label>
                             </div>
@@ -818,8 +843,8 @@ const Modals = () => {
                           <div className="mb-2 text-center">
                             <button
                               className="btn rounded-pill btn-primary"
-                              type="submit"
-                            >
+                              type="submit">
+                              
                               Sign In
                             </button>
                           </div>
@@ -835,8 +860,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#signup-modal"
-                  >
+                    data-bs-target="#signup-modal">
+                    
                     Sign Up Modal
                   </button>
                   {/* Log In modal */}
@@ -844,8 +869,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#login-modal"
-                  >
+                    data-bs-target="#login-modal">
+                    
                     Log In Modal
                   </button>
                 </div>
@@ -867,8 +892,8 @@ const Modals = () => {
                   tabIndex={-1}
                   role="dialog"
                   aria-hidden="true"
-                  style={{ display: "none" }}
-                >
+                  style={{ display: "none" }}>
+                  
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -876,11 +901,14 @@ const Modals = () => {
                           Modal Content is Responsive
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body p-4">
                         <div className="row">
@@ -893,8 +921,8 @@ const Modals = () => {
                                 type="text"
                                 className="form-control"
                                 id="field-1"
-                                placeholder="John"
-                              />
+                                placeholder="John" />
+                              
                             </div>
                           </div>
                           <div className="col-md-6">
@@ -906,8 +934,8 @@ const Modals = () => {
                                 type="text"
                                 className="form-control"
                                 id="field-2"
-                                placeholder="Doe"
-                              />
+                                placeholder="Doe" />
+                              
                             </div>
                           </div>
                         </div>
@@ -921,8 +949,8 @@ const Modals = () => {
                                 type="text"
                                 className="form-control"
                                 id="field-3"
-                                placeholder="Address"
-                              />
+                                placeholder="Address" />
+                              
                             </div>
                           </div>
                         </div>
@@ -936,8 +964,8 @@ const Modals = () => {
                                 type="text"
                                 className="form-control"
                                 id="field-4"
-                                placeholder="Boston"
-                              />
+                                placeholder="Boston" />
+                              
                             </div>
                           </div>
                           <div className="col-md-4">
@@ -949,8 +977,8 @@ const Modals = () => {
                                 type="text"
                                 className="form-control"
                                 id="field-5"
-                                placeholder="United States"
-                              />
+                                placeholder="United States" />
+                              
                             </div>
                           </div>
                           <div className="col-md-4">
@@ -962,14 +990,14 @@ const Modals = () => {
                                 type="text"
                                 className="form-control"
                                 id="field-6"
-                                placeholder={123456}
-                              />
+                                placeholder="{123456}" />
+                              
                             </div>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-12">
-                            <div className>
+                            <div>
                               <label htmlFor="field-7" className="form-label">
                                 Personal Info
                               </label>
@@ -977,8 +1005,8 @@ const Modals = () => {
                                 className="form-control"
                                 id="field-7"
                                 placeholder="Write something about yourself"
-                                defaultValue={""}
-                              />
+                                defaultValue={""} />
+                              
                             </div>
                           </div>
                         </div>
@@ -986,15 +1014,15 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel waves-effect"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel waves-effect me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button
                           type="button"
-                          className="btn btn-primary waves-effect waves-light"
-                        >
+                          className="btn btn-primary waves-effect waves-light">
+                          
                           Save changes
                         </button>
                       </div>
@@ -1008,8 +1036,8 @@ const Modals = () => {
                   tabIndex={-1}
                   role="dialog"
                   aria-hidden="true"
-                  style={{ display: "none" }}
-                >
+                  style={{ display: "none" }}>
+                  
                   <div className="modal-dialog">
                     <div className="modal-content p-0">
                       <div id="accordion">
@@ -1021,8 +1049,8 @@ const Modals = () => {
                                 className="text-dark"
                                 data-bs-toggle="collapse"
                                 aria-expanded="true"
-                                aria-controls="collapseOne"
-                              >
+                                aria-controls="collapseOne">
+                                
                                 Collapsible Group Item #1
                               </Link>
                             </h5>
@@ -1031,8 +1059,8 @@ const Modals = () => {
                             id="collapseOne"
                             className="collapse show"
                             aria-labelledby="headingOne"
-                            data-bs-parent="#accordion"
-                          >
+                            data-bs-parent="#accordion">
+                            
                             <div className="card-body">
                               Anim pariatur cliche reprehenderit, enim eiusmod
                               high life accusamus terry richardson ad squid. 3
@@ -1058,8 +1086,8 @@ const Modals = () => {
                                 className="collapsed text-dark"
                                 data-bs-toggle="collapse"
                                 aria-expanded="false"
-                                aria-controls="collapseTwo"
-                              >
+                                aria-controls="collapseTwo">
+                                
                                 Collapsible Group Item #2
                               </Link>
                             </h5>
@@ -1068,8 +1096,8 @@ const Modals = () => {
                             id="collapseTwo"
                             className="collapse"
                             aria-labelledby="headingTwo"
-                            data-bs-parent="#accordion"
-                          >
+                            data-bs-parent="#accordion">
+                            
                             <div className="card-body">
                               Anim pariatur cliche reprehenderit, enim eiusmod
                               high life accusamus terry richardson ad squid. 3
@@ -1095,8 +1123,8 @@ const Modals = () => {
                                 className="collapsed text-dark"
                                 data-bs-toggle="collapse"
                                 aria-expanded="false"
-                                aria-controls="collapseThree"
-                              >
+                                aria-controls="collapseThree">
+                                
                                 Collapsible Group Item #3
                               </Link>
                             </h5>
@@ -1105,8 +1133,8 @@ const Modals = () => {
                             id="collapseThree"
                             className="collapse"
                             aria-labelledby="headingThree"
-                            data-bs-parent="#accordion"
-                          >
+                            data-bs-parent="#accordion">
+                            
                             <div className="card-body">
                               Anim pariatur cliche reprehenderit, enim eiusmod
                               high life accusamus terry richardson ad squid. 3
@@ -1135,8 +1163,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary waves-effect waves-light mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#con-close-modal"
-                  >
+                    data-bs-target="#con-close-modal">
+                    
                     Responsive Modal
                   </button>
                   {/* Accordion modal */}
@@ -1144,8 +1172,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-secondary waves-effect waves-light mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#accordion-modal"
-                  >
+                    data-bs-target="#accordion-modal">
+                    
                     Accordion in Modal
                   </button>
                 </div>
@@ -1168,8 +1196,8 @@ const Modals = () => {
                   type="button"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModalScrollable2"
-                >
+                  data-bs-target="#exampleModalScrollable2">
+                  
                   Vertically centered modal
                 </button>
                 <div
@@ -1178,8 +1206,8 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalScrollable2"
                   data-bs-keyboard="false"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   {/* Scrollable modal */}
                   <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
@@ -1188,11 +1216,14 @@ const Modals = () => {
                           Modal title
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <p>
@@ -1205,9 +1236,9 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -1234,8 +1265,8 @@ const Modals = () => {
                   type="button"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModalScrollable3"
-                >
+                  data-bs-target="#exampleModalScrollable3">
+                  
                   Vertically centered scrollable modal
                 </button>
                 <div
@@ -1244,8 +1275,8 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalScrollable3"
                   data-bs-keyboard="false"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   {/* Scrollable modal */}
                   <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
@@ -1254,11 +1285,14 @@ const Modals = () => {
                           Modal title
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <p>
@@ -1294,9 +1328,9 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -1323,8 +1357,8 @@ const Modals = () => {
                   type="button"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModalScrollable4"
-                >
+                  data-bs-target="#exampleModalScrollable4">
+                  
                   Launch demo modal
                 </button>
                 <div
@@ -1333,8 +1367,8 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalScrollable4"
                   data-bs-keyboard="false"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   {/* Scrollable modal */}
                   <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
@@ -1343,11 +1377,14 @@ const Modals = () => {
                           Modal title
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <h5>Popover in a modal</h5>
@@ -1359,8 +1396,8 @@ const Modals = () => {
                             className="btn btn-secondary"
                             data-bs-toggle="popover"
                             title="Popover title"
-                            data-bs-content="Popover body content is set in this attribute."
-                          >
+                            data-bs-content="Popover body content is set in this attribute.">
+                            
                             button
                           </Link>
                           triggers a popover on click.
@@ -1372,8 +1409,8 @@ const Modals = () => {
                             to="#"
                             className="text-primary"
                             data-bs-toggle="tooltip"
-                            title="Tooltip"
-                          >
+                            title="Tooltip">
+                            
                             This link
                           </Link>{" "}
                           and{" "}
@@ -1381,8 +1418,8 @@ const Modals = () => {
                             to="#"
                             className="text-primary"
                             data-bs-toggle="tooltip"
-                            title="Tooltip"
-                          >
+                            title="Tooltip">
+                            
                             that link
                           </Link>{" "}
                           have tooltips on hover.
@@ -1391,9 +1428,9 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -1423,48 +1460,48 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary mb-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModalFullscreen"
-                  >
+                    data-bs-target="#exampleModalFullscreen">
+                    
                     Full screen
                   </button>
                   <button
                     type="button"
                     className="btn btn-secondary mb-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModalFullscreenSm"
-                  >
+                    data-bs-target="#exampleModalFullscreenSm">
+                    
                     Full screen below sm
                   </button>
                   <button
                     type="button"
                     className="btn btn-warning mb-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModalFullscreenMd"
-                  >
+                    data-bs-target="#exampleModalFullscreenMd">
+                    
                     Full screen below md
                   </button>
                   <button
                     type="button"
                     className="btn btn-info mb-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModalFullscreenLg"
-                  >
+                    data-bs-target="#exampleModalFullscreenLg">
+                    
                     Full screen below lg
                   </button>
                   <button
                     type="button"
                     className="btn btn-success mb-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModalFullscreenXl"
-                  >
+                    data-bs-target="#exampleModalFullscreenXl">
+                    
                     Full screen below xl
                   </button>
                   <button
                     type="button"
                     className="btn btn-danger mb-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModalFullscreenXxl"
-                  >
+                    data-bs-target="#exampleModalFullscreenXxl">
+                    
                     Full screen below xxl
                   </button>
                 </div>
@@ -1474,31 +1511,34 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalFullscreenLabel"
                   aria-hidden="true"
-                  style={{ display: "none" }}
-                >
+                  style={{ display: "none" }}>
+                  
                   <div className="modal-dialog modal-fullscreen">
                     <div className="modal-content">
                       <div className="modal-header">
                         <h4
                           className="modal-title"
-                          id="exampleModalFullscreenLabel"
-                        >
+                          id="exampleModalFullscreenLabel">
+                          
                           Full screen modal
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">...</div>
                       <div className="modal-footer">
                         <button
                           type="button"
                           className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                       </div>
@@ -1511,31 +1551,34 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalFullscreenSmLabel"
                   aria-hidden="true"
-                  style={{ display: "none" }}
-                >
+                  style={{ display: "none" }}>
+                  
                   <div className="modal-dialog modal-fullscreen-sm-down">
                     <div className="modal-content">
                       <div className="modal-header">
                         <h4
                           className="modal-title"
-                          id="exampleModalFullscreenSmLabel"
-                        >
+                          id="exampleModalFullscreenSmLabel">
+                          
                           Full screen below sm
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">...</div>
                       <div className="modal-footer">
                         <button
                           type="button"
                           className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                       </div>
@@ -1548,31 +1591,34 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalFullscreenMdLabel"
                   aria-hidden="true"
-                  style={{ display: "none" }}
-                >
+                  style={{ display: "none" }}>
+                  
                   <div className="modal-dialog modal-fullscreen-md-down">
                     <div className="modal-content">
                       <div className="modal-header">
                         <h4
                           className="modal-title"
-                          id="exampleModalFullscreenMdLabel"
-                        >
+                          id="exampleModalFullscreenMdLabel">
+                          
                           Full screen below md
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">...</div>
                       <div className="modal-footer">
                         <button
                           type="button"
                           className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                       </div>
@@ -1585,31 +1631,34 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalFullscreenLgLabel"
                   aria-hidden="true"
-                  style={{ display: "none" }}
-                >
+                  style={{ display: "none" }}>
+                  
                   <div className="modal-dialog modal-fullscreen-lg-down">
                     <div className="modal-content">
                       <div className="modal-header">
                         <h4
                           className="modal-title"
-                          id="exampleModalFullscreenLgLabel"
-                        >
+                          id="exampleModalFullscreenLgLabel">
+                          
                           Full screen below lg
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">...</div>
                       <div className="modal-footer">
                         <button
                           type="button"
                           className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                       </div>
@@ -1622,31 +1671,34 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalFullscreenXlLabel"
                   aria-hidden="true"
-                  style={{ display: "none" }}
-                >
+                  style={{ display: "none" }}>
+                  
                   <div className="modal-dialog modal-fullscreen-xl-down">
                     <div className="modal-content">
                       <div className="modal-header">
                         <h4
                           className="modal-title"
-                          id="exampleModalFullscreenXlLabel"
-                        >
+                          id="exampleModalFullscreenXlLabel">
+                          
                           Full screen below xl
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">...</div>
                       <div className="modal-footer">
                         <button
                           type="button"
                           className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                       </div>
@@ -1659,31 +1711,34 @@ const Modals = () => {
                   tabIndex={-1}
                   aria-labelledby="exampleModalFullscreenXxlLabel"
                   aria-hidden="true"
-                  style={{ display: "none" }}
-                >
+                  style={{ display: "none" }}>
+                  
                   <div className="modal-dialog modal-fullscreen-xxl-down">
                     <div className="modal-content">
                       <div className="modal-header">
                         <h4
                           className="modal-title"
-                          id="exampleModalFullscreenXxlLabel"
-                        >
+                          id="exampleModalFullscreenXxlLabel">
+                          
                           Full screen below xxl
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">...</div>
                       <div className="modal-footer">
                         <button
                           type="button"
                           className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                       </div>
@@ -1710,8 +1765,8 @@ const Modals = () => {
                   className="btn btn-primary mb-1 me-1"
                   data-bs-toggle="modal"
                   data-bs-target="#formmodal"
-                  data-bs-whatever="@mdo"
-                >
+                  data-bs-whatever="@mdo">
+                  
                   Open modal for @mdo
                 </button>
                 <button
@@ -1719,8 +1774,8 @@ const Modals = () => {
                   className="btn btn-secondary mb-1 me-1"
                   data-bs-toggle="modal"
                   data-bs-target="#formmodal"
-                  data-bs-whatever="@fat"
-                >
+                  data-bs-whatever="@fat">
+                  
                   Open modal for @fat
                 </button>
                 <button
@@ -1728,8 +1783,8 @@ const Modals = () => {
                   className="btn btn-light mb-1 me-1"
                   data-bs-toggle="modal"
                   data-bs-target="#formmodal"
-                  data-bs-whatever="@getbootstrap"
-                >
+                  data-bs-whatever="@getbootstrap">
+                  
                   Open modal for @getbootstrap
                 </button>
                 <div
@@ -1737,8 +1792,8 @@ const Modals = () => {
                   id="formmodal"
                   tabIndex={-1}
                   aria-labelledby="exampleModalLabel"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -1746,39 +1801,42 @@ const Modals = () => {
                           New message
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <form>
                           <div className="mb-3">
                             <label
                               htmlFor="recipient-name"
-                              className="col-form-label"
-                            >
+                              className="col-form-label">
+                              
                               Recipient:
                             </label>
                             <input
                               type="text"
                               className="form-control"
-                              id="recipient-name"
-                            />
+                              id="recipient-name" />
+                            
                           </div>
                           <div className="mb-3">
                             <label
                               htmlFor="message-text"
-                              className="col-form-label"
-                            >
+                              className="col-form-label">
+                              
                               Message:
                             </label>
                             <textarea
                               className="form-control"
                               id="message-text"
-                              defaultValue={""}
-                            />
+                              defaultValue={""} />
+                            
                           </div>
                         </form>
                       </div>
@@ -1786,8 +1844,8 @@ const Modals = () => {
                         <button
                           type="button"
                           className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -1818,8 +1876,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-scale"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Scale
                     </Link>
                   </div>
@@ -1828,8 +1886,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-slide-in-right"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Slide In Right
                     </Link>
                   </div>
@@ -1838,8 +1896,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-slide-in-bottom"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Slide In Bottom
                     </Link>
                   </div>
@@ -1848,8 +1906,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-newspaper"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Newspaper
                     </Link>
                   </div>
@@ -1858,8 +1916,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-fall"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Fall
                     </Link>
                   </div>
@@ -1868,8 +1926,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-flip-horizontal"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Flip Horizontal
                     </Link>
                   </div>
@@ -1878,8 +1936,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-flip-vertical"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Flip Vertical
                     </Link>
                   </div>
@@ -1888,8 +1946,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-super-scaled"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Super Scaled
                     </Link>
                   </div>
@@ -1898,8 +1956,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-sign"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Sign
                     </Link>
                   </div>
@@ -1908,8 +1966,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-rotate-bottom"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Rotate Bottom
                     </Link>
                   </div>
@@ -1918,8 +1976,8 @@ const Modals = () => {
                       className="modal-effect btn btn-primary d-grid mb-3"
                       data-bs-effect="effect-rotate-left"
                       data-bs-toggle="modal"
-                      to="#modaldemo8"
-                    >
+                      to="#modaldemo8">
+                      
                       Rotate Left
                     </Link>
                   </div>
@@ -1927,16 +1985,20 @@ const Modals = () => {
                 <div className="modal fade" id="modaldemo8">
                   <div
                     className="modal-dialog modal-dialog-centered text-center"
-                    role="document"
-                  >
+                    role="document">
+                    
                     <div className="modal-content modal-content-demo">
                       <div className="modal-header">
                         <h4 className="modal-title">Message Preview</h4>
                         <button
-                          aria-label="Close"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body text-start">
                         <h6>Why We Use Electoral College, Not Popular Vote</h6>
@@ -1951,13 +2013,13 @@ const Modals = () => {
                         </p>
                       </div>
                       <div className="modal-footer">
-                        <button className="btn btn-primary">
+                        <button className="btn btn-primary me-2">
                           Save changes
                         </button>{" "}
                         <button
                           className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                       </div>
@@ -1983,8 +2045,8 @@ const Modals = () => {
                 <button
                   type="button"
                   className="btn-close"
-                  aria-label="Close"
-                />
+                  aria-label="Close" />
+                
               </div>
             </div>
           </div>
@@ -1997,11 +2059,14 @@ const Modals = () => {
               </div>
               <div className="card-body">
                 <button
-                  type="button"
-                  className="btn-close"
-                  disabled
-                  aria-label="Close"
-                />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                
               </div>
             </div>
           </div>
@@ -2016,14 +2081,14 @@ const Modals = () => {
                 <button
                   type="button"
                   className="btn-close btn-close-white"
-                  aria-label="Close"
-                />
+                  aria-label="Close" />
+                
                 <button
                   type="button"
                   className="btn-close btn-close-white"
                   disabled
-                  aria-label="Close"
-                />
+                  aria-label="Close" />
+                
               </div>
             </div>
           </div>
@@ -2043,8 +2108,8 @@ const Modals = () => {
                   className="modal fade"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-top">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -2052,11 +2117,14 @@ const Modals = () => {
                           Modal Heading
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <h5>Text in a modal</h5>
@@ -2068,9 +2136,9 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -2087,17 +2155,20 @@ const Modals = () => {
                   className="modal fade"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-sm modal-right">
                     <div className="modal-content">
                       <div className="modal-header border-0">
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <div className="text-center">
@@ -2109,8 +2180,8 @@ const Modals = () => {
                           <button
                             type="button"
                             className="btn btn-danger btn-sm"
-                            data-bs-dismiss="modal"
-                          >
+                            data-bs-dismiss="modal">
+                            
                             Close
                           </button>
                         </div>
@@ -2125,8 +2196,8 @@ const Modals = () => {
                   className="modal fade"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-sm modal-bottom">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -2134,11 +2205,14 @@ const Modals = () => {
                           Modal Heading
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <h5>Text in a modal</h5>
@@ -2150,9 +2224,9 @@ const Modals = () => {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-cancel"
-                          data-bs-dismiss="modal"
-                        >
+                          className="btn btn-cancel me-2"
+                          data-bs-dismiss="modal">
+                          
                           Close
                         </button>
                         <button type="button" className="btn btn-primary">
@@ -2169,8 +2243,8 @@ const Modals = () => {
                   id="centermodal"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -2178,11 +2252,14 @@ const Modals = () => {
                           Center Modal
                         </h4>
                         <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        />
+  type="button"
+  className="close"
+  data-bs-dismiss="modal"
+  aria-label="Close"
+>
+  <span aria-hidden="true">×</span>
+</button>
+                        
                       </div>
                       <div className="modal-body">
                         <h5>Overflowing text to show scroll behavior</h5>
@@ -2208,8 +2285,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#top-modal"
-                  >
+                    data-bs-target="#top-modal">
+                    
                     Top Modal
                   </button>
                   {/* Bottom modal */}
@@ -2217,8 +2294,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#bottom-modal"
-                  >
+                    data-bs-target="#bottom-modal">
+                    
                     Bottom Modal
                   </button>
                   {/* Center modal */}
@@ -2226,8 +2303,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#centermodal"
-                  >
+                    data-bs-target="#centermodal">
+                    
                     Center modal
                   </button>
                   {/* Right modal */}
@@ -2235,8 +2312,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-primary mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#right-modal"
-                  >
+                    data-bs-target="#right-modal">
+                    
                     Rightbar Modal
                   </button>
                 </div>
@@ -2255,8 +2332,8 @@ const Modals = () => {
                   className="modal fade"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-sm">
                     <div className="modal-content modal-filled bg-success">
                       <div className="modal-body p-4">
@@ -2271,8 +2348,8 @@ const Modals = () => {
                           <button
                             type="button"
                             className="btn btn-cancel my-2"
-                            data-bs-dismiss="modal"
-                          >
+                            data-bs-dismiss="modal">
+                            
                             Continue
                           </button>
                         </div>
@@ -2287,8 +2364,8 @@ const Modals = () => {
                   className="modal fade"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-sm">
                     <div className="modal-content">
                       <div className="modal-body p-4">
@@ -2303,8 +2380,8 @@ const Modals = () => {
                           <button
                             type="button"
                             className="btn btn-info my-2"
-                            data-bs-dismiss="modal"
-                          >
+                            data-bs-dismiss="modal">
+                            
                             Continue
                           </button>
                         </div>
@@ -2319,8 +2396,8 @@ const Modals = () => {
                   className="modal fade"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-sm">
                     <div className="modal-content">
                       <div className="modal-body p-4">
@@ -2335,8 +2412,8 @@ const Modals = () => {
                           <button
                             type="button"
                             className="btn btn-warning my-2"
-                            data-bs-dismiss="modal"
-                          >
+                            data-bs-dismiss="modal">
+                            
                             Continue
                           </button>
                         </div>
@@ -2351,8 +2428,8 @@ const Modals = () => {
                   className="modal fade"
                   tabIndex={-1}
                   role="dialog"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                  
                   <div className="modal-dialog modal-sm">
                     <div className="modal-content modal-filled bg-danger">
                       <div className="modal-body p-4">
@@ -2367,8 +2444,8 @@ const Modals = () => {
                           <button
                             type="button"
                             className="btn btn-cancel my-2"
-                            data-bs-dismiss="modal"
-                          >
+                            data-bs-dismiss="modal">
+                            
                             Continue
                           </button>
                         </div>
@@ -2383,8 +2460,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-success mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#success-alert-modal"
-                  >
+                    data-bs-target="#success-alert-modal">
+                    
                     Success Alert
                   </button>
                   {/* Info Alert modal */}
@@ -2392,8 +2469,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-info mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#info-alert-modal"
-                  >
+                    data-bs-target="#info-alert-modal">
+                    
                     Info Alert
                   </button>
                   {/* Warning Alert modal */}
@@ -2401,8 +2478,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-warning mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#warning-alert-modal"
-                  >
+                    data-bs-target="#warning-alert-modal">
+                    
                     Warning Alert
                   </button>
                   {/* Danger Alert modal */}
@@ -2410,8 +2487,8 @@ const Modals = () => {
                     type="button"
                     className="btn btn-danger mt-1 me-1"
                     data-bs-toggle="modal"
-                    data-bs-target="#danger-alert-modal"
-                  >
+                    data-bs-target="#danger-alert-modal">
+                    
                     Danger Alert
                   </button>
                 </div>
@@ -2421,8 +2498,8 @@ const Modals = () => {
         </div>
         {/* /Modal Position */}
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Modals;

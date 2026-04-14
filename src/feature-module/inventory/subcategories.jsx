@@ -1,100 +1,169 @@
-import React, { useState } from "react";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Table from "../../core/pagination/datatable";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import {  X } from "feather-icons-react/build/IconComponents";
-import { Category } from "../../core/common/selectOption/selectOption";
-import DefaultEditor from "react-simple-wysiwyg";
-import Select from "react-select";
-import CommonDeleteModal from "../../core/common/modal/commonDeleteModal";
+import CommonFooter from "../../components/footer/commonFooter";
+import PrimeDataTable from "../../components/data-table";
+import TableTopHead from "../../components/table-top-head";
+import SearchFromApi from "../../components/data-table/search";
+import useAppModal from "../../core/common/modal/useAppModal";
+import { MODAL_TYPES } from "../../routes/modal_root/modalTypes";
+import toast from "react-hot-toast";
+import Loader from "../../components/loader/Loader";
+import { api_url } from "../../environment";
+import { formatDate } from "../../utils/common";
 
 const SubCategories = () => {
-  const dataSource = useSelector((state) => state.rootReducer.subcategory_data);
+  const [loading, setLoading] = useState(false);
+  const { open } = useAppModal();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [subCategories, setSubCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubcategories, setSelectedSubcategories] = useState([]);
+  const [filteredData, setFilteredData] = useState(setSubCategories);
+
+  useEffect(() => {
+    fetchsubcategories();
+    // fetchCategories();
+  }, []);
+
+  const fetchsubcategories = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${api_url}/GetMaster?masterType=4`);
+      const json = await res.json();
+
+      console.log("json", json);
+
+      const formattedData = json?.data.map((row) => ({
+        image: row.image,
+        parentGrpName: row.parentGrpName,
+        parentGrpCode: row.parentGrpCode,
+        code: row.code,
+        name: row.name,
+        alias: row.alias,
+        remark: row.remark,
+        createdon: row.createdOn,
+        status: row.deactive ? "Inactive" : "Active",
+      }));
+      setSubCategories(formattedData);
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch(`${api_url}/GetMaster?masterType=5`);
+      const json = await res.json();
+
+      const formatted = json?.data.map((item) => ({
+        label: item.name,
+        value: item.code,
+      }));
+
+      setCategories(formatted);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
 
   const columns = [
     {
-      title: "Image",
-      dataIndex: "logo",
-      render: (text, record) => (
-        <span className="productimgname">
-          <Link to="#" className="product-img stock-img">
-            <ImageWithBasePath alt="" src={record.img} />
-          </Link>
-        </span>
+      field: "name",
+      header: "Sub Category",
+      key: "name",
+      sortable: true,
+      body: (rowData) => (
+        <>
+          <span className="productimgname">
+            <Link to="#" className="product-img stock-img">
+              <img alt="" src={rowData.image} />
+            </Link>
+            <span>{rowData.name}</span>
+          </span>
+        </>
       ),
-      sorter: (a, b) => a.category.length - b.category.length,
     },
     {
-      title: "Sub Category",
-      dataIndex: "parentcategory",
-      sorter: (a, b) => a.parentcategory.length - b.parentcategory.length,
+      field: "parentGrpName",
+      header: "Category",
+      key: "parentGrpName",
+      sortable: true,
     },
     {
-      title: "Category",
-      dataIndex: "category",
-      sorter: (a, b) => a.category.length - b.category.length,
-    },
-
-    {
-      title: "Category Code",
-      dataIndex: "categorycode",
-      sorter: (a, b) => a.categorycode.length - b.categorycode.length,
+      field: "parentGrpCode",
+      header: "Category Code",
+      key: "parentGrpCode",
+      sortable: true,
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      sorter: (a, b) => a.description.length - b.description.length,
+      field: "remark",
+      header: "Description",
+      key: "remark",
+      sortable: true,
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      render: (text) => (
+      header: "Created On",
+      field: "createdon",
+      key: "createdon",
+      sortable: true,
+      body: (data) => <div>{formatDate(data.createdon)}</div>,
+    },
+    {
+      field: "status",
+      header: "Status",
+      key: "status",
+      sortable: true,
+      body: (rowData) => (
         <span className="badge bg-success fw-medium fs-10">
-          {text}
+          {rowData.status}
         </span>
       ),
-      sorter: (a, b) => a.createdby.length - b.createdby.length,
     },
-
     {
-      title: "",
-      dataIndex: "actions",
+      header: "",
+      field: "actions",
       key: "actions",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
-            <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-category"
-            >
-              <i data-feather="edit" className="feather-edit"></i>
-            </Link>
-            <Link data-bs-toggle="modal" data-bs-target="#delete-modal" className="p-2" to="#">
-              <i
-                data-feather="trash-2"
-                className="feather-trash-2"
-              ></i>
-            </Link>
-          </div>
+      sortable: false,
+      body: (_row) => (
+        <div className="edit-delete-action d-flex align-items-center">
+          <Link
+            className="me-2 p-2 d-flex align-items-center border rounded"
+            to="#"
+            onClick={() =>
+              open(MODAL_TYPES.SUBCATEGORY, {
+                data: _row,
+                onSuccess: fetchsubcategories,
+              })
+            }
+          >
+            <i className="feather icon-edit"></i>
+          </Link>
+          <Link
+            className="p-2 d-flex align-items-center border rounded"
+            to="#"
+            data-bs-toggle="modal"
+            data-bs-target="#delete-modal"
+          >
+            <i className="feather icon-trash-2"></i>
+          </Link>
         </div>
       ),
     },
   ];
 
-  const [values, setValue] = useState();
-  function onChange(e) {
-    setValue(e.target.value);
-  }
-
   return (
     <>
+      {loading && <Loader loading={loading} />}
       <div className="page-wrapper">
         <div className="content">
           <div className="page-header">
@@ -104,28 +173,30 @@ const SubCategories = () => {
                 <h6>Manage your sub categories</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
-                to="#"
                 className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#add-category"
+                onClick={() =>
+                  open(MODAL_TYPES.SUBCATEGORY, {
+                    data: null,
+                    onSuccess: fetchsubcategories,
+                  })
+                }
               >
-               <i className='ti ti-circle-plus me-1'></i>  Add Sub Category
+                <i className="ti ti-circle-plus me-1"></i> Add Sub Category
               </Link>
             </div>
           </div>
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
+              <SearchFromApi
+                callback={(e) => setSearchQuery(e)}
+                rows={rows}
+                setRows={setRows}
+              />
 
-              </div>
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
@@ -133,30 +204,21 @@ const SubCategories = () => {
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
                     data-bs-toggle="dropdown"
                   >
-                    Category
+                    {selectedCategory?.label || "Category"}
                   </Link>
-                  <ul className="dropdown-menu  dropdown-menu-end p-3">
-                    <li>
-                      <Link to="#" className="dropdown-item rounded-1">
-                        Computers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="dropdown-item rounded-1">
-                        Electronics
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="dropdown-item rounded-1">
-                        Shoe
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="dropdown-item rounded-1">
-                        Electronics
-                      </Link>
-                    </li>
-                  </ul>
+                  {categories.map((item, index) => (
+                    <ul className="dropdown-menu dropdown-menu-end p-3">
+                      <li key={index}>
+                        <Link
+                          to="#"
+                          className="dropdown-item rounded-1"
+                          onClick={() => setSelectedCategory(item)}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    </ul>
+                  ))}
                 </div>
 
                 <div className="dropdown me-2">
@@ -169,29 +231,35 @@ const SubCategories = () => {
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Active
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Inactive
                       </Link>
                     </li>
                   </ul>
                 </div>
-
               </div>
             </div>
             <div className="card-body">
               <div className="table-responsive sub-category-table">
-                <Table columns={columns} dataSource={dataSource} />
+                <PrimeDataTable
+                  column={columns}
+                  data={subCategories}
+                  searchQuery={_searchQuery}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedSubcategories}
+                  onSelectionChange={(e) => setSelectedSubcategories(e.value)}
+                  dataKey="id"
+                />
               </div>
             </div>
           </div>
@@ -199,237 +267,7 @@ const SubCategories = () => {
         </div>
         <CommonFooter />
       </div>
-      <>
-        {/* Add Category */}
-        <div className="modal fade" id="add-category">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content">
-                  <div className="modal-header">
-                    <div className="page-title">
-                      <h4>Add Sub Category</h4>
-                    </div>
-                    <button
-                      type="button"
-                      className="close bg-danger text-white fs-16"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    <form>
-                      <div className="mb-3">
-                        <div className="add-image-upload">
-                          <div className="add-image">
-                            <span className="fw-normal">
-                              <i
-                                data-feather="plus-circle"
-                                className="plus-down-add"
-                              />{" "}
-                              Add Image
-                            </span>
-                          </div>
-                          <div className="new-employee-field">
-                            <div className="mb-0">
-                              <div className="image-upload mb-2">
-                                <input type="file" />
-                                <div className="image-uploads">
-                                  <h4 className="fs-13 fw-medium">Upload Image</h4>
-                                </div>
-                              </div>
-                              <span>JPEG, PNG up to 2 MB</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Category<span className="text-danger ms-1">*</span>
-                        </label>
-                        <Select
-                          classNamePrefix="react-select"
-                          options={Category}
-                          placeholder="Choose"
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Sub Category<span className="text-danger ms-1">*</span>
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Category Code<span className="text-danger ms-1">*</span>
-                        </label>
-                        <input type="text" className="form-control" />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Description<span className="text-danger ms-1">*</span>
-                        </label>
-                        <DefaultEditor value={values} onChange={onChange} />
-                      </div>
-                      <div className="mb-0">
-                        <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
-                          <span className="status-label">Status</span>
-                          <input
-                            type="checkbox"
-                            id="user2"
-                            className="check"
-                            defaultChecked
-                          />
-                          <label htmlFor="user2" className="checktoggle" />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <Link
-                      to="#"
-                      className="btn btn-primary fs-13 fw-medium p-2 px-3"
-                    >
-                      Create Subcategory
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* /Add Category */}
-        {/* Edit Category */}
-        <div className="modal fade" id="edit-category">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="page-wrapper-new p-0">
-                <div className="content">
-                  <div className="modal-header">
-                    <div className="page-title">
-                      <h4>Edit Sub Category</h4>
-                    </div>
-                    <button
-                      type="button"
-                      className="close bg-danger text-white fs-16"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    >
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">
-                    <form>
-                      <div className="mb-3">
-                        <div className="add-image-upload">
-                          <div className="add-image p-1 border-solid">
-                            <ImageWithBasePath src="assets/img/products/laptop.png" alt="image" />
-                            <Link to="#">
-                              <X className="x-square-add image-close remove-product fs-12 text-white bg-danger rounded-1" />
-                            </Link>
-                          </div>
-                          <div className="new-employee-field">
-                            <div className="mb-0">
-                              <div className="image-upload mb-2">
-                                <input type="file" />
-                                <div className="image-uploads">
-                                  <h4 className="fs-13 fw-medium">Change Image</h4>
-                                </div>
-                              </div>
-                              <span>JPEG, PNG up to 2 MB</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Category<span className="text-danger ms-1">*</span>
-                        </label>
-                        <Select
-                          classNamePrefix="react-select"
-                          options={Category}
-                          placeholder="Choose"
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Sub Category<span className="text-danger ms-1">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          defaultValue="Laptop"
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Category Code<span className="text-danger ms-1">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          defaultValue="CT001"
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <label className="form-label">
-                          Description<span className="text-danger ms-1">*</span>
-                        </label>
-                        <textarea
-                          className="form-control"
-                          defaultValue={"Efficient Productivity"}
-                        />
-                      </div>
-                      <div className="mb-0">
-                        <div className="status-toggle modal-status d-flex justify-content-between align-items-center">
-                          <span className="status-label">Status</span>
-                          <input
-                            type="checkbox"
-                            id="user3"
-                            className="check"
-                            defaultChecked
-                          />
-                          <label htmlFor="user3" className="checktoggle" />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                      data-bs-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                    <Link
-                      to="#"
-                      className="btn btn-primary fs-13 fw-medium p-2 px-3"
-                    >
-                      Add Sub Category
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* /Edit Category */}
-        <CommonDeleteModal />
-      </>
-
     </>
-
-
   );
 };
 

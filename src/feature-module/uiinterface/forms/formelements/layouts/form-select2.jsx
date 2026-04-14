@@ -1,92 +1,93 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import Select from "react-select";
-import { all_routes } from "../../../../../Router/all_routes";
+import { all_routes } from "../../../../../routes/all_routes";
+
 
 const FormSelect2 = () => {
   const route = all_routes;
   const selection = [
-    { value: "s-1", label: "Selection-1" },
-    { value: "s-2", label: "Selection-2" },
-    { value: "s-3", label: "Selection-3" },
-    { value: "s-4", label: "Selection-4" },
-    { value: "s-5", label: "Selection-5" },
-  ];
+  { value: "s-1", label: "Selection-1" },
+  { value: "s-2", label: "Selection-2" },
+  { value: "s-3", label: "Selection-3" },
+  { value: "s-4", label: "Selection-4" },
+  { value: "s-5", label: "Selection-5" }];
+
   const multiselect = [
-    { value: "m-1", label: "Multiple-1" },
-    { value: "m-2", label: "Multiple-2" },
-    { value: "m-3", label: "Multiple-3" },
-    { value: "m-4", label: "Multiple-4" },
-    { value: "m-5", label: "Multiple-5" },
-  ];
+  { value: "m-1", label: "Multiple-1" },
+  { value: "m-2", label: "Multiple-2" },
+  { value: "m-3", label: "Multiple-3" },
+  { value: "m-4", label: "Multiple-4" },
+  { value: "m-5", label: "Multiple-5" }];
+
   const selectwithplaceholder = [
-    { value: "st-1", label: "Texas" },
-    { value: "st-2", label: "Georgia" },
-    { value: "st-3", label: "California" },
-    { value: "st-4", label: "Washington D.C" },
-    { value: "st-5", label: "Virginia" },
-  ];
+  { value: "st-1", label: "Texas" },
+  { value: "st-2", label: "Georgia" },
+  { value: "st-3", label: "California" },
+  { value: "st-4", label: "Washington D.C" },
+  { value: "st-5", label: "Virginia" }];
+
   const multiselectwithplaceholder = [
-    { value: "fr-1", label: "Apple" },
-    { value: "fr-2", label: "Mango" },
-    { value: "fr-3", label: "Orange" },
-    { value: "fr-4", label: "Guava" },
-    { value: "fr-5", label: "Pineapple" },
-  ];
+  { value: "fr-1", label: "Apple" },
+  { value: "fr-2", label: "Mango" },
+  { value: "fr-3", label: "Orange" },
+  { value: "fr-4", label: "Guava" },
+  { value: "fr-5", label: "Pineapple" }];
+
   const multiselectwithplaceholders = [
-    { value: "fr-1", label: "Apple" },
-    { value: "fr-2", label: "Mango" },
-    { value: "fr-3", label: "Orange" },
-    { value: "fr-4", label: "Guava" },
-    { value: "fr-5", label: "Pineapple" },
-  ];
+  { value: "fr-1", label: "Apple" },
+  { value: "fr-2", label: "Mango" },
+  { value: "fr-3", label: "Orange" },
+  { value: "fr-4", label: "Guava" },
+  { value: "fr-5", label: "Pineapple" }];
+
   const basicselect = [
-    { value: "orange", label: "Orange" },
-    { value: "white", label: "White" },
-    { value: "purple", label: "Purple" },
-  ];
+  { value: "orange", label: "Orange" },
+  { value: "white", label: "White" },
+  { value: "purple", label: "Purple" }];
+
 
   const smallselect = [
-    { value: "orange", label: "Orange" },
-    { value: "white", label: "White" },
-    { value: "purple", label: "Purple" },
-  ];
+  { value: "orange", label: "Orange" },
+  { value: "white", label: "White" },
+  { value: "purple", label: "Purple" }];
+
   const nestedselect = [
-    {
-      label: "Group1",
-      options: [
-        { value: "orange", label: "Orange" },
-        { value: "white", label: "White" },
-        { value: "purple", label: "Purple" },
-      ],
-    },
-    {
-      label: "Group2",
-      options: [
-        { value: "purple", label: "Purple" },
-        { value: "orange", label: "Orange" },
-        { value: "white", label: "White" },
-      ],
-    },
-    {
-      label: "Group3",
-      options: [
-        { value: "white", label: "White" },
-        { value: "purple", label: "Purple" },
-        { value: "orange", label: "Orange" },
-      ],
-    },
-  ];
-  const disabledselect = [
-    { value: "one", label: "First" },
-    { value: "two", label: "Second", isDisabled: true },
-    { value: "three", label: "Third" },
-  ];
-  const multiselectdrag = [
+  {
+    label: "Group1",
+    options: [
     { value: "orange", label: "Orange" },
     { value: "white", label: "White" },
+    { value: "purple", label: "Purple" }]
+
+  },
+  {
+    label: "Group2",
+    options: [
     { value: "purple", label: "Purple" },
-  ];
+    { value: "orange", label: "Orange" },
+    { value: "white", label: "White" }]
+
+  },
+  {
+    label: "Group3",
+    options: [
+    { value: "white", label: "White" },
+    { value: "purple", label: "Purple" },
+    { value: "orange", label: "Orange" }]
+
+  }];
+
+  const disabledselect = [
+  { value: "one", label: "First" },
+  { value: "two", label: "Second", isDisabled: true },
+  { value: "three", label: "Third" }];
+
+  const multiselectdrag = [
+  { value: "orange", label: "Orange" },
+  { value: "white", label: "White" },
+  { value: "purple", label: "Purple" }];
+
   return (
     <div>
       <div className="page-wrapper cardhead">
@@ -128,11 +129,11 @@ const FormSelect2 = () => {
                 </div>
                 <div className="card-body">
                   <Select classNamePrefix="react-select"
-                    options={multiselect}
-                    className="select2"
-                    isMulti={true}
-                    defaultValue={[multiselect[0]]}
-                  />
+                  options={multiselect}
+                  className="select2"
+                  isMulti={true}
+                  defaultValue={[multiselect[0]]} />
+                  
                 </div>
               </div>
             </div>
@@ -143,10 +144,10 @@ const FormSelect2 = () => {
                 </div>
                 <div className="card-body">
                   <Select classNamePrefix="react-select"
-                    options={selectwithplaceholder}
-                    defaultValue={selectwithplaceholder[0]} 
-                    placeholder="Select a state"
-                  />
+                  options={selectwithplaceholder}
+                  defaultValue={selectwithplaceholder[0]}
+                  placeholder="Select a state" />
+                  
                 </div>
               </div>
             </div>
@@ -159,11 +160,11 @@ const FormSelect2 = () => {
                 </div>
                 <div className="card-body">
                   <Select classNamePrefix="react-select"
-                    options={multiselectwithplaceholder}
-                    className="js-example-placeholder-multiple select2 js-states"
-                    isMulti={true}
-                    placeholder="Select"
-                  />
+                  options={multiselectwithplaceholder}
+                  className="js-example-placeholder-multiple select2 js-states"
+                  isMulti={true}
+                  placeholder="Select" />
+                  
                 </div>
               </div>
             </div>
@@ -176,11 +177,11 @@ const FormSelect2 = () => {
                 </div>
                 <div className="card-body">
                   <Select classNamePrefix="react-select"
-                    options={multiselectwithplaceholders}
-                    className="select2"
-                    isMulti={true}
-                    placeholder="Select fruits"
-                  />
+                  options={multiselectwithplaceholders}
+                  className="select2"
+                  isMulti={true}
+                  placeholder="Select fruits" />
+                  
                 </div>
               </div>
             </div>
@@ -200,10 +201,10 @@ const FormSelect2 = () => {
                         to Select 2.
                       </p>
                       <Select classNamePrefix="react-select"
-                        options={basicselect}
-                        className="js-example-basic-single select2"
-                        defaultValue={basicselect[0]} 
-                      />
+                      options={basicselect}
+                      className="js-example-basic-single select2"
+                      defaultValue={basicselect[0]} />
+                      
                     </div>
                   </div>
                 </div>
@@ -221,10 +222,10 @@ const FormSelect2 = () => {
                         Add options inside the optgroups to for group options.
                       </p>
                       <Select classNamePrefix="react-select"
-                        options={nestedselect}
-                        //className="form-control nested"
-                        defaultValue={nestedselect[0].options[0]} 
-                      />
+                      options={nestedselect}
+                      //className="form-control nested"
+                      defaultValue={nestedselect[0].options[0]} />
+                      
                     </div>
                   </div>
                 </div>
@@ -267,8 +268,8 @@ const FormSelect2 = () => {
                       <p>Set tags: true to convert select 2 in Tag mode.</p>
                       <select
                         className="form-control tagging"
-                        multiple="multiple"
-                      >
+                        multiple>
+                        
                         <option>orange</option>
                         <option>white</option>
                         <option>purple</option>
@@ -291,10 +292,10 @@ const FormSelect2 = () => {
                         Use data( select2) function to get container of select2.
                       </p>
                       <Select classNamePrefix="react-select"
-                        options={smallselect}
-                        // className="form-control form-small select"
-                        defaultValue={smallselect[0]} 
-                      />
+                      options={smallselect}
+                      // className="form-control form-small select"
+                      defaultValue={smallselect[0]} />
+                      
                     </div>
                   </div>
                 </div>
@@ -308,10 +309,10 @@ const FormSelect2 = () => {
                     <div className="col-md-12">
                       <p>Disable Select using disabled attribute.</p>
                       <Select classNamePrefix="react-select"
-                        options={disabledselect}
-                        //className="form-control disabled-results"
-                        defaultValue={disabledselect[0]} 
-                      />
+                      options={disabledselect}
+                      //className="form-control disabled-results"
+                      defaultValue={disabledselect[0]} />
+                      
                     </div>
                   </div>
                 </div>
@@ -328,11 +329,11 @@ const FormSelect2 = () => {
                         selectin in Tag mode.
                       </p>
                       <Select classNamePrefix="react-select"
-                        options={multiselectdrag}
-                        isMulti
-                        className="form-control tagging"
-                        placeholder="Select or add tags"
-                      />
+                      options={multiselectdrag}
+                      isMulti
+                      className="tagging"
+                      placeholder="Select or add tags" />
+                      
                     </div>
                   </div>
                 </div>
@@ -341,8 +342,8 @@ const FormSelect2 = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default FormSelect2;

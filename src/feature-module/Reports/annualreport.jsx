@@ -1,17 +1,19 @@
-import React from "react";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
-import Select from "react-select";
-import PredefinedDateRanges from "../../core/common/range-picker/datePicker";
+import { useState } from "react";
+import CommonFooter from "../../components/footer/commonFooter";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
+import CommonSelect from "../../components/select/common-select";
 
 const Annualreport = () => {
+  const [selectedStore, setSelectedStore] = useState(null);
+
   const Store = [
-    { value: "All Stores", label: "All Stores" },
-    { value: "Electro Mart", label: "Electro Mart" },
-    { value: "Quantum Gadgets", label: "Quantum Gadgets" },
-    { value: "Prime Bazaar", label: "Prime Bazaar" },
-  ];
+  { value: "All Stores", label: "All Stores" },
+  { value: "Electro Mart", label: "Electro Mart" },
+  { value: "Quantum Gadgets", label: "Quantum Gadgets" },
+  { value: "Prime Bazaar", label: "Prime Bazaar" }];
+
 
   return (
     <div className="page-wrapper">
@@ -30,7 +32,7 @@ const Annualreport = () => {
         </div>
         <div className="card">
           <div className="card-body">
-            <form action="sales-report.html">
+            <form>
               <div className="row row-gap-2 align-items-end">
                 <div className="col-md-3">
                   <div>
@@ -39,18 +41,20 @@ const Annualreport = () => {
                       <span className="input-icon-addon fs-16 text-gray-9">
                         <i className="ti ti-calendar" />
                       </span>
-                      <PredefinedDateRanges />
+                      <CommonDateRangePicker />
                     </div>
                   </div>
                 </div>
                 <div className="col-md-3">
                   <div>
                     <label className="form-label">Store</label>
-                    <Select
-                      classNamePrefix="react-select"
+                    <CommonSelect
                       options={Store}
+                      value={selectedStore}
+                      onChange={(e) => setSelectedStore(e.value)}
                       placeholder="Choose"
-                    />
+                      filter={false} />
+                    
                   </div>
                 </div>
                 <div className="col-md-3">
@@ -176,8 +180,8 @@ const Annualreport = () => {
         </div>
       </div>
       <CommonFooter />
-    </div>
-  );
+    </div>);
+
 };
 
 export default Annualreport;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
@@ -84,8 +84,8 @@ const RangeSlides = () => {
                     max={100}
                     value={sliderValueDefault}
                     defaultValue={[0, 50]}
-                    onChange={handleChangeDefault}
-                  />
+                    onChange={handleChangeDefault} />
+                  
                   {sliderValueDefault}
                 </div>
               </div>
@@ -103,8 +103,8 @@ const RangeSlides = () => {
                     max={1000}
                     defaultValue={550}
                     value={sliderValue}
-                    onChange={handleChange}
-                  />
+                    onChange={handleChange} />
+                  
                   {sliderValue}
                 </div>
               </div>
@@ -123,8 +123,8 @@ const RangeSlides = () => {
                     step={2}
                     value={sliderValues}
                     onChange={handleSliderChange}
-                    range
-                  />
+                    range />
+                  
                   ${sliderValues[0]} ${sliderValues[1]}
                 </div>
               </div>
@@ -145,8 +145,8 @@ const RangeSlides = () => {
                     onChange={handleSliderChangeRange}
                     range
                     // marks={{ 1000: '-1000', 0: '0', 1000: '1000' }}
-                    dots
-                  />
+                    dots />
+                  
                   {sliderValuesRange[0]} To: {sliderValuesRange[1]}
                 </div>
               </div>
@@ -167,8 +167,8 @@ const RangeSlides = () => {
                     onChange={handleSliderChangeStep}
                     range
                     // marks={{ 1000: '-1000', 0: '0', 1000: '1000' }}
-                    dots
-                  />
+                    dots />
+                  
                   {sliderValuesStep[0]} To: {sliderValuesStep[1]}
                 </div>
               </div>
@@ -194,10 +194,10 @@ const RangeSlides = () => {
                       2: "Mar",
                       3: "Apr",
                       4: "May",
-                      5: "June",
+                      5: "June"
                     }}
-                    dots
-                  />
+                    dots />
+                  
                 </div>
               </div>
             </div>
@@ -213,8 +213,8 @@ const RangeSlides = () => {
                     min={10}
                     max={100}
                     value={sliderValueModernSkin}
-                    onChange={handleSliderChangeModernSkin}
-                  />
+                    onChange={handleSliderChangeModernSkin} />
+                  
                   {sliderValueModernSkin}
                 </div>
               </div>
@@ -281,8 +281,8 @@ const RangeSlides = () => {
         </div>
       </div>
       {/* /Main Wrapper */}
-    </>
-  );
+    </>);
+
 };
 
 export default RangeSlides;

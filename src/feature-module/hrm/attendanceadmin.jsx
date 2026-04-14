@@ -1,82 +1,251 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
-import { useSelector } from "react-redux";
-import Table from "../../core/pagination/datatable.jsx";
-import AddAttendance from "../../core/modals/hrm/addattendance.jsx";
-import EditAttendance from "../../core/modals/hrm/editattendance.jsx";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons.jsx";
-import RefreshIcon from "../../core/common/tooltip-content/refresh.jsx";
-import CollapesIcon from "../../core/common/tooltip-content/collapes.jsx";
-import { DatePicker } from "antd";
-import { Calendar } from "feather-icons-react/build/IconComponents/index.js";
+import AddAttendance from "../../core/modals/hrm/addattendance";
+import EditAttendance from "../../core/modals/hrm/editattendance";
+
+
+
+import {
+  user01,
+  user03,
+  user04,
+  user05,
+  user06,
+  user12,
+  user26,
+  user28,
+  user30 } from
+"../../utils/imagepath/index";
+import PrimeDataTable from "../../components/data-table";
+import TableTopHead from "../../components/table-top-head";
+import CommonDatePicker from "../../components/date-picker/common-date-picker";
+import SearchFromApi from "../../components/data-table/search";
+
+export const attandanceadmindata = [
+{
+  id: "1",
+  Employee: "Carl Evans",
+  image: user01,
+  Role: "Designer",
+  Status: "Present",
+  Clock_In: "09:00 AM",
+  Clock_Out: "07:15 PM",
+  Production: "09h 00m",
+  Break: "0h 45m",
+  Overtime: "0h 20m",
+  Total_Hours: "09h 20m"
+},
+{
+  id: "2",
+  Employee: "Minerva Rameriz",
+  image: user06,
+  Role: "Administrator",
+  Status: "Present",
+  Clock_In: "09:15 AM",
+  Clock_Out: "07:12 PM",
+  Production: "09h 00m",
+  Break: "01h 15m",
+  Overtime: "0h 12m",
+  Total_Hours: "09h 12m"
+},
+{
+  id: "3",
+  Employee: "Robert Lamon",
+  image: user04,
+  Role: "Developer",
+  Status: "Present",
+  Clock_In: "09:40 AM",
+  Clock_Out: "07:00 PM",
+  Production: "08h 45m",
+  Break: "01h 00m",
+  Overtime: "00h 00m",
+  Total_Hours: "08h 45m"
+},
+{
+  id: "4",
+  Employee: "Patricia Lewis",
+  image: user03,
+  Role: "HR Manager",
+  Status: "Present",
+  Clock_In: "09:45 AM",
+  Clock_Out: "08:10 PM",
+  Production: "09h 12m",
+  Break: "00h 50m",
+  Overtime: "00 14m",
+  Total_Hours: "09h 14m"
+},
+{
+  id: "5",
+  Employee: "Mark Joslyn",
+  image: user05,
+  Role: "Designer",
+  Status: "Absent",
+  Clock_In: "-",
+  Clock_Out: "-",
+  Production: "-",
+  Break: "-",
+  Overtime: "-",
+  Total_Hours: "-"
+},
+{
+  id: "6",
+  Employee: "Marsha Betts",
+  image: user05,
+  Role: "Developer",
+  Status: "Present",
+  Clock_In: "09:17 AM",
+  Clock_Out: "07:34 PM",
+  Production: "09h 26m",
+  Break: "01h 20m",
+  Overtime: "00h 26m",
+  Total_Hours: "09h 26m"
+},
+{
+  id: "7",
+  Employee: "Daniel Jude ",
+  image: user28,
+  Role: "HR Assistant",
+  Status: "Absent",
+  Clock_In: "-",
+  Clock_Out: "-",
+  Production: "-",
+  Break: "-",
+  Overtime: "-",
+  Total_Hours: "-"
+},
+{
+  id: "8",
+  Employee: "Emma Bates",
+  image: user12,
+  Role: "HR Assistant",
+  Status: "Present",
+  Clock_In: "09:42 AM",
+  Clock_Out: "07:20 PM",
+  Production: "09h 17m",
+  Break: "01h 00m",
+  Overtime: "00h 17m",
+  Total_Hours: "09h 17m"
+},
+{
+  id: "9",
+  Employee: "Richard Fralick ",
+  image: user30,
+  Role: "Designer",
+  Status: "Present",
+  Clock_In: "09:18 AM",
+  Clock_Out: "07:11 PM",
+  Production: "09h 32m",
+  Break: "01h 15m",
+  Overtime: "00h 32m",
+  Total_Hours: "09h 32m"
+},
+{
+  id: "10",
+  Employee: "Michelle Robison",
+  image: user26,
+  Role: "HR Manager",
+  Status: "Present",
+  Clock_In: "09:30 AM",
+  Clock_Out: "08:10 PM",
+  Production: "09h 00m",
+  Break: "00h 34m",
+  Overtime: "00h 20m",
+  Total_Hours: "09h 20m"
+}];
+
 
 const AttendanceAdmin = () => {
-  const dataSource = useSelector((state) => state.rootReducer.attendanceadmin_data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, _setTotalRecords] = useState(5);
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const [selectedAttendances, setSelectedAttendances] = useState([]);
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
 
+  const [date, setDate] = useState(new Date());
   const columns = [
-    {
-      title: "Employee",
-      dataIndex: "Employee",
-      render: (text, record) => (
-        <div className="d-flex align-items-center">
+  {
+    header:
+    <label className="checkboxs">
+          <input type="checkbox" id="select-all" />
+          <span className="checkmarks" />
+        </label>,
+
+    body: () =>
+    <label className="checkboxs">
+          <input type="checkbox" />
+          <span className="checkmarks" />
+        </label>,
+
+    sortable: false,
+    key: "checked"
+  },
+  {
+    field: "Employee",
+    header: "Employee",
+    sortable: true,
+    body: (rowData) =>
+    <div className="d-flex align-items-center">
           <Link to="#" className="avatar avatar-md me-2">
-            <ImageWithBasePath src={`assets/img/users/${record.image}`} alt="product" />
+            <img src={rowData.image} alt="product" />
           </Link>
           <div>
             <h6>
-              <Link to="#">{text}</Link>
+              <Link to="#">{rowData.Employee}</Link>
             </h6>
-            <span>{record.Role}</span>
+            <span>{rowData.Role}</span>
           </div>
         </div>
 
-      ),
-      sorter: (a, b) => a.Employee.length - b.Employee.length,
-    },
-    {
-      title: "Status",
-      dataIndex: "Status",
-      render: (text) => (
-        <span className={`badge ${text === 'Present' ? "badge-success" : 'badge-danger'} d-inline-flex align-items-center badge-xs`}>
+  },
+  {
+    field: "Status",
+    header: "Status",
+    sortable: true,
+    body: (rowData) =>
+    <span
+      className={`badge ${
+      rowData.Status === "Present" ? "badge-success" : "badge-danger"} d-inline-flex align-items-center badge-xs`
+      }>
+      
           <i className="ti ti-point-filled me-1" />
-          {text}
+          {rowData.Status}
         </span>
 
-      ),
-      sorter: (a, b) => a.Status.length - b.Status.length,
-    },
-    {
-      title: "Clock In",
-      dataIndex: "Clock_In",
-      sorter: (a, b) => a.Clock_In.length - b.Clock_In.length,
-    },
-    {
-      title: "Clock Out",
-      dataIndex: "Clock_Out",
-      sorter: (a, b) => a.Clock_Out.length - b.Clock_Out.length,
-    },
-    {
-      title: "Production",
-      dataIndex: "Production",
-      sorter: (a, b) => a.Production.length - b.Production.length,
-    },
-    {
-      title: "Break",
-      dataIndex: "Break",
-      sorter: (a, b) => a.Break.length - b.Break.length,
-    },
-    {
-      title: "Overtime",
-      dataIndex: "Overtime",
-      sorter: (a, b) => a.Overtime.length - b.Overtime.length,
-    },
-    {
-      title: "Total Hours",
-      dataIndex: "Total_Hours",
-      sorter: (a, b) => a.Total_Hours.length - b.Total_Hours.length,
-    },
-  ];
+  },
+  {
+    field: "Clock_In",
+    header: "Clock In",
+    sortable: true
+  },
+  {
+    field: "Clock_Out",
+    header: "Clock Out",
+    sortable: true
+  },
+  {
+    field: "Production",
+    header: "Production",
+    sortable: true
+  },
+  {
+    field: "Break",
+    header: "Break",
+    sortable: true
+  },
+  {
+    field: "Overtime",
+    header: "Overtime",
+    sortable: true
+  },
+  {
+    field: "Total_Hours",
+    header: "Total Hours",
+    sortable: true
+  }];
+
 
   return (
     <div>
@@ -89,51 +258,45 @@ const AttendanceAdmin = () => {
                 <h6>Manage your Attendance</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+           <TableTopHead />
           </div>
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="me-2 date-select-small">
                   <div className="input-addon-left position-relative">
-                    <DatePicker
-                      className="form-control datetimepicker"
-                      placeholder="dd/mm/yyyy"
-                    />
-                    <span className="cus-icon">
-                     <Calendar />
-                    </span>
+                    <CommonDatePicker
+                          value={date}
+                          onChange={setDate}
+                          className="w-100" />
+                    
+                      <span className="cus-icon">
+                        <i className="feather icon-calendar" />
+                      </span>
                   </div>
                 </div>
                 <div className="dropdown">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Select Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Present
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="#"
-                        className="dropdown-item rounded-1"
-                      >
+                      <Link to="#" className="dropdown-item rounded-1">
                         Absent
                       </Link>
                     </li>
@@ -143,14 +306,26 @@ const AttendanceAdmin = () => {
             </div>
             <div className="card-body pb-0">
               <div className="table-responsive">
-                <Table columns={columns} dataSource={dataSource} />
+                <PrimeDataTable
+                  column={columns}
+                  data={attandanceadmindata}
+                  rows={rows}
+                  setRows={setRows}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalRecords={totalRecords}
+                  selectionMode="checkbox"
+                  selection={selectedAttendances}
+                  onSelectionChange={(e) => setSelectedAttendances(e.value)}
+                  dataKey="id" />
+                
               </div>
             </div>
           </div>
           {/* /product list */}
         </div>
         <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-          <p className="mb-0">2014-2025 © DreamsPOS. All Right Reserved</p>
+          <p className="mb-0">2014-2026 © DreamsPOS. All Right Reserved</p>
           <p>
             Designed &amp; Developed By{" "}
             <Link to="#" className="text-primary">
@@ -162,8 +337,8 @@ const AttendanceAdmin = () => {
 
       <AddAttendance />
       <EditAttendance />
-    </div>
-  );
+    </div>);
+
 };
 
 export default AttendanceAdmin;

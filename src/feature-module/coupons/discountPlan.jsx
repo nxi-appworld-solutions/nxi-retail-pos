@@ -1,70 +1,70 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Table from "../../core/pagination/datatable";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import TooltipIcons from "../../core/common/tooltip-content/tooltipIcons";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
+import PrimeDataTable from "../../components/data-table";
+import CommonFooter from "../../components/footer/commonFooter";
 import DiscountPlanModal from "../../core/modals/coupons/discountPlanModal";
 import { discountPlanData } from "../../core/json/discountPlanData";
-
+import TableTopHead from "../../components/table-top-head";
+import DeleteModal from "../../components/delete-modal";
+import SearchFromApi from "../../components/data-table/search";
 
 const DiscountPlan = () => {
-
   const dataSource = discountPlanData;
+  const [rows, setRows] = useState(10);
+  const [_searchQuery, setSearchQuery] = useState(undefined);
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+  };
 
   const columns = [
-    {
-      title: "Plan Name",
-      dataIndex: "PlanName",
-      sorter: (a, b) => a.PlanName.length - b.PlanName.length,
-    },
-    {
-      title: "Customers",
-      dataIndex: "Customers",
-      sorter: (a, b) => a.Customers.length - b.Customers.length,
-    },
+  {
+    header: "Plan Name",
+    field: "PlanName"
+  },
+  {
+    header: "Customers",
+    field: "Customers"
+  },
 
-    {
-      title: "Status",
-      dataIndex: "Status",
-      render: (text) => (
-        <span className={`badge table-badge ${text === 'Active' ? 'bg-success' : text === 'Redeemed' ? 'bg-pink' : text === 'Expired' ? 'bg-light' : 'bg-danger'} fw-medium fs-10`}>
-          {text}
+  {
+    header: "Status",
+    field: "Status",
+    body: (text) =>
+    <span
+      className={`badge table-badge ${text?.Status === "Active" ? "bg-success" : text === "Redeemed" ? "bg-pink" : text === "Expired" ? "bg-light" : "bg-danger"} fw-medium fs-10`}>
+      
+          {text?.Status}
         </span>
-      ),
-      sorter: (a, b) => a.Status.length - b.Status.length,
-    },
-    {
-      title: "",
-      dataIndex: "actions",
-      key: "actions",
-      render: () => (
-        <div className="action-table-data">
-          <div className="edit-delete-action">
 
+  },
+  {
+    header: "",
+    field: "actions",
+    key: "actions",
+    body: () =>
+    <div className="action-table-data">
+          <div className="edit-delete-action">
             <Link
-              className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-units"
-            >
-              <i data-feather="edit" className="feather-edit" />
+          className="me-2 p-2"
+          to="#"
+          data-bs-toggle="modal"
+          data-bs-target="#edit-units">
+          
+              <i className="ti ti-edit" />
             </Link>
             <Link
-              data-bs-toggle="modal"
-              data-bs-target="#delete-modal"
-              className="p-2"
-              to="#"
-            >
-              <i data-feather="trash-2" className="feather-trash-2" />
+          data-bs-toggle="modal"
+          data-bs-target="#delete-modal"
+          className="p-2"
+          to="#">
+          
+              <i className="ti ti-trash" />
             </Link>
           </div>
-
         </div>
-      ),
-    },
-  ];
+
+  }];
+
 
   return (
     <div>
@@ -77,19 +77,15 @@ const DiscountPlan = () => {
                 <h6>Manage Your discount plans</h6>
               </div>
             </div>
-            <ul className="table-top-head">
-              <TooltipIcons />
-              <RefreshIcon />
-              <CollapesIcon />
-            </ul>
+            <TableTopHead />
             <div className="page-btn">
               <Link
                 to="#"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#add-units"
-              >
-              <i className='ti ti-circle-plus me-1'></i>
+                data-bs-target="#add-units">
+                
+                <i className="ti ti-circle-plus me-1"></i>
                 Add Discount Plan
               </Link>
             </div>
@@ -97,16 +93,18 @@ const DiscountPlan = () => {
           {/* /product list */}
           <div className="card table-list-card">
             <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-              <div className="search-set">
-
-              </div>
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows} />
+              
               <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
                 <div className="dropdown me-2">
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Customer
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -136,8 +134,8 @@ const DiscountPlan = () => {
                   <Link
                     to="#"
                     className="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
-                    data-bs-toggle="dropdown"
-                  >
+                    data-bs-toggle="dropdown">
+                    
                     Status
                   </Link>
                   <ul className="dropdown-menu  dropdown-menu-end p-3">
@@ -163,15 +161,20 @@ const DiscountPlan = () => {
                     </li>
                   </ul>
                 </div>
-
               </div>
             </div>
 
-
             <div className="card-body">
-
               <div className="table-responsive">
-                <Table columns={columns} dataSource={dataSource} />
+                <PrimeDataTable
+                  column={columns}
+                  data={dataSource}
+                  totalRecords={10}
+                  rows={10}
+                  setRows={() => {}}
+                  currentPage={1}
+                  setCurrentPage={() => {}} />
+                
               </div>
             </div>
           </div>
@@ -180,9 +183,9 @@ const DiscountPlan = () => {
         <CommonFooter />
       </div>
       <DiscountPlanModal />
+      <DeleteModal />
+    </div>);
 
-    </div>
-  );
 };
 
 export default DiscountPlan;

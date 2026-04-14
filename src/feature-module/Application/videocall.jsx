@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import "boxicons/css/boxicons.css";
-import "boxicons/css/boxicons.min.css";
-import Scrollbars from "react-custom-scrollbars-2";
-import ImageWithBasePath from "../../core/img/imagewithbasebath";
+import { useState } from "react";
+import { Scrollbar } from "react-scrollbars-custom";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import CommonFooter from "../../core/common/footer/commonFooter";
-import RefreshIcon from "../../core/common/tooltip-content/refresh";
-import CollapesIcon from "../../core/common/tooltip-content/collapes";
+import CommonFooter from "../../components/footer/commonFooter";
+import RefreshIcon from "../../components/tooltip-content/refresh";
+import CollapesIcon from "../../components/tooltip-content/collapes";
+import { user01, user02, video } from "../../utils/imagepath";
 
 const Videocall = () => {
   const [addClass, setAddClass] = useState(false);
@@ -27,20 +25,17 @@ const Videocall = () => {
     setIsActive((prevState) => !prevState); // Toggle the state
   };
 
-
   const [isFullscreen, setIsFullscreen] = useState(false);
   const toggleFullscreen = () => {
     if (!isFullscreen) {
       if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen().catch(() => {
-        });
+        document.documentElement.requestFullscreen().catch(() => {});
         setIsFullscreen(true);
       }
     } else {
       if (document.exitFullscreen) {
         if (document.fullscreenElement) {
-          document.exitFullscreen().catch(() => {
-          });
+          document.exitFullscreen().catch(() => {});
         }
         setIsFullscreen(false);
       }
@@ -63,7 +58,7 @@ const Videocall = () => {
             </ul>
             <div className="page-btn">
               <Link to="#" className="btn btn-primary">
-              <i className='ti ti-circle-plus me-1'></i>
+                <i className="ti ti-circle-plus me-1"></i>
                 Add People
               </Link>
             </div>
@@ -73,18 +68,12 @@ const Videocall = () => {
             <div className="col-xxl-12">
               <div className="single-video d-flex">
                 <div className="join-video flex-fill">
-                  <ImageWithBasePath
-                    src="assets/img/video/video.jpg"
-                    className="img-fluid"
-                    alt="Logo"
-                  />
-                  <div className={`chat-active-users ${isActive ? "show-active-users" : ""}`}>
+                  <img src={video} className="img-fluid" alt="Logo" />
+                  <div
+                    className={`chat-active-users ${isActive ? "show-active-users" : ""}`}>
+                    
                     <div className="video-avatar">
-                      <ImageWithBasePath
-                        src="assets/img/video/user-01.jpg"
-                        className="img-fluid"
-                        alt="Logo"
-                      />
+                      <img src={user01} className="img-fluid" alt="Logo" />
                       <div className="user-name">
                         <span>Joanne Conner</span>
                       </div>
@@ -97,8 +86,8 @@ const Videocall = () => {
                     <Link
                       to="#"
                       onClick={toggleFullscreen}
-                      className="video-expand btnFullscreen	"
-                    >
+                      className="video-expand btnFullscreen	">
+                      
                       <i className="ti ti-maximize" />
                     </Link>
                   </div>
@@ -110,39 +99,40 @@ const Videocall = () => {
                   <div className="call-overlay-bottom d-flex justify-content-sm-between align-items-center flex-wrap w-100">
                     <Link
                       to="#"
-                      className="options-icon d-flex align-items-center justify-content-center guest-off rounded" onClick={handleGuestOffClick}
-                    >
+                      className="options-icon d-flex align-items-center justify-content-center guest-off rounded"
+                      onClick={handleGuestOffClick}>
+                      
                       <i className="ti ti-user-off" />
                     </Link>
                     <div className="call-option rounded-pill d-flex justify-content-center align-items-center">
                       <Link
                         to="#"
-                        className="options-icon bg-light d-flex justify-content-center align-items-center rounded me-2"
-                      >
+                        className="options-icon bg-light d-flex justify-content-center align-items-center rounded me-2">
+                        
                         <i className="ti ti-microphone" />
                       </Link>
                       <Link
                         to="#"
-                        className="options-icon bg-light d-flex justify-content-center align-items-center rounded me-2"
-                      >
+                        className="options-icon bg-light d-flex justify-content-center align-items-center rounded me-2">
+                        
                         <i className="ti ti-video" />
                       </Link>
                       <Link
                         to="#"
-                        className="call-icon bg-danger d-flex justify-content-center align-items-center rounded"
-                      >
+                        className="call-icon bg-danger d-flex justify-content-center align-items-center rounded">
+                        
                         <i className="ti ti-phone" />
                       </Link>
                       <Link
                         to="#"
-                        className="options-icon bg-light d-flex justify-content-center align-items-center rounded mx-2"
-                      >
+                        className="options-icon bg-light d-flex justify-content-center align-items-center rounded mx-2">
+                        
                         <i className="ti ti-volume" />
                       </Link>
                       <Link
                         to="#"
-                        className="options-icon bg-light d-flex justify-content-center align-items-center rounded"
-                      >
+                        className="options-icon bg-light d-flex justify-content-center align-items-center rounded">
+                        
                         <i className="ti ti-device-imac-share" />
                       </Link>
                     </div>
@@ -150,22 +140,21 @@ const Videocall = () => {
                       to="#"
                       className="options-icon bg-light d-flex align-items-center justify-content-center rounded"
                       id="show-message"
-                      onClick={handleShowClass}
-                    >
+                      onClick={handleShowClass}>
+                      
                       <i className="ti ti-dots" />
                     </Link>
                   </div>
                 </div>
                 <div
                   className={
-                    addClass
-                      ? "right-user-side chat-rooms theiaStickySidebar open-chats"
-                      : "right-user-side chat-rooms theiaStickySidebar "
+                  addClass ?
+                  "right-user-side chat-rooms theiaStickySidebar open-chats" :
+                  "right-user-side chat-rooms theiaStickySidebar "
                   }
-                  id="chat-room"
-                >
-                  <Scrollbars>
-
+                  id="chat-room">
+                  
+                  <Scrollbar>
                     <div className="card slime-grp border-0 mb-0">
                       <div className="card-header p-3 pb-0 border-0">
                         <div className="d-flex align-items-center justify-content-between">
@@ -173,19 +162,18 @@ const Videocall = () => {
                           <Link
                             to="#"
                             className="close_profile close_profile4 avatar avatar-sm mb-0 rounded-circle bg-danger"
-                            onClick={handleShowremoveClass}
-                          >
+                            onClick={handleShowremoveClass}>
+                            
                             <i className="ti ti-x" />
                           </Link>
                         </div>
                       </div>
                       <div className="card-body slimscroll p-3">
-
                         <div>
                           <div className="chat-msg-blk p-0">
                             <div className="chats">
                               <div className="avatar avatar-md avatar-rounded flex-shrink-0 me-2">
-                                <ImageWithBasePath src="assets/img/users/user-01.jpg" alt="image" />
+                                <img src={user01} alt="image" />
                               </div>
                               <div className="chat-content flex-fill">
                                 <div className="message-content">
@@ -200,8 +188,8 @@ const Videocall = () => {
                               <div className="chat-content flex-fill">
                                 <div className="message-content">
                                   <h4>
-                                    Good Morning..! Today we have meeting about the
-                                    new policy.
+                                    Good Morning..! Today we have meeting about
+                                    the new policy.
                                   </h4>
                                 </div>
                                 <div className="chat-profile-name text-end">
@@ -211,18 +199,18 @@ const Videocall = () => {
                                 </div>
                               </div>
                               <div className="avatar avatar-md avatar-rounded flex-shrink-0 ms-2">
-                                <ImageWithBasePath src="assets/img/users/user-02.jpg" alt="image" />
+                                <img src={user02} alt="image" />
                               </div>
                             </div>
                             <div className="chats">
                               <div className="avatar avatar-md avatar-rounded flex-shrink-0 me-2">
-                                <ImageWithBasePath src="assets/img/users/user-01.jpg" alt="image" />
+                                <img src={user01} alt="image" />
                               </div>
                               <div className="chat-content flex-fill">
                                 <div className="message-content">
                                   <h4>
-                                    Great.! This is the second new product that comes
-                                    in this week.
+                                    Great.! This is the second new product that
+                                    comes in this week.
                                   </h4>
                                 </div>
                                 <div className="chat-profile-name d-flex justify-content-end">
@@ -232,7 +220,7 @@ const Videocall = () => {
                             </div>
                             <div className="chats">
                               <div className="avatar avatar-md avatar-rounded flex-shrink-0 me-2">
-                                <ImageWithBasePath src="assets/img/users/user-01.jpg" alt="image" />
+                                <img src={user01} alt="image" />
                               </div>
                               <div className="chat-content flex-fill">
                                 <div className="message-content">
@@ -245,13 +233,13 @@ const Videocall = () => {
                             </div>
                             <div className="chats">
                               <div className="avatar avatar-md avatar-rounded flex-shrink-0 me-2">
-                                <ImageWithBasePath src="assets/img/users/user-01.jpg" alt="image" />
+                                <img src={user01} alt="image" />
                               </div>
                               <div className="chat-content flex-fill">
                                 <div className="message-content">
                                   <h4>
-                                    Great.! This is the second new product that comes
-                                    in this week.
+                                    Great.! This is the second new product that
+                                    comes in this week.
                                   </h4>
                                 </div>
                                 <div className="chat-profile-name d-flex justify-content-end">
@@ -261,7 +249,7 @@ const Videocall = () => {
                             </div>
                             <div className="chats">
                               <div className="avatar avatar-md avatar-rounded flex-shrink-0 me-2">
-                                <ImageWithBasePath src="assets/img/users/user-01.jpg" alt="image" />
+                                <img src={user01} alt="image" />
                               </div>
                               <div className="chat-content flex-fill">
                                 <div className="message-content">
@@ -274,7 +262,7 @@ const Videocall = () => {
                             </div>
                             <div className="chats">
                               <div className="avatar avatar-md avatar-rounded flex-shrink-0 me-2">
-                                <ImageWithBasePath src="assets/img/users/user-01.jpg" alt="image" />
+                                <img src={user01} alt="image" />
                               </div>
                               <div className="chat-content flex-fill">
                                 <div className="message-content">
@@ -289,8 +277,8 @@ const Videocall = () => {
                               <div className="chat-content flex-fill">
                                 <div className="message-content">
                                   <h4>
-                                    Good Morning..! Today we have meeting about the
-                                    new product.
+                                    Good Morning..! Today we have meeting about
+                                    the new product.
                                   </h4>
                                 </div>
                                 <div className="chat-profile-name text-end">
@@ -300,18 +288,18 @@ const Videocall = () => {
                                 </div>
                               </div>
                               <div className="avatar avatar-md avatar-rounded flex-shrink-0 ms-2">
-                                <ImageWithBasePath src="assets/img/users/user-02.jpg" alt="image" />
+                                <img src={user02} alt="image" />
                               </div>
                             </div>
                             <div className="chats mb-0">
                               <div className="avatar avatar-md avatar-rounded flex-shrink-0 me-2">
-                                <ImageWithBasePath src="assets/img/users/user-01.jpg" alt="image" />
+                                <img src={user01} alt="image" />
                               </div>
                               <div className="chat-content flex-fill">
                                 <div className="message-content">
                                   <h4>
-                                    Great.! This is the second new product that comes
-                                    in this week.
+                                    Great.! This is the second new product that
+                                    comes in this week.
                                   </h4>
                                 </div>
                                 <div className="chat-profile-name d-flex justify-content-end">
@@ -340,8 +328,8 @@ const Videocall = () => {
                               <input
                                 type="text"
                                 className="form-control chat_form"
-                                placeholder="Enter Message....."
-                              />
+                                placeholder="Enter Message....." />
+                              
                               <div className="send-chat comman-icon">
                                 <Link to="#" className="rounded">
                                   <i className="ti ti-send text-white" />
@@ -350,15 +338,10 @@ const Videocall = () => {
                             </form>
                           </div>
                         </div>
-
-
                       </div>
                     </div>
-
-                  </Scrollbars>
-
+                  </Scrollbar>
                 </div>
-
               </div>
             </div>
             {/* /Video */}
@@ -366,9 +349,8 @@ const Videocall = () => {
         </div>
         <CommonFooter />
       </div>
+    </>);
 
-    </>
-  );
 };
 
 export default Videocall;
