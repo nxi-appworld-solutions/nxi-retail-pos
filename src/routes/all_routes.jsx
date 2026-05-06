@@ -3,6 +3,7 @@ export const all_routes = {
   dashboard: "/admin-dashboard",
   productlist: "/product-list",
   addproduct: "/add-product",
+  editproduct: "/edit-product/:id",
   salesdashboard: "/sales-dashboard",
   brandlist: "/brand-list",
   units: "/units",
@@ -283,6 +284,5 @@ export const all_routes = {
   cities: "/cities",
   activities: "/activities",
   pricing: "/pricing",
-  contact: "/contacts"
-
-};
+  contact: "/contact",
+}; 

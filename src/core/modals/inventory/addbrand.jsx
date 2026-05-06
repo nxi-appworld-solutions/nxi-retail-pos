@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Loader from "../../../components/loader/Loader";
 import useModal from "../../../routes/modal_root/useModal";
-import { api_url } from "../../../environment";
+import { api_url, base_url } from "../../../environment";
 
 const AddBrand = () => {
   const { close, payload } = useModal();
   const { form, setForm, handleChange, resetForm } = useForm(brandFormSchema);
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState("");
   const isEdit = !!payload?.data;
 
   useEffect(() => {
@@ -23,6 +24,8 @@ const AddBrand = () => {
         alias: payload.data.alias,
         status: payload.data.status === "Active",
       });
+      if (payload?.data) setPreview(base_url + payload.data.image);
+      setFile(null);
     } else {
       resetForm();
     }
@@ -39,8 +42,9 @@ const AddBrand = () => {
       formData.append("alias", form.alias);
       formData.append("masterType", 7);
       formData.append("status", form.status);
-      formData.append("image", file);
-
+      if (file) {
+        formData.append("files", file);
+      }
       const res = await fetch(`${api_url}/saveMaster`, {
         method: "POST",
         body: formData,
@@ -85,20 +89,33 @@ const AddBrand = () => {
             <div className="mb-3">
               <div className="add-image-upload">
                 <div className="add-image">
-                  <span className="fw-normal">
-                    <i className="feather icon-plus-circle plus-down-add" /> Add
-                    Image
-                  </span>
+                  {preview ? (
+                    <img src={preview} alt="preview" />
+                  ) : (
+                    <span className="fw-normal">
+                      <i className="feather icon-plus-circle plus-down-add" />{" "}
+                      Add Image
+                    </span>
+                  )}
                 </div>
                 <div className="new-employee-field">
                   <div className="mb-0">
                     <div className="image-upload mb-2">
                       <input
                         type="file"
-                        onChange={(e) => setFile(e.target.files[0])}
+                        accept="image/*"
+                        onChange={(e) => {
+                          const selected = e.target.files[0];
+                          setFile(selected);
+                          if (selected) {
+                            setPreview(URL.createObjectURL(selected));
+                          }
+                        }}
                       />
                       <div className="image-uploads">
-                        <h4 className="fs-13 fw-medium">Upload Image</h4>
+                        <h4 className="fs-13 fw-medium">
+                          {preview ? "Change Image" : "Upload Image"}
+                        </h4>
                       </div>
                     </div>
                     <span>JPEG, PNG up to 2 MB</span>

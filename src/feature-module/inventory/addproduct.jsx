@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { all_routes } from "../../routes/all_routes";
 import RefreshIcon from "../../components/tooltip-content/refresh";
 import CollapesIcon from "../../components/tooltip-content/collapes";
@@ -34,6 +34,7 @@ const AddProduct = () => {
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
   const [selectedSellingType, setSelectedSellingType] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedGroup, setSelectedGroup] = useState(null);
   const [selectedSubCategory, setSelectedSubCategory] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedUnit, setSelectedUnit] = useState(null);
@@ -50,11 +51,85 @@ const AddProduct = () => {
   const [filteredSubCategories, setFilteredSubCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [units, setUnits] = useState([]);
+  const [groups, setGroups] = useState([]);
+
   const [productType, setProductType] = useState(1); // 1: single, 2: variant
   const [variantAttributes, setVariantAttributes] = useState([]); // dropdown
   const [variants, setVariants] = useState([]); // table rows
   const [selectedValues, setSelectedValues] = useState([]);
   const [images, setImages] = useState([]);
+
+  const { id } = useParams();
+  const isEdit = !!id;
+
+  // useEffect(() => {
+  //   if (isEdit) {
+  //     loadProduct();
+  //   }
+  // }, [id]);
+
+  // const loadProduct = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const res = await fetch(`${api_url}/GetProduct?code=${id}`);
+  //     const json = await res.json();
+
+  //     if (json.status === 1) {
+  //       const data = json.data;
+
+  //       // 🔹 BASIC
+  //       setForm({
+  //         name: data.name,
+  //         alias: data.alias,
+  //         sku: data.c2,
+  //         qty: data.d1,
+  //         price: data.d2,
+  //         discountValue: data.d3,
+  //         qtyAlt: data.d4,
+  //         priceAlt: data.d5,
+  //         manufacturer: data.customFields?.manufacturer || "",
+  //       });
+
+  //       // 🔹 DROPDOWNS
+  //       setSelectedStore(data.storeId);
+  //       setSelectedWarehouse(data.warehouseId);
+  //       setSelectedBrand(data.brandId);
+  //       setSelectedUnit(data.unitId);
+  //       setSelectedSellingType(data.sellingTypeId);
+  //       setSelectedBarcodeSymbol(data.barcodeSymbolId);
+  //       setSelectedTaxType(data.taxTypeId);
+  //       setSelectedDiscountType(data.discountTypeId);
+
+  //       // 🔥 Category + SubCategory
+  //       setSelectedCategory(data.categoryId); // derive if needed
+  //       setSelectedSubCategory(data.parentGrpCode);
+
+  //       // 🔹 PRODUCT TYPE
+  //       setProductType(data.productType);
+
+  //       // 🔹 VARIANTS
+  //       setVariants(data.variants || []);
+
+  //       // 🔹 IMAGES
+  //       setImages(
+  //         (data.images || []).map((img, i) => ({
+  //           id: i,
+  //           url: img.imagePath,
+  //           isExisting: true,
+  //         })),
+  //       );
+
+  //       // 🔹 CUSTOM FIELDS
+  //       setSelectedWarranty(data.customFields?.warranty || null);
+  //       setDate1(data.customFields?.manufacturedDate || null);
+  //       setDate2(data.customFields?.expiryDate || null);
+  //     }
+  //   } catch (err) {
+  //     console.error(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleCustomField = (name) => {
     setCustomFields((prev) => ({
@@ -115,15 +190,17 @@ const AddProduct = () => {
   const loadMasters = async () => {
     const store = await getMasters(11);
     const warehouse = await getMasters(12);
-    const cat = await getMasters(5);
-    const subCat = await getMasters(4);
+    // const cat = await getMasters(5);
+    // const subCat = await getMasters(5);
+    const group = await getMasters(5);
     const brand = await getMasters(7);
     const unit = await getMasters(8);
 
     setWarehouses(warehouse);
     setStores(store);
-    setCategories(cat);
-    setAllSubCategories(subCat);
+    setGroups(group);
+    // setCategories(cat);
+    // setAllSubCategories(subCat);
     setBrands(brand);
     setUnits(unit);
   };
@@ -152,16 +229,16 @@ const AddProduct = () => {
     }
   };
 
-  const handleCategoryChange = (value) => {
-    setSelectedCategory(value);
+  // const handleCategoryChange = (value) => {
+  //   setSelectedCategory(value);
 
-    const filtered = allSubCategories.filter((x) => x.parent === value);
+  //   const filtered = allSubCategories.filter((x) => x.parent === value);
 
-    console.log("filtered", filtered);
-    setFilteredSubCategories(filtered);
+  //   console.log("filtered", filtered);
+  //   setFilteredSubCategories(filtered);
 
-    setSelectedSubCategory(null);
-  };
+  //   setSelectedSubCategory(null);
+  // };
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -221,6 +298,7 @@ const AddProduct = () => {
     },
   ];
 
+  console.log("variants", selectedGroup);
   // const selectedAttr = variantAttributes.find(
   //   (x) => x.value === selectedAttribute,
   // );
@@ -282,7 +360,7 @@ const AddProduct = () => {
       formData.append("Name", form.name);
       formData.append("Alias", form.alias);
       formData.append("PrintName", form.slug);
-      formData.append("ParentGrp", selectedSubCategory || 0);
+      formData.append("ParentGrp", selectedGroup || 0);
       formData.append("C1", form.sku || "");
 
       // 🔹 STORE / WAREHOUSE
@@ -416,29 +494,6 @@ const AddProduct = () => {
                   >
                     <div className="accordion-body border-top">
                       <div className="row">
-                        <div className="col-lg-4 col-sm-4 col-12">
-                          <div className="mb-3 list position-relative">
-                            <label className="form-label">
-                              Item Code
-                              <span className="text-danger ms-1">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              name="alias"
-                              className="form-control list"
-                              value={form.alias}
-                              onChange={handleChange}
-                              placeholder="108"
-                              disabled
-                            />
-                            {/* <button
-                              type="submit"
-                              className="btn btn-primaryadd"
-                            >
-                              Generate
-                            </button> */}
-                          </div>
-                        </div>
                         <div className="col-sm-4 col-12">
                           <div className="mb-3">
                             <label className="form-label">
@@ -494,6 +549,28 @@ const AddProduct = () => {
                             />
                           </div>
                         </div>
+                        <div className="col-lg-4 col-sm-4 col-12">
+                          <div className="mb-3 list position-relative">
+                            <label className="form-label">
+                              Alias
+                              <span className="text-danger ms-1">*</span>
+                            </label>
+                            <input
+                              type="text"
+                              name="alias"
+                              className="form-control list"
+                              value={form.alias}
+                              onChange={handleChange}
+                              disabled
+                            />
+                            {/* <button
+                              type="submit"
+                              className="btn btn-primaryadd"
+                            >
+                              Generate
+                            </button> */}
+                          </div>
+                        </div>
                         <div className="col-sm-4 col-12">
                           <div className="mb-3">
                             <label className="form-label">
@@ -508,37 +585,53 @@ const AddProduct = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-sm-4 col-12">
-                          <div className="mb-3 list position-relative">
-                            <label className="form-label">
-                              SKU<span className="text-danger ms-1">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              name="sku"
-                              className="form-control list"
-                              value={form.sku}
-                              onChange={(e) =>
-                                setForm({ ...form, sku: e.target.value })
-                              }
-                            />
-                            <button
-                              type="button"
-                              className="btn btn-primaryadd"
-                              onClick={() =>
-                                setForm((prev) => ({
-                                  ...prev,
-                                  sku: generateSKU(),
-                                }))
-                              }
-                            >
-                              Generate
-                            </button>
-                          </div>
-                        </div>
                       </div>
                       <div className="addservice-info">
                         <div className="row">
+                          <div className="col-sm-4 col-12">
+                            <div className="mb-3">
+                              <label className="form-label">
+                                Group
+                                <span className="text-danger ms-1">*</span>
+                              </label>
+                              <CommonSelect
+                                className="w-100"
+                                options={groups}
+                                value={selectedGroup}
+                                onChange={(e) => setSelectedGroup(e.value)}
+                                placeholder="Choose"
+                                filter={false}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-sm-4 col-12">
+                            <div className="mb-3 list position-relative">
+                              <label className="form-label">
+                                SKU<span className="text-danger ms-1">*</span>
+                              </label>
+                              <input
+                                type="text"
+                                name="sku"
+                                className="form-control list"
+                                value={form.sku}
+                                onChange={(e) =>
+                                  setForm({ ...form, sku: e.target.value })
+                                }
+                              />
+                              <button
+                                type="button"
+                                className="btn btn-primaryadd"
+                                onClick={() =>
+                                  setForm((prev) => ({
+                                    ...prev,
+                                    sku: generateSKU(),
+                                  }))
+                                }
+                              >
+                                Generate
+                              </button>
+                            </div>
+                          </div>
                           <div className="col-sm-4 col-12">
                             <div className="mb-3">
                               <label className="form-label">
@@ -557,7 +650,7 @@ const AddProduct = () => {
                               />
                             </div>
                           </div>
-                          <div className="col-sm-4 col-12">
+                          {/* <div className="col-sm-4 col-12">
                             <div className="mb-3">
                               <div className="add-newplus">
                                 <label className="form-label">
@@ -581,25 +674,7 @@ const AddProduct = () => {
                                 filter={false}
                               />
                             </div>
-                          </div>
-                          <div className="col-sm-4 col-12">
-                            <div className="mb-3">
-                              <label className="form-label">
-                                Sub Category
-                                <span className="text-danger ms-1">*</span>
-                              </label>
-                              <CommonSelect
-                                className="w-100"
-                                options={filteredSubCategories}
-                                value={selectedSubCategory}
-                                onChange={(e) =>
-                                  setSelectedSubCategory(e.value)
-                                }
-                                placeholder="Choose"
-                                filter={false}
-                              />
-                            </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                       <div className="add-product-new">
@@ -1243,7 +1318,7 @@ const AddProduct = () => {
                   Cancel
                 </button>
                 <button type="submit" className="btn btn-primary">
-                  Add Product
+                  {isEdit ? "Update Product" : "Add Product"}
                 </button>
               </div>
             </div>

@@ -10,6 +10,12 @@ import AddCustomer from "../../core/modals/peoples/addcustomer";
 import AddStore from "../../core/modals/peoples/addstore";
 import AddWarehouse from "../../core/modals/peoples/addwarehouse";
 import AddUsers from "../../core/modals/usermanagement/addusers";
+import CustomerFindModal from "../../feature-module/pos/components/customer/customerFindModal";
+import BarcodeModal from "../../feature-module/pos/components/modal/barcodeModal";
+import CartWarningModal from "../../feature-module/pos/components/modal/cartWarningModal";
+import CashPaymentModal from "../../feature-module/pos/components/modal/cashPaymentModal";
+import OnlinePaymentModal from "../../feature-module/pos/components/modal/onlinePaymentModal";
+
 import { MODAL_TYPES } from "./modalTypes";
 
 export const MODAL_REGISTRY = {
@@ -23,6 +29,13 @@ export const MODAL_REGISTRY = {
   [MODAL_TYPES.WARRANTY]: AddWarranty,
   [MODAL_TYPES.CUSTOMER]: AddCustomer,
   [MODAL_TYPES.USER]: AddUsers,
+
+  [MODAL_TYPES.POS_CASH_PAYMENT]: CashPaymentModal,
+  [MODAL_TYPES.POS_ONLINE_PAYMENT]: OnlinePaymentModal,
+  [MODAL_TYPES.POS_CUSTOMER]: CustomerFindModal,
+  [MODAL_TYPES.POS_BARCODE]: BarcodeModal,
+  [MODAL_TYPES.POS_CART_WARNING]: CartWarningModal,
+
   // [MODAL_TYPES.QUICK_ADD_PRODUCT]: QuickAddProductModal,
   // [MODAL_TYPES.GST]: GSTMasterModal,
   // [MODAL_TYPES.HSN]: HSNMasterModal,

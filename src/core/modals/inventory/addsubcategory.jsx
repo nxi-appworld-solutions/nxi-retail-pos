@@ -4,7 +4,7 @@ import CommonSelect from "../../../components/select/common-select";
 import { Editor } from "primereact/editor";
 import { subCategoryFormSchema } from "../../forms/formSchemas";
 import useForm from "../../hooks/useForm";
-import { api_url } from "../../../environment";
+import { api_url, base_url } from "../../../environment";
 import toast from "react-hot-toast";
 import Loader from "../../../components/loader/Loader";
 import useModal from "../../../routes/modal_root/useModal";
@@ -13,6 +13,7 @@ const AddSubCategory = () => {
   const [file, setFile] = useState(null);
   const { close, payload } = useModal();
   const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState("");
   const [existingImage, setExistingImage] = useState("");
   const { form, setForm, handleChange, resetForm } = useForm(
     subCategoryFormSchema,
@@ -33,7 +34,11 @@ const AddSubCategory = () => {
         status: payload.data.status === "Active",
       });
 
-      setExistingImage(payload.data.image || "");
+      if (payload?.data) setExistingImage(payload.data.image || "");
+
+      // 👇 existing image preview
+      if (payload.data.image) setPreview(base_url + payload.data.image);
+
       // ✅ category set
       setSelectedCategory(payload.data.parentGrpCode);
 
@@ -81,16 +86,15 @@ const AddSubCategory = () => {
       formData.append("code", form.code);
       formData.append("name", form.name);
       formData.append("alias", form.alias);
-      formData.append("parentGrp", selectedCategory);
-      formData.append("masterType", 4);
+      formData.append("parentGrp", selectedCategory || 0);
+      formData.append("masterType", 5);
       formData.append("remark", text);
       formData.append("status", form.status);
       formData.append("files", file);
       formData.append(
         "images",
-        JSON.stringify(existingImage ? [existingImage] : []),
+        JSON.stringify(file ? [] : existingImage ? [existingImage] : []),
       );
-
       console.log("formData", [...formData.entries()]);
 
       const res = await fetch(`${api_url}/saveMaster`, {
@@ -102,9 +106,9 @@ const AddSubCategory = () => {
         // body: JSON.stringify(requestPayload),
       });
       const data = await res.json();
-
+      console.log("response", data);
       if (data.status === 1) {
-        toast.success(data.msg || "Subcategory saved successfully");
+        toast.success(data.msg || "Category saved successfully");
         payload?.onSuccess?.();
         if (isEdit) {
           close();
@@ -112,7 +116,7 @@ const AddSubCategory = () => {
           resetForm();
         }
       } else {
-        toast.error(data.msg || "Error saving subcategory");
+        toast.error(data.msg || "Error saving category");
       }
     } catch (err) {
       toast.error(err);
@@ -125,7 +129,7 @@ const AddSubCategory = () => {
     <>
       {loading && <Loader loading={loading} />}
       <BaseModal
-        title="Add Sub Category"
+        title="Add Category"
         footer={
           <button
             type="submit"
@@ -140,20 +144,35 @@ const AddSubCategory = () => {
           <div className="mb-3">
             <div className="add-image-upload">
               <div className="add-image">
-                <span className="fw-normal">
-                  <i className="feather icon-plus-circle plus-down-add" /> Add
-                  Image
-                </span>
+                {preview ? (
+                  <img src={preview} alt="preview" />
+                ) : (
+                  <span className="fw-normal">
+                    <i className="feather icon-plus-circle plus-down-add" /> Add
+                    Image
+                  </span>
+                )}
               </div>
               <div className="new-employee-field">
                 <div className="mb-0">
                   <div className="image-upload mb-2">
                     <input
                       type="file"
-                      onChange={(e) => setFile(e.target.files[0])}
+                      accept="image/*"
+                      onChange={(e) => {
+                        const selected = e.target.files[0];
+                        setFile(selected);
+                        setExistingImage("");
+
+                        if (selected) {
+                          setPreview(URL.createObjectURL(selected));
+                        }
+                      }}
                     />
                     <div className="image-uploads">
-                      <h4 className="fs-13 fw-medium">Upload Image</h4>
+                      <h4 className="fs-13 fw-medium">
+                        {preview ? "Change Image" : "Upload Image"}
+                      </h4>
                     </div>
                   </div>
                   <span>JPEG, PNG up to 2 MB</span>
@@ -163,20 +182,7 @@ const AddSubCategory = () => {
           </div>
           <div className="mb-3">
             <label className="form-label">
-              Category<span className="text-danger ms-1">*</span>
-            </label>
-            <CommonSelect
-              className="w-100"
-              options={categories}
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.value)}
-              placeholder="Choose"
-              filter={false}
-            />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">
-              Sub Category Name
+              Group
               <span className="text-danger ms-1">*</span>
             </label>
             <input
@@ -188,7 +194,7 @@ const AddSubCategory = () => {
             />
           </div>
           <div className="mb-3">
-            <label className="form-label">Sub Category Code</label>
+            <label className="form-label">Alias</label>
             <input
               type="text"
               name="alias"
@@ -198,12 +204,23 @@ const AddSubCategory = () => {
             />
           </div>
           <div className="mb-3">
+            <label className="form-label">Under Group</label>
+            <CommonSelect
+              className="w-100"
+              options={categories}
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.value)}
+              placeholder="Choose"
+              filter={false}
+            />
+          </div>
+
+          <div className="mb-3">
             <label className="form-label">Description</label>
             <Editor
               value={text}
               onTextChange={(e) => setText(e.htmlValue)}
               name="description"
-              className="form-control"
               style={{ height: "100px" }}
             />
           </div>

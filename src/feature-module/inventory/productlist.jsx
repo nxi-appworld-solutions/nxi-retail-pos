@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Brand from "../../core/modals/inventory/brand";
 import { all_routes } from "../../routes/all_routes";
 import PrimeDataTable from "../../components/data-table";
 import TableTopHead from "../../components/table-top-head";
 import DeleteModal from "../../components/delete-modal";
 import SearchFromApi from "../../components/data-table/search";
-import { api_url } from "../../environment";
+import { api_url, base_url } from "../../environment";
 import Loader from "../../components/loader/Loader";
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalRecords, _setTotalRecords] = useState(5);
   const [rows, setRows] = useState(10);
@@ -37,7 +38,7 @@ const ProductList = () => {
       body: (data) => (
         <div className="d-flex align-items-center">
           <Link to="#" className="avatar avatar-md me-2">
-            <img alt="" src={data.productImage} />
+            <img alt="" src={base_url + data.image} />
           </Link>
           <Link to="#">{data.product}</Link>
         </div>
@@ -86,14 +87,15 @@ const ProductList = () => {
       sortable: false,
       body: (_row) => (
         <div className="edit-delete-action d-flex align-items-center">
-          <Link
+          <div
             className="me-2 p-2 d-flex align-items-center border rounded"
             to="#"
-            data-bs-toggle="modal"
-            data-bs-target="#edit-customer"
+            onClick={() =>
+              navigate(route.addproduct, { state: { productId: _row.Id } })
+            }
           >
             <i className="feather icon-edit"></i>
-          </Link>
+          </div>
           <Link
             className="p-2 d-flex align-items-center border rounded"
             to="#"
@@ -130,6 +132,7 @@ const ProductList = () => {
         unit: row.dynamicFields.Unit.name,
         qty: row.d1,
         price: row.d2,
+        image: row.image,
         createdby: row.createdBy || "SYSTEM",
         createdAt: row.createdAt,
       }));
@@ -143,7 +146,7 @@ const ProductList = () => {
 
   return (
     <>
-    {loading && <Loader loading/>}
+      {loading && <Loader loading />}
       <div className="page-wrapper">
         <div className="content">
           <div className="page-header">
@@ -345,9 +348,7 @@ const ProductList = () => {
               </div>
             </div>
             <div className="card-body">
-              {/* /Filter */}
               <div className="table-responsive">
-                {/* <Table columns={columns} dataSource={productlistdata} /> */}
                 <PrimeDataTable
                   column={columns}
                   data={products}
@@ -365,8 +366,6 @@ const ProductList = () => {
               </div>
             </div>
           </div>
-          {/* /product list */}
-          <Brand />
         </div>
       </div>
       <DeleteModal />

@@ -22,6 +22,7 @@ const AddWarehouse = () => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const existingImage = payload?.data?.image || "";
 
   console.log("payload?.data", payload?.data);
 
@@ -146,7 +147,6 @@ const AddWarehouse = () => {
       console.log("response", data?.status);
 
       if (data?.status === 1) {
-
         toast.success(data.msg || "Warehouse saved successfully");
         payload?.onSuccess?.();
         if (isEdit) {

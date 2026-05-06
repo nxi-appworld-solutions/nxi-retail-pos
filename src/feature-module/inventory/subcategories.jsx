@@ -8,7 +8,7 @@ import useAppModal from "../../core/common/modal/useAppModal";
 import { MODAL_TYPES } from "../../routes/modal_root/modalTypes";
 import toast from "react-hot-toast";
 import Loader from "../../components/loader/Loader";
-import { api_url } from "../../environment";
+import { api_url, base_url } from "../../environment";
 import { formatDate } from "../../utils/common";
 
 const SubCategories = () => {
@@ -23,7 +23,10 @@ const SubCategories = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategories, setSelectedSubcategories] = useState([]);
   const [filteredData, setFilteredData] = useState(setSubCategories);
-
+  console.log(
+    "🚀 ~ file: subcategories.jsx:34 ~ SubCategories ~ subCategories:",
+    subCategories,
+  );
   useEffect(() => {
     fetchsubcategories();
     // fetchCategories();
@@ -32,7 +35,7 @@ const SubCategories = () => {
   const fetchsubcategories = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${api_url}/GetMaster?masterType=4`);
+      const res = await fetch(`${api_url}/GetMaster?masterType=5`);
       const json = await res.json();
 
       console.log("json", json);
@@ -40,7 +43,7 @@ const SubCategories = () => {
       const formattedData = json?.data.map((row) => ({
         image: row.image,
         parentGrpName: row.parentGrpName,
-        parentGrpCode: row.parentGrpCode,
+        parentGrpCode: row.parentGrpCode || "",
         code: row.code,
         name: row.name,
         alias: row.alias,
@@ -86,7 +89,7 @@ const SubCategories = () => {
         <>
           <span className="productimgname">
             <Link to="#" className="product-img stock-img">
-              <img alt="" src={rowData.image} />
+              <img alt="" src={base_url + rowData.image} />
             </Link>
             <span>{rowData.name}</span>
           </span>
@@ -169,8 +172,8 @@ const SubCategories = () => {
           <div className="page-header">
             <div className="add-item d-flex">
               <div className="page-title">
-                <h4 className="fw-bold">Sub Category</h4>
-                <h6>Manage your sub categories</h6>
+                <h4 className="fw-bold">Category</h4>
+                <h6>Manage your categories</h6>
               </div>
             </div>
             <TableTopHead />
@@ -184,7 +187,7 @@ const SubCategories = () => {
                   })
                 }
               >
-                <i className="ti ti-circle-plus me-1"></i> Add Sub Category
+                <i className="ti ti-circle-plus me-1"></i> Add Category
               </Link>
             </div>
           </div>

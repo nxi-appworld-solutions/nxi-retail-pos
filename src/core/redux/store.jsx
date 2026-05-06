@@ -5,6 +5,8 @@ import commonSlice from "./commonSlice";
 import MainReducer from "./reducer";
 import themeSettingSlice from "./themeSettingSlice";
 import modalReducer from "./store/modalSlice";
+import cartReducer from "./store/cartSlice";
+import posOrderSlice from "./store/posOrderSlice";
 
 const combinedReducer = combineReducers({
   sidebar: sidebarSlice,
@@ -12,6 +14,8 @@ const combinedReducer = combineReducers({
   rootReducer: MainReducer,
   themeSetting: themeSettingSlice,
   modal: modalReducer,
+  cart: cartReducer,
+  posOrder: posOrderSlice,
 });
 
 const rootReducer = (state, action) => {
@@ -25,7 +29,6 @@ const rootReducer = (state, action) => {
 const store = configureStore({
   reducer: rootReducer,
   preloadedState: getPreloadedState(),
-  modal: modalReducer,
 });
 
 function onStateChange() {

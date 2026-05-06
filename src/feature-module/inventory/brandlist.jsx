@@ -8,7 +8,7 @@ import SearchFromApi from "../../components/data-table/search";
 import useAppModal from "../../core/common/modal/useAppModal";
 import { MODAL_TYPES } from "../../routes/modal_root/modalTypes";
 import Loader from "../../components/loader/Loader";
-import { api_url } from "../../environment";
+import { api_url, base_url } from "../../environment";
 import { formatDate } from "../../utils/common";
 
 const BrandList = () => {
@@ -30,7 +30,7 @@ const BrandList = () => {
       body: (_row) => (
         <span className="productimgname">
           <Link to="#" className="product-img stock-img">
-            <img alt="" src={_row.image} />
+            <img alt="" src={base_url + _row.image} />
           </Link>
           <span>{_row.name}</span>
         </span>

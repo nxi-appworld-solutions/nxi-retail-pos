@@ -7,7 +7,7 @@ import { authRoutes, posPages, unAuthRoutes } from "../routes/path";
 import { useEffect, useState } from "react";
 import TwoColumnSidebar from "../components/layouts/two-column";
 import HorizontalSidebar from "../components/layouts/horizontalSidebar";
-import PosHeader from "./pos/posHeader";
+import PosHeader from "./pos-old/posHeader";
 import { Toaster } from "react-hot-toast";
 import ModalRoot from "../routes/modal_root/modal_root";
 
@@ -44,7 +44,7 @@ const FeatureModule = () => {
       clearTimeout(timeoutId); // Clear the timeout when component unmounts
     };
   }, [location.pathname]);
-  
+
   const Preloader = () => {
     return (
       <div id="global-loader">
@@ -84,8 +84,11 @@ const FeatureModule = () => {
     return (
       <div className={`main-wrapper ${toggleHeader ? "header-collapse" : ""}`}>
         <PosHeader />
-        <ThemeSettings />
+        {/* <ThemeSettings /> */}
         <Outlet />
+        <ModalRoot />
+
+        <Toaster position="top-right" reverseOrder={false} />
       </div>
     );
   }

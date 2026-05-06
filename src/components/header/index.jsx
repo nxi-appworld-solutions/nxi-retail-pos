@@ -355,7 +355,7 @@ const Header = () => {
             </li>
             {/* /Select Store */}
 
-            <li className="nav-item dropdown link-nav">
+            {/* <li className="nav-item dropdown link-nav">
               <Link
                 to="#"
                 className="btn btn-primary btn-md d-inline-flex align-items-center"
@@ -464,7 +464,7 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-            </li>
+            </li> */}
             <li className="nav-item pos-nav">
               <Link
                 to={route.pos}

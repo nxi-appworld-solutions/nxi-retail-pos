@@ -77,10 +77,10 @@ export const productFormSchema = {
   barcode: 0,
   description: "",
   discountType: 0,
-  discountValue: 0,
-  qty: 0,
-  price: 0,
-  qtyAlt: 0,
+  discountValue: "",
+  qty: "",
+  price: "",
+  qtyAlt: "",
   taxType: 0,
 };
 
@@ -105,10 +105,15 @@ export const warrantyFormSchema = {
 };
 
 export const customerFormSchema = {
+  code: 0,
   name: "",
   email: "",
   phone: "",
   address: "",
+  city: "",
+  state: "",
+  country: "",
+  postalcode: "",
   status: true,
 };
 

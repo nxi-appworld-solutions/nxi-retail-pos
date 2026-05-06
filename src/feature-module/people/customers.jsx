@@ -5,20 +5,23 @@ import DeleteModal from "../../components/delete-modal";
 import CommonSelect from "../../components/select/common-select";
 import TableTopHead from "../../components/table-top-head";
 import { user41 } from "../../utils/imagepath";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import useAppModal from "../../core/common/modal/useAppModal";
 import { MODAL_TYPES } from "../../routes/modal_root/modalTypes";
+import { api_url } from "../../environment";
+import toast from "react-hot-toast";
 
 const Customers = () => {
   const { open } = useAppModal();
-  const [listData, _setListData] = useState(customersData);
+  // const [listData, _setListData] = useState(customersData);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalRecords, _setTotalRecords] = useState(5);
   const [rows, setRows] = useState(10);
   const [_searchQuery, setSearchQuery] = useState(undefined);
-
   const [selectedCustomers, setSelectedCustomers] = useState([]);
+  const [listData, setListData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const columns = [
     { header: "Code", field: "code", key: "code" },
@@ -87,7 +90,38 @@ const Customers = () => {
 
   const handleSearch = (value) => setSearchQuery(value);
 
+  useEffect(() => {
+    fetchcustomers();
+  }, []);
 
+  const fetchcustomers = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${api_url}/GetMaster?masterType=2`);
+      const json = await res.json();
+      
+      console.log("customers response", json);
+
+      const formattedData = json?.data?.map((row) => ({
+        code: row.code,
+        name: row.name,
+        email: row.c1,
+        phone: row.c2,
+        address: row.c5,
+        city: row.cM7,
+        state: row.cM8,
+        country: row.cM9,
+        postalcode: row.cM10,
+        createdOn: row.createdOn,
+        status: row.deactive === 1 ? "Inactive" : "Active",
+      }));
+      setListData(formattedData);
+    } catch (error) {
+      toast.error("Error fetching customers:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
